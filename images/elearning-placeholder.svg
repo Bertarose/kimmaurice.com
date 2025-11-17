@@ -1,0 +1,10 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="600" fill="#FFFEF9"/>
+  <rect x="150" y="150" width="500" height="300" rx="10" fill="none" stroke="#1a1a1a" stroke-width="3"/>
+  <circle cx="250" cy="280" r="30" fill="#1a1a1a" opacity="0.3"/>
+  <rect x="300" y="250" width="300" height="15" fill="#1a1a1a" opacity="0.3"/>
+  <rect x="300" y="290" width="250" height="15" fill="#1a1a1a" opacity="0.2"/>
+  <text x="50%" y="85%" font-family="Arial, sans-serif" font-size="28" fill="#1a1a1a" text-anchor="middle" font-weight="300">
+    E-Learning Modules
+  </text>
+</svg>

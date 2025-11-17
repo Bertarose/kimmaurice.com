@@ -1,0 +1,10 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="600" fill="#1a1a1a"/>
+  <rect x="100" y="100" width="600" height="400" rx="5" fill="#FFFEF9"/>
+  <rect x="120" y="120" width="560" height="40" fill="#f1efe9"/>
+  <rect x="140" y="180" width="250" height="200" fill="#f1efe9"/>
+  <rect x="410" y="180" width="250" height="200" fill="#f1efe9"/>
+  <text x="50%" y="85%" font-family="Arial, sans-serif" font-size="28" fill="#FFFEF9" text-anchor="middle" font-weight="300">
+    Portfolio Optimization
+  </text>
+</svg>
