@@ -223,7 +223,22 @@ img {
     background: linear-gradient(135deg, #0a0a1f 0%, #1a1a2e 50%, #16213e 100%);
     margin-top: 60px;  /* Only nav height now */
 }
-
+/* Ajout de l'image de fond avec 10% d'opacité */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Remplace par le nom réel de ton fichier image */
+    background-image: url('images/ton-image-de-fond.jpg'); 
+    background-size: cover;
+    background-position: center;
+    opacity: 0.1; /* Opacité à 10% */
+    z-index: 0;   /* Place l'image tout au fond */
+    pointer-events: none; /* Assure que l'image ne bloque pas les clics */
+}
 .starfield {
     position: absolute;
     top: 0;
