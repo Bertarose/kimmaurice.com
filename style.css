@@ -1,7 +1,7 @@
 /* ==================================
    VARIABLES & RESET
+   (AUCUN CHANGEMENT DANS CETTE SECTION)
    ================================== */
-
 :root {
     /* Cargo Colors */
     --color-beige: #FFFEF9;
@@ -65,59 +65,12 @@ img {
 }
 
 /* ==================================
-   CODE-ART BANNER
-   ================================== */
-
-.code-art-banner {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 30px;
-    background-color: var(--color-black);
-    color: var(--color-beige);
-    z-index: 2000;
-    overflow: hidden;
-    border-bottom: 1px solid var(--color-beige);
-}
-
-.banner-content {
-    display: flex;
-    align-items: center;
-    height: 100%;
-    white-space: nowrap;
-    animation: scroll-banner 40s linear infinite;
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    letter-spacing: 0.15em;
-    text-transform: lowercase;
-}
-
-.banner-content span {
-    padding: 0 1rem;
-    display: inline-block;
-}
-
-@keyframes scroll-banner {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(-50%);
-    }
-}
-
-.code-art-banner:hover .banner-content {
-    animation-play-state: paused;
-}
-
-/* ==================================
    NAVIGATION
    ================================== */
 
 .nav {
     position: fixed;
-    top: 30px;
+    top: 0;
     left: 0;
     right: 0;
     background-color: rgba(255, 254, 249, 0.95);
@@ -130,27 +83,49 @@ img {
 .nav-container {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 1.5rem 2rem;
+    padding: 1rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 2rem;
+}
+
+/* Logo */
+.nav-logo {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
 }
 
 .nav-logo a {
-    font-size: 1.1rem;
-    font-weight: 600;
-    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
 }
 
+.logo-img {
+    height: 35px;
+    width: auto;
+    display: block;
+    transition: transform var(--transition-fast);
+}
+
+.logo-img:hover {
+    transform: scale(1.05);
+}
+
+/* Desktop Menu */
 .nav-menu {
     display: flex;
     align-items: center;
     gap: 2rem;
+    flex: 1;
+    justify-content: center;
 }
 
 .nav-link {
     font-size: 0.95rem;
     position: relative;
+    white-space: nowrap;
 }
 
 .nav-link::after {
@@ -169,6 +144,15 @@ img {
     width: 100%;
 }
 
+/* Navigation Controls (Language + Hamburger) */
+.nav-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-shrink: 0;
+}
+
+/* Language Switch Button */
 .lang-switch {
     padding: 0.5rem 1rem;
     background-color: var(--color-black);
@@ -178,32 +162,53 @@ img {
     font-size: 0.85rem;
     font-weight: 500;
     cursor: pointer;
-    transition: transform var(--transition-fast);
+    transition: transform var(--transition-fast), opacity var(--transition-fast);
+    white-space: nowrap;
 }
 
 .lang-switch:hover {
     transform: scale(1.05);
+    opacity: 0.9;
 }
 
+/* Mobile Menu Toggle (Hidden on Desktop) */
 .mobile-menu-toggle {
     display: none;
     flex-direction: column;
+    justify-content: center;
     gap: 5px;
     background: none;
     border: none;
     cursor: pointer;
     padding: 0.5rem;
+    width: 40px;
+    height: 40px;
 }
 
 .mobile-menu-toggle span {
     width: 24px;
     height: 2px;
     background-color: var(--color-black);
-    transition: var(--transition-fast);
+    transition: all var(--transition-fast);
+    transform-origin: center;
+}
+
+.mobile-menu-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+}
+
+.mobile-menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+
+.mobile-menu-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
 }
 
 /* ==================================
-   HERO SECTION WITH STARFIELD
+   HERO SECTION AVEC STARFIELD
+   (AUCUN CHANGEMENT DANS CETTE SECTION)
    ================================== */
 
 .hero {
@@ -216,7 +221,7 @@ img {
     padding: 8rem 2rem 4rem;
     overflow: hidden;
     background: linear-gradient(135deg, #0a0a1f 0%, #1a1a2e 50%, #16213e 100%);
-    margin-top: 30px;
+    margin-top: 60px;  /* Only nav height now */
 }
 
 .starfield {
@@ -225,28 +230,65 @@ img {
     left: 0;
     right: 0;
     bottom: 0;
+    background-color: transparent;
     background-image: 
-        radial-gradient(2px 2px at 20% 30%, white, transparent),
-        radial-gradient(2px 2px at 60% 70%, white, transparent),
+        /* Layer 1 - Small stars */
+        radial-gradient(1px 1px at 20% 30%, white, transparent),
+        radial-gradient(1px 1px at 60% 70%, white, transparent),
         radial-gradient(1px 1px at 50% 50%, white, transparent),
         radial-gradient(1px 1px at 80% 10%, white, transparent),
-        radial-gradient(2px 2px at 90% 60%, white, transparent),
+        radial-gradient(1px 1px at 90% 60%, white, transparent),
         radial-gradient(1px 1px at 33% 90%, white, transparent),
-        radial-gradient(2px 2px at 15% 75%, white, transparent);
-    background-size: 200% 200%;
-    background-position: 0% 0%;
-    animation: twinkle 8s ease-in-out infinite;
-    opacity: 0.6;
+        radial-gradient(1px 1px at 15% 75%, white, transparent),
+        radial-gradient(1px 1px at 45% 15%, white, transparent),
+        radial-gradient(1px 1px at 70% 45%, white, transparent),
+        radial-gradient(1px 1px at 25% 55%, white, transparent),
+        radial-gradient(1px 1px at 85% 85%, white, transparent),
+        radial-gradient(1px 1px at 10% 40%, white, transparent),
+        radial-gradient(1px 1px at 55% 25%, white, transparent),
+        radial-gradient(1px 1px at 40% 80%, white, transparent),
+        radial-gradient(1px 1px at 95% 35%, white, transparent),
+        /* Layer 2 - Medium stars with glow */
+        radial-gradient(2px 2px at 40% 20%, white, transparent),
+        radial-gradient(2px 2px at 75% 65%, white, transparent),
+        radial-gradient(2px 2px at 22% 82%, white, transparent),
+        radial-gradient(2px 2px at 68% 38%, white, transparent),
+        radial-gradient(2px 2px at 88% 15%, white, transparent),
+        radial-gradient(2px 2px at 35% 62%, white, transparent),
+        /* Layer 3 - Larger bright stars */
+        radial-gradient(3px 3px at 65% 55%, rgba(255,255,255,0.9), transparent),
+        radial-gradient(3px 3px at 18% 18%, rgba(255,255,255,0.9), transparent),
+        radial-gradient(3px 3px at 82% 72%, rgba(255,255,255,0.9), transparent);
+    background-size: 250% 250%, 250% 250%;
+    background-position: 0% 0%, 50% 50%;
+    animation: starfield-twinkle 12s ease-in-out infinite, starfield-move 40s linear infinite;
+    opacity: 0.8;
 }
 
-@keyframes twinkle {
+@keyframes starfield-twinkle {
     0%, 100% {
         opacity: 0.6;
-        background-position: 0% 0%;
+    }
+    25% {
+        opacity: 0.9;
     }
     50% {
-        opacity: 0.8;
-        background-position: 100% 100%;
+        opacity: 0.7;
+    }
+    75% {
+        opacity: 0.95;
+    }
+}
+
+@keyframes starfield-move {
+    0% {
+        background-position: 0% 0%, 50% 50%;
+    }
+    50% {
+        background-position: 100% 100%, 0% 100%;
+    }
+    100% {
+        background-position: 0% 0%, 50% 50%;
     }
 }
 
@@ -360,6 +402,7 @@ img {
 
 /* ==================================
    COMMON SECTION STYLES
+   (AUCUN CHANGEMENT DANS CETTE SECTION)
    ================================== */
 
 section {
@@ -392,6 +435,7 @@ section {
 
 /* ==================================
    PHILOSOPHY SECTION
+   (AUCUN CHANGEMENT DANS CETTE SECTION)
    ================================== */
 
 .philosophy {
@@ -472,6 +516,7 @@ section {
 
 /* ==================================
    EXPERTISE SECTION
+   (AUCUN CHANGEMENT DANS CETTE SECTION)
    ================================== */
 
 .expertise-grid {
@@ -525,6 +570,7 @@ section {
 
 /* ==================================
    PROJECTS SECTION
+   (AUCUN CHANGEMENT DANS CETTE SECTION)
    ================================== */
 
 .projects {
@@ -615,6 +661,7 @@ section {
 
 /* ==================================
    EXPERIENCE SECTION
+   (AUCUN CHANGEMENT DANS CETTE SECTION)
    ================================== */
 
 .experience {
@@ -710,6 +757,7 @@ section {
 
 /* ==================================
    EXPLORATIONS SECTION
+   (AUCUN CHANGEMENT DANS CETTE SECTION)
    ================================== */
 
 .explorations {
@@ -752,6 +800,7 @@ section {
 
 /* ==================================
    FOOTER CTA SECTION - BLACK BACKGROUND
+   (AUCUN CHANGEMENT DANS CETTE SECTION)
    ================================== */
 
 .footer-cta {
@@ -892,6 +941,7 @@ body.lang-en .fr { display: none; }
 
 /* ==================================
    ANIMATIONS
+   (AUCUN CHANGEMENT DANS CETTE SECTION)
    ================================== */
 
 @keyframes fadeInUp {
@@ -924,55 +974,73 @@ body.lang-en .fr { display: none; }
         --spacing-lg: 3rem;
     }
     
+    /* Navigation adjustments */
     .nav {
-        top: 30px;
-        background-color: rgba(255, 254, 249, 0.98);  /* More transparent on mobile */
+        background-color: rgba(255, 254, 249, 0.98);
     }
     
     .nav-container {
-        padding: 0.75rem 1rem;  /* Reduced padding on mobile */
+        padding: 0.75rem 1.5rem;
     }
     
+    .logo-img {
+        height: 28px;
+    }
+
+    /* Show mobile menu toggle */
+    .mobile-menu-toggle {
+        display: flex;
+    }
+
+    /* Transform menu into mobile overlay */
     .nav-menu {
         position: fixed;
-        top: 30px;  /* Just below the code-art banner */
+        top: 0;
         left: 0;
-        right: 0;
+        width: 100vw;
+        height: 100vh;
         background-color: var(--color-beige);
         flex-direction: column;
-        padding: 5rem 2rem 2rem;  /* Extra padding-top for the nav bar */
-        gap: 1.5rem;
-        transform: translateY(-100%);
-        transition: transform var(--transition-smooth);
-        border-bottom: 1px solid var(--color-light-gray);
-        z-index: 900;  /* Below nav but above content */
-        max-height: 100vh;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        padding: 2rem;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+        z-index: 9999;
         overflow-y: auto;
     }
     
     .nav-menu.active {
-        transform: translateY(0);
+        transform: translateX(0);
     }
     
+    /* Make sure nav stays on top */
+    .nav {
+        z-index: 10000;
+    }
+    
+    /* Mobile menu toggle needs to be above menu overlay */
     .mobile-menu-toggle {
-        display: flex;
+        position: relative;
+        z-index: 10001;
     }
     
-    .mobile-menu-toggle.active span:nth-child(1) {
-        transform: rotate(45deg) translate(5px, 5px);
+    /* Mobile menu links */
+    .nav-link {
+        font-size: 1.5rem;
+        font-weight: 300;
     }
     
-    .mobile-menu-toggle.active span:nth-child(2) {
-        opacity: 0;
+    .nav-link::after {
+        bottom: -8px;
+        height: 2px;
     }
     
-    .mobile-menu-toggle.active span:nth-child(3) {
-        transform: rotate(-45deg) translate(7px, -7px);
-    }
-    
+    /* Hero section adjustment */
     .hero {
         padding: 6rem 1rem 3rem;
-        margin-top: 0;  /* Remove margin on mobile */
+        margin-top: 60px;
     }
     
     .hero-buttons {
@@ -995,17 +1063,26 @@ body.lang-en .fr { display: none; }
         grid-template-columns: 1fr;
     }
     
-    .contact-methods {
-        grid-template-columns: 1fr;
+    .cta-group {
+        flex-direction: column;
+        gap: 1rem;
     }
     
-    .banner-content {
-        font-size: 0.65rem;
+    .btn {
+        width: 100%;
+        min-width: auto;
+    }
+    
+    .footer-links {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
     }
 }
 
 /* ==================================
    RESPONSIVE - MOBILE
+   (AUCUN CHANGEMENT DANS CETTE SECTION)
    ================================== */
 
 @media (max-width: 480px) {
@@ -1039,6 +1116,7 @@ body.lang-en .fr { display: none; }
 
 /* ==================================
    PRINT STYLES
+   (AUCUN CHANGEMENT DANS CETTE SECTION)
    ================================== */
 
 @media print {
