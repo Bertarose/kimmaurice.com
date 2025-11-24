@@ -211,19 +211,7 @@ img {
    (AUCUN CHANGEMENT DANS CETTE SECTION)
    ================================== */
 
-.hero {
-    position: relative;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 8rem 2rem 4rem;
-    overflow: hidden;
-    background: linear-gradient(135deg, #0a0a1f 0%, #1a1a2e 50%, #16213e 100%);
-    margin-top: 60px;  /* Only nav height now */
-}
-/* Ajout de l'image de fond avec 10% d'opacité */
+   /* Ajout de l'image de fond avec 10% d'opacité */
 .hero::before {
     content: '';
     position: absolute;
@@ -239,6 +227,25 @@ img {
     z-index: 0;   /* Place l'image tout au fond */
     pointer-events: none; /* Assure que l'image ne bloque pas les clics */
 }
+
+.hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 8rem 2rem 4rem;
+    overflow: hidden;
+    background: linear-gradient(135deg, #0a0a1f 0%, #1a1a2e 50%, #16213e 100%);
+    margin-top: 60px;  /* Only nav height now */
+}
+
+
+
+
+
+
 .starfield {
     position: absolute;
     top: 0;

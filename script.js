@@ -121,16 +121,18 @@ function initSmoothScroll() {
             const targetSection = document.querySelector(targetId);
             
             if (targetSection) {
+                // Close mobile menu first
+                closeMobileMenu();
+                
+                // Calculate position
                 const navHeight = document.querySelector('.nav').offsetHeight;
                 const targetPosition = targetSection.offsetTop - navHeight;
                 
+                // Smooth scroll
                 window.scrollTo({
                     top: targetPosition,
                     behavior: 'smooth'
                 });
-                
-                // Close mobile menu if open
-                closeMobileMenu();
             }
         });
     });
@@ -142,6 +144,11 @@ const nav = document.querySelector('.nav');
 const scrollThreshold = 100;
 
 function handleNavScroll() {
+    // Don't hide nav on mobile
+    if (window.innerWidth <= 768) {
+        return;
+    }
+    
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     
     if (scrollTop > scrollThreshold) {
@@ -181,52 +188,52 @@ function initMobileMenu() {
     const menuToggle = document.getElementById('mobileMenuToggle');
     const navMenu = document.querySelector('.nav-menu');
     
-    if (menuToggle) {
-        menuToggle.addEventListener('click', function() {
-            this.classList.toggle('active');
-            navMenu.classList.toggle('active');
-            
-            // Prevent body scroll when menu is open
-            if (navMenu.classList.contains('active')) {
-                document.body.style.overflow = 'hidden';
-            } else {
-                document.body.style.overflow = '';
-            }
-        });
+    if (!menuToggle || !navMenu) {
+        console.error('Mobile menu elements not found!');
+        return;
     }
+    
+    // Toggle menu on button click
+    menuToggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const isActive = navMenu.classList.contains('active');
+        
+        if (isActive) {
+            // Close menu
+            menuToggle.classList.remove('active');
+            navMenu.classList.remove('active');
+            document.body.style.overflow = '';
+        } else {
+            // Open menu
+            menuToggle.classList.add('active');
+            navMenu.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+    });
+    
+    // Close menu when clicking on a link
+    const navLinks = navMenu.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            menuToggle.classList.remove('active');
+            navMenu.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    });
 }
 
 function closeMobileMenu() {
     const menuToggle = document.getElementById('mobileMenuToggle');
     const navMenu = document.querySelector('.nav-menu');
     
-    if (menuToggle && navMenu.classList.contains('active')) {
+    if (menuToggle && navMenu && navMenu.classList.contains('active')) {
         menuToggle.classList.remove('active');
         navMenu.classList.remove('active');
         document.body.style.overflow = '';
     }
 }
-
-// Close mobile menu when clicking outside
-document.addEventListener('click', function(event) {
-    const navMenu = document.querySelector('.nav-menu');
-    const menuToggle = document.getElementById('mobileMenuToggle');
-    
-    if (navMenu && menuToggle) {
-        if (navMenu.classList.contains('active') && 
-            !navMenu.contains(event.target) && 
-            !menuToggle.contains(event.target)) {
-            closeMobileMenu();
-        }
-    }
-});
-
-// Close mobile menu on window resize to desktop size
-window.addEventListener('resize', function() {
-    if (window.innerWidth > 768) {
-        closeMobileMenu();
-    }
-});
 
 /* ==================================
    INTERSECTION OBSERVER FOR ANIMATIONS
@@ -397,7 +404,7 @@ document.addEventListener('DOMContentLoaded', function() {
     highlightActiveSection();
     initLazyLoading();
     initFormValidation();
-    initScrollToTop();  // New scroll to top
+    initScrollToTop();
     initKeyboardNav();
     
     // Performance monitoring (development only)
@@ -413,6 +420,27 @@ document.addEventListener('DOMContentLoaded', function() {
     if (langButton) {
         langButton.addEventListener('click', switchLanguage);
     }
+    
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(event) {
+        const navMenu = document.querySelector('.nav-menu');
+        const menuToggle = document.getElementById('mobileMenuToggle');
+        
+        if (navMenu && menuToggle) {
+            if (navMenu.classList.contains('active') && 
+                !navMenu.contains(event.target) && 
+                !menuToggle.contains(event.target)) {
+                closeMobileMenu();
+            }
+        }
+    });
+    
+    // Close mobile menu on window resize to desktop size
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 768) {
+            closeMobileMenu();
+        }
+    });
     
     console.log('✓ Portfolio initialized successfully');
     console.log(`✓ Current language: ${currentLang.toUpperCase()}`);

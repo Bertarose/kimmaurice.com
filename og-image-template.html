@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template Open Graph Image - Kim Maurice</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #1a1a1a;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 40px;
+        }
+
+        .instructions {
+            color: #fff;
+            max-width: 1200px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .instructions h1 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: #00ff88;
+        }
+
+        .instructions p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #ccc;
+            margin-bottom: 10px;
+        }
+
+        .og-container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 10px 50px rgba(0, 255, 136, 0.2);
+        }
+
+        .og-preview {
+            width: 1200px;
+            height: 630px;
+            background: #000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Effet starfield subtil */
+        .og-preview::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(2px 2px at 20% 30%, white, transparent),
+                radial-gradient(2px 2px at 60% 70%, white, transparent),
+                radial-gradient(1px 1px at 50% 50%, white, transparent),
+                radial-gradient(1px 1px at 80% 10%, white, transparent),
+                radial-gradient(2px 2px at 90% 60%, white, transparent),
+                radial-gradient(1px 1px at 33% 80%, white, transparent),
+                radial-gradient(1px 1px at 70% 20%, white, transparent);
+            background-size: 200% 200%;
+            opacity: 0.3;
+        }
+
+        .og-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 60px;
+        }
+
+        .og-logo {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #00ff88 0%, #00cc6a 100%);
+            border-radius: 50%;
+            margin: 0 auto 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            font-weight: bold;
+            color: #000;
+            border: 4px solid #00ff88;
+            box-shadow: 0 0 40px rgba(0, 255, 136, 0.5);
+        }
+
+        .og-title {
+            font-size: 72px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 20px;
+            letter-spacing: -2px;
+            text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+        }
+
+        .og-subtitle {
+            font-size: 36px;
+            font-weight: 300;
+            color: #00ff88;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+        }
+
+        .og-description {
+            font-size: 24px;
+            color: #ccc;
+            max-width: 900px;
+            line-height: 1.4;
+            margin-bottom: 40px;
+        }
+
+        .og-footer {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            font-size: 20px;
+            color: #888;
+        }
+
+        .og-footer span {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .dimensions {
+            margin-top: 20px;
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .download-info {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+            max-width: 1200px;
+        }
+
+        .download-info h2 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+
+        .download-info ol {
+            color: #666;
+            line-height: 2;
+            padding-left: 20px;
+        }
+
+        .download-info li {
+            margin-bottom: 10px;
+        }
+
+        .download-info code {
+            background: #e0e0e0;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: monospace;
+            color: #d63384;
+        }
+
+        .alternative-designs {
+            margin-top: 40px;
+            max-width: 1200px;
+        }
+
+        .alternative-designs h2 {
+            color: #00ff88;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+
+        .designs-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .mini-preview {
+            width: 100%;
+            height: 300px;
+            background: #000;
+            border: 2px solid #333;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mini-preview h3 {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: #00ff88;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .design-option-1 {
+            background: linear-gradient(135deg, #000 0%, #1a1a2e 100%);
+        }
+
+        .design-option-2 {
+            background: #000;
+            border: 2px solid #00ff88;
+        }
+
+        .design-option-3 {
+            background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%);
+        }
+
+        .design-option-4 {
+            background: linear-gradient(45deg, #000 0%, #003320 100%);
+        }
+
+        .mini-content {
+            text-align: center;
+            color: #fff;
+            padding: 20px;
+        }
+
+        .mini-content .name {
+            font-size: 32px;
+            font-weight: bold;
+            color: #00ff88;
+            margin-bottom: 10px;
+        }
+
+        .mini-content .role {
+            font-size: 16px;
+            color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="instructions">
+        <h1>📸 Template Image Open Graph</h1>
+        <p>Voici à quoi devrait ressembler ton image OG (1200x630px)</p>
+        <p><strong>Utilise ce template comme référence pour créer ton image finale dans Photoshop, Figma ou Canva</strong></p>
+    </div>
+
+    <div class="og-container">
+        <div class="og-preview">
+            <div class="og-content">
+                <div class="og-logo">KM</div>
+                <h1 class="og-title">Kim Maurice</h1>
+                <h2 class="og-subtitle">DESIGNER MULTIMÉDIA</h2>
+                <p class="og-description">
+                    25 ans d'expérience · UX/UI · E-learning · Audiovisuel · IA
+                </p>
+                <div class="og-footer">
+                    <span>📍 Montréal</span>
+                    <span>•</span>
+                    <span>kimmaurice.com</span>
+                </div>
+            </div>
+        </div>
+        <div class="dimensions">Dimensions: 1200 x 630 pixels · Format: JPG · Poids: < 200 KB</div>
+    </div>
+
+    <div class="download-info">
+        <h2>🎨 Comment créer cette image</h2>
+        <ol>
+            <li><strong>Option 1 - Screenshot:</strong> Fais un screenshot de l'aperçu ci-dessus et redimensionne à 1200x630px</li>
+            <li><strong>Option 2 - Canva:</strong> Crée un design 1200x630px sur <code>canva.com</code> avec fond noir et texte blanc/vert</li>
+            <li><strong>Option 3 - Figma:</strong> Crée un frame 1200x630px avec le design ci-dessus</li>
+            <li><strong>Option 4 - Photoshop:</strong> Nouveau document 1200x630px, fond noir, ajoute ton logo et texte</li>
+            <li>Sauvegarde en <code>JPG</code> avec qualité 85-90%</li>
+            <li>Optimise avec <code>tinypng.com</code> ou <code>squoosh.app</code> pour réduire le poids</li>
+            <li>Nomme le fichier <code>og-image.jpg</code></li>
+            <li>Upload dans le dossier <code>/images/</code> de ton site</li>
+        </ol>
+    </div>
+
+    <div class="alternative-designs">
+        <h2>🎨 Variations de Design (choisis celle que tu préfères)</h2>
+        <div class="designs-grid">
+            <div class="mini-preview design-option-1">
+                <h3>Option 1: Gradient</h3>
+                <div class="mini-content">
+                    <div class="name">KIM MAURICE</div>
+                    <div class="role">Designer Multimédia</div>
+                </div>
+            </div>
+
+            <div class="mini-preview design-option-2">
+                <h3>Option 2: Bordure</h3>
+                <div class="mini-content">
+                    <div class="name">KIM MAURICE</div>
+                    <div class="role">Designer Multimédia</div>
+                </div>
+            </div>
+
+            <div class="mini-preview design-option-3">
+                <h3>Option 3: Radial</h3>
+                <div class="mini-content">
+                    <div class="name">KIM MAURICE</div>
+                    <div class="role">Designer Multimédia</div>
+                </div>
+            </div>
+
+            <div class="mini-preview design-option-4">
+                <h3>Option 4: Teal</h3>
+                <div class="mini-content">
+                    <div class="name">KIM MAURICE</div>
+                    <div class="role">Designer Multimédia</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="download-info" style="margin-top: 40px;">
+        <h2>✅ Checklist Image OG</h2>
+        <ol>
+            <li>Dimensions exactes: <code>1200 x 630 pixels</code></li>
+            <li>Format: <code>JPG</code> (meilleure compatibilité que PNG)</li>
+            <li>Poids du fichier: <code>< 200 KB</code> (idéalement < 100 KB)</li>
+            <li>Nom du fichier: <code>og-image.jpg</code></li>
+            <li>Texte lisible même en miniature (teste à 300x157px)</li>
+            <li>Contraste élevé (texte clair sur fond sombre)</li>
+            <li>Pas de texte coupé sur les bords (marge de 40px minimum)</li>
+            <li>Ton logo ou initiales bien visibles</li>
+            <li>Cohérence avec l'identité visuelle de ton site</li>
+        </ol>
+    </div>
+
+    <div class="instructions" style="margin-top: 40px;">
+        <h2 style="color: #00ff88; margin-bottom: 20px;">🚀 Après avoir créé l'image</h2>
+        <p>1. Upload <code>og-image.jpg</code> dans <code>/images/</code> de ton site</p>
+        <p>2. Teste avec Facebook Debugger: <code>developers.facebook.com/tools/debug/</code></p>
+        <p>3. Teste avec Twitter Card Validator: <code>cards-dev.twitter.com/validator</code></p>
+        <p>4. Partage ton site sur LinkedIn pour voir l'aperçu</p>
+    </div>
+</body>
+</html>

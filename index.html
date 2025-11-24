@@ -1,21 +1,173 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+    <!-- Meta de base -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Kim Maurice - Designer multimédia et technologue créative basée à Montréal. 25 ans d'expérience en UX/UI, e-learning, production audiovisuelle et développement web.">
-    <meta name="keywords" content="designer multimédia, technologue créative, UX/UI, e-learning, Montréal, audiovisuel, web design">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- SEO de base -->
+    <title>Kim Maurice | Designer Multimédia & Technologue Créative | Montréal</title>
+    <meta name="description" content="Designer multimédia et technologue créative basée à Montréal. 25 ans d'expérience en UX/UI, e-learning, production audiovisuelle, design sonore et développement web. Expertise en IA générative et projets culturels.">
+    <meta name="keywords" content="designer multimédia Montréal, technologue créative, UX/UI designer, e-learning développeur, production audiovisuelle, design sonore, web design, IA générative, Kim Maurice, designer freelance Montréal, creative technologist">
     <meta name="author" content="Kim Maurice">
-    <title>Kim Maurice | Designer Multimédia & Technologue Créative</title>
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow">
+    
+    <!-- Canonical & Alternate Languages -->
+    <link rel="canonical" href="https://kimmaurice.com/">
+    <link rel="alternate" hreflang="fr" href="https://kimmaurice.com/">
+    <link rel="alternate" hreflang="en" href="https://kimmaurice.com/?lang=en">
+    <link rel="alternate" hreflang="x-default" href="https://kimmaurice.com/">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kimmaurice.com/">
+    <meta property="og:site_name" content="Kim Maurice">
+    <meta property="og:title" content="Kim Maurice | Designer Multimédia & Technologue Créative">
+    <meta property="og:description" content="25 ans d'expérience en design multimédia, UX/UI, e-learning, production audiovisuelle et design sonore. Basée à Montréal.">
+    <meta property="og:image" content="https://kimmaurice.com/images/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Kim Maurice - Designer Multimédia">
+    <meta property="og:locale" content="fr_CA">
+    <meta property="og:locale:alternate" content="en_CA">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://kimmaurice.com/">
+    <meta name="twitter:title" content="Kim Maurice | Designer Multimédia & Technologue Créative">
+    <meta name="twitter:description" content="25 ans d'expérience en design multimédia, UX/UI, e-learning, production audiovisuelle et design sonore. Basée à Montréal.">
+    <meta name="twitter:image" content="https://kimmaurice.com/images/og-image.jpg">
+    <meta name="twitter:image:alt" content="Kim Maurice - Designer Multimédia">
+    
+    <!-- LinkedIn & Professional Networks -->
+    <meta property="profile:first_name" content="Kim">
+    <meta property="profile:last_name" content="Maurice">
+    <meta property="profile:username" content="kimmaurice">
+    
+    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    
+    <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css">
+    
+    <!-- Google Analytics (GA4) - REMPLACE G-XXXXXXXXXX PAR TON VRAI ID -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX', {
+            'anonymize_ip': true,
+            'cookie_flags': 'SameSite=None;Secure'
+        });
+    </script>
+    
+    <!-- Schema.org structured data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Kim Maurice",
+        "jobTitle": "Designer Multimédia & Technologue Créative",
+        "description": "Designer multimédia et technologue créative avec 25 ans d'expérience en UX/UI, e-learning, production audiovisuelle et design sonore.",
+        "url": "https://kimmaurice.com",
+        "image": "https://kimmaurice.com/images/logo.jpg",
+        "email": "contact@kimmaurice.com",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Montréal",
+            "addressRegion": "QC",
+            "addressCountry": "CA"
+        },
+        "alumniOf": [
+            {
+                "@type": "EducationalOrganization",
+                "name": "Collège de Maisonneuve",
+                "description": "DEC en Techniques d'intégration multimédia"
+            }
+        ],
+        "knowsAbout": [
+            "UX/UI Design",
+            "E-learning Development",
+            "Audiovisual Production",
+            "Sound Design",
+            "Web Development",
+            "Generative AI",
+            "Interactive Design",
+            "Three.js",
+            "Next.js",
+            "React"
+        ],
+        "sameAs": [
+            "https://linkedin.com/in/kimmaurice",
+            "https://linktr.ee/bertarose",
+            "https://www.imdb.com/name/nm9371635/",
+            "https://www.artstation.com/kimmaurice",
+            "https://www.mixcloud.com/radiofougere/"
+        ],
+        "worksFor": {
+            "@type": "Organization",
+            "name": "Freelance"
+        }
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Kim Maurice Portfolio",
+        "url": "https://kimmaurice.com",
+        "description": "Portfolio professionnel de Kim Maurice, designer multimédia et technologue créative basée à Montréal",
+        "inLanguage": ["fr-CA", "en-CA"],
+        "author": {
+            "@type": "Person",
+            "name": "Kim Maurice"
+        }
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "name": "Kim Maurice - Services de Design Multimédia",
+        "description": "Services professionnels de design multimédia, UX/UI, e-learning, production audiovisuelle et design sonore à Montréal",
+        "provider": {
+            "@type": "Person",
+            "name": "Kim Maurice"
+        },
+        "areaServed": {
+            "@type": "City",
+            "name": "Montréal"
+        },
+        "serviceType": [
+            "UX/UI Design",
+            "E-learning Development",
+            "Audiovisual Production",
+            "Sound Design",
+            "Web Development",
+            "Interactive Design"
+        ]
+    }
+    </script>
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://www.google-analytics.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
 </head>
 <body class="lang-fr">
     <nav class="nav">
         <div class="nav-container">
             <div class="nav-logo">
-                <a href="#home">
-                    <img src="images/logo.jpg" alt="Kim Maurice" class="logo-img">
+                <a href="#home" aria-label="Retour à l'accueil">
+                    <img src="images/logo.jpg" alt="Kim Maurice - Designer Multimédia" class="logo-img" width="50" height="50">
                 </a>
             </div>
             
@@ -29,8 +181,8 @@
             </div>
             
             <div class="nav-controls">
-                <button id="langSwitch" class="lang-switch">EN</button>
-                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Menu">
+                <button id="langSwitch" class="lang-switch" aria-label="Changer de langue">EN</button>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Ouvrir le menu" aria-expanded="false">
                     <span></span>
                     <span></span>
                     <span></span>
@@ -77,7 +229,7 @@
             
             <div class="philosophy-intro">
                 <p class="large-text" data-fr="Depuis un moment, je navigue entre les disciplines — design, son, vidéo, code, narration. J'ai conçu des modules e-learning immersifs qui transforment la formation professionnelle, dirigé des productions audiovisuelles qui racontent des histoires complexes avec clarté, codé des interfaces intuitives qui rendent l'information accessible, et composé des environnements sonores qui amplifient l'émotion." data-en="For many years, I've been navigating between disciplines — design, sound, video, code, storytelling. I've designed immersive e-learning modules that transform professional training, directed audiovisual productions that tell complex stories with clarity, coded intuitive interfaces that make information accessible, and composed sound environments that amplify emotion.">
-                    Depuis un moment, je navigue entre les disciplines — design, son, vidéo, code, narration. J'ai conçu des modules e-learning immersifs qui transforment la formation professionnelle, dirigé des productions audiovisuelles qui racontent des histoires complexes avec clarté, codé des interfaces intuitives qui rendent l'information accessible, et composé des environnements sonores qui amplifient l'émotion.
+                    Depuis un moment, je navigue entre les disciplines — design, son, vidéo, code, narration. J'ai conçu des modules e-learning immersifs qui transforment la formation professionnelle, dirigé des productions audiovisuelles qui racontent des histoires, codé des interfaces intuitives qui rendent l'information accessible, et composé des environnements sonores qui amplifient l'émotion.
                 </p>
             </div>
 
@@ -184,7 +336,7 @@
                     <h3 data-fr="Développement web" data-en="Web development">Développement web</h3>
                     <ul>
                         <li data-fr="HTML, CSS, JavaScript" data-en="HTML, CSS, JavaScript">HTML, CSS, JavaScript</li>
-                        <li data-fr="React, Next.js, Three.js" data-en="React, Next.js, Three.js">React, Next.js, Three.js</li>
+                        <li data-fr="React, Next.js, Three.js" data-en="React, Next.js, Three.js">React, Next.js, Three.js, vibe coding</li>
                         <li data-fr="Responsive design" data-en="Responsive design">Responsive design</li>
                         <li data-fr="API & bases de données" data-en="API & databases">API & bases de données</li>
                     </ul>
@@ -206,9 +358,9 @@
                     <h3 data-fr="Design sonore" data-en="Sound design">Design sonore</h3>
                     <ul>
                         <li data-fr="Composition musicale" data-en="Musical composition">Composition musicale</li>
-                        <li data-fr="Audio interactif (Max/MSP, Pure Data)" data-en="Interactive audio (Max/MSP, Pure Data)">Audio interactif (Max/MSP, Pure Data)</li>
+                        <li data-fr="Audio interactif (Max/MSP, Pure Data)" data-en="Interactive audio (Max/MSP, Pure Data)">Audio interactif, pure Data)</li>
                         <li data-fr="Production (Ableton, Logic Pro)" data-en="Production (Ableton, Logic Pro)">Production (Ableton, Logic Pro)</li>
-                        <li data-fr="Spatialisation audio" data-en="Audio spatialization">Spatialisation audio</li>
+                        <li data-fr="Spatialisation audio" data-en="Audio spatialization">Composition audio</li>
                     </ul>
                 </div>
 
@@ -283,7 +435,7 @@
                     <div class="project-content">
                         <h3 data-fr="Modules E-learning" data-en="E-learning Modules">Modules E-learning</h3>
                         <p class="project-description" data-fr="Formations immersives pour Métro, CIUSSS, Ville de Laval" data-en="Immersive training for Métro, CIUSSS, Ville de Laval">
-                            Formations immersives pour Métro, CIUSSS, Ville de Laval
+                            Formations immersives pour Métro, CIUSSS, Ville de Laval, CRIM, Technologia, Campus Gardaworld.
                         </p>
                         <div class="project-tech">
                             <span>Storyline</span>
@@ -323,12 +475,12 @@
                     <div class="project-content">
                         <h3 data-fr="Design Graphique Film/TV" data-en="Film/TV Graphic Design">Design Graphique Film/TV</h3>
                         <p class="project-description" data-fr="Bad Blood, Unité 9, My Salinger Year" data-en="Bad Blood, Unité 9, My Salinger Year">
-                            Bad Blood, Unité 9, My Salinger Year
+                            Les rois mongoles, Bad Blood, Unité 9, My Salinger Year
                         </p>
                         <div class="project-tech">
-                            <span>After Effects</span>
-                            <span>Premiere</span>
-                            <span>Photoshop</span>
+                            <span>HTML</span>
+                            <span>Gestion d'impression</span>
+                            <span>Suite Adobe</span>
                         </div>
                     </div>
                 </div>
@@ -504,24 +656,24 @@
                 <h2>Travaillons ensemble!</h2>
                 
                 <div class="cta-group">
-                    <a href="/cdn-cgi/l/email-protection#422b2c242d02292b2f2f2337302b21276c212d2f" class="btn btn-primary">
+                    <a href="mailto:contact@kimmaurice.com" class="btn btn-primary">
                         Écrivez-moi un e-mail →
                     </a>
-                    <a href="https://files.cargocollective.com/c3208072/Curriculum_Kimmaurice_2025.pdf" target="_blank" class="btn btn-secondary">
+                    <a href="https://files.cargocollective.com/c3208072/Curriculum_Kimmaurice_2025.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
                         📄 Télécharger mon CV
                     </a>
                 </div>
                 
                 <div class="footer-links">
-                    <a href="https://wa.me/2633845163" class="footer-link" target="_blank">WhatsApp</a>
-                    <a href="https://linktr.ee/bertarose" target="_blank" class="footer-link">Réseaux sociaux</a>
-                    <a href="https://www.mixcloud.com/radiofougere/" target="_blank" class="footer-link">Radio Fougère</a>
-                    <a href="http://www.artstation.com/kimmaurice" target="_blank" class="footer-link">Portfolio cinéma</a>
-                    <a href="https://www.imdb.com/fr-ca/name/nm9371635/" target="_blank" class="footer-link">IMDB</a>
+                    <a href="https://wa.me/2633845163" class="footer-link" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+                    <a href="https://linktr.ee/bertarose" target="_blank" rel="noopener noreferrer" class="footer-link">Réseaux sociaux</a>
+                    <a href="https://www.mixcloud.com/radiofougere/" target="_blank" rel="noopener noreferrer" class="footer-link">Radio Fougère</a>
+                    <a href="http://www.artstation.com/kimmaurice" target="_blank" rel="noopener noreferrer" class="footer-link">Portfolio cinéma</a>
+                    <a href="https://www.imdb.com/fr-ca/name/nm9371635/" target="_blank" rel="noopener noreferrer" class="footer-link">IMDB</a>
                 </div>
                 
                 <p class="footer-copyright">
-                    <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7e171018113e151713131f0b0c171d1b501d1113"><span class="__cf_email__" data-cfemail="264f484049664d4f4b4b4753544f45430845494b">[email&#160;protected]</span></a><br>
+                    contact@kimmaurice.com<br>
                     © 2025 Kim Maurice · Montréal, Québec
                 </p>
             </div>
@@ -530,24 +682,24 @@
                 <h2>Let's work together!</h2>
                 
                 <div class="cta-group">
-                    <a href="/cdn-cgi/l/email-protection#ed84838b82ad868480808c989f848e88c38e8280" class="btn btn-primary">
+                    <a href="mailto:contact@kimmaurice.com" class="btn btn-primary">
                         Write me an email →
                     </a>
-                    <a href="https://files.cargocollective.com/c3208072/Curriculum_Kimmaurice_2025.pdf" target="_blank" class="btn btn-secondary">
+                    <a href="https://files.cargocollective.com/c3208072/Curriculum_Kimmaurice_2025.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
                         📄 Download my CV
                     </a>
                 </div>
                 
                 <div class="footer-links">
-                    <a href="https://wa.me/2633845163" class="footer-link" target="_blank">WhatsApp</a>
-                    <a href="https://linktr.ee/bertarose" target="_blank" class="footer-link">Social media</a>
-                    <a href="https://www.mixcloud.com/radiofougere/" target="_blank" class="footer-link">Radio Fougère</a>
-                    <a href="http://www.artstation.com/kimmaurice" target="_blank" class="footer-link">Film portfolio</a>
-                    <a href="https://www.imdb.com/fr-ca/name/nm9371635/" target="_blank" class="footer-link">IMDB</a>
+                    <a href="https://wa.me/2633845163" class="footer-link" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+                    <a href="https://linktr.ee/bertarose" target="_blank" rel="noopener noreferrer" class="footer-link">Social media</a>
+                    <a href="https://www.mixcloud.com/radiofougere/" target="_blank" rel="noopener noreferrer" class="footer-link">Radio Fougère</a>
+                    <a href="http://www.artstation.com/kimmaurice" target="_blank" rel="noopener noreferrer" class="footer-link">Film portfolio</a>
+                    <a href="https://www.imdb.com/fr-ca/name/nm9371635/" target="_blank" rel="noopener noreferrer" class="footer-link">IMDB</a>
                 </div>
                 
                 <p class="footer-copyright">
-                    <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fe979098918e9d9792978a9790d19d9193"><span class="__cf_email__" data-cfemail="076e6968476c6e6a6a6672756e646229646869">[email&#160;protected]</span></a><br>
+                    contact@kimmaurice.com<br>
                     © 2025 Kim Maurice · Montreal, Quebec
                 </p>
             </div>
