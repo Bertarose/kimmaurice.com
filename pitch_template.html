@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Pitch</title>
+    <style>
+        :root {
+            --color-beige: #FFFEF9;
+            --color-black: #1a1a1a;
+            --color-gray: #6b6b6b;
+            --font-primary: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            --spacing-md: 2rem;
+            --spacing-lg: 4rem;
+        }
+        body {
+            font-family: var(--font-primary);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background: var(--color-black);
+            color: var(--color-beige);
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: var(--spacing-lg) var(--spacing-md);
+        }
+        header {
+            text-align: center;
+            padding-bottom: var(--spacing-md);
+            border-bottom: 1px solid var(--color-gray);
+            margin-bottom: var(--spacing-lg);
+        }
+        h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 300;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+        h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 300;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--color-gray);
+            padding-bottom: 1rem;
+        }
+        section {
+            margin-bottom: var(--spacing-lg);
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--color-gray);
+        }
+        li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--color-beige);
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: var(--spacing-md) 0;
+            border: 1px solid var(--color-gray);
+        }
+        a {
+            color: var(--color-beige);
+            text-decoration: none;
+            font-weight: bold;
+            border-bottom: 1px solid transparent;
+            transition: border-bottom 0.2s ease;
+        }
+        a:hover {
+            border-bottom: 1px solid var(--color-beige);
+        }
+        footer {
+            text-align: center;
+            margin-top: var(--spacing-lg);
+            padding-top: var(--spacing-md);
+            border-top: 1px solid var(--color-gray);
+            color: var(--color-gray);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+        <h1>[Project Title]</h1>
+        <p>[A short and catchy tagline for your project]</p>
+    </header>
+
+    <main>
+        <section id="summary">
+            <h2>Project Summary</h2>
+            <p>[Provide a brief, high-level overview of your project. What is it, and why is it important?]</p>
+        </section>
+
+        <section id="problem">
+            <h2>The Problem</h2>
+            <p>[Describe the problem or need that your project addresses. What pain points are you solving?]</p>
+        </section>
+
+        <section id="solution">
+            <h2>The Solution</h2>
+            <p>[Explain how your project solves the problem. What is your proposed solution, and how does it work?]</p>
+        </section>
+
+        <section id="features">
+            <h2>Key Features</h2>
+            <ul>
+                <li>[Feature 1: A brief description of the feature]</li>
+                <li>[Feature 2: A brief description of the feature]</li>
+                <li>[Feature 3: A brief description of the feature]</li>
+            </ul>
+        </section>
+
+        <section id="audience">
+            <h2>Target Audience</h2>
+            <p>[Describe the target audience for your project. Who are you building this for?]</p>
+        </section>
+
+        <section id="mockups">
+            <h2>Mockups/Visuals</h2>
+            <p>[Insert images, mockups, or wireframes of your project here. Visuals are a great way to showcase your idea.]</p>
+            <img src="[Image URL]" alt="[Image description]">
+        </section>
+
+        <section id="cta">
+            <h2>Call to Action</h2>
+            <p>[What do you want the reader to do next? Provide a clear call to action, such as contacting you for more information or providing feedback.]</p>
+            <a href="mailto:[Your Email]">Contact Me</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 [Your Name]</p>
+    </footer>
+    </div>
+</body>
+</html>
