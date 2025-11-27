@@ -46,6 +46,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="about-section.css">
     
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-WYM83ME5LK"></script>
 
@@ -188,9 +189,11 @@
                 <span data-fr="Designer multimédia & Technologue Créative" data-en="Multimedia Designer & Creative Technologist">Designer multimédia & Technologue Créative</span>
             </h1>
             <p class="hero-subtitle" data-fr="UX/UI • E-learning • Production audiovisuelle • Design sonore" data-en="UX/UI • E-learning • Audiovisual production • Sound design">
-                Web • UX/UI • E-learning • Production audiovisuelle • Design sonore
+                UX/UI • E-learning • Production audiovisuelle • Design sonore
             </p>
-           
+            <p class="hero-description" data-fr="25 ans d'expérience à créer des expériences numériques immersives qui éduquent, inspirent et transforment. Je fusionne design, technologie et art pour donner vie à des projets qui ont du sens." data-en="25 years of experience creating immersive digital experiences that educate, inspire and transform. I merge design, technology and art to bring meaningful projects to life.">
+                25 ans d'expérience à créer des expériences numériques immersives qui éduquent, inspirent et transforment.
+            </p>
             <div class="hero-buttons">
                 <a href="#projects" class="btn-primary" data-fr="Voir mes projets" data-en="View my projects">Voir mes projets</a>
                 <a href="#contact" class="btn-secondary" data-fr="Me contacter" data-en="Contact me">Me contacter</a>
@@ -206,19 +209,25 @@
         </div>
     </section>
 
-    <!-- PROJETS EN PREMIER -->
+    <!-- PROJETS EN PREMIER - TOUS AVEC LIENS DIRECTS -->
     <section class="projects" id="projects">
         <div class="container">
             <div class="section-header">
-                <h2 data-fr="Projets sélectionnés" data-en="Selected projects">Quelques projets</h2>
+                <h2 data-fr="Projets sélectionnés" data-en="Selected projects">Projets sélectionnés</h2>
             </div>
 
             <div class="projects-grid">
-                <div class="project-card">
+                
+                <!-- PROJET 1: E-LEARNING -->
+               
+                <a href="https://360.articulate.com/review/content/b3987a71-9c66-4545-8c4f-80d7974c32e4/review" 
+                 target="_blank" 
+                   class="project-card project-card-link">
                     <div class="project-image">
                         <img src="images/elearning-placeholder.svg" alt="E-learning" loading="lazy">
                         <div class="project-overlay">
                             <span class="project-tag">E-LEARNING</span>
+                            <span class="external-link-indicator">📄 Voir un extrait </span>
                         </div>
                     </div>
                     <div class="project-content">
@@ -230,16 +239,22 @@
                             <span>Storyline</span>
                             <span>Rise</span>
                             <span>SCORM</span>
+                            <span>Images génératives</span>
                             <span>UX Design</span>
                         </div>
                     </div>
-                </div>
+                </a>
 
-                <div class="project-card">
+                <!-- PROJET 2: FILM/TV - LIEN VERS IMDB OU ARTSTATION -->
+                <a href="https://www.imdb.com/name/nm9371635/" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   class="project-card project-card-link">
                     <div class="project-image">
                         <img src="images/cultural-placeholder.svg" alt="Film TV" loading="lazy">
                         <div class="project-overlay">
                             <span class="project-tag">FILM/TV</span>
+                            <span class="external-link-indicator">🎬 Voir sur IMDB</span>
                         </div>
                     </div>
                     <div class="project-content">
@@ -254,34 +269,40 @@
                             <span>HTML/CSS</span>
                         </div>
                     </div>
-                </div>
+                </a>
 
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="images/still-fm-placeholder.svg" alt="Still FM" loading="lazy">
-                        <div class="project-overlay">
-                            <span class="project-tag">WEB</span>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3>Still FM</h3>
-                        <p class="project-description" data-fr="Plateforme de streaming radio underground avec intégration Twitch et Mixcloud. Design minimaliste, player audio personnalisé et interface responsive. Développement Next.js complet." data-en="Underground radio streaming platform with Twitch and Mixcloud integration. Minimalist design, custom audio player and responsive interface. Full Next.js development.">
-                            Plateforme de streaming radio underground avec intégration Twitch et Mixcloud. Design minimaliste, player audio personnalisé et interface responsive. Développement Next.js complet.
-                        </p>
-                        <div class="project-tech">
-                            <span>Next.js</span>
-                            <span>React</span>
-                            <span>Mixcloud API</span>
-                            <span>Twitch</span>
-                        </div>
-                    </div>
-                </div>
+              <div class="project-card project-card-no-link">
+    <div class="project-image">
+        <img src="images/still-fm-placeholder.svg" alt="Still FM" loading="lazy">
+        <div class="project-overlay">
+            <span class="project-tag">WEB</span>
+            <span class="status-badge-in-progress">🚧 En cours</span>
+        </div>
+    </div>
+    <div class="project-content">
+        <h3>Still FM</h3>
+        <p class="project-description" data-fr="Plateforme de streaming radio underground avec intégration Twitch et Mixcloud. Design minimaliste, player audio personnalisé et interface responsive. Développement Next.js complet." data-en="Underground radio streaming platform with Twitch and Mixcloud integration. Minimalist design, custom audio player and responsive interface. Full Next.js development.">
+            Plateforme de streaming radio underground avec intégration Twitch et Mixcloud. Design minimaliste, player audio personnalisé et interface responsive. Développement Next.js complet.
+        </p>
+        <div class="project-tech">
+            <span>Next.js</span>
+            <span>React</span>
+            <span>Mixcloud API</span>
+            <span>Twitch</span>
+        </div>
+    </div>
+</div>
 
-                <div class="project-card">
+                <!-- PROJET 4: LATENT ORGAN -->
+      
+                <a href="https://prototype-psi-liart.vercel.app/" 
+                target="_blank" 
+                   class="project-card project-card-link">
                     <div class="project-image">
                         <img src="images/latent-organ-placeholder.svg" alt="Latent Organ" loading="lazy">
                         <div class="project-overlay">
                             <span class="project-tag">AI + AUDIO</span>
+                            <span class="external-link-indicator">🎹 Voir le projet</span>
                         </div>
                     </div>
                     <div class="project-content">
@@ -296,13 +317,18 @@
                             <span>Python</span>
                         </div>
                     </div>
-                </div>
+                </a>
 
-                <div class="project-card">
+                <!-- PROJET 5: THIS IS WEIRD AI - LIEN VERS INSTAGRAM -->
+                <a href="https://www.instagram.com/this_is_weird_ai" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   class="project-card project-card-link">
                     <div class="project-image">
                         <img src="images/bg.jpg" alt="AI Art" loading="lazy">
                         <div class="project-overlay">
                             <span class="project-tag">IA GÉNÉRATIVE</span>
+                            <span class="external-link-indicator">📸 Voir sur Instagram</span>
                         </div>
                     </div>
                     <div class="project-content">
@@ -317,13 +343,17 @@
                             <span>n8n</span>
                         </div>
                     </div>
-                </div>
+                </a>
 
-                <div class="project-card">
+                <!-- PROJET 6: SITES WEB -->
+               
+                <a href="#" 
+                   class="project-card project-card-link">
                     <div class="project-image">
                         <img src="images/portfolio-placeholder.svg" alt="Portfolio" loading="lazy">
                         <div class="project-overlay">
                             <span class="project-tag">WEB</span>
+                            <span class="external-link-indicator">🌐 Voir les sites</span>
                         </div>
                     </div>
                     <div class="project-content">
@@ -338,28 +368,33 @@
                             <span>SEO</span>
                         </div>
                     </div>
-                </div>
+                </a>
 
-                <div class="project-card">
+                <!-- PROJET 7: SOUND DESIGN - LIEN VERS MIXCLOUD OU AUTRE -->
+                <a href="https://www.mixcloud.com/radiofougere/" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   class="project-card project-card-link">
                     <div class="project-image">
                         <img src="images/audio-placeholder.svg" alt="Audio" loading="lazy">
                         <div class="project-overlay">
-                            <span class="project-tag">SOUND DESIGN</span>
+                            <span class="project-tag">SOUND</span>
+                            <span class="external-link-indicator">🔊 Écouter</span>
                         </div>
                     </div>
                     <div class="project-content">
                         <h3 data-fr="Design Sonore & Installations" data-en="Sound Design & Installations">Design Sonore & Installations</h3>
                         <p class="project-description" data-fr="Création de paysages sonores immersifs et installations audio interactives. Composition musicale, spatialisation audio et systèmes génératifs avec Max/MSP, Pure Data et Ableton." data-en="Creation of immersive soundscapes and interactive audio installations. Musical composition, audio spatialization and generative systems with Max/MSP, Pure Data and Ableton.">
-                            Création de paysages sonores immersifs et installations audio interactives. Composition musicale, spatialisation audio et systèmes génératifs avec Max/MSP, Pure Data et Ableton.
+                            Création de paysages sonores immersifs et installations audio interactives.
                         </p>
                         <div class="project-tech">
-                            <span>Max/MSP</span>
-                            <span>Pure Data</span>
-                            <span>Ableton</span>
+                            <span>Synth</span>
+                            <span>Abelton</span>
+                            <span>Enregistrement</span>
                             <span>Audio 3D</span>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
     </section>
@@ -546,9 +581,6 @@
         </div>
     </section>
 
-
-         
-
     <!-- EXPLORATIONS -->
     <section class="explorations" id="explorations">
         <div class="container">
@@ -615,7 +647,7 @@
                 <h2>Travaillons ensemble!</h2>
                 
                 <div class="cta-group">
-                    <a href="mailto:contact@kimmaurice.com" class="btn btn-primary">
+                    <a href="/cdn-cgi/l/email-protection#63000c0d1702001723080a0e0e0216110a00064d000c0e" class="btn btn-primary">
                         Écrivez-moi un e-mail →
                     </a>
                     <a href="https://files.cargocollective.com/c3208072/Curriculum_Kimmaurice_2025.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
@@ -632,7 +664,7 @@
                 </div>
                 
                 <p class="footer-copyright">
-                    contact@kimmaurice.com<br>
+                    <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c7a4a8a9b3a6a4b387acaeaaaaa6b2b5aea4a2e9a4a8aa">[email&#160;protected]</a><br>
                     © 2025 Kim Maurice · Montréal, Québec
                 </p>
             </div>
@@ -641,7 +673,7 @@
                 <h2>Let's work together!</h2>
                 
                 <div class="cta-group">
-                    <a href="mailto:contact@kimmaurice.com" class="btn btn-primary">
+                    <a href="/cdn-cgi/l/email-protection#3c5f5352485d5f487c575551515d494e555f59125f5351" class="btn btn-primary">
                         Write me an email →
                     </a>
                     <a href="https://files.cargocollective.com/c3208072/Curriculum_Kimmaurice_2025.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
@@ -658,14 +690,3 @@
                 </div>
                 
                 <p class="footer-copyright">
-                    contact@kimmaurice.com<br>
-                    © 2025 Kim Maurice · Montreal, Quebec
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <script src="script.js"></script>
-    <script src="modal.js"></script>
-</body>
-</html>

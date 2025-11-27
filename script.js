@@ -526,3 +526,195 @@ if (typeof module !== 'undefined' && module.exports) {
         debounce
     };
 }
+
+// ============================================
+// MODALS DE PROJETS - JAVASCRIPT
+// ============================================
+
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // Sélectionner tous les éléments
+    const projectCards = document.querySelectorAll('.project-card');
+    const modals = document.querySelectorAll('.project-modal');
+    const body = document.body;
+    
+    // État global pour tracker le modal actuel et l'index de l'image
+    let currentModal = null;
+    let currentImageIndex = 0;
+    
+    // ============================================
+    // OUVRIR UN MODAL
+    // ============================================
+    
+    projectCards.forEach(card => {
+        card.addEventListener('click', function() {
+            const projectId = this.getAttribute('data-project-id');
+            const modal = document.getElementById(`modal-${projectId}`);
+            
+            if (modal) {
+                openModal(modal);
+            }
+        });
+    });
+    
+    function openModal(modal) {
+        currentModal = modal;
+        currentImageIndex = 0;
+        
+        // Afficher le modal
+        modal.classList.add('active');
+        body.classList.add('modal-open');
+        
+        // Reset gallery à la première image
+        showImage(0);
+        
+        // Setup gallery navigation
+        setupGalleryNavigation(modal);
+    }
+    
+    // ============================================
+    // FERMER UN MODAL
+    // ============================================
+    
+    // Fermer avec le bouton X
+    modals.forEach(modal => {
+        const closeBtn = modal.querySelector('.modal-close');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', function() {
+                closeModal(modal);
+            });
+        }
+    });
+    
+    // Fermer en cliquant sur l'overlay
+    modals.forEach(modal => {
+        const overlay = modal.querySelector('.modal-overlay');
+        if (overlay) {
+            overlay.addEventListener('click', function() {
+                closeModal(modal);
+            });
+        }
+    });
+    
+    // Fermer avec la touche ESC
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && currentModal) {
+            closeModal(currentModal);
+        }
+    });
+    
+    function closeModal(modal) {
+        modal.classList.remove('active');
+        body.classList.remove('modal-open');
+        currentModal = null;
+        currentImageIndex = 0;
+    }
+    
+    // ============================================
+    // NAVIGATION DANS LA GALLERY
+    // ============================================
+    
+    function setupGalleryNavigation(modal) {
+        const images = modal.querySelectorAll('.gallery-image');
+        const prevBtn = modal.querySelector('.gallery-prev');
+        const nextBtn = modal.querySelector('.gallery-next');
+        const dots = modal.querySelectorAll('.dot');
+        
+        // Boutons Prev/Next
+        if (prevBtn) {
+            prevBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                navigateGallery(-1);
+            });
+        }
+        
+        if (nextBtn) {
+            nextBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                navigateGallery(1);
+            });
+        }
+        
+        // Dots
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', function(e) {
+                e.stopPropagation();
+                showImage(index);
+            });
+        });
+        
+        // Navigation au clavier (flèches gauche/droite)
+        document.addEventListener('keydown', function(e) {
+            if (!currentModal) return;
+            
+            if (e.key === 'ArrowLeft') {
+                navigateGallery(-1);
+            } else if (e.key === 'ArrowRight') {
+                navigateGallery(1);
+            }
+        });
+    }
+    
+    function navigateGallery(direction) {
+        if (!currentModal) return;
+        
+        const images = currentModal.querySelectorAll('.gallery-image');
+        const totalImages = images.length;
+        
+        currentImageIndex += direction;
+        
+        // Loop around
+        if (currentImageIndex < 0) {
+            currentImageIndex = totalImages - 1;
+        } else if (currentImageIndex >= totalImages) {
+            currentImageIndex = 0;
+        }
+        
+        showImage(currentImageIndex);
+    }
+    
+    function showImage(index) {
+        if (!currentModal) return;
+        
+        const images = currentModal.querySelectorAll('.gallery-image');
+        const dots = currentModal.querySelectorAll('.dot');
+        
+        currentImageIndex = index;
+        
+        // Update images
+        images.forEach((img, i) => {
+            if (i === index) {
+                img.classList.add('active');
+            } else {
+                img.classList.remove('active');
+            }
+        });
+        
+        // Update dots
+        dots.forEach((dot, i) => {
+            if (i === index) {
+                dot.classList.add('active');
+            } else {
+                dot.classList.remove('active');
+            }
+        });
+    }
+    
+    // ============================================
+    // AUTO-HIDE NAVIGATION SI UNE SEULE IMAGE
+    // ============================================
+    
+    modals.forEach(modal => {
+        const images = modal.querySelectorAll('.gallery-image');
+        const prevBtn = modal.querySelector('.gallery-prev');
+        const nextBtn = modal.querySelector('.gallery-next');
+        const dotsContainer = modal.querySelector('.gallery-dots');
+        
+        if (images.length <= 1) {
+            if (prevBtn) prevBtn.style.display = 'none';
+            if (nextBtn) nextBtn.style.display = 'none';
+            if (dotsContainer) dotsContainer.style.display = 'none';
+        }
+    });
+    
+});

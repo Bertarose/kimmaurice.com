@@ -212,6 +212,8 @@ img {
    ================================== */
 
    /* Ajout de l'image de fond avec 10% d'opacité */
+/* IMAGE DE FOND DU HERO - SUPPRIMÉE */
+/*
 .hero::before {
     content: '';
     position: absolute;
@@ -219,14 +221,14 @@ img {
     left: 0;
     width: 100%;
     height: 100%;
-    /* Remplace par le nom réel de ton fichier image */
     background-image: url('images/bg.jpg'); 
     background-size: cover;
     background-position: center;
-    opacity: 0.1; /* Opacité à 10% */
-    z-index: 0;   /* Place l'image tout au fond */
-    pointer-events: none; /* Assure que l'image ne bloque pas les clics */
+    opacity: 0.1;
+    z-index: 0;
+    pointer-events: none;
 }
+*/
 
 .hero {
     position: relative;
@@ -637,11 +639,17 @@ section {
 
 .project-overlay {
     position: absolute;
-    top: 1rem;
-    right: 1rem;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
 }
 
 .project-tag {
+    position: absolute;
+    top: 20px;
+    right: 20px;
     display: inline-block;
     padding: 0.5rem 1rem;
     background-color: var(--color-black);
@@ -649,6 +657,7 @@ section {
     font-size: 0.75rem;
     font-weight: 600;
     letter-spacing: 0.05em;
+    pointer-events: auto;
 }
 
 .project-content {
@@ -1155,5 +1164,184 @@ body.lang-en .fr { display: none; }
     
     section {
         page-break-inside: avoid;
+    }
+}
+
+/* ============================================
+   MODALS DE PROJETS - STYLES
+   ============================================ */
+
+/* Modal Container */
+
+/* ============================================
+   CARTES DE PROJETS AVEC LIENS DIRECTS
+   Badges positionnés à GAUCHE pour éviter chevauchement
+   ============================================ */
+
+/* Cartes de projets avec liens externes */
+.project-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    position: relative;
+    cursor: pointer;
+}
+
+/* Effet hover sur les cartes */
+.project-card-link:hover {
+    transform: translateY(-10px);
+}
+
+.project-card-link:hover .project-overlay {
+    opacity: 1;
+}
+
+/* Indicateur de lien externe - POSITIONNÉ À GAUCHE */
+.external-link-indicator {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background: rgba(255, 255, 255, 0.95);
+    color: #1a1a2e;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 600;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    pointer-events: auto;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+}
+
+/* Apparition du badge au hover */
+.project-card-link:hover .external-link-indicator {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Animation de pulsation subtile */
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.project-card-link:hover .external-link-indicator {
+    animation: pulse 2s infinite;
+}
+
+/* Effet sur l'overlay */
+.project-card-link .project-overlay {
+    transition: opacity 0.3s ease;
+}
+
+/* Responsive - Mobile */
+@media (max-width: 768px) {
+    .project-tag {
+        top: 15px;
+        right: 15px;
+        font-size: 0.65rem;
+        padding: 0.4rem 0.8rem;
+    }
+    
+    .external-link-indicator {
+        opacity: 0.7;
+        font-size: 12px;
+        padding: 8px 16px;
+        bottom: 15px;
+        left: 15px;
+        transform: translateY(0);
+    }
+    
+    .project-card-link:hover .external-link-indicator {
+        opacity: 1;
+    }
+    
+    .project-card-link:hover .external-link-indicator {
+        animation: none;
+    }
+}
+
+/* Effet de focus pour accessibilité */
+.project-card-link:focus {
+    outline: 2px solid rgba(147, 51, 234, 0.5);
+    outline-offset: 4px;
+}
+
+.project-card-link:focus .external-link-indicator {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ============================================
+   VARIANTES DE COULEURS POUR LES BADGES
+   ============================================ */
+
+/* Badge pour liens Instagram */
+.project-card-link[href*="instagram"] .external-link-indicator {
+    background: linear-gradient(135deg, #f58529 0%, #dd2a7b 50%, #8134af 100%);
+    color: white;
+}
+
+/* Badge pour liens IMDB */
+.project-card-link[href*="imdb"] .external-link-indicator {
+    background: #f5c518;
+    color: #000;
+}
+
+/* Badge pour liens Mixcloud */
+.project-card-link[href*="mixcloud"] .external-link-indicator {
+    background: #52aad8;
+    color: white;
+}
+
+/* Badge pour liens Still FM / radio */
+.project-card-link[href*="stillfm"] .external-link-indicator,
+.project-card-link[href*="radio"] .external-link-indicator {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ff4757 100%);
+    color: white;
+}
+
+/* ============================================
+   STYLES POUR PROJETS "EN COURS" (STILL FM)
+   ============================================ */
+
+/* Carte sans lien - pas cliquable */
+.project-card-no-link {
+    cursor: default;
+}
+
+.project-card-no-link:hover {
+    transform: none;
+}
+
+/* Badge "En cours" - POSITIONNÉ À GAUCHE */
+.status-badge-in-progress {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background: #fbbf24;
+    color: #1a1a1a;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 600;
+    z-index: 10;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    pointer-events: auto;
+}
+
+/* Responsive - Mobile */
+@media (max-width: 768px) {
+    .status-badge-in-progress {
+        font-size: 12px;
+        padding: 8px 16px;
+        bottom: 15px;
+        left: 15px;
     }
 }
