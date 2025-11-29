@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIVE SIGNAL</title>
+    
+    <style>
+        /* --- RESET & BASE --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: 'Courier New', Courier, monospace;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* --- COUCHES (LAYERS) --- */
+        
+        /* 0. Image de Fond (OFFLINE) */
+        #offline-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 2; 
+            
+            /* J'ai mis une image de synthé modulaire sombre ici pour tester */
+            background-image: url('https://images.unsplash.com/photo-1598653222000-6b7b7a552625?q=80&w=2070&auto=format&fit=crop'); 
+            
+            background-size: cover;
+            background-position: center;
+            
+            /* Traitement d'image pour le look "Retro/Dark" */
+            filter: grayscale(100%) contrast(120%) brightness(40%);
+            
+            transition: opacity 1s ease;
+        }
+
+        /* Quand on passe en LIVE, on cache cette image */
+        body.is-live #offline-bg {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* 1. Twitch (VIDEO) */
+        #twitch-embed {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1; 
+            transition: all 1s ease;
+            pointer-events: none;
+        }
+
+        /* Mode "Fond d'écran" */
+        body:not(.watch-mode) #twitch-embed iframe {
+            filter: grayscale(100%) contrast(120%) brightness(0.5);
+            opacity: 0.4;
+        }
+
+        /* Mode "Spectateur" (Watch) */
+        body.watch-mode #twitch-embed {
+            z-index: 50; 
+            pointer-events: auto;
+        }
+        body.watch-mode #twitch-embed iframe {
+            filter: none;
+            opacity: 1;
+        }
+
+        /* 2. Canvas (Étoiles) */
+        #star-canvas {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 10;
+            pointer-events: none;
+            mix-blend-mode: screen;
+            opacity: 0.3;
+            transition: opacity 0.5s;
+        }
+
+        /* 3. Noise Overlay (Grain) */
+        .noise-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 5;
+            pointer-events: none;
+            opacity: 0.08;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* 4. Contenu Principal */
+        .main-content {
+            position: relative;
+            z-index: 20;
+            text-align: center;
+            transition: all 0.5s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        body.watch-mode .main-content {
+            opacity: 0;
+            transform: scale(0.95);
+            pointer-events: none;
+        }
+
+        /* --- UI ELEMENTS --- */
+        
+        .live-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 16px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            backdrop-filter: blur(5px);
+            margin-bottom: 20px;
+        }
+
+        .dot { width: 8px; height: 8px; border-radius: 50%; background-color: #ef4444; }
+        .dot.online { background-color: #22c55e; box-shadow: 0 0 10px #22c55e; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+
+        .status-text {
+            font-size: 10px; text-transform: uppercase;
+            letter-spacing: 0.2em; font-weight: bold; color: #ddd;
+        }
+
+        .subtitle {
+            font-size: 10px; text-transform: uppercase;
+            letter-spacing: 0.3em; color: rgba(255,255,255,0.5);
+            margin-top: 2rem;
+        }
+
+        /* Boutons */
+        .btn-group { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+
+        .btn {
+            padding: 15px 40px; font-size: 12px; text-transform: uppercase;
+            letter-spacing: 0.2em; font-weight: bold; text-decoration: none;
+            border: 1px solid #fff; background: rgba(0,0,0,0.3);
+            color: #fff; cursor: pointer; transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+        .btn:hover { background: #fff; color: #000; }
+
+        .btn-watch { border-color: #22c55e; color: #4ade80; display: block; /* FORCÉ À BLOCK POUR LE TEST */ }
+        .btn-watch:hover { background: #22c55e; color: #000; }
+
+        #close-stream-btn {
+            position: absolute; top: 30px; right: 30px; z-index: 100;
+            display: none; background: transparent; border: 1px solid rgba(255,255,255,0.5);
+            color: #fff; padding: 10px 20px; cursor: pointer;
+            text-transform: uppercase; font-size: 10px; letter-spacing: 0.1em;
+        }
+        #close-stream-btn:hover { background: #fff; color: #000; }
+
+        /* Audio Player */
+        .audio-player-wrapper {
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+            z-index: 30; display: flex; align-items: center; gap: 15px;
+            background: rgba(0,0,0,0.6); padding: 10px 20px; border-radius: 30px;
+            border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px);
+            transition: opacity 0.5s;
+        }
+        body.watch-mode .audio-player-wrapper { opacity: 0; pointer-events: none; }
+
+        .control-btn {
+            background: none; border: none; color: #fff; cursor: pointer;
+            font-size: 16px; width: 30px; height: 30px; display: flex;
+            align-items: center; justify-content: center; border-radius: 50%;
+        }
+        .control-btn:hover { background: rgba(255,255,255,0.2); }
+        .track-name {
+            font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em;
+            color: #aaa; min-width: 150px; text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="offline-bg"></div>
+
+    <div id="twitch-embed"></div>
+
+    <canvas id="star-canvas"></canvas>
+    <div class="noise-overlay"></div>
+
+    <button id="close-stream-btn">CLOSE STREAM X</button>
+
+    <div class="main-content">
+        <div class="live-indicator">
+            <div class="dot" id="live-dot"></div>
+            <span class="status-text" id="live-text">SIGNAL CHECK...</span>
+        </div>
+
+        <div class="btn-group">
+            <a href="portfolio.html" class="btn">ENTER SITE</a>
+            <button id="watch-btn" class="btn btn-watch">WATCH STREAM</button>
+        </div>
+
+        <div class="subtitle">MONTREAL UNDERGROUND RADIO</div>
+    </div>
+
+    <div class="audio-player-wrapper">
+        <button class="control-btn" id="prevBtn">⏮</button>
+        <button class="control-btn" id="playBtn">▶</button>
+        <button class="control-btn" id="nextBtn">⏭</button>
+        <div class="track-name" id="trackName">LOADING...</div>
+    </div>
+
+    <audio id="audioPlayer"></audio>
+
+    <script>
+        // CONFIG
+        const MP3_FILES = [
+            "audio/track1.mp3", "audio/track2.mp3", "audio/track3.mp3",
+            "audio/track4.mp3", "audio/track5.mp3", "audio/track6.mp3", "audio/track7.mp3"
+        ];
+
+        // --- TWITCH ---
+        let twitchPlayer = null;
+        let isPlayerReady = false;
+
+        function loadTwitchScript() {
+            if (!document.getElementById('twitch-js')) {
+                const script = document.createElement('script');
+                script.id = 'twitch-js';
+                script.src = 'https://player.twitch.tv/js/embed/v1.js';
+                script.async = true;
+                script.onload = initTwitchPlayer;
+                document.body.appendChild(script);
+            } else { initTwitchPlayer(); }
+        }
+
+        function initTwitchPlayer() {
+            if (isPlayerReady) return;
+            
+            // 1. Liste de base
+            const parents = ['localhost', '127.0.0.1', 'kimmaurice.com', 'www.kimmaurice.com', 'kimmaurice.vercel.app'];
+            
+            // 2. Récupération et FORCE AJOUT de l'adresse actuelle
+            const currentHost = window.location.hostname;
+            const currentProtocol = window.location.protocol;
+
+            console.log("📍 ADRESSE DÉTECTÉE :", currentHost);
+            console.log("📍 PROTOCOLE :", currentProtocol);
+
+            // Si on est en local (file://), on alerte car ça ne marchera pas
+            if (currentProtocol === 'file:') {
+                alert("ATTENTION : Twitch ne marche pas en ouvrant le fichier directement. Utilisez le bouton 'Go Live' de VS Code ou mettez le site sur Vercel !");
+            }
+
+            // On ajoute l'adresse actuelle à la liste SI elle n'est pas vide
+            if (currentHost && !parents.includes(currentHost)) {
+                parents.push(currentHost);
+                console.log("✅ J'ai ajouté ton adresse à la liste autorisée !");
+            }
+
+            console.log("📋 Liste finale envoyée à Twitch :", parents);
+
+            const options = {
+                width: '100%', height: '100%',
+                channel: 'bertarose', 
+                parent: parents,
+                autoplay: true, muted: true, controls: false
+            };
+
+            twitchPlayer = new Twitch.Player('twitch-embed', options);
+            isPlayerReady = true;
+
+            twitchPlayer.addEventListener(Twitch.Player.READY, () => {
+                twitchPlayer.setMuted(true);
+                twitchPlayer.play();
+                console.log("Twitch Ready");
+            });
+
+            twitchPlayer.addEventListener(Twitch.Player.ONLINE, () => {
+                updateLiveStatus(true);
+            });
+
+            twitchPlayer.addEventListener(Twitch.Player.OFFLINE, () => {
+                updateLiveStatus(false);
+            });
+        }
+
+        function updateLiveStatus(isLive) {
+            const dot = document.getElementById('live-dot');
+            const text = document.getElementById('live-text');
+            const watchBtn = document.getElementById('watch-btn');
+
+            if (isLive) {
+                // Si en live : On ajoute la classe qui cache le fond offline
+                document.body.classList.add('is-live'); 
+                dot.classList.add('online');
+                text.innerText = "LIVE ON AIR";
+                text.style.color = "#fff";
+                watchBtn.style.display = "block";
+            } else {
+                // Si offline : On retire la classe, le fond offline revient
+                document.body.classList.remove('is-live'); 
+                dot.classList.remove('online');
+                text.innerText = "OFFLINE";
+                text.style.color = "#aaa";
+                watchBtn.style.display = "none";
+            }
+        }
+
+        // --- AUDIO ---
+        let currentTrackIndex = 0;
+        const audio = document.getElementById('audioPlayer');
+        const playBtn = document.getElementById('playBtn');
+        const trackDisplay = document.getElementById('trackName');
+        let isRadioPlaying = false;
+
+        function loadTrack(index) {
+            if (index >= MP3_FILES.length) index = 0;
+            if (index < 0) index = MP3_FILES.length - 1;
+            currentTrackIndex = index;
+            audio.src = MP3_FILES[currentTrackIndex];
+            trackDisplay.textContent = MP3_FILES[currentTrackIndex].replace('audio/', '');
+        }
+
+        function toggleRadio() {
+            if (audio.paused) {
+                audio.play().catch(e => console.log("Clic requis"));
+                playBtn.innerText = "⏸";
+                isRadioPlaying = true;
+            } else { audio.pause(); playBtn.innerText = "▶"; isRadioPlaying = false; }
+        }
+
+        document.getElementById('playBtn').addEventListener('click', toggleRadio);
+        document.getElementById('nextBtn').addEventListener('click', () => { loadTrack(currentTrackIndex + 1); if(isRadioPlaying) audio.play(); });
+        document.getElementById('prevBtn').addEventListener('click', () => { loadTrack(currentTrackIndex - 1); if(isRadioPlaying) audio.play(); });
+        audio.addEventListener('ended', () => { loadTrack(currentTrackIndex + 1); audio.play(); });
+
+        // --- INTERACTION ---
+        const watchBtn = document.getElementById('watch-btn');
+        const closeBtn = document.getElementById('close-stream-btn');
+
+        watchBtn.addEventListener('click', () => {
+            document.body.classList.add('watch-mode');
+            closeBtn.style.display = 'block';
+            if (!audio.paused) { audio.pause(); playBtn.innerText = "▶"; isRadioPlaying = true; }
+            else { isRadioPlaying = false; }
+            if (twitchPlayer) { twitchPlayer.setMuted(false); twitchPlayer.setVolume(1.0); }
+        });
+
+        closeBtn.addEventListener('click', () => {
+            document.body.classList.remove('watch-mode');
+            closeBtn.style.display = 'none';
+            if (twitchPlayer) twitchPlayer.setMuted(true);
+        });
+
+        // --- PARTICLES ---
+        const canvas = document.getElementById('star-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2; this.speedX = Math.random()*0.5-0.25; this.speedY = Math.random()*0.5-0.25;
+            }
+            update() {
+                this.x += this.speedX; this.y += this.speedY;
+                if(this.x > canvas.width) this.x=0; if(this.x<0) this.x=canvas.width;
+                if(this.y > canvas.height) this.y=0; if(this.y<0) this.y=canvas.height;
+            }
+            draw() { ctx.fillStyle='white'; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI*2); ctx.fill(); }
+        }
+        function animateParticles() {
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            for(let i=0; i<particles.length; i++) {
+                particles[i].update(); particles[i].draw();
+                for(let j=i; j<particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x; const dy = particles[i].y - particles[j].y;
+                    const d = Math.sqrt(dx*dx+dy*dy);
+                    if(d<100) { ctx.beginPath(); ctx.strokeStyle=`rgba(255,255,255,${0.1-d/1000})`; ctx.lineWidth=0.5; ctx.moveTo(particles[i].x,particles[i].y); ctx.lineTo(particles[j].x,particles[j].y); ctx.stroke(); }
+                }
+            }
+            requestAnimationFrame(animateParticles);
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+        for(let i=0; i<100; i++) particles.push(new Particle());
+        animateParticles();
+        loadTwitchScript();
+        loadTrack(0);
+    </script>
+</body>
+</html>
