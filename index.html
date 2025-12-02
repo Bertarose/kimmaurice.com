@@ -12,11 +12,11 @@
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <meta name="googlebot" content="index, follow">
     
-    <link rel="canonical" href="https://kimmaurice.com/">
-    <link rel="alternate" hreflang="fr" href="https://kimmaurice.com/">
-    <link rel="alternate" hreflang="en" href="https://kimmaurice.com/?lang=en">
-    <link rel="alternate" hreflang="x-default" href="https://kimmaurice.com/">
     <link rel="canonical" href="https://www.kimmaurice.com/portfolio/index.html" />
+    
+    <link rel="alternate" hreflang="fr" href="https://www.kimmaurice.com/portfolio/index.html" />
+    <link rel="alternate" hreflang="en" href="https://www.kimmaurice.com/portfolio/en/index.html" />
+    <link rel="alternate" hreflang="x-default" href="https://www.kimmaurice.com/portfolio/index.html" />
     
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://kimmaurice.com/">
@@ -321,8 +321,7 @@
 <body>
     <header>
         <div class="logo">
-            <img src="portfolio/images/logo.jpg" alt="Kim Maurice">
-        </div>
+            <img src="portfolio/images/logo.jpg" alt="Logo de Kim Maurice"> </div>
         <div class="header-right">
             <button class="lang-btn" id="langBtn">EN</button>
             <a href="portfolio/index.html" class="cv-link">
@@ -428,11 +427,11 @@
             
             <div class="project-item">
                 <div class="project-number">09</div>
-                <h2 class="project-title">Configurateur Produit Immersif 360°</h2>
+                <h2 class="project-title" id="project9Title">Configurateur Produit Immersif 360°</h2>
                 <div class="project-meta">
-                    <span>E-commerce • Publicité Immersive (Ads)</span>
-                    <span>WebGL • Three.js • IA Générative (Skybox AI)</span>
-                    <span>2025</span>
+                    <span id="project9Meta1">E-commerce • Publicité Immersive (Ads)</span>
+                    <span id="project9Meta2">WebGL • Three.js • IA Générative (Skybox AI)</span>
+                    <span id="project9Meta3">2025</span>
                 </div>
             </div>
             </div>
@@ -447,7 +446,8 @@
         </div>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script>
         // LANGUAGE SWITCHER
         const translations = {
             fr: {
@@ -455,14 +455,26 @@
                 intro: 'Designer multimédia et technologue créative <br> explorant les intersections entre <br> art, technologie et expérience.',
                 location: 'Montréal — Travaux sélectionnés et idéations en cours',
                 footer: '© 2025 Kim Maurice — Designer Multimédia',
-                email: 'Email'
+                email: 'Email',
+                
+                // 🐛 CORRECTION TRADUCTION : Ajout des textes du Projet 9
+                project9Title: 'Configurateur Produit Immersif 360°',
+                project9Meta1: 'E-commerce • Publicité Immersive (Ads)',
+                project9Meta2: 'WebGL • Three.js • IA Générative (Skybox AI)',
+                project9Meta3: '2025' // La date reste la même
             },
             en: {
                 cvText: 'Digital CV',
                 intro: 'Multimedia designer and creative technologist <br> exploring intersections between <br> art, technology and experience.',
                 location: 'Montreal — Selected works and ongoing concepts',
                 footer: '© 2025 Kim Maurice — Multimedia Designer',
-                email: 'Email'
+                email: 'Email',
+
+                // 🐛 CORRECTION TRADUCTION : Ajout des traductions anglaises
+                project9Title: '360° Immersive Product Configurator',
+                project9Meta1: 'E-commerce • Immersive Advertising (Ads)',
+                project9Meta2: 'WebGL • Three.js • Generative AI (Skybox AI)',
+                project9Meta3: '2025'
             }
         };
 
@@ -473,13 +485,19 @@
             console.log('Language switched to:', currentLang); // DEBUG
             document.getElementById('langBtn').textContent = currentLang === 'fr' ? 'EN' : 'FR';
             
-            // Update texts
+            // Update common texts
             document.getElementById('cvText').textContent = translations[currentLang].cvText;
             document.getElementById('introText').innerHTML = translations[currentLang].intro;
             document.getElementById('locationText').textContent = translations[currentLang].location;
             document.getElementById('footerText').textContent = translations[currentLang].footer;
             document.getElementById('emailText').textContent = translations[currentLang].email;
             
+            // 🐛 CORRECTION TRADUCTION : Mise à jour du Projet 9
+            document.getElementById('project9Title').textContent = translations[currentLang].project9Title;
+            document.getElementById('project9Meta1').textContent = translations[currentLang].project9Meta1;
+            document.getElementById('project9Meta2').textContent = translations[currentLang].project9Meta2;
+            document.getElementById('project9Meta3').textContent = translations[currentLang].project9Meta3; // Inclus la date par souci d'uniformité
+
             console.log('All texts updated!'); // DEBUG
         });
 
