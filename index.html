@@ -273,7 +273,6 @@
     </style>
 </head>
 <body>
-    <!-- HEADER -->
     <header>
         <div class="logo">
             <img src="portfolio/images/logo.jpg" alt="Kim Maurice">
@@ -287,9 +286,7 @@
         </div>
     </header>
 
-    <!-- MAIN -->
     <main>
-        <!-- INTRO -->
         <div class="intro">
             <h1 id="introText">
                 Designer multimédia et technologue créative <br>
@@ -301,7 +298,6 @@
             </p>
         </div>
 
-        <!-- PROJECTS -->
         <div class="projects">
             <div class="project-item">
                 <div class="project-number">01</div>
@@ -350,6 +346,7 @@
                     <span>Art Visuel</span>
                     <span>AI • Motion</span>
                     <span>En développement</span>
+                    
                 </div>
             </div>
 
@@ -382,16 +379,25 @@
                     <span>This is Weird AI — 2023–25</span>
                 </div>
             </div>
-        </div>
+            
+            <div class="project-item">
+                <div class="project-number">09</div>
+                <h2 class="project-title">Configurateur Produit Immersif 360°</h2>
+                <div class="project-meta">
+                    <span>E-commerce • Publicité Immersive (Ads)</span>
+                    <span>WebGL • Three.js • IA Générative (Skybox AI)</span>
+                    <span>2025</span>
+                </div>
+            </div>
+            </div>
     </main>
 
-    <!-- FOOTER -->
     <footer>
         <p id="footerText">© 2025 Kim Maurice — Designer Multimédia</p>
         <div class="footer-links">
             <a href="/cdn-cgi/l/email-protection#85ecebe3eac5eeece8e8e4f0f7ece6e0abe6eae8" id="emailText">Email</a>
-            <a href="https://www.instagram.com/this_is_weird_ai/" target="_blank">Instagram</a>
-            <a href="https://www.linkedin.com/in/kimmaurice/" target="_blank">LinkedIn</a>
+            <a href="https://instagram.com/thisisweirdai" target="_blank">Instagram</a>
+            <a href="#" target="_blank">LinkedIn</a>
         </div>
     </footer>
 
@@ -418,6 +424,7 @@
 
         document.getElementById('langBtn').addEventListener('click', () => {
             currentLang = currentLang === 'fr' ? 'en' : 'fr';
+            console.log('Language switched to:', currentLang); // DEBUG
             document.getElementById('langBtn').textContent = currentLang === 'fr' ? 'EN' : 'FR';
             
             // Update texts
@@ -426,6 +433,8 @@
             document.getElementById('locationText').textContent = translations[currentLang].location;
             document.getElementById('footerText').textContent = translations[currentLang].footer;
             document.getElementById('emailText').textContent = translations[currentLang].email;
+            
+            console.log('All texts updated!'); // DEBUG
         });
 
         // Smooth scroll
@@ -456,3 +465,15 @@
                         const yPos = -(scrolled * speed);
                         project.style.transform = `translateY(${yPos}px)`;
                     });
+                });
+                ticking = true;
+            }
+            // Reset the flag after the animation frame has been executed
+            setTimeout(() => {
+                ticking = false;
+            }, 100); 
+        });
+
+    </script>
+</body>
+</html>
