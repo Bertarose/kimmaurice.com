@@ -708,5 +708,24 @@
     </section>
 
     <script src="main.js"></script>
+    <script>
+  const langSwitchBtn = document.getElementById('langSwitch');
+  let currentLang = 'fr'; // langue par défaut
+
+  langSwitchBtn.addEventListener('click', () => {
+    const newLang = currentLang === 'fr' ? 'en' : 'fr';
+    document.body.classList.remove(`lang-${currentLang}`);
+    document.body.classList.add(`lang-${newLang}`);
+    currentLang = newLang;
+
+    // Mettre à jour le texte
+    document.querySelectorAll('[data-fr]').forEach(el => {
+      el.textContent = el.getAttribute(`data-${currentLang}`);
+    });
+
+    // Mettre à jour le bouton
+    langSwitchBtn.textContent = currentLang === 'fr' ? 'EN' : 'FR';
+  });
+</script>
 </body>
 </html>
