@@ -144,7 +144,18 @@
     <link rel="preconnect" href="https://www.google-analytics.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="dns-prefetch" href="https://www.google-analytics.com">
-</head>
+
+
+    <script>
+const toggle = document.querySelector('.mobile-menu-toggle');
+const menu = document.querySelector('.nav-menu');
+
+toggle.addEventListener('click', () => {
+    toggle.classList.toggle('active');
+    menu.classList.toggle('active');
+});
+</script>
+ </head>   
 <body class="lang-fr">
     <nav class="nav">
         <div class="nav-container">
