@@ -693,7 +693,7 @@
         </div>
     </section>
 
-    <script>
+  <script>
   const langSwitchBtn = document.getElementById('langSwitch');
   let currentLang = 'fr'; // langue par défaut
 
@@ -711,6 +711,39 @@
     // Mettre à jour le bouton
     langSwitchBtn.textContent = currentLang === 'fr' ? 'EN' : 'FR';
   });
+
+
+  /* ================================== 
+     LOGIQUE DU MENU MOBILE AJOUTÉE ICI
+     ================================== */
+  const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+  const navMenu = document.querySelector('.nav-menu');
+
+  mobileMenuToggle.addEventListener('click', () => {
+    // 1. Basculer la classe 'active' sur le bouton et le menu
+    mobileMenuToggle.classList.toggle('active');
+    navMenu.classList.toggle('active');
+    // 2. Basculer la classe 'menu-open' sur le body pour bloquer le défilement
+    document.body.classList.toggle('menu-open');
+  });
+
+  // 3. Fermer le menu si l'utilisateur clique sur un lien de navigation
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      // Un léger délai pour permettre le défilement avant de fermer
+      setTimeout(() => {
+        mobileMenuToggle.classList.remove('active');
+        navMenu.classList.remove('active');
+        document.body.classList.remove('menu-open');
+      }, 100); 
+    });
+  });
+  /* ================================== 
+     FIN DE LA LOGIQUE DU MENU MOBILE
+     ================================== */
+
 </script>
+</body>
+</html>
 </body>
 </html>
