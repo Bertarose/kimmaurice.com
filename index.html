@@ -138,6 +138,50 @@
             transform: translateY(-2px);
         }
 
+        /* TICKER BANNER */
+        .ticker-container {
+            background: rgba(255, 254, 249, 0.03);
+            border-bottom: 1px solid rgba(255, 254, 249, 0.1);
+            overflow: hidden;
+            padding: 1rem 0;
+            position: relative;
+        }
+
+        .ticker-wrapper {
+            display: flex;
+            animation: scroll 30s linear infinite;
+        }
+
+        .ticker-item {
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            padding: 0 4rem;
+            font-size: 0.9rem;
+            color: var(--grey);
+            letter-spacing: 0.05rem;
+        }
+
+        .ticker-item::before {
+            content: '→';
+            margin-right: 1rem;
+            color: var(--cream);
+            opacity: 0.3;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .ticker-wrapper:hover {
+            animation-play-state: paused;
+        }
+
         /* MAIN CONTENT */
         main {
             padding: 6rem 4rem;
@@ -270,6 +314,11 @@
                 font-size: 0.7rem;
             }
 
+            .ticker-item {
+                font-size: 0.75rem;
+                padding: 0 2rem;
+            }
+
             main {
                 padding: 4rem 2rem;
             }
@@ -326,6 +375,13 @@
         </div>
     </header>
 
+    <div class="ticker-container">
+        <div class="ticker-wrapper">
+            <span class="ticker-item" id="tickerText">Liens des projets en ligne le 12 décembre • En ce moment, je monte le tout sur GitHub</span>
+            <span class="ticker-item" id="tickerText2">Liens des projets en ligne le 12 décembre • En ce moment, je monte le tout sur GitHub</span>
+        </div>
+    </div>
+
     <main>
         <div class="intro">
             <h1 id="introText">
@@ -368,7 +424,6 @@
                 </div>
             </div>
 
-            <!-- ✨ NOUVEAU: ComfyUI Workflows -->
             <div class="project-item">
                 <div class="project-number">04</div>
                 <h2 class="project-title" id="project4Title">Workflows ComfyUI Avancés</h2>
@@ -464,19 +519,19 @@
     <footer>
         <p id="footerText">© 2025 Kim Maurice — Designer Multimédia</p>
         <div class="footer-links">
-            <a href="/cdn-cgi/l/email-protection#0861666e674863616565697d7a616b6d266b6765" id="emailText">Email</a>
+            <a href="mailto:kim@kimmaurice.com" id="emailText">Email</a>
             <a href="https://instagram.com/thisisweirdai" target="_blank">Instagram</a>
             <a href="https://www.linkedin.com/in/kimmaurice/" target="_blank">LinkedIn</a>
-             <a href="https://github.com/Bertarose/"  target="_blank">Github</a>
+            <a href="https://github.com/Bertarose/" target="_blank">Github</a>
         </div>
     </footer>
 
-  
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script>
         // LANGUAGE SWITCHER
         const translations = {
             fr: {
                 cvText: 'CV Numérique',
+                ticker: 'Liens des projets en ligne le 12 décembre • En ce moment, je monte le tout sur GitHub',
                 intro: 'Designer multimédia et technologue créative explorant les intersections entre art, technologie et expérience.',
                 location: 'Montréal — Projets en cours, apprentissages actifs et explorations des derniers mois. Formation continue, expérimentation quotidienne.',
                 footer: '© 2025 Kim Maurice — Designer Multimédia',
@@ -497,7 +552,6 @@
                 project3Meta2: 'Next.js • React • API Mixcloud • Twitch', 
                 project3Meta3: 'Still FM — En développement • Lancement Février 2025',
                 
-                // ✨ NOUVEAU: ComfyUI
                 project4Title: 'Workflows ComfyUI Avancés', 
                 project4Meta1: 'AI Image Generation', 
                 project4Meta2: 'ComfyUI • Node-Based • Stable Diffusion', 
@@ -545,6 +599,7 @@
             },
             en: {
                 cvText: 'Digital CV',
+                ticker: 'Project links online December 12 • Currently setting everything up on GitHub',
                 intro: 'Multimedia designer and creative technologist exploring intersections between art, technology and experience.',
                 location: 'Montreal — Ongoing projects, active learning and recent explorations. Continuous training, daily experimentation.',
                 footer: '© 2025 Kim Maurice — Multimedia Designer',
@@ -565,7 +620,6 @@
                 project3Meta2: 'Next.js • React • Mixcloud API • Twitch', 
                 project3Meta3: 'Still FM — In Development • Launching February 2025',
                 
-                // ✨ NEW: ComfyUI
                 project4Title: 'Advanced ComfyUI Workflows', 
                 project4Meta1: 'AI Image Generation', 
                 project4Meta2: 'ComfyUI • Node-Based • Stable Diffusion', 
@@ -620,6 +674,8 @@
             document.getElementById('langBtn').textContent = currentLang === 'fr' ? 'EN' : 'FR';
             
             document.getElementById('cvText').textContent = translations[currentLang].cvText;
+            document.getElementById('tickerText').textContent = translations[currentLang].ticker;
+            document.getElementById('tickerText2').textContent = translations[currentLang].ticker;
             document.getElementById('introText').innerHTML = translations[currentLang].intro;
             document.getElementById('locationText').textContent = translations[currentLang].location;
             document.getElementById('footerText').textContent = translations[currentLang].footer;
@@ -666,25 +722,24 @@
 
         let ticking = false;
         
-// ✅ CODE CORRIGÉ
-window.addEventListener('scroll', () => {
-    if (!ticking) {
-        window.requestAnimationFrame(() => {
-            const scrolled = window.pageYOffset;
-            const projects = document.querySelectorAll('.project-item');
-            
-            projects.forEach((project, index) => {
-                const speed = 0.05 + (index * 0.01);
-                const yPos = -(scrolled * speed);
-                project.style.transform = `translateY(${yPos}px)`;
-            });
-            
-            ticking = false;  // ✓ À l'intérieur du requestAnimationFrame
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    const scrolled = window.pageYOffset;
+                    const projects = document.querySelectorAll('.project-item');
+                    
+                    projects.forEach((project, index) => {
+                        const speed = 0.05 + (index * 0.01);
+                        const yPos = -(scrolled * speed);
+                        project.style.transform = `translateY(${yPos}px)`;
+                    });
+                    
+                    ticking = false;
+                });
+                
+                ticking = true;
+            }
         });
-        
-        ticking = true;  // ✓ Après le requestAnimationFrame mais dans le if
-    }
-});
     </script>
 </body>
 </html>
