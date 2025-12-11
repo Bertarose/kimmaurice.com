@@ -247,9 +247,8 @@
 
         .project-item:hover {
             padding-left: 2rem;
-            /* Changements pour le survol */
-            border-color: rgba(255, 254, 249, 0.3); /* Bordure plus visible */
-            background: rgba(10, 10, 31, 0.5); /* Légère opacité de fond */
+            border-color: rgba(255, 254, 249, 0.3);
+            background: rgba(10, 10, 31, 0.5);
         }
 
         .project-item:hover .project-title {
@@ -289,13 +288,13 @@
         
         /* STYLE POUR LA DESCRIPTION AU SURVOL */
         .project-description {
-            background: rgba(22, 33, 62, 0.5); /* Utilise marine avec opacité */
+            background: rgba(22, 33, 62, 0.5);
             color: var(--cream);
             padding: 1.5rem;
             margin-top: 2rem;
             border-left: 4px solid var(--neon-green);
-            opacity: 0; /* Caché par défaut */
-            max-height: 0; /* Hauteur nulle par défaut */
+            opacity: 0;
+            max-height: 0;
             overflow: hidden;
             transition: opacity 0.4s ease, max-height 0.4s ease;
         }
@@ -307,11 +306,10 @@
         }
 
         .project-item:hover .project-description {
-            opacity: 1; /* Rendu visible au survol */
-            max-height: 200px; /* Assurez-vous que c'est suffisant pour le contenu */
+            opacity: 1;
+            max-height: 300px;
             transition-delay: 0.1s;
         }
-        /* FIN STYLE DESCRIPTION */
 
         /* FOOTER */
         footer {
@@ -389,12 +387,10 @@
                 gap: 0.5rem;
             }
 
-            /* Responsive pour la description */
             .project-description {
                 margin-top: 1rem;
                 padding: 1rem;
             }
-            /* Fin Responsive pour la description */
 
             footer {
                 padding: 2rem;
@@ -443,6 +439,7 @@
 
         <div class="projects">
             
+            <!-- 01. TERRARIUM -->
             <div class="project-item">
                 <div class="project-number">01</div>
                 <h2 class="project-title" id="project1Title">Terrarium Numérique</h2>
@@ -453,11 +450,12 @@
                 </div>
                 <div class="project-description" id="project1Desc">
                     <p id="project1DescText">
-                        Le projet est un terrarium physique et numérique immersif en VR/AR, où l’utilisateur se retrouve dans un monde forestier tranquille, marchant sur un sentier jusqu’à un coin au bord de l’eau avec un hamac et un feu pour se détendre. Une IA simule et visualise en temps réel la position de l’utilisateur dans ce terrarium miniature réel, offrant un suivi live et un rendu du parcours dans ce monde contemplatif et vivant..
+                        Installation immersive combinant terrarium physique et monde VR/AR forestier. L'IA visualise en temps réel la position de l'utilisateur dans ce microcosme contemplatif.
                     </p>
                 </div>
             </div>
 
+            <!-- 02. CHOCÔCALENDRIER -->
             <div class="project-item">
                 <div class="project-number">02</div>
                 <h2 class="project-title" id="project2Title">ChocÔCalendrier</h2>
@@ -468,11 +466,12 @@
                 </div>
                 <div class="project-description" id="project2Desc">
                     <p id="project2DescText">
-                        ChocoRétro-Tech est une expérience hybride qui transforme une boîte de chocolat traditionnelle en une aventure interactive. En achetant une boîte physique, l'utilisateur accède à une application web immersive (le "Compagnon Digital") qui gamifie la dégustation quotidienne.
+                        Calendrier de l'Avent hybride transformant une boîte de chocolats en aventure interactive. Application web gamifiée accompagnant la dégustation quotidienne.
                     </p>
                 </div>
             </div>
 
+            <!-- 03. STILL FM -->
             <div class="project-item">
                 <div class="project-number">03</div>
                 <h2 class="project-title" id="project3Title">Still FM — Radio Underground</h2>
@@ -482,10 +481,13 @@
                     <span id="project3Meta3" class="year-future">Lancement début 2026</span>
                 </div>
                 <div class="project-description" id="project3Desc">
-                    <p id="project3DescText">À venir — Description détaillée</p>
+                    <p id="project3DescText">
+                        Radio streaming underground avec intégration Twitch et Mixcloud. Player audio personnalisé et interface responsive développée en Next.js.
+                    </p>
                 </div>
             </div>
 
+            <!-- 04. COMFYUI -->
             <div class="project-item">
                 <div class="project-number">04</div>
                 <h2 class="project-title" id="project4Title">Workflows ComfyUI Avancés</h2>
@@ -495,10 +497,13 @@
                     <span id="project4Meta3">2025</span>
                 </div>
                 <div class="project-description" id="project4Desc">
-                    <p id="project4DescText">À venir — Description détaillée</p>
+                    <p id="project4DescText">
+                        Workflows d'IA générative avancés avec ComfyUI pour création d'images. Système node-based optimisé pour Stable Diffusion et production visuelle.
+                    </p>
                 </div>
             </div>
 
+            <!-- 05. PIPELINE IA -->
             <div class="project-item">
                 <div class="project-number">05</div>
                 <h2 class="project-title" id="project5Title">Pipeline Créatif IA</h2>
@@ -508,10 +513,13 @@
                     <span id="project5Meta3">2025</span>
                 </div>
                 <div class="project-description" id="project5Desc">
-                    <p id="project5DescText">À venir — Description détaillée</p>
+                    <p id="project5DescText">
+                        Pipeline automatisé de production créative utilisant outils d'IA. Documentation complète des workflows Python pour génération de contenu multimédia.
+                    </p>
                 </div>
             </div>
 
+            <!-- 06. LANDING ACTIONS -->
             <div class="project-item">
                 <div class="project-number">06</div>
                 <h2 class="project-title" id="project6Title">Landing Page Actions</h2>
@@ -521,10 +529,13 @@
                     <span id="project6Meta3">2025</span>
                 </div>
                 <div class="project-description" id="project6Desc">
-                    <p id="project6DescText">À venir — Description détaillée</p>
+                    <p id="project6DescText">
+                        Landing page interactive développée en Next.js avec animations fluides. Design moderne et expérience utilisateur optimisée pour conversion.
+                    </p>
                 </div>
             </div>
 
+            <!-- 07. LANDING INTERACTIVE -->
             <div class="project-item">
                 <div class="project-number">07</div>
                 <h2 class="project-title" id="project7Title">Landing Page Interactive</h2>
@@ -534,10 +545,13 @@
                     <span id="project7Meta3">2025</span>
                 </div>
                 <div class="project-description" id="project7Desc">
-                    <p id="project7DescText">À venir — Description détaillée</p>
+                    <p id="project7DescText">
+                        Expérience web générative réagissant au son en temps réel. Visualisations audio-réactives créant une interface immersive et unique.
+                    </p>
                 </div>
             </div>
 
+            <!-- 08. COURT-MÉTRAGE -->
             <div class="project-item">
                 <div class="project-number">08</div>
                 <h2 class="project-title" id="project8Title">Court-métrage Expérimental</h2>
@@ -547,10 +561,13 @@
                     <span id="project8Meta3">Projet court-métrage pour festival</span>
                 </div>
                 <div class="project-description" id="project8Desc">
-                    <p id="project8DescText">À venir — Description détaillée</p>
+                    <p id="project8DescText">
+                        Court-métrage expérimental utilisant IA générative pour création visuelle. Projet destiné aux festivals de cinéma d'art et technologie.
+                    </p>
                 </div>
             </div>
 
+            <!-- 09. SONIC FINGERPRINT -->
             <div class="project-item">
                 <div class="project-number">09</div>
                 <h2 class="project-title" id="project9Title">Sonic Fingerprint Generator</h2>
@@ -560,10 +577,13 @@
                     <span id="project9Meta3">2025</span>
                 </div>
                 <div class="project-description" id="project9Desc">
-                    <p id="project9DescText">À venir — Description détaillée</p>
+                    <p id="project9DescText">
+                        Générateur de signatures sonores uniques avec visualisation temps réel. Synthèse audio interactive transformant données en paysages sonores personnalisés.
+                    </p>
                 </div>
             </div>
 
+            <!-- 10. E-LEARNING -->
             <div class="project-item">
                 <div class="project-number">10</div>
                 <h2 class="project-title" id="project10Title">Plateforme E-Learning</h2>
@@ -573,10 +593,13 @@
                     <span id="project10Meta3">Technologia • GardaWorld — 2023-24</span>
                 </div>
                 <div class="project-description" id="project10Desc">
-                    <p id="project10DescText">À venir — Description détaillée</p>
+                    <p id="project10DescText">
+                        Formations interactives pour grandes organisations avec scénarisation pédagogique et gamification. Projets confidentiels · Extraits disponibles en entrevue.
+                    </p>
                 </div>
             </div>
 
+            <!-- 11. ARCHIVE AI -->
             <div class="project-item">
                 <div class="project-number">11</div>
                 <h2 class="project-title" id="project11Title">Archive Visuelle AI</h2>
@@ -586,10 +609,13 @@
                     <span id="project11Meta3">This is Weird AI — 2022–25</span>
                 </div>
                 <div class="project-description" id="project11Desc">
-                    <p id="project11DescText">À venir — Description détaillée</p>
+                    <p id="project11DescText">
+                        Exploration artistique des outils d'IA générative avec DALL-E, Sora et Stable Diffusion. Prompt engineering et workflows créatifs avec ComfyUI.
+                    </p>
                 </div>
             </div>
             
+            <!-- 12. CONFIGURATEUR 360 -->
             <div class="project-item">
                 <div class="project-number">12</div>
                 <h2 class="project-title" id="project12Title">Configurateur Produit Immersif 360°</h2>
@@ -599,7 +625,9 @@
                     <span id="project12Meta3">E-commerce • Publicité immersive — 2025</span>
                 </div>
                 <div class="project-description" id="project12Desc">
-                    <p id="project12DescText">À venir — Description détaillée</p>
+                    <p id="project12DescText">
+                        Configurateur 3D interactif pour visualisation produit e-commerce. Environnements 360° générés par IA avec Three.js pour expérience immersive.
+                    </p>
                 </div>
             </div>
         </div>
@@ -616,17 +644,35 @@
     </footer>
 
     <script>
-        // LANGUAGE SWITCHER
+        // DESCRIPTIONS BILINGUES (1-2 PHRASES MAX)
         const descriptions = {
             fr: {
-                project1: "Le projet est un terrarium physique et numérique immersif en VR/AR, où l’utilisateur se retrouve dans un monde forestier tranquille, marchant sur un sentier jusqu’à un coin au bord de l’eau avec un hamac et un feu pour se détendre. Une IA simule et visualise en temps réel la position de l’utilisateur dans ce terrarium miniature réel, offrant un suivi live et un rendu du parcours dans ce monde contemplatif et vivant.",
-                project2: "ChocoRétro-Tech est une expérience hybride qui transforme une boîte de chocolat traditionnelle en une aventure interactive. En achetant une boîte physique, l'utilisateur accède à une application web immersive qui gamifie la dégustation quotidienne.",
-                default: "À venir — Description détaillée"
+                project1: "Installation immersive combinant terrarium physique et monde VR/AR forestier. L'IA visualise en temps réel la position de l'utilisateur dans ce microcosme contemplatif.",
+                project2: "Calendrier de l'Avent hybride transformant une boîte de chocolats en aventure interactive. Application web gamifiée accompagnant la dégustation quotidienne.",
+                project3: "Radio streaming underground avec intégration Twitch et Mixcloud. Player audio personnalisé et interface responsive développée en Next.js.",
+                project4: "Workflows d'IA générative avancés avec ComfyUI pour création d'images. Système node-based optimisé pour Stable Diffusion et production visuelle.",
+                project5: "Pipeline automatisé de production créative utilisant outils d'IA. Documentation complète des workflows Python pour génération de contenu multimédia.",
+                project6: "Landing page interactive développée en Next.js avec animations fluides. Design moderne et expérience utilisateur optimisée pour conversion.",
+                project7: "Expérience web générative réagissant au son en temps réel. Visualisations audio-réactives créant une interface immersive et unique.",
+                project8: "Court-métrage expérimental utilisant IA générative pour création visuelle. Projet destiné aux festivals de cinéma d'art et technologie.",
+                project9: "Générateur de signatures sonores uniques avec visualisation temps réel. Synthèse audio interactive transformant données en paysages sonores personnalisés.",
+                project10: "Formations interactives pour grandes organisations avec scénarisation pédagogique et gamification. Projets confidentiels · Extraits disponibles en entrevue.",
+                project11: "Exploration artistique des outils d'IA générative avec DALL-E, Sora et Stable Diffusion. Prompt engineering et workflows créatifs avec ComfyUI.",
+                project12: "Configurateur 3D interactif pour visualisation produit e-commerce. Environnements 360° générés par IA avec Three.js pour expérience immersive."
             },
             en: {
-                project1: "The project is a physical and digital immersive terrarium in VR/AR, where the user finds themselves in a serene forest world, walking along a path to a spot by the water with a hammock and a fire to relax. An AI simulates and visualizes the user’s position in real time within this miniature, physical terrarium, providing live tracking and a rendering of their journey through this contemplative and living world.",
-                project2: "ChocoRetro-Tech is a hybrid experience that transforms a traditional chocolate box into an interactive adventure. By purchasing a physical box, users gain access to an immersive web app that gamifies the daily tasting ritual.",
-                default: "Coming soon — Detailed description"
+                project1: "Immersive installation combining physical terrarium and VR/AR forest world. AI visualizes user position in real-time within this contemplative microcosm.",
+                project2: "Hybrid Advent calendar transforming chocolate box into interactive adventure. Gamified web app accompanying daily tasting ritual.",
+                project3: "Underground streaming radio with Twitch and Mixcloud integration. Custom audio player and responsive interface built with Next.js.",
+                project4: "Advanced generative AI workflows with ComfyUI for image creation. Node-based system optimized for Stable Diffusion and visual production.",
+                project5: "Automated creative production pipeline using AI tools. Complete documentation of Python workflows for multimedia content generation.",
+                project6: "Interactive landing page developed in Next.js with fluid animations. Modern design and user experience optimized for conversion.",
+                project7: "Generative web experience reacting to sound in real-time. Audio-reactive visualizations creating immersive and unique interface.",
+                project8: "Experimental short film using generative AI for visual creation. Project intended for art and technology film festivals.",
+                project9: "Unique sonic signature generator with real-time visualization. Interactive audio synthesis transforming data into personalized soundscapes.",
+                project10: "Interactive training for major organizations with educational scripting and gamification. Confidential projects · Excerpts available in interview.",
+                project11: "Artistic exploration of generative AI tools with DALL-E, Sora and Stable Diffusion. Prompt engineering and creative workflows with ComfyUI.",
+                project12: "Interactive 3D configurator for e-commerce product visualization. AI-generated 360° environments with Three.js for immersive experience."
             }
         };
 
@@ -638,7 +684,7 @@
                 location: 'Montréal — Projets en cours, apprentissages actifs et explorations des derniers mois. Formation continue, expérimentation quotidienne.',
                 footer: '© 2025 Kim Maurice — Designer Multimédia',
                 email: 'Email',
-                langBtn: 'EN' // Texte du bouton pour passer à l'anglais
+                langBtn: 'EN'
             },
             en: {
                 cvText: 'Digital CV',
@@ -647,16 +693,15 @@
                 location: 'Montreal — Ongoing projects, active learning and recent explorations. Continuous training, daily experimentation.',
                 footer: '© 2025 Kim Maurice — Multimedia Designer',
                 email: 'Email',
-                langBtn: 'FR' // Texte du bouton pour passer au français
+                langBtn: 'FR'
             }
         };
 
-        let currentLang = 'fr'; // Défini initialement en 'fr' (cohérent avec l'HTML de départ)
+        let currentLang = 'fr';
 
         function updateContent(lang) {
             const currentTranslations = translations[lang];
             
-            // Mise à jour des textes globaux
             document.getElementById('langBtn').textContent = currentTranslations.langBtn;
             document.getElementById('cvText').textContent = currentTranslations.cvText;
             document.getElementById('tickerText').textContent = currentTranslations.ticker;
@@ -666,30 +711,23 @@
             document.getElementById('footerText').textContent = currentTranslations.footer;
             document.getElementById('emailText').textContent = currentTranslations.email;
 
-            // Mise à jour des descriptions de projets
+            // Mise à jour des descriptions
             for (let i = 1; i <= 12; i++) {
                 const descElement = document.getElementById(`project${i}DescText`);
                 if (descElement) {
-                    const key = `project${i}`;
-                    // Utilise la description spécifique si elle existe, sinon utilise la description par défaut
-                    descElement.textContent = descriptions[lang][key] || descriptions[lang].default;
+                    descElement.textContent = descriptions[lang][`project${i}`];
                 }
             }
         }
         
-        // Initialisation du contenu au chargement de la page (important pour les descriptions)
         updateContent(currentLang);
 
-
         document.getElementById('langBtn').addEventListener('click', () => {
-            // Toggle de la langue
             currentLang = currentLang === 'fr' ? 'en' : 'fr';
-            
-            // Mise à jour de tout le contenu
             updateContent(currentLang);
         });
 
-        // PARALLAX SCRIPT (conservé)
+        // PARALLAX SCROLL
         let ticking = false;
         
         window.addEventListener('scroll', () => {
