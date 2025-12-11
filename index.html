@@ -666,24 +666,25 @@
 
         let ticking = false;
         
-        window.addEventListener('scroll', () => {
-            if (!ticking) {
-                window.requestAnimationFrame(() => {
-                    const scrolled = window.pageYOffset;
-                    const projects = document.querySelectorAll('.project-item');
-                    
-                    projects.forEach((project, index) => {
-                        const speed = 0.05 + (index * 0.01);
-                        const yPos = -(scrolled * speed);
-                        project.style.transform = `translateY(${yPos}px)`;
-                    });
-                });
-                ticking = false;
-                });
-                
-                ticking = true;
-            }
+// ✅ CODE CORRIGÉ
+window.addEventListener('scroll', () => {
+    if (!ticking) {
+        window.requestAnimationFrame(() => {
+            const scrolled = window.pageYOffset;
+            const projects = document.querySelectorAll('.project-item');
+            
+            projects.forEach((project, index) => {
+                const speed = 0.05 + (index * 0.01);
+                const yPos = -(scrolled * speed);
+                project.style.transform = `translateY(${yPos}px)`;
+            });
+            
+            ticking = false;  // ✓ À l'intérieur du requestAnimationFrame
         });
+        
+        ticking = true;  // ✓ Après le requestAnimationFrame mais dans le if
+    }
+});
     </script>
 </body>
 </html>
