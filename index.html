@@ -287,7 +287,7 @@
             font-size: 0.75rem;
         }
         
-        /* 🆕 NOUVEAU STYLE POUR LA DESCRIPTION AU SURVOL */
+        /* STYLE POUR LA DESCRIPTION AU SURVOL */
         .project-description {
             background: rgba(22, 33, 62, 0.5); /* Utilise marine avec opacité */
             color: var(--cream);
@@ -308,10 +308,10 @@
 
         .project-item:hover .project-description {
             opacity: 1; /* Rendu visible au survol */
-            max-height: 200px; /* Doit être plus grand que le contenu de la description */
+            max-height: 200px; /* Assurez-vous que c'est suffisant pour le contenu */
             transition-delay: 0.1s;
         }
-        /* FIN NOUVEAU STYLE */
+        /* FIN STYLE DESCRIPTION */
 
         /* FOOTER */
         footer {
@@ -452,11 +452,11 @@
                     <span id="project1Meta3" class="year-future">En préparation — 2026</span>
                 </div>
                 <div class="project-description" id="project1Desc">
-                    <p>
+                    <p id="project1DescText">
                         Création d'un mini-écosystème numérique en temps réel. Le projet utilise des capteurs IoT pour recueillir des données environnementales (température, humidité) et les traduit en une visualisation 3D interactive générée avec WebGL. Une œuvre poétique reliant le physique et le virtuel.
                     </p>
                 </div>
-                </div>
+            </div>
 
             <div class="project-item">
                 <div class="project-number">02</div>
@@ -466,10 +466,8 @@
                     <span id="project2Meta2">Product Design • UX/UI • Experience</span>
                     <span id="project2Meta3">2025</span>
                 </div>
-                 <div class="project-description" id="project2Desc">
-                    <p>
-                        [INSÉREZ LA DESCRIPTION DU PROJET 02 ICI]
-                    </p>
+                <div class="project-description" id="project2Desc">
+                    <p id="project2DescText">À venir — Description détaillée</p>
                 </div>
             </div>
 
@@ -482,9 +480,7 @@
                     <span id="project3Meta3" class="year-future">Lancement début 2026</span>
                 </div>
                 <div class="project-description" id="project3Desc">
-                    <p>
-                        [INSÉREZ LA DESCRIPTION DU PROJET 03 ICI]
-                    </p>
+                    <p id="project3DescText">À venir — Description détaillée</p>
                 </div>
             </div>
 
@@ -497,9 +493,7 @@
                     <span id="project4Meta3">2025</span>
                 </div>
                 <div class="project-description" id="project4Desc">
-                    <p>
-                        [INSÉREZ LA DESCRIPTION DU PROJET 04 ICI]
-                    </p>
+                    <p id="project4DescText">À venir — Description détaillée</p>
                 </div>
             </div>
 
@@ -512,9 +506,7 @@
                     <span id="project5Meta3">2025</span>
                 </div>
                 <div class="project-description" id="project5Desc">
-                    <p>
-                        [INSÉREZ LA DESCRIPTION DU PROJET 05 ICI]
-                    </p>
+                    <p id="project5DescText">À venir — Description détaillée</p>
                 </div>
             </div>
 
@@ -527,9 +519,7 @@
                     <span id="project6Meta3">2025</span>
                 </div>
                 <div class="project-description" id="project6Desc">
-                    <p>
-                        [INSÉREZ LA DESCRIPTION DU PROJET 06 ICI]
-                    </p>
+                    <p id="project6DescText">À venir — Description détaillée</p>
                 </div>
             </div>
 
@@ -542,9 +532,7 @@
                     <span id="project7Meta3">2025</span>
                 </div>
                 <div class="project-description" id="project7Desc">
-                    <p>
-                        [INSÉREZ LA DESCRIPTION DU PROJET 07 ICI]
-                    </p>
+                    <p id="project7DescText">À venir — Description détaillée</p>
                 </div>
             </div>
 
@@ -557,9 +545,7 @@
                     <span id="project8Meta3">Projet court-métrage pour festival</span>
                 </div>
                 <div class="project-description" id="project8Desc">
-                    <p>
-                        [INSÉREZ LA DESCRIPTION DU PROJET 08 ICI]
-                    </p>
+                    <p id="project8DescText">À venir — Description détaillée</p>
                 </div>
             </div>
 
@@ -572,9 +558,7 @@
                     <span id="project9Meta3">2025</span>
                 </div>
                 <div class="project-description" id="project9Desc">
-                    <p>
-                        [INSÉREZ LA DESCRIPTION DU PROJET 09 ICI]
-                    </p>
+                    <p id="project9DescText">À venir — Description détaillée</p>
                 </div>
             </div>
 
@@ -587,9 +571,7 @@
                     <span id="project10Meta3">Technologia • GardaWorld — 2023-24</span>
                 </div>
                 <div class="project-description" id="project10Desc">
-                    <p>
-                        [INSÉREZ LA DESCRIPTION DU PROJET 10 ICI]
-                    </p>
+                    <p id="project10DescText">À venir — Description détaillée</p>
                 </div>
             </div>
 
@@ -602,9 +584,7 @@
                     <span id="project11Meta3">This is Weird AI — 2022–25</span>
                 </div>
                 <div class="project-description" id="project11Desc">
-                    <p>
-                        [INSÉREZ LA DESCRIPTION DU PROJET 11 ICI]
-                    </p>
+                    <p id="project11DescText">À venir — Description détaillée</p>
                 </div>
             </div>
             
@@ -617,9 +597,7 @@
                     <span id="project12Meta3">E-commerce • Publicité immersive — 2025</span>
                 </div>
                 <div class="project-description" id="project12Desc">
-                    <p>
-                        [INSÉREZ LA DESCRIPTION DU PROJET 12 ICI]
-                    </p>
+                    <p id="project12DescText">À venir — Description détaillée</p>
                 </div>
             </div>
         </div>
@@ -636,7 +614,18 @@
     </footer>
 
     <script>
-        // LANGUAGE SWITCHER (Inclus les clés pour le support futur des descriptions de projets si vous les ajoutez)
+        // LANGUAGE SWITCHER
+        const descriptions = {
+            fr: {
+                project1: "Création d'un mini-écosystème numérique en temps réel. Le projet utilise des capteurs IoT pour recueillir des données environnementales (température, humidité) et les traduit en une visualisation 3D interactive générée avec WebGL. Une œuvre poétique reliant le physique et le virtuel.",
+                default: "À venir — Description détaillée"
+            },
+            en: {
+                project1: "Creation of a real-time digital mini-ecosystem. The project uses IoT sensors to collect environmental data (temperature, humidity) and translates it into an interactive 3D visualization generated with WebGL. A poetic work connecting the physical and the virtual.",
+                default: "Coming soon — Detailed description"
+            }
+        };
+
         const translations = {
             fr: {
                 cvText: 'CV Numérique',
@@ -644,8 +633,7 @@
                 intro: 'Designer multimédia et technologue créative explorant les intersections entre art, technologie et expérience.',
                 location: 'Montréal — Projets en cours, apprentissages actifs et explorations des derniers mois. Formation continue, expérimentation quotidienne.',
                 footer: '© 2025 Kim Maurice — Designer Multimédia',
-                email: 'Email',
-                // Ajoutez ici les clés de traduction pour les titres et descriptions de projets si nécessaire
+                email: 'Email'
             },
             en: {
                 cvText: 'Digital CV',
@@ -653,12 +641,26 @@
                 intro: 'Multimedia designer and creative technologist exploring intersections between art, technology and experience.',
                 location: 'Montreal — Ongoing projects, active learning and recent explorations. Continuous training, daily experimentation.',
                 footer: '© 2025 Kim Maurice — Multimedia Designer',
-                email: 'Email',
-                // Ajoutez ici les clés de traduction pour les titres et descriptions de projets si nécessaire
+                email: 'Email'
             }
         };
 
         let currentLang = 'fr';
+
+        function updateDescriptions(lang) {
+            for (let i = 1; i <= 12; i++) {
+                const descElement = document.getElementById(`project${i}DescText`);
+                if (descElement) {
+                    // Utiliser la description spécifique si elle existe, sinon utiliser la valeur par défaut
+                    const key = `project${i}`;
+                    descElement.textContent = descriptions[lang][key] || descriptions[lang].default;
+                }
+            }
+        }
+
+        // Initialisation des descriptions au chargement
+        updateDescriptions(currentLang);
+
 
         document.getElementById('langBtn').addEventListener('click', () => {
             currentLang = currentLang === 'fr' ? 'en' : 'fr';
@@ -672,7 +674,8 @@
             document.getElementById('footerText').textContent = translations[currentLang].footer;
             document.getElementById('emailText').textContent = translations[currentLang].email;
             
-            // Si vous ajoutez les traductions des descriptions dans l'objet 'translations', vous pouvez les mettre à jour ici.
+            // Mise à jour des descriptions de projets
+            updateDescriptions(currentLang);
         });
 
         // PARALLAX SCRIPT (conservé)
