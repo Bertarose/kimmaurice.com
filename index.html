@@ -57,6 +57,7 @@
             --grey: #6b6b6b;
             --cream: #FFFEF9;
             --bg: #0a0a1f;
+            --neon-green: #39ff14;
         }
 
         body {
@@ -182,6 +183,30 @@
             animation-play-state: paused;
         }
 
+        /* BADGES */
+        .badge-complete {
+            background: rgba(57, 255, 20, 0.15) !important;
+            border: 1.5px solid var(--neon-green) !important;
+            padding: 0.4rem 0.8rem !important;
+            border-radius: 20px !important;
+            font-weight: 700 !important;
+            color: var(--neon-green) !important;
+        }
+
+        .badge-dev {
+            background: rgba(255, 193, 7, 0.15) !important;
+            border: 1.5px solid #ffc107 !important;
+            padding: 0.4rem 0.8rem !important;
+            border-radius: 20px !important;
+            font-weight: 700 !important;
+            color: #ffc107 !important;
+        }
+
+        .year-future {
+            color: var(--neon-green) !important;
+            font-weight: 700 !important;
+        }
+
         /* MAIN CONTENT */
         main {
             padding: 6rem 4rem;
@@ -250,6 +275,7 @@
             margin-top: 1.5rem;
             font-size: 0.9rem;
             color: var(--grey);
+            flex-wrap: wrap;
         }
 
         .project-meta span {
@@ -297,7 +323,6 @@
             .logo {
                 width: 45px;
                 height: 45px;
-                font-size: 1rem;
             }
 
             .header-right {
@@ -312,11 +337,6 @@
             .lang-btn {
                 padding: 0.5rem 0.8rem;
                 font-size: 0.7rem;
-            }
-
-            .ticker-item {
-                font-size: 0.75rem;
-                padding: 0 2rem;
             }
 
             main {
@@ -352,13 +372,6 @@
                 gap: 1rem;
             }
         }
-
-        /* SUBTLE CURSOR */
-        @media (min-width: 769px) {
-            .project-item {
-                cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="8" fill="rgba(255,254,249,0.3)"/></svg>'), auto;
-            }
-        }
     </style>
 </head>
 <body>
@@ -377,8 +390,8 @@
 
     <div class="ticker-container">
         <div class="ticker-wrapper">
-            <span class="ticker-item" id="tickerText">Liens des projets en ligne le 12 décembre • En ce moment, je monte le tout sur GitHub</span>
-            <span class="ticker-item" id="tickerText2">Liens des projets en ligne le 12 décembre • En ce moment, je monte le tout sur GitHub</span>
+            <span class="ticker-item" id="tickerText">Liens des projets en ligne le 13 décembre • En ce moment, je monte le tout sur GitHub</span>
+            <span class="ticker-item" id="tickerText2">Liens des projets en ligne le 13 décembre • En ce moment, je monte le tout sur GitHub</span>
         </div>
     </div>
 
@@ -394,123 +407,135 @@
 
         <div class="projects">
             
+            <!-- 01. TERRARIUM -->
             <div class="project-item">
                 <div class="project-number">01</div>
                 <h2 class="project-title" id="project1Title">Terrarium Numérique</h2>
                 <div class="project-meta">
                     <span id="project1Meta1">Installation Interactive</span>
-                    <span id="project1Meta2">WebGL • Capteurs</span>
-                    <span id="project1Meta3">2025</span>
+                    <span id="project1Meta2">WebGL • Capteurs • IoT</span>
+                    <span id="project1Meta3" class="year-future">En préparation — 2026</span>
                 </div>
             </div>
 
+            <!-- 02. CHOCÔCALENDRIER -->
             <div class="project-item">
                 <div class="project-number">02</div>
-                <h2 class="project-title" id="project2Title">Idéation Boîte de Chocolat</h2>
+                <h2 class="project-title" id="project2Title">ChocÔCalendrier</h2>
                 <div class="project-meta">
-                    <span id="project2Meta1">Product Design</span>
-                    <span id="project2Meta2">Packaging • Experience</span>
+                    <span id="project2Meta1" class="badge-complete">✅ Presque terminé</span>
+                    <span id="project2Meta2">Product Design • UX/UI • Experience</span>
                     <span id="project2Meta3">2025</span>
                 </div>
             </div>
 
+            <!-- 03. STILL FM -->
             <div class="project-item">
                 <div class="project-number">03</div>
-                <h2 class="project-title" id="project3Title">Radio Streaming Live</h2>
+                <h2 class="project-title" id="project3Title">Still FM — Radio Underground</h2>
                 <div class="project-meta">
-                    <span id="project3Meta1">Plateforme Web</span>
+                    <span id="project3Meta1" class="badge-dev">🚧 En cours</span>
                     <span id="project3Meta2">Next.js • React • API Mixcloud • Twitch</span>
-                    <span id="project3Meta3">Still FM — En développement • Lancement Février 2025</span>
+                    <span id="project3Meta3" class="year-future">Lancement début 2026</span>
                 </div>
             </div>
 
+            <!-- 04. COMFYUI -->
             <div class="project-item">
                 <div class="project-number">04</div>
                 <h2 class="project-title" id="project4Title">Workflows ComfyUI Avancés</h2>
                 <div class="project-meta">
-                    <span id="project4Meta1">AI Image Generation</span>
+                    <span id="project4Meta1" class="badge-complete">✅ Terminé</span>
                     <span id="project4Meta2">ComfyUI • Node-Based • Stable Diffusion</span>
                     <span id="project4Meta3">2025</span>
                 </div>
             </div>
 
+            <!-- 05. PIPELINE IA -->
             <div class="project-item">
                 <div class="project-number">05</div>
                 <h2 class="project-title" id="project5Title">Pipeline Créatif IA</h2>
                 <div class="project-meta">
-                    <span id="project5Meta1">Workflow Automation</span>
+                    <span id="project5Meta1" class="badge-complete">✅ Terminé</span>
                     <span id="project5Meta2">Python • AI Tools • Documentation</span>
                     <span id="project5Meta3">2025</span>
                 </div>
             </div>
 
+            <!-- 06. LANDING ACTIONS -->
             <div class="project-item">
                 <div class="project-number">06</div>
                 <h2 class="project-title" id="project6Title">Landing Page Actions</h2>
                 <div class="project-meta">
-                    <span id="project6Meta1">Web Design</span>
+                    <span id="project6Meta1" class="badge-complete">✅ Terminé</span>
                     <span id="project6Meta2">React • Next.js • Animation</span>
                     <span id="project6Meta3">2025</span>
                 </div>
             </div>
 
+            <!-- 07. LANDING INTERACTIVE -->
             <div class="project-item">
                 <div class="project-number">07</div>
                 <h2 class="project-title" id="project7Title">Landing Page Interactive</h2>
                 <div class="project-meta">
-                    <span id="project7Meta1">Web Design</span>
+                    <span id="project7Meta1" class="badge-complete">✅ Terminé</span>
                     <span id="project7Meta2">Génératif • Audio-réactif</span>
                     <span id="project7Meta3">2025</span>
                 </div>
             </div>
 
+            <!-- 08. VIDÉO GÉNÉRATIVE -->
             <div class="project-item">
                 <div class="project-number">08</div>
-                <h2 class="project-title" id="project8Title">Vidéo Générative</h2>
+                <h2 class="project-title" id="project8Title">Court-métrage Expérimental</h2>
                 <div class="project-meta">
-                    <span id="project8Meta1">Art Visuel</span>
-                    <span id="project8Meta2">AI • Motion</span>
-                    <span id="project8Meta3">En développement</span>
+                    <span id="project8Meta1" class="badge-dev">🎬 En cours</span>
+                    <span id="project8Meta2">Vidéo Générative • AI • Festival</span>
+                    <span id="project8Meta3">Projet court-métrage pour festival</span>
                 </div>
             </div>
 
+            <!-- 09. SONIC FINGERPRINT -->
             <div class="project-item">
                 <div class="project-number">09</div>
                 <h2 class="project-title" id="project9Title">Sonic Fingerprint Generator</h2>
                 <div class="project-meta">
-                    <span id="project9Meta1">Expérience Audio-visuelle</span>
-                    <span id="project9Meta2">Canvas • Tone.js</span>
+                    <span id="project9Meta1" class="badge-complete">✅ Terminé</span>
+                    <span id="project9Meta2">Canvas • Tone.js • Audio-visuel</span>
                     <span id="project9Meta3">2025</span>
                 </div>
             </div>
 
+            <!-- 10. E-LEARNING -->
             <div class="project-item">
                 <div class="project-number">10</div>
                 <h2 class="project-title" id="project10Title">Plateforme E-Learning</h2>
                 <div class="project-meta">
-                    <span id="project10Meta1">UX/UI Design</span>
-                    <span id="project10Meta2">Multimedia • LMS • Articulate, UX and others</span>
-                    <span id="project10Meta3">Campus GardaWorld - Technologia — 2023</span>
+                    <span id="project10Meta1" class="badge-complete">✅ Terminé</span>
+                    <span id="project10Meta2">UX/UI • Articulate • Multimedia • LMS</span>
+                    <span id="project10Meta3">Technologia • GardaWorld — 2023-24</span>
                 </div>
             </div>
 
+            <!-- 11. ARCHIVE AI -->
             <div class="project-item">
                 <div class="project-number">11</div>
                 <h2 class="project-title" id="project11Title">Archive Visuelle AI</h2>
                 <div class="project-meta">
-                    <span id="project11Meta1">Curation</span>
-                    <span id="project11Meta2">Exploration • Stable Diffusion • Generative Art Tools</span>
+                    <span id="project11Meta1" class="badge-complete">✅ Actif</span>
+                    <span id="project11Meta2">Stable Diffusion • Curation • Instagram</span>
                     <span id="project11Meta3">This is Weird AI — 2022–25</span>
                 </div>
             </div>
             
+            <!-- 12. CONFIGURATEUR 360 -->
             <div class="project-item">
                 <div class="project-number">12</div>
                 <h2 class="project-title" id="project12Title">Configurateur Produit Immersif 360°</h2>
                 <div class="project-meta">
-                    <span id="project12Meta1">E-commerce • Publicité Immersive (Ads)</span>
-                    <span id="project12Meta2">WebGL • Three.js • IA Générative (Skybox AI)</span>
-                    <span id="project12Meta3">2025</span>
+                    <span id="project12Meta1" class="badge-complete">✅ Terminé</span>
+                    <span id="project12Meta2">WebGL • Three.js • IA Générative</span>
+                    <span id="project12Meta3">E-commerce • Publicité immersive — 2025</span>
                 </div>
             </div>
         </div>
@@ -531,139 +556,19 @@
         const translations = {
             fr: {
                 cvText: 'CV Numérique',
-                ticker: 'Liens des projets en ligne le 12 décembre • En ce moment, je monte le tout sur GitHub',
+                ticker: 'Liens des projets en ligne le 13 décembre • En ce moment, je monte le tout sur GitHub',
                 intro: 'Designer multimédia et technologue créative explorant les intersections entre art, technologie et expérience.',
                 location: 'Montréal — Projets en cours, apprentissages actifs et explorations des derniers mois. Formation continue, expérimentation quotidienne.',
                 footer: '© 2025 Kim Maurice — Designer Multimédia',
-                email: 'Email',
-                
-                project1Title: 'Terrarium Numérique', 
-                project1Meta1: 'Installation Interactive', 
-                project1Meta2: 'WebGL • Capteurs', 
-                project1Meta3: '2025',
-                
-                project2Title: 'Idéation Boîte de Chocolat', 
-                project2Meta1: 'Product Design', 
-                project2Meta2: 'Packaging • Experience', 
-                project2Meta3: '2025',
-                
-                project3Title: 'Radio Streaming Live', 
-                project3Meta1: 'Plateforme Web', 
-                project3Meta2: 'Next.js • React • API Mixcloud • Twitch', 
-                project3Meta3: 'Still FM — En développement • Lancement Février 2025',
-                
-                project4Title: 'Workflows ComfyUI Avancés', 
-                project4Meta1: 'AI Image Generation', 
-                project4Meta2: 'ComfyUI • Node-Based • Stable Diffusion', 
-                project4Meta3: '2025',
-                
-                project5Title: 'Pipeline Créatif IA', 
-                project5Meta1: 'Workflow Automation', 
-                project5Meta2: 'Python • AI Tools • Documentation', 
-                project5Meta3: '2025',
-                
-                project6Title: 'Landing Page Actions', 
-                project6Meta1: 'Web Design', 
-                project6Meta2: 'React • Next.js • Animation', 
-                project6Meta3: '2025',
-                
-                project7Title: 'Landing Page Interactive', 
-                project7Meta1: 'Web Design', 
-                project7Meta2: 'Génératif • Audio-réactif', 
-                project7Meta3: '2025',
-                
-                project8Title: 'Vidéo Générative', 
-                project8Meta1: 'Art Visuel', 
-                project8Meta2: 'AI • Motion', 
-                project8Meta3: 'En développement',
-                
-                project9Title: 'Sonic Fingerprint Generator', 
-                project9Meta1: 'Expérience Audio-visuelle', 
-                project9Meta2: 'Canvas • Tone.js', 
-                project9Meta3: '2025',
-                
-                project10Title: 'Plateforme E-Learning', 
-                project10Meta1: 'UX/UI Design', 
-                project10Meta2: 'Multimedia • LMS • Articulate, UX and others', 
-                project10Meta3: 'Campus GardaWorld - Technologia — 2023',
-                
-                project11Title: 'Archive Visuelle AI', 
-                project11Meta1: 'Curation', 
-                project11Meta2: 'Exploration • Stable Diffusion • Generative Art Tools', 
-                project11Meta3: 'This is Weird AI — 2022–25',
-                
-                project12Title: 'Configurateur Produit Immersif 360°', 
-                project12Meta1: 'E-commerce • Publicité Immersive (Ads)', 
-                project12Meta2: 'WebGL • Three.js • IA Générative (Skybox AI)', 
-                project12Meta3: '2025'
+                email: 'Email'
             },
             en: {
                 cvText: 'Digital CV',
-                ticker: 'Project links online December 12 • Currently setting everything up on GitHub',
+                ticker: 'Project links online December 13 • Currently setting everything up on GitHub',
                 intro: 'Multimedia designer and creative technologist exploring intersections between art, technology and experience.',
                 location: 'Montreal — Ongoing projects, active learning and recent explorations. Continuous training, daily experimentation.',
                 footer: '© 2025 Kim Maurice — Multimedia Designer',
-                email: 'Email',
-
-                project1Title: 'Digital Terrarium', 
-                project1Meta1: 'Interactive Installation', 
-                project1Meta2: 'WebGL • Sensors', 
-                project1Meta3: '2025',
-                
-                project2Title: 'Chocolate Box Ideation', 
-                project2Meta1: 'Product Design', 
-                project2Meta2: 'Packaging • Experience', 
-                project2Meta3: '2025',
-                
-                project3Title: 'Live Streaming Radio', 
-                project3Meta1: 'Web Platform', 
-                project3Meta2: 'Next.js • React • Mixcloud API • Twitch', 
-                project3Meta3: 'Still FM — In Development • Launching February 2025',
-                
-                project4Title: 'Advanced ComfyUI Workflows', 
-                project4Meta1: 'AI Image Generation', 
-                project4Meta2: 'ComfyUI • Node-Based • Stable Diffusion', 
-                project4Meta3: '2025',
-                
-                project5Title: 'AI Creative Pipeline', 
-                project5Meta1: 'Workflow Automation', 
-                project5Meta2: 'Python • AI Tools • Documentation', 
-                project5Meta3: '2025',
-                
-                project6Title: 'Actions Landing Page', 
-                project6Meta1: 'Web Design', 
-                project6Meta2: 'React • Next.js • Animation', 
-                project6Meta3: '2025',
-                
-                project7Title: 'Interactive Landing Page', 
-                project7Meta1: 'Web Design', 
-                project7Meta2: 'Generative • Audio-reactive', 
-                project7Meta3: '2025',
-                
-                project8Title: 'Generative Video', 
-                project8Meta1: 'Visual Art', 
-                project8Meta2: 'AI • Motion', 
-                project8Meta3: 'In development',
-                
-                project9Title: 'Sonic Fingerprint Generator', 
-                project9Meta1: 'Audio-Visual Experience', 
-                project9Meta2: 'Canvas • Tone.js', 
-                project9Meta3: '2025',
-                
-                project10Title: 'E-Learning Platform', 
-                project10Meta1: 'UX/UI Design', 
-                project10Meta2: 'Multimedia • LMS • Articulate, UX and others', 
-                project10Meta3: 'Campus GardaWorld - Technologia — 2023',
-                
-                project11Title: 'AI Visual Archive', 
-                project11Meta1: 'Curation', 
-                project11Meta2: 'Exploration • Stable Diffusion • Generative Art Tools', 
-                project11Meta3: 'This is Weird AI — 2022–25',
-                
-                project12Title: '360° Immersive Product Configurator', 
-                project12Meta1: 'E-commerce • Immersive Advertising (Ads)', 
-                project12Meta2: 'WebGL • Three.js • Generative AI (Skybox AI)', 
-                project12Meta3: '2025'
+                email: 'Email'
             }
         };
 
@@ -680,44 +585,6 @@
             document.getElementById('locationText').textContent = translations[currentLang].location;
             document.getElementById('footerText').textContent = translations[currentLang].footer;
             document.getElementById('emailText').textContent = translations[currentLang].email;
-
-            for (let i = 1; i <= 12; i++) {
-                const titleId = `project${i}Title`;
-                const meta1Id = `project${i}Meta1`;
-                const meta2Id = `project${i}Meta2`;
-                const meta3Id = `project${i}Meta3`;
-
-                const titleElement = document.getElementById(titleId);
-                if (titleElement) {
-                    titleElement.textContent = translations[currentLang][titleId];
-                }
-
-                const meta1Element = document.getElementById(meta1Id);
-                if (meta1Element) {
-                    meta1Element.textContent = translations[currentLang][meta1Id];
-                }
-                const meta2Element = document.getElementById(meta2Id);
-                if (meta2Element) {
-                    meta2Element.textContent = translations[currentLang][meta2Id];
-                }
-                const meta3Element = document.getElementById(meta3Id);
-                if (meta3Element) {
-                    meta3Element.textContent = translations[currentLang][meta3Id];
-                }
-            }
-        });
-
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
         });
 
         let ticking = false;
