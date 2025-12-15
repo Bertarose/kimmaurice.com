@@ -1,753 +1,291 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+'use client';
+
+import { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
+import LandingAudioPlayer from './components/LandingAudioPlayer'; 
+import { usePlayer } from './context/PlayerContext';
+
+export default function LandingPage() {
+  const { isPlaying: isRadioPlaying, togglePlay: toggleRadio } = usePlayer();
     
-    <title>Kim Maurice | Designer Multimédia - Technologue créative, Montréal</title>
-    <meta name="description" content="Designer multimédia et technologue créative basée à Montréal. 25 ans d'expérience en UX/UI, e-learning, production audiovisuelle, design sonore et développement web. Expertise en IA générative et projets culturels.">
-    <meta name="keywords" content="designer multimédia Montréal, technologue créative, UX/UI designer, e-learning développeur, production audiovisuelle, design sonore, web design, IA générative, Kim Maurice, designer freelance Montréal, creative technologist">
-    <meta name="author" content="Kim Maurice">
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-    <meta name="googlebot" content="index, follow">
-    
-    <link rel="canonical" href="https://www.kimmaurice.com/portfolio/index.html" />
-    
-    <link rel="alternate" hreflang="fr" href="https://www.kimmaurice.com/portfolio/index.html" />
-    <link rel="alternate" hreflang="en" href="https://www.kimmaurice.com/portfolio/en/index.html" />
-    <link rel="alternate" hreflang="x-default" href="https://www.kimmaurice.com/portfolio/index.html" />
-    
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://kimmaurice.com/">
-    <meta property="og:site_name" content="Kim Maurice">
-    <meta property="og:title" content="Kim Maurice | Designer Multimédia & Technologue Créative">
-    <meta property="og:description" content="25 ans d'expérience en design multimédia, UX/UI, e-learning, production audiovisuelle et design sonore. Basée à Montréal.">
-    <meta property="og:image" content="https://kimmaurice.com/images/og-image.jpg">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Kim Maurice - Designer Multimédia">
-    <meta property="og:locale" content="fr_CA">
-    <meta property="og:locale:alternate" content="en_CA">
-    
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://kimmaurice.com/">
-    <meta name="twitter:title" content="Kim Maurice | Designer Multimédia & Technologue Créative">
-    <meta name="twitter:description" content="25 ans d'expérience en design multimédia, UX/UI, e-learning, production audiovisuelle et design sonore. Basée à Montréal.">
-    <meta name="twitter:image" content="https://kimmaurice.com/images/og-image.jpg">
-    <meta name="twitter:image:alt" content="Kim Maurice - Designer Multimédia">
-    
-    <meta property="profile:first_name" content="Kim">
-    <meta property="profile:last_name" content="Maurice">
-    <meta property="profile:username" content="kimmaurice">
-    
-    <link rel="icon" type="image/x-icon" href="/portfolio/images/favicon.ico">
+  const [isLive, setIsLive] = useState(false);  
+  const [watchMode, setWatchMode] = useState(false);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const playerInitialized = useRef(false);
+  const twitchPlayerRef = useRef<any>(null);
 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WYM83ME5LK"></script>
-    
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+  // INITIALISATION TWITCH PLAYER
+  useEffect(() => {
+    if (playerInitialized.current) return;
+
+    const initTwitchPlayer = () => {
+      if (playerInitialized.current) return; 
+
+      if ((window as any).Twitch && document.getElementById('twitch-embed')) { 
+        playerInitialized.current = true;
+          
+        const parents = ['localhost', '127.0.0.1', 'still-fm.vercel.app', 'www.stillfm.com', 'stillfm.com'];
+        if (typeof window !== 'undefined' && !parents.includes(window.location.hostname)) {
+            parents.push(window.location.hostname);
         }
 
-        :root {
-            --marine: #16213e;
-            --grey: #6b6b6b;
-            --cream: #FFFEF9;
-            --bg: #0a0a1f;
-            --neon-green: #39ff14;
-        }
+        const options = {
+          width: '100%',
+          height: '100%',
+          channel: 'bertarose',
+          parent: parents,
+          autoplay: true,
+          muted: true,      
+          controls: false,
+        };
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background: var(--bg);
-            color: var(--cream);
-            line-height: 1.2;
-            overflow-x: hidden;
-        }
+        try {
+            const player = new (window as any).Twitch.Player('twitch-embed', options);
+            twitchPlayerRef.current = player;
 
-        /* HEADER */
-        header {
-            padding: 3rem 4rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid rgba(255, 254, 249, 0.1);
-        }
+            player.addEventListener((window as any).Twitch.Player.READY, () => {
+              player.setMuted(true);
+              const playPromise = player.play();
+              if (playPromise && typeof playPromise.catch === 'function') {
+                  playPromise.catch((err: any) => console.warn('Twitch autoplay blocked:', err));
+              }
+            });
 
-        .logo {
-            width: 55px;
-            height: 55px;
-            border-radius: 50%;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+            player.addEventListener((window as any).Twitch.Player.ONLINE, () => {
+              setIsLive(true);
+            });
+            
+            player.addEventListener((window as any).Twitch.Player.OFFLINE, () => {
+              setIsLive(false);
+            });
 
-        .logo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        } catch (error) {
+            console.error('Twitch Player creation failed:', error);
+            playerInitialized.current = false;
         }
+      }
+    };
 
-        .header-right {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-        }
+    if (!(window as any).Twitch) {
+      if (!document.getElementById('twitch-js')) {
+        const script = document.createElement('script');
+        script.id = 'twitch-js';
+        script.src = 'https://player.twitch.tv/js/embed/v1.js';
+        script.async = true;
+        script.onload = initTwitchPlayer;
+        document.body.appendChild(script);
+      }
+    } else {
+      initTwitchPlayer(); 
+      setTimeout(() => {
+          if (!playerInitialized.current) {
+              initTwitchPlayer();
+          }
+      }, 500);
+    }
+  }, []);
 
-        .lang-btn {
-            background: transparent;
-            border: 1px solid rgba(255, 254, 249, 0.2);
-            color: var(--grey);
-            padding: 0.6rem 1rem;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            letter-spacing: 0.1rem;
-            text-transform: uppercase;
-            font-family: inherit;
+  // VÉRIFICATION API TWITCH
+  useEffect(() => {
+    const checkTwitchViaAPI = async () => {
+      try {
+        const res = await fetch('https://decapi.me/twitch/uptime/bertarose');
+        const text = await res.text();
+          
+        if (text.includes('offline') || text.includes('error')) {
+          setIsLive(false);
+        } else {
+          setIsLive(true);
         }
+      } catch (e) {
+        console.error('Twitch API check error:', e);
+      }
+    };
 
-        .lang-btn:hover {
-            color: var(--cream);
-            border-color: var(--cream);
-        }
+    const initialTimeout = setTimeout(checkTwitchViaAPI, 3000);
+    const interval = setInterval(checkTwitchViaAPI, 60000);
+    return () => {
+      clearTimeout(initialTimeout);
+      clearInterval(interval);
+    };
+  }, []);
 
-        .cv-link {
-            background: rgba(255, 254, 249, 0.05);
-            border: 1px solid rgba(255, 254, 249, 0.2);
-            color: var(--cream);
-            padding: 0.8rem 1.5rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s;
-            letter-spacing: 0.05rem;
-        }
+  // EXPOSER handleWatchStream AU PLAYER
+  useEffect(() => {
+    (window as any).openTwitchWatch = () => {
+      if (!twitchPlayerRef.current) {
+        console.error('Twitch Player not initialized');
+        return;
+      }
+      
+      if (isRadioPlaying) { 
+        toggleRadio();
+      }
+      
+      twitchPlayerRef.current.setMuted(false);
+      twitchPlayerRef.current.setVolume(1.0);
+      
+      const userPlayPromise = twitchPlayerRef.current.play();
+      if (userPlayPromise && typeof userPlayPromise.catch === 'function') {
+        userPlayPromise.catch((err: any) => console.warn('Twitch play failed:', err));
+      }
+      
+      setWatchMode(true);
+    };
 
-        .cv-link:hover {
-            background: rgba(255, 254, 249, 0.1);
-            border-color: var(--cream);
-            transform: translateY(-2px);
-        }
+    (window as any).closeTwitchWatch = () => {
+      setWatchMode(false);
+      if (twitchPlayerRef.current) {
+        twitchPlayerRef.current.setMuted(true);
+      }
+    };
+  }, [isRadioPlaying, toggleRadio]);
 
-        /* TICKER BANNER */
-        .ticker-container {
-            background: rgba(255, 254, 249, 0.03);
-            border-bottom: 1px solid rgba(255, 254, 249, 0.1);
-            overflow: hidden;
-            padding: 1rem 0;
-            position: relative;
-        }
+  const handleCloseWatch = () => {
+    setWatchMode(false);
+    if (twitchPlayerRef.current) {
+      twitchPlayerRef.current.setMuted(true);
+    }
+  };
 
-        .ticker-wrapper {
-            display: flex;
-            animation: scroll 30s linear infinite;
-        }
+  // ANIMATION ÉTOILES
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
 
-        .ticker-item {
-            display: flex;
-            align-items: center;
-            white-space: nowrap;
-            padding: 0 4rem;
-            font-size: 0.9rem;
-            color: var(--grey);
-            letter-spacing: 0.05rem;
-        }
+    const resizeCanvas = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
 
-        .ticker-item::before {
-            content: '→';
-            margin-right: 1rem;
-            color: var(--cream);
-            opacity: 0.3;
-        }
+    class Particle {
+      x: number; y: number; size: number; speedX: number; speedY: number; opacity: number;
+      canvas: HTMLCanvasElement; ctx: CanvasRenderingContext2D;
+      constructor(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
+        this.canvas = canvas; this.ctx = ctx;
+        this.x = Math.random() * this.canvas.width; this.y = Math.random() * this.canvas.height;
+        this.size = Math.random() * 2 + 0.5;
+        this.speedX = Math.random() * 0.5 - 0.25; this.speedY = Math.random() * 0.5 - 0.25;
+        this.opacity = Math.random() * 0.5 + 0.3;
+      }
+      update() {
+        this.x += this.speedX; this.y += this.speedY;
+        if (this.x > this.canvas.width) this.x = 0; if (this.x < 0) this.x = this.canvas.width;
+        if (this.y > this.canvas.height) this.y = 0; if (this.y < 0) this.y = this.canvas.height;
+      }
+      draw() {
+        this.ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+        this.ctx.beginPath(); this.ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); this.ctx.fill();
+      }
+    }
 
-        @keyframes scroll {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(-50%);
-            }
-        }
+    const particleCount = 150; const particles: Particle[] = [];
+    for (let i = 0; i < particleCount; i++) { particles.push(new Particle(canvas, ctx)); }
 
-        .ticker-wrapper:hover {
-            animation-play-state: paused;
-        }
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => { p.update(); p.draw(); });
+      particles.forEach((pA, indexA) => {
+        particles.slice(indexA + 1).forEach(pB => {
+          const dx = pA.x - pB.x; const dy = pA.y - pB.y;
+          const distance = Math.sqrt(dx*dx + dy*dy);
+          if (distance < 100) {
+            ctx.strokeStyle = `rgba(255,255,255,${0.1*(1-distance/100)})`;
+            ctx.lineWidth = 0.5;
+            ctx.beginPath(); ctx.moveTo(pA.x,pA.y); ctx.lineTo(pB.x,pB.y); ctx.stroke();
+          }
+        });
+      });
+      requestAnimationFrame(animate);
+    };
+    animate();
+    return () => window.removeEventListener('resize', resizeCanvas);
+  }, []);
 
-        /* BADGES */
-        .badge-complete {
-            background: rgba(57, 255, 20, 0.15) !important;
-            border: 1.5px solid var(--neon-green) !important;
-            padding: 0.4rem 0.8rem !important;
-            border-radius: 20px !important;
-            font-weight: 700 !important;
-            color: var(--neon-green) !important;
-        }
+  return (
+    <div className="relative w-full h-screen overflow-hidden bg-black">
 
-        .badge-dev {
-            background: rgba(255, 193, 7, 0.15) !important;
-            border: 1.5px solid #ffc107 !important;
-            padding: 0.4rem 0.8rem !important;
-            border-radius: 20px !important;
-            font-weight: 700 !important;
-            color: #ffc107 !important;
-        }
+      {/* TWITCH EMBED */}
+      <div 
+        className={`absolute inset-0 overflow-hidden transition-all duration-500 ${
+          watchMode ? 'z-[60]' : (isLive ? 'z-0' : 'z-[-1]')
+        }`}
+      >
+        <div 
+          id="twitch-embed" 
+          className={`w-full h-full object-cover transition-all duration-1000 
+            ${watchMode ? 'grayscale-0 pointer-events-auto' : 'grayscale contrast-125 opacity-60 pointer-events-none'}
+          `}
+        />
+      </div>
 
-        .year-future {
-            color: var(--neon-green) !important;
-            font-weight: 700 !important;
-        }
+      {/* VIDEO OFFLINE */}
+      {!isLive && (
+        <video
+          className="absolute inset-0 w-full h-full object-cover z-0"
+          src="/video.mov"
+          autoPlay
+          loop
+          muted
+          playsInline
+        />
+      )}
 
-        /* MAIN CONTENT */
-        main {
-            padding: 6rem 4rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
+      {/* CANVAS ÉTOILES */}
+      <canvas
+        ref={canvasRef}
+        className={`absolute inset-0 w-full h-full z-1 pointer-events-none mix-blend-screen transition-opacity duration-500 ${watchMode ? 'opacity-0' : 'opacity-50'}`}
+      />
 
-        .intro {
-            margin-bottom: 8rem;
-        }
+      {/* Dark Overlay */}
+      <div className={`absolute inset-0 bg-black/30 z-3 pointer-events-none transition-opacity duration-500 ${watchMode ? 'opacity-0' : 'opacity-100'}`} />
 
-        .intro h1 {
-            font-size: 3rem;
-            font-weight: 300;
-            line-height: 1.4;
-            color: var(--cream);
-            max-width: 900px;
-        }
-
-        .intro p {
-            font-size: 1.1rem;
-            color: var(--grey);
-            margin-top: 2rem;
-            max-width: 600px;
-        }
-
-        /* PROJECT LIST */
-        .projects {
-            margin-top: 6rem;
-        }
-
-        .project-item {
-            padding: 4rem 0;
-            border-bottom: 1px solid rgba(255, 254, 249, 0.08);
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .project-item:hover {
-            padding-left: 2rem;
-            border-color: rgba(255, 254, 249, 0.3);
-            background: rgba(10, 10, 31, 0.5);
-        }
-
-        .project-item:hover .project-title {
-            color: var(--cream);
-        }
-
-        .project-number {
-            font-size: 0.85rem;
-            color: var(--grey);
-            letter-spacing: 0.2rem;
-            margin-bottom: 1rem;
-            font-family: 'Courier New', monospace;
-        }
-
-        .project-title {
-            font-size: 4rem;
-            font-weight: 300;
-            color: rgba(255, 254, 249, 0.7);
-            transition: color 0.3s;
-            line-height: 1.1;
-        }
-
-        .project-meta {
-            display: flex;
-            gap: 3rem;
-            margin-top: 1.5rem;
-            font-size: 0.9rem;
-            color: var(--grey);
-            flex-wrap: wrap;
-        }
-
-        .project-meta span {
-            text-transform: uppercase;
-            letter-spacing: 0.15rem;
-            font-size: 0.75rem;
-        }
+      {/* ✅ CONTENU MINIMAL - JUSTE LOGO + STATUS */}
+      <div className={`relative z-10 flex flex-col items-center justify-center h-full text-white font-mono pb-20 transition-all duration-500 ${watchMode ? 'opacity-0 pointer-events-none scale-95' : 'opacity-100 scale-100'}`}>
         
-        /* STYLE POUR LA DESCRIPTION AU SURVOL */
-        .project-description {
-            background: rgba(22, 33, 62, 0.5);
-            color: var(--cream);
-            padding: 1.5rem;
-            margin-top: 2rem;
-            border-left: 4px solid var(--neon-green);
-            opacity: 0;
-            max-height: 0;
-            overflow: hidden;
-            transition: opacity 0.4s ease, max-height 0.4s ease;
-        }
-
-        .project-description p {
-            font-size: 0.95rem;
-            color: var(--cream);
-            line-height: 1.5;
-        }
-
-        .project-item:hover .project-description {
-            opacity: 1;
-            max-height: 300px;
-            transition-delay: 0.1s;
-        }
-
-        /* FOOTER */
-        footer {
-            padding: 4rem;
-            border-top: 1px solid rgba(255, 254, 249, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        footer p {
-            font-size: 0.85rem;
-            color: var(--grey);
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .footer-links a {
-            font-size: 0.85rem;
-            color: var(--grey);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .footer-links a:hover {
-            color: var(--cream);
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            header {
-                padding: 2rem;
-            }
-
-            .logo {
-                width: 45px;
-                height: 45px;
-            }
-
-            .header-right {
-                gap: 0.8rem;
-            }
-
-            .cv-link {
-                padding: 0.6rem 1rem;
-                font-size: 0.75rem;
-            }
-
-            .lang-btn {
-                padding: 0.5rem 0.8rem;
-                font-size: 0.7rem;
-            }
-
-            main {
-                padding: 4rem 2rem;
-            }
-
-            .intro h1 {
-                font-size: 2rem;
-            }
-
-            .project-title {
-                font-size: 2.5rem;
-            }
-
-            .project-item:hover {
-                padding-left: 0;
-            }
-
-            .project-meta {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-
-            .project-description {
-                margin-top: 1rem;
-                padding: 1rem;
-            }
-
-            footer {
-                padding: 2rem;
-                flex-direction: column;
-                gap: 2rem;
-                text-align: center;
-            }
-
-            .footer-links {
-                flex-direction: column;
-                gap: 1rem;
-            }
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <div class="logo">
-            <img src="portfolio/images/logo.jpg" alt="Logo de Kim Maurice"> 
+        {/* INDICATEUR LIVE */}
+        <div className="mb-8 flex items-center gap-3 backdrop-blur-sm px-4 py-2 rounded-full bg-black/40 border border-white/10">
+          <div className={`w-2 h-2 rounded-full ${isLive ? 'bg-green-500 animate-pulse shadow-[0_0_10px_rgba(34,197,94,0.8)]' : 'bg-red-500'}`} />
+          <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-gray-200">
+            {isLive ? 'LIVE ON AIR' : 'OFFLINE'}
+          </span>
         </div>
-        <div class="header-right">
-            <button class="lang-btn" id="langBtn">EN</button>
-            <a href="portfolio/index.html" class="cv-link">
-                <span>💼</span>
-                <span id="cvText">CV Numérique</span>
-            </a>
-        </div>
-    </header>
 
-    <div class="ticker-container">
-        <div class="ticker-wrapper">
-            <span class="ticker-item" id="tickerText">Liens des projets en ligne le weekend du 14 décembre • En ce moment, je monte le tout sur GitHub</span>
-            <span class="ticker-item" id="tickerText2">Liens des projets en ligne le weekend du 14 décembre • En ce moment, je monte le tout sur GitHub</span>
+        {/* LOGO */}
+        <div className="mb-12">
+          <Image 
+            src="/Stillfm logo-white.png"
+            alt="Still FM"
+            width={600}
+            height={200}
+            className="w-[300px] md:w-[600px] h-auto drop-shadow-2xl opacity-90"
+            priority
+          />
         </div>
+
+        <p className="mt-8 text-[10px] uppercase tracking-widest text-gray-400 opacity-70">
+          Montreal Underground Radio
+        </p>
+      </div>
+
+      {/* ✅ PLAYER - CONTROL CENTER COMPLET */}
+      <div className={`fixed bottom-4 left-4 z-50 transition-opacity duration-500 ${watchMode ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+        <LandingAudioPlayer isLive={isLive} />
+      </div>
+
+      {/* BOUTON RETOUR WATCH MODE */}
+      {watchMode && (
+        <button 
+          onClick={handleCloseWatch}
+          className="fixed top-6 right-6 z-[100] border border-white/50 text-white/80 px-6 py-2 text-[10px] uppercase tracking-widest hover:bg-white hover:text-black transition-all cursor-pointer"
+        >
+          Close Stream X
+        </button>
+      )}
     </div>
-
-    <main>
-        <div class="intro">
-            <h1 id="introText">
-                Designer multimédia et technologue créative explorant les intersections entre art, technologie et expérience.
-            </h1>
-            <p id="locationText">
-                Montréal — Projets en cours, apprentissages actifs et explorations des derniers mois. Formation continue, expérimentation quotidienne.
-            </p>
-        </div>
-
-        <div class="projects">
-            
-            <!-- 01. TERRARIUM -->
-            <div class="project-item">
-                <div class="project-number">01</div>
-                <h2 class="project-title" id="project1Title">Terrarium Numérique</h2>
-                <div class="project-meta">
-                    <span id="project1Meta1">Installation Interactive</span>
-                    <span id="project1Meta2">WebGL • Capteurs • IoT</span>
-                    <span id="project1Meta3" class="year-future">En préparation — 2026</span>
-                </div>
-                <div class="project-description" id="project1Desc">
-                    <p id="project1DescText">
-                        Installation immersive combinant terrarium physique et monde VR/AR forestier. L'IA visualise en temps réel la position de l'utilisateur dans ce microcosme contemplatif.
-                    </p>
-                </div>
-            </div>
-
-            <!-- 02. CHOCÔCALENDRIER -->
-            <div class="project-item">
-                <div class="project-number">02</div>
-                <h2 class="project-title" id="project2Title">ChocÔCalendrier</h2>
-                <div class="project-meta">
-                    <span id="project2Meta1" class="badge-complete">✅ Presque terminé</span>
-                    <span id="project2Meta2">Product Design • UX/UI • Experience</span>
-                    <span id="project2Meta3">2025</span>
-                </div>
-                <div class="project-description" id="project2Desc">
-                    <p id="project2DescText">
-                        Calendrier de l'Avent hybride transformant une boîte de chocolats en aventure interactive. Application web gamifiée accompagnant la dégustation quotidienne.
-                    </p>
-                </div>
-            </div>
-
-            <!-- 03. STILL FM -->
-            <div class="project-item">
-                <div class="project-number">03</div>
-                <h2 class="project-title" id="project3Title">Still FM — Radio Underground</h2>
-                <div class="project-meta">
-                    <span id="project3Meta1" class="badge-dev">🚧 En cours</span>
-                    <span id="project3Meta2">Next.js • React • API Mixcloud • Twitch</span>
-                    <span id="project3Meta3" class="year-future">Lancement début 2026</span>
-                </div>
-                <div class="project-description" id="project3Desc">
-                    <p id="project3DescText">
-                        Radio streaming underground avec intégration Twitch et Mixcloud. Player audio personnalisé et interface responsive développée en Next.js.
-                    </p>
-                </div>
-            </div>
-
-            <!-- 04. COMFYUI -->
-            <div class="project-item">
-                <div class="project-number">04</div>
-                <h2 class="project-title" id="project4Title">Workflows ComfyUI Avancés</h2>
-                <div class="project-meta">
-                    <span id="project4Meta1" class="badge-complete">✅ Terminé</span>
-                    <span id="project4Meta2">ComfyUI • Node-Based • Stable Diffusion</span>
-                    <span id="project4Meta3">2025</span>
-                </div>
-                <div class="project-description" id="project4Desc">
-                    <p id="project4DescText">
-                        Workflows d'IA générative avancés avec ComfyUI pour création d'images. Système node-based optimisé pour Stable Diffusion et production visuelle.
-                    </p>
-                </div>
-            </div>
-
-            <!-- 05. PIPELINE IA -->
-            <div class="project-item">
-                <div class="project-number">05</div>
-                <h2 class="project-title" id="project5Title">Pipeline Créatif IA</h2>
-                <div class="project-meta">
-                    <span id="project5Meta1" class="badge-complete">✅ Terminé</span>
-                    <span id="project5Meta2">Python • AI Tools • Documentation</span>
-                    <span id="project5Meta3">2025</span>
-                </div>
-                <div class="project-description" id="project5Desc">
-                    <p id="project5DescText">
-                        Pipeline automatisé de production créative utilisant outils d'IA. Documentation complète des workflows Python pour génération de contenu multimédia.
-                    </p>
-                </div>
-            </div>
-
-            <!-- 06. LANDING ACTIONS -->
-            <div class="project-item">
-                <div class="project-number">06</div>
-                <h2 class="project-title" id="project6Title">Landing Page Actions</h2>
-                <div class="project-meta">
-                    <span id="project6Meta1" class="badge-complete">✅ Terminé</span>
-                    <span id="project6Meta2">React • Next.js • Animation</span>
-                    <span id="project6Meta3">2025</span>
-                </div>
-                <div class="project-description" id="project6Desc">
-                    <p id="project6DescText">
-                        Landing page interactive développée en Next.js avec animations fluides. Design moderne et expérience utilisateur optimisée pour conversion.
-                    </p>
-                </div>
-            </div>
-
-            <!-- 07. LANDING INTERACTIVE -->
-            <div class="project-item">
-                <div class="project-number">07</div>
-                <h2 class="project-title" id="project7Title">Landing Page Interactive</h2>
-                <div class="project-meta">
-                    <span id="project7Meta1" class="badge-complete">✅ Terminé</span>
-                    <span id="project7Meta2">Génératif • Audio-réactif</span>
-                    <span id="project7Meta3">2025</span>
-                </div>
-                <div class="project-description" id="project7Desc">
-                    <p id="project7DescText">
-                        Expérience web générative réagissant au son en temps réel. Visualisations audio-réactives créant une interface immersive et unique.
-                    </p>
-                </div>
-            </div>
-
-            <!-- 08. COURT-MÉTRAGE -->
-            <div class="project-item">
-                <div class="project-number">08</div>
-                <h2 class="project-title" id="project8Title">Court-métrage Expérimental</h2>
-                <div class="project-meta">
-                    <span id="project8Meta1" class="badge-dev">🎬 En cours</span>
-                    <span id="project8Meta2">Vidéo Générative • AI • Festival</span>
-                    <span id="project8Meta3">Projet court-métrage pour festival</span>
-                </div>
-                <div class="project-description" id="project8Desc">
-                    <p id="project8DescText">
-                        Court-métrage expérimental utilisant IA générative pour création visuelle. Projet destiné aux festivals de cinéma d'art et technologie.
-                    </p>
-                </div>
-            </div>
-
-            <!-- 09. SONIC FINGERPRINT -->
-            <div class="project-item">
-                <div class="project-number">09</div>
-                <h2 class="project-title" id="project9Title">Sonic Fingerprint Generator</h2>
-                <div class="project-meta">
-                    <span id="project9Meta1" class="badge-complete">✅ Terminé</span>
-                    <span id="project9Meta2">Canvas • Tone.js • Audio-visuel</span>
-                    <span id="project9Meta3">2025</span>
-                </div>
-                <div class="project-description" id="project9Desc">
-                    <p id="project9DescText">
-                        Générateur de signatures sonores uniques avec visualisation temps réel. Synthèse audio interactive transformant données en paysages sonores personnalisés.
-                    </p>
-                </div>
-            </div>
-
-            <!-- 10. E-LEARNING -->
-            <div class="project-item">
-                <div class="project-number">10</div>
-                <h2 class="project-title" id="project10Title">Plateforme E-Learning</h2>
-                <div class="project-meta">
-                    <span id="project10Meta1" class="badge-complete">✅ Terminé</span>
-                    <span id="project10Meta2">UX/UI • Articulate • Multimedia • LMS</span>
-                    <span id="project10Meta3">Technologia • GardaWorld — 2023-24</span>
-                </div>
-                <div class="project-description" id="project10Desc">
-                    <p id="project10DescText">
-                        Formations interactives pour grandes organisations avec scénarisation pédagogique et gamification. Projets confidentiels · Extraits disponibles en entrevue.
-                    </p>
-                </div>
-            </div>
-
-            <!-- 11. ARCHIVE AI -->
-            <div class="project-item">
-                <div class="project-number">11</div>
-                <h2 class="project-title" id="project11Title">Archive Visuelle AI</h2>
-                <div class="project-meta">
-                    <span id="project11Meta1" class="badge-complete">✅ Actif</span>
-                    <span id="project11Meta2">Stable Diffusion • Curation • Instagram</span>
-                    <span id="project11Meta3">This is Weird AI — 2022–25</span>
-                </div>
-                <div class="project-description" id="project11Desc">
-                    <p id="project11DescText">
-                        Exploration artistique des outils d'IA générative avec DALL-E, Sora et Stable Diffusion. Prompt engineering et workflows créatifs avec ComfyUI.
-                    </p>
-                </div>
-            </div>
-            
-            <!-- 12. CONFIGURATEUR 360 -->
-            <div class="project-item">
-                <div class="project-number">12</div>
-                <h2 class="project-title" id="project12Title">Configurateur Produit Immersif 360°</h2>
-                <div class="project-meta">
-                    <span id="project12Meta1" class="badge-complete">✅ Terminé</span>
-                    <span id="project12Meta2">WebGL • Three.js • IA Générative</span>
-                    <span id="project12Meta3">E-commerce • Publicité immersive — 2025</span>
-                </div>
-                <div class="project-description" id="project12Desc">
-                    <p id="project12DescText">
-                        Configurateur 3D interactif pour visualisation produit e-commerce. Environnements 360° générés par IA avec Three.js pour expérience immersive.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <footer>
-        <p id="footerText">© 2025 Kim Maurice — Designer Multimédia</p>
-        <div class="footer-links">
-            <a href="mailto:kim@kimmaurice.com" id="emailText">Email</a>
-            <a href="https://instagram.com/thisisweirdai" target="_blank">Instagram</a>
-            <a href="https://www.linkedin.com/in/kimmaurice/" target="_blank">LinkedIn</a>
-            <a href="https://github.com/Bertarose/" target="_blank">Github</a>
-        </div>
-    </footer>
-
-    <script>
-        // DESCRIPTIONS BILINGUES (1-2 PHRASES MAX)
-        const descriptions = {
-            fr: {
-                project1: "Installation immersive combinant terrarium physique et monde VR/AR forestier. L'IA visualise en temps réel la position de l'utilisateur dans ce microcosme contemplatif.",
-                project2: "Calendrier de l'Avent hybride transformant une boîte de chocolats en aventure interactive. Application web gamifiée accompagnant la dégustation quotidienne.",
-                project3: "Radio streaming underground avec intégration Twitch et Mixcloud. Player audio personnalisé et interface responsive développée en Next.js.",
-                project4: "Workflows d'IA générative avancés avec ComfyUI pour création d'images. Système node-based optimisé pour Stable Diffusion et production visuelle.",
-                project5: "Pipeline automatisé de production créative utilisant outils d'IA. Documentation complète des workflows Python pour génération de contenu multimédia.",
-                project6: "Landing page interactive développée en Next.js avec animations fluides. Design moderne et expérience utilisateur optimisée pour conversion.",
-                project7: "Expérience web générative réagissant au son en temps réel. Visualisations audio-réactives créant une interface immersive et unique.",
-                project8: "Court-métrage expérimental utilisant IA générative pour création visuelle. Projet destiné aux festivals de cinéma d'art et technologie.",
-                project9: "Générateur de signatures sonores uniques avec visualisation temps réel. Synthèse audio interactive transformant données en paysages sonores personnalisés.",
-                project10: "Formations interactives pour grandes organisations avec scénarisation pédagogique et gamification. Projets confidentiels · Extraits disponibles en entrevue.",
-                project11: "Exploration artistique des outils d'IA générative avec DALL-E, Sora et Stable Diffusion. Prompt engineering et workflows créatifs avec ComfyUI.",
-                project12: "Configurateur 3D interactif pour visualisation produit e-commerce. Environnements 360° générés par IA avec Three.js pour expérience immersive."
-            },
-            en: {
-                project1: "Immersive installation combining physical terrarium and VR/AR forest world. AI visualizes user position in real-time within this contemplative microcosm.",
-                project2: "Hybrid Advent calendar transforming chocolate box into interactive adventure. Gamified web app accompanying daily tasting ritual.",
-                project3: "Underground streaming radio with Twitch and Mixcloud integration. Custom audio player and responsive interface built with Next.js.",
-                project4: "Advanced generative AI workflows with ComfyUI for image creation. Node-based system optimized for Stable Diffusion and visual production.",
-                project5: "Automated creative production pipeline using AI tools. Complete documentation of Python workflows for multimedia content generation.",
-                project6: "Interactive landing page developed in Next.js with fluid animations. Modern design and user experience optimized for conversion.",
-                project7: "Generative web experience reacting to sound in real-time. Audio-reactive visualizations creating immersive and unique interface.",
-                project8: "Experimental short film using generative AI for visual creation. Project intended for art and technology film festivals.",
-                project9: "Unique sonic signature generator with real-time visualization. Interactive audio synthesis transforming data into personalized soundscapes.",
-                project10: "Interactive training for major organizations with educational scripting and gamification. Confidential projects · Excerpts available in interview.",
-                project11: "Artistic exploration of generative AI tools with DALL-E, Sora and Stable Diffusion. Prompt engineering and creative workflows with ComfyUI.",
-                project12: "Interactive 3D configurator for e-commerce product visualization. AI-generated 360° environments with Three.js for immersive experience."
-            }
-        };
-
-        const translations = {
-            fr: {
-                cvText: 'CV Numérique',
-                ticker: 'Liens des projets en ligne le weekend du 14 décembre • En ce moment, je monte le tout sur GitHub',
-                intro: 'Designer multimédia et technologue créative explorant les intersections entre art, technologie et expérience.',
-                location: 'Montréal — Projets en cours, apprentissages actifs et explorations des derniers mois. Formation continue, expérimentation quotidienne.',
-                footer: '© 2025 Kim Maurice — Designer Multimédia',
-                email: 'Email',
-                langBtn: 'EN'
-            },
-            en: {
-                cvText: 'Digital CV',
-                ticker: 'Project links online the weekend of December 14 • Currently setting everything up on GitHub',
-                intro: 'Multimedia designer and creative technologist exploring intersections between art, technology and experience.',
-                location: 'Montreal — Ongoing projects, active learning and recent explorations. Continuous training, daily experimentation.',
-                footer: '© 2025 Kim Maurice — Multimedia Designer',
-                email: 'Email',
-                langBtn: 'FR'
-            }
-        };
-
-        let currentLang = 'fr';
-
-        function updateContent(lang) {
-            const currentTranslations = translations[lang];
-            
-            document.getElementById('langBtn').textContent = currentTranslations.langBtn;
-            document.getElementById('cvText').textContent = currentTranslations.cvText;
-            document.getElementById('tickerText').textContent = currentTranslations.ticker;
-            document.getElementById('tickerText2').textContent = currentTranslations.ticker;
-            document.getElementById('introText').innerHTML = currentTranslations.intro;
-            document.getElementById('locationText').textContent = currentTranslations.location;
-            document.getElementById('footerText').textContent = currentTranslations.footer;
-            document.getElementById('emailText').textContent = currentTranslations.email;
-
-            // Mise à jour des descriptions
-            for (let i = 1; i <= 12; i++) {
-                const descElement = document.getElementById(`project${i}DescText`);
-                if (descElement) {
-                    descElement.textContent = descriptions[lang][`project${i}`];
-                }
-            }
-        }
-        
-        updateContent(currentLang);
-
-        document.getElementById('langBtn').addEventListener('click', () => {
-            currentLang = currentLang === 'fr' ? 'en' : 'fr';
-            updateContent(currentLang);
-        });
-
-        // PARALLAX SCROLL
-        let ticking = false;
-        
-        window.addEventListener('scroll', () => {
-            if (!ticking) {
-                window.requestAnimationFrame(() => {
-                    const scrolled = window.pageYOffset;
-                    const projects = document.querySelectorAll('.project-item');
-                    
-                    projects.forEach((project, index) => {
-                        const speed = 0.05 + (index * 0.01);
-                        const yPos = -(scrolled * speed);
-                        project.style.transform = `translateY(${yPos}px)`;
-                    });
-                    
-                    ticking = false;
-                });
-                
-                ticking = true;
-            }
-        });
-    </script>
-</body>
-</html>
+  );
+}
