@@ -569,20 +569,33 @@ footer, .footer-cta {
         left: 0; 
         right: 0; 
         bottom: 0;
-        background: #0a0a1f; /* Complètement opaque */
+        background: #0a0a1f !important; /* Force le background */
         flex-direction: column;
         justify-content: center;
         align-items: center;
         transform: translateX(100%);
         transition: transform 0.3s ease;
-        z-index: 9999 !important; /* Augmenté drastiquement */
+        z-index: 9999 !important;
         padding: 3rem 2rem;
         gap: 1.5rem;
+        overflow: hidden; /* Empêche tout débordement */
     }
     
     .nav-menu.active { 
         transform: translateX(0); 
-        display: flex !important; /* Force l'affichage */
+        display: flex !important;
+    }
+    
+    /* Ajouter un overlay noir derrière le menu pour masquer complètement le contenu */
+    .nav-menu::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: #0a0a1f;
+        z-index: -1;
     }
     
     .nav-link { 
@@ -654,9 +667,23 @@ footer, .footer-cta {
 }
 
 body.menu-open { 
-    overflow: hidden; 
-    position: fixed;
-    width: 100%;
+    overflow: hidden !important; 
+    position: fixed !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* Masquer le contenu principal quand le menu est ouvert */
+body.menu-open main,
+body.menu-open section:not(.nav),
+body.menu-open .hero,
+body.menu-open footer {
+    visibility: hidden !important;
+}
+
+/* Garder seulement la nav visible */
+body.menu-open .nav {
+    visibility: visible !important;
 }
 
 /* ==========================================================================
