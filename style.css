@@ -575,40 +575,47 @@ footer, .footer-cta {
         align-items: center;
         transform: translateX(100%);
         transition: transform 0.3s ease;
-        z-index: 999; /* Augmenté pour être au-dessus de tout */
-        padding: 2rem;
-        gap: 1rem;
+        z-index: 9999 !important; /* Augmenté drastiquement */
+        padding: 3rem 2rem;
+        gap: 1.5rem;
     }
     
     .nav-menu.active { 
         transform: translateX(0); 
+        display: flex !important; /* Force l'affichage */
     }
     
     .nav-link { 
-        font-size: 1.8rem; 
-        margin: 1rem 0;
-        padding: 1rem 2rem;
+        font-size: 1.5rem !important;
+        margin: 0.5rem 0 !important;
+        padding: 1.2rem 2rem !important;
         color: var(--cream) !important;
-        text-align: center;
-        width: 100%;
-        display: block;
-        border-bottom: 1px solid rgba(255, 254, 249, 0.1);
+        text-align: center !important;
+        width: auto !important;
+        display: block !important;
+        border: 1px solid rgba(255, 254, 249, 0.2) !important;
+        border-radius: 8px !important;
+        background: rgba(255, 254, 249, 0.03) !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.1rem !important;
     }
     
     .nav-link:hover {
-        background: rgba(57, 255, 20, 0.1);
+        background: rgba(57, 255, 20, 0.15) !important;
         color: var(--neon-green) !important;
+        border-color: var(--neon-green) !important;
+        transform: translateX(5px);
     }
     
     /* Burger au-dessus du menu */
     .mobile-menu-toggle {
-        z-index: 1000 !important;
+        z-index: 10000 !important;
         position: relative;
     }
     
     /* Nav sticky au-dessus de tout */
     .nav {
-        z-index: 1001 !important;
+        z-index: 10001 !important;
     }
     
     /* Garder le bouton langue visible sur mobile */
