@@ -6,7 +6,7 @@ const projectDescriptions = {
     fr: {
         projectLatentDesc: "Instrument musical expérimental combinant clavier MIDI, IA générative et visualisation 3D temps réel. Interface hybride analogique/numérique pour performance live.",
         project3DescText: "Radio streaming underground avec intégration Twitch et Mixcloud. Player audio personnalisé et interface responsive développée en Next.js.",
-        projectFilmDesc: "Designer graphique sur 15+ productions incluant Bad Blood et Unité 9. Création de props numériques, interfaces de futur et animations.",
+        projectFilmDesc: "Designer graphique sur 15+ productions incluant Bad Blood et Unité 9. Création de props numériques, interfaces et animations. Impression d'affiches, tissus, retouche photo et imprimés de toute sorte. Travail sous pression.",
         project2DescText: "Calendrier de l'Avent hybride transformant une boîte de chocolats en aventure interactive. Application web gamifiée.",
         project10DescText: "Formations interactives pour grandes organisations. Scénarisation pédagogique et gamification. Projets confidentiels.",
         project11DescText: "Exploration artistique des outils d'IA générative. Prompt engineering et workflows créatifs complexes.",
@@ -24,7 +24,7 @@ const projectDescriptions = {
     en: {
         projectLatentDesc: "Experimental musical instrument combining MIDI keyboard, generative AI and real-time 3D visualization. Hybrid analog/digital interface.",
         project3DescText: "Underground streaming radio with Twitch and Mixcloud integration. Custom audio player and responsive interface built with Next.js.",
-        projectFilmDesc: "Graphic designer on 15+ productions including Bad Blood and Unité 9. Creation of digital props, futuristic interfaces and animations.",
+        projectFilmDesc: "Graphic designer on 15+ productions including Bad Blood and Unité 9. Creation of digital props, interfaces and animations. Printing posters, fabrics, photo retouching and all kinds of printed materials. Working under pressure.",
         project2DescText: "Hybrid Advent calendar transforming a chocolate box into an interactive adventure. Gamified web app.",
         project10DescText: "Interactive training for major organizations. Instructional design and gamification. Confidential projects.",
         project11DescText: "Artistic exploration of generative AI tools. Prompt engineering and complex creative workflows.",
