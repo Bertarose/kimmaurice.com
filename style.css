@@ -96,16 +96,12 @@ a {
 }
 
 @keyframes float-stars {
-    0% { 
-        background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%; 
-    }
-    100% { 
-        background-position: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%; 
-    }
+    0% { background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%; }
+    100% { background-position: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%; }
 }
 
 /* ==========================================================================
-   3. HEADER & NAVIGATION (Unifié Landing + CV)
+   3. HEADER & NAVIGATION
    ========================================================================== */
 header, .nav {
     padding: 2rem 4rem;
@@ -151,7 +147,7 @@ header, .nav {
 
 .logo img, .logo-img { width: 100%; height: 100%; object-fit: cover; }
 
-/* Menu Desktop (Page CV) */
+/* Menu Desktop */
 .nav-menu {
     display: flex;
     gap: 2rem;
@@ -169,7 +165,7 @@ header, .nav {
 
 .nav-link:hover { color: var(--neon-green); }
 
-/* Contrôles à droite (Langue + Bouton CV + Burger) */
+/* Contrôles à droite */
 .header-right, .nav-controls {
     display: flex;
     align-items: center;
@@ -217,7 +213,7 @@ header, .nav {
     transform: translateY(-2px);
 }
 
-/* Burger Menu Mobile */
+/* Burger Menu Mobile (Invisible sur Desktop) */
 .mobile-menu-toggle {
     display: none;
     background: none;
@@ -225,27 +221,9 @@ header, .nav {
     flex-direction: column;
     gap: 5px;
     cursor: pointer;
-    z-index: 1000;
+    z-index: 2000; /* Toujours au-dessus du menu */
     padding: 10px;
     position: relative;
-}
-
-.mobile-menu-toggle span {
-    width: 25px;
-    height: 2px;
-    background: var(--cream);
-    transition: 0.3s;
-    display: block;
-}
-
-.mobile-menu-toggle.active span:nth-child(1) { 
-    transform: rotate(45deg) translate(5px, 5px); 
-}
-.mobile-menu-toggle.active span:nth-child(2) { 
-    opacity: 0; 
-}
-.mobile-menu-toggle.active span:nth-child(3) { 
-    transform: rotate(-45deg) translate(5px, -5px); 
 }
 
 /* ==========================================================================
@@ -282,7 +260,7 @@ h1, h2, h3 { font-weight: 300; }
 
 .section-header h2 { font-size: 2.5rem; color: var(--cream); }
 
-/* HERO (Intro) - CORRIGÉ POUR L'ALIGNEMENT */
+/* HERO (Intro) */
 .hero {
     min-height: 60vh;
     display: flex;
@@ -407,7 +385,7 @@ h1, h2, h3 { font-weight: 300; }
 .badge-dev { color: #ffc107; border: 1px solid #ffc107; padding: 2px 8px; border-radius: 4px; }
 .year-future { color: var(--neon-green); font-weight: 700; }
 
-/* Description (Visible au survol Desktop / Toujours visible Mobile) */
+/* Description */
 .project-description {
     background: var(--glass);
     color: var(--cream);
@@ -509,7 +487,7 @@ h1, h2, h3 { font-weight: 300; }
 }
 .timeline-list strong { color: var(--cream); font-weight: normal; border-bottom: 1px solid rgba(57, 255, 20, 0.3); }
 
-/* Bridge (Lien CV dans Landing) */
+/* Bridge */
 .cv-bridge {
     margin: 8rem 0;
     padding: 4rem;
@@ -549,158 +527,138 @@ footer, .footer-cta {
 .footer-copyright { font-size: 0.8rem; color: rgba(255,255,255,0.3); margin-top: 2rem; }
 
 /* ==========================================================================
-   8. RESPONSIVE (Mobile & Tablette)
+   8. RESPONSIVE (Mobile & Tablette) - CORRIGÉ
    ========================================================================== */
 @media (max-width: 768px) {
-    header, .nav { padding: 1.5rem; }
-    main { padding: 4rem 1.5rem; }
     
+    /* --- Ajustements Généraux --- */
+    header, .nav { padding: 1rem 1.5rem; }
+    main { padding: 4rem 1.5rem; }
     .intro h1 { font-size: 2rem; }
     .project-title { font-size: 2.2rem; }
-    
-    .mobile-menu-toggle { 
-        display: flex; 
+
+    /* Important pour que le menu puisse être fixé */
+    .nav-container { position: static; }
+
+    /* --- Le Bouton Burger --- */
+    .mobile-menu-toggle {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 30px;
+        height: 20px;
+        z-index: 2000; /* Le plus haut */
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0;
     }
     
-    /* Menu Mobile Fullscreen Dark - FIXÉ */
+    .mobile-menu-toggle span {
+        width: 100%;
+        height: 2px;
+        background-color: var(--cream);
+        transition: all 0.3s ease;
+        display: block;
+    }
+
+    /* Animation Croix */
+    .mobile-menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
+    .mobile-menu-toggle.active span:nth-child(2) { opacity: 0; }
+    .mobile-menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
+
+    /* --- Le Menu Mobile (Overlay) --- */
     .nav-menu {
         position: fixed;
-        top: 0; 
-        left: 0; 
-        right: 0; 
-        bottom: 0;
-        background: #0a0a1f !important; /* Force le background */
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: var(--bg); /* Fond opaque */
+        
+        display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        gap: 2rem;
+        
+        /* Caché par défaut */
         transform: translateX(100%);
-        transition: transform 0.3s ease;
-        z-index: 9999 !important;
-        padding: 4rem 2rem 4rem 2rem !important;
-        gap: 0.8rem !important; /* Réduit le gap pour tout voir */
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 1500; /* Entre bouton et contenu */
+        padding-top: 4rem;
+        padding-bottom: 2rem;
+        overflow-y: auto;
+    }
+
+    /* État Ouvert */
+    .nav-menu.active {
+        transform: translateX(0);
+    }
+
+    /* --- Liens Menu Mobile --- */
+    .nav-link {
+        font-size: 1.5rem;
+        display: block;
+        width: auto;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .nav-menu.active .nav-link {
+        opacity: 1;
+        transform: translateY(0);
+        transition-delay: 0.2s;
+    }
+    
+    .nav-link:hover {
+        transform: scale(1.1);
+    }
+
+    /* --- Body Lock (Géré par JS) --- */
+    body.menu-open {
         overflow: hidden;
-        overflow-y: auto; /* Permet le scroll si nécessaire */
+    }
+
+    /* --- Autres éléments --- */
+    .lang-switch { 
+        display: block; 
+        position: absolute; 
+        top: 1.5rem; 
+        right: 4.5rem; /* Juste à gauche du burger */
+        z-index: 2000;
     }
     
-    .nav-menu.active { 
-        transform: translateX(0); 
-        display: flex !important;
-    }
-    
-    /* Ajouter un overlay noir derrière le menu pour masquer complètement le contenu */
-    .nav-menu::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: #0a0a1f;
-        z-index: -1;
-    }
-    
-    .nav-link { 
-        font-size: 1.2rem !important;
-        margin: 0.8rem 0 !important;
-        padding: 1.2rem 2rem !important;
-        color: var(--cream) !important;
-        text-align: center !important;
-        width: 280px !important;
-        max-width: 90vw !important;
-        display: block !important;
-        border: 2px solid rgba(57, 255, 20, 0.3) !important;
-        border-radius: 12px !important;
-        background: rgba(22, 33, 62, 0.4) !important;
-        text-transform: uppercase !important;
-        letter-spacing: 0.1rem !important;
-        text-decoration: none !important;
-        transition: all 0.3s ease !important;
-    }
-    
-    .nav-link:hover, .nav-link:active {
-        background: rgba(57, 255, 20, 0.15) !important;
-        color: var(--neon-green) !important;
-        border-color: var(--neon-green) !important;
-        transform: translateX(5px) !important;
-    }
-    
-    /* Burger au-dessus du menu */
-    .mobile-menu-toggle {
-        z-index: 10000 !important;
-        position: relative;
-    }
-    
-    /* Nav sticky au-dessus de tout */
-    .nav {
-        z-index: 10001 !important;
-    }
-    
-    /* Garder le bouton langue visible sur mobile */
-    .lang-switch {
-        display: inline-block !important;
-    }
-    
-    /* Adaptations Mobile */
+    /* Layout Mobile */
     .timeline-item { grid-template-columns: 1fr; gap: 0.5rem; }
     .timeline-date { margin-bottom: 0.5rem; }
     .project-meta { flex-direction: column; gap: 0.5rem; }
-    
-    /* Afficher description projet sans survol sur mobile */
+    .footer-links { flex-direction: column; gap: 1rem; }
+    .hero-cta, .cta-group { flex-direction: column; width: 100%; }
+    .cta-primary, .cta-secondary, .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
+
+    /* Description projet toujours visible */
     .project-description { 
         opacity: 1; 
         max-height: none; 
         margin-top: 1rem; 
         padding: 1rem; 
-        background: transparent; 
+        background: rgba(255, 255, 255, 0.05); 
         border-left: 2px solid var(--neon-green); 
-        padding-left: 1rem; 
     }
     .project-item:hover { padding-left: 0; }
-    
-    .footer-links { flex-direction: column; gap: 1rem; }
-    
-    .hero-cta, .cta-group { 
-        flex-direction: column; 
-        width: 100%;
-    }
-    
-    .cta-primary, .cta-secondary, .btn-primary, .btn-secondary {
-        width: 100%;
-        justify-content: center;
-    }
-}
-
-body.menu-open { 
-    overflow: hidden !important; 
-    position: fixed !important;
-    width: 100% !important;
-    height: 100% !important;
-}
-
-/* Masquer le contenu principal quand le menu est ouvert */
-body.menu-open main,
-body.menu-open section:not(.nav),
-body.menu-open .hero,
-body.menu-open footer {
-    visibility: hidden !important;
-}
-
-/* Garder seulement la nav visible */
-body.menu-open .nav {
-    visibility: visible !important;
 }
 
 /* ==========================================================================
-   9. OPTION "LIGHT MODE" (Pour la page CV/Parcours)
+   9. OPTION "LIGHT MODE"
    ========================================================================== */
 body.light-mode {
     background: #f4f4f4;
     color: #1a1a2e;
 }
 
-body.light-mode .starfield {
-    display: none; /* Pas de starfield en light mode */
-}
+body.light-mode .starfield { display: none; }
 
 body.light-mode header, 
 body.light-mode .nav {
@@ -712,6 +670,8 @@ body.light-mode .nav-link { color: #555; }
 body.light-mode .nav-link:hover { color: #16213e; }
 body.light-mode .logo, body.light-mode .nav-logo { filter: invert(1); }
 body.light-mode .mobile-menu-toggle span { background: #1a1a2e; }
+
+/* Important : Fond du menu mobile en Light Mode */
 body.light-mode .nav-menu { background: #f4f4f4; }
 
 body.light-mode h1, body.light-mode h2, body.light-mode h3, body.light-mode strong { color: #16213e; }
