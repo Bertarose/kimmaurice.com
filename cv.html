@@ -10,8 +10,11 @@
     
     <link rel="icon" type="image/x-icon" href="img/favicon.ico">
     
+    <link rel="preconnect" href="https://www.googletagmanager.com">
     <link rel="stylesheet" href="style.css">
     
+    <script defer src="script.js"></script>
+
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-WYM83ME5LK"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -30,7 +33,7 @@
         "email": "info@kimmaurice.com"
     }
     </script>
-</head>   
+</head>    
 
 <body class="lang-fr">
 
@@ -53,7 +56,8 @@
             </div>
             
             <div class="nav-controls">
-                <button id="langSwitch" class="lang-switch" aria-label="Changer de langue">EN</button>
+                <button id="langBtn" class="lang-switch" aria-label="Changer de langue">EN</button>
+                
                 <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Ouvrir le menu" aria-expanded="false">
                     <span></span>
                     <span></span>
@@ -64,7 +68,6 @@
     </nav>
 
     <section class="hero" id="home" style="min-height: 60vh;">
-        <div class="starfield"></div>
         <div class="hero-content">
             <h1 class="hero-title">
                 <span data-fr="Curriculum Vitae" data-en="Curriculum Vitae">Curriculum Vitae</span>
@@ -88,7 +91,6 @@
             <div class="section-header">
                 <h2 data-fr="Expertises" data-en="Expertise">Expertises</h2>
             </div>
-
             <div class="expertise-grid">
                 <div class="expertise-card">
                     <div class="expertise-number">01</div>
@@ -96,201 +98,35 @@
                     <ul>
                         <li data-fr="Recherche utilisateur" data-en="User research">Recherche utilisateur</li>
                         <li data-fr="Wireframing & prototypage" data-en="Wireframing & prototyping">Wireframing & prototypage</li>
-                        <li data-fr="Design systems" data-en="Design systems">Design systems</li>
-                        <li data-fr="Tests d'utilisabilité" data-en="Usability testing">Tests d'utilisabilité</li>
                     </ul>
                 </div>
-
-                <div class="expertise-card">
-                    <div class="expertise-number">02</div>
-                    <h3 data-fr="E-learning" data-en="E-learning">E-learning</h3>
-                    <ul>
-                        <li data-fr="Scénarisation pédagogique" data-en="Educational scripting">Scénarisation pédagogique</li>
-                        <li data-fr="Storyline, Rise, Captivate" data-en="Storyline, Rise, Captivate">Storyline, Rise, Captivate</li>
-                        <li data-fr="Gamification" data-en="Gamification">Gamification</li>
-                        <li data-fr="SCORM & LMS" data-en="SCORM & LMS">SCORM & LMS</li>
-                    </ul>
                 </div>
-
-                <div class="expertise-card">
-                    <div class="expertise-number">03</div>
-                    <h3 data-fr="Développement web" data-en="Web development">Développement web</h3>
-                    <ul>
-                        <li data-fr="HTML, CSS, JavaScript" data-en="HTML, CSS, JavaScript">HTML, CSS, JavaScript</li>
-                        <li data-fr="React, Next.js, Three.js" data-en="React, Next.js, Three.js">React, Next.js, Three.js</li>
-                        <li data-fr="Responsive design" data-en="Responsive design">Responsive design</li>
-                        <li data-fr="API & bases de données" data-en="API & databases">API & bases de données</li>
-                    </ul>
-                </div>
-
-                <div class="expertise-card">
-                    <div class="expertise-number">04</div>
-                    <h3 data-fr="Production audiovisuelle" data-en="Audiovisual production">Production audiovisuelle</h3>
-                    <ul>
-                        <li data-fr="Montage vidéo (Premiere, Final Cut)" data-en="Video editing (Premiere, Final Cut)">Montage vidéo (Premiere, Final Cut)</li>
-                        <li data-fr="Motion design (After Effects)" data-en="Motion design (After Effects)">Motion design (After Effects)</li>
-                        <li data-fr="Direction artistique" data-en="Art direction">Direction artistique</li>
-                        <li data-fr="Production pour film/TV" data-en="Film/TV production">Production pour film/TV</li>
-                    </ul>
-                </div>
-
-                <div class="expertise-card">
-                    <div class="expertise-number">05</div>
-                    <h3 data-fr="Design sonore" data-en="Sound design">Design sonore</h3>
-                    <ul>
-                        <li data-fr="Composition musicale" data-en="Musical composition">Composition musicale</li>
-                        <li data-fr="Audio interactif (Max/MSP, Pure Data)" data-en="Interactive audio (Max/MSP, Pure Data)">Audio interactif (Max/MSP, Pure Data)</li>
-                        <li data-fr="Production (Ableton, Logic Pro)" data-en="Production (Ableton, Logic Pro)">Production (Ableton, Logic Pro)</li>
-                        <li data-fr="Spatialisation audio" data-en="Audio spatialization">Spatialisation audio</li>
-                    </ul>
-                </div>
-
-                <div class="expertise-card">
-                    <div class="expertise-number">06</div>
-                    <h3 data-fr="Technologies émergentes" data-en="Emerging technologies">Technologies émergentes</h3>
-                    <ul>
-                        <li data-fr="IA générative (GPT, MusicGen)" data-en="Generative AI (GPT, MusicGen)">IA générative (GPT, MusicGen)</li>
-                        <li data-fr="Machine learning audio/image" data-en="Audio/image machine learning">Machine learning audio/image</li>
-                        <li data-fr="Réalité augmentée" data-en="Augmented reality">Réalité augmentée</li>
-                        <li data-fr="Creative coding" data-en="Creative coding">Creative coding</li>
-                    </ul>
-                </div>
-            </div>
         </div>
     </section>
 
     <section class="experience" id="experience">
-        <div class="container">
+         <div class="container">
             <div class="section-header">
                 <h2 data-fr="Parcours" data-en="Experience">Parcours</h2>
             </div>
-
             <div class="experience-timeline">
-                <div class="timeline-section-header">
-                    <h3 data-fr="Expérience professionnelle" data-en="Professional Experience">Expérience professionnelle</h3>
-                </div>
-
                 <div class="timeline-item">
                     <div class="timeline-date">2023 - 2024</div>
                     <div class="timeline-content">
                         <h3>Designer Multimédia Senior</h3>
                         <h4>@ Technologia</h4>
                         <ul class="timeline-list">
-                            <li data-fr="Direction UX/UI pour modules e-learning interactifs (Storyline, Rise)" data-en="UX/UI direction for interactive e-learning modules">Direction UX/UI pour <strong>modules e-learning interactifs</strong> (Storyline, Rise)</li>
-                            <li data-fr="Innovation IA pour la production de contenu immersif (podcasts)" data-en="AI innovation for immersive content production"><strong>Innovation IA</strong> pour la production de contenu immersif (podcasts)</li>
-                            <li data-fr="Production audiovisuelle, design d'interfaces et R&D" data-en="Audiovisual production, interface design and R&D"><strong>Production audiovisuelle</strong>, design d'interfaces et R&D</li>
+                            <li data-fr="Direction UX/UI..." data-en="UX/UI direction...">Direction UX/UI...</li>
                         </ul>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-date">2020 - 2022</div>
-                    <div class="timeline-content">
-                        <h3>Designer Visuel Senior</h3>
-                        <h4>@ Campus GardaWorld</h4>
-                        <ul class="timeline-list">
-                            <li data-fr="Création de contenus interactifs pour formation corporative à grande échelle" data-en="Creation of interactive content for large-scale corporate training">Création de <strong>contenus interactifs</strong> pour formation corporative à grande échelle</li>
-                            <li data-fr="Direction artistique vidéo et design d'interfaces, incluant des tâches de webmestre" data-en="Video art direction and interface design"><strong>Direction artistique</strong> vidéo et design d'interfaces, incluant des tâches de <strong>webmestre</strong></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-date">2005 - 2020</div>
-                    <div class="timeline-content">
-                        <h3 data-fr="Années Multidisciplinaires" data-en="Multidisciplinary Years">Années Multidisciplinaires</h3>
-                        <h4 data-fr="Mandats variés" data-en="Various contracts">Mandats variés</h4>
-                        <ul class="timeline-list">
-                            <li data-fr="Design web et expériences interactives (NURUN, Loto-Québec)" data-en="Web design (NURUN, Loto-Québec)"><strong>Design web</strong> (NURUN, Loto-Québec)</li>
-                            <li data-fr="Design graphique pour film et télévision (15+ productions)" data-en="Graphic design for film/TV (15+ productions)"><strong>Design graphique pour film et télévision</strong> (15+ productions)</li>
-                            <li data-fr="Motion design, animation et montage vidéo" data-en="Motion design, animation and video editing"><strong>Motion design</strong>, animation et montage vidéo</li>
-                            <li data-fr="Production audio et design sonore pour projets créatifs" data-en="Audio production and sound design"><strong>Production audio</strong> et design sonore pour projets créatifs</li>
-                            <li data-fr="Projets numériques internationaux (Thaïlande, Cambodge, Corée)" data-en="International digital projects (Thailand, Cambodia, Korea)"><strong>Projets numériques internationaux</strong> (Thaïlande, Cambodge, Corée)</li>
-                            <li data-fr="Développement front-end (HTML, CSS, JavaScript)" data-en="Front-end development (HTML, CSS, JavaScript)"><strong>Développement front-end</strong> (HTML, CSS, JavaScript)</li>
-                            <li data-fr="Conseil en technologies créatives (OXFAM)" data-en="Creative technology consulting (OXFAM)"><strong>Conseil en technologies créatives</strong> (OXFAM)</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="timeline-section-header formation-header">
-                    <h3>Formation</h3>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-date">2005</div>
-                    <div class="timeline-content">
-                        <h3 data-fr="DEC Technique en Multimédia" data-en="Technical Diploma in Multimedia">DEC Technique en Multimédia</h3>
-                        <p data-fr="Spécialisation en design interactif, développement web et production multimédia." data-en="Specialization in interactive design, web development and multimedia production.">Spécialisation en <strong>design interactif</strong>, développement web et <strong>production multimédia</strong>.</p>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-date">2003</div>
-                    <div class="timeline-content">
-                        <h3 data-fr="DEC en Informatique de Gestion" data-en="Diploma in Management IT">DEC en Informatique de Gestion</h3>
-                        <p data-fr="Base solide en conception, programmation, et gestion de systèmes informatiques." data-en="Strong foundation in programming and IT systems.">Base solide en conception, programmation, et gestion de <strong>systèmes informatiques</strong>.</p>
                     </div>
                 </div>
             </div>
-        </div>
+         </div>
     </section>
-
+    
     <section class="explorations" id="explorations">
-        <div class="container">
-            <div class="section-header">
-                <h2 data-fr="Explorations personnelles" data-en="Personal explorations">Explorations personnelles</h2>
-            </div>
-
-            <div class="explorations-grid">
-                <div class="exploration-card">
-                    <div class="exploration-icon">🤖</div>
-                    <h3 data-fr="Intelligence Artificielle" data-en="Artificial Intelligence">Intelligence Artificielle</h3>
-                    <p data-fr="Exploration des outils d'IA générative pour créer des expériences interactives et des prototypes rapides." data-en="Exploring generative AI tools to create interactive experiences and rapid prototypes.">
-                        Exploration des outils d'IA générative pour créer des expériences interactives et des prototypes rapides.
-                    </p>
-                </div>
-
-                <div class="exploration-card">
-                    <div class="exploration-icon">🎵</div>
-                    <h3 data-fr="Musique Générative" data-en="Generative Music">Musique Générative</h3>
-                    <p data-fr="Création d'instruments virtuels et systèmes musicaux génératifs avec Max/MSP et machine learning." data-en="Creating virtual instruments and generative musical systems with Max/MSP and machine learning.">
-                        Création d'instruments virtuels et systèmes musicaux génératifs avec Max/MSP et machine learning.
-                    </p>
-                </div>
-
-                <div class="exploration-card">
-                    <div class="exploration-icon">📻</div>
-                    <h3 data-fr="Radio Underground" data-en="Underground Radio">Radio Underground</h3>
-                    <p data-fr="Opération de Still FM, station de radio underground avec développement web et curation musicale." data-en="Operating Still FM, underground radio station with web development and music curation.">
-                        Opération de Still FM, station de radio underground avec développement web et curation musicale.
-                    </p>
-                </div>
-
-                <div class="exploration-card">
-                    <div class="exploration-icon">🔊</div>
-                    <h3 data-fr="Design Sonore Spatial" data-en="Spatial Sound Design">Design Sonore Spatial</h3>
-                    <p data-fr="Expérimentation avec audio 3D et ambisonics pour créer des environnements sonores spatialisés." data-en="Experimenting with 3D audio and ambisonics to create spatialized sound environments.">
-                        Expérimentation avec audio 3D et ambisonics pour créer des environnements sonores spatialisés.
-                    </p>
-                </div>
-
-                <div class="exploration-card">
-                    <div class="exploration-icon">🥽</div>
-                    <h3 data-fr="Réalité Augmentée" data-en="Augmented Reality">Réalité Augmentée</h3>
-                    <p data-fr="Développement d'expériences AR pour l'éducation et l'art, fusionnant monde physique et digital." data-en="Developing AR experiences for education and art, merging physical and digital worlds.">
-                        Développement d'expériences AR pour l'éducation et l'art, fusionnant monde physique et digital.
-                    </p>
-                </div>
-
-                <div class="exploration-card">
-                    <div class="exploration-icon">💻</div>
-                    <h3 data-fr="Creative Coding" data-en="Creative Coding">Creative Coding</h3>
-                    <p data-fr="Prototypage rapide et expérimentations avec Three.js, p5.js et outils de programmation créative." data-en="Rapid prototyping and experimentation with Three.js, p5.js and creative programming tools.">
-                        Prototypage rapide et expérimentations avec Three.js, p5.js et outils de programmation créative.
-                    </p>
-                </div>
-            </div>
-        </div>
+         <div class="container">
+             </div>
     </section>
 
     <section class="footer-cta" id="contact">
@@ -320,7 +156,5 @@
             </div>
         </div>
     </section>
-
-    <script src="script.js"></script>
 </body>
 </html>
