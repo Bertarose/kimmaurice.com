@@ -343,45 +343,6 @@
             </div>
         </div>
     </section>
-
-  <script>
-  /* GESTION LANGUE */
-  const langSwitchBtn = document.getElementById('langSwitch');
-  let currentLang = 'fr';
-
-  langSwitchBtn.addEventListener('click', () => {
-    const newLang = currentLang === 'fr' ? 'en' : 'fr';
-    document.body.classList.remove(`lang-${currentLang}`);
-    document.body.classList.add(`lang-${newLang}`);
-    document.documentElement.lang = newLang; // Good for SEO
-    currentLang = newLang;
-
-    document.querySelectorAll('[data-fr]').forEach(el => {
-      el.textContent = el.getAttribute(`data-${currentLang}`);
-    });
-
-    langSwitchBtn.textContent = currentLang === 'fr' ? 'EN' : 'FR';
-  });
-
-  /* GESTION MENU MOBILE */
-  const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-  const navMenu = document.querySelector('.nav-menu');
-
-  mobileMenuToggle.addEventListener('click', () => {
-    mobileMenuToggle.classList.toggle('active');
-    navMenu.classList.toggle('active');
-    document.body.classList.toggle('menu-open');
-  });
-
-  document.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', () => {
-      setTimeout(() => {
-        mobileMenuToggle.classList.remove('active');
-        navMenu.classList.remove('active');
-        document.body.classList.remove('menu-open');
-      }, 100); 
-    });
-  });
-</script>
+<script src="../script.js"></script>
 </body>
 </html>
