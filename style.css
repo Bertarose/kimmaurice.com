@@ -569,8 +569,7 @@ footer, .footer-cta {
         left: 0; 
         right: 0; 
         bottom: 0;
-        background: rgba(10, 10, 31, 0.98);
-        backdrop-filter: blur(20px);
+        background: #0a0a1f; /* Complètement opaque */
         flex-direction: column;
         justify-content: center;
         align-items: center;
