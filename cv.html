@@ -35,6 +35,39 @@
     </script>
 
     <style>
+        /* Optimisations de performance */
+        * {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Réduire la complexité du starfield pour de meilleures performances */
+        .starfield {
+            opacity: 0.4 !important;
+        }
+
+        .starfield::before {
+            animation-duration: 200s !important;
+        }
+
+        .starfield::after {
+            animation-duration: 250s !important;
+        }
+
+        /* Optimiser les transitions */
+        .expertise-card,
+        .timeline-item,
+        .exploration-card {
+            transition: all 0.3s ease !important;
+            will-change: transform;
+        }
+
+        /* Optimiser les cartes au hover */
+        .expertise-card:hover,
+        .exploration-card:hover {
+            transform: translateY(-3px) !important;
+        }
+
         /* Styles spécifiques à la page CV */
         .container {
             max-width: 1200px;
@@ -482,7 +515,7 @@
                         <li data-fr="After Effects & Premiere" data-en="After Effects & Premiere">After Effects & Premiere</li>
                         <li data-fr="Motion design & animation" data-en="Motion design & animation">Motion design & animation</li>
                         <li data-fr="Design sonore & audio" data-en="Sound design & audio">Design sonore & audio</li>
-                        <li data-fr="Production cinéma/TV" data-en="Film/TV production">Production cinéma/TV</li>
+                        <li data-fr="Production cinéma/TV & design graphique" data-en="Film/TV production & graphic design">Production cinéma/TV & design graphique</li>
                     </ul>
                 </div>
 
@@ -552,7 +585,8 @@
                         <h4 data-fr="@ Productions Cinéma & TV" data-en="@ Film & TV Productions">@ Productions Cinéma & TV</h4>
                         <ul class="timeline-list">
                             <li data-fr="Design graphique pour 15+ productions (Bad Blood, Unité 9, etc.)" data-en="Graphic design for 15+ productions (Bad Blood, Unité 9, etc.)">Design graphique pour 15+ productions (Bad Blood, Unité 9, etc.)</li>
-                            <li data-fr="Création d'interfaces futuristes et props numériques" data-en="Creation of futuristic interfaces and digital props">Création d'interfaces futuristes et props numériques</li>
+                            <li data-fr="Création d'interfaces, props numériques et design graphique" data-en="Creation of interfaces, digital props and graphic design">Création d'interfaces, props numériques et design graphique</li>
+                            <li data-fr="Impression d'affiches, tissus, retouche photo et création de faux documents" data-en="Printing posters, fabrics, photo retouching and fake documents creation">Impression d'affiches, tissus, retouche photo et création de faux documents</li>
                             <li data-fr="Motion design et effets visuels avec After Effects" data-en="Motion design and visual effects with After Effects">Motion design et effets visuels avec After Effects</li>
                             <li data-fr="Collaboration avec réalisateurs et directeurs artistiques" data-en="Collaboration with directors and art directors">Collaboration avec réalisateurs et directeurs artistiques</li>
                         </ul>
