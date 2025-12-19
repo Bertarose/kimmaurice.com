@@ -50,11 +50,11 @@ a {
    2. ANIMATION STARFIELD (Pixels flottants en arrière-plan)
    ========================================================================== */
 .starfield {
-    position: fixed;
+    position: absolute; /* Changé de fixed à absolute pour rester dans le hero si besoin */
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
+    width: 100%;
+    height: 100%;
     pointer-events: none;
     z-index: -1; /* Derrière tout le contenu */
     background-image: 
@@ -220,6 +220,7 @@ main {
 .container {
     max-width: 1200px;
     margin: 0 auto;
+    padding: 0 20px;
 }
 
 section { padding: 6rem 0; }
@@ -235,43 +236,40 @@ h1, h2, h3 { font-weight: 300; }
 
 .section-header h2 { font-size: 2.5rem; color: var(--cream); }
 
-/* TICKER BANNER (Bandeau défilant) */
-.ticker-container {
-    background: rgba(255, 254, 249, 0.03);
-    border-bottom: 1px solid var(--border-light);
-    overflow: hidden;
-    padding: 1rem 0;
-}
-.ticker-wrapper { display: flex; animation: scroll 30s linear infinite; }
-.ticker-item { display: flex; align-items: center; white-space: nowrap; padding: 0 4rem; font-size: 0.9rem; color: var(--grey); }
-.ticker-item::before { content: '→'; margin-right: 1rem; color: var(--neon-green); }
-@keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-
-/* HERO (Intro) */
+/* HERO (Intro) - CORRIGÉ POUR L'ALIGNEMENT */
 .hero {
     min-height: 60vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: center; /* Centre verticalement */
+    align-items: center;     /* Centre horizontalement */
+    text-align: center;      /* Centre le texte */
     padding: 4rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
 }
 
 .intro h1, .hero-title {
     font-size: 3rem;
     line-height: 1.3;
     color: var(--cream);
-    max-width: 900px;
 }
 
 .intro p, .hero-subtitle {
     font-size: 1.1rem;
     color: var(--grey);
-    margin-top: 2rem;
-    max-width: 600px;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
 }
 
 /* Call to Actions (Boutons) */
-.hero-cta, .cta-group { margin-top: 3rem; display: flex; gap: 1.5rem; flex-wrap: wrap; align-items: center; }
+.hero-cta, .cta-group { margin-top: 2rem; display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center; align-items: center; }
 
 .cta-primary, .btn-primary {
     background: linear-gradient(135deg, var(--neon-green), #2ecc71);
