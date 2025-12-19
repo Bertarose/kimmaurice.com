@@ -76,7 +76,8 @@ function switchLanguage() {
 function applyLanguage(lang) {
     // A. Mettre à jour l'attribut HTML (Bon pour le SEO et le CSS)
     document.documentElement.lang = lang;
-    document.body.className = `lang-${lang}`; // Utile pour certains styles CSS spécifiques
+    document.body.classList.remove('lang-fr', 'lang-en');
+    document.body.classList.add(`lang-${lang}`);
 
     // B. Mettre à jour le bouton (On cherche les deux IDs possibles selon la page)
     const langBtn = document.getElementById('langBtn') || document.getElementById('langSwitch');
@@ -87,25 +88,21 @@ function applyLanguage(lang) {
     // C. Traduction via attributs data-fr / data-en (Méthode générique)
     const translatableElements = document.querySelectorAll('[data-fr][data-en]');
     translatableElements.forEach(el => {
-        // On vérifie si l'attribut existe pour la langue cible
         const text = el.getAttribute(`data-${lang}`);
         if (text) {
             if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
                 el.placeholder = text;
             } else {
-                el.innerHTML = text; // innerHTML permet de garder les balises <strong>
+                el.innerHTML = text;
             }
         }
     });
 
     // D. Traduction via IDs spécifiques (Méthode Landing Page)
-    // On vérifie si l'objet de traduction existe pour cette langue
     const content = projectDescriptions[lang];
     if (content) {
-        // On boucle sur chaque clé (ex: 'intro', 'project1DescText')
         for (const [key, value] of Object.entries(content)) {
-            const element = document.getElementById(key); // ex: document.getElementById('introText')
-            // Cas particulier pour introText et intro (mapping ID vs Clé)
+            const element = document.getElementById(key);
             if (key === 'intro' && document.getElementById('introText')) {
                 document.getElementById('introText').innerHTML = value;
             } 
@@ -126,12 +123,18 @@ function applyLanguage(lang) {
 // --- Menu Mobile ---
 function initMobileMenu() {
     const menuToggle = document.getElementById('mobileMenuToggle');
-    const navMenu = document.querySelector('.nav-menu'); // Fonctionne pour les deux pages
+    const navMenu = document.querySelector('.nav-menu');
 
-    if (!menuToggle || !navMenu) return;
+    if (!menuToggle || !navMenu) {
+        console.log('Menu mobile elements not found');
+        return;
+    }
+
+    console.log('Mobile menu initialized');
 
     // Ouvrir/Fermer au clic
     menuToggle.addEventListener('click', (e) => {
+        e.preventDefault();
         e.stopPropagation();
         toggleMenu();
     });
@@ -153,15 +156,30 @@ function initMobileMenu() {
     });
 
     function toggleMenu() {
-        menuToggle.classList.toggle('active');
-        navMenu.classList.toggle('active');
-        document.body.classList.toggle('menu-open');
+        const isOpen = menuToggle.classList.contains('active');
+        console.log('Toggling menu, currently:', isOpen ? 'open' : 'closed');
+        
+        if (isOpen) {
+            closeMenu();
+        } else {
+            openMenu();
+        }
+    }
+
+    function openMenu() {
+        menuToggle.classList.add('active');
+        navMenu.classList.add('active');
+        document.body.classList.add('menu-open');
+        menuToggle.setAttribute('aria-expanded', 'true');
+        console.log('Menu opened');
     }
 
     function closeMenu() {
         menuToggle.classList.remove('active');
         navMenu.classList.remove('active');
         document.body.classList.remove('menu-open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        console.log('Menu closed');
     }
 }
 
@@ -175,7 +193,6 @@ function initSmoothScroll() {
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
                 e.preventDefault();
-                // Calculer l'offset du header
                 const headerOffset = 80;
                 const elementPosition = targetElement.getBoundingClientRect().top;
                 const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
@@ -190,10 +207,9 @@ function initSmoothScroll() {
 }
 
 // --- Masquer la Nav au Scroll (Optionnel) ---
-// Note: Actif seulement si l'élément .nav existe (Page CV)
 function initNavScroll() {
     const nav = document.querySelector('.nav');
-    if (!nav) return; // Ne rien faire sur la Landing page qui utilise <header>
+    if (!nav) return;
 
     let lastScroll = 0;
     window.addEventListener('scroll', () => {
@@ -204,10 +220,8 @@ function initNavScroll() {
         }
         
         if (currentScroll > lastScroll && currentScroll > 100) {
-            // Scroll Down -> Hide
             nav.style.transform = 'translateY(-100%)';
         } else {
-            // Scroll Up -> Show
             nav.style.transform = 'translateY(0)';
         }
         lastScroll = currentScroll;
@@ -228,19 +242,17 @@ function initAnimations() {
             if (entry.isIntersecting) {
                 entry.target.style.opacity = "1";
                 entry.target.style.transform = "translateY(0)";
-                observer.unobserve(entry.target); // Animer une seule fois
+                observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
 
-    // Éléments à animer
     const elementsToAnimate = document.querySelectorAll('.project-item, .expertise-card, .timeline-item, .exploration-card');
     
     elementsToAnimate.forEach((el, index) => {
-        // État initial via JS pour ne pas casser le site si JS désactivé
         el.style.opacity = "0";
         el.style.transform = "translateY(20px)";
-        el.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`; // Petit délai en cascade
+        el.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
         observer.observe(el);
     });
 }
@@ -277,4 +289,6 @@ document.addEventListener('DOMContentLoaded', () => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     }
+
+    console.log("✅ All features initialized");
 });
