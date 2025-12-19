@@ -1,27 +1,20 @@
 /* ==========================================================================
-   1. VARIABLES & RESET (Base commune)
+   1. VARIABLES & RESET
    ========================================================================== */
 :root {
-    /* Palette de couleurs "Dark Mode" */
     --marine: #16213e;
-    --grey: #8b9bb4; /* Unifié pour meilleure lisibilité */
+    --grey: #8b9bb4;
     --cream: #FFFEF9;
     --bg: #0a0a1f;
     --neon-green: #39ff14;
-    
-    /* Effets */
     --glass: rgba(22, 33, 62, 0.6);
     --border-light: rgba(255, 254, 249, 0.1);
-    
-    /* Typographie */
     --font-primary: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     --font-mono: "SF Mono", Monaco, "Cascadia Code", "Courier New", monospace;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
-
 html { scroll-behavior: smooth; }
-
 body {
     font-family: var(--font-primary);
     background: var(--bg);
@@ -30,7 +23,6 @@ body {
     overflow-x: hidden;
     position: relative;
 }
-
 a { color: inherit; text-decoration: none; transition: color 0.3s; }
 
 /* ==========================================================================
@@ -71,52 +63,34 @@ a { color: inherit; text-decoration: none; transition: color 0.3s; }
 }
 
 /* ==========================================================================
-   3. NAVIGATION & HEADER
+   3. HEADER
    ========================================================================== */
-header, .nav {
-    padding: 2rem 4rem;
+header {
+    padding: 3rem 4rem;
     display: flex; justify-content: space-between; align-items: center;
-    border-bottom: 1px solid var(--border-light);
-    background: rgba(10, 10, 31, 0.8); backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 254, 249, 0.1);
     position: relative; z-index: 1001;
+    background: rgba(10, 10, 31, 0.8); backdrop-filter: blur(10px);
 }
-.nav { position: sticky; top: 0; padding: 1rem 4rem; }
-.nav-container { width: 100%; display: flex; justify-content: space-between; align-items: center; max-width: 1400px; margin: 0 auto; }
+.logo { width: 55px; height: 55px; border-radius: 50%; overflow: hidden; }
+.logo img { width: 100%; height: 100%; object-fit: cover; }
+.header-right { display: flex; align-items: center; gap: 1.5rem; }
 
-/* Logo */
-.logo, .nav-logo {
-    width: 55px; height: 55px; border-radius: 50%; overflow: hidden;
-    display: flex; align-items: center; justify-content: center;
-    transition: transform 0.3s;
-}
-.logo:hover, .nav-logo:hover { transform: scale(1.05); }
-.logo img, .logo-img { width: 100%; height: 100%; object-fit: cover; }
-
-/* Menu Desktop (Pour page CV) */
-.nav-menu { display: flex; gap: 2rem; align-items: center; }
-.nav-link { font-size: 0.9rem; color: var(--grey); text-transform: uppercase; letter-spacing: 0.05rem; font-weight: 500; }
-.nav-link:hover { color: var(--neon-green); }
-
-/* Éléments Droite (Langue + Lien CV) */
-.header-right, .nav-controls { display: flex; align-items: center; gap: 1.5rem; }
-
-.lang-btn, .lang-switch {
+.lang-btn {
     background: transparent; border: 1px solid rgba(255, 254, 249, 0.2);
     color: var(--grey); padding: 0.6rem 1rem; border-radius: 20px;
-    font-size: 0.8rem; cursor: pointer; text-transform: uppercase; transition: all 0.3s;
+    cursor: pointer; text-transform: uppercase; transition: all 0.3s;
 }
-.lang-btn:hover, .lang-switch:hover {
-    color: var(--bg); background: var(--neon-green); border-color: var(--neon-green); font-weight: bold;
-}
+.lang-btn:hover { background: var(--neon-green); color: var(--bg); border-color: var(--neon-green); }
 
 .cv-link-header {
     background: rgba(255, 254, 249, 0.05); border: 1px solid rgba(255, 254, 249, 0.2);
-    color: var(--cream); padding: 0.8rem 1.5rem; border-radius: 20px; font-size: 0.85rem;
-    display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.3s;
+    color: var(--cream); padding: 0.8rem 1.5rem; border-radius: 20px;
+    text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.3s;
 }
-.cv-link-header:hover { border-color: var(--neon-green); color: var(--neon-green); transform: translateY(-2px); }
+.cv-link-header:hover { background: rgba(255, 254, 249, 0.1); border-color: var(--cream); color: var(--neon-green); border-color: var(--neon-green); }
 
-/* TICKER (Spécifique Landing Page) */
+/* TICKER */
 .ticker-container {
     background: rgba(255, 254, 249, 0.03); border-bottom: 1px solid rgba(255, 254, 249, 0.1);
     overflow: hidden; padding: 1rem 0;
@@ -126,89 +100,44 @@ header, .nav {
 @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
 /* ==========================================================================
-   4. LAYOUT PRINCIPAL & INTRO
+   4. LAYOUT
    ========================================================================== */
 main {
     padding: 6rem 4rem; max-width: 1400px; margin: 0 auto;
     position: relative; z-index: 10;
 }
-.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-section { padding: 6rem 0; position: relative; z-index: 10; }
+.intro h1 { font-size: 3rem; font-weight: 300; line-height: 1.4; max-width: 900px; color: var(--cream); }
+.intro p { font-size: 1.1rem; color: var(--grey); margin-top: 2rem; max-width: 600px; }
 
-/* Styles Intro */
-.intro h1, .hero-title { 
-    font-size: 3rem; font-weight: 300; line-height: 1.4; color: var(--cream); max-width: 900px; 
-}
-.intro p, .hero-subtitle { 
-    font-size: 1.1rem; color: var(--grey); margin-top: 2rem; max-width: 600px; 
-}
-
-/* Centrage spécifique pour la page CV */
-.hero {
-    min-height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
-    text-align: center; padding: 4rem 0; overflow: hidden;
-}
-
-/* ==========================================================================
-   5. COMPOSANTS (Boutons & Badges)
-   ========================================================================== */
-.hero-cta, .cta-group { margin-top: 3rem; display: flex; gap: 1.5rem; flex-wrap: wrap; align-items: center; }
-.hero .hero-cta { justify-content: center; } /* Centré sur CV */
-
-/* Bouton Primaire (Vert) */
-.cta-primary, .btn-primary {
+/* CTAs */
+.hero-cta { margin-top: 3rem; display: flex; gap: 1.5rem; flex-wrap: wrap; align-items: center; }
+.cta-primary {
     background: linear-gradient(135deg, var(--neon-green), #2ecc71); color: var(--bg);
     padding: 1.2rem 2.5rem; border-radius: 30px; font-weight: 700;
-    display: inline-flex; align-items: center; gap: 0.8rem;
-    box-shadow: 0 0 30px rgba(57, 255, 20, 0.3); transition: transform 0.3s; border: none;
+    text-decoration: none; display: inline-flex; gap: 0.8rem;
+    box-shadow: 0 0 30px rgba(57, 255, 20, 0.3); transition: transform 0.3s;
 }
-.cta-primary:hover, .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 0 40px rgba(57, 255, 20, 0.6); }
-
-/* Bouton Secondaire (Outline) */
-.cta-secondary, .btn-secondary {
-    background: transparent; color: var(--grey); padding: 1rem 2rem;
-    border-bottom: 1px solid transparent; text-decoration: none;
-    display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.3s;
-}
-.btn-secondary { border: 1px solid var(--grey); border-radius: 30px; } /* Version bordure pour CV */
-
+.cta-primary:hover { transform: translateY(-3px); }
+.cta-secondary { color: var(--grey); text-decoration: none; border-bottom: 1px solid transparent; }
 .cta-secondary:hover { color: var(--cream); border-bottom-color: var(--cream); }
-.btn-secondary:hover { color: var(--neon-green); border-color: var(--neon-green); }
 
-/* Badges de statut */
-.badge-complete { color: var(--neon-green) !important; border: 1px solid var(--neon-green); padding: 2px 8px; border-radius: 10px; }
-.badge-dev { color: #ffc107 !important; border: 1px solid #ffc107; padding: 2px 8px; border-radius: 10px; }
-.year-future { color: var(--neon-green) !important; font-weight: bold; }
-
-/* ==========================================================================
-   6. LISTE DES PROJETS (Index & CV)
-   ========================================================================== */
+/* LISTE DES PROJETS */
 .projects { margin-top: 6rem; }
-
-.project-item, .project-card-link {
-    display: block; padding: 4rem 0;
-    border-bottom: 1px solid rgba(255, 254, 249, 0.08);
-    transition: all 0.3s ease; cursor: pointer; text-decoration: none;
+.project-item {
+    padding: 4rem 0; border-bottom: 1px solid rgba(255, 254, 249, 0.08);
+    transition: all 0.3s ease; text-decoration: none; display: block;
 }
-.project-item:hover, .project-card-link:hover {
-    padding-left: 2rem;
-    background: linear-gradient(90deg, rgba(22, 33, 62, 0.3), transparent);
-    border-color: rgba(255, 254, 249, 0.3);
+.project-item:hover {
+    padding-left: 2rem; background: rgba(10, 10, 31, 0.5); border-color: rgba(255, 254, 249, 0.3);
 }
-
-.project-number { font-size: 0.85rem; color: var(--grey); margin-bottom: 1rem; font-family: var(--font-mono); }
-.project-title { font-size: 4rem; font-weight: 300; color: rgba(255, 254, 249, 0.7); line-height: 1.1; transition: color 0.3s; }
-/* Ajustement taille titre CV vs Index si nécessaire, ici unifié à 4rem */
-
 .project-item:hover .project-title { color: var(--cream); }
 
-.project-meta {
-    display: flex; gap: 3rem; margin-top: 1.5rem; color: var(--grey); flex-wrap: wrap;
-    font-family: var(--font-mono); font-size: 0.85rem;
-}
-.project-meta span { text-transform: uppercase; letter-spacing: 0.1rem; }
+.project-number { font-size: 0.85rem; color: var(--grey); margin-bottom: 1rem; font-family: monospace; }
+.project-title { font-size: 4rem; font-weight: 300; color: rgba(255, 254, 249, 0.7); line-height: 1.1; transition: color 0.3s; }
+.project-meta { display: flex; gap: 3rem; margin-top: 1.5rem; color: var(--grey); flex-wrap: wrap; }
+.project-meta span { text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.1rem; }
 
-/* Description (Accordion effect) */
+/* Description */
 .project-description {
     background: rgba(22, 33, 62, 0.5); color: var(--cream);
     padding: 1.5rem; margin-top: 2rem;
@@ -217,35 +146,15 @@ section { padding: 6rem 0; position: relative; z-index: 10; }
 }
 .project-item:hover .project-description { opacity: 1; max-height: 300px; }
 
-/* ==========================================================================
-   7. CV SPÉCIFIQUE (Expertise & Timeline)
-   ========================================================================== */
-/* Grilles */
-.expertise-grid, .explorations-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+/* Badges */
+.badge-complete { color: var(--neon-green) !important; border: 1px solid var(--neon-green); padding: 2px 8px; border-radius: 10px; }
+.badge-dev { color: #ffc107 !important; border: 1px solid #ffc107; padding: 2px 8px; border-radius: 10px; }
+.year-future { color: var(--neon-green) !important; font-weight: bold; }
 
-/* Cartes */
-.expertise-card, .exploration-card {
-    background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-light);
-    padding: 2.5rem; transition: transform 0.3s; border-radius: 4px;
-}
-.expertise-card:hover, .exploration-card:hover { 
-    transform: translateY(-5px); border-color: var(--neon-green); background: rgba(57, 255, 20, 0.02); 
-}
-.expertise-card h3, .exploration-card h3 { font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--cream); }
-.expertise-card ul { list-style: none; }
-.expertise-card li { color: var(--grey); padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
-
-/* Timeline */
-.timeline-item { display: grid; grid-template-columns: 150px 1fr; gap: 2rem; margin-bottom: 3rem; padding-bottom: 3rem; border-bottom: 1px solid var(--border-light); }
-.timeline-date { font-family: var(--font-mono); color: var(--neon-green); font-size: 0.9rem; padding-top: 0.5rem; }
-.timeline-content h3 { font-size: 1.5rem; color: var(--cream); }
-.timeline-list li { position: relative; padding-left: 1.5rem; margin-bottom: 0.8rem; color: #b0bacc; list-style: none; }
-.timeline-list li::before { content: '▹'; position: absolute; left: 0; color: var(--neon-green); }
-
-/* Pont vers le CV (Bridge) */
+/* CV Bridge */
 .cv-bridge {
     margin: 8rem 0; padding: 4rem;
-    background: linear-gradient(135deg, rgba(22, 33, 62, 0.5), rgba(57, 255, 20, 0.05));
+    background: linear-gradient(135deg, rgba(22, 33, 62, 0.3), rgba(57, 255, 20, 0.05));
     border: 1px solid rgba(57, 255, 20, 0.2); border-radius: 20px; text-align: center;
 }
 .btn-cv {
@@ -254,86 +163,58 @@ section { padding: 6rem 0; position: relative; z-index: 10; }
     font-weight: 700; text-decoration: none; display: inline-block; margin-top: 2rem;
 }
 
-/* ==========================================================================
-   8. FOOTER
-   ========================================================================== */
-footer, .footer-cta {
+/* FOOTER */
+footer {
     padding: 4rem; border-top: 1px solid rgba(255, 254, 249, 0.1);
-    background: #050510; display: flex; justify-content: space-between;
-    flex-wrap: wrap; gap: 2rem; position: relative; z-index: 10;
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 2rem;
+    position: relative; z-index: 10;
 }
-.footer-links a, .footer-link { color: var(--grey); margin-left: 1.5rem; text-decoration: none; transition: color 0.3s; }
-.footer-links a:hover, .footer-link:hover { color: var(--cream); }
-.footer-copyright { font-size: 0.8rem; color: rgba(255,255,255,0.3); }
+.footer-links a { color: var(--grey); margin-left: 1.5rem; text-decoration: none; transition: color 0.3s; }
+.footer-links a:hover { color: var(--cream); }
 
 /* ==========================================================================
-   9. RESPONSIVE (Mobile & Tablette)
+   5. MOBILE MENU (Ajouté pour fixer le responsive)
    ========================================================================== */
 @media (max-width: 768px) {
-    /* Ajustements Généraux */
-    header, .nav { padding: 1rem 1.5rem; }
-    main, footer { padding: 4rem 1.5rem; }
+    header, main, footer { padding: 2rem; }
     .intro h1 { font-size: 2rem; }
     .project-title { font-size: 2.2rem; }
-    .nav-container { position: static; }
-
-    /* Burger Button */
+    .project-meta { gap: 1rem; flex-direction: column; }
+    
+    /* Bouton Burger (Initialement caché sur Desktop) */
     .mobile-menu-toggle {
         display: flex; flex-direction: column; justify-content: space-between;
-        width: 30px; height: 20px; z-index: 2000; cursor: pointer; background: none; border: none;
+        width: 30px; height: 20px; z-index: 2000;
+        background: transparent; border: none; cursor: pointer;
     }
-    .mobile-menu-toggle span { width: 100%; height: 2px; background-color: var(--cream); transition: all 0.3s ease; display: block; }
+    .mobile-menu-toggle span { width: 100%; height: 2px; background-color: var(--cream); transition: all 0.3s ease; }
+    
+    /* Animation Croix */
     .mobile-menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
     .mobile-menu-toggle.active span:nth-child(2) { opacity: 0; }
     .mobile-menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
 
-    /* Mobile Menu Overlay */
+    /* Menu Mobile Overlay */
     .nav-menu {
         position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
         background-color: var(--bg); display: flex; flex-direction: column;
         justify-content: center; align-items: center; gap: 2rem;
         transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        z-index: 1500; padding-top: 4rem; overflow-y: auto;
+        z-index: 1500;
     }
     .nav-menu.active { transform: translateX(0); }
-
-    /* Animation Liens Mobile */
-    .nav-link { font-size: 1.5rem; opacity: 0; transform: translateY(20px); transition: opacity 0.3s ease, transform 0.3s ease; }
-    .nav-menu.active .nav-link { opacity: 1; transform: translateY(0); transition-delay: 0.2s; }
-
-    /* Body Lock */
     body.menu-open { overflow: hidden; }
 
-    /* Lang switch on mobile */
-    .lang-switch { display: block; position: absolute; top: 1.5rem; right: 4.5rem; z-index: 2000; }
-    
-    /* Layout Mobile Spécifique */
-    .project-meta { gap: 1rem; flex-direction: column; }
-    
-    /* FORCE VISIBILITY ON MOBILE (Hérité de la Landing Page) */
-    .project-description { 
-        opacity: 1; max-height: none; margin-top: 1rem; 
-        background: transparent; padding: 0 0 0 1rem; border-left: 1px solid var(--neon-green); 
+    /* Force visibility des descriptions */
+    .project-description {
+        opacity: 1; max-height: none; margin-top: 1rem;
+        background: transparent; padding: 0 0 0 1rem; border-left: 1px solid var(--neon-green);
     }
     .project-item:hover { padding-left: 0; }
-    
-    /* Stacking éléments */
-    .timeline-item { grid-template-columns: 1fr; gap: 0.5rem; }
-    .hero-cta, .cta-group { flex-direction: column; width: 100%; align-items: stretch; }
-    .cta-primary, .cta-secondary, .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
-    .footer-links { flex-direction: column; align-items: flex-start; margin: 0; }
-    .footer-links a { margin-left: 0; margin-bottom: 1rem; }
 }
 
-/* ==========================================================================
-   10. LIGHT MODE
-   ========================================================================== */
-body.light-mode { background: #f4f4f4; color: #1a1a2e; }
-body.light-mode .starfield { display: none; }
-body.light-mode header, body.light-mode .nav { background: rgba(255, 255, 255, 0.95); border-bottom: 1px solid #e0e0e0; }
-body.light-mode .nav-menu { background: #f4f4f4; }
-body.light-mode h1, body.light-mode h2, body.light-mode h3 { color: #16213e; }
-body.light-mode p, body.light-mode li { color: #555; }
-body.light-mode .project-item, body.light-mode .expertise-card { border-color: #ddd; background: #fff; }
-body.light-mode .project-item:hover { background: #eee; }
-body.light-mode footer { background: #16213e; color: white; }
+/* Cacher le bouton burger sur desktop */
+@media (min-width: 769px) {
+    .mobile-menu-toggle { display: none; }
+    .nav-menu { display: none; } /* On cache le conteneur mobile sur desktop */
+}
