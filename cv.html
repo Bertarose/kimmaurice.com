@@ -33,6 +33,356 @@
         "email": "info@kimmaurice.com"
     }
     </script>
+
+    <style>
+        /* Styles spécifiques à la page CV */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-header {
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: var(--cream);
+            margin-bottom: 1rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            z-index: 10;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 300;
+            color: var(--cream);
+            margin-bottom: 1rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--grey);
+            margin-bottom: 1rem;
+        }
+
+        .hero-location {
+            font-size: 1rem;
+            color: var(--grey);
+            margin-bottom: 2rem;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--neon-green), #2ecc71);
+            color: var(--bg);
+            box-shadow: 0 0 30px rgba(57, 255, 20, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 254, 249, 0.05);
+            border: 1px solid rgba(255, 254, 249, 0.2);
+            color: var(--cream);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 254, 249, 0.1);
+            border-color: var(--neon-green);
+            color: var(--neon-green);
+        }
+
+        /* Expertise Grid */
+        .expertise {
+            padding: 6rem 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .expertise-card {
+            background: rgba(22, 33, 62, 0.3);
+            border: 1px solid rgba(255, 254, 249, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .expertise-card:hover {
+            background: rgba(22, 33, 62, 0.5);
+            border-color: var(--neon-green);
+            transform: translateY(-5px);
+        }
+
+        .expertise-number {
+            font-size: 3rem;
+            font-weight: 300;
+            color: var(--neon-green);
+            opacity: 0.3;
+            margin-bottom: 1rem;
+        }
+
+        .expertise-card h3 {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--cream);
+            margin-bottom: 1rem;
+        }
+
+        .expertise-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .expertise-card li {
+            padding: 0.5rem 0;
+            color: var(--grey);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .expertise-card li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--neon-green);
+        }
+
+        /* Experience Timeline */
+        .experience {
+            padding: 6rem 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .experience-timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .experience-timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--neon-green), transparent);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 4rem;
+            padding-left: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.5rem;
+            top: 0;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--neon-green);
+            box-shadow: 0 0 20px rgba(57, 255, 20, 0.5);
+        }
+
+        .timeline-date {
+            font-size: 0.9rem;
+            color: var(--neon-green);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content h3 {
+            font-size: 1.8rem;
+            font-weight: 500;
+            color: var(--cream);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content h4 {
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: var(--grey);
+            margin-bottom: 1rem;
+        }
+
+        .timeline-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .timeline-list li {
+            padding: 0.5rem 0;
+            color: var(--grey);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .timeline-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--neon-green);
+        }
+
+        /* Explorations */
+        .explorations {
+            padding: 6rem 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .exploration-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .exploration-card {
+            background: rgba(22, 33, 62, 0.2);
+            border: 1px solid rgba(255, 254, 249, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .exploration-card:hover {
+            background: rgba(22, 33, 62, 0.4);
+            border-color: var(--neon-green);
+            transform: translateY(-3px);
+        }
+
+        .exploration-card h4 {
+            font-size: 1.2rem;
+            color: var(--cream);
+            margin-bottom: 0.5rem;
+        }
+
+        .exploration-card p {
+            font-size: 0.9rem;
+            color: var(--grey);
+        }
+
+        /* Footer CTA */
+        .footer-cta {
+            padding: 6rem 2rem;
+            position: relative;
+            z-index: 10;
+            text-align: center;
+        }
+
+        .footer-content h2 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: var(--cream);
+            margin-bottom: 2rem;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            color: var(--grey);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-link:hover {
+            color: var(--neon-green);
+        }
+
+        .footer-copyright {
+            color: var(--grey);
+            font-size: 0.9rem;
+        }
+
+        .footer-copyright a {
+            color: var(--grey);
+            text-decoration: none;
+        }
+
+        .footer-copyright a:hover {
+            color: var(--neon-green);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .expertise-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline-content h3 {
+                font-size: 1.4rem;
+            }
+
+            .cta-group {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
 </head>    
 
 <body class="lang-fr">
@@ -67,7 +417,7 @@
         </div>
     </nav>
 
-    <section class="hero" id="home" style="min-height: 60vh;">
+    <section class="hero" id="home">
         <div class="hero-content">
             <h1 class="hero-title">
                 <span data-fr="Curriculum Vitae" data-en="Curriculum Vitae">Curriculum Vitae</span>
@@ -96,27 +446,129 @@
                     <div class="expertise-number">01</div>
                     <h3 data-fr="Design UX/UI" data-en="UX/UI Design">Design UX/UI</h3>
                     <ul>
-                        <li data-fr="Recherche utilisateur" data-en="User research">Recherche utilisateur</li>
+                        <li data-fr="Recherche utilisateur & personas" data-en="User research & personas">Recherche utilisateur & personas</li>
                         <li data-fr="Wireframing & prototypage" data-en="Wireframing & prototyping">Wireframing & prototypage</li>
+                        <li data-fr="Design systems & composants" data-en="Design systems & components">Design systems & composants</li>
+                        <li data-fr="Tests utilisateurs" data-en="User testing">Tests utilisateurs</li>
                     </ul>
                 </div>
+
+                <div class="expertise-card">
+                    <div class="expertise-number">02</div>
+                    <h3 data-fr="E-Learning & Pédagogie" data-en="E-Learning & Pedagogy">E-Learning & Pédagogie</h3>
+                    <ul>
+                        <li data-fr="Articulate Storyline & Rise" data-en="Articulate Storyline & Rise">Articulate Storyline & Rise</li>
+                        <li data-fr="Scénarisation pédagogique" data-en="Instructional design">Scénarisation pédagogique</li>
+                        <li data-fr="Gamification & interactivité" data-en="Gamification & interactivity">Gamification & interactivité</li>
+                        <li data-fr="Plateformes LMS" data-en="LMS platforms">Plateformes LMS</li>
+                    </ul>
                 </div>
+
+                <div class="expertise-card">
+                    <div class="expertise-number">03</div>
+                    <h3 data-fr="Développement Web" data-en="Web Development">Développement Web</h3>
+                    <ul>
+                        <li data-fr="HTML/CSS/JavaScript" data-en="HTML/CSS/JavaScript">HTML/CSS/JavaScript</li>
+                        <li data-fr="React & Next.js" data-en="React & Next.js">React & Next.js</li>
+                        <li data-fr="Three.js & WebGL" data-en="Three.js & WebGL">Three.js & WebGL</li>
+                        <li data-fr="API & intégrations" data-en="API & integrations">API & intégrations</li>
+                    </ul>
+                </div>
+
+                <div class="expertise-card">
+                    <div class="expertise-number">04</div>
+                    <h3 data-fr="Production Audiovisuelle" data-en="Audiovisual Production">Production Audiovisuelle</h3>
+                    <ul>
+                        <li data-fr="After Effects & Premiere" data-en="After Effects & Premiere">After Effects & Premiere</li>
+                        <li data-fr="Motion design & animation" data-en="Motion design & animation">Motion design & animation</li>
+                        <li data-fr="Design sonore & audio" data-en="Sound design & audio">Design sonore & audio</li>
+                        <li data-fr="Production cinéma/TV" data-en="Film/TV production">Production cinéma/TV</li>
+                    </ul>
+                </div>
+
+                <div class="expertise-card">
+                    <div class="expertise-number">05</div>
+                    <h3 data-fr="IA Générative" data-en="Generative AI">IA Générative</h3>
+                    <ul>
+                        <li data-fr="Stable Diffusion & ComfyUI" data-en="Stable Diffusion & ComfyUI">Stable Diffusion & ComfyUI</li>
+                        <li data-fr="Prompt engineering" data-en="Prompt engineering">Prompt engineering</li>
+                        <li data-fr="Workflows automatisés" data-en="Automated workflows">Workflows automatisés</li>
+                        <li data-fr="IA audio & vidéo" data-en="AI audio & video">IA audio & vidéo</li>
+                    </ul>
+                </div>
+
+                <div class="expertise-card">
+                    <div class="expertise-number">06</div>
+                    <h3 data-fr="Outils Créatifs" data-en="Creative Tools">Outils Créatifs</h3>
+                    <ul>
+                        <li data-fr="Figma & Adobe Suite" data-en="Figma & Adobe Suite">Figma & Adobe Suite</li>
+                        <li data-fr="Blender & 3D" data-en="Blender & 3D">Blender & 3D</li>
+                        <li data-fr="Git & GitHub" data-en="Git & GitHub">Git & GitHub</li>
+                        <li data-fr="Python & automation" data-en="Python & automation">Python & automation</li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </section>
 
     <section class="experience" id="experience">
          <div class="container">
             <div class="section-header">
-                <h2 data-fr="Parcours" data-en="Experience">Parcours</h2>
+                <h2 data-fr="Parcours Professionnel" data-en="Professional Experience">Parcours Professionnel</h2>
             </div>
             <div class="experience-timeline">
                 <div class="timeline-item">
                     <div class="timeline-date">2023 - 2024</div>
                     <div class="timeline-content">
-                        <h3>Designer Multimédia Senior</h3>
+                        <h3 data-fr="Designer Multimédia Senior" data-en="Senior Multimedia Designer">Designer Multimédia Senior</h3>
                         <h4>@ Technologia</h4>
                         <ul class="timeline-list">
-                            <li data-fr="Direction UX/UI..." data-en="UX/UI direction...">Direction UX/UI...</li>
+                            <li data-fr="Direction UX/UI pour modules e-learning complexes" data-en="UX/UI direction for complex e-learning modules">Direction UX/UI pour modules e-learning complexes</li>
+                            <li data-fr="Développement de formations interactives sur Articulate Storyline" data-en="Development of interactive training on Articulate Storyline">Développement de formations interactives sur Articulate Storyline</li>
+                            <li data-fr="Gamification et scénarisation pédagogique" data-en="Gamification and instructional design">Gamification et scénarisation pédagogique</li>
+                            <li data-fr="Création de contenus vidéo et motion design" data-en="Video content creation and motion design">Création de contenus vidéo et motion design</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">2020 - 2023</div>
+                    <div class="timeline-content">
+                        <h3 data-fr="Designer E-Learning" data-en="E-Learning Designer">Designer E-Learning</h3>
+                        <h4>@ Campus GardaWorld</h4>
+                        <ul class="timeline-list">
+                            <li data-fr="Conception de formations en sécurité et conformité" data-en="Design of security and compliance training">Conception de formations en sécurité et conformité</li>
+                            <li data-fr="Développement de parcours d'apprentissage adaptatifs" data-en="Development of adaptive learning paths">Développement de parcours d'apprentissage adaptatifs</li>
+                            <li data-fr="Intégration LMS et suivi analytique" data-en="LMS integration and analytics">Intégration LMS et suivi analytique</li>
+                            <li data-fr="Production audiovisuelle et animation 2D/3D" data-en="Audiovisual production and 2D/3D animation">Production audiovisuelle et animation 2D/3D</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">2010 - 2020</div>
+                    <div class="timeline-content">
+                        <h3 data-fr="Designer Graphique" data-en="Graphic Designer">Designer Graphique</h3>
+                        <h4 data-fr="@ Productions Cinéma & TV" data-en="@ Film & TV Productions">@ Productions Cinéma & TV</h4>
+                        <ul class="timeline-list">
+                            <li data-fr="Design graphique pour 15+ productions (Bad Blood, Unité 9, etc.)" data-en="Graphic design for 15+ productions (Bad Blood, Unité 9, etc.)">Design graphique pour 15+ productions (Bad Blood, Unité 9, etc.)</li>
+                            <li data-fr="Création d'interfaces futuristes et props numériques" data-en="Creation of futuristic interfaces and digital props">Création d'interfaces futuristes et props numériques</li>
+                            <li data-fr="Motion design et effets visuels avec After Effects" data-en="Motion design and visual effects with After Effects">Motion design et effets visuels avec After Effects</li>
+                            <li data-fr="Collaboration avec réalisateurs et directeurs artistiques" data-en="Collaboration with directors and art directors">Collaboration avec réalisateurs et directeurs artistiques</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">2000 - 2010</div>
+                    <div class="timeline-content">
+                        <h3 data-fr="Designer Web & Multimédia" data-en="Web & Multimedia Designer">Designer Web & Multimédia</h3>
+                        <h4 data-fr="@ Divers clients & agences" data-en="@ Various clients & agencies">@ Divers clients & agences</h4>
+                        <ul class="timeline-list">
+                            <li data-fr="Conception et développement de sites web" data-en="Website design and development">Conception et développement de sites web</li>
+                            <li data-fr="Identités visuelles et branding" data-en="Visual identities and branding">Identités visuelles et branding</li>
+                            <li data-fr="Installations interactives et multimédia" data-en="Interactive and multimedia installations">Installations interactives et multimédia</li>
+                            <li data-fr="Production audiovisuelle et montage" data-en="Audiovisual production and editing">Production audiovisuelle et montage</li>
                         </ul>
                     </div>
                 </div>
@@ -126,7 +578,41 @@
     
     <section class="explorations" id="explorations">
          <div class="container">
-             </div>
+            <div class="section-header">
+                <h2 data-fr="Explorations & Projets Personnels" data-en="Explorations & Personal Projects">Explorations & Projets Personnels</h2>
+            </div>
+            <div class="exploration-grid">
+                <div class="exploration-card">
+                    <h4 data-fr="🎵 DJ & Radio Underground" data-en="🎵 DJ & Underground Radio">🎵 DJ & Radio Underground</h4>
+                    <p data-fr="DJ actif sur Still FM, radio underground de Montréal. Exploration des cultures musicales alternatives." data-en="Active DJ on Still FM, Montreal's underground radio. Exploring alternative music cultures.">DJ actif sur Still FM, radio underground de Montréal. Exploration des cultures musicales alternatives.</p>
+                </div>
+
+                <div class="exploration-card">
+                    <h4 data-fr="🤖 IA Générative" data-en="🤖 Generative AI">🤖 IA Générative</h4>
+                    <p data-fr="Archive visuelle sur Instagram (@this_is_weird_ai). Expérimentation avec Stable Diffusion et workflows créatifs." data-en="Visual archive on Instagram (@this_is_weird_ai). Experimentation with Stable Diffusion and creative workflows.">Archive visuelle sur Instagram (@this_is_weird_ai). Expérimentation avec Stable Diffusion et workflows créatifs.</p>
+                </div>
+
+                <div class="exploration-card">
+                    <h4 data-fr="🎹 Instruments Expérimentaux" data-en="🎹 Experimental Instruments">🎹 Instruments Expérimentaux</h4>
+                    <p data-fr="Création d'instruments musicaux hybrides combinant MIDI, IA et visualisations temps réel." data-en="Creation of hybrid musical instruments combining MIDI, AI and real-time visualizations.">Création d'instruments musicaux hybrides combinant MIDI, IA et visualisations temps réel.</p>
+                </div>
+
+                <div class="exploration-card">
+                    <h4 data-fr="🌐 Développement Web" data-en="🌐 Web Development">🌐 Développement Web</h4>
+                    <p data-fr="Projets open-source sur GitHub. Exploration de Three.js, Next.js et technologies immersives." data-en="Open-source projects on GitHub. Exploring Three.js, Next.js and immersive technologies.">Projets open-source sur GitHub. Exploration de Three.js, Next.js et technologies immersives.</p>
+                </div>
+
+                <div class="exploration-card">
+                    <h4 data-fr="🔊 Design Sonore" data-en="🔊 Sound Design">🔊 Design Sonore</h4>
+                    <p data-fr="Installations audio-visuelles et générateurs de signatures sonores uniques." data-en="Audio-visual installations and unique sonic signature generators.">Installations audio-visuelles et générateurs de signatures sonores uniques.</p>
+                </div>
+
+                <div class="exploration-card">
+                    <h4 data-fr="📚 Apprentissage Continu" data-en="📚 Continuous Learning">📚 Apprentissage Continu</h4>
+                    <p data-fr="Exploration active de nouvelles technologies : WebGL, IA, IoT, VR/AR et cultures numériques." data-en="Active exploration of new technologies: WebGL, AI, IoT, VR/AR and digital cultures.">Exploration active de nouvelles technologies : WebGL, IA, IoT, VR/AR et cultures numériques.</p>
+                </div>
+            </div>
+         </div>
     </section>
 
     <section class="footer-cta" id="contact">
