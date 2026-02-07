@@ -336,3 +336,92 @@ footer {
         justify-content: flex-start;
     }
 }
+
+/* --- Collaborations: reveal style --- */
+.collab-item {
+  position: relative;
+}
+
+/* Summary doit ressembler à un project-item normal */
+.collab-summary {
+  list-style: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.collab-summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Panel caché par défaut (desktop hover/focus + open via details) */
+.collab-panel {
+  margin-top: 18px;
+  padding: 22px 24px;
+  border-left: 4px solid rgba(0, 255, 120, 0.85);
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(6px);
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transform: translateY(6px);
+  transition: max-height 420ms ease, opacity 250ms ease, transform 250ms ease;
+}
+
+/* Reveal au hover/focus */
+.collab-item:hover .collab-panel,
+.collab-item:focus-within .collab-panel,
+.collab-item[open] .collab-panel {
+  max-height: 1600px; /* assez grand pour ta liste */
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.collab-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+}
+
+@media (min-width: 900px) {
+  .collab-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.collab-group h3 {
+  margin: 0 0 10px;
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+.collab-group ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.collab-group li {
+  margin: 6px 0;
+  line-height: 1.45;
+}
+
+.collab-group a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* liste film/TV en 2 colonnes sur desktop */
+.two-col {
+  columns: 2;
+  column-gap: 28px;
+}
+@media (max-width: 700px) {
+  .two-col { columns: 1; }
+}
+
+.collab-note {
+  margin-top: 18px;
+  opacity: 0.7;
+  font-size: 13px;
+}
