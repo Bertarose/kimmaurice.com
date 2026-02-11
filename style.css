@@ -425,3 +425,27 @@ footer {
   opacity: 0.7;
   font-size: 13px;
 }
+
+/* ==========================================================================
+   HORS CHAMP (Projet sans lien)
+   ========================================================================== */
+.disabled-project {
+    opacity: 0.7;
+    cursor: default;
+}
+
+.disabled-project:hover {
+    padding-left: 0;            /* empêche le slide à gauche */
+    background: transparent;    /* empêche le background hover */
+    border-color: rgba(255, 254, 249, 0.08); /* garde la bordure normale */
+}
+
+.disabled-project:hover .project-title {
+    color: rgba(255, 254, 249, 0.7); /* empêche le hover color */
+}
+
+/* (optionnel) si tu veux quand même voir la description au hover */
+.disabled-project:hover .project-description {
+    opacity: 1;
+    max-height: 300px;
+}
