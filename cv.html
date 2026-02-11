@@ -33,389 +33,351 @@
         "email": "info@kimmaurice.com"
     }
     </script>
+<style>
+/* ==========================================================================
+   CV PAGE PATCH — compatible avec ton thème BLANC de style.css
+   (Remplace ton <style> actuel par celui-ci)
+   ========================================================================== */
 
-    <style>
-        /* Optimisations de performance */
-        * {
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
+/* Optimisations de performance */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-        /* Réduire la complexité du starfield pour de meilleures performances */
-        .starfield {
-            opacity: 0.4 !important;
-        }
+/* Starfield plus subtil sur fond blanc */
+.starfield {
+  opacity: 0.12 !important;
+}
+.starfield::before { animation-duration: 200s !important; }
+.starfield::after  { animation-duration: 250s !important; }
 
-        .starfield::before {
-            animation-duration: 200s !important;
-        }
+/* Optimiser les transitions */
+.expertise-card,
+.timeline-item,
+.exploration-card {
+  transition: all 0.3s ease !important;
+  will-change: transform;
+}
 
-        .starfield::after {
-            animation-duration: 250s !important;
-        }
+/* ==========================================================================
+   Base layout
+   ========================================================================== */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
 
-        /* Optimiser les transitions */
-        .expertise-card,
-        .timeline-item,
-        .exploration-card {
-            transition: all 0.3s ease !important;
-            will-change: transform;
-        }
+.section-header {
+  margin-bottom: 3rem;
+  text-align: center;
+}
 
-        /* Optimiser les cartes au hover */
-        .expertise-card:hover,
-        .exploration-card:hover {
-            transform: translateY(-3px) !important;
-        }
+.section-header h2 {
+  font-size: 2.5rem;
+  font-weight: 300;
+  color: var(--marine); /* noir */
+  margin-bottom: 1rem;
+}
 
-        /* Styles spécifiques à la page CV */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
+/* ==========================================================================
+   HERO
+   ========================================================================== */
+.hero {
+  position: relative;
+  z-index: 10;
+  padding: 4rem 2rem;
+  text-align: center;
+}
 
-        .section-header {
-            margin-bottom: 3rem;
-            text-align: center;
-        }
+.hero-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
 
-        .section-header h2 {
-            font-size: 2.5rem;
-            font-weight: 300;
-            color: var(--cream);
-            margin-bottom: 1rem;
-        }
+.hero-title {
+  font-size: 3rem;
+  font-weight: 300;
+  color: var(--marine);
+  margin-bottom: 1rem;
+}
 
-        /* Hero Section */
-        .hero {
-            position: relative;
-            z-index: 10;
-            padding: 4rem 2rem;
-            text-align: center;
-        }
+.hero-subtitle,
+.hero-location {
+  color: var(--grey);
+}
 
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
+/* ==========================================================================
+   Buttons (adaptés au thème blanc)
+   ========================================================================== */
+.btn {
+  display: inline-block;
+  padding: 1rem 2rem;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
 
-        .hero-title {
-            font-size: 3rem;
-            font-weight: 300;
-            color: var(--cream);
-            margin-bottom: 1rem;
-        }
+/* On garde ton accent néon */
+.btn-primary {
+  background: linear-gradient(135deg, var(--neon-green), #2ecc71);
+  color: #000;
+  box-shadow: 0 0 30px rgba(57, 255, 20, 0.25);
+}
+.btn-primary:hover { transform: translateY(-3px); }
 
-        .hero-subtitle {
-            font-size: 1.2rem;
-            color: var(--grey);
-            margin-bottom: 1rem;
-        }
+/* Secondary : propre sur fond blanc */
+.btn-secondary {
+  background: rgba(0, 0, 0, 0.03);
+  border: 1px solid var(--border-light);
+  color: var(--marine);
+}
+.btn-secondary:hover {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: var(--neon-green);
+  color: var(--marine);
+}
 
-        .hero-location {
-            font-size: 1rem;
-            color: var(--grey);
-            margin-bottom: 2rem;
-        }
+/* ==========================================================================
+   Sections spacing
+   ========================================================================== */
+.expertise,
+.experience,
+.explorations,
+.footer-cta {
+  padding: 6rem 2rem;
+  position: relative;
+  z-index: 10;
+}
 
-        /* Buttons */
-        .btn {
-            display: inline-block;
-            padding: 1rem 2rem;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
+/* ==========================================================================
+   Expertise Grid (cartes en blanc)
+   ========================================================================== */
+.expertise-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
 
-        .btn-primary {
-            background: linear-gradient(135deg, var(--neon-green), #2ecc71);
-            color: var(--bg);
-            box-shadow: 0 0 30px rgba(57, 255, 20, 0.3);
-        }
+.expertise-card {
+  background: rgba(0, 0, 0, 0.02);
+  border: 1px solid var(--border-light);
+  border-radius: 15px;
+  padding: 2rem;
+}
 
-        .btn-primary:hover {
-            transform: translateY(-3px);
-        }
+.expertise-card:hover {
+  background: rgba(0, 0, 0, 0.03);
+  border-color: rgba(57, 255, 20, 0.6);
+  transform: translateY(-3px) !important;
+}
 
-        .btn-secondary {
-            background: rgba(255, 254, 249, 0.05);
-            border: 1px solid rgba(255, 254, 249, 0.2);
-            color: var(--cream);
-        }
+.expertise-number {
+  font-size: 3rem;
+  font-weight: 300;
+  color: var(--neon-green);
+  opacity: 0.35;
+  margin-bottom: 1rem;
+}
 
-        .btn-secondary:hover {
-            background: rgba(255, 254, 249, 0.1);
-            border-color: var(--neon-green);
-            color: var(--neon-green);
-        }
+.expertise-card h3 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--marine);
+  margin-bottom: 1rem;
+}
 
-        /* Expertise Grid */
-        .expertise {
-            padding: 6rem 2rem;
-            position: relative;
-            z-index: 10;
-        }
+.expertise-card ul { list-style: none; padding: 0; }
 
-        .expertise-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
+.expertise-card li {
+  padding: 0.5rem 0;
+  color: var(--grey);
+  position: relative;
+  padding-left: 1.5rem;
+}
+.expertise-card li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: var(--neon-green);
+}
 
-        .expertise-card {
-            background: rgba(22, 33, 62, 0.3);
-            border: 1px solid rgba(255, 254, 249, 0.1);
-            border-radius: 15px;
-            padding: 2rem;
-            transition: all 0.3s ease;
-        }
+/* ==========================================================================
+   Experience Timeline (lisible sur blanc)
+   ========================================================================== */
+.experience-timeline {
+  position: relative;
+  padding-left: 2rem;
+}
 
-        .expertise-card:hover {
-            background: rgba(22, 33, 62, 0.5);
-            border-color: var(--neon-green);
-            transform: translateY(-5px);
-        }
+.experience-timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, rgba(57,255,20,0.9), transparent);
+}
 
-        .expertise-number {
-            font-size: 3rem;
-            font-weight: 300;
-            color: var(--neon-green);
-            opacity: 0.3;
-            margin-bottom: 1rem;
-        }
+.timeline-item {
+  position: relative;
+  margin-bottom: 4rem;
+  padding-left: 2rem;
+}
 
-        .expertise-card h3 {
-            font-size: 1.5rem;
-            font-weight: 500;
-            color: var(--cream);
-            margin-bottom: 1rem;
-        }
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -2.5rem;
+  top: 0.2rem;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--neon-green);
+  box-shadow: 0 0 18px rgba(57, 255, 20, 0.35);
+}
 
-        .expertise-card ul {
-            list-style: none;
-            padding: 0;
-        }
+.timeline-date {
+  font-size: 0.9rem;
+  color: rgba(57, 255, 20, 0.9);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  margin-bottom: 0.5rem;
+}
 
-        .expertise-card li {
-            padding: 0.5rem 0;
-            color: var(--grey);
-            position: relative;
-            padding-left: 1.5rem;
-        }
+.timeline-content h3 {
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: var(--marine);
+  margin-bottom: 0.4rem;
+}
 
-        .expertise-card li::before {
-            content: "→";
-            position: absolute;
-            left: 0;
-            color: var(--neon-green);
-        }
+.timeline-content h4 {
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--grey);
+  margin-bottom: 1rem;
+}
 
-        /* Experience Timeline */
-        .experience {
-            padding: 6rem 2rem;
-            position: relative;
-            z-index: 10;
-        }
+.timeline-list { list-style: none; padding: 0; }
 
-        .experience-timeline {
-            position: relative;
-            padding-left: 2rem;
-        }
+.timeline-list li {
+  padding: 0.5rem 0;
+  color: var(--grey);
+  position: relative;
+  padding-left: 1.5rem;
+}
+.timeline-list li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--neon-green);
+}
 
-        .experience-timeline::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(to bottom, var(--neon-green), transparent);
-        }
+/* ==========================================================================
+   Explorations (cartes en blanc)
+   ========================================================================== */
+.exploration-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
 
-        .timeline-item {
-            position: relative;
-            margin-bottom: 4rem;
-            padding-left: 2rem;
-        }
+.exploration-card {
+  background: rgba(0, 0, 0, 0.02);
+  border: 1px solid var(--border-light);
+  border-radius: 15px;
+  padding: 1.5rem;
+}
 
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -2.5rem;
-            top: 0;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: var(--neon-green);
-            box-shadow: 0 0 20px rgba(57, 255, 20, 0.5);
-        }
+.exploration-card:hover {
+  background: rgba(0, 0, 0, 0.03);
+  border-color: rgba(57,255,20,0.6);
+  transform: translateY(-3px) !important;
+}
 
-        .timeline-date {
-            font-size: 0.9rem;
-            color: var(--neon-green);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.1rem;
-            margin-bottom: 0.5rem;
-        }
+.exploration-card h4 {
+  font-size: 1.2rem;
+  color: var(--marine);
+  margin-bottom: 0.5rem;
+}
+.exploration-card p {
+  font-size: 0.95rem;
+  color: var(--grey);
+}
 
-        .timeline-content h3 {
-            font-size: 1.8rem;
-            font-weight: 500;
-            color: var(--cream);
-            margin-bottom: 0.5rem;
-        }
+/* ==========================================================================
+   Footer CTA
+   ========================================================================== */
+.footer-cta {
+  text-align: center;
+}
 
-        .timeline-content h4 {
-            font-size: 1.2rem;
-            font-weight: 400;
-            color: var(--grey);
-            margin-bottom: 1rem;
-        }
+.footer-content h2 {
+  font-size: 2.5rem;
+  font-weight: 300;
+  color: var(--marine);
+  margin-bottom: 2rem;
+}
 
-        .timeline-list {
-            list-style: none;
-            padding: 0;
-        }
+.cta-group {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+}
 
-        .timeline-list li {
-            padding: 0.5rem 0;
-            color: var(--grey);
-            position: relative;
-            padding-left: 1.5rem;
-        }
+/* tes liens de footer dans cv.html */
+.footer-links {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
 
-        .timeline-list li::before {
-            content: "•";
-            position: absolute;
-            left: 0;
-            color: var(--neon-green);
-        }
+.footer-link {
+  color: var(--grey);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.footer-link:hover { color: var(--neon-green); }
 
-        /* Explorations */
-        .explorations {
-            padding: 6rem 2rem;
-            position: relative;
-            z-index: 10;
-        }
+.footer-copyright {
+  color: var(--grey);
+  font-size: 0.9rem;
+}
+.footer-copyright a {
+  color: var(--grey);
+  text-decoration: none;
+}
+.footer-copyright a:hover { color: var(--neon-green); }
 
-        .exploration-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+@media (max-width: 768px) {
+  .hero-title { font-size: 2rem; }
+  .section-header h2 { font-size: 2rem; }
+  .expertise-grid { grid-template-columns: 1fr; }
+  .timeline-content h3 { font-size: 1.4rem; }
 
-        .exploration-card {
-            background: rgba(22, 33, 62, 0.2);
-            border: 1px solid rgba(255, 254, 249, 0.1);
-            border-radius: 15px;
-            padding: 1.5rem;
-            transition: all 0.3s ease;
-        }
+  .cta-group {
+    flex-direction: column;
+    align-items: center;
+  }
 
-        .exploration-card:hover {
-            background: rgba(22, 33, 62, 0.4);
-            border-color: var(--neon-green);
-            transform: translateY(-3px);
-        }
-
-        .exploration-card h4 {
-            font-size: 1.2rem;
-            color: var(--cream);
-            margin-bottom: 0.5rem;
-        }
-
-        .exploration-card p {
-            font-size: 0.9rem;
-            color: var(--grey);
-        }
-
-        /* Footer CTA */
-        .footer-cta {
-            padding: 6rem 2rem;
-            position: relative;
-            z-index: 10;
-            text-align: center;
-        }
-
-        .footer-content h2 {
-            font-size: 2.5rem;
-            font-weight: 300;
-            color: var(--cream);
-            margin-bottom: 2rem;
-        }
-
-        .cta-group {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 3rem;
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 2rem;
-            justify-content: center;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .footer-link {
-            color: var(--grey);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .footer-link:hover {
-            color: var(--neon-green);
-        }
-
-        .footer-copyright {
-            color: var(--grey);
-            font-size: 0.9rem;
-        }
-
-        .footer-copyright a {
-            color: var(--grey);
-            text-decoration: none;
-        }
-
-        .footer-copyright a:hover {
-            color: var(--neon-green);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero-title {
-                font-size: 2rem;
-            }
-
-            .section-header h2 {
-                font-size: 2rem;
-            }
-
-            .expertise-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .timeline-content h3 {
-                font-size: 1.4rem;
-            }
-
-            .cta-group {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .btn {
-                width: 100%;
-                max-width: 300px;
-            }
-        }
-    </style>
+  .btn {
+    width: 100%;
+    max-width: 320px;
+  }
+}
+</style>
 </head>    
 
 <body class="lang-fr">
