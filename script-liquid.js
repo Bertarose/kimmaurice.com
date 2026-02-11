@@ -32,7 +32,7 @@ const projectDescriptions = {
       "Pages landing programmées pour publicités, pétitions et campagnes d'impact social. Déploiement rapide sur Vercel avec code optimisé.",
     introText:
       "Designer multimédia et technologue créative explorant les intersections entre art, technologie et expérience.",
-    locationText: "Apprentissage continu",
+    locationText: "Montréal — Projets en cours, apprentissages actifs et explorations récentes autour des assistants IA, de l’expérimentation immersive et de formes numériques hors norme.",
     ctaPrimaryText: "Voir mon parcours complet (CV)",
     ctaSecondaryText: "ou découvrir mes projets ↓",
     bridgeTitle: "Envie d'en savoir plus sur mon parcours ?",
