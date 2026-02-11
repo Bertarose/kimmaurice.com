@@ -304,26 +304,35 @@ document.addEventListener('DOMContentLoaded', () => {
   const canvas = document.getElementById("molecules");
   if (!canvas) return;
 
-  const ctx = canvas.getContext("2d", { alpha: true });
-
-  // Respecte "reduce motion"
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (reduceMotion) return;
 
-  // Config
-  const DOTS = 64;              // 40–90
-  const RADIUS = 90;            // rayon du nuage
-  const EASE = 0.08;            // suivi souris (0.05 lent, 0.12 plus rapide)
-  const FLOW = 0.008;           // vitesse de fluide
-  const JITTER = 0.9;           // agitation organique
-  const DOT_MIN = 1.2;          // taille point min
-  const DOT_MAX = 2.2;          // taille point max
+  const ctx = canvas.getContext("2d", { alpha: true });
 
-  let w = 0, h = 0, dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+  // ---- Réglages (feel) ----
+  const DOTS = 100;         // tu voulais ~100
+  const CLUSTER = 48;       // "taille" du nuage (plus petit = plus compact)
+  const DOT_MIN = 1.2;
+  const DOT_MAX = 2.2;
+
+  // Suivi: spring + damping (accélération/décélération naturelle)
+  const SPRING = 0.12;      // force vers la souris (0.08 doux, 0.14 plus nerveux)
+  const DAMPING = 0.78;     // friction (0.75 plus amorti, 0.85 plus glissant)
+
+  // Mouvement organique interne (très subtil)
+  const DRIFT = 0.012;      // vitesse
+  const WIGGLE = 6;         // amplitude (3–10)
+
+  // Couleur
+  const DOT_COLOR = "rgba(0,0,0,0.55)"; // noir doux (monte à 0.7 si tu veux plus noir)
+
+  // ---- Canvas setup ----
+  let w = 0, h = 0;
+  let dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
 
   function resize() {
-    w = Math.floor(window.innerWidth);
-    h = Math.floor(window.innerHeight);
+    w = window.innerWidth;
+    h = window.innerHeight;
     canvas.width = Math.floor(w * dpr);
     canvas.height = Math.floor(h * dpr);
     canvas.style.width = w + "px";
@@ -333,91 +342,80 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener("resize", resize, { passive: true });
   resize();
 
-  // Position cible (souris)
-  const target = { x: w * 0.5, y: h * 0.35 };
-  const center = { x: target.x, y: target.y };
+  // ---- Target (souris) + position actuelle (centre du cluster) ----
+  const target = { x: w * 0.5, y: h * 0.4 };
+  const center = { x: target.x, y: target.y, vx: 0, vy: 0 };
 
-  // Suivi souris + fallback mobile (touche)
+  // Suivi souris / touch
   window.addEventListener("mousemove", (e) => {
     target.x = e.clientX;
     target.y = e.clientY;
   }, { passive: true });
 
   window.addEventListener("touchmove", (e) => {
-    if (!e.touches || !e.touches[0]) return;
-    target.x = e.touches[0].clientX;
-    target.y = e.touches[0].clientY;
+    const t = e.touches && e.touches[0];
+    if (!t) return;
+    target.x = t.clientX;
+    target.y = t.clientY;
   }, { passive: true });
 
-  // Points init : cercle + variations
-  const dots = Array.from({ length: DOTS }, (_, i) => {
-    const a = (i / DOTS) * Math.PI * 2;
-    const r = RADIUS * (0.55 + Math.random() * 0.55);
+  // ---- Points: distribution "dense" sans trou au centre ----
+  // Technique: rayon = sqrt(rand) -> densité uniforme dans un disque
+  const dots = Array.from({ length: DOTS }, () => {
+    const a = Math.random() * Math.PI * 2;
+    const r = Math.sqrt(Math.random()) * CLUSTER; // pas de centre vide
     return {
-      baseA: a,
-      baseR: r,
-      x: center.x + Math.cos(a) * r,
-      y: center.y + Math.sin(a) * r,
+      ox: Math.cos(a) * r,       // offset de base autour du centre
+      oy: Math.sin(a) * r,
+      x: center.x,
+      y: center.y,
       vx: 0,
       vy: 0,
       size: DOT_MIN + Math.random() * (DOT_MAX - DOT_MIN),
-      phase: Math.random() * 1000,
+      seed: Math.random() * 1000
     };
   });
 
-  let t = 0;
+  let tick = 0;
 
-  function draw() {
-    t += 1;
+  function animate() {
+    tick++;
 
-    // centre suit la souris avec easing
-    center.x += (target.x - center.x) * EASE;
-    center.y += (target.y - center.y) * EASE;
+    // ---- Centre: spring vers target (accélération + freinage) ----
+    const dx = target.x - center.x;
+    const dy = target.y - center.y;
 
+    center.vx += dx * SPRING;
+    center.vy += dy * SPRING;
+
+    center.vx *= DAMPING;
+    center.vy *= DAMPING;
+
+    center.x += center.vx;
+    center.y += center.vy;
+
+    // ---- Draw ----
     ctx.clearRect(0, 0, w, h);
+    ctx.fillStyle = DOT_COLOR;
 
-    // style minimal noir (sur fond blanc)
-    // (si tu veux plus soft: rgba(0,0,0,0.35))
-    ctx.fillStyle = "rgba(0,0,0,0.35)";
-
-    // légère liaison entre points proches (optionnel, très discret)
-    // Active si tu veux un effet "molecule bonds"
-    const link = true;
-    if (link) {
-      ctx.lineWidth = 1;
-      for (let i = 0; i < dots.length; i++) {
-        for (let j = i + 1; j < dots.length; j++) {
-          const dx = dots[i].x - dots[j].x;
-          const dy = dots[i].y - dots[j].y;
-          const dist = Math.hypot(dx, dy);
-          if (dist < 42) {
-            const a = (1 - dist / 42) * 0.15; // très léger
-            ctx.strokeStyle = `rgba(0,0,0,${a})`;
-            ctx.beginPath();
-            ctx.moveTo(dots[i].x, dots[i].y);
-            ctx.lineTo(dots[j].x, dots[j].y);
-            ctx.stroke();
-          }
-        }
-      }
-    }
-
-    // points
+    // Points: suivent le centre + petit wiggle interne
     for (const p of dots) {
-      // mouvement organique (pseudo “fluide”)
-      const a = p.baseA + Math.sin((t * FLOW) + p.phase) * 0.55;
-      const r = p.baseR + Math.cos((t * FLOW) + p.phase * 1.2) * (JITTER * 6);
+      const t = tick * DRIFT + p.seed;
 
-      const tx = center.x + Math.cos(a) * r;
-      const ty = center.y + Math.sin(a) * r;
+      // wiggle très subtil (organique)
+      const wx = Math.sin(t) * WIGGLE * 0.15;
+      const wy = Math.cos(t * 1.07) * WIGGLE * 0.15;
 
-      // petit spring vers la target
-      p.vx += (tx - p.x) * 0.02;
-      p.vy += (ty - p.y) * 0.02;
+      // cible point = centre + offset + wiggle
+      const tx = center.x + p.ox + wx;
+      const ty = center.y + p.oy + wy;
 
-      // damping
-      p.vx *= 0.88;
-      p.vy *= 0.88;
+      // point spring (moins fort que centre)
+      p.vx += (tx - p.x) * 0.10;
+      p.vy += (ty - p.y) * 0.10;
+
+      p.vx *= 0.70;
+      p.vy *= 0.70;
 
       p.x += p.vx;
       p.y += p.vy;
@@ -427,8 +425,8 @@ document.addEventListener('DOMContentLoaded', () => {
       ctx.fill();
     }
 
-    requestAnimationFrame(draw);
+    requestAnimationFrame(animate);
   }
 
-  requestAnimationFrame(draw);
+  requestAnimationFrame(animate);
 })();
