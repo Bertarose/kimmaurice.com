@@ -298,3 +298,137 @@ document.addEventListener('DOMContentLoaded', () => {
 
     console.log("✅ All features initialized");
 });
+
+
+(function initMoleculesBackground() {
+  const canvas = document.getElementById("molecules");
+  if (!canvas) return;
+
+  const ctx = canvas.getContext("2d", { alpha: true });
+
+  // Respecte "reduce motion"
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduceMotion) return;
+
+  // Config
+  const DOTS = 64;              // 40–90
+  const RADIUS = 90;            // rayon du nuage
+  const EASE = 0.08;            // suivi souris (0.05 lent, 0.12 plus rapide)
+  const FLOW = 0.008;           // vitesse de fluide
+  const JITTER = 0.9;           // agitation organique
+  const DOT_MIN = 1.2;          // taille point min
+  const DOT_MAX = 2.2;          // taille point max
+
+  let w = 0, h = 0, dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+
+  function resize() {
+    w = Math.floor(window.innerWidth);
+    h = Math.floor(window.innerHeight);
+    canvas.width = Math.floor(w * dpr);
+    canvas.height = Math.floor(h * dpr);
+    canvas.style.width = w + "px";
+    canvas.style.height = h + "px";
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  window.addEventListener("resize", resize, { passive: true });
+  resize();
+
+  // Position cible (souris)
+  const target = { x: w * 0.5, y: h * 0.35 };
+  const center = { x: target.x, y: target.y };
+
+  // Suivi souris + fallback mobile (touche)
+  window.addEventListener("mousemove", (e) => {
+    target.x = e.clientX;
+    target.y = e.clientY;
+  }, { passive: true });
+
+  window.addEventListener("touchmove", (e) => {
+    if (!e.touches || !e.touches[0]) return;
+    target.x = e.touches[0].clientX;
+    target.y = e.touches[0].clientY;
+  }, { passive: true });
+
+  // Points init : cercle + variations
+  const dots = Array.from({ length: DOTS }, (_, i) => {
+    const a = (i / DOTS) * Math.PI * 2;
+    const r = RADIUS * (0.55 + Math.random() * 0.55);
+    return {
+      baseA: a,
+      baseR: r,
+      x: center.x + Math.cos(a) * r,
+      y: center.y + Math.sin(a) * r,
+      vx: 0,
+      vy: 0,
+      size: DOT_MIN + Math.random() * (DOT_MAX - DOT_MIN),
+      phase: Math.random() * 1000,
+    };
+  });
+
+  let t = 0;
+
+  function draw() {
+    t += 1;
+
+    // centre suit la souris avec easing
+    center.x += (target.x - center.x) * EASE;
+    center.y += (target.y - center.y) * EASE;
+
+    ctx.clearRect(0, 0, w, h);
+
+    // style minimal noir (sur fond blanc)
+    // (si tu veux plus soft: rgba(0,0,0,0.35))
+    ctx.fillStyle = "rgba(0,0,0,0.35)";
+
+    // légère liaison entre points proches (optionnel, très discret)
+    // Active si tu veux un effet "molecule bonds"
+    const link = true;
+    if (link) {
+      ctx.lineWidth = 1;
+      for (let i = 0; i < dots.length; i++) {
+        for (let j = i + 1; j < dots.length; j++) {
+          const dx = dots[i].x - dots[j].x;
+          const dy = dots[i].y - dots[j].y;
+          const dist = Math.hypot(dx, dy);
+          if (dist < 42) {
+            const a = (1 - dist / 42) * 0.15; // très léger
+            ctx.strokeStyle = `rgba(0,0,0,${a})`;
+            ctx.beginPath();
+            ctx.moveTo(dots[i].x, dots[i].y);
+            ctx.lineTo(dots[j].x, dots[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+    }
+
+    // points
+    for (const p of dots) {
+      // mouvement organique (pseudo “fluide”)
+      const a = p.baseA + Math.sin((t * FLOW) + p.phase) * 0.55;
+      const r = p.baseR + Math.cos((t * FLOW) + p.phase * 1.2) * (JITTER * 6);
+
+      const tx = center.x + Math.cos(a) * r;
+      const ty = center.y + Math.sin(a) * r;
+
+      // petit spring vers la target
+      p.vx += (tx - p.x) * 0.02;
+      p.vy += (ty - p.y) * 0.02;
+
+      // damping
+      p.vx *= 0.88;
+      p.vy *= 0.88;
+
+      p.x += p.vx;
+      p.y += p.vy;
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    requestAnimationFrame(draw);
+  }
+
+  requestAnimationFrame(draw);
+})();
