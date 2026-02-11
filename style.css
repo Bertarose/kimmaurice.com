@@ -54,8 +54,37 @@ img {
 }
 
 /* ==========================================================================
-   2. STARFIELD (plus subtil en blanc)
+   2. LIQUID GRADIENT BACKGROUND (Three.js Canvas)
    ========================================================================== */
+
+#liquidCanvas {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: auto;
+}
+
+/* ==========================================================================
+   2. BACKGROUNDS ANIMÉS (WAVES + MOLECULES)
+   ========================================================================== */
+
+canvas { display: block; }
+
+#waves,
+#molecules {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+#waves { z-index: 0; opacity: 0.25; }
+#molecules { z-index: 1; opacity: 0.6; }
+
+/* Starfield (plus subtil en blanc) */
 .starfield {
     position: fixed;
     inset: 0;
@@ -85,6 +114,12 @@ img {
 @keyframes float-stars {
     from { background-position: 0 0; }
     to { background-position: 100% 100%; }
+}
+
+/* Contenu toujours au-dessus */
+header, nav, main, section, footer {
+    position: relative;
+    z-index: 10;
 }
 
 /* ==========================================================================
@@ -155,7 +190,105 @@ header {
 }
 
 /* ==========================================================================
-   4. TICKER
+   4. NAV (CV.HTML)
+   ========================================================================== */
+
+.nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(255,255,255,0.9);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-light);
+}
+
+.nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo .logo-img {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.nav-link {
+    font-size: 0.9rem;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+}
+
+.nav-link:hover { 
+    opacity: 1; 
+}
+
+.nav-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.lang-switch {
+    background: transparent;
+    border: 1px solid var(--border-light);
+    color: var(--grey);
+    padding: 0.6rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.lang-switch:hover {
+    background: var(--neon-green);
+    color: white;
+    border-color: var(--neon-green);
+}
+
+/* ==========================================================================
+   5. BURGER MENU
+   ========================================================================== */
+
+.mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 3000;
+    position: relative;
+}
+
+.mobile-menu-toggle span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--marine);
+    margin: 5px 0;
+    transition: 0.3s;
+}
+
+.mobile-menu-toggle.active span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+.mobile-menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+.mobile-menu-toggle.active span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ==========================================================================
+   6. TICKER
    ========================================================================== */
 .ticker-container {
     background: rgba(0, 0, 0, 0.02);
@@ -181,7 +314,7 @@ header {
 }
 
 /* ==========================================================================
-   5. LAYOUT
+   7. LAYOUT
    ========================================================================== */
 main {
     padding: 6rem 4rem;
@@ -228,7 +361,7 @@ main {
 }
 
 /* ==========================================================================
-   6. PROJECTS
+   8. PROJECTS
    ========================================================================== */
 .projects {
     margin-top: 6rem;
@@ -327,8 +460,25 @@ main {
     background: transparent;
 }
 
+/* Collaborations */
+.collab-item {
+    border: 1px solid var(--border-light);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-top: 2rem;
+}
+
+.collab-summary {
+    cursor: pointer;
+    list-style: none;
+}
+
+.collab-panel {
+    margin-top: 2rem;
+}
+
 /* ==========================================================================
-   7. CV BRIDGE
+   9. CV BRIDGE
    ========================================================================== */
 .cv-bridge {
     margin: 8rem 0;
@@ -350,7 +500,213 @@ main {
 }
 
 /* ==========================================================================
-   8. FOOTER
+   10. CV PAGE STYLES
+   ========================================================================== */
+
+.hero {
+    padding: 8rem 4rem 6rem;
+    text-align: center;
+    background: rgba(255,255,255,0.9);
+}
+
+.hero-title {
+    font-size: 4rem;
+    font-weight: 300;
+    margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+    font-size: 1.5rem;
+    color: var(--grey);
+    margin-bottom: 1rem;
+}
+
+.hero-location {
+    color: var(--grey);
+    margin-bottom: 2rem;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 1rem 2rem;
+    border-radius: 30px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s;
+}
+
+.btn-primary {
+    background: var(--neon-green);
+    color: black;
+}
+
+.btn-secondary {
+    background: var(--glass);
+    border: 1px solid var(--border-light);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+/* Sections */
+.expertise, .experience, .explorations {
+    padding: 6rem 4rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.section-header h2 {
+    font-size: 3rem;
+    font-weight: 300;
+}
+
+/* Expertise Grid */
+.expertise-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.expertise-card {
+    background: rgba(0, 0, 0, 0.02);
+    border: 1px solid var(--border-light);
+    border-radius: 12px;
+    padding: 2rem;
+    transition: all 0.3s;
+}
+
+.expertise-card:hover {
+    border-color: var(--neon-green);
+    transform: translateY(-4px);
+}
+
+.expertise-number {
+    color: var(--grey);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+}
+
+.expertise-card h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.expertise-card ul {
+    list-style: none;
+}
+
+.expertise-card li {
+    padding: 0.5rem 0;
+    color: var(--grey);
+    border-bottom: 1px solid var(--border-light);
+}
+
+.expertise-card li:last-child {
+    border-bottom: none;
+}
+
+/* Timeline */
+.experience-timeline {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.timeline-item {
+    display: flex;
+    gap: 2rem;
+    padding: 2rem 0;
+    border-left: 2px solid var(--border-light);
+    padding-left: 2rem;
+    margin-left: 2rem;
+    position: relative;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -6px;
+    top: 2rem;
+    width: 10px;
+    height: 10px;
+    background: var(--neon-green);
+    border-radius: 50%;
+}
+
+.timeline-date {
+    font-family: var(--font-mono);
+    color: var(--grey);
+    min-width: 120px;
+}
+
+.timeline-content h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.timeline-content h4 {
+    color: var(--grey);
+    font-weight: 400;
+}
+
+/* Footer CTA */
+.footer-cta {
+    padding: 6rem 4rem;
+    background: rgba(0, 0, 0, 0.02);
+    text-align: center;
+}
+
+.footer-content h2 {
+    font-size: 3rem;
+    font-weight: 300;
+    margin-bottom: 2rem;
+}
+
+.cta-group {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.footer-links {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.footer-links a {
+    color: var(--grey);
+}
+
+.footer-links a:hover {
+    color: var(--neon-green);
+}
+
+.footer-copyright {
+    color: var(--grey);
+    font-size: 0.9rem;
+}
+
+/* ==========================================================================
+   11. FOOTER
    ========================================================================== */
 footer {
     padding: 4rem;
@@ -371,9 +727,37 @@ footer {
 }
 
 /* ==========================================================================
-   9. MOBILE
+   12. MOBILE
    ========================================================================== */
 @media (max-width: 768px) {
+
+    .mobile-menu-toggle { 
+        display: block; 
+    }
+
+    .nav-menu {
+        position: fixed;
+        inset: 0;
+        background: rgba(255,255,255,0.98);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transform: translateX(100%);
+        transition: transform 0.35s ease;
+        z-index: 2000;
+        gap: 2rem;
+    }
+
+    .nav-menu.active {
+        transform: translateX(0);
+    }
+
+    .nav-link {
+        font-size: 1.2rem;
+        opacity: 0.9;
+    }
+
     header, main, footer {
         padding: 2rem;
     }
@@ -401,45 +785,472 @@ footer {
     .project-item:hover {
         padding-left: 0;
     }
+
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .expertise-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .timeline-item {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .timeline-date {
+        min-width: auto;
+    }
 }
 
-/* Molecules background (minimal) */
-#molecules {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;            /* derrière ton contenu */
-  pointer-events: none;  /* ne bloque pas les clics */
-  opacity: 0.35;         /* ajuste à ton goût */
+/* bloque scroll quand menu ouvert */
+body.menu-open {
+    overflow: hidden;
 }
 
-/* Assure que ton contenu reste au-dessus */
-header, .nav, main, footer, section {
-  position: relative;
-  z-index: 10;
+/* ==========================================================================
+   13. CV PAGE SPECIFIC STYLES
+   ========================================================================== */
+
+/* CV Page: Cache le header de index.html si présent */
+body.cv-page header {
+    display: none !important;
 }
 
-/* =========================
-   WAVES BACKGROUND
-   ========================= */
-
-#waves {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
+/* Canvas et starfield sur CV */
+body.cv-page #molecules {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
 }
 
-/* Ondes ultra pâles */
-body {
-  background: #ffffff;
+body.cv-page .starfield { 
+    opacity: 0.10 !important; 
+    z-index: 2; 
 }
 
-/* Canvas des points */
-#molecules {
-  position: fixed;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
+body.cv-page .starfield::before { 
+    animation-duration: 200s !important; 
 }
+
+body.cv-page .starfield::after { 
+    animation-duration: 250s !important; 
+}
+
+/* Contenu CV au-dessus du canvas */
+body.cv-page .hero, 
+body.cv-page .expertise, 
+body.cv-page .experience, 
+body.cv-page .explorations, 
+body.cv-page .footer-cta, 
+body.cv-page .nav { 
+    position: relative; 
+    z-index: 10; 
+}
+
+/* Nav spécifique CV */
+body.cv-page .nav {
+    transform: none !important;
+}
+
+body.cv-page .nav-container {
+    gap: 1.5rem;
+}
+
+body.cv-page .logo-img {
+    width: 44px !important;
+    height: 44px !important;
+}
+
+body.cv-page .nav-menu {
+    align-items: center;
+    gap: 1.3rem;
+}
+
+body.cv-page .nav-link {
+    font-size: 0.95rem;
+    white-space: nowrap;
+}
+
+body.cv-page .lang-switch {
+    background: rgba(0,0,0,0.03) !important;
+    border: 1px solid rgba(0,0,0,0.12) !important;
+    padding: 0.5rem 0.9rem;
+}
+
+/* Mobile menu CV - FIX iOS */
+@media (max-width: 768px) {
+    body.cv-page .nav-menu {
+        position: fixed !important;
+        inset: 0 !important;
+        width: 100% !important;
+        height: 100svh !important;
+        background: rgba(255,255,255,0.98) !important;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        
+        display: none !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 1.6rem !important;
+        
+        z-index: 3500 !important;
+    }
+    
+    body.cv-page .nav-menu.active { 
+        display: flex !important; 
+    }
+    
+    body.cv-page .nav-link {
+        font-size: 1.25rem !important;
+        opacity: 0.9 !important;
+    }
+    
+    body.cv-page.menu-open {
+        overflow: hidden;
+        touch-action: none;
+    }
+}
+
+/* Layout CV */
+.container { 
+    max-width: 1200px; 
+    margin: 0 auto; 
+    padding: 0 2rem; 
+}
+
+.section-header { 
+    margin-bottom: 3rem; 
+    text-align: center; 
+}
+
+.section-header h2 {
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: var(--marine);
+    margin-bottom: 1rem;
+}
+
+/* Hero CV */
+.hero { 
+    padding: 4rem 2rem; 
+    text-align: center; 
+}
+
+.hero-content { 
+    max-width: 900px; 
+    margin: 0 auto; 
+}
+
+.hero-title {
+    font-size: 3rem;
+    font-weight: 300;
+    color: var(--marine);
+    margin-bottom: 1rem;
+}
+
+.hero-subtitle, 
+.hero-location { 
+    color: var(--grey); 
+    margin-bottom: 1rem; 
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+/* Boutons CV */
+.btn {
+    display: inline-block;
+    padding: 1rem 2rem;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--neon-green), #2ecc71);
+    color: #000;
+    box-shadow: 0 0 30px rgba(57, 255, 20, 0.25);
+}
+
+.btn-primary:hover { 
+    transform: translateY(-3px); 
+}
+
+.btn-secondary {
+    background: rgba(0,0,0,0.03);
+    border: 1px solid var(--border-light);
+    color: var(--marine);
+}
+
+.btn-secondary:hover {
+    background: rgba(0,0,0,0.05);
+    border-color: var(--neon-green);
+    color: var(--marine);
+}
+
+/* Sections CV */
+.expertise, 
+.experience, 
+.explorations, 
+.footer-cta {
+    padding: 6rem 2rem;
+}
+
+/* Expertise Grid */
+.expertise-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.expertise-card {
+    background: rgba(0,0,0,0.02);
+    border: 1px solid var(--border-light);
+    border-radius: 15px;
+    padding: 2rem;
+    transition: all 0.3s ease;
+    will-change: transform;
+}
+
+.expertise-card:hover {
+    background: rgba(0,0,0,0.03);
+    border-color: rgba(57,255,20,0.6);
+    transform: translateY(-3px);
+}
+
+.expertise-number {
+    font-size: 3rem;
+    font-weight: 300;
+    color: var(--neon-green);
+    opacity: 0.35;
+    margin-bottom: 1rem;
+}
+
+.expertise-card h3 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--marine);
+    margin-bottom: 1rem;
+}
+
+.expertise-card ul { 
+    list-style: none; 
+    padding: 0; 
+}
+
+.expertise-card li {
+    padding: 0.5rem 0;
+    color: var(--grey);
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.expertise-card li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--neon-green);
+}
+
+/* Timeline Experience */
+.experience-timeline { 
+    position: relative; 
+    padding-left: 2rem; 
+}
+
+.experience-timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, rgba(57,255,20,0.9), transparent);
+}
+
+.timeline-item { 
+    position: relative; 
+    margin-bottom: 4rem; 
+    padding-left: 2rem; 
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -2.5rem;
+    top: 0.2rem;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--neon-green);
+    box-shadow: 0 0 18px rgba(57,255,20,0.35);
+}
+
+.timeline-date {
+    font-size: 0.9rem;
+    color: rgba(57,255,20,0.95);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.timeline-content h3 {
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: var(--marine);
+    margin-bottom: 0.4rem;
+}
+
+.timeline-content h4 {
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--grey);
+    margin-bottom: 1rem;
+}
+
+.timeline-list { 
+    list-style: none; 
+    padding: 0; 
+}
+
+.timeline-list li {
+    padding: 0.5rem 0;
+    color: var(--grey);
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.timeline-list li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--neon-green);
+}
+
+/* Explorations */
+.exploration-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.exploration-card {
+    background: rgba(0,0,0,0.02);
+    border: 1px solid var(--border-light);
+    border-radius: 15px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    will-change: transform;
+}
+
+.exploration-card:hover {
+    background: rgba(0,0,0,0.03);
+    border-color: rgba(57,255,20,0.6);
+    transform: translateY(-3px);
+}
+
+.exploration-card h4 { 
+    font-size: 1.2rem; 
+    color: var(--marine); 
+    margin-bottom: 0.5rem; 
+}
+
+.exploration-card p { 
+    font-size: 0.95rem; 
+    color: var(--grey); 
+}
+
+/* Footer CTA CV */
+.footer-cta { 
+    text-align: center; 
+}
+
+.footer-content h2 {
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: var(--marine);
+    margin-bottom: 2rem;
+}
+
+.cta-group {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+}
+
+.footer-links {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.footer-link { 
+    color: var(--grey); 
+    text-decoration: none; 
+    transition: color 0.3s; 
+}
+
+.footer-link:hover { 
+    color: var(--neon-green); 
+}
+
+.footer-copyright { 
+    color: var(--grey); 
+    font-size: 0.9rem; 
+}
+
+.footer-copyright a { 
+    color: var(--grey); 
+    text-decoration: none; 
+}
+
+.footer-copyright a:hover { 
+    color: var(--neon-green); 
+}
+
+/* CV Mobile Responsive */
+@media (max-width: 768px) {
+    .hero-title { 
+        font-size: 2rem; 
+    }
+    
+    .section-header h2 { 
+        font-size: 2rem; 
+    }
+    
+    .expertise-grid { 
+        grid-template-columns: 1fr; 
+    }
+    
+    .timeline-content h3 { 
+        font-size: 1.4rem; 
+    }
+    
+    .cta-group { 
+        flex-direction: column; 
+        align-items: center; 
+    }
+    
+    .btn { 
+        width: 100%; 
+        max-width: 320px; 
+    }
+}
+
