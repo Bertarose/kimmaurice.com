@@ -402,3 +402,20 @@ footer {
         padding-left: 0;
     }
 }
+
+/* Molecules background (minimal) */
+#molecules {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;            /* derrière ton contenu */
+  pointer-events: none;  /* ne bloque pas les clics */
+  opacity: 0.35;         /* ajuste à ton goût */
+}
+
+/* Assure que ton contenu reste au-dessus */
+header, .nav, main, footer, section {
+  position: relative;
+  z-index: 10;
+}
