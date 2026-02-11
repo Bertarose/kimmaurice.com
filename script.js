@@ -300,7 +300,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-(function initMoleculesBackground() {
+(function swarmDots() {
   const canvas = document.getElementById("molecules");
   if (!canvas) return;
 
@@ -309,26 +309,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const ctx = canvas.getContext("2d", { alpha: true });
 
-  // ---- Réglages (feel) ----
-  const DOTS = 100;         // tu voulais ~100
-  const CLUSTER = 48;       // "taille" du nuage (plus petit = plus compact)
-  const DOT_MIN = 1.2;
-  const DOT_MAX = 2.2;
+  // ----- SETTINGS -----
+  const DOTS = 100;
 
-  // Suivi: spring + damping (accélération/décélération naturelle)
-  const SPRING = 0.12;      // force vers la souris (0.08 doux, 0.14 plus nerveux)
-  const DAMPING = 0.78;     // friction (0.75 plus amorti, 0.85 plus glissant)
+  // Taille du groupe (plus petit = plus serré)
+  const CLUSTER_RADIUS = 55;
 
-  // Mouvement organique interne (très subtil)
-  const DRIFT = 0.012;      // vitesse
-  const WIGGLE = 6;         // amplitude (3–10)
+  // Noir (augmente l'opacité si tu veux plus noir)
+  const DOT_COLOR_MIN = 0.55;
+  const DOT_COLOR_MAX = 0.95;
 
-  // Couleur
-  const DOT_COLOR = "rgba(0,0,0,0.55)"; // noir doux (monte à 0.7 si tu veux plus noir)
+  // Suivi de souris (groupe)
+  const TARGET_FORCE = 0.020;  // force vers la souris
+  const TARGET_DAMP  = 0.86;   // inertie globale
 
-  // ---- Canvas setup ----
+  // Comportement "vivant" (entre eux)
+  const COHESION = 0.004;      // rester ensemble
+  const SEPARATION = 0.035;    // éviter de se coller
+  const SEPARATION_DIST = 14;  // distance personnelle
+  const ALIGNMENT = 0.010;     // s’aligner un peu (effet essaim)
+
+  // Vitesse
+  const MAX_SPEED = 2.6;
+
+  // Agitation organique individuelle
+  const NOISE = 0.030;         // micro dérive
+  const NOISE_SPEED = 0.010;
+
+  // "Leader effect": celui le plus proche de la direction du mouvement tire un peu plus
+  const LEADER_PULL = 0.055;
+
+  // Perf
   let w = 0, h = 0;
-  let dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+  const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
 
   function resize() {
     w = window.innerWidth;
@@ -342,11 +355,10 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener("resize", resize, { passive: true });
   resize();
 
-  // ---- Target (souris) + position actuelle (centre du cluster) ----
-  const target = { x: w * 0.5, y: h * 0.4 };
-  const center = { x: target.x, y: target.y, vx: 0, vy: 0 };
+  // Target (souris)
+  const target = { x: w * 0.5, y: h * 0.45 };
+  const prevTarget = { x: target.x, y: target.y };
 
-  // Suivi souris / touch
   window.addEventListener("mousemove", (e) => {
     target.x = e.clientX;
     target.y = e.clientY;
@@ -359,74 +371,144 @@ document.addEventListener('DOMContentLoaded', () => {
     target.y = t.clientY;
   }, { passive: true });
 
-  // ---- Points: distribution "dense" sans trou au centre ----
-  // Technique: rayon = sqrt(rand) -> densité uniforme dans un disque
+  // Init dots (dense, pas de trou au centre)
   const dots = Array.from({ length: DOTS }, () => {
     const a = Math.random() * Math.PI * 2;
-    const r = Math.sqrt(Math.random()) * CLUSTER; // pas de centre vide
+    const r = Math.sqrt(Math.random()) * CLUSTER_RADIUS;
+    const x = target.x + Math.cos(a) * r;
+    const y = target.y + Math.sin(a) * r;
+
     return {
-      ox: Math.cos(a) * r,       // offset de base autour du centre
-      oy: Math.sin(a) * r,
-      x: center.x,
-      y: center.y,
-      vx: 0,
-      vy: 0,
-      size: DOT_MIN + Math.random() * (DOT_MAX - DOT_MIN),
+      x, y,
+      vx: (Math.random() - 0.5) * 1.2,
+      vy: (Math.random() - 0.5) * 1.2,
+      size: 1.2 + Math.random() * 1.2,
+      alpha: DOT_COLOR_MIN + Math.random() * (DOT_COLOR_MAX - DOT_COLOR_MIN),
       seed: Math.random() * 1000
     };
   });
 
-  let tick = 0;
+  function clampSpeed(p) {
+    const s = Math.hypot(p.vx, p.vy);
+    if (s > MAX_SPEED) {
+      p.vx = (p.vx / s) * MAX_SPEED;
+      p.vy = (p.vy / s) * MAX_SPEED;
+    }
+  }
 
-  function animate() {
-    tick++;
+  let t = 0;
 
-    // ---- Centre: spring vers target (accélération + freinage) ----
-    const dx = target.x - center.x;
-    const dy = target.y - center.y;
+  function step() {
+    t++;
 
-    center.vx += dx * SPRING;
-    center.vy += dy * SPRING;
+    // direction du mouvement de la souris
+    const tx = target.x - prevTarget.x;
+    const ty = target.y - prevTarget.y;
+    prevTarget.x = target.x;
+    prevTarget.y = target.y;
 
-    center.vx *= DAMPING;
-    center.vy *= DAMPING;
+    // si la souris bouge, on calcule une direction
+    const moveLen = Math.hypot(tx, ty) || 1;
+    const dirx = tx / moveLen;
+    const diry = ty / moveLen;
 
-    center.x += center.vx;
-    center.y += center.vy;
+    // Centre du groupe
+    let cx = 0, cy = 0;
+    for (const p of dots) { cx += p.x; cy += p.y; }
+    cx /= DOTS; cy /= DOTS;
 
-    // ---- Draw ----
-    ctx.clearRect(0, 0, w, h);
-    ctx.fillStyle = DOT_COLOR;
-
-    // Points: suivent le centre + petit wiggle interne
+    // Choisir un "leader" selon la direction (celui le plus "en avant")
+    // si tu vas à gauche, le plus à gauche devient leader naturellement.
+    let leader = dots[0];
+    let best = -Infinity;
     for (const p of dots) {
-      const t = tick * DRIFT + p.seed;
+      const vx = p.x - cx;
+      const vy = p.y - cy;
+      const score = vx * dirx + vy * diry; // projection dans la direction
+      if (score > best) { best = score; leader = p; }
+    }
 
-      // wiggle très subtil (organique)
-      const wx = Math.sin(t) * WIGGLE * 0.15;
-      const wy = Math.cos(t * 1.07) * WIGGLE * 0.15;
+    // Forces boids-lite
+    for (let i = 0; i < DOTS; i++) {
+      const p = dots[i];
 
-      // cible point = centre + offset + wiggle
-      const tx = center.x + p.ox + wx;
-      const ty = center.y + p.oy + wy;
+      // Cohesion: vers centre
+      let ax = (cx - p.x) * COHESION;
+      let ay = (cy - p.y) * COHESION;
 
-      // point spring (moins fort que centre)
-      p.vx += (tx - p.x) * 0.10;
-      p.vy += (ty - p.y) * 0.10;
+      // Target force: tout le monde suit, mais doucement
+      ax += (target.x - p.x) * TARGET_FORCE;
+      ay += (target.y - p.y) * TARGET_FORCE;
 
-      p.vx *= 0.70;
-      p.vy *= 0.70;
+      // Leader pull: le leader tire plus vers la souris
+      if (p === leader) {
+        ax += (target.x - p.x) * LEADER_PULL;
+        ay += (target.y - p.y) * LEADER_PULL;
+      }
+
+      // Alignment + Separation (avec voisins proches)
+      let avx = 0, avy = 0, neighbors = 0;
+      let sx = 0, sy = 0;
+
+      for (let j = 0; j < DOTS; j++) {
+        if (i === j) continue;
+        const q = dots[j];
+        const dx = p.x - q.x;
+        const dy = p.y - q.y;
+        const d = Math.hypot(dx, dy);
+
+        // Separation: éviter de coller
+        if (d > 0 && d < SEPARATION_DIST) {
+          const push = (SEPARATION_DIST - d) / SEPARATION_DIST;
+          sx += (dx / d) * push;
+          sy += (dy / d) * push;
+        }
+
+        // Alignment: regarder les vitesses proches (distance moyenne)
+        if (d < 60) {
+          avx += q.vx;
+          avy += q.vy;
+          neighbors++;
+        }
+      }
+
+      ax += sx * SEPARATION;
+      ay += sy * SEPARATION;
+
+      if (neighbors > 0) {
+        avx /= neighbors;
+        avy /= neighbors;
+        ax += (avx - p.vx) * ALIGNMENT;
+        ay += (avy - p.vy) * ALIGNMENT;
+      }
+
+      // Micro-noise individuel (vivant, pas identique)
+      const n = t * NOISE_SPEED + p.seed;
+      ax += Math.sin(n) * NOISE;
+      ay += Math.cos(n * 1.13) * NOISE;
+
+      // Apply accel
+      p.vx = (p.vx + ax) * TARGET_DAMP;
+      p.vy = (p.vy + ay) * TARGET_DAMP;
+
+      clampSpeed(p);
 
       p.x += p.vx;
       p.y += p.vy;
+    }
 
+    // Draw
+    ctx.clearRect(0, 0, w, h);
+
+    for (const p of dots) {
+      ctx.fillStyle = `rgba(0,0,0,${p.alpha})`; // NOIR
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
       ctx.fill();
     }
 
-    requestAnimationFrame(animate);
+    requestAnimationFrame(step);
   }
 
-  requestAnimationFrame(animate);
+  requestAnimationFrame(step);
 })();
