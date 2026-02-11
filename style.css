@@ -6,7 +6,7 @@
     --grey: #555555;
     --cream: #000000;
     --bg: #ffffff;
-    --neon-green: #39ff14;
+    --black: #39ff14;
 
     --glass: rgba(0, 0, 0, 0.04);
     --border-light: rgba(0, 0, 0, 0.08);
@@ -41,6 +41,9 @@ a {
     text-decoration: none; 
     transition: color 0.3s;
 }
+
+
+
 
 /* Optimisations */
 img {
@@ -168,9 +171,9 @@ header {
 }
 
 .lang-btn:hover {
-    background: var(--neon-green);
+    background: var(--black);
     color: white;
-    border-color: var(--neon-green);
+    border-color: var(--black);
 }
 
 .cv-link-header {
@@ -185,8 +188,8 @@ header {
 }
 
 .cv-link-header:hover {
-    border-color: var(--neon-green);
-    color: var(--neon-green);
+    border-color: var(--black);
+    color: var(--black);
 }
 
 /* ==========================================================================
@@ -250,9 +253,9 @@ header {
 }
 
 .lang-switch:hover {
-    background: var(--neon-green);
+    background: var(--black);
     color: white;
-    border-color: var(--neon-green);
+    border-color: var(--black);
 }
 
 /* ==========================================================================
@@ -345,7 +348,7 @@ main {
 }
 
 .cta-primary {
-    background: var(--neon-green);
+    background: var(--black);
     color: black;
     padding: 1.2rem 2.5rem;
     border-radius: 30px;
@@ -416,7 +419,7 @@ main {
     background: rgba(0, 0, 0, 0.03);
     padding: 1.5rem;
     margin-top: 2rem;
-    border-left: 3px solid var(--neon-green);
+    border-left: 3px solid var(--black);
 
     opacity: 0;
     max-height: 0;
@@ -431,8 +434,8 @@ main {
 
 /* Badges */
 .badge-complete {
-    color: var(--neon-green) !important;
-    border: 1px solid var(--neon-green);
+    color: var(--black) !important;
+    border: 1px solid var(--black);
     padding: 2px 8px;
     border-radius: 10px;
 }
@@ -445,7 +448,7 @@ main {
 }
 
 .year-future {
-    color: var(--neon-green) !important;
+    color: var(--black) !important;
     font-weight: bold;
 }
 
@@ -490,7 +493,7 @@ main {
 }
 
 .btn-cv {
-    background: var(--neon-green);
+    background: var(--black);
     color: black;
     padding: 1rem 2rem;
     border-radius: 30px;
@@ -544,7 +547,7 @@ main {
 }
 
 .btn-primary {
-    background: var(--neon-green);
+    background: var(--black);
     color: black;
 }
 
@@ -590,7 +593,7 @@ main {
 }
 
 .expertise-card:hover {
-    border-color: var(--neon-green);
+    border-color: var(--black);
     transform: translateY(-4px);
 }
 
@@ -644,7 +647,7 @@ main {
     top: 2rem;
     width: 10px;
     height: 10px;
-    background: var(--neon-green);
+    background: var(--black);
     border-radius: 50%;
 }
 
@@ -697,7 +700,7 @@ main {
 }
 
 .footer-links a:hover {
-    color: var(--neon-green);
+    color: var(--black);
 }
 
 .footer-copyright {
@@ -979,7 +982,7 @@ body.cv-page .lang-switch {
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, var(--neon-green), #2ecc71);
+    background: linear-gradient(135deg, var(--black), #2ecc71);
     color: #000;
     box-shadow: 0 0 30px rgba(57, 255, 20, 0.25);
 }
@@ -996,7 +999,7 @@ body.cv-page .lang-switch {
 
 .btn-secondary:hover {
     background: rgba(0,0,0,0.05);
-    border-color: var(--neon-green);
+    border-color: var(--black);
     color: var(--marine);
 }
 
@@ -1033,7 +1036,7 @@ body.cv-page .lang-switch {
 .expertise-number {
     font-size: 3rem;
     font-weight: 300;
-    color: var(--neon-green);
+    color: var(--black);
     opacity: 0.35;
     margin-bottom: 1rem;
 }
@@ -1061,7 +1064,7 @@ body.cv-page .lang-switch {
     content: "→";
     position: absolute;
     left: 0;
-    color: var(--neon-green);
+    color: var(--black);
 }
 
 /* Timeline Experience */
@@ -1094,7 +1097,7 @@ body.cv-page .lang-switch {
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: var(--neon-green);
+    background: var(--black);
     box-shadow: 0 0 18px rgba(57,255,20,0.35);
 }
 
@@ -1137,7 +1140,7 @@ body.cv-page .lang-switch {
     content: "•";
     position: absolute;
     left: 0;
-    color: var(--neon-green);
+    color: var(--black);
 }
 
 /* Explorations */
@@ -1208,7 +1211,7 @@ body.cv-page .lang-switch {
 }
 
 .footer-link:hover { 
-    color: var(--neon-green); 
+    color: var(--black); 
 }
 
 .footer-copyright { 
@@ -1222,7 +1225,7 @@ body.cv-page .lang-switch {
 }
 
 .footer-copyright a:hover { 
-    color: var(--neon-green); 
+    color: var(--black); 
 }
 
 /* CV Mobile Responsive */
@@ -1254,3 +1257,33 @@ body.cv-page .lang-switch {
     }
 }
 
+/* =========================
+   BACKGROUNDS CANVAS FIX
+   (empêche les canvases de bloquer les clics)
+   ========================= */
+#waves,
+#molecules {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none !important; /* <-- super important mobile */
+  z-index: 0;
+}
+
+/* Le reste du site au-dessus */
+header, nav, .nav, main, footer, section {
+  position: relative;
+  z-index: 10;
+}
+
+/* Si ton menu overlay doit passer au-dessus de tout */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 4000;
+}
+
+.nav-menu {
+  z-index: 4500;
+}
