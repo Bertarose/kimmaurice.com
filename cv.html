@@ -1,642 +1,673 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    
-    <title>Kim Maurice | CV Détaillé & Parcours</title>
-    <meta name="description" content="CV détaillé de Kim Maurice : 25 ans d'expérience en UX/UI, E-learning et technologies créatives.">
-    
-    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
-    
-    <link rel="preconnect" href="https://www.googletagmanager.com">
-    <link rel="stylesheet" href="style.css">
-    
-    <script defer src="script.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WYM83ME5LK"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-WYM83ME5LK', { anonymize_ip: true });
-    </script>
-    
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Kim Maurice",
-        "jobTitle": "Designer Multimédia & Technologue Créative",
-        "url": "https://kimmaurice.com/cv.html",
-        "email": "info@kimmaurice.com"
+  <title>Kim Maurice | CV Détaillé & Parcours</title>
+  <meta name="description" content="CV détaillé de Kim Maurice : 25 ans d'expérience en UX/UI, E-learning et technologies créatives.">
+
+  <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <link rel="stylesheet" href="style.css">
+
+  <script defer src="script.js"></script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-WYM83ME5LK"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-WYM83ME5LK', { anonymize_ip: true });
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Kim Maurice",
+    "jobTitle": "Designer Multimédia & Technologue Créative",
+    "url": "https://kimmaurice.com/cv.html",
+    "email": "info@kimmaurice.com"
+  }
+  </script>
+
+  <style>
+    /* ==========================================================================
+       CV PAGE PATCH — Theme blanc + FIX NAV mobile
+       ========================================================================== */
+
+    * {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
-    </script>
-<style>
-/* ==========================================================================
-   CV PAGE PATCH — compatible avec ton thème BLANC de style.css
-   (Remplace ton <style> actuel par celui-ci)
-   ========================================================================== */
 
-/* Optimisations de performance */
-* {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+    /* Starfield subtil sur fond blanc */
+    .starfield { opacity: 0.12 !important; }
+    .starfield::before { animation-duration: 200s !important; }
+    .starfield::after  { animation-duration: 250s !important; }
 
-/* Starfield plus subtil sur fond blanc */
-.starfield {
-  opacity: 0.12 !important;
-}
-.starfield::before { animation-duration: 200s !important; }
-.starfield::after  { animation-duration: 250s !important; }
+    /* IMPORTANT: empêcher le menu mobile global (style.css) de casser cv.html */
+    .nav {
+      background: rgba(255,255,255,0.92) !important;
+      border-bottom: 1px solid var(--border-light) !important;
+      z-index: 2000 !important;
+    }
 
-/* Optimiser les transitions */
-.expertise-card,
-.timeline-item,
-.exploration-card {
-  transition: all 0.3s ease !important;
-  will-change: transform;
-}
+    /* Desktop: menu normal */
+    @media (min-width: 769px) {
+      .nav-menu {
+        position: relative !important;
+        transform: none !important;
+        width: auto !important;
+        height: auto !important;
+        background: transparent !important;
+        flex-direction: row !important;
+        justify-content: flex-start !important;
+        align-items: center !important;
+        gap: 2rem !important;
+      }
+    }
 
-/* ==========================================================================
-   Base layout
-   ========================================================================== */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem;
-}
+    /* Mobile: menu overlay ONLY when active (sinon caché) */
+    @media (max-width: 768px) {
+      .nav-menu {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100vh !important;
+        background: rgba(255,255,255,0.98) !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 2rem !important;
 
-.section-header {
-  margin-bottom: 3rem;
-  text-align: center;
-}
+        /* caché par défaut */
+        transform: translateX(100%) !important;
+        transition: transform 0.35s ease !important;
+        z-index: 2500 !important;
+      }
 
-.section-header h2 {
-  font-size: 2.5rem;
-  font-weight: 300;
-  color: var(--marine); /* noir */
-  margin-bottom: 1rem;
-}
+      .nav-menu.active {
+        transform: translateX(0) !important;
+      }
 
-/* ==========================================================================
-   HERO
-   ========================================================================== */
-.hero {
-  position: relative;
-  z-index: 10;
-  padding: 4rem 2rem;
-  text-align: center;
-}
+      .nav-link {
+        color: var(--marine) !important;
+        font-size: 1.2rem !important;
+      }
 
-.hero-content {
-  max-width: 900px;
-  margin: 0 auto;
-}
+      /* Assure que le burger est visible sur fond blanc */
+      .mobile-menu-toggle span {
+        background-color: var(--marine) !important;
+      }
+    }
 
-.hero-title {
-  font-size: 3rem;
-  font-weight: 300;
-  color: var(--marine);
-  margin-bottom: 1rem;
-}
+    /* Base layout */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
 
-.hero-subtitle,
-.hero-location {
-  color: var(--grey);
-}
+    .section-header {
+      margin-bottom: 3rem;
+      text-align: center;
+    }
 
-/* ==========================================================================
-   Buttons (adaptés au thème blanc)
-   ========================================================================== */
-.btn {
-  display: inline-block;
-  padding: 1rem 2rem;
-  border-radius: 30px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: all 0.3s ease;
-}
+    .section-header h2 {
+      font-size: 2.5rem;
+      font-weight: 300;
+      color: var(--marine);
+      margin-bottom: 1rem;
+    }
 
-/* On garde ton accent néon */
-.btn-primary {
-  background: linear-gradient(135deg, var(--neon-green), #2ecc71);
-  color: #000;
-  box-shadow: 0 0 30px rgba(57, 255, 20, 0.25);
-}
-.btn-primary:hover { transform: translateY(-3px); }
+    /* Hero */
+    .hero {
+      position: relative;
+      z-index: 10;
+      padding: 4rem 2rem;
+      text-align: center;
+    }
 
-/* Secondary : propre sur fond blanc */
-.btn-secondary {
-  background: rgba(0, 0, 0, 0.03);
-  border: 1px solid var(--border-light);
-  color: var(--marine);
-}
-.btn-secondary:hover {
-  background: rgba(0, 0, 0, 0.05);
-  border-color: var(--neon-green);
-  color: var(--marine);
-}
+    .hero-content { max-width: 900px; margin: 0 auto; }
 
-/* ==========================================================================
-   Sections spacing
-   ========================================================================== */
-.expertise,
-.experience,
-.explorations,
-.footer-cta {
-  padding: 6rem 2rem;
-  position: relative;
-  z-index: 10;
-}
+    .hero-title {
+      font-size: 3rem;
+      font-weight: 300;
+      color: var(--marine);
+      margin-bottom: 1rem;
+    }
 
-/* ==========================================================================
-   Expertise Grid (cartes en blanc)
-   ========================================================================== */
-.expertise-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-}
+    .hero-subtitle,
+    .hero-location {
+      color: var(--grey);
+      margin-bottom: 1rem;
+    }
 
-.expertise-card {
-  background: rgba(0, 0, 0, 0.02);
-  border: 1px solid var(--border-light);
-  border-radius: 15px;
-  padding: 2rem;
-}
+    /* Buttons */
+    .btn {
+      display: inline-block;
+      padding: 1rem 2rem;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
 
-.expertise-card:hover {
-  background: rgba(0, 0, 0, 0.03);
-  border-color: rgba(57, 255, 20, 0.6);
-  transform: translateY(-3px) !important;
-}
+    .btn-primary {
+      background: linear-gradient(135deg, var(--neon-green), #2ecc71);
+      color: #000;
+      box-shadow: 0 0 30px rgba(57, 255, 20, 0.25);
+    }
+    .btn-primary:hover { transform: translateY(-3px); }
 
-.expertise-number {
-  font-size: 3rem;
-  font-weight: 300;
-  color: var(--neon-green);
-  opacity: 0.35;
-  margin-bottom: 1rem;
-}
+    .btn-secondary {
+      background: rgba(0, 0, 0, 0.03);
+      border: 1px solid var(--border-light);
+      color: var(--marine);
+    }
+    .btn-secondary:hover {
+      background: rgba(0, 0, 0, 0.05);
+      border-color: var(--neon-green);
+      color: var(--marine);
+    }
 
-.expertise-card h3 {
-  font-size: 1.5rem;
-  font-weight: 500;
-  color: var(--marine);
-  margin-bottom: 1rem;
-}
+    /* Sections spacing */
+    .expertise,
+    .experience,
+    .explorations,
+    .footer-cta {
+      padding: 6rem 2rem;
+      position: relative;
+      z-index: 10;
+    }
 
-.expertise-card ul { list-style: none; padding: 0; }
+    /* Expertise */
+    .expertise-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
 
-.expertise-card li {
-  padding: 0.5rem 0;
-  color: var(--grey);
-  position: relative;
-  padding-left: 1.5rem;
-}
-.expertise-card li::before {
-  content: "→";
-  position: absolute;
-  left: 0;
-  color: var(--neon-green);
-}
+    .expertise-card {
+      background: rgba(0, 0, 0, 0.02);
+      border: 1px solid var(--border-light);
+      border-radius: 15px;
+      padding: 2rem;
+      transition: all 0.3s ease;
+      will-change: transform;
+    }
 
-/* ==========================================================================
-   Experience Timeline (lisible sur blanc)
-   ========================================================================== */
-.experience-timeline {
-  position: relative;
-  padding-left: 2rem;
-}
+    .expertise-card:hover {
+      background: rgba(0, 0, 0, 0.03);
+      border-color: rgba(57,255,20,0.6);
+      transform: translateY(-3px);
+    }
 
-.experience-timeline::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: linear-gradient(to bottom, rgba(57,255,20,0.9), transparent);
-}
+    .expertise-number {
+      font-size: 3rem;
+      font-weight: 300;
+      color: var(--neon-green);
+      opacity: 0.35;
+      margin-bottom: 1rem;
+    }
 
-.timeline-item {
-  position: relative;
-  margin-bottom: 4rem;
-  padding-left: 2rem;
-}
+    .expertise-card h3 {
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: var(--marine);
+      margin-bottom: 1rem;
+    }
 
-.timeline-item::before {
-  content: '';
-  position: absolute;
-  left: -2.5rem;
-  top: 0.2rem;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: var(--neon-green);
-  box-shadow: 0 0 18px rgba(57, 255, 20, 0.35);
-}
+    .expertise-card ul { list-style: none; padding: 0; }
 
-.timeline-date {
-  font-size: 0.9rem;
-  color: rgba(57, 255, 20, 0.9);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1rem;
-  margin-bottom: 0.5rem;
-}
+    .expertise-card li {
+      padding: 0.5rem 0;
+      color: var(--grey);
+      position: relative;
+      padding-left: 1.5rem;
+    }
 
-.timeline-content h3 {
-  font-size: 1.8rem;
-  font-weight: 500;
-  color: var(--marine);
-  margin-bottom: 0.4rem;
-}
+    .expertise-card li::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: var(--neon-green);
+    }
 
-.timeline-content h4 {
-  font-size: 1.1rem;
-  font-weight: 400;
-  color: var(--grey);
-  margin-bottom: 1rem;
-}
+    /* Timeline */
+    .experience-timeline {
+      position: relative;
+      padding-left: 2rem;
+    }
 
-.timeline-list { list-style: none; padding: 0; }
+    .experience-timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, rgba(57,255,20,0.9), transparent);
+    }
 
-.timeline-list li {
-  padding: 0.5rem 0;
-  color: var(--grey);
-  position: relative;
-  padding-left: 1.5rem;
-}
-.timeline-list li::before {
-  content: "•";
-  position: absolute;
-  left: 0;
-  color: var(--neon-green);
-}
+    .timeline-item {
+      position: relative;
+      margin-bottom: 4rem;
+      padding-left: 2rem;
+      will-change: transform;
+    }
 
-/* ==========================================================================
-   Explorations (cartes en blanc)
-   ========================================================================== */
-.exploration-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-}
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -2.5rem;
+      top: 0.2rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--neon-green);
+      box-shadow: 0 0 18px rgba(57, 255, 20, 0.35);
+    }
 
-.exploration-card {
-  background: rgba(0, 0, 0, 0.02);
-  border: 1px solid var(--border-light);
-  border-radius: 15px;
-  padding: 1.5rem;
-}
+    .timeline-date {
+      font-size: 0.9rem;
+      color: rgba(57,255,20,0.95);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1rem;
+      margin-bottom: 0.5rem;
+    }
 
-.exploration-card:hover {
-  background: rgba(0, 0, 0, 0.03);
-  border-color: rgba(57,255,20,0.6);
-  transform: translateY(-3px) !important;
-}
+    .timeline-content h3 {
+      font-size: 1.8rem;
+      font-weight: 500;
+      color: var(--marine);
+      margin-bottom: 0.4rem;
+    }
 
-.exploration-card h4 {
-  font-size: 1.2rem;
-  color: var(--marine);
-  margin-bottom: 0.5rem;
-}
-.exploration-card p {
-  font-size: 0.95rem;
-  color: var(--grey);
-}
+    .timeline-content h4 {
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: var(--grey);
+      margin-bottom: 1rem;
+    }
 
-/* ==========================================================================
-   Footer CTA
-   ========================================================================== */
-.footer-cta {
-  text-align: center;
-}
+    .timeline-list { list-style: none; padding: 0; }
 
-.footer-content h2 {
-  font-size: 2.5rem;
-  font-weight: 300;
-  color: var(--marine);
-  margin-bottom: 2rem;
-}
+    .timeline-list li {
+      padding: 0.5rem 0;
+      color: var(--grey);
+      position: relative;
+      padding-left: 1.5rem;
+    }
 
-.cta-group {
-  display: flex;
-  gap: 1.5rem;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-bottom: 3rem;
-}
+    .timeline-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--neon-green);
+    }
 
-/* tes liens de footer dans cv.html */
-.footer-links {
-  display: flex;
-  gap: 2rem;
-  justify-content: center;
-  margin-bottom: 2rem;
-  flex-wrap: wrap;
-}
+    /* Explorations */
+    .exploration-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
 
-.footer-link {
-  color: var(--grey);
-  text-decoration: none;
-  transition: color 0.3s;
-}
-.footer-link:hover { color: var(--neon-green); }
+    .exploration-card {
+      background: rgba(0, 0, 0, 0.02);
+      border: 1px solid var(--border-light);
+      border-radius: 15px;
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+      will-change: transform;
+    }
 
-.footer-copyright {
-  color: var(--grey);
-  font-size: 0.9rem;
-}
-.footer-copyright a {
-  color: var(--grey);
-  text-decoration: none;
-}
-.footer-copyright a:hover { color: var(--neon-green); }
+    .exploration-card:hover {
+      background: rgba(0, 0, 0, 0.03);
+      border-color: rgba(57,255,20,0.6);
+      transform: translateY(-3px);
+    }
 
-/* ==========================================================================
-   Responsive
-   ========================================================================== */
-@media (max-width: 768px) {
-  .hero-title { font-size: 2rem; }
-  .section-header h2 { font-size: 2rem; }
-  .expertise-grid { grid-template-columns: 1fr; }
-  .timeline-content h3 { font-size: 1.4rem; }
+    .exploration-card h4 {
+      font-size: 1.2rem;
+      color: var(--marine);
+      margin-bottom: 0.5rem;
+    }
 
-  .cta-group {
-    flex-direction: column;
-    align-items: center;
-  }
+    .exploration-card p {
+      font-size: 0.95rem;
+      color: var(--grey);
+    }
 
-  .btn {
-    width: 100%;
-    max-width: 320px;
-  }
-}
-</style>
-</head>    
+    /* Footer CTA */
+    .footer-cta { text-align: center; }
+
+    .footer-content h2 {
+      font-size: 2.5rem;
+      font-weight: 300;
+      color: var(--marine);
+      margin-bottom: 2rem;
+    }
+
+    .cta-group {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 3rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-link {
+      color: var(--grey);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-link:hover { color: var(--neon-green); }
+
+    .footer-copyright {
+      color: var(--grey);
+      font-size: 0.9rem;
+    }
+
+    .footer-copyright a {
+      color: var(--grey);
+      text-decoration: none;
+    }
+
+    .footer-copyright a:hover { color: var(--neon-green); }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero-title { font-size: 2rem; }
+      .section-header h2 { font-size: 2rem; }
+      .expertise-grid { grid-template-columns: 1fr; }
+      .timeline-content h3 { font-size: 1.4rem; }
+
+      .cta-group {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .btn { width: 100%; max-width: 320px; }
+    }
+  </style>
+</head>
 
 <body class="lang-fr">
+  <div class="starfield"></div>
 
-    <div class="starfield"></div>
+  <nav class="nav">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <a href="index.html" aria-label="Retour à l'accueil">
+          <img src="img/logo.jpg" alt="Kim Maurice" class="logo-img" width="50" height="50">
+        </a>
+      </div>
 
-    <nav class="nav">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <a href="index.html" aria-label="Retour à l'accueil">
-                    <img src="img/logo.jpg" alt="Kim Maurice" class="logo-img" width="50" height="50">
-                </a>
-            </div>
-            
-            <div class="nav-menu">
-                <a href="index.html#projects" class="nav-link" data-fr="← Voir les Projets" data-en="← View Projects">← Voir les Projets</a>
-                <a href="#expertise" class="nav-link" data-fr="Expertise" data-en="Expertise">Expertise</a>
-                <a href="#experience" class="nav-link" data-fr="Parcours" data-en="Experience">Parcours</a>
-                <a href="#explorations" class="nav-link" data-fr="Explorations" data-en="Explorations">Explorations</a>
-                <a href="#contact" class="nav-link" data-fr="Contact" data-en="Contact">Contact</a>
-            </div>
-            
-            <div class="nav-controls">
-                <button id="langBtn" class="lang-switch" aria-label="Changer de langue">EN</button>
-                
-                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Ouvrir le menu" aria-expanded="false">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-            </div>
+      <div class="nav-menu" id="navMenu">
+        <a href="index.html#projects" class="nav-link" data-fr="← Voir les Projets" data-en="← View Projects">← Voir les Projets</a>
+        <a href="#expertise" class="nav-link" data-fr="Expertise" data-en="Expertise">Expertise</a>
+        <a href="#experience" class="nav-link" data-fr="Parcours" data-en="Experience">Parcours</a>
+        <a href="#explorations" class="nav-link" data-fr="Explorations" data-en="Explorations">Explorations</a>
+        <a href="#contact" class="nav-link" data-fr="Contact" data-en="Contact">Contact</a>
+      </div>
+
+      <div class="nav-controls">
+        <button id="langBtn" class="lang-switch" aria-label="Changer de langue">EN</button>
+
+        <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Ouvrir le menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <h1 class="hero-title">
+        <span data-fr="Curriculum Vitae" data-en="Curriculum Vitae">Curriculum Vitae</span>
+      </h1>
+      <p class="hero-subtitle" data-fr="25 ans de design, code et multimédia" data-en="25 years of design, code and multimedia">
+        25 ans de design, code et multimédia
+      </p>
+      <p class="hero-location">
+        <span data-fr="📍 Montréal, Québec" data-en="📍 Montreal, Quebec">📍 Montréal, Québec</span>
+      </p>
+      <div style="margin-top: 2rem;">
+        <a href="Curriculum_Kimmaurice_2025.pdf" target="_blank" class="btn btn-secondary">
+          📄 <span data-fr="Télécharger le PDF" data-en="Download PDF">Télécharger le PDF</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="expertise" id="expertise">
+    <div class="container">
+      <div class="section-header">
+        <h2 data-fr="Expertises" data-en="Expertise">Expertises</h2>
+      </div>
+
+      <div class="expertise-grid">
+        <div class="expertise-card">
+          <div class="expertise-number">01</div>
+          <h3 data-fr="Design UX/UI" data-en="UX/UI Design">Design UX/UI</h3>
+          <ul>
+            <li data-fr="Recherche utilisateur & personas" data-en="User research & personas">Recherche utilisateur & personas</li>
+            <li data-fr="Wireframing & prototypage" data-en="Wireframing & prototyping">Wireframing & prototypage</li>
+            <li data-fr="Design systems & composants" data-en="Design systems & components">Design systems & composants</li>
+            <li data-fr="Tests utilisateurs" data-en="User testing">Tests utilisateurs</li>
+          </ul>
         </div>
-    </nav>
 
-    <section class="hero" id="home">
-        <div class="hero-content">
-            <h1 class="hero-title">
-                <span data-fr="Curriculum Vitae" data-en="Curriculum Vitae">Curriculum Vitae</span>
-            </h1>
-            <p class="hero-subtitle" data-fr="25 ans de design, code et multimédia" data-en="25 years of design, code and multimedia">
-                25 ans de design, code et multimédia
-            </p>
-            <p class="hero-location">
-                <span data-fr="📍 Montréal, Québec" data-en="📍 Montreal, Quebec">📍 Montréal, Québec</span>
-            </p>
-            <div style="margin-top: 2rem;">
-                 <a href="Curriculum_Kimmaurice_2025.pdf" target="_blank" class="btn btn-secondary">
-                    📄 <span data-fr="Télécharger le PDF" data-en="Download PDF">Télécharger le PDF</span>
-                </a>
-            </div>
+        <div class="expertise-card">
+          <div class="expertise-number">02</div>
+          <h3 data-fr="E-Learning & Pédagogie" data-en="E-Learning & Pedagogy">E-Learning & Pédagogie</h3>
+          <ul>
+            <li data-fr="Articulate Storyline & Rise" data-en="Articulate Storyline & Rise">Articulate Storyline & Rise</li>
+            <li data-fr="Scénarisation pédagogique" data-en="Instructional design">Scénarisation pédagogique</li>
+            <li data-fr="Gamification & interactivité" data-en="Gamification & interactivity">Gamification & interactivité</li>
+            <li data-fr="Plateformes LMS" data-en="LMS platforms">Plateformes LMS</li>
+          </ul>
         </div>
-    </section>
 
-    <section class="expertise" id="expertise">
-        <div class="container">
-            <div class="section-header">
-                <h2 data-fr="Expertises" data-en="Expertise">Expertises</h2>
-            </div>
-            <div class="expertise-grid">
-                <div class="expertise-card">
-                    <div class="expertise-number">01</div>
-                    <h3 data-fr="Design UX/UI" data-en="UX/UI Design">Design UX/UI</h3>
-                    <ul>
-                        <li data-fr="Recherche utilisateur & personas" data-en="User research & personas">Recherche utilisateur & personas</li>
-                        <li data-fr="Wireframing & prototypage" data-en="Wireframing & prototyping">Wireframing & prototypage</li>
-                        <li data-fr="Design systems & composants" data-en="Design systems & components">Design systems & composants</li>
-                        <li data-fr="Tests utilisateurs" data-en="User testing">Tests utilisateurs</li>
-                    </ul>
-                </div>
-
-                <div class="expertise-card">
-                    <div class="expertise-number">02</div>
-                    <h3 data-fr="E-Learning & Pédagogie" data-en="E-Learning & Pedagogy">E-Learning & Pédagogie</h3>
-                    <ul>
-                        <li data-fr="Articulate Storyline & Rise" data-en="Articulate Storyline & Rise">Articulate Storyline & Rise</li>
-                        <li data-fr="Scénarisation pédagogique" data-en="Instructional design">Scénarisation pédagogique</li>
-                        <li data-fr="Gamification & interactivité" data-en="Gamification & interactivity">Gamification & interactivité</li>
-                        <li data-fr="Plateformes LMS" data-en="LMS platforms">Plateformes LMS</li>
-                    </ul>
-                </div>
-
-                <div class="expertise-card">
-                    <div class="expertise-number">03</div>
-                    <h3 data-fr="Développement Web" data-en="Web Development">Développement Web</h3>
-                    <ul>
-                        <li data-fr="HTML/CSS/JavaScript" data-en="HTML/CSS/JavaScript">HTML/CSS/JavaScript</li>
-                        <li data-fr="React & Next.js" data-en="React & Next.js">React & Next.js</li>
-                        <li data-fr="Three.js & WebGL" data-en="Three.js & WebGL">Three.js & WebGL</li>
-                        <li data-fr="API & intégrations" data-en="API & integrations">API & intégrations</li>
-                    </ul>
-                </div>
-
-                <div class="expertise-card">
-                    <div class="expertise-number">04</div>
-                    <h3 data-fr="Production Audiovisuelle" data-en="Audiovisual Production">Production Audiovisuelle</h3>
-                    <ul>
-                        <li data-fr="After Effects & Premiere" data-en="After Effects & Premiere">After Effects & Premiere</li>
-                        <li data-fr="Motion design & animation" data-en="Motion design & animation">Motion design & animation</li>
-                        <li data-fr="Design sonore & audio" data-en="Sound design & audio">Design sonore & audio</li>
-                        <li data-fr="Production cinéma/TV & design graphique" data-en="Film/TV production & graphic design">Production cinéma/TV & design graphique</li>
-                    </ul>
-                </div>
-
-                <div class="expertise-card">
-                    <div class="expertise-number">05</div>
-                    <h3 data-fr="IA Générative" data-en="Generative AI">IA Générative</h3>
-                    <ul>
-                        <li data-fr="Stable Diffusion & ComfyUI" data-en="Stable Diffusion & ComfyUI">Stable Diffusion & ComfyUI</li>
-                        <li data-fr="Prompt engineering" data-en="Prompt engineering">Prompt engineering</li>
-                        <li data-fr="Workflows automatisés" data-en="Automated workflows">Workflows automatisés</li>
-                        <li data-fr="IA audio & vidéo" data-en="AI audio & video">IA audio & vidéo</li>
-                    </ul>
-                </div>
-
-                <div class="expertise-card">
-                    <div class="expertise-number">06</div>
-                    <h3 data-fr="Outils Créatifs" data-en="Creative Tools">Outils Créatifs</h3>
-                    <ul>
-                        <li data-fr="Figma & Adobe Suite" data-en="Figma & Adobe Suite">Figma & Adobe Suite</li>
-                        <li data-fr="Blender & 3D" data-en="Blender & 3D">Blender & 3D</li>
-                        <li data-fr="Git & GitHub" data-en="Git & GitHub">Git & GitHub</li>
-                        <li data-fr="Python & automation" data-en="Python & automation">Python & automation</li>
-                    </ul>
-                </div>
-            </div>
+        <div class="expertise-card">
+          <div class="expertise-number">03</div>
+          <h3 data-fr="Développement Web" data-en="Web Development">Développement Web</h3>
+          <ul>
+            <li data-fr="HTML/CSS/JavaScript" data-en="HTML/CSS/JavaScript">HTML/CSS/JavaScript</li>
+            <li data-fr="React & Next.js" data-en="React & Next.js">React & Next.js</li>
+            <li data-fr="Three.js & WebGL" data-en="Three.js & WebGL">Three.js & WebGL</li>
+            <li data-fr="API & intégrations" data-en="API & integrations">API & intégrations</li>
+          </ul>
         </div>
-    </section>
 
-    <section class="experience" id="experience">
-         <div class="container">
-            <div class="section-header">
-                <h2 data-fr="Parcours Professionnel" data-en="Professional Experience">Parcours Professionnel</h2>
-            </div>
-            <div class="experience-timeline">
-                <div class="timeline-item">
-                    <div class="timeline-date">2023 - 2024</div>
-                    <div class="timeline-content">
-                        <h3 data-fr="Designer Multimédia Senior" data-en="Senior Multimedia Designer">Designer Multimédia Senior</h3>
-                        <h4>@ Technologia</h4>
-                        <ul class="timeline-list">
-                            <li data-fr="Direction UX/UI pour modules e-learning complexes" data-en="UX/UI direction for complex e-learning modules">Direction UX/UI pour modules e-learning complexes</li>
-                            <li data-fr="Développement de formations interactives sur Articulate Storyline" data-en="Development of interactive training on Articulate Storyline">Développement de formations interactives sur Articulate Storyline</li>
-                            <li data-fr="Gamification et scénarisation pédagogique" data-en="Gamification and instructional design">Gamification et scénarisation pédagogique</li>
-                            <li data-fr="Création de contenus vidéo et motion design" data-en="Video content creation and motion design">Création de contenus vidéo et motion design</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-date">2020 - 2023</div>
-                    <div class="timeline-content">
-                        <h3 data-fr="Designer E-Learning" data-en="E-Learning Designer">Designer E-Learning</h3>
-                        <h4>@ Campus GardaWorld</h4>
-                        <ul class="timeline-list">
-                            <li data-fr="Conception de formations en sécurité et conformité" data-en="Design of security and compliance training">Conception de formations en sécurité et conformité</li>
-                            <li data-fr="Développement de parcours d'apprentissage adaptatifs" data-en="Development of adaptive learning paths">Développement de parcours d'apprentissage adaptatifs</li>
-                            <li data-fr="Intégration LMS et suivi analytique" data-en="LMS integration and analytics">Intégration LMS et suivi analytique</li>
-                            <li data-fr="Production audiovisuelle et animation 2D/3D" data-en="Audiovisual production and 2D/3D animation">Production audiovisuelle et animation 2D/3D</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-date">2010 - 2020</div>
-                    <div class="timeline-content">
-                        <h3 data-fr="Designer Graphique" data-en="Graphic Designer">Designer Graphique</h3>
-                        <h4 data-fr="@ Productions Cinéma & TV" data-en="@ Film & TV Productions">@ Productions Cinéma & TV</h4>
-                        <ul class="timeline-list">
-                            <li data-fr="Design graphique pour 15+ productions (Bad Blood, Unité 9, etc.)" data-en="Graphic design for 15+ productions (Bad Blood, Unité 9, etc.)">Design graphique pour 15+ productions (Bad Blood, Unité 9, etc.)</li>
-                            <li data-fr="Création d'interfaces, props numériques et design graphique" data-en="Creation of interfaces, digital props and graphic design">Création d'interfaces, props numériques et design graphique</li>
-                            <li data-fr="Impression d'affiches, tissus, retouche photo et création de faux documents" data-en="Printing posters, fabrics, photo retouching and fake documents creation">Impression d'affiches, tissus, retouche photo et création de faux documents</li>
-                            <li data-fr="Motion design et effets visuels avec After Effects" data-en="Motion design and visual effects with After Effects">Motion design et effets visuels avec After Effects</li>
-                            <li data-fr="Collaboration avec réalisateurs et directeurs artistiques" data-en="Collaboration with directors and art directors">Collaboration avec réalisateurs et directeurs artistiques</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-date">2000 - 2010</div>
-                    <div class="timeline-content">
-                        <h3 data-fr="Designer Web & Multimédia" data-en="Web & Multimedia Designer">Designer Web & Multimédia</h3>
-                        <h4 data-fr="@ Divers clients & agences" data-en="@ Various clients & agencies">@ Divers clients & agences</h4>
-                        <ul class="timeline-list">
-                            <li data-fr="Conception et développement de sites web" data-en="Website design and development">Conception et développement de sites web</li>
-                            <li data-fr="Identités visuelles et branding" data-en="Visual identities and branding">Identités visuelles et branding</li>
-                            <li data-fr="Installations interactives et multimédia" data-en="Interactive and multimedia installations">Installations interactives et multimédia</li>
-                            <li data-fr="Production audiovisuelle et montage" data-en="Audiovisual production and editing">Production audiovisuelle et montage</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-         </div>
-    </section>
-    
-    <section class="explorations" id="explorations">
-         <div class="container">
-            <div class="section-header">
-                <h2 data-fr="Explorations & Projets Personnels" data-en="Explorations & Personal Projects">Explorations & Projets Personnels</h2>
-            </div>
-            <div class="exploration-grid">
-                <div class="exploration-card">
-                    <h4 data-fr="🎵 DJ & Radio Underground" data-en="🎵 DJ & Underground Radio">🎵 DJ & Radio Underground</h4>
-                    <p data-fr="DJ actif sur Still FM, radio underground de Montréal. Exploration des cultures musicales alternatives." data-en="Active DJ on Still FM, Montreal's underground radio. Exploring alternative music cultures.">DJ actif sur Still FM, radio underground de Montréal. Exploration des cultures musicales alternatives.</p>
-                </div>
-
-                <div class="exploration-card">
-                    <h4 data-fr="🤖 IA Générative" data-en="🤖 Generative AI">🤖 IA Générative</h4>
-                    <p data-fr="Archive visuelle sur Instagram (@this_is_weird_ai). Expérimentation avec Stable Diffusion et workflows créatifs." data-en="Visual archive on Instagram (@this_is_weird_ai). Experimentation with Stable Diffusion and creative workflows.">Archive visuelle sur Instagram (@this_is_weird_ai). Expérimentation avec Stable Diffusion et workflows créatifs.</p>
-                </div>
-
-                <div class="exploration-card">
-                    <h4 data-fr="🎹 Instruments Expérimentaux" data-en="🎹 Experimental Instruments">🎹 Instruments Expérimentaux</h4>
-                    <p data-fr="Création d'instruments musicaux hybrides combinant MIDI, IA et visualisations temps réel." data-en="Creation of hybrid musical instruments combining MIDI, AI and real-time visualizations.">Création d'instruments musicaux hybrides combinant MIDI, IA et visualisations temps réel.</p>
-                </div>
-
-                <div class="exploration-card">
-                    <h4 data-fr="🌐 Développement Web" data-en="🌐 Web Development">🌐 Développement Web</h4>
-                    <p data-fr="Projets open-source sur GitHub. Exploration de Three.js, Next.js et technologies immersives." data-en="Open-source projects on GitHub. Exploring Three.js, Next.js and immersive technologies.">Projets open-source sur GitHub. Exploration de Three.js, Next.js et technologies immersives.</p>
-                </div>
-
-                <div class="exploration-card">
-                    <h4 data-fr="🔊 Design Sonore" data-en="🔊 Sound Design">🔊 Design Sonore</h4>
-                    <p data-fr="Installations audio-visuelles et générateurs de signatures sonores uniques." data-en="Audio-visual installations and unique sonic signature generators.">Installations audio-visuelles et générateurs de signatures sonores uniques.</p>
-                </div>
-
-                <div class="exploration-card">
-                    <h4 data-fr="📚 Apprentissage Continu" data-en="📚 Continuous Learning">📚 Apprentissage Continu</h4>
-                    <p data-fr="Exploration active de nouvelles technologies : WebGL, IA, IoT, VR/AR et cultures numériques." data-en="Active exploration of new technologies: WebGL, AI, IoT, VR/AR and digital cultures.">Exploration active de nouvelles technologies : WebGL, IA, IoT, VR/AR et cultures numériques.</p>
-                </div>
-            </div>
-         </div>
-    </section>
-
-    <section class="footer-cta" id="contact">
-        <div class="container">
-            <div class="footer-content">
-                <h2 data-fr="Travaillons ensemble!" data-en="Let's work together!">Travaillons ensemble!</h2>
-                
-                <div class="cta-group">
-                    <a href="mailto:info@kimmaurice.com" class="btn btn-primary">
-                        <span data-fr="Écrivez-moi un e-mail" data-en="Send me an email">Écrivez-moi un e-mail</span> →
-                    </a>
-                    <a href="Curriculum_Kimmaurice_2025.pdf" target="_blank" class="btn btn-secondary">
-                        📄 <span data-fr="Télécharger mon CV" data-en="Download my CV">Télécharger mon CV</span>
-                    </a>
-                </div>
-                
-                <div class="footer-links">
-                    <a href="https://linkedin.com/in/kimmaurice" target="_blank" class="footer-link">LinkedIn</a>
-                    <a href="https://github.com/Bertarose/" target="_blank" class="footer-link">Github</a>
-                    <a href="https://www.imdb.com/name/nm9371635/" target="_blank" class="footer-link">IMDb</a>
-                </div>
-                
-                <p class="footer-copyright">
-                    <a href="mailto:info@kimmaurice.com">info@kimmaurice.com</a><br>
-                    © 2025 Kim Maurice · Montréal, Québec
-                </p>
-            </div>
+        <div class="expertise-card">
+          <div class="expertise-number">04</div>
+          <h3 data-fr="Production Audiovisuelle" data-en="Audiovisual Production">Production Audiovisuelle</h3>
+          <ul>
+            <li data-fr="After Effects & Premiere" data-en="After Effects & Premiere">After Effects & Premiere</li>
+            <li data-fr="Motion design & animation" data-en="Motion design & animation">Motion design & animation</li>
+            <li data-fr="Design sonore & audio" data-en="Sound design & audio">Design sonore & audio</li>
+            <li data-fr="Production cinéma/TV & design graphique" data-en="Film/TV production & graphic design">Production cinéma/TV & design graphique</li>
+          </ul>
         </div>
-    </section>
+
+        <div class="expertise-card">
+          <div class="expertise-number">05</div>
+          <h3 data-fr="IA Générative" data-en="Generative AI">IA Générative</h3>
+          <ul>
+            <li data-fr="Stable Diffusion & ComfyUI" data-en="Stable Diffusion & ComfyUI">Stable Diffusion & ComfyUI</li>
+            <li data-fr="Prompt engineering" data-en="Prompt engineering">Prompt engineering</li>
+            <li data-fr="Workflows automatisés" data-en="Automated workflows">Workflows automatisés</li>
+            <li data-fr="IA audio & vidéo" data-en="AI audio & video">IA audio & vidéo</li>
+          </ul>
+        </div>
+
+        <div class="expertise-card">
+          <div class="expertise-number">06</div>
+          <h3 data-fr="Outils Créatifs" data-en="Creative Tools">Outils Créatifs</h3>
+          <ul>
+            <li data-fr="Figma & Adobe Suite" data-en="Figma & Adobe Suite">Figma & Adobe Suite</li>
+            <li data-fr="Blender & 3D" data-en="Blender & 3D">Blender & 3D</li>
+            <li data-fr="Git & GitHub" data-en="Git & GitHub">Git & GitHub</li>
+            <li data-fr="Python & automation" data-en="Python & automation">Python & automation</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="experience" id="experience">
+    <div class="container">
+      <div class="section-header">
+        <h2 data-fr="Parcours Professionnel" data-en="Professional Experience">Parcours Professionnel</h2>
+      </div>
+
+      <div class="experience-timeline">
+        <div class="timeline-item">
+          <div class="timeline-date">2023 - 2024</div>
+          <div class="timeline-content">
+            <h3 data-fr="Designer Multimédia Senior" data-en="Senior Multimedia Designer">Designer Multimédia Senior</h3>
+            <h4>@ Technologia</h4>
+            <ul class="timeline-list">
+              <li data-fr="Direction UX/UI pour modules e-learning complexes" data-en="UX/UI direction for complex e-learning modules">Direction UX/UI pour modules e-learning complexes</li>
+              <li data-fr="Développement de formations interactives sur Articulate Storyline" data-en="Development of interactive training on Articulate Storyline">Développement de formations interactives sur Articulate Storyline</li>
+              <li data-fr="Gamification et scénarisation pédagogique" data-en="Gamification and instructional design">Gamification et scénarisation pédagogique</li>
+              <li data-fr="Création de contenus vidéo et motion design" data-en="Video content creation and motion design">Création de contenus vidéo et motion design</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-date">2020 - 2023</div>
+          <div class="timeline-content">
+            <h3 data-fr="Designer E-Learning" data-en="E-Learning Designer">Designer E-Learning</h3>
+            <h4>@ Campus GardaWorld</h4>
+            <ul class="timeline-list">
+              <li data-fr="Conception de formations en sécurité et conformité" data-en="Design of security and compliance training">Conception de formations en sécurité et conformité</li>
+              <li data-fr="Développement de parcours d'apprentissage adaptatifs" data-en="Development of adaptive learning paths">Développement de parcours d'apprentissage adaptatifs</li>
+              <li data-fr="Intégration LMS et suivi analytique" data-en="LMS integration and analytics">Intégration LMS et suivi analytique</li>
+              <li data-fr="Production audiovisuelle et animation 2D/3D" data-en="Audiovisual production and 2D/3D animation">Production audiovisuelle et animation 2D/3D</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-date">2010 - 2020</div>
+          <div class="timeline-content">
+            <h3 data-fr="Designer Graphique" data-en="Graphic Designer">Designer Graphique</h3>
+            <h4 data-fr="@ Productions Cinéma & TV" data-en="@ Film & TV Productions">@ Productions Cinéma & TV</h4>
+            <ul class="timeline-list">
+              <li data-fr="Design graphique pour 15+ productions (Bad Blood, Unité 9, etc.)" data-en="Graphic design for 15+ productions (Bad Blood, Unité 9, etc.)">Design graphique pour 15+ productions (Bad Blood, Unité 9, etc.)</li>
+              <li data-fr="Création d'interfaces, props numériques et design graphique" data-en="Creation of interfaces, digital props and graphic design">Création d'interfaces, props numériques et design graphique</li>
+              <li data-fr="Impression d'affiches, tissus, retouche photo et création de faux documents" data-en="Printing posters, fabrics, photo retouching and fake documents creation">Impression d'affiches, tissus, retouche photo et création de faux documents</li>
+              <li data-fr="Motion design et effets visuels avec After Effects" data-en="Motion design and visual effects with After Effects">Motion design et effets visuels avec After Effects</li>
+              <li data-fr="Collaboration avec réalisateurs et directeurs artistiques" data-en="Collaboration with directors and art directors">Collaboration avec réalisateurs et directeurs artistiques</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-date">2000 - 2010</div>
+          <div class="timeline-content">
+            <h3 data-fr="Designer Web & Multimédia" data-en="Web & Multimedia Designer">Designer Web & Multimédia</h3>
+            <h4 data-fr="@ Divers clients & agences" data-en="@ Various clients & agencies">@ Divers clients & agences</h4>
+            <ul class="timeline-list">
+              <li data-fr="Conception et développement de sites web" data-en="Website design and development">Conception et développement de sites web</li>
+              <li data-fr="Identités visuelles et branding" data-en="Visual identities and branding">Identités visuelles et branding</li>
+              <li data-fr="Installations interactives et multimédia" data-en="Interactive and multimedia installations">Installations interactives et multimédia</li>
+              <li data-fr="Production audiovisuelle et montage" data-en="Audiovisual production and editing">Production audiovisuelle et montage</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="explorations" id="explorations">
+    <div class="container">
+      <div class="section-header">
+        <h2 data-fr="Explorations & Projets Personnels" data-en="Explorations & Personal Projects">Explorations & Projets Personnels</h2>
+      </div>
+
+      <div class="exploration-grid">
+        <div class="exploration-card">
+          <h4 data-fr="🎵 DJ & Radio Underground" data-en="🎵 DJ & Underground Radio">🎵 DJ & Radio Underground</h4>
+          <p data-fr="DJ actif sur Still FM, radio underground de Montréal. Exploration des cultures musicales alternatives." data-en="Active DJ on Still FM, Montreal's underground radio. Exploring alternative music cultures.">DJ actif sur Still FM, radio underground de Montréal. Exploration des cultures musicales alternatives.</p>
+        </div>
+
+        <div class="exploration-card">
+          <h4 data-fr="🤖 IA Générative" data-en="🤖 Generative AI">🤖 IA Générative</h4>
+          <p data-fr="Archive visuelle sur Instagram (@this_is_weird_ai). Expérimentation avec Stable Diffusion et workflows créatifs." data-en="Visual archive on Instagram (@this_is_weird_ai). Experimentation with Stable Diffusion and creative workflows.">Archive visuelle sur Instagram (@this_is_weird_ai). Expérimentation avec Stable Diffusion et workflows créatifs.</p>
+        </div>
+
+        <div class="exploration-card">
+          <h4 data-fr="🎹 Instruments Expérimentaux" data-en="🎹 Experimental Instruments">🎹 Instruments Expérimentaux</h4>
+          <p data-fr="Création d'instruments musicaux hybrides combinant MIDI, IA et visualisations temps réel." data-en="Creation of hybrid musical instruments combining MIDI, AI and real-time visualizations.">Création d'instruments musicaux hybrides combinant MIDI, IA et visualisations temps réel.</p>
+        </div>
+
+        <div class="exploration-card">
+          <h4 data-fr="🌐 Développement Web" data-en="🌐 Web Development">🌐 Développement Web</h4>
+          <p data-fr="Projets open-source sur GitHub. Exploration de Three.js, Next.js et technologies immersives." data-en="Open-source projects on GitHub. Exploring Three.js, Next.js and immersive technologies.">Projets open-source sur GitHub. Exploration de Three.js, Next.js et technologies immersives.</p>
+        </div>
+
+        <div class="exploration-card">
+          <h4 data-fr="🔊 Design Sonore" data-en="🔊 Sound Design">🔊 Design Sonore</h4>
+          <p data-fr="Installations audio-visuelles et générateurs de signatures sonores uniques." data-en="Audio-visual installations and unique sonic signature generators.">Installations audio-visuelles et générateurs de signatures sonores uniques.</p>
+        </div>
+
+        <div class="exploration-card">
+          <h4 data-fr="📚 Apprentissage Continu" data-en="📚 Continuous Learning">📚 Apprentissage Continu</h4>
+          <p data-fr="Exploration active de nouvelles technologies : WebGL, IA, IoT, VR/AR et cultures numériques." data-en="Active exploration of new technologies: WebGL, AI, IoT, VR/AR and digital cultures.">Exploration active de nouvelles technologies : WebGL, IA, IoT, VR/AR et cultures numériques.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="footer-cta" id="contact">
+    <div class="container">
+      <div class="footer-content">
+        <h2 data-fr="Travaillons ensemble!" data-en="Let's work together!">Travaillons ensemble!</h2>
+
+        <div class="cta-group">
+          <a href="mailto:info@kimmaurice.com" class="btn btn-primary">
+            <span data-fr="Écrivez-moi un e-mail" data-en="Send me an email">Écrivez-moi un e-mail</span> →
+          </a>
+          <a href="Curriculum_Kimmaurice_2025.pdf" target="_blank" class="btn btn-secondary">
+            📄 <span data-fr="Télécharger mon CV" data-en="Download my CV">Télécharger mon CV</span>
+          </a>
+        </div>
+
+        <div class="footer-links">
+          <a href="https://linkedin.com/in/kimmaurice" target="_blank" class="footer-link">LinkedIn</a>
+          <a href="https://github.com/Bertarose/" target="_blank" class="footer-link">Github</a>
+          <a href="https://www.imdb.com/name/nm9371635/" target="_blank" class="footer-link">IMDb</a>
+        </div>
+
+        <p class="footer-copyright">
+          <a href="mailto:info@kimmaurice.com">info@kimmaurice.com</a><br>
+          © 2025 Kim Maurice · Montréal, Québec
+        </p>
+      </div>
+    </div>
+  </section>
 </body>
 </html>
