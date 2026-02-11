@@ -278,6 +278,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // 3. Initialiser l'interface
     initMobileMenu();
     initSmoothScroll();
+   if (!location.pathname.includes('cv.html')) {
+    initNavScroll();
+}
     initNavScroll();
     initAnimations();
     
