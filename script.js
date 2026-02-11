@@ -243,6 +243,54 @@ function initSwarmDots() {
     alpha: 0.3 + Math.random() * 0.7,
   }));
 
+   /* ==========================================================================
+   WAVES BACKGROUND (ultra subtle)
+   ========================================================================== */
+function initWaves() {
+  const canvas = document.getElementById("waves");
+  if (!canvas) return;
+
+  const ctx = canvas.getContext("2d");
+  let w, h;
+
+  function resize() {
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+  }
+  window.addEventListener("resize", resize);
+  resize();
+
+  let t = 0;
+
+  function draw() {
+    t += 0.005;
+
+    ctx.clearRect(0, 0, w, h);
+
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = "rgba(0,0,0,0.04)"; // TRÈS pâle
+
+    for (let i = 0; i < 3; i++) {
+      ctx.beginPath();
+
+      for (let x = 0; x < w; x += 8) {
+        const y =
+          h / 2 +
+          Math.sin(x * 0.01 + t + i * 1.5) * (12 + i * 6);
+
+        if (x === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+
+      ctx.stroke();
+    }
+
+    requestAnimationFrame(draw);
+  }
+
+  draw();
+}
+
   function animate() {
     ctx.clearRect(0, 0, w, h);
 
