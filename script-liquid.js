@@ -66,7 +66,7 @@ const projectDescriptions = {
       "Landing pages for ads, petitions and social impact campaigns.",
     introText:
       "Multimedia designer and creative technologist exploring intersections between art, technology and experience.",
-    locationText: "Continuous learning",
+    locationText: "Montreal — Ongoing projects, active learning, and recent explorations around AI assistants, immersive experimentation, and unconventional digital forms.",
     ctaPrimaryText: "View full background (CV)",
     ctaSecondaryText: "or discover my projects ↓",
     bridgeTitle: "Want to know more about my background?",
