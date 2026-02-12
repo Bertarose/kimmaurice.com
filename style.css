@@ -482,6 +482,20 @@ header {
     animation: scroll 30s linear infinite;
 }
 
+/* Tablet */
+@media (max-width: 1024px){
+  .ticker-wrapper{
+    animation: scroll 45s linear infinite;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px){
+  .ticker-wrapper{
+    animation: scroll 60s linear infinite;
+  }
+}
+
 .ticker-item {
     white-space: nowrap;
     padding: 0 2rem;
