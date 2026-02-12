@@ -1401,40 +1401,31 @@ section:hover {
    PERFORMANCE OPTIMIZATIONS
    ========================================================================== */
 
-/* Reduce animations on mobile */
 @media (max-width: 768px) {
-  * {
+  *:not(.ticker-wrapper):not(.ticker-wrapper *) {
     animation-duration: 0.5s !important;
   }
-  
-  .starfield {
-    opacity: 0.08;
-  }
-  
-  #waves,
-  #molecules {
-    opacity: 0.3;
-  }
-  
-  /* Sur mobile, ajouter un léger fond blanc sur les éléments de texte pour la lisibilité */
-  .intro h1 {
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  }
-  
+
+  .starfield { opacity: 0.08; }
+
+  #waves, #molecules { opacity: 0.3; }
+
+  .intro h1 { box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); }
+
   .project-item {
     background: rgba(255, 255, 255, 0.5);
     backdrop-filter: blur(6px);
   }
-  
+
   .project-item:hover {
     background: rgba(255, 255, 255, 0.9);
   }
-  
+
   .cv-bridge {
     background: rgba(255, 255, 255, 0.5);
     backdrop-filter: blur(6px);
   }
-  
+
   .collab-item {
     background: rgba(255, 255, 255, 0.5);
     backdrop-filter: blur(6px);
