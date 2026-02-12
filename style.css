@@ -1420,8 +1420,8 @@ section:hover {
   .intro h1 { box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); }
 
   .project-item {
-    background: rgba(255, 255, 255, 0.5);
-    backdrop-filter: blur(6px);
+     background: rgba(255,255,255,0.18);   /* beaucoup plus transparent */
+  backdrop-filter: none;  
   }
 
   .project-item:hover {
@@ -1429,13 +1429,13 @@ section:hover {
   }
 
   .cv-bridge {
-    background: rgba(255, 255, 255, 0.5);
-    backdrop-filter: blur(6px);
+    background: rgba(255,255,255,0.18);
+  backdrop-filter: none;
   }
 
   .collab-item {
-    background: rgba(255, 255, 255, 0.5);
-    backdrop-filter: blur(6px);
+    background: rgba(255,255,255,0.18);
+  backdrop-filter: none;
   }
 }
 
@@ -1445,21 +1445,3 @@ body, html {
   max-width: 100vw;
 }
 
-/*image de fond sur mobile*/
-@media (max-width: 768px){
-
-  /* laisse le background du body visible */
-  main, section, .intro, .projects, .hero {
-    background: transparent !important;
-    backdrop-filter: none !important;
-  }
-
-  /* garde seulement le glass sur les cartes, pas sur tout */
-  .project-description,
-  .collab-item,
-  .cv-bridge{
-    background: rgba(255,255,255,0.35) !important;
-    backdrop-filter: blur(4px) !important;
-  }
-
-}
