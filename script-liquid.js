@@ -293,7 +293,7 @@ function initLiquidBackground() {
           float noise = sin(uv.x * 20.0 + uTime) * cos(uv.y * 20.0 - uTime) * 0.02;
           color += vec3(noise);
           
-          gl_FragColor = vec4(color, 0.05);
+          gl_FragColor = vec4(color, 0.14);
         }
       `,
       transparent: true
@@ -362,3 +362,23 @@ document.addEventListener("DOMContentLoaded", () => {
     initMobileMenu();
     initLiquidBackground();
 });
+
+
+/* =========================
+   STEP 2 — ACTIVE PROJECT ON SCROLL
+   ========================= */
+(function(){
+  const items = document.querySelectorAll('.project-item');
+  if(!items.length) return;
+
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        items.forEach(x=>x.classList.remove('is-active'));
+        e.target.classList.add('is-active');
+      }
+    });
+  }, { threshold: 0.35 });
+
+  items.forEach(item=>io.observe(item));
+})();
