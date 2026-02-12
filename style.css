@@ -1447,3 +1447,57 @@ body, html {
 @media (max-width: 768px){
   #liquidCanvas{ display:none !important; }
 }
+/* =========================
+   MOBILE: HERO IMAGE ONLY
+   ========================= */
+@media (max-width: 768px){
+
+  /* On enlève le background global sur mobile */
+  body.home{
+    background-image: none !important;
+    background-color: #f5f5f5;
+  }
+
+  /* On crée un hero image seulement en haut */
+  body.home main{
+    position: relative;
+    padding-top: 0 !important;
+  }
+
+  body.home main::before{
+    content:"";
+    display:block;
+    height: 42vh;                 /* ajuste: 35–55vh */
+    min-height: 280px;
+    background-image: url("img/img.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-bottom: 4px solid #000;
+  }
+
+  /* Le contenu arrive juste après l’image */
+  body.home .intro{
+    margin-top: 1.4rem;
+  }
+
+  /* IMPORTANT: éviter les gros fonds opaques qui masquent tout */
+  body.home section,
+  body.home .projects{
+    background: transparent !important;
+    backdrop-filter: none !important;
+  }
+}
+
+/* =========================
+   CV MOBILE SPACING FIX
+   ========================= */
+@media (max-width: 768px){
+  .hero-title{
+    margin-bottom: 0.6rem !important;
+  }
+  .hero-subtitle{
+    margin-top: 0.6rem !important;
+    line-height: 1.35 !important;
+  }
+}
