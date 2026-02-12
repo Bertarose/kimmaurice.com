@@ -32,7 +32,7 @@ const projectDescriptions = {
       "Pages landing programmées pour publicités, pétitions et campagnes d'impact social. Déploiement rapide sur Vercel avec code optimisé.",
     introText:
       "Designer multimédia et technologue créative explorant les intersections entre art, technologie et expérience.",
-    locationText: "Montréal — Projets en cours, apprentissages actifs et explorations récentes autour des assistants IA, de l’expérimentation immersive et de formes numériques hors norme.",
+    locationText: "Montréal — Projets en cours, apprentissages actifs et explorations récentes autour des assistants IA, de l'expérimentation immersive et de formes numériques hors norme.",
     ctaPrimaryText: "Voir mon parcours complet (CV)",
     ctaSecondaryText: "ou découvrir mes projets ↓",
     bridgeTitle: "Envie d'en savoir plus sur mon parcours ?",
@@ -293,7 +293,7 @@ function initLiquidBackground() {
           float noise = sin(uv.x * 20.0 + uTime) * cos(uv.y * 20.0 - uTime) * 0.02;
           color += vec3(noise);
           
-          gl_FragColor = vec4(color, 0.8);
+          gl_FragColor = vec4(color, 0.05);
         }
       `,
       transparent: true

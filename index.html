@@ -12,6 +12,9 @@
     <link rel="preconnect" href="https://www.googletagmanager.com">
     <link rel="stylesheet" href="style.css">
     
+    <!-- Three.js for liquid background -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
     <script defer src="script-liquid.js"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-WYM83ME5LK"></script>
     <script>
@@ -34,6 +37,10 @@
 </head>
 
 <body>
+    <!-- Liquid gradient background canvas -->
+    <canvas id="liquidCanvas"></canvas>
+    
+    <!-- Legacy canvases (can be removed if not used elsewhere) -->
     <canvas id="waves"></canvas>
     <canvas id="molecules"></canvas>
     <div class="starfield"></div>
@@ -48,15 +55,15 @@
 
     <div class="ticker-container">
         <div class="ticker-wrapper">
-            <span class="ticker-item" id="tickerText">De nouveaux projets, idées et expérimentations s’y ajoutent au fil du temps.</span>
-            <span class="ticker-item" id="tickerText2">De nouveaux projets, idées et expérimentations s’y ajoutent au fil du temps.</span>
+            <span class="ticker-item" id="tickerText">De nouveaux projets, idées et expérimentations s'y ajoutent au fil du temps.</span>
+            <span class="ticker-item" id="tickerText2">De nouveaux projets, idées et expérimentations s'y ajoutent au fil du temps.</span>
         </div>
     </div>
 
     <main>
         <div class="intro">
             <h1 id="introText">Designer multimédia et technologue créative explorant les intersections entre art, technologie et expérience.</h1>
-            <p id="locationText">Montréal — Projets en cours, apprentissages actifs et explorations récentes autour des assistants IA, de l’expérimentation immersive et de formes numériques hors norme.</p>
+            <p id="locationText">Apprentissage continu</p>
             <div class="hero-cta">
                 <a href="cv.html" class="cta-primary">
                     <span id="ctaPrimaryText">Voir mon parcours complet (CV)</span> →
@@ -78,7 +85,7 @@
                 <div class="project-description">
                     <p id="projectHorsChampDesc">
                         <strong>Hors Champ</strong> est une application de performance musicale en temps réel contrôlée par MIDI, conçue pour l'expérimentation sonore et conceptuelle.
-                        L'application combine génération musicale par IA (Google Gemini), synthèse audio, effets en temps réel, looper multi‑pistes et contrôle MIDI pour créer une expérience de création musicale live interactive.
+                        L'application combine génération musicale par IA (Google Gemini), synthèse audio, effets en temps réel, looper multi‑pistes et contrôle MIDI pour créer une expérience de création musicale live interactive.
                     </p>
                 </div>
             </div>
@@ -100,7 +107,7 @@
             <!-- 03 — STILL FM -->
             <a href="https://still-fm.vercel.app/" target="_blank" class="project-item">
                 <div class="project-number">03</div>
-                <h2 class="project-title">Still FM — Radio</h2>
+                <h2 class="project-title">Still FM — Radio</h2>
                 <div class="project-meta">
                     <span class="badge-dev">🚧 En cours</span>
                     <span>Next.js • Mixcloud API</span>
@@ -114,14 +121,14 @@
             <!-- 04 — DESIGN CINÉMA / TV -->
             <a href="https://www.imdb.com/name/nm9371635/" target="_blank" class="project-item">
                 <div class="project-number">04</div>
-                <h2 class="project-title">Design Cinéma / TV</h2>
+                <h2 class="project-title">Design Cinéma / TV</h2>
                 <div class="project-meta">
                     <span class="badge-complete">✅ Pro</span>
                     <span>After Effects • Photoshop • UI</span>
-                    <span>15+ Productions</span>
+                    <span>15+ Productions</span>
                 </div>
                 <div class="project-description">
-                    <p id="projectFilmDesc">Designer graphique sur 15+ productions incluant Bad Blood et Unité 9. Création de props numériques, interfaces et animations. Impression d'affiches, tissus, retouche photo et imprimés de toute sorte. Travail sous pression.</p>
+                    <p id="projectFilmDesc">Designer graphique sur 15+ productions incluant Bad Blood et Unité 9. Création de props numériques, interfaces et animations. Impression d'affiches, tissus, retouche photo et imprimés de toute sorte. Travail sous pression.</p>
                 </div>
             </a>
 
@@ -146,34 +153,33 @@
                 <div class="project-meta">
                     <span class="badge-complete">✅ Pro</span>
                     <span>Articulate • UX/UI • LMS</span>
-                    <span>Technologia / Garda</span>
+                    <span>Technologia / Garda</span>
                 </div>
                 <div class="project-description">
                     <p id="project10DescText">Formations interactives pour grandes organisations. Scénarisation pédagogique et gamification. Projets confidentiels.</p>
                 </div>
             </a>
 
-            <!-- 07 — ARCHIVE VISUELLE AI -->
-            <a href="https://www.instagram.com/salut_berta_rose/" target="_blank" class="project-item">
+            <!-- 07 — AI ART EXPLORATION -->
+            <a href="https://www.midjourney.com/app/users/bf99c00d-1fe1-480a-94a6-4e9084e47cb9/" target="_blank" class="project-item">
                 <div class="project-number">07</div>
-                <h2 class="project-title">Archive Visuelle AI</h2>
+                <h2 class="project-title">AI Art Exploration</h2>
                 <div class="project-meta">
-                    <span>Stable Diffusion • ComfyUI</span>
-                    <span>Instagram</span>
+                    <span>Midjourney • Stable Diffusion</span>
+                    <span>IA Générative</span>
                 </div>
                 <div class="project-description">
-                    <p id="project11DescText">Exploration artistique des outils d'IA générative. Prompt engineering et workflows créatifs complexes.</p>
+                    <p id="project11DescText">Exploration artistique des outils d'IA générative. Prompt engineering et workflows créatifs complexes.</p>
                 </div>
             </a>
 
-            <!-- 08 — PIPELINE CRÉATIF IA -->
-            <a href="https://github.com/Bertarose/creative-ai-production-pipeline" target="_blank" class="project-item">
+            <!-- 08 — CREATIVE PIPELINE -->
+            <a href="https://github.com/Bertarose/Automation-Pipeline/tree/main" target="_blank" class="project-item">
                 <div class="project-number">08</div>
-                <h2 class="project-title">Pipeline Créatif IA</h2>
+                <h2 class="project-title">Creative Pipeline</h2>
                 <div class="project-meta">
-                    <span class="badge-complete">✅ Code</span>
                     <span>Python • Automation</span>
-                    <span>2025</span>
+                    <span>Documentation</span>
                 </div>
                 <div class="project-description">
                     <p id="project5DescText">Pipeline automatisé de production créative. Documentation complète des workflows Python pour génération de contenu.</p>
@@ -183,10 +189,10 @@
             <!-- 09 — OBSCURA -->
             <a href="https://obscura-liart.vercel.app/" target="_blank" class="project-item">
                 <div class="project-number">09</div>
-                <h2 class="project-title">Obscura – Bibliothèque de films</h2>
+                <h2 class="project-title">Obscura – Bibliothèque de films</h2>
                 <div class="project-meta">
                     <span class="badge-complete">✅ Déployé – en cours de programmation</span>
-                    <span>HTML – JAVASCRIPT</span>
+                    <span>HTML – JAVASCRIPT</span>
                     <span>2025</span>
                 </div>
                 <div class="project-description">
@@ -199,7 +205,7 @@
             <!-- 10 — SONIC FINGERPRINT -->
             <div class="project-item">
                 <div class="project-number">10</div>
-                <h2 class="project-title">Sonic Fingerprint</h2>
+                <h2 class="project-title">Sonic Fingerprint</h2>
                 <div class="project-meta">
                     <span>Canvas • Tone.js</span>
                     <span>Audio‑visuel</span>
@@ -212,9 +218,9 @@
             <!-- 11 — TERRARIUM NUMÉRIQUE -->
             <div class="project-item">
                 <div class="project-number">11</div>
-                <h2 class="project-title">Terrarium Numérique</h2>
+                <h2 class="project-title">Terrarium Numérique</h2>
                 <div class="project-meta">
-                    <span class="year-future">En préparation — 2026</span>
+                    <span class="year-future">En préparation — 2026</span>
                     <span>WebGL • IoT</span>
                 </div>
                 <div class="project-description">
@@ -225,7 +231,7 @@
             <!-- 12 — ACTIONS PAGE -->
             <a href="https://actions-lemon.vercel.app/" target="_blank" class="project-item">
                 <div class="project-number">12</div>
-                <h2 class="project-title">Actions Page</h2>
+                <h2 class="project-title">Actions Page</h2>
                 <div class="project-meta">
                     <span class="badge-complete">✅ Déployé</span>
                     <span>Landing Page • Vercel</span>
@@ -261,7 +267,7 @@
                         <h3 data-fr="Conception sonore" data-en="Sound design">Conception sonore</h3>
                         <ul>
                             <li><a href="https://starkimproject.com/exhibits/saekdong%ec%83%89%eb%8f%99diaspora/" target="_blank" rel="noopener">Saekdong Diaspora</a></li>
-                            <li><a href="https://starkimproject.com/laudace/" target="_blank" rel="noopener">L’audace</a></li>
+                            <li><a href="https://starkimproject.com/laudace/" target="_blank" rel="noopener">L'audace</a></li>
                             <li><a href="https://vimeo.com/600554637" target="_blank" rel="noopener">Œuvre vidéo — conception sonore</a></li>
                         </ul>
                     </div>
@@ -269,13 +275,13 @@
                     <div class="collab-group">
                         <h3>Performance / projections / radio</h3>
                         <ul>
-                            <li><strong>Queer ASMR</strong> — projection vidéo, <em>Dyke Air</em>, Paris (6 décembre 2013)</li>
+                            <li><strong>Queer ASMR</strong> — projection vidéo, <em>Dyke Air</em>, Paris (6 décembre 2013)</li>
                             <li>RA</li>
-                            <li>Cabaret Tollé</li>
+                            <li>Cabaret Tollé</li>
                             <li>ENDLESSS — streaming live</li>
                             <li>Filles-troniques</li>
                             <li>Suoni per il Popolo — performances vidéo expérimentales</li>
-                            <li>Émissions de radio : <a href="https://www.mixcloud.com/n10as/" target="_blank" rel="noopener">n10as</a>, <a href="https://www.mixcloud.com/StillFM/" target="_blank" rel="noopener">Still FM</a></li>
+                            <li>Émissions de radio : <a href="https://www.mixcloud.com/n10as/" target="_blank" rel="noopener">n10as</a>, <a href="https://www.mixcloud.com/StillFM/" target="_blank" rel="noopener">Still FM</a></li>
                         </ul>
                     </div>
                     <!-- Presse -->
@@ -287,23 +293,23 @@
                     </div>
                     <!-- Cinéma / télévision — designer multimédia -->
                     <div class="collab-group">
-                        <h3>Cinéma / télévision — designer multimédia</h3>
+                        <h3>Cinéma / télévision — designer multimédia</h3>
                         <ul class="two-col">
-                            <li>Après (2021)</li>
-                            <li>5e Rang (2019–2020)</li>
-                            <li>Nadia, Butterfly (2020)</li>
-                            <li>My Salinger Year (2020) — non créditée</li>
-                            <li>Les Veuves (2020)</li>
-                            <li>Kuessipan (2019)</li>
-                            <li>Aquaslash (2019)</li>
-                            <li>La femme de mon frère (2019)</li>
-                            <li>Unité 9 (2019)</li>
-                            <li>Bad Blood (2018)</li>
-                            <li>Demain des hommes (2018)</li>
-                            <li>Les rois mongols (2017) — direction artistique</li>
-                            <li>Jérémie (2015–2016)</li>
-                            <li>L’Échappée (2016)</li>
-                            <li>Lemonade (2018)</li>
+                            <li>Après (2021)</li>
+                            <li>5e Rang (2019–2020)</li>
+                            <li>Nadia, Butterfly (2020)</li>
+                            <li>My Salinger Year (2020) — non créditée</li>
+                            <li>Les Veuves (2020)</li>
+                            <li>Kuessipan (2019)</li>
+                            <li>Aquaslash (2019)</li>
+                            <li>La femme de mon frère (2019)</li>
+                            <li>Unité 9 (2019)</li>
+                            <li>Bad Blood (2018)</li>
+                            <li>Demain des hommes (2018)</li>
+                            <li>Les rois mongols (2017) — direction artistique</li>
+                            <li>Jérémie (2015–2016)</li>
+                            <li>L'Échappée (2016)</li>
+                            <li>Lemonade (2018)</li>
                         </ul>
                     </div>
                     <p class="collab-note" data-fr="Certains projets sont difficiles à retrouver en ligne. Détails et références disponibles sur demande." data-en="Some projects are hard to find online. Details and references available on request.">
@@ -315,16 +321,16 @@
 
         <!-- Bridge vers le CV -->
         <div class="cv-bridge">
-            <h3 id="bridgeTitle">Envie d'en savoir plus sur mon parcours ?</h3>
-            <p id="bridgeText">CV détaillé avec 25 ans d'expérience, compétences techniques complètes, parcours professionnel et formations.</p>
-            <a href="cv.html" class="btn-cv"><span id="bridgeButton">Consulter le CV complet</span> →</a>
+            <h3 id="bridgeTitle">Envie d'en savoir plus sur mon parcours ?</h3>
+            <p id="bridgeText">CV détaillé avec 25 ans d'expérience, compétences techniques complètes, parcours professionnel et formations.</p>
+            <a href="cv.html" class="btn-cv"><span id="bridgeButton">Consulter le CV complet</span> →</a>
         </div>
     </main>
 
     <footer>
-        <p id="footerText">© 2025 Kim Maurice</p>
+        <p id="footerText">© 2025 Kim Maurice</p>
         <div class="footer-links">
-            <a href="mailto:info@kimmaurice.com">Email</a>
+            <a href="/cdn-cgi/l/email-protection#d6bfb8b0b996bdbfbbbbb7a3a4bfb5b3f8b5b9bb">Email</a>
             <a href="https://linkedin.com/in/kimmaurice" target="_blank">LinkedIn</a>
             <a href="https://github.com/Bertarose/" target="_blank">Github</a>
         </div>
