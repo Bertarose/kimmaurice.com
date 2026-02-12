@@ -464,6 +464,7 @@ header {
 /* ==========================================================================
    TICKER
    ========================================================================== */
+
 .ticker-container {
     background: var(--black);
     border-bottom: var(--border-thick) solid var(--black);
@@ -471,6 +472,7 @@ header {
     padding: 0.6rem 0;
 }
 
+/* Desktop */
 @media (min-width: 769px) {
   .ticker-container {
     padding: 0.8rem 0;
@@ -479,20 +481,21 @@ header {
 
 .ticker-wrapper {
     display: flex;
-    animation: scroll 30s linear infinite;
+    animation: scroll linear infinite;
+    animation-duration: 30s;
 }
 
 /* Tablet */
 @media (max-width: 1024px){
   .ticker-wrapper{
-    animation: scroll 45s linear infinite;
+    animation-duration: 45s;
   }
 }
 
 /* Mobile */
 @media (max-width: 768px){
   .ticker-wrapper{
-    animation: scroll 60s linear infinite;
+    animation-duration: 60s;
   }
 }
 
@@ -504,6 +507,7 @@ header {
     font-size: 0.8rem;
 }
 
+/* Desktop typography */
 @media (min-width: 769px) {
   .ticker-item {
     padding: 0 4rem;
@@ -511,11 +515,17 @@ header {
   }
 }
 
+/* Optional: pause au hover (desktop only) */
+@media (hover: hover){
+  .ticker-wrapper:hover{
+    animation-play-state: paused;
+  }
+}
+
 @keyframes scroll {
     from { transform: translateX(0); }
     to { transform: translateX(-50%); }
 }
-
 /* ==========================================================================
    LAYOUT
    ========================================================================== */
