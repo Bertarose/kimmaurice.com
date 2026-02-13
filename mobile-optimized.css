@@ -95,7 +95,7 @@
         box-sizing: border-box;
     }
     
-    /* Projects */
+    /* Projects - TOUJOURS VISIBLES sur mobile */
     .projects {
         padding: 1rem 0.75rem !important;
     }
@@ -103,11 +103,24 @@
     .project-item {
         padding: 1.75rem 1.25rem !important;
         margin-bottom: 1.5rem !important;
+        /* FOND OPAQUE - toujours visible */
+        background: rgba(255, 255, 255, 0.95) !important;
+        backdrop-filter: blur(8px) !important;
+        border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    }
+    
+    /* Désactiver l'effet hover sur mobile */
+    .project-item:hover,
+    .project-item:active,
+    .project-item.is-active {
+        background: rgba(255, 255, 255, 0.95) !important;
+        transform: none !important;
     }
     
     .project-number {
         font-size: 0.9rem !important;
         margin-bottom: 0.5rem !important;
+        opacity: 0.8 !important;
     }
     
     .project-title {
@@ -115,6 +128,12 @@
         line-height: 1.15 !important;
         margin-bottom: 0.85rem !important;
         hyphens: auto;
+        color: #000 !important;
+    }
+    
+    /* Underline toujours visible */
+    .project-title::after {
+        background: rgba(57, 255, 20, 0.4) !important;
     }
     
     .project-meta {
@@ -128,28 +147,35 @@
     .project-description {
         font-size: 0.95rem !important;
         line-height: 1.65 !important;
+        color: #333 !important;
     }
     
     .project-description p {
         font-size: 0.95rem !important;
         line-height: 1.65 !important;
+        color: #333 !important;
     }
     
-    /* Badges */
+    /* Badges bien visibles */
     .badge-dev,
     .badge-complete {
         padding: 0.4rem 0.8rem !important;
         font-size: 0.8rem !important;
         white-space: nowrap;
+        background: rgba(0, 0, 0, 0.08) !important;
+        border-radius: 12px !important;
     }
     
     .year-future {
         font-size: 0.85rem !important;
     }
     
-    /* Collaborations */
+    /* Collaborations - toujours visible */
     .collab-item {
         padding: 1.5rem 1.25rem !important;
+        background: rgba(255, 255, 255, 0.95) !important;
+        backdrop-filter: blur(8px) !important;
+        border: 1px solid rgba(0, 0, 0, 0.1) !important;
     }
     
     .collab-summary {
@@ -191,10 +217,13 @@
         line-height: 1.6 !important;
     }
     
-    /* CV Bridge */
+    /* CV Bridge - toujours visible */
     .cv-bridge {
         padding: 2rem 1.25rem !important;
         margin: 2rem 0.75rem !important;
+        background: rgba(255, 255, 255, 0.95) !important;
+        backdrop-filter: blur(8px) !important;
+        border: 1px solid rgba(0, 0, 0, 0.1) !important;
     }
     
     .cv-bridge h3 {
@@ -216,7 +245,7 @@
         justify-content: center !important;
     }
     
-    /* Footer - GARDE LE FOOTER NORMAL sur index.html */
+    /* Footer */
     footer {
         padding: 2.5rem 1.25rem !important;
         text-align: center;
@@ -247,11 +276,11 @@
         width: clamp(130px, 38vw, 200px) !important;
     }
     
-    /* GIF layer */
+    /* GIF layer - moins visible pour ne pas gêner la lecture */
     .gif-layer {
         background-size: 150px auto !important;
         background-position: 88% 88% !important;
-        opacity: 0.6 !important;
+        opacity: 0.4 !important;
     }
     
     /* Typography */
@@ -292,14 +321,14 @@
         height: auto !important;
     }
     
-    /* Touch feedback */
+    /* Touch feedback léger */
     .project-item {
-        -webkit-tap-highlight-color: rgba(57, 255, 20, 0.15);
-        tap-highlight-color: rgba(57, 255, 20, 0.15);
+        -webkit-tap-highlight-color: rgba(57, 255, 20, 0.1);
+        tap-highlight-color: rgba(57, 255, 20, 0.1);
     }
     
     .project-item:active {
-        transform: scale(0.995);
+        transform: scale(0.98);
         transition: transform 0.1s ease;
     }
     
@@ -340,7 +369,7 @@
         padding: 0.65rem 0.95rem !important;
     }
     
-    /* Sections CV */
+    /* Sections CV - toujours visibles */
     .hero-title {
         font-size: clamp(1.8rem, 7vw, 3rem) !important;
         line-height: 1.05 !important;
@@ -356,6 +385,9 @@
     .cv-section {
         padding: 2rem 1.25rem !important;
         margin-bottom: 1.5rem !important;
+        background: rgba(255, 255, 255, 0.95) !important;
+        backdrop-filter: blur(8px) !important;
+        border: 1px solid rgba(0, 0, 0, 0.1) !important;
     }
     
     .section-title {
@@ -363,12 +395,15 @@
         margin-bottom: 1.25rem !important;
     }
     
-    /* Experience cards */
+    /* Experience cards - toujours visibles */
     .experience-card,
     .skill-card,
     .education-card {
         padding: 1.25rem 1rem !important;
         margin-bottom: 1.25rem !important;
+        background: rgba(255, 255, 255, 0.95) !important;
+        backdrop-filter: blur(8px) !important;
+        border: 1px solid rgba(0, 0, 0, 0.1) !important;
     }
     
     .experience-title,
@@ -418,7 +453,7 @@
     
     .gif-layer {
         background-size: 120px auto !important;
-        opacity: 0.5 !important;
+        opacity: 0.3 !important;
     }
 }
 
