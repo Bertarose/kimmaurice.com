@@ -11,7 +11,7 @@ const projectDescriptions = {
     projectHorsChampDesc:
       "<strong>Hors Champ</strong> est une application de performance musicale en temps réel contrôlée par MIDI, conçue pour l'expérimentation sonore et conceptuelle. L'application combine génération musicale par IA (Google Gemini), synthèse audio, effets en temps réel, looper multi-pistes et contrôle MIDI pour créer une expérience de création musicale live interactive.",
     projectLatentDesc:
-      "Instrument musical expérimental combinant clavier MIDI, IA générative et visualisation 3D temps réel. Interface hybride analogique/numérique pour performance live.",
+      "Desktop version: Instrument musical expérimental combinant clavier MIDI, IA générative et visualisation 3D temps réel. Interface hybride analogique/numérique pour performance live.",
     project3DescText:
       "Radio streaming underground avec intégration Twitch et Mixcloud. Player audio personnalisé et interface responsive développée en Next.js.",
     projectFilmDesc:
@@ -19,7 +19,7 @@ const projectDescriptions = {
     project2DescText:
       "Calendrier de l'Avent hybride transformant une boîte de chocolats en aventure interactive. Application web gamifiée.",
     project10DescText:
-      "Formations interactives pour grandes organisations. Scénarisation pédagogique et gamification. Projets confidentiels.",
+      "Extrait de formations interactives pour grandes organisations. Scénarisation pédagogique et gamification. Projets confidentiels.",
     project11DescText:
       "Exploration artistique des outils d'IA générative. Prompt engineering et workflows créatifs complexes.",
     project5DescText:
@@ -27,9 +27,9 @@ const projectDescriptions = {
     project9DescText:
       "Générateur de signatures sonores uniques avec visualisation temps réel. Synthèse audio interactive.",
     project1DescText:
-      "Installation immersive combinant terrarium physique et monde VR/AR forestier.",
+      "Futur projet : Installation immersive combinant terrarium physique et monde VR/AR forestier.",
     project12DescText:
-      "Pages landing programmées pour publicités, pétitions et campagnes d'impact social. Déploiement rapide sur Vercel avec code optimisé.",
+      "Exemple de pages avec code caché : landing programmées pour publicités, pétitions et campagnes d'impact social. Déploiement rapide sur Vercel avec code optimisé.",
     introText:
       "Designer multimédia et technologue créative explorant les intersections entre art, technologie et expérience.",
     locationText: "Montréal — Projets en cours, apprentissages actifs et explorations récentes autour des assistants IA, de l'expérimentation immersive et de formes numériques hors norme.",
