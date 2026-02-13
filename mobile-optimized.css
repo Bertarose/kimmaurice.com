@@ -1,0 +1,1040 @@
+/* ========================================================================
+   MOBILE OPTIMIZATIONS - KIMMAURICE.COM
+   À charger APRÈS style.css dans le <head>
+   Version fusionnée et optimisée - Février 2025
+   ======================================================================== */
+
+/* =====================================================================
+   CORRECTIONS GÉNÉRALES MOBILE
+   ===================================================================== */
+
+@media (max-width: 768px) {
+    /* Empêcher scroll horizontal */
+    html, body {
+        overflow-x: hidden !important;
+        max-width: 100vw !important;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    * {
+        max-width: 100%;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+    
+    body {
+        -webkit-text-size-adjust: 100%;
+    }
+    
+    /* =====================================================================
+       HEADER & NAVIGATION
+       ===================================================================== */
+    
+    /* Header compact */
+    header {
+        padding: 1rem 1rem !important;
+        gap: 0.75rem;
+    }
+    
+    .header-right {
+        gap: 0.6rem !important;
+    }
+    
+    .nav-logo .logo-text {
+        font-size: 0.95rem !important;
+    }
+    
+    /* Nav CV */
+    .nav-container {
+        padding: 1rem 1rem !important;
+    }
+    
+    .nav-controls {
+        gap: 0.6rem !important;
+    }
+    
+    /* Cacher le menu desktop dans CV */
+    .cv-nav-links {
+        display: none !important;
+    }
+    
+    /* =====================================================================
+       BOUTONS & INTERACTIONS TACTILES (44px minimum)
+       ===================================================================== */
+    
+    /* Boutons tactiles - zone minimale 44px */
+    .lang-btn,
+    .lang-switch {
+        min-height: 44px !important;
+        padding: 0.7rem 1rem !important;
+        font-size: 0.9rem !important;
+        background: rgba(255, 255, 255, 0.9) !important;
+        border: 2px solid rgba(0, 0, 0, 0.2) !important;
+        color: var(--black) !important;
+        font-weight: 600 !important;
+    }
+    
+    .cv-link-header {
+        min-height: 44px !important;
+        padding: 0.7rem 1rem !important;
+        font-size: 0.9rem !important;
+    }
+    
+    /* Tous les éléments cliquables */
+    a:not(.project-item),
+    button {
+        min-height: 44px;
+        min-width: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+    
+    /* Feedback tactile global */
+    * {
+        -webkit-tap-highlight-color: rgba(57, 255, 20, 0.15) !important;
+        tap-highlight-color: rgba(57, 255, 20, 0.15) !important;
+    }
+    
+    a:not(.project-item):active,
+    button:active {
+        opacity: 0.8 !important;
+        transition: opacity 0.1s ease !important;
+    }
+    
+    /* Désactiver :hover sur boutons (remplacer par :active) */
+    .lang-btn:hover,
+    .lang-switch:hover {
+        background: rgba(255, 255, 255, 0.9) !important;
+        color: var(--black) !important;
+        border-color: rgba(0, 0, 0, 0.2) !important;
+    }
+    
+    .lang-btn:active,
+    .lang-switch:active {
+        background: var(--black) !important;
+        color: white !important;
+        border-color: var(--black) !important;
+        transform: scale(0.95) !important;
+        transition: all 0.1s ease !important;
+    }
+    
+    /* =====================================================================
+       SECTIONS & CONTENEURS
+       ===================================================================== */
+    
+    /* Main content */
+    main {
+        padding: 0 !important;
+    }
+    
+    section {
+        margin-bottom: 2rem;
+    }
+    
+    /* Sections toujours visibles */
+    .expertise,
+    .explorations,
+    .footer-cta {
+        background: rgba(255, 255, 255, 0.88) !important;
+        backdrop-filter: blur(10px) !important;
+        padding: 2.5rem 1.25rem !important;
+        margin: 1rem 0.5rem !important;
+        border-radius: 20px !important;
+    }
+    
+    /* Désactiver effets :hover sur sections */
+    .expertise:hover,
+    .explorations:hover,
+    .footer-cta:hover {
+        background: rgba(255, 255, 255, 0.88) !important;
+        backdrop-filter: blur(10px) !important;
+    }
+    
+    /* =====================================================================
+       HERO SECTION
+       ===================================================================== */
+    
+    .hero {
+        background: rgba(255, 255, 255, 0.92) !important;
+        backdrop-filter: blur(12px) !important;
+        padding: 2.5rem 1.25rem !important;
+        margin: 1rem 0.5rem !important;
+        border-radius: 20px !important;
+        border: 2px solid rgba(0, 0, 0, 0.08) !important;
+    }
+    
+    .hero-content {
+        text-align: center;
+    }
+    
+    .hero-title {
+        font-size: clamp(1.8rem, 7vw, 3rem) !important;
+        line-height: 1.05 !important;
+        margin-bottom: 0.8rem !important;
+    }
+    
+    .hero-subtitle {
+        font-size: clamp(0.95rem, 3vw, 1.15rem) !important;
+        line-height: 1.5 !important;
+        margin-top: 0.8rem !important;
+        opacity: 0.85 !important;
+    }
+    
+    .hero-location {
+        font-size: 0.95rem !important;
+        opacity: 0.75 !important;
+        margin-bottom: 1.5rem !important;
+    }
+    
+    /* Hero CTA vertical */
+    .hero-cta {
+        display: flex;
+        flex-direction: column !important;
+        gap: 1rem !important;
+        width: 100%;
+    }
+    
+    .cta-primary,
+    .cta-secondary {
+        width: 100% !important;
+        padding: 1rem 1.5rem !important;
+        min-height: 48px !important;
+        text-align: center;
+        justify-content: center;
+        box-sizing: border-box;
+    }
+    
+    /* =====================================================================
+       INTRO SECTION
+       ===================================================================== */
+    
+    .intro {
+        padding: 2rem 1.25rem !important;
+    }
+    
+    .intro h1 {
+        font-size: clamp(1.6rem, 7vw, 2.5rem) !important;
+        line-height: 1.1 !important;
+        margin-bottom: 1.25rem !important;
+    }
+    
+    .intro p {
+        font-size: clamp(0.95rem, 3vw, 1.1rem) !important;
+        margin-bottom: 1.5rem !important;
+    }
+    
+    /* =====================================================================
+       EXPERTISE CARDS - TOUJOURS VISIBLES
+       ===================================================================== */
+    
+    .expertise-grid {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 1.25rem !important;
+        padding: 0 0.5rem !important;
+    }
+    
+    .expertise-card {
+        /* Fond visible par défaut */
+        background: rgba(255, 255, 255, 0.92) !important;
+        backdrop-filter: blur(10px) !important;
+        padding: 1.75rem 1.5rem !important;
+        border-radius: 15px !important;
+        border: 2px solid rgba(57, 255, 20, 0.3) !important;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08) !important;
+        margin-bottom: 1.5rem !important;
+        color: #000 !important;
+    }
+    
+    /* Désactiver :hover */
+    .expertise-card:hover {
+        background: rgba(255, 255, 255, 0.92) !important;
+        transform: none !important;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08) !important;
+    }
+    
+    /* Feedback tactile */
+    .expertise-card:active {
+        transform: scale(0.98) !important;
+        background: rgba(255, 255, 255, 0.95) !important;
+        transition: transform 0.1s ease !important;
+    }
+    
+    .expertise-number {
+        font-size: 0.85rem !important;
+        opacity: 0.7 !important;
+        margin-bottom: 0.75rem !important;
+    }
+    
+    .expertise-card h3 {
+        font-size: 1.2rem !important;
+        margin-bottom: 1rem !important;
+        line-height: 1.3 !important;
+    }
+    
+    .expertise-card ul {
+        padding-left: 0 !important;
+    }
+    
+    .expertise-card li {
+        font-size: 0.92rem !important;
+        line-height: 1.6 !important;
+        padding: 0.5rem 0 !important;
+        padding-left: 1.5rem !important;
+        color: #222 !important;
+    }
+    
+    .expertise-card li::before {
+        color: var(--neon) !important;
+        font-weight: bold !important;
+    }
+    
+    /* =====================================================================
+       TIMELINE (PARCOURS) - TOUJOURS VISIBLE
+       ===================================================================== */
+    
+    .timeline {
+        background: rgba(255, 255, 255, 0.85) !important;
+        backdrop-filter: blur(8px) !important;
+        padding: 1.5rem 1rem !important;
+        border-radius: 15px !important;
+    }
+    
+    .timeline:hover {
+        background: rgba(255, 255, 255, 0.85) !important;
+    }
+    
+    .timeline-item {
+        padding: 1.75rem 0 !important;
+        padding-left: 1.5rem !important;
+        border-left: 3px solid var(--neon) !important;
+        margin-bottom: 1.75rem !important;
+        background: transparent !important;
+    }
+    
+    .timeline-item:hover {
+        background: transparent !important;
+        padding-left: 1.5rem !important;
+        border-left-width: 3px !important;
+        transform: none !important;
+    }
+    
+    .timeline-item:active {
+        background: rgba(57, 255, 20, 0.05) !important;
+        transition: background 0.1s ease !important;
+    }
+    
+    .timeline-item::before {
+        width: 12px !important;
+        height: 12px !important;
+        left: -7.5px !important;
+        background: var(--neon) !important;
+        border: 2px solid #fff !important;
+        box-shadow: 0 0 0 3px rgba(57, 255, 20, 0.2) !important;
+    }
+    
+    .timeline-date {
+        font-size: 0.88rem !important;
+        opacity: 0.75 !important;
+        margin-bottom: 0.6rem !important;
+        font-weight: 600 !important;
+    }
+    
+    .timeline-content h3 {
+        font-size: 1.25rem !important;
+        margin-bottom: 0.5rem !important;
+        line-height: 1.3 !important;
+    }
+    
+    .timeline-content h4 {
+        font-size: 1.05rem !important;
+        opacity: 0.75 !important;
+        margin-bottom: 1rem !important;
+    }
+    
+    .timeline-list li {
+        font-size: 0.92rem !important;
+        line-height: 1.65 !important;
+        margin-bottom: 0.6rem !important;
+    }
+    
+    /* =====================================================================
+       EXPLORATION CARDS - TOUJOURS VISIBLES
+       ===================================================================== */
+    
+    .exploration-grid {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 1.25rem !important;
+        padding: 0 0.5rem !important;
+    }
+    
+    .exploration-card {
+        background: rgba(255, 255, 255, 0.92) !important;
+        backdrop-filter: blur(10px) !important;
+        padding: 1.5rem 1.25rem !important;
+        border-radius: 15px !important;
+        border: 2px solid rgba(57, 255, 20, 0.4) !important;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08) !important;
+        color: #000 !important;
+    }
+    
+    .exploration-card:hover {
+        background: rgba(255, 255, 255, 0.92) !important;
+        transform: none !important;
+        border-color: rgba(57, 255, 20, 0.4) !important;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08) !important;
+    }
+    
+    .exploration-card:active {
+        transform: scale(0.98) !important;
+        background: rgba(255, 255, 255, 0.95) !important;
+        border-color: var(--neon) !important;
+        transition: all 0.1s ease !important;
+    }
+    
+    .exploration-card h4 {
+        font-size: 1.15rem !important;
+        margin-bottom: 0.75rem !important;
+        line-height: 1.3 !important;
+        color: #000 !important;
+    }
+    
+    .exploration-card p {
+        font-size: 0.92rem !important;
+        line-height: 1.6 !important;
+        opacity: 0.85 !important;
+        color: #333 !important;
+    }
+    
+    /* =====================================================================
+       PROJECTS - TOUJOURS VISIBLES
+       ===================================================================== */
+    
+    .projects {
+        padding: 1rem 0.75rem !important;
+    }
+    
+    .project-item {
+        padding: 1.75rem 1.25rem !important;
+        margin-bottom: 1.5rem !important;
+        background: rgba(255, 255, 255, 0.95) !important;
+        backdrop-filter: blur(8px) !important;
+        border: 1px solid rgba(0, 0, 0, 0.1) !important;
+        -webkit-tap-highlight-color: rgba(57, 255, 20, 0.1);
+        tap-highlight-color: rgba(57, 255, 20, 0.1);
+    }
+    
+    .project-item:hover,
+    .project-item.is-active {
+        background: rgba(255, 255, 255, 0.95) !important;
+        transform: none !important;
+    }
+    
+    .project-item:active {
+        transform: scale(0.98);
+        transition: transform 0.1s ease;
+    }
+    
+    .project-number {
+        font-size: 0.9rem !important;
+        margin-bottom: 0.5rem !important;
+        opacity: 0.8 !important;
+    }
+    
+    .project-title {
+        font-size: clamp(1.5rem, 6vw, 2.2rem) !important;
+        line-height: 1.15 !important;
+        margin-bottom: 0.85rem !important;
+        hyphens: auto;
+        color: #000 !important;
+    }
+    
+    .project-title::after {
+        background: rgba(57, 255, 20, 0.4) !important;
+    }
+    
+    .project-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem !important;
+        margin-bottom: 1rem !important;
+        font-size: 0.85rem !important;
+    }
+    
+    .project-description {
+        font-size: 0.95rem !important;
+        line-height: 1.65 !important;
+        color: #333 !important;
+    }
+    
+    .project-description p {
+        font-size: 0.95rem !important;
+        line-height: 1.65 !important;
+        color: #333 !important;
+    }
+    
+    /* Badges */
+    .badge-dev,
+    .badge-complete {
+        padding: 0.4rem 0.8rem !important;
+        font-size: 0.8rem !important;
+        white-space: nowrap;
+        background: rgba(0, 0, 0, 0.08) !important;
+        border-radius: 12px !important;
+    }
+    
+    .year-future {
+        font-size: 0.85rem !important;
+    }
+    
+    /* =====================================================================
+       COLLABORATIONS
+       ===================================================================== */
+    
+    .collab-item {
+        padding: 1.5rem 1.25rem !important;
+        background: rgba(255, 255, 255, 0.95) !important;
+        backdrop-filter: blur(8px) !important;
+        border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    }
+    
+    .collab-summary {
+        padding: 0 !important;
+        cursor: pointer;
+    }
+    
+    .collab-panel {
+        padding: 1.25rem 0.75rem !important;
+        margin-top: 1.25rem !important;
+    }
+    
+    .collab-group {
+        margin-bottom: 1.75rem !important;
+    }
+    
+    .collab-group h3 {
+        font-size: 1.15rem !important;
+        margin-bottom: 0.85rem !important;
+        line-height: 1.3 !important;
+    }
+    
+    .collab-group ul {
+        padding-left: 1.5rem !important;
+    }
+    
+    .collab-group li {
+        font-size: 0.92rem !important;
+        line-height: 1.65 !important;
+        margin-bottom: 0.6rem !important;
+    }
+    
+    .two-col {
+        column-count: 1 !important;
+    }
+    
+    .collab-note {
+        font-size: 0.9rem !important;
+        line-height: 1.6 !important;
+    }
+    
+    /* =====================================================================
+       CV BRIDGE & SECTIONS CV
+       ===================================================================== */
+    
+    .cv-bridge {
+        padding: 2rem 1.25rem !important;
+        margin: 2rem 0.75rem !important;
+        background: rgba(255, 255, 255, 0.95) !important;
+        backdrop-filter: blur(8px) !important;
+        border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    }
+    
+    .cv-bridge h3 {
+        font-size: clamp(1.4rem, 5.5vw, 2rem) !important;
+        margin-bottom: 1rem !important;
+        line-height: 1.25 !important;
+    }
+    
+    .cv-bridge p {
+        font-size: 0.95rem !important;
+        margin-bottom: 1.5rem !important;
+        line-height: 1.65 !important;
+    }
+    
+    .btn-cv {
+        width: 100% !important;
+        padding: 1rem 1.5rem !important;
+        min-height: 48px !important;
+        justify-content: center !important;
+    }
+    
+    .cv-section {
+        padding: 2rem 1.25rem !important;
+        margin-bottom: 1.5rem !important;
+        background: rgba(255, 255, 255, 0.95) !important;
+        backdrop-filter: blur(8px) !important;
+        border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    }
+    
+    .section-title {
+        font-size: clamp(1.4rem, 5.5vw, 2rem) !important;
+        margin-bottom: 1.25rem !important;
+    }
+    
+    .section-header h2 {
+        font-size: clamp(1.6rem, 6vw, 2.2rem) !important;
+        margin-bottom: 1.5rem !important;
+        line-height: 1.2 !important;
+        padding: 0.5rem !important;
+        background: rgba(57, 255, 20, 0.1) !important;
+        border-left: 4px solid var(--neon) !important;
+        padding-left: 1rem !important;
+    }
+    
+    /* Experience cards */
+    .experience-card,
+    .skill-card,
+    .education-card {
+        padding: 1.25rem 1rem !important;
+        margin-bottom: 1.25rem !important;
+        background: rgba(255, 255, 255, 0.95) !important;
+        backdrop-filter: blur(8px) !important;
+        border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    }
+    
+    .experience-title,
+    .skill-title {
+        font-size: clamp(1.15rem, 4.5vw, 1.5rem) !important;
+        line-height: 1.25 !important;
+    }
+    
+    .experience-meta,
+    .skill-meta {
+        font-size: 0.85rem !important;
+        margin-bottom: 0.75rem !important;
+    }
+    
+    .experience-description,
+    .skill-description {
+        font-size: 0.92rem !important;
+        line-height: 1.65 !important;
+    }
+    
+    /* =====================================================================
+       BOUTONS D'ACTION - FEEDBACK TACTILE
+       ===================================================================== */
+    
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 1rem 1.5rem;
+        border-radius: 25px;
+        width: 100%;
+    }
+    
+    .btn-primary {
+        background: var(--black) !important;
+        color: white !important;
+        border: 2px solid var(--black) !important;
+        min-height: 50px !important;
+        font-weight: 600 !important;
+        font-size: 1rem !important;
+    }
+    
+    .btn-primary:hover {
+        background: var(--black) !important;
+        color: white !important;
+        transform: none !important;
+    }
+    
+    .btn-primary:active {
+        background: #333 !important;
+        transform: scale(0.97) !important;
+        transition: all 0.1s ease !important;
+    }
+    
+    .btn-secondary {
+        background: rgba(255, 255, 255, 0.9) !important;
+        color: var(--black) !important;
+        border: 2px solid rgba(0, 0, 0, 0.3) !important;
+        min-height: 50px !important;
+        font-weight: 600 !important;
+        font-size: 1rem !important;
+    }
+    
+    .btn-secondary:hover {
+        background: rgba(255, 255, 255, 0.9) !important;
+        color: var(--black) !important;
+        border-color: rgba(0, 0, 0, 0.3) !important;
+        transform: none !important;
+    }
+    
+    .btn-secondary:active {
+        background: rgba(255, 255, 255, 1) !important;
+        border-color: var(--black) !important;
+        transform: scale(0.97) !important;
+        transition: all 0.1s ease !important;
+    }
+    
+    /* =====================================================================
+       NAVIGATION & LIENS - FEEDBACK TACTILE
+       ===================================================================== */
+    
+    .cv-nav-links a,
+    .nav-link,
+    .footer-link {
+        opacity: 1 !important;
+        font-weight: 600 !important;
+        padding: 0.5rem 0.75rem !important;
+        border-radius: 8px !important;
+    }
+    
+    .cv-nav-links a:hover,
+    .nav-link:hover,
+    .footer-link:hover {
+        opacity: 1 !important;
+        text-decoration: none !important;
+    }
+    
+    .cv-nav-links a:active,
+    .nav-link:active,
+    .footer-link:active {
+        background: rgba(57, 255, 20, 0.15) !important;
+        opacity: 0.8 !important;
+        transform: scale(0.96) !important;
+        transition: all 0.1s ease !important;
+    }
+    
+    /* =====================================================================
+       FOOTER
+       ===================================================================== */
+    
+    footer {
+        padding: 2.5rem 1.25rem !important;
+        text-align: center;
+    }
+    
+    footer p {
+        font-size: 0.9rem !important;
+        margin-bottom: 1.5rem !important;
+    }
+    
+    .footer-links {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 1rem !important;
+        align-items: center !important;
+        margin: 1.5rem 0 !important;
+    }
+    
+    .footer-links a {
+        font-size: 1rem !important;
+        font-weight: 600 !important;
+        min-height: 44px !important;
+        padding: 0.75rem 1.5rem !important;
+        background: rgba(255, 255, 255, 0.7) !important;
+        border: 2px solid rgba(0, 0, 0, 0.1) !important;
+        border-radius: 25px !important;
+        width: 80% !important;
+        max-width: 300px !important;
+        text-align: center !important;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .footer-links a:active {
+        background: rgba(255, 255, 255, 1) !important;
+        border-color: var(--black) !important;
+        transform: scale(0.96) !important;
+    }
+    
+    /* =====================================================================
+       TYPOGRAPHY MOBILE
+       ===================================================================== */
+    
+    p, li, span:not(.badge-dev):not(.badge-complete) {
+        font-size: clamp(0.92rem, 2.8vw, 1.05rem) !important;
+    }
+    
+    h1 {
+        font-size: clamp(1.75rem, 7vw, 3rem) !important;
+    }
+    
+    h2 {
+        font-size: clamp(1.35rem, 5.5vw, 2.2rem) !important;
+    }
+    
+    h3 {
+        font-size: clamp(1.15rem, 4.5vw, 1.6rem) !important;
+    }
+    
+    h4 {
+        font-size: clamp(1.05rem, 3.8vw, 1.3rem) !important;
+    }
+    
+    h1, h2, h3, h4,
+    .project-title,
+    .intro h1 {
+        hyphens: auto;
+        -webkit-hyphens: auto;
+        -ms-hyphens: auto;
+    }
+    
+    /* =====================================================================
+       LISTES
+       ===================================================================== */
+    
+    ul, ol {
+        padding-left: 1.5rem !important;
+    }
+    
+    li {
+        margin-bottom: 0.6rem !important;
+    }
+    
+    /* =====================================================================
+       IMAGES & MÉDIAS
+       ===================================================================== */
+    
+    img:not(.sticker), 
+    video, 
+    iframe, 
+    canvas {
+        max-width: 100% !important;
+        height: auto !important;
+    }
+    
+    /* Stickers */
+    .sticker {
+        width: clamp(130px, 38vw, 200px) !important;
+    }
+    
+    /* GIF layer */
+    .gif-layer {
+        background-size: 150px auto !important;
+        background-position: 88% 88% !important;
+        opacity: 0.4 !important;
+    }
+    
+    /* =====================================================================
+       TICKER
+       ===================================================================== */
+    
+    .ticker-container {
+        font-size: 0.85rem !important;
+    }
+    
+    /* =====================================================================
+       FOCUS STATES & ACCESSIBILITÉ
+       ===================================================================== */
+    
+    a:focus-visible,
+    button:focus-visible {
+        outline: 3px solid rgba(57, 255, 20, 0.6) !important;
+        outline-offset: 2px !important;
+    }
+    
+    /* Prevent zoom on input */
+    input, select, textarea {
+        font-size: 16px !important;
+    }
+    
+    /* =====================================================================
+       ANIMATIONS & TRANSITIONS OPTIMISÉES
+       ===================================================================== */
+    
+    @media (prefers-reduced-motion: no-preference) {
+        * {
+            transition: transform 0.1s ease, 
+                        background 0.1s ease,
+                        opacity 0.1s ease,
+                        border-color 0.1s ease !important;
+        }
+    }
+    
+    html {
+        scroll-behavior: smooth !important;
+    }
+}
+
+/* =====================================================================
+   TRÈS PETITS ÉCRANS (<480px)
+   ===================================================================== */
+
+@media (max-width: 480px) {
+    .sticker {
+        width: clamp(110px, 35vw, 160px) !important;
+    }
+    
+    .gif-layer {
+        background-size: 120px auto !important;
+        opacity: 0.3 !important;
+    }
+    
+    .expertise-card,
+    .exploration-card,
+    .timeline {
+        padding: 1.25rem 1rem !important;
+    }
+    
+    .section-header h2 {
+        font-size: clamp(1.4rem, 6vw, 1.8rem) !important;
+    }
+    
+    .btn-primary,
+    .btn-secondary {
+        padding: 0.9rem 1.25rem !important;
+        font-size: 0.95rem !important;
+    }
+}
+
+/* =====================================================================
+   TRÈS PETITS ÉCRANS (<400px)
+   ===================================================================== */
+
+@media (max-width: 400px) {
+    .cv-mobile-nav a {
+        font-size: 0.65rem;
+        padding: 0.35rem 0.2rem;
+    }
+    
+    .cv-mobile-nav a::before {
+        font-size: 1rem;
+        margin-bottom: 0.1rem;
+    }
+}
+
+/* =====================================================================
+   MODE PAYSAGE MOBILE
+   ===================================================================== */
+
+@media (max-width: 768px) and (orientation: landscape) {
+    .hero {
+        padding: 1.5rem 1rem !important;
+    }
+    
+    .hero-title {
+        font-size: 1.6rem !important;
+    }
+    
+    .expertise-card,
+    .exploration-card {
+        padding: 1.25rem 1rem !important;
+    }
+}
+
+/* =====================================================================
+   MENU MOBILE STICKY POUR CV.HTML
+   ===================================================================== */
+
+@media (max-width: 768px) {
+    /* Espace pour le menu fixe sur CV */
+    body.cv-page::after {
+        content: '';
+        display: block;
+        height: 65px;
+    }
+    
+    /* Container du menu CV */
+    .cv-mobile-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(12px);
+        border-top: 2px solid #000;
+        padding: 0.5rem;
+        z-index: 9999;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    .cv-mobile-nav-inner {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        max-width: 100%;
+        gap: 0.25rem;
+    }
+    
+    .cv-mobile-nav a {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        color: #666;
+        font-size: 0.7rem;
+        font-weight: 600;
+        padding: 0.4rem 0.3rem;
+        border-radius: 8px;
+        transition: all 0.2s ease;
+        flex: 1;
+        min-width: 0;
+        text-align: center;
+        line-height: 1.2;
+    }
+    
+    .cv-mobile-nav a span {
+        display: block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 100%;
+    }
+    
+    .cv-mobile-nav a:active {
+        background: rgba(57, 255, 20, 0.2);
+        color: #000;
+        transform: scale(0.95);
+    }
+    
+    .cv-mobile-nav a.active {
+        color: #000;
+        background: rgba(57, 255, 20, 0.15);
+    }
+    
+    /* Icons menu CV */
+    .cv-mobile-nav a::before {
+        content: '●';
+        font-size: 1.2rem;
+        margin-bottom: 0.15rem;
+        display: block;
+    }
+    
+    .cv-mobile-nav a[href*="projects"]::before {
+        content: '←';
+        font-size: 1.1rem;
+    }
+    
+    .cv-mobile-nav a[href*="expertise"]::before {
+        content: '⚡';
+    }
+    
+    .cv-mobile-nav a[href*="experience"]::before {
+        content: '💼';
+    }
+    
+    .cv-mobile-nav a[href*="explorations"]::before {
+        content: '🔬';
+    }
+    
+    .cv-mobile-nav a[href*="contact"]::before {
+        content: '✉️';
+    }
+    
+    /* Ajuster contenu CV */
+    body.cv-page main {
+        padding-bottom: 75px !important;
+    }
+    
+    body.cv-page footer {
+        margin-bottom: 75px !important;
+    }
+}
