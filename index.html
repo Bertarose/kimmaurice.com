@@ -12,10 +12,7 @@
     <link rel="preconnect" href="https://www.googletagmanager.com">
     <link rel="stylesheet" href="style.css">
     
-    <!-- Three.js for liquid background -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    
-    <script defer src="script-liquid.js"></script>
+    <script defer src="script.js"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-WYM83ME5LK"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -39,16 +36,10 @@
 <body>
 <div class="bg-image"></div>
 
-    <!-- Liquid gradient background canvas -->
-    <canvas id="liquidCanvas"></canvas>
-    
-    <!-- Legacy canvases (can be removed if not used elsewhere) -->
-    <canvas id="waves"></canvas>
-    <canvas id="molecules"></canvas>
-    <div class="starfield"></div>
-    
     <header>
-        <div class="logo"><img src="img/logo.jpg" alt="Kim Maurice"></div>
+        <div class="nav-logo">
+  <a href="index.html" class="logo-text">KIM MAURICE</a></div>
+       
         <div class="header-right">
             <button class="lang-btn" id="langBtn">EN</button>
             <a href="cv.html" class="cv-link-header"><span>💼</span><span id="cvTextHeader">CV</span></a>
@@ -162,26 +153,27 @@
                 </div>
             </a>
 
-            <!-- 07 — AI ART EXPLORATION -->
-            <a href="https://www.midjourney.com/app/users/bf99c00d-1fe1-480a-94a6-4e9084e47cb9/" target="_blank" class="project-item">
+            <!-- 07 — AI GENERATIVE ART -->
+            <a href="https://www.instagram.com/this_is_weird_ai/" target="_blank" class="project-item">
                 <div class="project-number">07</div>
-                <h2 class="project-title">AI Art Exploration</h2>
+                <h2 class="project-title">AI Generative Art</h2>
                 <div class="project-meta">
-                    <span>Midjourney • Stable Diffusion</span>
-                    <span>IA Générative</span>
+                    <span class="badge-complete">✅ En ligne</span>
+                    <span>Stable Diffusion • ComfyUI</span>
+                    <span>2024–2025</span>
                 </div>
                 <div class="project-description">
                     <p id="project11DescText">Exploration artistique des outils d'IA générative. Prompt engineering et workflows créatifs complexes.</p>
                 </div>
             </a>
 
-            <!-- 08 — CREATIVE PIPELINE -->
-            <a href="https://github.com/Bertarose/Automation-Pipeline/tree/main" target="_blank" class="project-item">
+            <!-- 08 — WORKFLOW AUTOMATION -->
+            <a href="https://github.com/Bertarose/WORKFLOWS" target="_blank" class="project-item">
                 <div class="project-number">08</div>
-                <h2 class="project-title">Creative Pipeline</h2>
+                <h2 class="project-title">Workflow Automation</h2>
                 <div class="project-meta">
-                    <span>Python • Automation</span>
-                    <span>Documentation</span>
+                    <span>Python • Automation • IA</span>
+                    <span>2025</span>
                 </div>
                 <div class="project-description">
                     <p id="project5DescText">Pipeline automatisé de production créative. Documentation complète des workflows Python pour génération de contenu.</p>
@@ -189,7 +181,7 @@
             </a>
 
             <!-- 09 — OBSCURA -->
-            <a href="https://obscura-liart.vercel.app/" target="_blank" class="project-item">
+            <a href="https://obscura-eight.vercel.app/" target="_blank" class="project-item">
                 <div class="project-number">09</div>
                 <h2 class="project-title">Obscura – Bibliothèque de films</h2>
                 <div class="project-meta">
@@ -337,5 +329,11 @@
             <a href="https://github.com/Bertarose/" target="_blank">Github</a>
         </div>
     </footer>
+
+<div class="floating-layer">
+  <img src="img/k.gif" class="sticker" style="left: 75%; top: 67%;">
+</div>
+
+<script src="stickers.js"></script>
 </body>
 </html>

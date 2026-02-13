@@ -11,11 +11,8 @@
   <link rel="icon" type="image/x-icon" href="img/favicon.ico">
   <link rel="preconnect" href="https://www.googletagmanager.com">
   <link rel="stylesheet" href="style.css">
-
-  <!-- Three.js for liquid background -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   
-  <script defer src="script-liquid.js"></script>
+  <script defer src="script.js"></script>
 
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-WYM83ME5LK"></script>
   <script>
@@ -41,36 +38,30 @@
 
   <div class="bg-image"></div>
 
-  <!-- Liquid Gradient Background -->
-  <canvas id="liquidCanvas"></canvas>
-
-  <nav class="nav">
-    <div class="nav-container">
-      <div class="nav-logo">
-        <a href="index.html" aria-label="Retour à l'accueil">
-          <img src="img/logo.jpg" alt="Kim Maurice" class="logo-img" width="50" height="50">
-        </a>
-      </div>
-
-      <div class="nav-menu" id="navMenu">
-        <a href="index.html#projects" class="nav-link" data-fr="← Voir les Projets" data-en="← View Projects">← Voir les Projets</a>
-        <a href="#expertise" class="nav-link" data-fr="Expertise" data-en="Expertise">Expertise</a>
-        <a href="#experience" class="nav-link" data-fr="Parcours" data-en="Experience">Parcours</a>
-        <a href="#explorations" class="nav-link" data-fr="Explorations" data-en="Explorations">Explorations</a>
-        <a href="#contact" class="nav-link" data-fr="Contact" data-en="Contact">Contact</a>
-      </div>
-
-      <div class="nav-controls">
-        <button id="langBtn" class="lang-switch" aria-label="Changer de langue">EN</button>
-
-        <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Ouvrir le menu" aria-expanded="false">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-      </div>
+  <header>
+    <div class="nav-logo">
+      <a href="index.html" class="logo-text">KIM MAURICE</a>
     </div>
-  </nav>
+
+    <nav class="cv-nav-links">
+      <a href="index.html#projects" data-fr="← Voir les Projets" data-en="← View Projects">← Voir les Projets</a>
+      <a href="#expertise" data-fr="Expertise" data-en="Expertise">Expertise</a>
+      <a href="#experience" data-fr="Parcours" data-en="Experience">Parcours</a>
+      <a href="#explorations" data-fr="Explorations" data-en="Explorations">Explorations</a>
+      <a href="#contact" data-fr="Contact" data-en="Contact">Contact</a>
+    </nav>
+       
+    <div class="header-right">
+      <button class="lang-btn" id="langBtn">EN</button>
+    </div>
+  </header>
+
+  <div class="ticker-container">
+    <div class="ticker-wrapper">
+      <span class="ticker-item" data-fr="De nouveaux projets, idées et expérimentations s'y ajoutent au fil du temps." data-en="New projects, ideas and experiments are added over time.">De nouveaux projets, idées et expérimentations s'y ajoutent au fil du temps.</span>
+      <span class="ticker-item" data-fr="De nouveaux projets, idées et expérimentations s'y ajoutent au fil du temps." data-en="New projects, ideas and experiments are added over time.">De nouveaux projets, idées et expérimentations s'y ajoutent au fil du temps.</span>
+    </div>
+  </div>
 
   <section class="hero" id="home">
     <div class="hero-content">
@@ -148,8 +139,8 @@
           <ul>
             <li data-fr="Stable Diffusion & ComfyUI" data-en="Stable Diffusion & ComfyUI">Stable Diffusion & ComfyUI</li>
             <li data-fr="Prompt engineering" data-en="Prompt engineering">Prompt engineering</li>
-            <li data-fr="Workflows automatisés" data-en="Automated workflows">Workflows automatisés</li>
-            <li data-fr="IA audio & vidéo" data-en="AI audio & video">IA audio & vidéo</li>
+            <li data-fr="Workflows créatifs Python" data-en="Creative Python workflows">Workflows créatifs Python</li>
+            <li data-fr="Midjourney & outils IA" data-en="Midjourney & AI tools">Midjourney & outils IA</li>
           </ul>
         </div>
 
@@ -157,55 +148,55 @@
           <div class="expertise-number">06</div>
           <h3 data-fr="Outils Créatifs" data-en="Creative Tools">Outils Créatifs</h3>
           <ul>
-            <li data-fr="Figma & Adobe Suite" data-en="Figma & Adobe Suite">Figma & Adobe Suite</li>
-            <li data-fr="Blender & 3D" data-en="Blender & 3D">Blender & 3D</li>
-            <li data-fr="Git & GitHub" data-en="Git & GitHub">Git & GitHub</li>
-            <li data-fr="Python & automation" data-en="Python & automation">Python & automation</li>
+            <li data-fr="Adobe Creative Suite" data-en="Adobe Creative Suite">Adobe Creative Suite</li>
+            <li data-fr="Figma & prototypage" data-en="Figma & prototyping">Figma & prototypage</li>
+            <li data-fr="Ableton Live & audio" data-en="Ableton Live & audio">Ableton Live & audio</li>
+            <li data-fr="Git & développement" data-en="Git & development">Git & développement</li>
           </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="experience" id="experience">
+  <section class="timeline" id="experience">
     <div class="container">
       <div class="section-header">
         <h2 data-fr="Parcours Professionnel" data-en="Professional Experience">Parcours Professionnel</h2>
       </div>
 
-      <div class="experience-timeline">
+      <div class="timeline-grid">
         <div class="timeline-item">
-          <div class="timeline-date">2023 - 2024</div>
+          <div class="timeline-date">2024 - 2025</div>
           <div class="timeline-content">
-            <h3 data-fr="Designer Multimédia Senior" data-en="Senior Multimedia Designer">Designer Multimédia Senior</h3>
-            <h4>@ Technologia</h4>
+            <h3 data-fr="Designer Multimédia & Développeuse" data-en="Multimedia Designer & Developer">Designer Multimédia & Développeuse</h3>
+            <h4 data-fr="@ Projets personnels & freelance" data-en="@ Personal projects & freelance">@ Projets personnels & freelance</h4>
             <ul class="timeline-list">
-              <li data-fr="Direction UX/UI pour modules e-learning complexes" data-en="UX/UI direction for complex e-learning modules">Direction UX/UI pour modules e-learning complexes</li>
-              <li data-fr="Développement de formations interactives sur Articulate Storyline" data-en="Development of interactive training on Articulate Storyline">Développement de formations interactives sur Articulate Storyline</li>
-              <li data-fr="Gamification et scénarisation pédagogique" data-en="Gamification and instructional design">Gamification et scénarisation pédagogique</li>
-              <li data-fr="Création de contenus vidéo et motion design" data-en="Video content creation and motion design">Création de contenus vidéo et motion design</li>
+              <li data-fr="Développement d'instruments musicaux expérimentaux (Latent Organ, Hors Champ)" data-en="Development of experimental musical instruments (Latent Organ, Hors Champ)">Développement d'instruments musicaux expérimentaux (Latent Organ, Hors Champ)</li>
+              <li data-fr="Création de radio streaming (Still FM) avec Next.js et APIs" data-en="Creation of streaming radio (Still FM) with Next.js and APIs">Création de radio streaming (Still FM) avec Next.js et APIs</li>
+              <li data-fr="Exploration et maîtrise d'outils d'IA générative (Stable Diffusion, ComfyUI)" data-en="Exploration and mastery of generative AI tools (Stable Diffusion, ComfyUI)">Exploration et maîtrise d'outils d'IA générative (Stable Diffusion, ComfyUI)</li>
+              <li data-fr="Développement d'interfaces web modernes et responsive" data-en="Development of modern and responsive web interfaces">Développement d'interfaces web modernes et responsive</li>
             </ul>
           </div>
         </div>
 
         <div class="timeline-item">
-          <div class="timeline-date">2020 - 2023</div>
+          <div class="timeline-date">2020 - 2024</div>
           <div class="timeline-content">
-            <h3 data-fr="Designer E-Learning" data-en="E-Learning Designer">Designer E-Learning</h3>
-            <h4>@ Campus GardaWorld</h4>
+            <h3 data-fr="Conceptrice Pédagogique & Designer UX" data-en="Instructional Designer & UX Designer">Conceptrice Pédagogique & Designer UX</h3>
+            <h4 data-fr="@ Technologia / Garda" data-en="@ Technologia / Garda">@ Technologia / Garda</h4>
             <ul class="timeline-list">
-              <li data-fr="Conception de formations en sécurité et conformité" data-en="Design of security and compliance training">Conception de formations en sécurité et conformité</li>
-              <li data-fr="Développement de parcours d'apprentissage adaptatifs" data-en="Development of adaptive learning paths">Développement de parcours d'apprentissage adaptatifs</li>
-              <li data-fr="Intégration LMS et suivi analytique" data-en="LMS integration and analytics">Intégration LMS et suivi analytique</li>
-              <li data-fr="Production audiovisuelle et animation 2D/3D" data-en="Audiovisual production and 2D/3D animation">Production audiovisuelle et animation 2D/3D</li>
+              <li data-fr="Conception de formations e-learning immersives avec Articulate Storyline" data-en="Design of immersive e-learning courses with Articulate Storyline">Conception de formations e-learning immersives avec Articulate Storyline</li>
+              <li data-fr="Scénarisation pédagogique et gamification pour grandes organisations" data-en="Instructional design and gamification for large organizations">Scénarisation pédagogique et gamification pour grandes organisations</li>
+              <li data-fr="Design d'interfaces et d'expériences utilisateur engageantes" data-en="Design of engaging interfaces and user experiences">Design d'interfaces et d'expériences utilisateur engageantes</li>
+              <li data-fr="Collaboration avec équipes pluridisciplinaires et clients corporatifs" data-en="Collaboration with multidisciplinary teams and corporate clients">Collaboration avec équipes pluridisciplinaires et clients corporatifs</li>
             </ul>
           </div>
         </div>
 
         <div class="timeline-item">
-          <div class="timeline-date">2010 - 2020</div>
+          <div class="timeline-date">2017 - 2021</div>
           <div class="timeline-content">
-            <h3 data-fr="Designer Graphique" data-en="Graphic Designer">Designer Graphique</h3>
+            <h3 data-fr="Designer Graphique & Multimédia" data-en="Graphic & Multimedia Designer">Designer Graphique & Multimédia</h3>
             <h4 data-fr="@ Productions Cinéma & TV" data-en="@ Film & TV Productions">@ Productions Cinéma & TV</h4>
             <ul class="timeline-list">
               <li data-fr="Design graphique pour 15+ productions (Bad Blood, Unité 9, etc.)" data-en="Graphic design for 15+ productions (Bad Blood, Unité 9, etc.)">Design graphique pour 15+ productions (Bad Blood, Unité 9, etc.)</li>
@@ -289,68 +280,20 @@
         </div>
 
         <div class="footer-links">
+          <a href="/cdn-cgi/l/email-protection#b2dbdcd4ddf2d9dbdfdfd3c7c0dbd1d79cd1dddf" class="footer-link">Email</a>
           <a href="https://linkedin.com/in/kimmaurice" target="_blank" class="footer-link">LinkedIn</a>
           <a href="https://github.com/Bertarose/" target="_blank" class="footer-link">Github</a>
           <a href="https://www.imdb.com/name/nm9371635/" target="_blank" class="footer-link">IMDb</a>
         </div>
 
         <p class="footer-copyright">
-          <a href="/cdn-cgi/l/email-protection#2841464e476843414545495d5a414b4d064b4745"><span class="__cf_email__" data-cfemail="20494e464f604b494d4d4155524943450e434f4d">[email&#160;protected]</span></a><br>
-          © 2026 Kim Maurice · Montréal, Québec
+          © 2025 Kim Maurice
         </p>
       </div>
     </div>
   </section>
 
-  <!-- Petit script local uniquement pour sécuriser le menu sur cv.html (en plus de script.js) -->
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-    (function() {
-      const menuToggle = document.getElementById('mobileMenuToggle');
-      const navMenu = document.getElementById('navMenu');
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
 
-      if (!menuToggle || !navMenu) return;
-
-      // Toujours fermé au chargement (évite état iOS bloqué)
-      menuToggle.classList.remove('active');
-      navMenu.classList.remove('active');
-      document.body.classList.remove('menu-open');
-      menuToggle.setAttribute('aria-expanded', 'false');
-
-      menuToggle.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        const isOpen = navMenu.classList.contains('active');
-        if (isOpen) {
-          navMenu.classList.remove('active');
-          document.body.classList.remove('menu-open');
-          menuToggle.setAttribute('aria-expanded', 'false');
-        } else {
-          navMenu.classList.add('active');
-          document.body.classList.add('menu-open');
-          menuToggle.setAttribute('aria-expanded', 'true');
-        }
-      });
-
-      // Fermer quand on clique un lien
-      navMenu.querySelectorAll('a').forEach(a => {
-        a.addEventListener('click', () => {
-          navMenu.classList.remove('active');
-          document.body.classList.remove('menu-open');
-          menuToggle.setAttribute('aria-expanded', 'false');
-        });
-      });
-
-      // Fermer quand on clique dehors
-      document.addEventListener('click', (e) => {
-        if (!navMenu.classList.contains('active')) return;
-        if (navMenu.contains(e.target) || menuToggle.contains(e.target)) return;
-        navMenu.classList.remove('active');
-        document.body.classList.remove('menu-open');
-        menuToggle.setAttribute('aria-expanded', 'false');
-      });
-
-      // Si on repasse en desktop, on ferme (évite états bizarres)
-      window.addEventListener('resize', () => {
-        if (window.innerWidth > 768) {
-          navMenu.classList.remove('active');
-   
+</body>
+</html>
