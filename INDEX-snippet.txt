@@ -1,0 +1,11 @@
+<!-- ========================================================================
+     À AJOUTER DANS INDEX.HTML
+     ======================================================================== -->
+
+<!-- DANS LE <HEAD>, AJOUTER APRÈS <link rel="stylesheet" href="style.css"> : -->
+
+<link rel="stylesheet" href="mobile-optimized.css">
+
+
+<!-- C'EST TOUT POUR INDEX.HTML ! -->
+<!-- Pas de menu mobile, le footer reste normal -->

@@ -11,6 +11,7 @@
   <link rel="icon" type="image/x-icon" href="img/favicon.ico">
   <link rel="preconnect" href="https://www.googletagmanager.com">
   <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="mobile-optimized.css">
   
   <script defer src="script.js"></script>
 
@@ -294,6 +295,50 @@
   </section>
 
   <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<!-- Menu Mobile Navigation -->
+<nav class="cv-mobile-nav" aria-label="Navigation mobile">
+  <div class="cv-mobile-nav-inner">
+    <a href="index.html#projects" data-section="projects">
+      <span data-fr="Projets" data-en="Projects">Projets</span>
+    </a>
+    <a href="#expertise" data-section="expertise">
+      <span data-fr="Expert." data-en="Expert.">Expert.</span>
+    </a>
+    <a href="#experience" data-section="experience">
+      <span data-fr="Parcours" data-en="Exp.">Parcours</span>
+    </a>
+    <a href="#explorations" data-section="explorations">
+      <span data-fr="Explor." data-en="Explor.">Explor.</span>
+    </a>
+    <a href="#contact" data-section="contact">
+      <span data-fr="Contact" data-en="Contact">Contact</span>
+    </a>
+  </div>
+</nav>
 
+<script>
+(function() {
+  if (window.innerWidth > 768) return;
+  const navLinks = document.querySelectorAll('.cv-mobile-nav a');
+  const sections = document.querySelectorAll('section[id]');
+  function setActiveLink() {
+    let current = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      if (window.pageYOffset >= sectionTop - 200) {
+        current = section.getAttribute('id');
+      }
+    });
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('data-section') === current) {
+        link.classList.add('active');
+      }
+    });
+  }
+  window.addEventListener('scroll', setActiveLink);
+  setActiveLink();
+})();
+</script>
 </body>
 </html>
