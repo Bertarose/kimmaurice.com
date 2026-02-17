@@ -10,6 +10,10 @@ const projectDescriptions = {
   fr: {
     projectHorsChampDesc:
       "<strong>Hors Champ</strong> est une application de performance musicale en temps réel contrôlée par MIDI, conçue pour l'expérimentation sonore et conceptuelle. L'application combine génération musicale par IA (Google Gemini), synthèse audio, effets en temps réel, looper multi-pistes et contrôle MIDI pour créer une expérience de création musicale live interactive.",
+    projectAtelierDesc:
+      "Site web conçu et réalisé pour l'artiste — conception visuelle, architecture de contenu et mise en ligne via Cargo Collective.",
+    projectInsulaDesc:
+      "Site web réalisé pour Insula Care — identité visuelle en ligne, structure éditoriale et déploiement via Cargo Collective.",
     projectLatentDesc:
       "Desktop version: Instrument musical expérimental combinant clavier MIDI, IA générative et visualisation 3D temps réel. Interface hybride analogique/numérique pour performance live.",
     project3DescText:
@@ -44,6 +48,10 @@ const projectDescriptions = {
   en: {
     projectHorsChampDesc:
       "<strong>Hors Champ</strong> is a real-time MIDI-controlled music performance application designed for sonic and conceptual experimentation.",
+    projectAtelierDesc:
+      "Website designed and built for the artist — visual identity, content architecture and deployment via Cargo Collective.",
+    projectInsulaDesc:
+      "Website created for Insula Care — online visual identity, editorial structure and deployment via Cargo Collective.",
     projectLatentDesc:
       "Experimental musical instrument combining MIDI keyboard, generative AI and real-time 3D visualization.",
     project3DescText:
