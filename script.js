@@ -169,3 +169,10 @@ document.addEventListener("DOMContentLoaded", () => {
     initMobileMenu();
     initProjectScroll();
 });
+
+
+// ── Grid hover descriptions ──
+document.querySelectorAll('.grid-item[data-desc]').forEach(item => {
+  const desc = item.querySelector('.grid-hover-desc');
+  if (desc) desc.textContent = item.dataset.desc;
+});

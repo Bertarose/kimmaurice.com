@@ -1447,3 +1447,128 @@ body, html {
     font-size: clamp(2.4rem, 4vw, 3.2rem);
   }
 }
+
+/* ==========================================================================
+   PROJECTS GRID — COMPACT WITH HOVER
+   ========================================================================== */
+.projects-grid {
+    margin-top: 4rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+}
+
+@media (min-width: 600px) {
+    .projects-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 1024px) {
+    .projects-grid { grid-template-columns: repeat(3, 1fr); margin-top: 6rem; }
+}
+
+.grid-item {
+    position: relative;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    padding: 1.4rem 1.5rem 1.2rem;
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.2s ease, border-color 0.2s ease;
+    cursor: pointer;
+    overflow: hidden;
+    min-height: 120px;
+    background: rgba(255,255,255,0.45);
+}
+
+.grid-item:hover {
+    background: rgba(255,255,255,0.95);
+    border-color: rgba(0,0,0,0.18);
+    text-decoration: none;
+    z-index: 2;
+}
+
+.grid-item.disabled-project { opacity: 0.65; cursor: default; }
+
+.grid-number {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--grey);
+    margin-bottom: 0.3rem;
+}
+
+.grid-title {
+    font-size: clamp(1rem, 2.2vw, 1.25rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+    margin-bottom: 0.6rem;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 0.12em;
+}
+
+.grid-title::after {
+    content: "";
+    position: absolute;
+    left: 0; bottom: 0;
+    width: 100%;
+    height: 0.15em;
+    background: rgba(57,255,20,0.25);
+    transition: background 0.2s ease;
+}
+
+.grid-item:hover .grid-title::after { background: rgba(57,255,20,0.9); }
+
+.grid-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    font-size: 0.75rem;
+    color: var(--grey);
+}
+
+.grid-meta span {
+    padding: 0.25rem 0.55rem;
+    background: rgba(0,0,0,0.04);
+    border-radius: 8px;
+}
+
+.grid-meta .badge-complete {
+    background: rgba(57, 255, 20, 0.15) !important;
+    color: var(--black);
+    font-weight: bold;
+}
+
+.grid-meta .badge-dev {
+    background: rgba(255, 187, 0, 0.15) !important;
+    color: var(--black);
+    font-weight: bold;
+}
+
+.grid-hover-desc {
+    max-height: 0;
+    overflow: hidden;
+    font-size: 0.82rem;
+    line-height: 1.55;
+    color: var(--marine);
+    transition: max-height 0.3s ease, margin-top 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+    margin-top: 0;
+}
+
+.grid-item:hover .grid-hover-desc {
+    max-height: 120px;
+    opacity: 1;
+    margin-top: 0.75rem;
+}
+
+/* Mobile: always show description */
+@media (hover: none) {
+    .grid-hover-desc {
+        max-height: none;
+        opacity: 1;
+        margin-top: 0.6rem;
+        font-size: 0.8rem;
+    }
+}
