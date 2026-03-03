@@ -35,8 +35,8 @@ const projectDescriptions = {
     project12DescText:
       "Exemple de pages avec code caché : landing programmées pour publicités, pétitions et campagnes d'impact social. Déploiement rapide sur Vercel avec code optimisé.",
     introText:
-      "Designer multimédia et technologue créative explorant les intersections entre art, technologie et expérience.",
-    locationText: "Montréal — Projets en cours, apprentissages actifs et explorations récentes autour des assistants IA, de l'expérimentation immersive et de formes numériques hors norme.",
+      "Technologue créative — multimédia, son & production audiovisuelle",
+    locationText: "Montréal · 25 ans d'expérience",
     ctaPrimaryText: "Voir mon parcours complet (CV)",
     ctaSecondaryText: "ou découvrir mes projets ↓",
     bridgeTitle: "Envie d'en savoir plus sur mon parcours ?",
@@ -73,8 +73,8 @@ const projectDescriptions = {
     project12DescText:
       "Landing pages for ads, petitions and social impact campaigns.",
     introText:
-      "Multimedia designer and creative technologist exploring intersections between art, technology and experience.",
-    locationText: "Montreal — Ongoing projects, active learning, and recent explorations around AI assistants, immersive experimentation, and unconventional digital forms.",
+      "Creative technologist — multimedia, sound & audiovisual production",
+    locationText: "Montreal · 25 years of experience",
     ctaPrimaryText: "View full background (CV)",
     ctaSecondaryText: "or discover my projects ↓",
     bridgeTitle: "Want to know more about my background?",
