@@ -1,291 +1,859 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    
-    <title>Kim Maurice | Designer Multimédia - Technologue créative, Montréal</title>
-    <meta name="description" content="Designer multimédia et technologue créative basée à Montréal. Expertise en IA générative, WebGL et projets culturels.">
-    
-    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
-    <link rel="preconnect" href="https://www.googletagmanager.com">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="mobile-optimized.css">
-    
-    <script defer src="script.js"></script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WYM83ME5LK"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-WYM83ME5LK', { anonymize_ip: true });
-    </script>
-    
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Kim Maurice",
-        "jobTitle": "Designer Multimédia & Technologue Créative",
-        "url": "https://kimmaurice.com",
-        "email": "info@kimmaurice.com"
-    }
-    </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kim Maurice | Designer Multimédia · Technologue créative · Montréal</title>
+  <meta name="description" content="Designer multimédia et technologue créative basée à Montréal. Expertise en IA générative, WebGL et projets culturels.">
+  <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;900&family=DM+Mono:wght@400;500&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+  <script defer src="script.js"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-WYM83ME5LK"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-WYM83ME5LK',{anonymize_ip:true});</script>
+
+<style>
+/* =====================================================
+   THEMES
+   ===================================================== */
+
+/* DARK — fond noir, vert néon */
+[data-theme="dark"] {
+  --bg:         #0a0a0a;
+  --surface:    rgba(255,255,255,0.04);
+  --hover:      rgba(255,255,255,0.09);
+  --text:       #f2f0eb;
+  --muted:      #777;
+  --border:     rgba(255,255,255,0.09);
+  --accent:     #39ff14;
+  --accent-dim: rgba(57,255,20,0.12);
+  --ticker-bg:  #39ff14;
+  --ticker-txt: #000;
+  --btn-bg:     #39ff14;
+  --btn-txt:    #000;
+  --btn-hover-txt: #39ff14;
+  --grid-hover-bg: rgba(255,255,255,0.06);
+  --grid-hover-txt: #f2f0eb;
+  --grid-badge-bg: rgba(57,255,20,0.12);
+  --grid-badge-txt: #39ff14;
+  --heading-font: 'Barlow Condensed', sans-serif;
+  --body-font:    'DM Mono', monospace;
+  --h1-weight: 900;
+  --h1-transform: uppercase;
+  --h1-spacing: 0.04em;
+  --h1-style: normal;
+  --logo-size: 1.1rem;
+  --logo-spacing: 0.22em;
+  --bg-img-opacity: 0.22;
+  --bg-img-filter: grayscale(100%) brightness(0.7);
+  --collab-bg: rgba(0,0,0,0.35);
+  --bridge-glow: rgba(57,255,20,0.07);
+  --footer-bg: rgba(0,0,0,0.5);
+  --switcher-bg: rgba(15,15,15,0.95);
+  --switcher-border: rgba(255,255,255,0.1);
+  --switcher-active: #39ff14;
+  --switcher-active-txt: #000;
+}
+
+/* WHITE — fond blanc, encre noire */
+[data-theme="white"] {
+  --bg:         #fafaf8;
+  --surface:    rgba(0,0,0,0.02);
+  --hover:      #f0ede7;
+  --text:       #111;
+  --muted:      #888;
+  --border:     #e0ddd8;
+  --accent:     #111;
+  --accent-dim: rgba(0,0,0,0.06);
+  --ticker-bg:  #111;
+  --ticker-txt: #fafaf8;
+  --btn-bg:     #111;
+  --btn-txt:    #fafaf8;
+  --btn-hover-txt: #111;
+  --grid-hover-bg: #111;
+  --grid-hover-txt: #fafaf8;
+  --grid-badge-bg: rgba(0,0,0,0.08);
+  --grid-badge-txt: #111;
+  --heading-font: 'Barlow Condensed', sans-serif;
+  --body-font:    'DM Mono', monospace;
+  --h1-weight: 900;
+  --h1-transform: uppercase;
+  --h1-spacing: 0.04em;
+  --h1-style: normal;
+  --logo-size: 1.1rem;
+  --logo-spacing: 0.22em;
+  --bg-img-opacity: 0;
+  --bg-img-filter: none;
+  --collab-bg: rgba(0,0,0,0.02);
+  --bridge-glow: transparent;
+  --footer-bg: #fafaf8;
+  --switcher-bg: rgba(250,250,248,0.97);
+  --switcher-border: #e0ddd8;
+  --switcher-active: #111;
+  --switcher-active-txt: #fafaf8;
+}
+
+/* CREAM — chaud, typographique, éditorial */
+[data-theme="cream"] {
+  --bg:         #f5f0e8;
+  --surface:    rgba(0,0,0,0.03);
+  --hover:      #ede5d8;
+  --text:       #2a1f0f;
+  --muted:      #9a8570;
+  --border:     #d8cebc;
+  --accent:     #c0392b;
+  --accent-dim: rgba(192,57,43,0.1);
+  --ticker-bg:  #2a1f0f;
+  --ticker-txt: #f5f0e8;
+  --btn-bg:     #2a1f0f;
+  --btn-txt:    #f5f0e8;
+  --btn-hover-txt: #2a1f0f;
+  --grid-hover-bg: #2a1f0f;
+  --grid-hover-txt: #f5f0e8;
+  --grid-badge-bg: rgba(192,57,43,0.12);
+  --grid-badge-txt: #c0392b;
+  --heading-font: 'Instrument Serif', Georgia, serif;
+  --body-font:    'DM Mono', monospace;
+  --h1-weight: 400;
+  --h1-transform: none;
+  --h1-spacing: -0.02em;
+  --h1-style: italic;
+  --logo-size: 1rem;
+  --logo-spacing: 0.12em;
+  --bg-img-opacity: 0;
+  --bg-img-filter: none;
+  --collab-bg: rgba(0,0,0,0.03);
+  --bridge-glow: rgba(192,57,43,0.06);
+  --footer-bg: #f5f0e8;
+  --switcher-bg: rgba(245,240,232,0.97);
+  --switcher-border: #d8cebc;
+  --switcher-active: #2a1f0f;
+  --switcher-active-txt: #f5f0e8;
+}
+
+/* UNDERGROUND — fond anthracite, rose, condensé */
+[data-theme="underground"] {
+  --bg:         #141414;
+  --surface:    rgba(255,255,255,0.03);
+  --hover:      rgba(255,45,120,0.12);
+  --text:       #f0f0f0;
+  --muted:      #777;
+  --border:     rgba(255,255,255,0.07);
+  --accent:     #ff2d78;
+  --accent-dim: rgba(255,45,120,0.12);
+  --ticker-bg:  #ff2d78;
+  --ticker-txt: #fff;
+  --btn-bg:     #ff2d78;
+  --btn-txt:    #fff;
+  --btn-hover-txt: #ff2d78;
+  --grid-hover-bg: rgba(255,45,120,0.15);
+  --grid-hover-txt: #f0f0f0;
+  --grid-badge-bg: rgba(255,45,120,0.15);
+  --grid-badge-txt: #ff2d78;
+  --heading-font: 'Barlow Condensed', sans-serif;
+  --body-font:    'DM Mono', monospace;
+  --h1-weight: 900;
+  --h1-transform: uppercase;
+  --h1-spacing: 0.04em;
+  --h1-style: normal;
+  --logo-size: 1.1rem;
+  --logo-spacing: 0.22em;
+  --bg-img-opacity: 0.18;
+  --bg-img-filter: grayscale(100%) brightness(0.5);
+  --collab-bg: rgba(0,0,0,0.4);
+  --bridge-glow: rgba(255,45,120,0.08);
+  --footer-bg: rgba(0,0,0,0.5);
+  --switcher-bg: rgba(20,20,20,0.97);
+  --switcher-border: rgba(255,255,255,0.1);
+  --switcher-active: #ff2d78;
+  --switcher-active-txt: #fff;
+}
+
+/* =====================================================
+   RESET & BASE
+   ===================================================== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+
+body {
+  font-family: var(--body-font);
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  min-height: 100vh;
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
+::selection { background: var(--accent); color: var(--btn-txt); }
+a { text-decoration: none; color: inherit; }
+
+/* =====================================================
+   BACKGROUND
+   ===================================================== */
+.bg-image {
+  position: fixed; inset: 0;
+  background-image: url("img/img.jpg");
+  background-size: cover; background-position: center;
+  z-index: -2;
+  opacity: var(--bg-img-opacity);
+  filter: var(--bg-img-filter);
+  transition: opacity 0.4s ease;
+}
+.bg-gradient {
+  position: fixed; inset: 0; z-index: -1;
+  background: linear-gradient(180deg, rgba(0,0,0,0.0) 0%, rgba(0,0,0,0.0) 100%);
+}
+[data-theme="dark"] .bg-gradient {
+  background: radial-gradient(ellipse 80% 60% at 50% 100%, rgba(57,255,20,0.05) 0%, transparent 70%),
+    linear-gradient(180deg, rgba(8,8,8,0.6) 0%, rgba(8,8,8,0.4) 50%, rgba(8,8,8,0.85) 100%);
+}
+[data-theme="underground"] .bg-gradient {
+  background: radial-gradient(ellipse 80% 60% at 50% 100%, rgba(255,45,120,0.05) 0%, transparent 70%),
+    linear-gradient(180deg, rgba(10,10,10,0.7) 0%, rgba(10,10,10,0.5) 50%, rgba(10,10,10,0.9) 100%);
+}
+
+/* =====================================================
+   THEME SWITCHER
+   ===================================================== */
+.theme-switcher {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 5000;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+
+.theme-switcher-label {
+  font-family: var(--body-font);
+  font-size: 0.55rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: right;
+  margin-bottom: 0.1rem;
+}
+
+.theme-buttons {
+  display: flex;
+  gap: 0.4rem;
+  background: var(--switcher-bg);
+  border: 1px solid var(--switcher-border);
+  padding: 0.4rem;
+  backdrop-filter: blur(12px);
+  transition: background 0.3s, border-color 0.3s;
+}
+
+.theme-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 3px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.15s, border-color 0.15s;
+  flex-shrink: 0;
+}
+.theme-btn:hover { transform: scale(1.15); }
+.theme-btn.active { border-color: var(--switcher-active); }
+
+.theme-btn[data-t="dark"]        { background: #0a0a0a; box-shadow: inset 0 0 0 6px #39ff14; background: linear-gradient(135deg, #0a0a0a 60%, #1a3a1a 100%); }
+.theme-btn[data-t="white"]       { background: #fafaf8; box-shadow: inset 0 0 0 1px #ccc; }
+.theme-btn[data-t="cream"]       { background: linear-gradient(135deg, #f5f0e8 50%, #ede5d8 100%); box-shadow: inset 0 0 0 1px #d8cebc; }
+.theme-btn[data-t="underground"] { background: linear-gradient(135deg, #141414 50%, #2a0a14 100%); box-shadow: inset 0 0 0 6px #ff2d78; }
+
+/* Tooltip on hover */
+.theme-btn::after {
+  content: attr(data-label);
+  position: absolute;
+  bottom: 110%;
+  right: 0;
+  font-family: var(--body-font);
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: var(--switcher-bg);
+  color: var(--text);
+  padding: 0.25rem 0.5rem;
+  white-space: nowrap;
+  border: 1px solid var(--switcher-border);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s;
+}
+.theme-btn:hover::after { opacity: 1; }
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+header {
+  position: sticky; top: 0; z-index: 999;
+  padding: 1.1rem 1.5rem;
+  display: flex; justify-content: space-between; align-items: center;
+  background: var(--bg);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.4s, border-color 0.4s;
+}
+[data-theme="dark"] header,
+[data-theme="underground"] header { background: rgba(10,10,10,0.88); }
+
+@media (min-width: 768px) { header { padding: 1.4rem 3rem; } }
+
+.logo-text {
+  font-family: var(--heading-font);
+  font-weight: var(--h1-weight);
+  font-style: var(--h1-style);
+  font-size: var(--logo-size);
+  letter-spacing: var(--logo-spacing);
+  text-transform: var(--h1-transform);
+  color: var(--text);
+  transition: color 0.2s, font-size 0.3s;
+}
+.logo-text:hover { color: var(--accent); }
+
+.header-right { display: flex; align-items: center; gap: 0.75rem; }
+
+.lang-btn {
+  font-family: var(--body-font); font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em;
+  background: transparent; color: var(--muted); border: 1px solid var(--border);
+  padding: 0.4rem 0.8rem; cursor: pointer; transition: all 0.2s; min-height: 36px;
+}
+.lang-btn:hover { color: var(--accent); border-color: var(--accent); }
+
+.cv-link-header {
+  font-family: var(--body-font); font-size: 0.7rem; font-weight: 500; letter-spacing: 0.1em;
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  padding: 0.4rem 0.9rem; border: 1px solid var(--accent); color: var(--accent);
+  transition: all 0.2s; min-height: 36px;
+  background: var(--accent-dim);
+}
+.cv-link-header:hover { background: var(--btn-bg); color: var(--btn-txt); border-color: var(--btn-bg); }
+
+/* =====================================================
+   TICKER
+   ===================================================== */
+.ticker-container {
+  overflow: hidden; padding: 0.4rem 0;
+  background: var(--ticker-bg);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.4s;
+}
+.ticker-wrapper { display: inline-flex; white-space: nowrap; animation: ticker 35s linear infinite; }
+.ticker-item {
+  font-family: var(--body-font); font-size: 0.65rem; font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--ticker-txt); padding: 0 4rem;
+  transition: color 0.4s;
+}
+@keyframes ticker { to { transform: translateX(-50%); } }
+
+/* =====================================================
+   HERO
+   ===================================================== */
+.hero {
+  display: grid; grid-template-columns: 1fr;
+  border-bottom: 1px solid var(--border);
+  position: relative; z-index: 10;
+  transition: border-color 0.4s;
+}
+@media (min-width: 900px) { .hero { grid-template-columns: 55% 45%; min-height: 75vh; } }
+
+.hero-image {
+  position: relative; overflow: hidden; min-height: 56vw; background: #111;
+}
+@media (min-width: 900px) { .hero-image { min-height: auto; } }
+.hero-image img {
+  width: 100%; height: 100%; object-fit: cover; object-position: center 25%;
+  display: block;
+  filter: var(--bg-img-filter, grayscale(100%) brightness(0.75));
+  transition: filter 0.8s ease;
+}
+[data-theme="white"] .hero-image img,
+[data-theme="cream"] .hero-image img { filter: grayscale(100%) brightness(0.85); }
+.hero:hover .hero-image img { filter: grayscale(30%) brightness(0.85) !important; }
+
+.hero-text {
+  padding: 2.5rem 1.5rem;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  border-left: 1px solid var(--border);
+  transition: border-color 0.4s;
+}
+@media (min-width: 768px) { .hero-text { padding: 3.5rem 3rem; } }
+@media (min-width: 900px) { .hero-text { padding: 4rem 3.5rem; } }
+
+.hero-kicker {
+  font-family: var(--body-font); font-size: 0.62rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 1.75rem;
+  transition: color 0.4s;
+}
+
+h1 {
+  font-family: var(--heading-font);
+  font-size: clamp(2.8rem, 6.5vw, 5.5rem);
+  font-weight: var(--h1-weight);
+  font-style: var(--h1-style);
+  line-height: 0.96;
+  letter-spacing: var(--h1-spacing);
+  text-transform: var(--h1-transform);
+  margin-bottom: 2rem;
+  color: var(--text);
+  transition: font-family 0.3s, color 0.4s;
+}
+
+.hero-desc {
+  font-family: var(--body-font); font-size: 0.75rem; line-height: 1.75;
+  color: var(--muted); max-width: 36ch; margin-bottom: 2.5rem;
+  transition: color 0.4s;
+}
+
+.hero-cta { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; }
+
+.btn-primary {
+  font-family: var(--body-font); font-size: 0.7rem; font-weight: 500; letter-spacing: 0.08em;
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  padding: 0.75rem 1.5rem; background: var(--btn-bg); color: var(--btn-txt);
+  border: 1px solid var(--btn-bg); transition: all 0.2s; min-height: 44px;
+}
+.btn-primary:hover { background: transparent; color: var(--btn-hover-txt); border-color: var(--btn-bg); }
+
+.btn-ghost {
+  font-family: var(--body-font); font-size: 0.7rem; color: var(--muted);
+  letter-spacing: 0.06em; padding: 0.75rem 0; transition: color 0.15s;
+  display: inline-flex; align-items: center; min-height: 44px;
+}
+.btn-ghost:hover { color: var(--text); }
+
+/* =====================================================
+   SECTION LABEL
+   ===================================================== */
+.section-label {
+  padding: 2rem 1.5rem 0; display: flex; align-items: center; gap: 1rem;
+  position: relative; z-index: 10;
+}
+@media (min-width: 768px) { .section-label { padding: 2.5rem 3rem 0; } }
+.section-label-text {
+  font-family: var(--body-font); font-size: 0.6rem; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--accent); white-space: nowrap;
+  transition: color 0.4s;
+}
+.section-label-line { flex: 1; height: 1px; background: var(--border); transition: background 0.4s; }
+
+/* =====================================================
+   PROJECTS GRID
+   ===================================================== */
+.projects-grid {
+  margin-top: 1.5rem; display: grid; grid-template-columns: 1fr 1fr;
+  border-top: 1px solid var(--border); border-left: 1px solid var(--border);
+  position: relative; z-index: 10; transition: border-color 0.4s;
+}
+@media (min-width: 640px)  { .projects-grid { grid-template-columns: repeat(3,1fr); } }
+@media (min-width: 1100px) { .projects-grid { grid-template-columns: repeat(4,1fr); } }
+
+.grid-item {
+  position: relative;
+  border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  padding: 1.25rem; display: block; color: var(--text);
+  transition: background 0.15s, color 0.15s, border-color 0.4s;
+  min-height: 105px; background: transparent; overflow: hidden;
+}
+.grid-item:hover { background: var(--grid-hover-bg); color: var(--grid-hover-txt); }
+.grid-item:hover .grid-number { color: var(--accent); }
+.grid-item:hover .grid-hover-desc { max-height: 120px; opacity: 0.75; margin-top: 0.65rem; }
+.grid-item.disabled-project { opacity: 0.32; cursor: default; pointer-events: none; }
+
+.grid-number {
+  font-family: var(--body-font); font-size: 0.58rem; color: var(--muted);
+  margin-bottom: 0.4rem; letter-spacing: 0.08em;
+  transition: color 0.2s;
+}
+.grid-title {
+  font-family: var(--heading-font);
+  font-weight: var(--h1-weight);
+  font-style: var(--h1-style);
+  font-size: clamp(0.95rem, 1.8vw, 1.15rem);
+  line-height: 1.1; margin-bottom: 0.6rem;
+  letter-spacing: var(--h1-spacing);
+  text-transform: var(--h1-transform);
+  transition: font-family 0.3s;
+}
+.grid-meta { display: flex; flex-wrap: wrap; gap: 0.28rem; }
+.grid-meta span {
+  font-family: var(--body-font); font-size: 0.56rem; letter-spacing: 0.04em;
+  padding: 0.15rem 0.45rem; background: rgba(128,128,128,0.1); color: var(--muted);
+  transition: background 0.4s, color 0.4s;
+}
+.grid-meta .badge-complete { background: var(--grid-badge-bg) !important; color: var(--grid-badge-txt) !important; font-weight: 500; }
+.grid-meta .badge-dev { background: rgba(200,160,0,0.1) !important; color: #b8860b !important; }
+[data-theme="dark"] .grid-meta .badge-dev,
+[data-theme="underground"] .grid-meta .badge-dev { color: #ffd700 !important; }
+
+.grid-hover-desc {
+  max-height: 0; overflow: hidden;
+  font-family: var(--body-font); font-size: 0.66rem; line-height: 1.6;
+  transition: max-height 0.25s ease, opacity 0.25s ease, margin-top 0.25s ease;
+  opacity: 0; margin-top: 0;
+}
+@media (hover: none) { .grid-hover-desc { max-height: none !important; opacity: 0.6 !important; margin-top: 0.5rem !important; } }
+
+/* =====================================================
+   COLLABORATIONS
+   ===================================================== */
+.collab-item { border-top: 1px solid var(--border); position: relative; z-index: 10; }
+.collab-summary {
+  list-style: none; cursor: pointer; padding: 1.2rem 1.5rem;
+  display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; transition: background 0.15s;
+}
+@media (min-width: 768px) { .collab-summary { padding: 1.2rem 3rem; } }
+.collab-summary:hover { background: var(--hover); }
+.collab-summary::-webkit-details-marker { display: none; }
+
+.project-number { font-family: var(--body-font); font-size: 0.58rem; color: var(--muted); min-width: 20px; }
+.project-title {
+  font-family: var(--heading-font); font-weight: var(--h1-weight); font-style: var(--h1-style);
+  font-size: 1rem; letter-spacing: var(--h1-spacing); text-transform: var(--h1-transform); flex: 1;
+  transition: font-family 0.3s;
+}
+.project-meta { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+.project-meta span { font-family: var(--body-font); font-size: 0.56rem; padding: 0.15rem 0.45rem; background: rgba(128,128,128,0.1); color: var(--muted); }
+.project-meta .badge-complete { background: var(--grid-badge-bg) !important; color: var(--grid-badge-txt) !important; font-weight: 500; }
+
+.collab-panel {
+  padding: 2rem 1.5rem; border-top: 1px solid var(--border);
+  display: grid; grid-template-columns: 1fr; gap: 2rem;
+  background: var(--collab-bg); transition: background 0.4s;
+}
+@media (min-width: 640px)  { .collab-panel { grid-template-columns: repeat(2,1fr); padding: 2rem 3rem; } }
+@media (min-width: 1024px) { .collab-panel { grid-template-columns: repeat(4,1fr); } }
+
+.collab-group h3 {
+  font-family: var(--body-font); font-size: 0.6rem; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 0.85rem; font-weight: 500;
+  transition: color 0.4s;
+}
+.collab-group ul { list-style: none; padding: 0; }
+.collab-group li {
+  font-family: var(--body-font); font-size: 0.7rem;
+  padding: 0.26rem 0 0.26rem 1rem; position: relative; color: var(--muted); line-height: 1.45;
+}
+.collab-group li::before { content: "–"; position: absolute; left: 0; color: var(--border); }
+.collab-group a { color: inherit; border-bottom: 1px solid var(--border); transition: color 0.15s, border-color 0.15s; }
+.collab-group a:hover { color: var(--accent); border-color: var(--accent); }
+.two-col { column-count: 1; }
+@media (min-width: 640px) { .two-col { column-count: 2; column-gap: 1.5rem; } }
+.collab-note { font-size: 0.62rem; color: var(--muted); font-style: italic; margin-top: 0.75rem; grid-column: 1/-1; }
+
+/* =====================================================
+   CV BRIDGE
+   ===================================================== */
+.cv-bridge {
+  padding: 5rem 1.5rem; text-align: center;
+  border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  position: relative; z-index: 10; overflow: hidden;
+  transition: border-color 0.4s;
+}
+@media (min-width: 768px) { .cv-bridge { padding: 7rem 3rem; } }
+.cv-bridge::before {
+  content: ''; position: absolute; width: 500px; height: 300px;
+  background: radial-gradient(ellipse, var(--bridge-glow) 0%, transparent 70%);
+  top: 50%; left: 50%; transform: translate(-50%,-50%); pointer-events: none;
+  transition: background 0.4s;
+}
+.cv-bridge h3 {
+  font-family: var(--heading-font); font-weight: var(--h1-weight); font-style: var(--h1-style);
+  font-size: clamp(2rem, 5vw, 3.5rem); letter-spacing: var(--h1-spacing);
+  text-transform: var(--h1-transform); margin-bottom: 0.75rem; position: relative;
+  color: var(--text); transition: font-family 0.3s, color 0.4s;
+}
+.cv-bridge p { font-family: var(--body-font); font-size: 0.7rem; color: var(--muted); margin-bottom: 2.5rem; line-height: 1.7; position: relative; }
+.btn-cv {
+  font-family: var(--body-font); font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em;
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.85rem 2rem; background: var(--btn-bg); color: var(--btn-txt);
+  border: 1px solid var(--btn-bg); transition: all 0.2s; position: relative;
+}
+.btn-cv:hover { background: transparent; color: var(--btn-hover-txt); }
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
+footer {
+  padding: 1.5rem; border-top: 1px solid var(--border);
+  display: flex; flex-direction: column; gap: 1rem; align-items: center;
+  position: relative; z-index: 10;
+  background: var(--footer-bg);
+  transition: background 0.4s, border-color 0.4s;
+}
+@media (min-width: 768px) { footer { flex-direction: row; justify-content: space-between; padding: 1.5rem 3rem; } }
+footer p { font-family: var(--body-font); font-size: 0.62rem; color: var(--muted); letter-spacing: 0.08em; }
+.footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; }
+.footer-links a { font-family: var(--body-font); font-size: 0.62rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.15s; }
+.footer-links a:hover { color: var(--accent); }
+
+/* =====================================================
+   STICKERS
+   ===================================================== */
+.floating-layer { position: fixed; inset: 0; z-index: 12; pointer-events: none; }
+.sticker { position: fixed; width: clamp(110px,14vw,220px); pointer-events: auto; cursor: grab; user-select: none; touch-action: none; box-shadow: 0 4px 20px rgba(0,0,0,.3); }
+.sticker:active { cursor: grabbing; }
+
+/* =====================================================
+   FOCUS & MOTION
+   ===================================================== */
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+@media (max-width: 480px) {
+  h1 { font-size: 2.8rem; }
+  .hero-cta { flex-direction: column; align-items: flex-start; }
+  .btn-primary, .btn-ghost { width: 100%; justify-content: center; }
+  .theme-switcher { bottom: 1rem; right: 1rem; }
+}
+</style>
 </head>
 
-<body>
+<body class="home lang-fr">
 <div class="bg-image"></div>
+<div class="bg-gradient"></div>
 
-    <header>
-        <div class="nav-logo">
-            <a href="index.html" class="logo-text">KIM MAURICE</a>
-        </div>
-        <div class="header-right">
-            <button class="lang-btn" id="langBtn">EN</button>
-            <a href="cv.html" class="cv-link-header"><span>💼</span><span id="cvTextHeader">CV</span></a>
-        </div>
-    </header>
+<!-- THEME SWITCHER -->
+<div class="theme-switcher" role="group" aria-label="Choisir un thème">
+  <div class="theme-switcher-label">thème</div>
+  <div class="theme-buttons">
+    <button class="theme-btn active" data-t="dark"        data-label="Noir · Néon"      aria-label="Thème sombre néon"       title="Noir · Néon"></button>
+    <button class="theme-btn"        data-t="white"       data-label="Blanc · Éditorial" aria-label="Thème blanc éditorial"   title="Blanc · Éditorial"></button>
+    <button class="theme-btn"        data-t="cream"       data-label="Crème · Sérif"     aria-label="Thème crème typographique" title="Crème · Sérif"></button>
+    <button class="theme-btn"        data-t="underground" data-label="Rose · Underground" aria-label="Thème underground rose"  title="Rose · Underground"></button>
+  </div>
+</div>
 
-    <div class="ticker-container">
-        <div class="ticker-wrapper">
-            <span class="ticker-item" id="tickerText">De nouveaux projets, idées et expérimentations s'y ajoutent au fil du temps.</span>
-            <span class="ticker-item" id="tickerText2">De nouveaux projets, idées et expérimentations s'y ajoutent au fil du temps.</span>
-        </div>
+<header>
+  <div class="nav-logo"><a href="index.html" class="logo-text">Kim Maurice</a></div>
+  <div class="header-right">
+    <button class="lang-btn" id="langBtn">EN</button>
+    <a href="cv.html" class="cv-link-header"><span id="cvTextHeader">CV</span> →</a>
+  </div>
+</header>
+
+<div class="ticker-container">
+  <div class="ticker-wrapper">
+    <span class="ticker-item" id="tickerText">De nouveaux projets, idées et expérimentations s'y ajoutent au fil du temps.</span>
+    <span class="ticker-item">De nouveaux projets, idées et expérimentations s'y ajoutent au fil du temps.</span>
+    <span class="ticker-item">De nouveaux projets, idées et expérimentations s'y ajoutent au fil du temps.</span>
+    <span class="ticker-item">De nouveaux projets, idées et expérimentations s'y ajoutent au fil du temps.</span>
+  </div>
+</div>
+
+<main>
+  <section class="hero">
+    <div class="hero-image">
+      <img src="img/img.jpg" alt="Kim Maurice — technologue créative, Montréal" loading="eager">
     </div>
+    <div class="hero-text">
+      <p class="hero-kicker" id="locationText">Montréal · 25 ans d'expérience</p>
+      <h1 id="introText">Technologue<br>créative —<br>multimédia,<br>son & image</h1>
+      <p class="hero-desc" data-fr="Design, code, son, vidéo. De la conception stratégique au déploiement technique." data-en="Design, code, sound, video. From strategic concept to technical deployment.">Design, code, son, vidéo. De la conception stratégique au déploiement technique.</p>
+      <div class="hero-cta">
+        <a href="cv.html" class="btn-primary"><span id="ctaPrimaryText">Voir le CV complet</span> →</a>
+        <a href="#projects" class="btn-ghost" id="ctaSecondaryText">↓ projets</a>
+      </div>
+    </div>
+  </section>
 
-    <main>
-        <div class="intro">
-            <h1 id="introText">Technologue créative — multimédia, son & production audiovisuelle</h1>
-            <p id="locationText">Montréal · 25 ans d'expérience</p>
-            <div class="hero-cta">
-                <a href="cv.html" class="cta-primary">
-                    <span id="ctaPrimaryText">Voir mon parcours complet (CV)</span> →
-                </a>
-                <a href="#projects" class="cta-secondary" id="ctaSecondaryText">ou découvrir mes projets ↓</a>
-            </div>
+  <div class="section-label">
+    <span class="section-label-text" data-fr="Projets sélectionnés" data-en="Selected projects">Projets sélectionnés</span>
+    <div class="section-label-line"></div>
+  </div>
+
+  <div class="projects-grid" id="projects">
+    <div class="grid-item disabled-project" data-desc="Application de performance musicale en temps réel : IA générative (Gemini), synthèse audio, looper multi-pistes et contrôle MIDI.">
+      <div class="grid-number">01</div><h2 class="grid-title">Hors Champ</h2>
+      <div class="grid-meta"><span class="badge-dev">🚧 2026</span><span>Gemini · MIDI</span></div>
+      <div class="grid-hover-desc"></div>
+    </div>
+    <a href="http://www.atelier-lac.com/" target="_blank" class="grid-item" data-desc="Site web conçu pour l'artiste — conception visuelle, architecture de contenu, déploiement via Cargo Collective.">
+      <div class="grid-number">02</div><h2 class="grid-title">Atelier LAC</h2>
+      <div class="grid-meta"><span class="badge-complete">Site web</span><span>Cargo</span></div>
+      <div class="grid-hover-desc"></div>
+    </a>
+    <a href="https://prototype-psi-liart.vercel.app/" target="_blank" class="grid-item" data-desc="Instrument musical expérimental : clavier MIDI, IA générative et visualisation 3D temps réel.">
+      <div class="grid-number">03</div><h2 class="grid-title">Latent Organ</h2>
+      <div class="grid-meta"><span class="badge-complete">✓ Prototype</span><span>AI · Three.js · MIDI</span></div>
+      <div class="grid-hover-desc"></div>
+    </a>
+    <a href="https://insula.care/" target="_blank" class="grid-item" data-desc="Site web réalisé pour Insula Care — identité visuelle en ligne, structure éditoriale, Cargo Collective.">
+      <div class="grid-number">04</div><h2 class="grid-title">Insula Care</h2>
+      <div class="grid-meta"><span class="badge-complete">Site web</span><span>Cargo</span></div>
+      <div class="grid-hover-desc"></div>
+    </a>
+    <a href="https://still-fm.vercel.app/" target="_blank" class="grid-item" data-desc="Radio streaming underground avec intégration Twitch et Mixcloud. Player audio personnalisé en Next.js.">
+      <div class="grid-number">05</div><h2 class="grid-title">Still FM</h2>
+      <div class="grid-meta"><span class="badge-dev">🚧 2026</span><span>Next.js · Mixcloud</span></div>
+      <div class="grid-hover-desc"></div>
+    </a>
+    <a href="https://www.imdb.com/name/nm9371635/" target="_blank" class="grid-item" data-desc="Designer graphique sur 15+ productions québécoises (Bad Blood, Unité 9, Kuessipan…). Props numériques, interfaces fictives.">
+      <div class="grid-number">06</div><h2 class="grid-title">Cinéma / TV</h2>
+      <div class="grid-meta"><span class="badge-complete">✓ Pro</span><span>15+ productions</span></div>
+      <div class="grid-hover-desc"></div>
+    </a>
+    <div class="grid-item" data-desc="Calendrier de l'Avent hybride transformant une boîte de chocolats en aventure interactive gamifiée.">
+      <div class="grid-number">07</div><h2 class="grid-title">ChocÔCalendrier</h2>
+      <div class="grid-meta"><span class="badge-complete">✓ 2025</span><span>UX · Gamification</span></div>
+      <div class="grid-hover-desc"></div>
+    </div>
+    <a href="https://360.articulate.com/review/content/b3987a71-9c66-4545-8c4f-80d7974c32e4/review" target="_blank" class="grid-item" data-desc="Formations interactives pour grandes organisations. Scénarisation pédagogique, gamification, multimédias.">
+      <div class="grid-number">08</div><h2 class="grid-title">E‑Learning Immersif</h2>
+      <div class="grid-meta"><span class="badge-complete">✓ Pro</span><span>Articulate · LMS</span></div>
+      <div class="grid-hover-desc"></div>
+    </a>
+    <a href="https://www.instagram.com/salut_berta_rose/" target="_blank" class="grid-item" data-desc="Exploration artistique des outils d'IA générative. Stable Diffusion, ComfyUI, workflows créatifs.">
+      <div class="grid-number">09</div><h2 class="grid-title">AI Generative Art</h2>
+      <div class="grid-meta"><span class="badge-complete">✓ En ligne</span><span>Stable Diffusion</span></div>
+      <div class="grid-hover-desc"></div>
+    </a>
+    <a href="https://github.com/Bertarose/creative-ai-production-pipeline.git" target="_blank" class="grid-item" data-desc="Pipeline automatisé de production créative. Workflows Python pour génération de contenu IA.">
+      <div class="grid-number">10</div><h2 class="grid-title">Workflow Automation</h2>
+      <div class="grid-meta"><span>Python · IA</span><span>2025</span></div>
+      <div class="grid-hover-desc"></div>
+    </a>
+    <a href="https://obscura-liart.vercel.app/" target="_blank" class="grid-item" data-desc="Archive cinématographique dédiée aux films étranges, dérangeants et visionnaires.">
+      <div class="grid-number">11</div><h2 class="grid-title">Obscura</h2>
+      <div class="grid-meta"><span class="badge-complete">✓ Déployé</span><span>HTML · JS</span></div>
+      <div class="grid-hover-desc"></div>
+    </a>
+    <div class="grid-item" data-desc="Générateur de signatures sonores uniques avec visualisation temps réel. Synthèse audio interactive.">
+      <div class="grid-number">12</div><h2 class="grid-title">Sonic Fingerprint</h2>
+      <div class="grid-meta"><span>Canvas · Tone.js</span></div>
+      <div class="grid-hover-desc"></div>
+    </div>
+    <div class="grid-item" data-desc="Installation immersive combinant terrarium physique et monde VR/AR forestier.">
+      <div class="grid-number">13</div><h2 class="grid-title">Terrarium Numérique</h2>
+      <div class="grid-meta"><span class="badge-dev">2026</span><span>WebGL · IoT</span></div>
+      <div class="grid-hover-desc"></div>
+    </div>
+    <a href="https://actions-lemon.vercel.app/" target="_blank" class="grid-item" data-desc="Pages landing pour publicités, pétitions et campagnes d'impact social. Déploiement rapide sur Vercel.">
+      <div class="grid-number">14</div><h2 class="grid-title">Actions Page</h2>
+      <div class="grid-meta"><span class="badge-complete">✓ 2025</span><span>Landing · Vercel</span></div>
+      <div class="grid-hover-desc"></div>
+    </a>
+  </div>
+
+  <section id="collaborations">
+    <details class="collab-item" open>
+      <summary class="collab-summary">
+        <div class="project-number">15</div>
+        <h2 class="project-title" data-fr="Participations" data-en="Participations">Participations</h2>
+        <div class="project-meta">
+          <span class="badge-complete" data-fr="✓ Sélection" data-en="✓ Selected">✓ Sélection</span>
+          <span data-fr="Son · Performance · Cinéma/TV · Radio" data-en="Sound · Performance · Film/TV · Radio">Son · Performance · Cinéma/TV · Radio</span>
+          <span>2005–2025</span>
         </div>
-
-        <div class="projects-grid" id="projects">
-
-            <div class="grid-item disabled-project" data-desc="Application de performance musicale en temps réel : IA générative (Gemini), synthèse audio, looper multi-pistes et contrôle MIDI.">
-                <div class="grid-number">01</div>
-                <h2 class="grid-title">Hors Champ</h2>
-                <div class="grid-meta">
-                    <span class="badge-dev">🚧 2026</span>
-                    <span>Gemini • MIDI</span>
-                </div>
-                <div class="grid-hover-desc"></div>
-            </div>
-
-            <a href="http://www.atelier-lac.com/" target="_blank" class="grid-item" data-desc="Site web conçu pour l'artiste — conception visuelle, architecture de contenu, déploiement via Cargo Collective.">
-                <div class="grid-number">02</div>
-                <h2 class="grid-title">Atelier LAC</h2>
-                <div class="grid-meta">
-                    <span class="badge-complete">Site web</span>
-                    <span>Cargo</span>
-                </div>
-                <div class="grid-hover-desc"></div>
-            </a>
-
-            <a href="https://prototype-psi-liart.vercel.app/" target="_blank" class="grid-item" data-desc="Instrument musical expérimental : clavier MIDI, IA générative et visualisation 3D temps réel. Interface hybride analogique/numérique pour performance live.">
-                <div class="grid-number">03</div>
-                <h2 class="grid-title">Latent Organ</h2>
-                <div class="grid-meta">
-                    <span class="badge-complete">✅ Prototype</span>
-                    <span>AI • Three.js • MIDI</span>
-                </div>
-                <div class="grid-hover-desc"></div>
-            </a>
-
-            <a href="https://insula.care/" target="_blank" class="grid-item" data-desc="Site web réalisé pour Insula Care — identité visuelle en ligne, structure éditoriale et déploiement via Cargo Collective.">
-                <div class="grid-number">04</div>
-                <h2 class="grid-title">Insula Care</h2>
-                <div class="grid-meta">
-                    <span class="badge-complete">Site web</span>
-                    <span>Cargo</span>
-                </div>
-                <div class="grid-hover-desc"></div>
-            </a>
-
-            <a href="https://still-fm.vercel.app/" target="_blank" class="grid-item" data-desc="Radio streaming underground avec intégration Twitch et Mixcloud. Player audio personnalisé développé en Next.js.">
-                <div class="grid-number">05</div>
-                <h2 class="grid-title">Still FM</h2>
-                <div class="grid-meta">
-                    <span class="badge-dev">🚧 2026</span>
-                    <span>Next.js • Mixcloud</span>
-                </div>
-                <div class="grid-hover-desc"></div>
-            </a>
-
-            <a href="https://www.imdb.com/name/nm9371635/" target="_blank" class="grid-item" data-desc="Designer graphique sur 15+ productions québécoises (Bad Blood, Unité 9, Kuessipan…). Props numériques, interfaces fictives, animations. Travail sous pression.">
-                <div class="grid-number">06</div>
-                <h2 class="grid-title">Cinéma / TV</h2>
-                <div class="grid-meta">
-                    <span class="badge-complete">✅ Pro</span>
-                    <span>15+ productions</span>
-                </div>
-                <div class="grid-hover-desc"></div>
-            </a>
-
-            <div class="grid-item" data-desc="Calendrier de l'Avent hybride transformant une boîte de chocolats en aventure interactive. Application web gamifiée.">
-                <div class="grid-number">07</div>
-                <h2 class="grid-title">ChocÔCalendrier</h2>
-                <div class="grid-meta">
-                    <span class="badge-complete">✅ 2025</span>
-                    <span>UX/UI • Gamification</span>
-                </div>
-                <div class="grid-hover-desc"></div>
-            </div>
-
-            <a href="https://360.articulate.com/review/content/b3987a71-9c66-4545-8c4f-80d7974c32e4/review" target="_blank" class="grid-item" data-desc="Formations interactives pour grandes organisations (Technologia, GardaWorld). Scénarisation pédagogique, gamification et intégrations multimédias complexes.">
-                <div class="grid-number">08</div>
-                <h2 class="grid-title">E‑Learning Immersif</h2>
-                <div class="grid-meta">
-                    <span class="badge-complete">✅ Pro</span>
-                    <span>Articulate • LMS</span>
-                </div>
-                <div class="grid-hover-desc"></div>
-            </a>
-
-            <a href="https://www.instagram.com/salut_berta_rose/" target="_blank" class="grid-item" data-desc="Exploration artistique des outils d'IA générative. Prompt engineering et workflows créatifs complexes avec Stable Diffusion et ComfyUI.">
-                <div class="grid-number">09</div>
-                <h2 class="grid-title">AI Generative Art</h2>
-                <div class="grid-meta">
-                    <span class="badge-complete">✅ En ligne</span>
-                    <span>Stable Diffusion</span>
-                </div>
-                <div class="grid-hover-desc"></div>
-            </a>
-
-            <a href="https://github.com/Bertarose/creative-ai-production-pipeline.git" target="_blank" class="grid-item" data-desc="Pipeline automatisé de production créative. Documentation complète des workflows Python pour génération de contenu assistée par IA.">
-                <div class="grid-number">10</div>
-                <h2 class="grid-title">Workflow Automation</h2>
-                <div class="grid-meta">
-                    <span>Python • IA</span>
-                    <span>2025</span>
-                </div>
-                <div class="grid-hover-desc"></div>
-            </a>
-
-            <a href="https://obscura-liart.vercel.app/" target="_blank" class="grid-item" data-desc="Archive cinématographique dédiée aux films étranges, dérangeants et visionnaires.">
-                <div class="grid-number">11</div>
-                <h2 class="grid-title">Obscura</h2>
-                <div class="grid-meta">
-                    <span class="badge-complete">✅ Déployé</span>
-                    <span>HTML • JS</span>
-                </div>
-                <div class="grid-hover-desc"></div>
-            </a>
-
-            <div class="grid-item" data-desc="Générateur de signatures sonores uniques avec visualisation temps réel. Synthèse audio interactive.">
-                <div class="grid-number">12</div>
-                <h2 class="grid-title">Sonic Fingerprint</h2>
-                <div class="grid-meta">
-                    <span>Canvas • Tone.js</span>
-                </div>
-                <div class="grid-hover-desc"></div>
-            </div>
-
-            <div class="grid-item" data-desc="Installation immersive combinant terrarium physique et monde VR/AR forestier.">
-                <div class="grid-number">13</div>
-                <h2 class="grid-title">Terrarium Numérique</h2>
-                <div class="grid-meta">
-                    <span class="year-future">2026</span>
-                    <span>WebGL • IoT</span>
-                </div>
-                <div class="grid-hover-desc"></div>
-            </div>
-
-            <a href="https://actions-lemon.vercel.app/" target="_blank" class="grid-item" data-desc="Pages landing pour publicités, pétitions et campagnes d'impact social. Déploiement rapide sur Vercel.">
-                <div class="grid-number">14</div>
-                <h2 class="grid-title">Actions Page</h2>
-                <div class="grid-meta">
-                    <span class="badge-complete">✅ 2025</span>
-                    <span>Landing • Vercel</span>
-                </div>
-                <div class="grid-hover-desc"></div>
-            </a>
-
+      </summary>
+      <div class="collab-panel">
+        <div class="collab-group">
+          <h3 data-fr="Conception sonore" data-en="Sound design">Conception sonore</h3>
+          <ul>
+            <li><a href="https://starkimproject.com/exhibits/saekdong%ec%83%89%eb%8f%99diaspora/" target="_blank">Saekdong Diaspora</a></li>
+            <li><a href="https://starkimproject.com/laudace/" target="_blank">L'audace</a></li>
+            <li><a href="https://vimeo.com/600554637" target="_blank">Œuvre vidéo</a></li>
+          </ul>
         </div>
-
-        <section class="projects" id="collaborations">
-            <details class="project-item collab-item" open>
-                <summary class="collab-summary">
-                    <div class="project-number">15</div>
-                    <h2 class="project-title" data-fr="Participations" data-en="Participations">Participations</h2>
-                    <div class="project-meta">
-                        <span class="badge-complete" data-fr="✅ Sélection" data-en="✅ Selected">✅ Sélection</span>
-                        <span data-fr="Son • Performance • Cinéma/TV • Radio" data-en="Sound • Performance • Film/TV • Radio">Son • Performance • Cinéma/TV • Radio</span>
-                        <span>2005–2025</span>
-                    </div>
-                </summary>
-                <div class="collab-panel">
-                    <div class="collab-group">
-                        <h3 data-fr="Conception sonore" data-en="Sound design">Conception sonore</h3>
-                        <ul>
-                            <li><a href="https://starkimproject.com/exhibits/saekdong%ec%83%89%eb%8f%99diaspora/" target="_blank" rel="noopener">Saekdong Diaspora</a></li>
-                            <li><a href="https://starkimproject.com/laudace/" target="_blank" rel="noopener">L'audace</a></li>
-                            <li><a href="https://vimeo.com/600554637" target="_blank" rel="noopener">Œuvre vidéo — conception sonore</a></li>
-                        </ul>
-                    </div>
-                    <div class="collab-group">
-                        <h3>Performance / projections / radio</h3>
-                        <ul>
-                            <li><strong>Queer ASMR</strong> — projection vidéo, <em>Dyke Air</em>, Paris (6 décembre 2013)</li>
-                            <li>Cabaret Tollé</li>
-                            <li>ENDLESSS — streaming live</li>
-                            <li>Filles-troniques</li>
-                            <li>Suoni per il Popolo — performances vidéo expérimentales</li>
-                            <li>Émissions de radio : <a href="https://www.mixcloud.com/n10as/" target="_blank" rel="noopener">n10as</a>, <a href="https://www.mixcloud.com/StillFM/" target="_blank" rel="noopener">Still FM</a></li>
-                        </ul>
-                    </div>
-                    <div class="collab-group">
-                        <h3>Presse</h3>
-                        <ul>
-                            <li><em>Les dessous du web</em>, Fugues Magazine — article (2015)</li>
-                        </ul>
-                    </div>
-                    <div class="collab-group">
-                        <h3>Cinéma / télévision — designer multimédia</h3>
-                        <ul class="two-col">
-                            <li>Après (2021)</li>
-                            <li>5e Rang (2019–2020)</li>
-                            <li>Nadia, Butterfly (2020)</li>
-                            <li>My Salinger Year (2020) — non créditée</li>
-                            <li>Les Veuves (2020)</li>
-                            <li>Kuessipan (2019)</li>
-                            <li>Aquaslash (2019)</li>
-                            <li>La femme de mon frère (2019)</li>
-                            <li>Unité 9 (2019)</li>
-                            <li>Bad Blood (2018)</li>
-                            <li>Demain des hommes (2018)</li>
-                            <li>Les rois mongols (2017) — direction artistique</li>
-                            <li>Jérémie (2015–2016)</li>
-                            <li>L'Échappée (2016)</li>
-                            <li>Lemonade (2018)</li>
-                        </ul>
-                    </div>
-                    <p class="collab-note" data-fr="Certains projets sont difficiles à retrouver en ligne. Détails et références disponibles sur demande." data-en="Some projects are hard to find online. Details and references available on request.">
-                       Certains projets sont difficiles à retrouver en ligne. Détails et références disponibles sur demande.
-                    </p>
-                </div>
-            </details>
-        </section>
-
-        <div class="cv-bridge">
-            <h3 id="bridgeTitle">Envie d'en savoir plus sur mon parcours ?</h3>
-            <p id="bridgeText">CV détaillé, compétences techniques complètes, parcours professionnel et formations.</p>
-            <a href="cv.html" class="btn-cv"><span id="bridgeButton">Consulter le CV complet</span> →</a>
+        <div class="collab-group">
+          <h3>Performance / radio</h3>
+          <ul>
+            <li>Queer ASMR — Dyke Air, Paris (2013)</li>
+            <li>Cabaret Tollé</li>
+            <li>ENDLESSS — streaming live</li>
+            <li>Filles-troniques</li>
+            <li>Suoni per il Popolo</li>
+            <li><a href="https://www.mixcloud.com/n10as/" target="_blank">n10as</a>, <a href="https://www.mixcloud.com/StillFM/" target="_blank">Still FM</a></li>
+          </ul>
         </div>
-    </main>
+        <div class="collab-group">
+          <h3>Presse</h3>
+          <ul><li><em>Les dessous du web</em>, Fugues (2015)</li></ul>
+        </div>
+        <div class="collab-group">
+          <h3>Cinéma / TV</h3>
+          <ul class="two-col">
+            <li>Après (2021)</li><li>5e Rang (2019–20)</li>
+            <li>Nadia, Butterfly (2020)</li><li>Les Veuves (2020)</li>
+            <li>Kuessipan (2019)</li><li>Aquaslash (2019)</li>
+            <li>La femme de mon frère (2019)</li><li>Unité 9 (2019)</li>
+            <li>Bad Blood (2018)</li><li>Demain des hommes (2018)</li>
+            <li>Les rois mongols (2017)</li><li>Jérémie (2015–16)</li>
+            <li>L'Échappée (2016)</li><li>Lemonade (2018)</li>
+          </ul>
+        </div>
+        <p class="collab-note" data-fr="Certains projets sont difficiles à retrouver en ligne. Détails disponibles sur demande." data-en="Some projects are hard to find online. Details available on request.">Certains projets sont difficiles à retrouver en ligne. Détails disponibles sur demande.</p>
+      </div>
+    </details>
+  </section>
 
-    <footer>
-        <p id="footerText">© 2025 Kim Maurice</p>
-        <div class="footer-links">
-            <a href="https://instagram.com/salut_berta_rose/" target="_blank">Instagram</a>
-            <a href="/cdn-cgi/l/email-protection#f49d9a929bb49f9d99999581869d9791da979b99">Email</a>
-            <a href="https://linkedin.com/in/kimmaurice" target="_blank">LinkedIn</a>
-            <a href="https://github.com/Bertarose/" target="_blank">Github</a>
-            <a href="https://www.imdb.com/fr-ca/name/nm9371635/?ref_=fn_t_1" target="_blank" rel="noopener">IMDb</a>
-    
+  <div class="cv-bridge">
+    <h3 id="bridgeTitle">Envie d'en savoir plus ?</h3>
+    <p id="bridgeText">CV détaillé · compétences techniques · 25 ans de parcours</p>
+    <a href="cv.html" class="btn-cv"><span id="bridgeButton">Consulter le CV</span> →</a>
+  </div>
+</main>
+
+<footer>
+  <p id="footerText">© 2025 Kim Maurice</p>
+  <div class="footer-links">
+    <a href="https://instagram.com/salut_berta_rose/" target="_blank">Instagram</a>
+    <a href="mailto:info@kimmaurice.com">Email</a>
+    <a href="https://linkedin.com/in/kimmaurice" target="_blank">LinkedIn</a>
+    <a href="https://github.com/Bertarose/" target="_blank">Github</a>
+    <a href="https://www.imdb.com/fr-ca/name/nm9371635/" target="_blank">IMDb</a>
+  </div>
+</footer>
+
+<script>
+// ── HOVER DESCRIPTIONS ──────────────────────────────
+document.querySelectorAll('.grid-item[data-desc]').forEach(item => {
+  const el = item.querySelector('.grid-hover-desc');
+  if (el) el.textContent = item.getAttribute('data-desc');
+});
+
+// ── THEME SWITCHER ──────────────────────────────────
+const THEME_KEY = 'km-theme';
+const html = document.documentElement;
+
+function setTheme(t) {
+  html.setAttribute('data-theme', t);
+  localStorage.setItem(THEME_KEY, t);
+  document.querySelectorAll('.theme-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.t === t);
+  });
+}
+
+document.querySelectorAll('.theme-btn').forEach(btn => {
+  btn.addEventListener('click', () => setTheme(btn.dataset.t));
+});
+
+// Load saved theme
+const saved = localStorage.getItem(THEME_KEY) || 'dark';
+setTheme(saved);
+
+// ── LANG TOGGLE ─────────────────────────────────────
+let currentLang = localStorage.getItem('preferredLanguage') || 'fr';
+function applyLanguage(lang) {
+  document.documentElement.lang = lang;
+  document.body.classList.remove('lang-fr','lang-en');
+  document.body.classList.add('lang-'+lang);
+  const btn = document.getElementById('langBtn');
+  if (btn) btn.textContent = lang === 'fr' ? 'EN' : 'FR';
+  document.querySelectorAll('[data-fr][data-en]').forEach(el => {
+    el.innerHTML = el.getAttribute('data-'+lang);
+  });
+}
+document.getElementById('langBtn')?.addEventListener('click', () => {
+  currentLang = currentLang === 'fr' ? 'en' : 'fr';
+  localStorage.setItem('preferredLanguage', currentLang);
+  applyLanguage(currentLang);
+});
+applyLanguage(currentLang);
+</script>
+</body>
+</html>

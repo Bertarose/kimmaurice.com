@@ -1,343 +1,606 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
   <title>Kim Maurice | CV Détaillé & Parcours</title>
   <meta name="description" content="CV détaillé de Kim Maurice : 25 ans d'expérience en UX/UI, E-learning et technologies créatives.">
-
   <link rel="icon" type="image/x-icon" href="img/favicon.ico">
-  <link rel="preconnect" href="https://www.googletagmanager.com">
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="mobile-optimized.css">
-  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;900&family=DM+Mono:wght@400;500&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
   <script defer src="script.js"></script>
-
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-WYM83ME5LK"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-WYM83ME5LK', { anonymize_ip: true });
-  </script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-WYM83ME5LK',{anonymize_ip:true});</script>
+<style>
+/* =====================================================
+   THEMES
+   ===================================================== */
+[data-theme="dark"] {
+  --bg: #0a0a0a; --surface: rgba(255,255,255,0.04); --hover: rgba(255,255,255,0.07);
+  --text: #f2f0eb; --muted: #777; --border: rgba(255,255,255,0.09);
+  --accent: #39ff14; --accent-dim: rgba(57,255,20,0.12);
+  --ticker-bg: #39ff14; --ticker-txt: #000;
+  --btn-bg: #39ff14; --btn-txt: #000; --btn-hover-txt: #39ff14;
+  --heading-font: 'Barlow Condensed', sans-serif; --body-font: 'DM Mono', monospace;
+  --h1-weight: 900; --h1-transform: uppercase; --h1-spacing: 0.04em; --h1-style: normal;
+  --logo-size: 1.1rem; --logo-spacing: 0.22em;
+  --bg-img-opacity: 0.08; --collab-bg: rgba(0,0,0,0.35);
+  --bridge-glow: rgba(57,255,20,0.06); --footer-bg: rgba(0,0,0,0.5);
+  --switcher-bg: rgba(15,15,15,0.96); --switcher-border: rgba(255,255,255,0.1);
+  --switcher-active: #39ff14; --switcher-active-txt: #000;
+  --timeline-line: rgba(57,255,20,0.2); --timeline-dot: rgba(57,255,20,0.4);
+  --timeline-dot-hover: #39ff14; --timeline-dot-glow: rgba(57,255,20,0.6);
+}
+[data-theme="white"] {
+  --bg: #fafaf8; --surface: rgba(0,0,0,0.02); --hover: #f0ede7;
+  --text: #111; --muted: #888; --border: #e0ddd8;
+  --accent: #111; --accent-dim: rgba(0,0,0,0.06);
+  --ticker-bg: #111; --ticker-txt: #fafaf8;
+  --btn-bg: #111; --btn-txt: #fafaf8; --btn-hover-txt: #111;
+  --heading-font: 'Barlow Condensed', sans-serif; --body-font: 'DM Mono', monospace;
+  --h1-weight: 900; --h1-transform: uppercase; --h1-spacing: 0.04em; --h1-style: normal;
+  --logo-size: 1.1rem; --logo-spacing: 0.22em;
+  --bg-img-opacity: 0; --collab-bg: rgba(0,0,0,0.02);
+  --bridge-glow: transparent; --footer-bg: #fafaf8;
+  --switcher-bg: rgba(250,250,248,0.97); --switcher-border: #e0ddd8;
+  --switcher-active: #111; --switcher-active-txt: #fafaf8;
+  --timeline-line: #e0ddd8; --timeline-dot: #ccc;
+  --timeline-dot-hover: #111; --timeline-dot-glow: transparent;
+}
+[data-theme="cream"] {
+  --bg: #f5f0e8; --surface: rgba(0,0,0,0.03); --hover: #ede5d8;
+  --text: #2a1f0f; --muted: #9a8570; --border: #d8cebc;
+  --accent: #c0392b; --accent-dim: rgba(192,57,43,0.1);
+  --ticker-bg: #2a1f0f; --ticker-txt: #f5f0e8;
+  --btn-bg: #2a1f0f; --btn-txt: #f5f0e8; --btn-hover-txt: #2a1f0f;
+  --heading-font: 'Instrument Serif', Georgia, serif; --body-font: 'DM Mono', monospace;
+  --h1-weight: 400; --h1-transform: none; --h1-spacing: -0.02em; --h1-style: italic;
+  --logo-size: 1rem; --logo-spacing: 0.1em;
+  --bg-img-opacity: 0; --collab-bg: rgba(0,0,0,0.03);
+  --bridge-glow: rgba(192,57,43,0.06); --footer-bg: #f5f0e8;
+  --switcher-bg: rgba(245,240,232,0.97); --switcher-border: #d8cebc;
+  --switcher-active: #2a1f0f; --switcher-active-txt: #f5f0e8;
+  --timeline-line: #d8cebc; --timeline-dot: #c8b8a0;
+  --timeline-dot-hover: #c0392b; --timeline-dot-glow: transparent;
+}
+[data-theme="underground"] {
+  --bg: #141414; --surface: rgba(255,255,255,0.03); --hover: rgba(255,45,120,0.1);
+  --text: #f0f0f0; --muted: #777; --border: rgba(255,255,255,0.07);
+  --accent: #ff2d78; --accent-dim: rgba(255,45,120,0.12);
+  --ticker-bg: #ff2d78; --ticker-txt: #fff;
+  --btn-bg: #ff2d78; --btn-txt: #fff; --btn-hover-txt: #ff2d78;
+  --heading-font: 'Barlow Condensed', sans-serif; --body-font: 'DM Mono', monospace;
+  --h1-weight: 900; --h1-transform: uppercase; --h1-spacing: 0.04em; --h1-style: normal;
+  --logo-size: 1.1rem; --logo-spacing: 0.22em;
+  --bg-img-opacity: 0.14; --collab-bg: rgba(0,0,0,0.4);
+  --bridge-glow: rgba(255,45,120,0.08); --footer-bg: rgba(0,0,0,0.5);
+  --switcher-bg: rgba(20,20,20,0.97); --switcher-border: rgba(255,255,255,0.1);
+  --switcher-active: #ff2d78; --switcher-active-txt: #fff;
+  --timeline-line: rgba(255,45,120,0.2); --timeline-dot: rgba(255,45,120,0.4);
+  --timeline-dot-hover: #ff2d78; --timeline-dot-glow: rgba(255,45,120,0.5);
+}
 
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Kim Maurice",
-    "jobTitle": "Designer Multimédia & Technologue Créative",
-    "url": "https://kimmaurice.com/cv.html",
-    "email": "info@kimmaurice.com"
-  }
-  </script>
+/* =====================================================
+   RESET & BASE
+   ===================================================== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+body {
+  font-family: var(--body-font); background: var(--bg); color: var(--text);
+  overflow-x: hidden; padding-bottom: 4rem;
+  transition: background 0.4s ease, color 0.4s ease;
+}
+@media (min-width: 769px) { body { padding-bottom: 0; } }
+::selection { background: var(--accent); color: var(--btn-txt); }
+a { text-decoration: none; color: inherit; }
+
+/* BG */
+.bg-image {
+  position: fixed; inset: 0; z-index: -2;
+  background-image: url("img/img.jpg");
+  background-size: cover; background-position: center;
+  opacity: var(--bg-img-opacity);
+  filter: grayscale(100%) brightness(0.5);
+  transition: opacity 0.4s;
+}
+.bg-gradient { position: fixed; inset: 0; z-index: -1; }
+[data-theme="dark"] .bg-gradient { background: linear-gradient(180deg, rgba(8,8,8,0.7) 0%, rgba(8,8,8,0.5) 50%, rgba(8,8,8,0.9) 100%); }
+[data-theme="underground"] .bg-gradient { background: linear-gradient(180deg, rgba(10,10,10,0.75) 0%, rgba(10,10,10,0.6) 50%, rgba(10,10,10,0.92) 100%); }
+
+/* =====================================================
+   THEME SWITCHER
+   ===================================================== */
+.theme-switcher {
+  position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 5000;
+  display: flex; flex-direction: column; align-items: flex-end; gap: 0.4rem;
+}
+.theme-switcher-label {
+  font-family: var(--body-font); font-size: 0.55rem; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--muted);
+}
+.theme-buttons {
+  display: flex; gap: 0.4rem;
+  background: var(--switcher-bg); border: 1px solid var(--switcher-border);
+  padding: 0.4rem; backdrop-filter: blur(12px); transition: background 0.3s, border-color 0.3s;
+}
+.theme-btn {
+  width: 28px; height: 28px; border-radius: 3px; border: 2px solid transparent;
+  cursor: pointer; transition: transform 0.15s, border-color 0.15s; flex-shrink: 0;
+}
+.theme-btn:hover { transform: scale(1.15); }
+.theme-btn.active { border-color: var(--switcher-active); }
+.theme-btn[data-t="dark"]        { background: linear-gradient(135deg, #0a0a0a 60%, #1a3a1a 100%); box-shadow: inset 0 0 0 5px #39ff14; }
+.theme-btn[data-t="white"]       { background: #fafaf8; box-shadow: inset 0 0 0 1px #ccc; }
+.theme-btn[data-t="cream"]       { background: linear-gradient(135deg, #f5f0e8 50%, #ede5d8 100%); box-shadow: inset 0 0 0 1px #d8cebc; }
+.theme-btn[data-t="underground"] { background: linear-gradient(135deg, #141414 50%, #2a0a14 100%); box-shadow: inset 0 0 0 5px #ff2d78; }
+.theme-btn::after {
+  content: attr(data-label); position: absolute; bottom: 110%; right: 0;
+  font-family: var(--body-font); font-size: 0.55rem; letter-spacing: 0.1em; text-transform: uppercase;
+  background: var(--switcher-bg); color: var(--text); padding: 0.25rem 0.5rem; white-space: nowrap;
+  border: 1px solid var(--switcher-border); opacity: 0; pointer-events: none; transition: opacity 0.15s;
+  position: absolute;
+}
+.theme-btn { position: relative; }
+.theme-btn:hover::after { opacity: 1; }
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+header {
+  position: sticky; top: 0; z-index: 999; padding: 1.1rem 1.5rem;
+  display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+  background: var(--bg); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border);
+  transition: background 0.4s, border-color 0.4s;
+}
+[data-theme="dark"] header,
+[data-theme="underground"] header { background: rgba(10,10,10,0.9); }
+@media (min-width: 768px) { header { padding: 1.4rem 3rem; } }
+
+.logo-text {
+  font-family: var(--heading-font); font-weight: var(--h1-weight); font-style: var(--h1-style);
+  font-size: var(--logo-size); letter-spacing: var(--logo-spacing);
+  text-transform: var(--h1-transform); color: var(--text); transition: color 0.2s; white-space: nowrap;
+}
+.logo-text:hover { color: var(--accent); }
+
+.cv-nav-links { display: none; align-items: center; gap: 0.1rem; flex: 1; justify-content: center; }
+@media (min-width: 769px) { .cv-nav-links { display: flex; } }
+.cv-nav-links a {
+  font-family: var(--heading-font); font-size: 0.9rem; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: var(--h1-transform); color: var(--muted);
+  padding: 0.4rem 0.7rem; transition: color 0.15s; white-space: nowrap;
+}
+.cv-nav-links a:hover { color: var(--accent); }
+
+.header-right { display: flex; align-items: center; flex-shrink: 0; }
+.lang-btn {
+  font-family: var(--body-font); font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em;
+  background: transparent; color: var(--muted); border: 1px solid var(--border);
+  padding: 0.4rem 0.8rem; cursor: pointer; transition: all 0.2s; min-height: 36px;
+}
+.lang-btn:hover { color: var(--accent); border-color: var(--accent); }
+
+/* =====================================================
+   TICKER
+   ===================================================== */
+.ticker-container { overflow: hidden; background: var(--ticker-bg); padding: 0.4rem 0; border-bottom: 1px solid var(--border); transition: background 0.4s; }
+.ticker-wrapper { display: inline-flex; white-space: nowrap; animation: ticker 35s linear infinite; }
+.ticker-item { font-family: var(--body-font); font-size: 0.65rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ticker-txt); padding: 0 4rem; transition: color 0.4s; }
+@keyframes ticker { to { transform: translateX(-50%); } }
+
+/* =====================================================
+   HERO
+   ===================================================== */
+.hero {
+  padding: 3.5rem 1.5rem 3rem; border-bottom: 1px solid var(--border);
+  display: grid; grid-template-columns: 1fr; gap: 2rem;
+  position: relative; z-index: 10; transition: border-color 0.4s;
+}
+@media (min-width: 768px) { .hero { padding: 5rem 3rem 4rem; grid-template-columns: 1fr 1fr; align-items: end; gap: 4rem; } }
+@media (min-width: 1024px) { .hero { grid-template-columns: 2fr 1fr; } }
+
+.hero-eyebrow {
+  font-family: var(--body-font); font-size: 0.62rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 1.25rem; transition: color 0.4s;
+}
+h1.hero-title {
+  font-family: var(--heading-font); font-weight: var(--h1-weight); font-style: var(--h1-style);
+  font-size: clamp(4rem, 11vw, 8rem); line-height: 0.88;
+  letter-spacing: var(--h1-spacing); text-transform: var(--h1-transform);
+  margin-bottom: 0; color: var(--text); transition: font-family 0.3s, color 0.4s;
+}
+.hero-right { display: flex; flex-direction: column; gap: 1.5rem; justify-content: flex-end; }
+.hero-subtitle { font-family: var(--body-font); font-size: 0.72rem; color: var(--muted); line-height: 1.7; transition: color 0.4s; }
+.hero-location { font-family: var(--body-font); font-size: 0.68rem; color: var(--muted); letter-spacing: 0.06em; transition: color 0.4s; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 0.65rem; }
+
+.btn {
+  font-family: var(--body-font); font-size: 0.7rem; font-weight: 500; letter-spacing: 0.08em;
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem;
+  padding: 0.7rem 1.3rem; transition: all 0.2s; cursor: pointer; min-height: 44px;
+}
+.btn-primary { background: var(--btn-bg); color: var(--btn-txt); border: 1px solid var(--btn-bg); }
+.btn-primary:hover { background: transparent; color: var(--btn-hover-txt); }
+.btn-secondary { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+.btn-secondary:hover { border-color: var(--text); color: var(--text); }
+
+/* =====================================================
+   SECTIONS
+   ===================================================== */
+section.cv-section { border-bottom: 1px solid var(--border); position: relative; z-index: 10; transition: border-color 0.4s; }
+
+.section-header {
+  padding: 2rem 1.5rem 1.5rem; border-bottom: 1px solid var(--border);
+  display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; transition: border-color 0.4s;
+}
+@media (min-width: 768px) { .section-header { padding: 2.5rem 3rem 2rem; } }
+.section-header h2 {
+  font-family: var(--heading-font); font-weight: var(--h1-weight); font-style: var(--h1-style);
+  font-size: clamp(2rem, 5vw, 3rem); letter-spacing: var(--h1-spacing);
+  text-transform: var(--h1-transform); color: var(--text); transition: font-family 0.3s, color 0.4s;
+}
+.section-tag { font-family: var(--body-font); font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); transition: color 0.4s; }
+
+/* =====================================================
+   EXPERTISE GRID
+   ===================================================== */
+.expertise-grid {
+  display: grid; grid-template-columns: 1fr 1fr; border-left: 1px solid var(--border);
+  transition: border-color 0.4s;
+}
+@media (min-width: 640px) { .expertise-grid { grid-template-columns: repeat(3,1fr); } }
+
+.expertise-card {
+  padding: 1.5rem 1.25rem; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  transition: background 0.15s, border-color 0.4s;
+}
+.expertise-card:hover { background: var(--hover); }
+.expertise-number { font-family: var(--body-font); font-size: 0.58rem; color: var(--accent); margin-bottom: 0.5rem; transition: color 0.4s; }
+.expertise-card h3 {
+  font-family: var(--heading-font); font-weight: var(--h1-weight); font-style: var(--h1-style);
+  font-size: 1.05rem; letter-spacing: var(--h1-spacing); text-transform: var(--h1-transform);
+  margin-bottom: 0.85rem; color: var(--text); transition: font-family 0.3s, color 0.4s;
+}
+.expertise-card ul { list-style: none; padding: 0; }
+.expertise-card li {
+  font-family: var(--body-font); font-size: 0.68rem; padding: 0.25rem 0 0.25rem 1rem;
+  position: relative; color: var(--muted); line-height: 1.4; transition: color 0.4s;
+}
+.expertise-card li::before { content: "–"; position: absolute; left: 0; color: var(--border); }
+
+/* =====================================================
+   TIMELINE
+   ===================================================== */
+.timeline-grid { padding: 2rem 1.5rem; display: flex; flex-direction: column; }
+@media (min-width: 768px) { .timeline-grid { padding: 2.5rem 3rem; } }
+
+.timeline-item {
+  display: grid; grid-template-columns: 1fr;
+  padding: 2rem 0 2rem 1.5rem;
+  border-left: 1px solid var(--timeline-line);
+  position: relative; transition: border-color 0.2s;
+}
+@media (min-width: 640px) { .timeline-item { grid-template-columns: 90px 1fr; gap: 2rem; padding-left: 0; border-left: none; } }
+.timeline-item:hover { border-left-color: var(--accent); }
+.timeline-item + .timeline-item { border-top: 1px solid var(--border); }
+
+.timeline-item::before {
+  content: ""; position: absolute; left: -4px; top: 2.1rem;
+  width: 7px; height: 7px; background: var(--timeline-dot); border-radius: 50%;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.timeline-item:hover::before { background: var(--timeline-dot-hover); box-shadow: 0 0 8px var(--timeline-dot-glow); }
+@media (min-width: 640px) { .timeline-item::before { display: none; } }
+
+.timeline-date {
+  font-family: var(--body-font); font-size: 0.62rem; color: var(--muted);
+  letter-spacing: 0.06em; line-height: 1.5; margin-bottom: 0.5rem; transition: color 0.4s;
+}
+@media (min-width: 640px) { .timeline-date { margin-bottom: 0; padding-top: 0.15rem; text-align: right; } }
+
+.timeline-content h3 {
+  font-family: var(--heading-font); font-weight: var(--h1-weight); font-style: var(--h1-style);
+  font-size: 1.3rem; letter-spacing: var(--h1-spacing); text-transform: var(--h1-transform);
+  margin-bottom: 0.25rem; color: var(--text); transition: font-family 0.3s, color 0.4s;
+}
+.timeline-content h4 {
+  font-family: var(--body-font); font-size: 0.68rem; color: var(--accent);
+  margin-bottom: 0.9rem; font-weight: 400; letter-spacing: 0.04em; transition: color 0.4s;
+}
+.timeline-list { list-style: none; padding: 0; }
+.timeline-list li {
+  font-family: var(--body-font); font-size: 0.7rem;
+  padding: 0.28rem 0 0.28rem 1rem; position: relative; color: var(--muted); line-height: 1.5; transition: color 0.4s;
+}
+.timeline-list li::before { content: "–"; position: absolute; left: 0; color: var(--border); }
+
+/* =====================================================
+   EXPLORATIONS
+   ===================================================== */
+.exploration-grid { display: grid; grid-template-columns: 1fr; }
+@media (min-width: 640px)  { .exploration-grid { grid-template-columns: repeat(2,1fr); } }
+@media (min-width: 1024px) { .exploration-grid { grid-template-columns: repeat(3,1fr); } }
+
+.exploration-card {
+  padding: 1.75rem 1.5rem; border-top: 1px solid var(--border); transition: background 0.15s, border-color 0.4s;
+}
+@media (min-width: 768px) {
+  .exploration-card { padding: 2rem 3rem; }
+  .exploration-card:nth-child(odd) { border-right: 1px solid var(--border); }
+}
+.exploration-card:hover { background: var(--hover); }
+.exploration-card h4 {
+  font-family: var(--heading-font); font-weight: var(--h1-weight); font-style: var(--h1-style);
+  font-size: 1rem; letter-spacing: var(--h1-spacing); text-transform: var(--h1-transform);
+  margin-bottom: 0.6rem; color: var(--text); transition: font-family 0.3s, color 0.4s;
+}
+.exploration-card p { font-family: var(--body-font); font-size: 0.7rem; color: var(--muted); line-height: 1.7; transition: color 0.4s; }
+
+/* =====================================================
+   CONTACT CTA
+   ===================================================== */
+.footer-cta-section {
+  padding: 5rem 1.5rem; text-align: center; border-bottom: 1px solid var(--border);
+  position: relative; z-index: 10; overflow: hidden; transition: border-color 0.4s;
+}
+@media (min-width: 768px) { .footer-cta-section { padding: 7rem 3rem; } }
+.footer-cta-section::before {
+  content: ''; position: absolute; width: 600px; height: 300px;
+  background: radial-gradient(ellipse, var(--bridge-glow) 0%, transparent 70%);
+  top: 50%; left: 50%; transform: translate(-50%,-50%); pointer-events: none; transition: background 0.4s;
+}
+.footer-cta-section h2 {
+  font-family: var(--heading-font); font-weight: var(--h1-weight); font-style: var(--h1-style);
+  font-size: clamp(2.5rem, 7vw, 5rem); letter-spacing: var(--h1-spacing);
+  text-transform: var(--h1-transform); margin-bottom: 2.5rem; position: relative;
+  color: var(--text); transition: font-family 0.3s, color 0.4s;
+}
+.cta-group { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; margin-bottom: 2.5rem; position: relative; }
+.footer-links-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; margin-bottom: 2rem; position: relative; }
+.footer-link { font-family: var(--body-font); font-size: 0.65rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.15s; }
+.footer-link:hover { color: var(--accent); }
+.footer-copyright { font-family: var(--body-font); font-size: 0.62rem; color: var(--muted); letter-spacing: 0.08em; position: relative; transition: color 0.4s; }
+
+/* =====================================================
+   MOBILE NAV
+   ===================================================== */
+.cv-mobile-nav {
+  display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 2000;
+  background: var(--switcher-bg); backdrop-filter: blur(16px); border-top: 1px solid var(--border);
+  padding: 0.4rem 0.5rem calc(0.4rem + env(safe-area-inset-bottom)); transition: background 0.4s;
+}
+@media (max-width: 768px) { .cv-mobile-nav { display: block; } }
+.cv-mobile-nav-inner { display: flex; justify-content: space-around; }
+.cv-mobile-nav a {
+  font-family: var(--heading-font); font-size: 0.78rem; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: var(--h1-transform); color: var(--muted);
+  display: flex; align-items: center; justify-content: center;
+  padding: 0.6rem 0.4rem; min-height: 44px; flex: 1; text-align: center; transition: color 0.15s;
+}
+.cv-mobile-nav a.active, .cv-mobile-nav a:hover { color: var(--accent); }
+
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+@media (max-width: 480px) { .theme-switcher { bottom: 5rem; right: 1rem; } }
+</style>
 </head>
 
 <body class="lang-fr cv-page">
+<div class="bg-image"></div>
+<div class="bg-gradient"></div>
 
-  <div class="bg-image"></div>
+<!-- THEME SWITCHER -->
+<div class="theme-switcher" role="group" aria-label="Choisir un thème">
+  <div class="theme-switcher-label">thème</div>
+  <div class="theme-buttons">
+    <button class="theme-btn active" data-t="dark"        data-label="Noir · Néon"       title="Noir · Néon"></button>
+    <button class="theme-btn"        data-t="white"       data-label="Blanc · Éditorial"  title="Blanc · Éditorial"></button>
+    <button class="theme-btn"        data-t="cream"       data-label="Crème · Sérif"      title="Crème · Sérif"></button>
+    <button class="theme-btn"        data-t="underground" data-label="Rose · Underground" title="Rose · Underground"></button>
+  </div>
+</div>
 
-  <header>
-    <div class="nav-logo">
-      <a href="index.html" class="logo-text">KIM MAURICE</a>
-    </div>
+<header>
+  <div class="nav-logo"><a href="index.html" class="logo-text">Kim Maurice</a></div>
+  <nav class="cv-nav-links">
+    <a href="index.html#projects" data-fr="← Projets" data-en="← Projects">← Projets</a>
+    <a href="#expertise">Expertise</a>
+    <a href="#experience" data-fr="Parcours" data-en="Experience">Parcours</a>
+    <a href="#explorations">Explorations</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <div class="header-right">
+    <button class="lang-btn" id="langBtn">EN</button>
+  </div>
+</header>
 
-    <nav class="cv-nav-links">
-      <a href="index.html#projects" data-fr="← Voir les Projets" data-en="← View Projects">← Voir les Projets</a>
-      <a href="#expertise" data-fr="Expertise" data-en="Expertise">Expertise</a>
-      <a href="#experience" data-fr="Parcours" data-en="Experience">Parcours</a>
-      <a href="#explorations" data-fr="Explorations" data-en="Explorations">Explorations</a>
-      <a href="#contact" data-fr="Contact" data-en="Contact">Contact</a>
-    </nav>
-       
-    <div class="header-right">
-      <button class="lang-btn" id="langBtn">EN</button>
-    </div>
-  </header>
+<div class="ticker-container">
+  <div class="ticker-wrapper">
+    <span class="ticker-item" data-fr="De nouveaux projets, idées et expérimentations s'y ajoutent au fil du temps." data-en="New projects, ideas and experiments are added over time.">De nouveaux projets, idées et expérimentations s'y ajoutent au fil du temps.</span>
+    <span class="ticker-item">De nouveaux projets, idées et expérimentations s'y ajoutent au fil du temps.</span>
+    <span class="ticker-item">De nouveaux projets, idées et expérimentations s'y ajoutent au fil du temps.</span>
+    <span class="ticker-item">De nouveaux projets, idées et expérimentations s'y ajoutent au fil du temps.</span>
+  </div>
+</div>
 
-  <div class="ticker-container">
-    <div class="ticker-wrapper">
-      <span class="ticker-item" data-fr="De nouveaux projets, idées et expérimentations s'y ajoutent au fil du temps." data-en="New projects, ideas and experiments are added over time.">De nouveaux projets, idées et expérimentations s'y ajoutent au fil du temps.</span>
-      <span class="ticker-item" data-fr="De nouveaux projets, idées et expérimentations s'y ajoutent au fil du temps." data-en="New projects, ideas and experiments are added over time.">De nouveaux projets, idées et expérimentations s'y ajoutent au fil du temps.</span>
+<section class="hero" id="home">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Curriculum Vitae</p>
+    <h1 class="hero-title" data-fr="Kim<br>Maurice" data-en="Kim<br>Maurice">Kim<br>Maurice</h1>
+  </div>
+  <div class="hero-right">
+    <p class="hero-subtitle" data-fr="25 ans de design, code et multimédia. Montréal, Québec." data-en="25 years of design, code and multimedia. Montreal, Quebec.">25 ans de design, code et multimédia. Montréal, Québec.</p>
+    <p class="hero-location">info@kimmaurice.com</p>
+    <div class="hero-actions">
+      <a href="Kim_Maurice_CV_2026_MTL.pdf" target="_blank" class="btn btn-primary"><span data-fr="⬇ Télécharger PDF" data-en="⬇ Download PDF">⬇ Télécharger PDF</span></a>
+      <a href="mailto:info@kimmaurice.com" class="btn btn-secondary"><span data-fr="Écrire" data-en="Contact">Écrire</span></a>
     </div>
   </div>
+</section>
 
-  <section class="hero" id="home">
-    <div class="hero-content">
-      <h1 class="hero-title">
-        <span data-fr="Curriculum Vitae" data-en="Curriculum Vitae">Curriculum Vitae</span>
-      </h1>
-      <p class="hero-subtitle" data-fr="25 ans de design, code et multimédia" data-en="25 years of design, code and multimedia">
-        25 ans de design, code et multimédia
-      </p>
-      <p class="hero-location">
-        <span data-fr="📍 Montréal, Québec" data-en="📍 Montreal, Quebec">📍 Montréal, Québec</span>
-      </p>
-      <div style="margin-top: 2rem;">
-        <a href="Kim_Maurice_CV_2026_MTL.pdf" target="_blank" class="btn btn-secondary">
-          <span data-fr="Télécharger le PDF" data-en="Download PDF">Télécharger le PDF</span>
-        </a>
+<!-- EXPERTISE -->
+<section class="cv-section" id="expertise">
+  <div class="section-header">
+    <h2 data-fr="Expertises" data-en="Expertise">Expertises</h2>
+    <span class="section-tag">06 domaines</span>
+  </div>
+  <div class="expertise-grid">
+    <div class="expertise-card"><div class="expertise-number">01</div><h3 data-fr="Design UX/UI" data-en="UX/UI Design">Design UX/UI</h3><ul><li data-fr="Recherche utilisateur & personas" data-en="User research & personas">Recherche utilisateur & personas</li><li data-fr="Wireframing & prototypage" data-en="Wireframing & prototyping">Wireframing & prototypage</li><li>Design systems</li><li data-fr="Tests utilisateurs" data-en="User testing">Tests utilisateurs</li></ul></div>
+    <div class="expertise-card"><div class="expertise-number">02</div><h3 data-fr="E-Learning & Pédagogie" data-en="E-Learning & Pedagogy">E-Learning & Pédagogie</h3><ul><li>Articulate Storyline & Rise</li><li data-fr="Scénarisation pédagogique" data-en="Instructional design">Scénarisation pédagogique</li><li data-fr="Gamification & interactivité" data-en="Gamification & interactivity">Gamification & interactivité</li><li>LMS (Docebo, Moodle)</li></ul></div>
+    <div class="expertise-card"><div class="expertise-number">03</div><h3 data-fr="Développement Web" data-en="Web Development">Développement Web</h3><ul><li>HTML / CSS / JavaScript</li><li>React & Next.js</li><li>Three.js & WebGL</li><li data-fr="API & intégrations" data-en="API & integrations">API & intégrations</li></ul></div>
+    <div class="expertise-card"><div class="expertise-number">04</div><h3 data-fr="Production Audiovisuelle" data-en="Audiovisual Production">Production Audiovisuelle</h3><ul><li>After Effects & Premiere</li><li data-fr="Motion design & animation" data-en="Motion design & animation">Motion design & animation</li><li data-fr="Design sonore" data-en="Sound design">Design sonore</li><li data-fr="Cinéma / TV" data-en="Film / TV">Cinéma / TV</li></ul></div>
+    <div class="expertise-card"><div class="expertise-number">05</div><h3 data-fr="IA Générative" data-en="Generative AI">IA Générative</h3><ul><li>Stable Diffusion & ComfyUI</li><li>Prompt engineering</li><li data-fr="Workflows créatifs Python" data-en="Creative Python workflows">Workflows créatifs Python</li><li>Midjourney & outils IA</li></ul></div>
+    <div class="expertise-card"><div class="expertise-number">06</div><h3 data-fr="Outils Créatifs" data-en="Creative Tools">Outils Créatifs</h3><ul><li>Adobe Creative Suite</li><li data-fr="Figma & prototypage" data-en="Figma & prototyping">Figma & prototypage</li><li>Ableton Live</li><li>Git / GitHub / Vercel</li></ul></div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="cv-section" id="experience">
+  <div class="section-header">
+    <h2 data-fr="Parcours" data-en="Experience">Parcours</h2>
+    <span class="section-tag">25 ans</span>
+  </div>
+  <div class="timeline-grid">
+    <div class="timeline-item">
+      <div class="timeline-date">2024–2025</div>
+      <div class="timeline-content">
+        <h3 data-fr="Designer Multimédia & Développeuse" data-en="Multimedia Designer & Developer">Designer Multimédia & Développeuse</h3>
+        <h4 data-fr="@ Projets personnels & freelance" data-en="@ Personal projects & freelance">@ Projets personnels & freelance</h4>
+        <ul class="timeline-list">
+          <li data-fr="Instruments musicaux expérimentaux (Latent Organ, Hors Champ)" data-en="Experimental musical instruments (Latent Organ, Hors Champ)">Instruments musicaux expérimentaux (Latent Organ, Hors Champ)</li>
+          <li data-fr="Radio streaming Still FM — Next.js + APIs Mixcloud / Twitch" data-en="Still FM streaming radio — Next.js + Mixcloud / Twitch APIs">Radio streaming Still FM — Next.js + APIs Mixcloud / Twitch</li>
+          <li data-fr="IA générative : Stable Diffusion, ComfyUI, workflows Python" data-en="Generative AI: Stable Diffusion, ComfyUI, Python workflows">IA générative : Stable Diffusion, ComfyUI, workflows Python</li>
+          <li data-fr="Interfaces web modernes et responsive" data-en="Modern responsive web interfaces">Interfaces web modernes et responsive</li>
+        </ul>
       </div>
     </div>
-  </section>
-
-  <section class="expertise" id="expertise">
-    <div class="container">
-      <div class="section-header">
-        <h2 data-fr="Expertises" data-en="Expertise">Expertises</h2>
-      </div>
-
-      <div class="expertise-grid">
-        <div class="expertise-card">
-          <div class="expertise-number">01</div>
-          <h3 data-fr="Design UX/UI" data-en="UX/UI Design">Design UX/UI</h3>
-          <ul>
-            <li data-fr="Recherche utilisateur & personas" data-en="User research & personas">Recherche utilisateur & personas</li>
-            <li data-fr="Wireframing & prototypage" data-en="Wireframing & prototyping">Wireframing & prototypage</li>
-            <li data-fr="Design systems & composants" data-en="Design systems & components">Design systems & composants</li>
-            <li data-fr="Tests utilisateurs" data-en="User testing">Tests utilisateurs</li>
-          </ul>
-        </div>
-
-        <div class="expertise-card">
-          <div class="expertise-number">02</div>
-          <h3 data-fr="E-Learning & Pédagogie" data-en="E-Learning & Pedagogy">E-Learning & Pédagogie</h3>
-          <ul>
-            <li data-fr="Articulate Storyline & Rise" data-en="Articulate Storyline & Rise">Articulate Storyline & Rise</li>
-            <li data-fr="Scénarisation pédagogique" data-en="Instructional design">Scénarisation pédagogique</li>
-            <li data-fr="Gamification & interactivité" data-en="Gamification & interactivity">Gamification & interactivité</li>
-            <li data-fr="Plateformes LMS" data-en="LMS platforms">Plateformes LMS</li>
-          </ul>
-        </div>
-
-        <div class="expertise-card">
-          <div class="expertise-number">03</div>
-          <h3 data-fr="Développement Web" data-en="Web Development">Développement Web</h3>
-          <ul>
-            <li data-fr="HTML/CSS/JavaScript" data-en="HTML/CSS/JavaScript">HTML/CSS/JavaScript</li>
-            <li data-fr="React & Next.js" data-en="React & Next.js">React & Next.js</li>
-            <li data-fr="Three.js & WebGL" data-en="Three.js & WebGL">Three.js & WebGL</li>
-            <li data-fr="API & intégrations" data-en="API & integrations">API & intégrations</li>
-          </ul>
-        </div>
-
-        <div class="expertise-card">
-          <div class="expertise-number">04</div>
-          <h3 data-fr="Production Audiovisuelle" data-en="Audiovisual Production">Production Audiovisuelle</h3>
-          <ul>
-            <li data-fr="After Effects & Premiere" data-en="After Effects & Premiere">After Effects & Premiere</li>
-            <li data-fr="Motion design & animation" data-en="Motion design & animation">Motion design & animation</li>
-            <li data-fr="Design sonore & audio" data-en="Sound design & audio">Design sonore & audio</li>
-            <li data-fr="Production cinéma/TV & design graphique" data-en="Film/TV production & graphic design">Production cinéma/TV & design graphique</li>
-          </ul>
-        </div>
-
-        <div class="expertise-card">
-          <div class="expertise-number">05</div>
-          <h3 data-fr="IA Générative" data-en="Generative AI">IA Générative</h3>
-          <ul>
-            <li data-fr="Stable Diffusion & ComfyUI" data-en="Stable Diffusion & ComfyUI">Stable Diffusion & ComfyUI</li>
-            <li data-fr="Prompt engineering" data-en="Prompt engineering">Prompt engineering</li>
-            <li data-fr="Workflows créatifs Python" data-en="Creative Python workflows">Workflows créatifs Python</li>
-            <li data-fr="Midjourney & outils IA" data-en="Midjourney & AI tools">Midjourney & outils IA</li>
-          </ul>
-        </div>
-
-        <div class="expertise-card">
-          <div class="expertise-number">06</div>
-          <h3 data-fr="Outils Créatifs" data-en="Creative Tools">Outils Créatifs</h3>
-          <ul>
-            <li data-fr="Adobe Creative Suite" data-en="Adobe Creative Suite">Adobe Creative Suite</li>
-            <li data-fr="Figma & prototypage" data-en="Figma & prototyping">Figma & prototypage</li>
-            <li data-fr="Ableton Live & audio" data-en="Ableton Live & audio">Ableton Live & audio</li>
-            <li data-fr="Git & développement" data-en="Git & development">Git & développement</li>
-          </ul>
-        </div>
+    <div class="timeline-item">
+      <div class="timeline-date">2020–2024</div>
+      <div class="timeline-content">
+        <h3 data-fr="Conceptrice Pédagogique & Designer UX" data-en="Instructional Designer & UX Designer">Conceptrice Pédagogique & Designer UX</h3>
+        <h4>@ Technologia / GardaWorld</h4>
+        <ul class="timeline-list">
+          <li data-fr="15+ formations e-learning immersives (Articulate Storyline)" data-en="15+ immersive e-learning courses (Articulate Storyline)">15+ formations e-learning immersives (Articulate Storyline)</li>
+          <li data-fr="Scénarisation pédagogique et gamification — grandes organisations" data-en="Instructional design and gamification — large organizations">Scénarisation pédagogique et gamification — grandes organisations</li>
+          <li data-fr="Supervision d'équipe créative, gestion de budgets" data-en="Creative team supervision, budget management">Supervision d'équipe créative, gestion de budgets</li>
+        </ul>
       </div>
     </div>
-  </section>
-
-  <section class="timeline" id="experience">
-    <div class="container">
-      <div class="section-header">
-        <h2 data-fr="Parcours Professionnel" data-en="Professional Experience">Parcours Professionnel</h2>
-      </div>
-
-      <div class="timeline-grid">
-        <div class="timeline-item">
-          <div class="timeline-date">2024 - 2025</div>
-          <div class="timeline-content">
-            <h3 data-fr="Designer Multimédia & Développeuse" data-en="Multimedia Designer & Developer">Designer Multimédia & Développeuse</h3>
-            <h4 data-fr="@ Projets personnels & freelance" data-en="@ Personal projects & freelance">@ Projets personnels & freelance</h4>
-            <ul class="timeline-list">
-              <li data-fr="Développement d'instruments musicaux expérimentaux (Latent Organ, Hors Champ)" data-en="Development of experimental musical instruments (Latent Organ, Hors Champ)">Développement d'instruments musicaux expérimentaux (Latent Organ, Hors Champ)</li>
-              <li data-fr="Création de radio streaming (Still FM) avec Next.js et APIs" data-en="Creation of streaming radio (Still FM) with Next.js and APIs">Création de radio streaming (Still FM) avec Next.js et APIs</li>
-              <li data-fr="Exploration et maîtrise d'outils d'IA générative (Stable Diffusion, ComfyUI)" data-en="Exploration and mastery of generative AI tools (Stable Diffusion, ComfyUI)">Exploration et maîtrise d'outils d'IA générative (Stable Diffusion, ComfyUI)</li>
-              <li data-fr="Développement d'interfaces web modernes et responsive" data-en="Development of modern and responsive web interfaces">Développement d'interfaces web modernes et responsive</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-date">2020 - 2024</div>
-          <div class="timeline-content">
-            <h3 data-fr="Conceptrice Pédagogique & Designer UX" data-en="Instructional Designer & UX Designer">Conceptrice Pédagogique & Designer UX</h3>
-            <h4 data-fr="@ Technologia / Garda" data-en="@ Technologia / Garda">@ Technologia / Garda</h4>
-            <ul class="timeline-list">
-              <li data-fr="Conception de formations e-learning immersives avec Articulate Storyline" data-en="Design of immersive e-learning courses with Articulate Storyline">Conception de formations e-learning immersives avec Articulate Storyline</li>
-              <li data-fr="Scénarisation pédagogique et gamification pour grandes organisations" data-en="Instructional design and gamification for large organizations">Scénarisation pédagogique et gamification pour grandes organisations</li>
-              <li data-fr="Design d'interfaces et d'expériences utilisateur engageantes" data-en="Design of engaging interfaces and user experiences">Design d'interfaces et d'expériences utilisateur engageantes</li>
-              <li data-fr="Collaboration avec équipes pluridisciplinaires et clients corporatifs" data-en="Collaboration with multidisciplinary teams and corporate clients">Collaboration avec équipes pluridisciplinaires et clients corporatifs</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-date">2017 - 2021</div>
-          <div class="timeline-content">
-            <h3 data-fr="Designer Graphique & Multimédia" data-en="Graphic & Multimedia Designer">Designer Graphique & Multimédia</h3>
-            <h4 data-fr="@ Productions Cinéma & TV" data-en="@ Film & TV Productions">@ Productions Cinéma & TV</h4>
-            <ul class="timeline-list">
-              <li data-fr="Design graphique pour 15+ productions (Bad Blood, Unité 9, etc.)" data-en="Graphic design for 15+ productions (Bad Blood, Unité 9, etc.)">Design graphique pour 15+ productions (Bad Blood, Unité 9, etc.)</li>
-              <li data-fr="Création d'interfaces, props numériques et design graphique" data-en="Creation of interfaces, digital props and graphic design">Création d'interfaces, props numériques et design graphique</li>
-              <li data-fr="Impression d'affiches, tissus, retouche photo et création de faux documents" data-en="Printing posters, fabrics, photo retouching and fake documents creation">Impression d'affiches, tissus, retouche photo et création de faux documents</li>
-              <li data-fr="Motion design et effets visuels avec After Effects" data-en="Motion design and visual effects with After Effects">Motion design et effets visuels avec After Effects</li>
-              <li data-fr="Collaboration avec réalisateurs et directeurs artistiques" data-en="Collaboration with directors and art directors">Collaboration avec réalisateurs et directeurs artistiques</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-date">2000 - 2010</div>
-          <div class="timeline-content">
-            <h3 data-fr="Designer Web & Multimédia" data-en="Web & Multimedia Designer">Designer Web & Multimédia</h3>
-            <h4 data-fr="@ Divers clients & agences" data-en="@ Various clients & agencies">@ Divers clients & agences</h4>
-            <ul class="timeline-list">
-              <li data-fr="Conception et développement de sites web" data-en="Website design and development">Conception et développement de sites web</li>
-              <li data-fr="Identités visuelles et branding" data-en="Visual identities and branding">Identités visuelles et branding</li>
-              <li data-fr="Installations interactives et multimédia" data-en="Interactive and multimedia installations">Installations interactives et multimédia</li>
-              <li data-fr="Production audiovisuelle et montage" data-en="Audiovisual production and editing">Production audiovisuelle et montage</li>
-            </ul>
-          </div>
-        </div>
+    <div class="timeline-item">
+      <div class="timeline-date">2017–2021</div>
+      <div class="timeline-content">
+        <h3 data-fr="Designer Graphique & Multimédia" data-en="Graphic & Multimedia Designer">Designer Graphique & Multimédia</h3>
+        <h4 data-fr="@ Productions Cinéma & TV" data-en="@ Film & TV Productions">@ Productions Cinéma & TV</h4>
+        <ul class="timeline-list">
+          <li data-fr="15+ productions (Bad Blood, Unité 9, Kuessipan, Nadia Butterfly…)" data-en="15+ productions (Bad Blood, Unité 9, Kuessipan, Nadia Butterfly…)">15+ productions (Bad Blood, Unité 9, Kuessipan, Nadia Butterfly…)</li>
+          <li data-fr="Props numériques, interfaces fictives, motion design" data-en="Digital props, fictional interfaces, motion design">Props numériques, interfaces fictives, motion design</li>
+        </ul>
       </div>
     </div>
-  </section>
-
-  <section class="explorations" id="explorations">
-    <div class="container">
-      <div class="section-header">
-        <h2 data-fr="Explorations & Projets Personnels" data-en="Explorations & Personal Projects">Explorations & Projets Personnels</h2>
-      </div>
-
-      <div class="exploration-grid">
-        <div class="exploration-card">
-          <h4 data-fr="DJ & Radio Underground" data-en="DJ & Underground Radio">DJ & Radio Underground</h4>
-          <p data-fr="DJ actif sur Still FM, radio underground de Montréal. Exploration des cultures musicales alternatives." data-en="Active DJ on Still FM, Montreal's underground radio. Exploring alternative music cultures.">DJ actif sur Still FM, radio underground de Montréal. Exploration des cultures musicales alternatives.</p>
-        </div>
-
-        <div class="exploration-card">
-          <h4 data-fr="IA Générative" data-en="Generative AI">IA Générative</h4>
-          <p data-fr="Archive visuelle sur Instagram (@this_is_weird_ai). Expérimentation avec Stable Diffusion et workflows créatifs." data-en="Visual archive on Instagram (@this_is_weird_ai). Experimentation with Stable Diffusion and creative workflows.">Archive visuelle sur Instagram (@this_is_weird_ai). Expérimentation avec Stable Diffusion et workflows créatifs.</p>
-        </div>
-
-        <div class="exploration-card">
-          <h4 data-fr="Instruments Expérimentaux" data-en="Experimental Instruments">Instruments Expérimentaux</h4>
-          <p data-fr="Création d'instruments musicaux hybrides combinant MIDI, IA et visualisations temps réel." data-en="Creation of hybrid musical instruments combining MIDI, AI and real-time visualizations.">Création d'instruments musicaux hybrides combinant MIDI, IA et visualisations temps réel.</p>
-        </div>
-
-        <div class="exploration-card">
-          <h4 data-fr="Développement Web" data-en="Web Development">Développement Web</h4>
-          <p data-fr="Projets open-source sur GitHub. Exploration de Three.js, Next.js et technologies immersives." data-en="Open-source projects on GitHub. Exploring Three.js, Next.js and immersive technologies.">Projets open-source sur GitHub. Exploration de Three.js, Next.js et technologies immersives.</p>
-        </div>
-
-        <div class="exploration-card">
-          <h4 data-fr="Design Sonore" data-en="Sound Design">Design Sonore</h4>
-          <p data-fr="Installations audio-visuelles et générateurs de signatures sonores uniques." data-en="Audio-visual installations and unique sonic signature generators.">Installations audio-visuelles et générateurs de signatures sonores uniques.</p>
-        </div>
-
-        <div class="exploration-card">
-          <h4 data-fr="Apprentissage Continu" data-en="Continuous Learning">Apprentissage Continu</h4>
-          <p data-fr="Exploration active de nouvelles technologies : WebGL, IA, IoT, VR/AR et cultures numériques." data-en="Active exploration of new technologies: WebGL, AI, IoT, VR/AR and digital cultures.">Exploration active de nouvelles technologies : WebGL, IA, IoT, VR/AR et cultures numériques.</p>
-        </div>
+    <div class="timeline-item">
+      <div class="timeline-date">2000–2016</div>
+      <div class="timeline-content">
+        <h3 data-fr="Designer Web & Multimédia" data-en="Web & Multimedia Designer">Designer Web & Multimédia</h3>
+        <h4>@ NURUN, LOTO-QUÉBEC, MARVVY, OXFAM</h4>
+        <ul class="timeline-list">
+          <li data-fr="Expériences web interactives & identités visuelles" data-en="Interactive web experiences & visual identities">Expériences web interactives & identités visuelles</li>
+          <li data-fr="Conseil stratégique en technologies (OXFAM)" data-en="Strategic technology consulting (OXFAM)">Conseil stratégique en technologies (OXFAM)</li>
+          <li data-fr="Installations interactives et production audiovisuelle" data-en="Interactive installations and audiovisual production">Installations interactives et production audiovisuelle</li>
+        </ul>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="footer-cta" id="contact">
-    <div class="container">
-      <div class="footer-content">
-        <h2 data-fr="Travaillons ensemble!" data-en="Let's work together!">Travaillons ensemble!</h2>
+<!-- EXPLORATIONS -->
+<section class="cv-section" id="explorations">
+  <div class="section-header">
+    <h2 data-fr="Explorations" data-en="Explorations">Explorations</h2>
+    <span class="section-tag" data-fr="Projets personnels" data-en="Personal projects">Projets personnels</span>
+  </div>
+  <div class="exploration-grid">
+    <div class="exploration-card"><h4 data-fr="DJ & Radio Underground" data-en="DJ & Underground Radio">DJ & Radio Underground</h4><p data-fr="DJ actif sur Still FM, radio underground montréalaise." data-en="Active DJ on Still FM, Montreal's underground radio.">DJ actif sur Still FM, radio underground montréalaise.</p></div>
+    <div class="exploration-card"><h4 data-fr="IA Générative" data-en="Generative AI">IA Générative</h4><p data-fr="Stable Diffusion, ComfyUI, workflows créatifs Python." data-en="Stable Diffusion, ComfyUI, creative Python workflows.">Stable Diffusion, ComfyUI, workflows créatifs Python.</p></div>
+    <div class="exploration-card"><h4 data-fr="Instruments Expérimentaux" data-en="Experimental Instruments">Instruments Expérimentaux</h4><p data-fr="MIDI, IA générative, visualisations 3D temps réel." data-en="MIDI, generative AI, real-time 3D visualizations.">MIDI, IA générative, visualisations 3D temps réel.</p></div>
+    <div class="exploration-card"><h4 data-fr="Développement Web" data-en="Web Development">Développement Web</h4><p data-fr="Three.js, Next.js, WebGL, technologies immersives." data-en="Three.js, Next.js, WebGL, immersive technologies.">Three.js, Next.js, WebGL, technologies immersives.</p></div>
+    <div class="exploration-card"><h4 data-fr="Design Sonore" data-en="Sound Design">Design Sonore</h4><p data-fr="Installations audio-visuelles pour artistes et événements." data-en="Audio-visual installations for artists and events.">Installations audio-visuelles pour artistes et événements.</p></div>
+    <div class="exploration-card"><h4 data-fr="Apprentissage Continu" data-en="Continuous Learning">Apprentissage Continu</h4><p data-fr="WebGL, IA, IoT, VR/AR, cultures numériques." data-en="WebGL, AI, IoT, VR/AR, digital cultures.">WebGL, IA, IoT, VR/AR, cultures numériques.</p></div>
+  </div>
+</section>
 
-        <div class="cta-group">
-          <a href="/cdn-cgi/l/email-protection#b2dbdcd4ddf2d9dbdfdfd3c7c0dbd1d79cd1dddf" class="btn btn-primary">
-            <span data-fr="Écrivez-moi un e-mail" data-en="Send me an email">Écrivez-moi un e-mail</span> →
-          </a>
-          <a href="Kim_Maurice_CV_2026_MTL.pdf" target="_blank" class="btn btn-secondary">
-            <span data-fr="Télécharger mon CV" data-en="Download my CV">Télécharger mon CV</span>
-          </a>
-        </div>
+<!-- CONTACT -->
+<section class="footer-cta-section" id="contact">
+  <h2 data-fr="Travaillons<br>ensemble." data-en="Let's work<br>together.">Travaillons<br>ensemble.</h2>
+  <div class="cta-group">
+    <a href="mailto:info@kimmaurice.com" class="btn btn-primary"><span data-fr="✉ Écrire un message" data-en="✉ Send a message">✉ Écrire un message</span></a>
+    <a href="Kim_Maurice_CV_2026_MTL.pdf" target="_blank" class="btn btn-secondary"><span data-fr="⬇ Télécharger le CV" data-en="⬇ Download CV">⬇ Télécharger le CV</span></a>
+  </div>
+  <div class="footer-links-row">
+    <a href="mailto:info@kimmaurice.com" class="footer-link">Email</a>
+    <a href="https://linkedin.com/in/kimmaurice" target="_blank" class="footer-link">LinkedIn</a>
+    <a href="https://github.com/Bertarose/" target="_blank" class="footer-link">Github</a>
+    <a href="https://www.imdb.com/name/nm9371635/" target="_blank" class="footer-link">IMDb</a>
+  </div>
+  <p class="footer-copyright">© 2025 Kim Maurice</p>
+</section>
 
-        <div class="footer-links">
-          <a href="mailto:info@kimmaurice.com" class="footer-link">Email</a>
-          <a href="https://linkedin.com/in/kimmaurice" target="_blank" class="footer-link">LinkedIn</a>
-          <a href="https://github.com/Bertarose/" target="_blank" class="footer-link">Github</a>
-          <a href="https://www.imdb.com/name/nm9371635/" target="_blank" class="footer-link">IMDb</a>
-        </div>
-
-        <p class="footer-copyright">
-          © 2025 Kim Maurice
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-<!-- Menu Mobile Navigation -->
 <nav class="cv-mobile-nav" aria-label="Navigation mobile">
   <div class="cv-mobile-nav-inner">
-    <a href="index.html#projects" data-section="projects">
-      <span data-fr="Projets" data-en="Projects">Projets</span>
-    </a>
-    <a href="#expertise" data-section="expertise">
-      <span data-fr="Expert." data-en="Expert.">Expert.</span>
-    </a>
-    <a href="#experience" data-section="experience">
-      <span data-fr="Parcours" data-en="Exp.">Parcours</span>
-    </a>
-    <a href="#explorations" data-section="explorations">
-      <span data-fr="Explor." data-en="Explor.">Explor.</span>
-    </a>
-    <a href="#contact" data-section="contact">
-      <span data-fr="Contact" data-en="Contact">Contact</span>
-    </a>
+    <a href="index.html#projects" data-section="projects"><span data-fr="Projets" data-en="Projects">Projets</span></a>
+    <a href="#expertise" data-section="expertise"><span>Expert.</span></a>
+    <a href="#experience" data-section="experience"><span data-fr="Parcours" data-en="Exp.">Parcours</span></a>
+    <a href="#explorations" data-section="explorations"><span>Explor.</span></a>
+    <a href="#contact" data-section="contact"><span>Contact</span></a>
   </div>
 </nav>
 
 <script>
+// ── THEME SWITCHER (shared with index.html via localStorage) ──
+const THEME_KEY = 'km-theme';
+const html = document.documentElement;
+
+function setTheme(t) {
+  html.setAttribute('data-theme', t);
+  localStorage.setItem(THEME_KEY, t);
+  document.querySelectorAll('.theme-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.t === t);
+  });
+}
+document.querySelectorAll('.theme-btn').forEach(btn => {
+  btn.addEventListener('click', () => setTheme(btn.dataset.t));
+});
+setTheme(localStorage.getItem(THEME_KEY) || 'dark');
+
+// ── LANG ──
+let currentLang = localStorage.getItem('preferredLanguage') || 'fr';
+function applyLanguage(lang) {
+  document.documentElement.lang = lang;
+  document.body.classList.remove('lang-fr','lang-en');
+  document.body.classList.add('lang-'+lang);
+  const btn = document.getElementById('langBtn');
+  if (btn) btn.textContent = lang === 'fr' ? 'EN' : 'FR';
+  document.querySelectorAll('[data-fr][data-en]').forEach(el => { el.innerHTML = el.getAttribute('data-'+lang); });
+}
+document.getElementById('langBtn')?.addEventListener('click', () => {
+  currentLang = currentLang === 'fr' ? 'en' : 'fr';
+  localStorage.setItem('preferredLanguage', currentLang);
+  applyLanguage(currentLang);
+});
+applyLanguage(currentLang);
+
+// ── MOBILE NAV ACTIVE STATE ──
 (function() {
   if (window.innerWidth > 768) return;
   const navLinks = document.querySelectorAll('.cv-mobile-nav a');
   const sections = document.querySelectorAll('section[id]');
-  function setActiveLink() {
+  function setActive() {
     let current = '';
-    sections.forEach(section => {
-      const sectionTop = section.offsetTop;
-      if (window.pageYOffset >= sectionTop - 200) {
-        current = section.getAttribute('id');
-      }
-    });
-    navLinks.forEach(link => {
-      link.classList.remove('active');
-      if (link.getAttribute('data-section') === current) {
-        link.classList.add('active');
-      }
-    });
+    sections.forEach(s => { if (window.pageYOffset >= s.offsetTop - 200) current = s.id; });
+    navLinks.forEach(l => { l.classList.toggle('active', l.dataset.section === current); });
   }
-  window.addEventListener('scroll', setActiveLink);
-  setActiveLink();
+  window.addEventListener('scroll', setActive, { passive: true });
+  setActive();
 })();
 </script>
 </body>
