@@ -3,593 +3,608 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kim Maurice | Designer Multimédia · Technologue créative · Montréal</title>
-  <meta name="description" content="Designer multimédia et technologue créative basée à Montréal.">
+  <title>Kim Maurice | Technologue créative · Montréal</title>
+  <meta name="description" content="Kim Maurice — technologue créative, designer multimédia, chercheuse en IA. Espace d'expérimentation à Montréal.">
   <link rel="icon" type="image/x-icon" href="img/favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <script defer src="script.js"></script>
+  <link rel="stylesheet" href="style.css">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-WYM83ME5LK"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-WYM83ME5LK',{anonymize_ip:true});</script>
 <style>
 /* ══════════════════════════════════════════════
-   THÈME DARK — inchangé, cinématique
+   INDEX — PAGE D'ACCUEIL & LABO
    ══════════════════════════════════════════════ */
-[data-theme="dark"] {
-  --bg: #08061a;
-  --text: #fff;
-  --muted: rgba(255,255,255,0.52);
-  --border: rgba(255,255,255,0.13);
-  --border2: rgba(255,255,255,0.26);
-  --accent: #fff;
-  --hover-bg: rgba(255,255,255,0.07);
-  --grid-hover-bg: rgba(255,255,255,0.09);
-  --grid-hover-txt: #fff;
-  --badge-bg: rgba(255,255,255,0.12);
-  --badge-txt: rgba(255,255,255,0.9);
-  --ticker-bg: rgba(8,6,26,0.85);
-  --ticker-txt: rgba(255,255,255,0.55);
-  --btn-bg: transparent;
-  --btn-txt: #fff;
-  --btn-brd: rgba(255,255,255,0.52);
-  --btn-hover-bg: #fff;
-  --btn-hover-txt: #000;
-  --collab-bg: rgba(255,255,255,0.025);
-  --footer-bg: #05040f;
-  --img-filter: brightness(0.7) saturate(1.1);
-  --hero-overlay: linear-gradient(160deg, rgba(45,12,100,.55) 0%, rgba(15,6,60,.68) 40%, rgba(4,2,18,.86) 100%);
-  --hf: 'Barlow Condensed', sans-serif;
-  --bf: 'DM Mono', monospace;
-  --hw: 400; --hcase: none; --hls: -0.01em;
+
+/* ── CANVAS BACKGROUND ── */
+#bgCanvas {
+  position:fixed; inset:0; z-index:0;
+  pointer-events:none;
+  opacity:1;
+  transition:opacity .4s;
+}
+[data-theme="light"] #bgCanvas { opacity:.18; }
+
+body { position:relative; }
+main { position:relative; z-index:1; }
+
+/* ── HERO — plein écran, texte seul ── */
+.hero {
+  min-height:100vh;
+  display:flex; flex-direction:column; justify-content:flex-end;
+  padding:0 1.5rem 4.5rem;
+  position:relative;
+}
+@media(min-width:768px) { .hero { padding:0 2.5rem 6rem; } }
+
+.hero-eyebrow {
+  font-family:var(--bf); font-size:.58rem; letter-spacing:.26em;
+  text-transform:uppercase; color:var(--muted); margin-bottom:1.6rem;
+  display:flex; align-items:center; gap:.8rem;
+}
+.hero-eyebrow::before {
+  content:''; display:block; width:28px; height:1px; background:var(--muted);
 }
 
-/* ══════════════════════════════════════════════
-   THÈME LIGHT — ivoire éditorial, tout lisible
-   ══════════════════════════════════════════════ */
-[data-theme="light"] {
-  --bg: #f4f2ed;
-  --text: #111;
-  --muted: #595959;
-  --border: #d2cec6;
-  --border2: #aeaaa0;
-  --accent: #111;
-  --hover-bg: #e5e2db;
-  --grid-hover-bg: #111;
-  --grid-hover-txt: #f4f2ed;
-  --badge-bg: rgba(0,0,0,.09);
-  --badge-txt: #111;
-  --ticker-bg: #111;
-  --ticker-txt: #f4f2ed;
-  --btn-bg: #111;
-  --btn-txt: #f4f2ed;
-  --btn-brd: #111;
-  --btn-hover-bg: transparent;
-  --btn-hover-txt: #111;
-  --collab-bg: rgba(0,0,0,.03);
-  --footer-bg: #eae8e2;
-  --img-filter: grayscale(100%) contrast(1.06) brightness(0.86);
-  --hero-overlay: none;
-  --hf: 'Barlow Condensed', sans-serif;
-  --bf: 'DM Mono', monospace;
-  --hw: 900; --hcase: uppercase; --hls: 0.04em;
+h1.hero-title {
+  font-family:var(--hf); font-weight:var(--hw);
+  font-size:clamp(3.5rem,10vw,11rem);
+  line-height:.86; letter-spacing:var(--hls); text-transform:var(--hcase);
+  color:var(--text); margin-bottom:2.5rem;
 }
+[data-theme="dark"]  h1.hero-title { font-weight:300; color:#fff; }
+[data-theme="light"] h1.hero-title { font-weight:900; }
 
-/* ══════════════════════════════════════════════
-   RESET
-   ══════════════════════════════════════════════ */
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;}
-body{font-family:var(--bf);background:var(--bg);color:var(--text);overflow-x:hidden;transition:background .4s,color .3s;}
-::selection{background:var(--accent);color:var(--btn-hover-txt);}
-a{text-decoration:none;color:inherit;}
-img{display:block;max-width:100%;}
+.hero-bottom {
+  display:flex; align-items:flex-end;
+  justify-content:space-between; flex-wrap:wrap; gap:1.5rem;
+}
+.hero-sub {
+  font-family:var(--bf); font-size:.68rem; color:var(--muted);
+  line-height:1.9; max-width:40ch;
+}
+[data-theme="light"] .hero-sub { color:#444; }
+.hero-actions { display:flex; flex-wrap:wrap; gap:.6rem; align-items:center; }
 
-/* ══════════════════════════════════════════════
-   HEADER
-   ══════════════════════════════════════════════ */
-header{
-  position:fixed;top:0;left:0;right:0;z-index:999;
-  height:56px;padding:0 1.25rem;
-  display:flex;justify-content:space-between;align-items:center;
-  transition:background .4s,border-color .4s;
-}
-@media(min-width:768px){header{height:64px;padding:0 2.5rem;}}
-
-[data-theme="dark"]  header{background:transparent;border-bottom:none;}
-[data-theme="light"] header{background:var(--bg);border-bottom:1px solid var(--border);}
-
-.logo-link{display:flex;align-items:center;}
-.logo-img{width:34px;height:34px;object-fit:contain;transition:opacity .2s;}
-.logo-link:hover .logo-img{opacity:.6;}
-
-.header-right{display:flex;align-items:center;gap:.45rem;}
-
-.theme-toggle{
-  width:34px;height:34px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:.82rem;background:transparent;
-  color:var(--muted);border:1px solid var(--border);
-  cursor:pointer;transition:color .2s,border-color .2s;
-}
-.theme-toggle:hover{color:var(--text);border-color:var(--border2);}
-
-.lang-btn{
-  height:34px;padding:0 .6rem;
-  font-family:var(--bf);font-size:.56rem;font-weight:500;letter-spacing:.14em;
-  background:transparent;color:var(--muted);border:1px solid var(--border);
-  cursor:pointer;transition:color .2s,border-color .2s;
-}
-.lang-btn:hover{color:var(--text);border-color:var(--border2);}
-
-.cv-link-header{
-  height:34px;padding:0 .85rem;
-  font-family:var(--bf);font-size:.56rem;font-weight:500;letter-spacing:.12em;
-  display:inline-flex;align-items:center;gap:.3rem;
-  color:var(--text);border:1px solid var(--border2);transition:all .2s;
-}
-[data-theme="dark"]  .cv-link-header:hover{background:#fff;color:#000;border-color:#fff;}
-[data-theme="light"] .cv-link-header:hover{background:#111;color:#f4f2ed;border-color:#111;}
-
-/* ══════════════════════════════════════════════
-   TICKER — light only
-   ══════════════════════════════════════════════ */
-.ticker-container{
-  overflow:hidden;
-  background:var(--ticker-bg);border-bottom:1px solid var(--border);
-  margin-top:56px;transition:background .4s;
-}
-@media(min-width:768px){.ticker-container{margin-top:64px;}}
-[data-theme="dark"]  .ticker-container{display:none;}
-[data-theme="light"] .ticker-container{display:block;padding:.36rem 0;}
-
-.ticker-wrapper{display:inline-flex;white-space:nowrap;animation:ticker 50s linear infinite;}
-.ticker-item{font-family:var(--bf);font-size:.56rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--ticker-txt);padding:0 4rem;}
-@keyframes ticker{to{transform:translateX(-50%);}}
-
-/* ══════════════════════════════════════════════
-   HERO — DARK (plein écran cinéma, inchangé)
-   ══════════════════════════════════════════════ */
-[data-theme="dark"] .hero{
-  position:relative;min-height:100vh;margin-top:0;overflow:hidden;display:block;
-}
-[data-theme="dark"] .hero-image{position:absolute;inset:0;z-index:0;}
-[data-theme="dark"] .hero-image img{
-  width:100%;height:100%;object-fit:cover;object-position:center 20%;
-  filter:var(--img-filter);transition:filter .8s;
-}
-[data-theme="dark"] .hero-image::after{
-  content:'';position:absolute;inset:0;z-index:1;
-  background:var(--hero-overlay);
-}
-[data-theme="dark"] .hero:hover .hero-image img{filter:brightness(.8) saturate(1.15);}
-[data-theme="dark"] .hero-text{
-  position:absolute;bottom:0;left:0;z-index:2;
-  padding:0 1.5rem 5rem;max-width:700px;
-  display:flex;flex-direction:column;justify-content:flex-end;
-}
-@media(min-width:768px){[data-theme="dark"] .hero-text{padding:0 2.5rem 6.5rem;}}
-
-/* nav bar bas — dark only */
-.hero-nav-bar{display:none;}
-[data-theme="dark"] .hero-nav-bar{
-  display:flex;position:absolute;bottom:0;left:0;right:0;z-index:3;
-  border-top:1px solid rgba(255,255,255,.13);
-}
-.hero-nav-bar a{
-  flex:1;padding:.9rem 1rem;
-  font-family:var(--bf);font-size:.57rem;letter-spacing:.07em;
-  color:rgba(255,255,255,.6);
-  border-right:1px solid rgba(255,255,255,.13);
-  background:rgba(8,6,26,.62);backdrop-filter:blur(10px);
-  transition:background .15s,color .15s;white-space:nowrap;display:flex;align-items:center;
-}
-.hero-nav-bar a:last-child{border-right:none;}
-.hero-nav-bar a:hover{background:rgba(255,255,255,.1);color:#fff;}
-@media(max-width:640px){
-  .hero-nav-bar a:nth-child(n+4){display:none;}
-  .hero-nav-bar a{font-size:.52rem;padding:.75rem .55rem;}
-}
-
-/* ══════════════════════════════════════════════
-   HERO — LIGHT (split 50/50, lisible)
-   ══════════════════════════════════════════════ */
-[data-theme="light"] .hero{
-  display:grid;grid-template-columns:1fr;
-  margin-top:0;border-bottom:1px solid var(--border);overflow:hidden;
-}
-@media(min-width:768px){
-  [data-theme="light"] .hero{
-    grid-template-columns:52% 48%;
-    min-height:calc(90vh - 64px);
-  }
-}
-[data-theme="light"] .hero-image{
-  position:relative;overflow:hidden;
-  min-height:56vw;background:#ccc;
-  /* ordre: image en 1er sur mobile */
-  order:0;
-}
-@media(min-width:768px){[data-theme="light"] .hero-image{min-height:auto;}}
-[data-theme="light"] .hero-image img{
-  width:100%;height:100%;
-  object-fit:cover;object-position:center 18%;
-  filter:var(--img-filter);transition:filter .6s;
-}
-[data-theme="light"] .hero:hover .hero-image img{filter:grayscale(70%) contrast(1.06) brightness(.82);}
-
-[data-theme="light"] .hero-text{
-  padding:2.5rem 1.75rem 3rem;
-  display:flex;flex-direction:column;justify-content:flex-end;
-  background:var(--bg);border-left:1px solid var(--border);
-  order:1;
-}
-@media(min-width:768px){[data-theme="light"] .hero-text{padding:3.5rem 3rem 4rem;}}
-
-/* ══════════════════════════════════════════════
-   HERO TYPO (partagé)
-   ══════════════════════════════════════════════ */
-.hero-kicker{
-  font-family:var(--bf);font-size:.57rem;letter-spacing:.22em;
-  text-transform:uppercase;color:var(--muted);margin-bottom:1.2rem;
-}
-h1{
-  font-family:var(--hf);font-weight:var(--hw);
-  letter-spacing:var(--hls);text-transform:var(--hcase);
-  color:var(--text);line-height:.9;margin-bottom:1.4rem;transition:color .3s;
-}
-[data-theme="dark"]  h1{font-size:clamp(2.6rem,5.5vw,5.5rem);font-weight:400;color:#fff;text-shadow:0 2px 32px rgba(0,0,0,.4);}
-[data-theme="light"] h1{font-size:clamp(2.8rem,5.8vw,5rem);font-weight:900;color:#111;}
-
-.hero-desc{
-  font-family:var(--bf);font-size:.7rem;line-height:1.8;
-  color:var(--muted);max-width:38ch;margin-bottom:2rem;
-}
-[data-theme="light"] .hero-desc{color:#444;font-size:.72rem;}
-
-.hero-cta{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;}
-
-.btn-primary{
-  font-family:var(--bf);font-size:.62rem;font-weight:500;
-  letter-spacing:.1em;text-transform:uppercase;
-  display:inline-flex;align-items:center;gap:.4rem;
-  padding:.72rem 1.5rem;min-height:42px;
-  background:var(--btn-bg);color:var(--btn-txt);border:1px solid var(--btn-brd);
+.btn-hero {
+  font-family:var(--bf); font-size:.62rem; font-weight:500;
+  letter-spacing:.1em; text-transform:uppercase;
+  display:inline-flex; align-items:center; gap:.4rem;
+  padding:.72rem 1.5rem; min-height:42px;
+  background:var(--btn-bg); color:var(--btn-txt); border:1px solid var(--btn-brd);
   transition:all .2s;
 }
-.btn-primary:hover{background:var(--btn-hover-bg);color:var(--btn-hover-txt);}
-[data-theme="dark"] .btn-primary{
-  font-family:'Barlow Condensed',sans-serif;font-size:.95rem;
-  font-weight:400;text-transform:none;letter-spacing:.02em;
-  border-color:rgba(255,255,255,.55);
+[data-theme="dark"] .btn-hero {
+  font-family:'Barlow Condensed', sans-serif; font-size:.95rem;
+  font-weight:400; text-transform:none; letter-spacing:.02em;
+  border-color:rgba(255,255,255,.45);
 }
-[data-theme="dark"]  .btn-primary:hover{background:#fff;color:#000;border-color:#fff;}
-[data-theme="light"] .btn-primary:hover{background:transparent;color:#111;}
+.btn-hero:hover { background:var(--btn-hover-bg); color:var(--btn-hover-txt); }
+[data-theme="dark"]  .btn-hero:hover { background:#fff; color:#000; border-color:#fff; }
+[data-theme="light"] .btn-hero:hover { background:transparent; color:#111; }
 
-.btn-ghost{
-  font-family:var(--bf);font-size:.62rem;color:var(--muted);
-  letter-spacing:.08em;padding:.72rem 0;min-height:42px;
-  display:inline-flex;align-items:center;transition:color .15s;
+.btn-ghost-hero {
+  font-family:var(--bf); font-size:.62rem; color:var(--muted);
+  letter-spacing:.08em; padding:.72rem 0; min-height:42px;
+  display:inline-flex; align-items:center; transition:color .15s;
 }
-.btn-ghost:hover{color:var(--text);}
+.btn-ghost-hero:hover { color:var(--text); }
+
+/* scroll hint */
+.scroll-hint {
+  position:absolute; right:1.5rem; bottom:5rem;
+  font-family:var(--bf); font-size:.52rem; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--muted);
+  writing-mode:vertical-lr;
+  animation:nudge 2.5s ease-in-out infinite;
+}
+@media(min-width:768px) { .scroll-hint { right:2.5rem; } }
+@keyframes nudge {
+  0%,100% { transform:translateY(0); opacity:.6; }
+  50% { transform:translateY(8px); opacity:1; }
+}
 
 /* ══════════════════════════════════════════════
-   PAGE CONTENT
+   STATUS BAR
    ══════════════════════════════════════════════ */
-.section-label{padding:2.5rem 1.5rem 0;display:flex;align-items:center;gap:1.2rem;}
-@media(min-width:768px){.section-label{padding:3rem 2.5rem 0;}}
-.section-label-text{font-family:var(--bf);font-size:.55rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
-.section-label-line{flex:1;height:1px;background:var(--border);}
+.status-bar {
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  display:grid; grid-template-columns:1fr;
+}
+@media(min-width:640px)  { .status-bar { grid-template-columns:repeat(3,1fr); } }
+@media(min-width:1024px) { .status-bar { grid-template-columns:repeat(4,1fr); } }
+
+.status-item {
+  padding:1.2rem 1.5rem;
+  border-bottom:1px solid var(--border);
+  transition:background .15s;
+}
+@media(min-width:640px) {
+  .status-item {
+    border-right:1px solid var(--border);
+    border-bottom:none;
+  }
+  .status-item:last-child { border-right:none; }
+}
+@media(min-width:1024px) { .status-item:nth-child(4) { border-right:none; } }
+.status-item:hover { background:var(--hover-bg); }
+
+.status-label {
+  font-family:var(--bf); font-size:.5rem; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--muted); margin-bottom:.45rem;
+}
+.status-value {
+  font-family:var(--hf); font-weight:var(--hw); font-size:1.1rem;
+  letter-spacing:var(--hls); text-transform:var(--hcase); color:var(--text);
+  line-height:1.1;
+}
+[data-theme="dark"] .status-value { font-weight:400; font-size:1.15rem; }
+.status-dot {
+  display:inline-block; width:6px; height:6px; border-radius:50%;
+  background:#4caf50; margin-right:.4rem;
+  animation:pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity:1; transform:scale(1); }
+  50% { opacity:.5; transform:scale(.85); }
+}
 
 /* ══════════════════════════════════════════════
-   GRID PROJETS
+   LABO SECTION
    ══════════════════════════════════════════════ */
-.projects-grid{
-  margin-top:1.5rem;display:grid;grid-template-columns:1fr 1fr;
-  border-top:1px solid var(--border);border-left:1px solid var(--border);
-}
-@media(min-width:640px) {.projects-grid{grid-template-columns:repeat(3,1fr);}}
-@media(min-width:1100px){.projects-grid{grid-template-columns:repeat(4,1fr);}}
+.labo-section { padding:4rem 0; border-bottom:1px solid var(--border); }
 
-.grid-item{
-  border-right:1px solid var(--border);border-bottom:1px solid var(--border);
-  padding:1.2rem;display:block;color:var(--text);
-  transition:background .18s,color .18s;min-height:105px;background:transparent;
-  position:relative;overflow:hidden;
+.labo-intro {
+  padding:0 1.5rem 2.5rem;
+  display:flex; align-items:flex-start; gap:3rem; flex-wrap:wrap;
 }
-.grid-item:hover{background:var(--grid-hover-bg);color:var(--grid-hover-txt);}
-.grid-item:hover .grid-number{color:var(--accent);}
-.grid-item:hover .grid-hover-desc{max-height:80px;opacity:.75;margin-top:.5rem;}
-.grid-item.disabled-project{opacity:.3;cursor:default;pointer-events:none;}
-
-.grid-number{font-family:var(--bf);font-size:.5rem;color:var(--muted);margin-bottom:.4rem;letter-spacing:.1em;transition:color .18s;}
-.grid-title{
-  font-family:var(--hf);font-weight:var(--hw);
-  font-size:clamp(.9rem,1.8vw,1.1rem);line-height:1.05;margin-bottom:.55rem;
-  letter-spacing:var(--hls);text-transform:var(--hcase);
+@media(min-width:768px) { .labo-intro { padding:0 2.5rem 2.5rem; } }
+.labo-intro-text {
+  font-family:var(--bf); font-size:.68rem; color:var(--muted);
+  line-height:1.9; max-width:52ch; flex:1;
 }
-[data-theme="dark"]  .grid-title{font-weight:500;font-size:clamp(1rem,2vw,1.15rem);}
-[data-theme="light"] .grid-title{font-size:clamp(.88rem,1.6vw,1rem);}
+[data-theme="light"] .labo-intro-text { color:#444; }
 
-.grid-meta{display:flex;flex-wrap:wrap;gap:.22rem;}
-.grid-meta span{font-family:var(--bf);font-size:.49rem;letter-spacing:.04em;padding:.11rem .38rem;background:rgba(128,128,128,.09);color:var(--muted);}
-.grid-meta .badge-complete{background:var(--badge-bg)!important;color:var(--badge-txt)!important;font-weight:500;}
-.grid-meta .badge-dev{background:rgba(180,140,0,.1)!important;}
-[data-theme="dark"]  .grid-meta .badge-dev{color:#c8a800!important;}
-[data-theme="light"] .grid-meta .badge-dev{color:#7a5c00!important;}
-.grid-hover-desc{max-height:0;overflow:hidden;font-family:var(--bf);font-size:.58rem;line-height:1.55;transition:max-height .22s,opacity .22s,margin-top .22s;opacity:0;}
-[data-theme="light"] .grid-item:hover .grid-hover-desc{color:var(--bg);}
-@media(hover:none){.grid-hover-desc{max-height:none!important;opacity:.65!important;margin-top:.4rem!important;}}
+/* experiment cards */
+.experiments-grid {
+  display:grid; grid-template-columns:1fr;
+  border-top:1px solid var(--border); border-left:1px solid var(--border);
+}
+@media(min-width:640px)  { .experiments-grid { grid-template-columns:repeat(2,1fr); } }
+@media(min-width:1024px) { .experiments-grid { grid-template-columns:repeat(3,1fr); } }
+
+.experiment-card {
+  border-right:1px solid var(--border); border-bottom:1px solid var(--border);
+  padding:2rem 1.75rem; display:flex; flex-direction:column; gap:1.1rem;
+  transition:background .18s; position:relative; overflow:hidden;
+}
+.experiment-card:hover { background:var(--hover-bg); }
+.experiment-card.featured {
+  grid-column:1/-1;
+  display:grid; grid-template-columns:1fr;
+  background:var(--hover-bg);
+}
+@media(min-width:768px) { .experiment-card.featured { grid-template-columns:1fr 1fr; gap:3rem; align-items:start; } }
+
+.exp-num {
+  font-family:var(--bf); font-size:.5rem; letter-spacing:.15em;
+  color:var(--muted); font-weight:500;
+}
+.exp-title {
+  font-family:var(--hf); font-weight:var(--hw); font-size:clamp(1.2rem,2.5vw,1.6rem);
+  letter-spacing:var(--hls); text-transform:var(--hcase); color:var(--text); line-height:1.05;
+}
+[data-theme="dark"] .exp-title { font-weight:400; }
+.exp-desc {
+  font-family:var(--bf); font-size:.65rem; color:var(--muted); line-height:1.8; flex:1;
+}
+[data-theme="light"] .exp-desc { color:#444; }
+.exp-tags { display:flex; flex-wrap:wrap; gap:.22rem; }
+.exp-tag {
+  font-family:var(--bf); font-size:.49rem; letter-spacing:.06em;
+  padding:.11rem .42rem; background:rgba(128,128,128,.09); color:var(--muted);
+}
+.exp-link {
+  font-family:var(--bf); font-size:.58rem; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--muted);
+  display:inline-flex; align-items:center; gap:.4rem;
+  border-bottom:1px solid var(--border); padding-bottom:.2rem;
+  transition:color .15s, border-color .15s; align-self:flex-start;
+}
+.exp-link:hover { color:var(--text); border-color:var(--text); }
+
+/* ── LIVE VISUALIZER block inside featured card ── */
+.exp-visual {
+  width:100%; aspect-ratio:16/9; position:relative; overflow:hidden;
+  background:rgba(0,0,0,.2); border:1px solid var(--border);
+}
+[data-theme="light"] .exp-visual { background:rgba(0,0,0,.04); }
+#miniCanvas { width:100%; height:100%; display:block; }
 
 /* ══════════════════════════════════════════════
-   COLLABS
+   ABOUT STRIP
    ══════════════════════════════════════════════ */
-.collab-item{border-top:1px solid var(--border);}
-.collab-summary{list-style:none;cursor:pointer;padding:1rem 1.5rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap;transition:background .15s;}
-@media(min-width:768px){.collab-summary{padding:1rem 2.5rem;}}
-.collab-summary:hover{background:var(--hover-bg);}
-.collab-summary::-webkit-details-marker{display:none;}
-.project-number{font-family:var(--bf);font-size:.5rem;color:var(--muted);min-width:20px;}
-.project-title{font-family:var(--hf);font-weight:var(--hw);font-size:1rem;letter-spacing:var(--hls);text-transform:var(--hcase);flex:1;}
-.project-meta{display:flex;flex-wrap:wrap;gap:.22rem;}
-.project-meta span{font-family:var(--bf);font-size:.49rem;padding:.11rem .38rem;background:rgba(128,128,128,.09);color:var(--muted);}
-.project-meta .badge-complete{background:var(--badge-bg)!important;color:var(--badge-txt)!important;font-weight:500;}
-.collab-panel{padding:2rem 1.5rem;border-top:1px solid var(--border);display:grid;grid-template-columns:1fr;gap:2rem;background:var(--collab-bg);}
-@media(min-width:640px) {.collab-panel{grid-template-columns:repeat(2,1fr);padding:2rem 2.5rem;}}
-@media(min-width:1024px){.collab-panel{grid-template-columns:repeat(4,1fr);}}
-.collab-group h3{font-family:var(--bf);font-size:.54rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:.8rem;font-weight:500;}
-.collab-group ul{list-style:none;}
-.collab-group li{font-family:var(--bf);font-size:.63rem;padding:.2rem 0 .2rem .9rem;position:relative;color:var(--muted);line-height:1.5;}
-.collab-group li::before{content:"–";position:absolute;left:0;color:var(--border2);}
-.collab-group a{border-bottom:1px solid var(--border);transition:color .15s,border-color .15s;}
-.collab-group a:hover{color:var(--text);border-color:var(--text);}
-.two-col{column-count:1;}
-@media(min-width:640px){.two-col{column-count:2;column-gap:1.5rem;}}
-.collab-note{font-size:.57rem;color:var(--muted);font-style:italic;margin-top:.75rem;grid-column:1/-1;}
-
-/* ══════════════════════════════════════════════
-   CV BRIDGE
-   ══════════════════════════════════════════════ */
-.cv-bridge{padding:6rem 1.5rem;text-align:center;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
-@media(min-width:768px){.cv-bridge{padding:9rem 2.5rem;}}
-.cv-bridge h3{font-family:var(--hf);font-weight:var(--hw);font-size:clamp(2.2rem,6vw,5.5rem);letter-spacing:var(--hls);text-transform:var(--hcase);margin-bottom:1rem;color:var(--text);}
-[data-theme="dark"] .cv-bridge h3{font-weight:400;}
-.cv-bridge p{font-family:var(--bf);font-size:.66rem;color:var(--muted);margin-bottom:2.5rem;line-height:1.9;letter-spacing:.06em;}
-[data-theme="light"] .cv-bridge p{color:#444;}
-.btn-cv{font-family:var(--bf);font-size:.64rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 2.25rem;background:var(--btn-bg);color:var(--btn-txt);border:1px solid var(--btn-brd);transition:all .2s;}
-.btn-cv:hover{background:var(--btn-hover-bg);color:var(--btn-hover-txt);}
-[data-theme="dark"]  .btn-cv{border-color:rgba(255,255,255,.42);}
-[data-theme="dark"]  .btn-cv:hover{background:#fff;color:#000;}
-[data-theme="light"] .btn-cv:hover{background:transparent;color:#111;}
-
-/* ══════════════════════════════════════════════
-   FOOTER
-   ══════════════════════════════════════════════ */
-footer{padding:1.5rem;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:1rem;align-items:center;background:var(--footer-bg);transition:background .4s;}
-@media(min-width:768px){footer{flex-direction:row;justify-content:space-between;padding:1.5rem 2.5rem;}}
-footer p{font-family:var(--bf);font-size:.57rem;color:var(--muted);letter-spacing:.1em;}
-.footer-links{display:flex;flex-wrap:wrap;justify-content:center;gap:1.5rem;}
-.footer-links a{font-family:var(--bf);font-size:.57rem;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;transition:color .15s;}
-.footer-links a:hover{color:var(--text);}
-
-/* stickers */
-.floating-layer{position:fixed;inset:0;z-index:12;pointer-events:none;}
-.sticker{position:fixed;width:clamp(110px,14vw,220px);pointer-events:auto;cursor:grab;user-select:none;touch-action:none;box-shadow:0 4px 20px rgba(0,0,0,.3);}
-.sticker:active{cursor:grabbing;}
-
-a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;}}
-@media(max-width:380px){
-  [data-theme="dark"]  h1{font-size:2.2rem!important;}
-  [data-theme="light"] h1{font-size:2.3rem!important;}
+.about-strip {
+  padding:5rem 1.5rem 5rem;
+  display:grid; grid-template-columns:1fr; gap:3rem;
+  border-bottom:1px solid var(--border);
 }
+@media(min-width:768px) {
+  .about-strip { padding:6rem 2.5rem; grid-template-columns:1fr 2fr; gap:6rem; align-items:start; }
+}
+.about-label {
+  font-family:var(--bf); font-size:.55rem; letter-spacing:.22em;
+  text-transform:uppercase; color:var(--muted); padding-top:.3rem;
+}
+.about-text {
+  font-family:var(--bf); font-size:.72rem; color:var(--muted);
+  line-height:2.0; max-width:60ch;
+}
+[data-theme="light"] .about-text { color:#444; }
+.about-text strong { color:var(--text); font-weight:500; }
+.about-link {
+  display:inline-block; margin-top:2rem;
+  font-family:var(--bf); font-size:.6rem; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--muted); border-bottom:1px solid var(--border);
+  padding-bottom:.2rem; transition:color .15s, border-color .15s;
+}
+.about-link:hover { color:var(--text); border-color:var(--text); }
+
+/* ══════════════════════════════════════════════
+   CONTACT STRIP
+   ══════════════════════════════════════════════ */
+.contact-strip {
+  padding:5rem 1.5rem;
+  display:flex; flex-direction:column; gap:2rem; align-items:flex-start;
+}
+@media(min-width:768px) {
+  .contact-strip {
+    flex-direction:row; align-items:center; justify-content:space-between;
+    padding:5rem 2.5rem;
+  }
+}
+.contact-strip h2 {
+  font-family:var(--hf); font-weight:var(--hw);
+  font-size:clamp(2.5rem,7vw,6rem); letter-spacing:var(--hls);
+  text-transform:var(--hcase); color:var(--text); line-height:.88;
+}
+[data-theme="dark"] .contact-strip h2 { font-weight:300; }
+.contact-strip-right { display:flex; flex-direction:column; gap:1rem; align-items:flex-start; }
+@media(min-width:768px) { .contact-strip-right { align-items:flex-end; } }
+.contact-email {
+  font-family:var(--hf); font-weight:var(--hw); font-size:1.2rem;
+  letter-spacing:.04em; color:var(--muted); text-transform:lowercase;
+  transition:color .15s;
+}
+[data-theme="dark"] .contact-email { font-weight:400; }
+.contact-email:hover { color:var(--text); }
+.contact-social { display:flex; gap:1.2rem; flex-wrap:wrap; }
+.contact-social a {
+  font-family:var(--bf); font-size:.57rem; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--muted); transition:color .15s;
+}
+.contact-social a:hover { color:var(--text); }
+
+/* footer */
+footer {
+  padding:1.2rem 1.5rem;
+  border-top:1px solid var(--border);
+  display:flex; flex-direction:column; gap:.8rem; align-items:center;
+  background:var(--footer-bg); transition:background .4s;
+}
+@media(min-width:768px) { footer { flex-direction:row; justify-content:space-between; padding:1.2rem 2.5rem; } }
+footer p { font-family:var(--bf); font-size:.55rem; color:var(--muted); letter-spacing:.1em; }
+.footer-nav { display:flex; gap:1.5rem; flex-wrap:wrap; }
+.footer-nav a { font-family:var(--bf); font-size:.55rem; color:var(--muted); letter-spacing:.1em; text-transform:uppercase; transition:color .15s; }
+.footer-nav a:hover { color:var(--text); }
 </style>
 </head>
-<body class="home lang-fr">
+<body class="lang-fr">
+
+<!-- Background canvas -->
+<canvas id="bgCanvas"></canvas>
 
 <header>
   <a href="index.html" class="logo-link" aria-label="Kim Maurice — accueil">
     <img src="img/logo-light.png" alt="Kim Maurice" class="logo-img" id="logoImg" width="34" height="34">
   </a>
+  <nav class="header-center">
+    <a href="#labo" data-fr="Labo" data-en="Lab">Labo</a>
+    <a href="#about" data-fr="À propos" data-en="About">À propos</a>
+    <a href="cv.html" data-fr="CV & Portfolio" data-en="CV & Portfolio">CV & Portfolio</a>
+    <a href="#contact">Contact</a>
+  </nav>
   <div class="header-right">
     <button class="theme-toggle" id="themeToggle" aria-label="Changer le thème">☀</button>
     <button class="lang-btn" id="langBtn">EN</button>
-    <a href="cv.html" class="cv-link-header"><span data-fr="CV" data-en="CV">CV</span> ↗</a>
+    <a href="cv.html" class="btn-header" data-fr="CV →" data-en="CV →">CV →</a>
   </div>
 </header>
 
-<div class="ticker-container">
-  <div class="ticker-wrapper">
-    <span class="ticker-item" data-fr="Technologue créative · Design · Code · Son · Vidéo · Montréal · 25 ans d'expérience" data-en="Creative Technologist · Design · Code · Sound · Video · Montreal · 25 years experience">Technologue créative · Design · Code · Son · Vidéo · Montréal · 25 ans d'expérience</span>
-    <span class="ticker-item" data-fr="Technologue créative · Design · Code · Son · Vidéo · Montréal · 25 ans d'expérience" data-en="Creative Technologist · Design · Code · Sound · Video · Montreal · 25 years experience">Technologue créative · Design · Code · Son · Vidéo · Montréal · 25 ans d'expérience</span>
-    <span class="ticker-item" data-fr="Technologue créative · Design · Code · Son · Vidéo · Montréal · 25 ans d'expérience" data-en="Creative Technologist · Design · Code · Sound · Video · Montreal · 25 years experience">Technologue créative · Design · Code · Son · Vidéo · Montréal · 25 ans d'expérience</span>
-    <span class="ticker-item" data-fr="Technologue créative · Design · Code · Son · Vidéo · Montréal · 25 ans d'expérience" data-en="Creative Technologist · Design · Code · Sound · Video · Montreal · 25 years experience">Technologue créative · Design · Code · Son · Vidéo · Montréal · 25 ans d'expérience</span>
-  </div>
-</div>
-
 <main>
+
+  <!-- ── HERO ── -->
   <section class="hero">
-    <div class="hero-image">
-      <img src="img/img.jpg" alt="Kim Maurice — technologue créative, Montréal" loading="eager">
+    <p class="hero-eyebrow" data-fr="Tiohtiá:ke · Montréal · technologue créative" data-en="Tiohtiá:ke · Montréal · creative technologist">Tiohtiá:ke · Montréal · technologue créative</p>
+    <h1 class="hero-title" data-fr="Kim<br>Maurice" data-en="Kim<br>Maurice">Kim<br>Maurice</h1>
+    <div class="hero-bottom">
+      <p class="hero-sub" data-fr="Design, code, son, image. Un espace de recherche-création entre les disciplines — où la technologie devient un médium expressif." data-en="Design, code, sound, image. A research-creation space between disciplines — where technology becomes an expressive medium.">Design, code, son, image. Un espace de recherche-création entre les disciplines — où la technologie devient un médium expressif.</p>
+      <div class="hero-actions">
+        <a href="cv.html" class="btn-hero" data-fr="Voir le portfolio" data-en="View portfolio">Voir le portfolio</a>
+        <a href="#labo" class="btn-ghost-hero" data-fr="↓ expérimentations" data-en="↓ experiments">↓ expérimentations</a>
+      </div>
     </div>
-    <nav class="hero-nav-bar">
-      <a href="cv.html"            data-fr="CV & Parcours"  data-en="CV & Experience">CV & Parcours</a>
-      <a href="#projects"          data-fr="Projets"        data-en="Projects">Projets</a>
-      <a href="cv.html#expertise"  data-fr="Expertises"     data-en="Expertise">Expertises</a>
-      <a href="cv.html#explorations" data-fr="Explorations" data-en="Explorations">Explorations</a>
-      <a href="mailto:info@kimmaurice.com">Contact</a>
-    </nav>
-    <div class="hero-text">
-      <p class="hero-kicker" data-fr="Montréal · 25 ans d'expérience" data-en="Montréal · 25 years experience">Montréal · 25 ans d'expérience</p>
-      <h1 data-fr="Technologue<br>créative —<br>multimédia,<br>son & image" data-en="Creative<br>Technologist —<br>multimedia,<br>sound & image">Technologue<br>créative —<br>multimédia,<br>son & image</h1>
-      <p class="hero-desc" data-fr="Design, code, son, vidéo. De la conception stratégique au déploiement technique." data-en="Design, code, sound, video. From strategic concept to technical deployment.">Design, code, son, vidéo. De la conception stratégique au déploiement technique.</p>
-      <div class="hero-cta">
-        <a href="cv.html" class="btn-primary"><span data-fr="Voir le CV complet" data-en="View full CV">Voir le CV complet</span> →</a>
-        <a href="#projects" class="btn-ghost" data-fr="↓ projets" data-en="↓ projects">↓ projets</a>
+    <span class="scroll-hint" aria-hidden="true">scroll</span>
+  </section>
+
+  <!-- ── STATUS BAR ── -->
+  <div class="status-bar">
+    <div class="status-item">
+      <div class="status-label" data-fr="Statut" data-en="Status">Statut</div>
+      <div class="status-value"><span class="status-dot"></span><span data-fr="Disponible" data-en="Available">Disponible</span></div>
+    </div>
+    <div class="status-item">
+      <div class="status-label" data-fr="Spécialité" data-en="Specialty">Spécialité</div>
+      <div class="status-value" data-fr="Multimédia · IA · Son" data-en="Multimedia · AI · Sound">Multimédia · IA · Son</div>
+    </div>
+    <div class="status-item">
+      <div class="status-label" data-fr="Base" data-en="Base">Base</div>
+      <div class="status-value">Montréal, QC</div>
+    </div>
+    <div class="status-item">
+      <div class="status-label" data-fr="Expérience" data-en="Experience">Expérience</div>
+      <div class="status-value" data-fr="25 ans" data-en="25 years">25 ans</div>
+    </div>
+  </div>
+
+  <!-- ── LABO ── -->
+  <section class="labo-section" id="labo">
+
+    <div class="section-label">
+      <span class="section-label-text" data-fr="Espace d'expérimentation" data-en="Experimentation space">Espace d'expérimentation</span>
+      <div class="section-label-line"></div>
+    </div>
+
+    <div class="labo-intro" style="padding-top:2rem;">
+      <p class="labo-intro-text" data-fr="Prototypes, recherches, instruments et interfaces expérimentales. Ce labo documente une pratique en mouvement — des idées en chantier, des outils qui se cherchent une forme." data-en="Prototypes, research, experimental instruments and interfaces. This lab documents a practice in motion — ideas under construction, tools searching for their form.">Prototypes, recherches, instruments et interfaces expérimentales. Ce labo documente une pratique en mouvement — des idées en chantier, des outils qui se cherchent une forme.</p>
+    </div>
+
+    <div class="experiments-grid">
+
+      <!-- FEATURED: Hors Champ -->
+      <div class="experiment-card featured" id="horsChamp">
+        <div>
+          <div class="exp-num">EXP — 001 · 2026</div>
+          <h2 class="exp-title" data-fr="Hors Champ" data-en="Hors Champ">Hors Champ</h2>
+          <p class="exp-desc" data-fr="Instrument de performance musicale en temps réel. IA générative (Gemini), synthèse audio, looper multi-pistes, contrôle MIDI. Une exploration de la co-création humain–machine dans un contexte de performance live." data-en="Real-time musical performance instrument. Generative AI (Gemini), audio synthesis, multi-track looper, MIDI control. An exploration of human–machine co-creation in a live performance context.">Instrument de performance musicale en temps réel. IA générative (Gemini), synthèse audio, looper multi-pistes, contrôle MIDI. Une exploration de la co-création humain–machine dans un contexte de performance live.</p>
+          <div class="exp-tags">
+            <span class="exp-tag">Gemini API</span>
+            <span class="exp-tag">MIDI</span>
+            <span class="exp-tag">Web Audio</span>
+            <span class="exp-tag">Three.js</span>
+            <span class="exp-tag">Performance</span>
+          </div>
+          <span class="exp-link" style="margin-top:.5rem; pointer-events:none; opacity:.45;" data-fr="🚧 En développement" data-en="🚧 In development">🚧 En développement</span>
+        </div>
+        <div class="exp-visual">
+          <canvas id="miniCanvas"></canvas>
+        </div>
+      </div>
+
+      <!-- Latent Organ -->
+      <a href="https://prototype-psi-liart.vercel.app/" target="_blank" class="experiment-card">
+        <div class="exp-num">EXP — 002 · 2025</div>
+        <h2 class="exp-title" data-fr="Latent Organ" data-en="Latent Organ">Latent Organ</h2>
+        <p class="exp-desc" data-fr="Instrument musical expérimental combinant clavier MIDI, traitement neural RAVE/DDSP et visualisation 3D en temps réel via WebSocket." data-en="Experimental musical instrument combining MIDI keyboard, RAVE/DDSP neural processing and real-time 3D visualization via WebSocket.">Instrument musical expérimental combinant clavier MIDI, traitement neural RAVE/DDSP et visualisation 3D en temps réel via WebSocket.</p>
+        <div class="exp-tags">
+          <span class="exp-tag">MIDI</span>
+          <span class="exp-tag">Three.js</span>
+          <span class="exp-tag">RAVE</span>
+          <span class="exp-tag">Python</span>
+        </div>
+        <span class="exp-link" data-fr="Voir le prototype →" data-en="View prototype →">Voir le prototype →</span>
+      </a>
+
+      <!-- Still FM -->
+      <a href="https://still-fm.vercel.app/" target="_blank" class="experiment-card">
+        <div class="exp-num">EXP — 003 · 2026</div>
+        <h2 class="exp-title" data-fr="Still FM" data-en="Still FM">Still FM</h2>
+        <p class="exp-desc" data-fr="Radio underground montréalaise. Player persistant, intégration Mixcloud, PWA, page residents. Architecture Next.js pensée pour l'écoute en continu." data-en="Montreal underground radio. Persistent player, Mixcloud integration, PWA, residents page. Next.js architecture designed for continuous listening.">Radio underground montréalaise. Player persistant, intégration Mixcloud, PWA, page residents. Architecture Next.js pensée pour l'écoute en continu.</p>
+        <div class="exp-tags">
+          <span class="exp-tag">Next.js</span>
+          <span class="exp-tag">Mixcloud API</span>
+          <span class="exp-tag">PWA</span>
+        </div>
+        <span class="exp-link" data-fr="Écouter →" data-en="Listen →">Écouter →</span>
+      </a>
+
+      <!-- Obscura -->
+      <a href="https://obscura-liart.vercel.app/" target="_blank" class="experiment-card">
+        <div class="exp-num">EXP — 004 · 2025</div>
+        <h2 class="exp-title" data-fr="Obscura" data-en="Obscura">Obscura</h2>
+        <p class="exp-desc" data-fr="Archive cinématographique dédiée aux films étranges, dérangeants, visionnaires. Interface sombre, navigation obsessionnelle." data-en="Cinematographic archive dedicated to strange, disturbing, visionary films. Dark interface, obsessive navigation.">Archive cinématographique dédiée aux films étranges, dérangeants, visionnaires. Interface sombre, navigation obsessionnelle.</p>
+        <div class="exp-tags">
+          <span class="exp-tag">HTML</span>
+          <span class="exp-tag">CSS</span>
+          <span class="exp-tag">JavaScript</span>
+        </div>
+        <span class="exp-link" data-fr="Explorer →" data-en="Explore →">Explorer →</span>
+      </a>
+
+      <!-- AI Generative Art -->
+      <a href="https://www.instagram.com/salut_berta_rose/" target="_blank" class="experiment-card">
+        <div class="exp-num">EXP — 005 · ongoing</div>
+        <h2 class="exp-title" data-fr="@thisisweirdai" data-en="@thisisweirdai">@thisisweirdai</h2>
+        <p class="exp-desc" data-fr="Exploration continue de l'IA générative — Stable Diffusion, ComfyUI, workflows créatifs. Esthétique halftone, duotone, écran de sérigraphie." data-en="Ongoing exploration of generative AI — Stable Diffusion, ComfyUI, creative workflows. Halftone, duotone, screen-printing aesthetics.">Exploration continue de l'IA générative — Stable Diffusion, ComfyUI, workflows créatifs. Esthétique halftone, duotone, écran de sérigraphie.</p>
+        <div class="exp-tags">
+          <span class="exp-tag">Stable Diffusion</span>
+          <span class="exp-tag">ComfyUI</span>
+          <span class="exp-tag">Python</span>
+        </div>
+        <span class="exp-link" data-fr="Instagram →" data-en="Instagram →">Instagram →</span>
+      </a>
+
+      <!-- Prochain projet -->
+      <div class="experiment-card" style="opacity:.45; cursor:default;">
+        <div class="exp-num">EXP — 006 · à venir</div>
+        <h2 class="exp-title" data-fr="Terrarium Numérique" data-en="Digital Terrarium">Terrarium Numérique</h2>
+        <p class="exp-desc" data-fr="Installation immersive : terrarium physique connecté à un monde VR/AR forestier. IoT, WebGL, capteurs biométriques." data-en="Immersive installation: physical terrarium connected to a VR/AR forest world. IoT, WebGL, biometric sensors.">Installation immersive : terrarium physique connecté à un monde VR/AR forestier. IoT, WebGL, capteurs biométriques.</p>
+        <div class="exp-tags">
+          <span class="exp-tag">WebGL</span>
+          <span class="exp-tag">IoT</span>
+          <span class="exp-tag">VR/AR</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── À PROPOS ── -->
+  <section class="about-strip" id="about">
+    <div class="about-label" data-fr="À propos" data-en="About">À propos</div>
+    <div>
+      <p class="about-text" data-fr="Je suis <strong>Kim Maurice</strong>, technologue créative basée à <strong>Montréal</strong>. Depuis 25 ans, je navigue entre le design, le code, le son et l'image — d'abord dans les grandes agences interactives (NURUN, Loto-Québec), puis sur les plateaux de tournage québécois, en e-learning, et maintenant dans la recherche-création avec l'IA générative.<br><br>Je cherche des contextes où la technologie sert une vision artistique ou pédagogique. J'aime collaborer avec des artistes, des centres culturels, des institutions éducatives. Je crois que les outils les plus intéressants sont ceux qu'on n'a pas encore fini d'inventer." data-en="I'm <strong>Kim Maurice</strong>, a creative technologist based in <strong>Montréal</strong>. For 25 years I've navigated between design, code, sound and image — first in large interactive agencies (NURUN, Loto-Québec), then on Quebec film sets, in e-learning, and now in research-creation with generative AI.<br><br>I seek contexts where technology serves an artistic or pedagogical vision. I love collaborating with artists, cultural centres, educational institutions. I believe the most interesting tools are the ones we haven't finished inventing yet.">Je suis <strong>Kim Maurice</strong>, technologue créative basée à <strong>Montréal</strong>. Depuis 25 ans, je navigue entre le design, le code, le son et l'image — d'abord dans les grandes agences interactives (NURUN, Loto-Québec), puis sur les plateaux de tournage québécois, en e-learning, et maintenant dans la recherche-création avec l'IA générative.<br><br>Je cherche des contextes où la technologie sert une vision artistique ou pédagogique. J'aime collaborer avec des artistes, des centres culturels, des institutions éducatives. Je crois que les outils les plus intéressants sont ceux qu'on n'a pas encore fini d'inventer.</p>
+      <a href="cv.html" class="about-link" data-fr="Voir le CV complet & portfolio →" data-en="View full CV & portfolio →">Voir le CV complet & portfolio →</a>
+    </div>
+  </section>
+
+  <!-- ── CONTACT ── -->
+  <section class="contact-strip" id="contact">
+    <h2 data-fr="Travaillons<br>ensemble." data-en="Let's work<br>together.">Travaillons<br>ensemble.</h2>
+    <div class="contact-strip-right">
+      <a href="mailto:info@kimmaurice.com" class="contact-email">info@kimmaurice.com</a>
+      <div class="contact-social">
+        <a href="https://linkedin.com/in/kimmaurice" target="_blank">LinkedIn</a>
+        <a href="https://github.com/Bertarose/" target="_blank">Github</a>
+        <a href="https://instagram.com/salut_berta_rose/" target="_blank">Instagram</a>
+        <a href="https://www.imdb.com/name/nm9371635/" target="_blank">IMDb</a>
       </div>
     </div>
   </section>
 
-  <div class="section-label">
-    <span class="section-label-text" data-fr="Projets sélectionnés" data-en="Selected projects">Projets sélectionnés</span>
-    <div class="section-label-line"></div>
-  </div>
-
-  <div class="projects-grid" id="projects">
-    <div class="grid-item disabled-project" data-desc="Application de performance musicale en temps réel : IA générative (Gemini), synthèse audio, looper multi-pistes et contrôle MIDI.">
-      <div class="grid-number">01</div><h2 class="grid-title">Hors Champ</h2>
-      <div class="grid-meta"><span class="badge-dev">🚧 2026</span><span>Gemini · MIDI</span></div>
-      <div class="grid-hover-desc"></div>
-    </div>
-    <a href="http://www.atelier-lac.com/" target="_blank" class="grid-item" data-desc="Site web conçu pour l'artiste — conception visuelle, architecture de contenu, Cargo Collective.">
-      <div class="grid-number">02</div><h2 class="grid-title">Atelier LAC</h2>
-      <div class="grid-meta"><span class="badge-complete">Site web</span><span>Cargo</span></div>
-      <div class="grid-hover-desc"></div>
-    </a>
-    <a href="https://prototype-psi-liart.vercel.app/" target="_blank" class="grid-item" data-desc="Instrument musical expérimental : clavier MIDI, IA générative et visualisation 3D temps réel.">
-      <div class="grid-number">03</div><h2 class="grid-title">Latent Organ</h2>
-      <div class="grid-meta"><span class="badge-complete">✓ Prototype</span><span>AI · Three.js · MIDI</span></div>
-      <div class="grid-hover-desc"></div>
-    </a>
-    <a href="https://insula.care/" target="_blank" class="grid-item" data-desc="Site web réalisé pour Insula Care — identité visuelle, structure éditoriale, Cargo Collective.">
-      <div class="grid-number">04</div><h2 class="grid-title">Insula Care</h2>
-      <div class="grid-meta"><span class="badge-complete">Site web</span><span>Cargo</span></div>
-      <div class="grid-hover-desc"></div>
-    </a>
-    <a href="https://still-fm.vercel.app/" target="_blank" class="grid-item" data-desc="Radio streaming underground avec intégration Twitch et Mixcloud. Player audio personnalisé en Next.js.">
-      <div class="grid-number">05</div><h2 class="grid-title">Still FM</h2>
-      <div class="grid-meta"><span class="badge-dev">🚧 2026</span><span>Next.js · Mixcloud</span></div>
-      <div class="grid-hover-desc"></div>
-    </a>
-    <a href="https://www.imdb.com/name/nm9371635/" target="_blank" class="grid-item" data-desc="Designer graphique sur 15+ productions québécoises (Bad Blood, Unité 9, Kuessipan…). Props numériques, interfaces fictives.">
-      <div class="grid-number">06</div><h2 class="grid-title">Cinéma / TV</h2>
-      <div class="grid-meta"><span class="badge-complete">✓ Pro</span><span>15+ productions</span></div>
-      <div class="grid-hover-desc"></div>
-    </a>
-    <div class="grid-item" data-desc="Calendrier de l'Avent hybride — boîte de chocolats transformée en aventure interactive gamifiée.">
-      <div class="grid-number">07</div><h2 class="grid-title">ChocÔCalendrier</h2>
-      <div class="grid-meta"><span class="badge-complete">✓ 2025</span><span>UX · Gamification</span></div>
-      <div class="grid-hover-desc"></div>
-    </div>
-    <a href="https://360.articulate.com/review/content/b3987a71-9c66-4545-8c4f-80d7974c32e4/review" target="_blank" class="grid-item" data-desc="Formations interactives pour grandes organisations. Scénarisation pédagogique, gamification, multimédias.">
-      <div class="grid-number">08</div><h2 class="grid-title">E‑Learning Immersif</h2>
-      <div class="grid-meta"><span class="badge-complete">✓ Pro</span><span>Articulate · LMS</span></div>
-      <div class="grid-hover-desc"></div>
-    </a>
-    <a href="https://www.instagram.com/salut_berta_rose/" target="_blank" class="grid-item" data-desc="Exploration artistique des outils d'IA générative. Stable Diffusion, ComfyUI, workflows créatifs Python.">
-      <div class="grid-number">09</div><h2 class="grid-title">AI Generative Art</h2>
-      <div class="grid-meta"><span class="badge-complete">✓ En ligne</span><span>Stable Diffusion</span></div>
-      <div class="grid-hover-desc"></div>
-    </a>
-    <a href="https://github.com/Bertarose/creative-ai-production-pipeline.git" target="_blank" class="grid-item" data-desc="Pipeline automatisé de production créative. Workflows Python pour génération de contenu IA.">
-      <div class="grid-number">10</div><h2 class="grid-title">Workflow Automation</h2>
-      <div class="grid-meta"><span>Python · IA</span><span>2025</span></div>
-      <div class="grid-hover-desc"></div>
-    </a>
-    <a href="https://obscura-liart.vercel.app/" target="_blank" class="grid-item" data-desc="Archive cinématographique dédiée aux films étranges, dérangeants et visionnaires.">
-      <div class="grid-number">11</div><h2 class="grid-title">Obscura</h2>
-      <div class="grid-meta"><span class="badge-complete">✓ Déployé</span><span>HTML · JS</span></div>
-      <div class="grid-hover-desc"></div>
-    </a>
-    <div class="grid-item" data-desc="Générateur de signatures sonores uniques avec visualisation temps réel. Synthèse audio interactive.">
-      <div class="grid-number">12</div><h2 class="grid-title">Sonic Fingerprint</h2>
-      <div class="grid-meta"><span>Canvas · Tone.js</span></div>
-      <div class="grid-hover-desc"></div>
-    </div>
-    <div class="grid-item" data-desc="Installation immersive combinant terrarium physique et monde VR/AR forestier.">
-      <div class="grid-number">13</div><h2 class="grid-title">Terrarium Numérique</h2>
-      <div class="grid-meta"><span class="badge-dev">2026</span><span>WebGL · IoT</span></div>
-      <div class="grid-hover-desc"></div>
-    </div>
-    <a href="https://actions-lemon.vercel.app/" target="_blank" class="grid-item" data-desc="Pages landing pour pétitions et campagnes d'impact social. Déploiement rapide sur Vercel.">
-      <div class="grid-number">14</div><h2 class="grid-title">Actions Page</h2>
-      <div class="grid-meta"><span class="badge-complete">✓ 2025</span><span>Landing · Vercel</span></div>
-      <div class="grid-hover-desc"></div>
-    </a>
-  </div>
-
-  <section id="collaborations">
-    <details class="collab-item" open>
-      <summary class="collab-summary">
-        <div class="project-number">15</div>
-        <h2 class="project-title" data-fr="Participations" data-en="Participations">Participations</h2>
-        <div class="project-meta">
-          <span class="badge-complete" data-fr="✓ Sélection" data-en="✓ Selected">✓ Sélection</span>
-          <span data-fr="Son · Performance · Cinéma/TV · Radio" data-en="Sound · Performance · Film/TV · Radio">Son · Performance · Cinéma/TV · Radio</span>
-          <span>2005–2025</span>
-        </div>
-      </summary>
-      <div class="collab-panel">
-        <div class="collab-group">
-          <h3 data-fr="Conception sonore" data-en="Sound design">Conception sonore</h3>
-          <ul>
-            <li><a href="https://starkimproject.com/exhibits/saekdong%ec%83%89%eb%8f%99diaspora/" target="_blank">Saekdong Diaspora</a></li>
-            <li><a href="https://starkimproject.com/laudace/" target="_blank">L'audace</a></li>
-            <li><a href="https://vimeo.com/600554637" target="_blank">Œuvre vidéo</a></li>
-          </ul>
-        </div>
-        <div class="collab-group">
-          <h3>Performance / radio</h3>
-          <ul>
-            <li>Queer ASMR — Dyke Air, Paris (2013)</li>
-            <li>Cabaret Tollé</li>
-            <li>ENDLESSS — streaming live</li>
-            <li>Filles-troniques</li>
-            <li>Suoni per il Popolo</li>
-            <li><a href="https://www.mixcloud.com/n10as/" target="_blank">n10as</a>, <a href="https://www.mixcloud.com/StillFM/" target="_blank">Still FM</a></li>
-          </ul>
-        </div>
-        <div class="collab-group">
-          <h3>Presse</h3>
-          <ul><li><em>Les dessous du web</em>, Fugues (2015)</li></ul>
-        </div>
-        <div class="collab-group">
-          <h3>Cinéma / TV</h3>
-          <ul class="two-col">
-            <li>Après (2021)</li><li>5e Rang (2019–20)</li>
-            <li>Nadia, Butterfly (2020)</li><li>Les Veuves (2020)</li>
-            <li>Kuessipan (2019)</li><li>Aquaslash (2019)</li>
-            <li>La femme de mon frère (2019)</li><li>Unité 9 (2019)</li>
-            <li>Bad Blood (2018)</li><li>Demain des hommes (2018)</li>
-            <li>Les rois mongols (2017)</li><li>Jérémie (2015–16)</li>
-            <li>L'Échappée (2016)</li><li>Lemonade (2018)</li>
-          </ul>
-        </div>
-        <p class="collab-note" data-fr="Certains projets sont difficiles à retrouver en ligne. Détails disponibles sur demande." data-en="Some projects are hard to find online. Details available on request.">Certains projets sont difficiles à retrouver en ligne. Détails disponibles sur demande.</p>
-      </div>
-    </details>
-  </section>
-
-  <div class="cv-bridge">
-    <h3 data-fr="Envie d'en savoir plus ?" data-en="Want to know more?">Envie d'en savoir plus ?</h3>
-    <p data-fr="CV détaillé · compétences techniques · 25 ans de parcours" data-en="Full CV · technical skills · 25 years of experience">CV détaillé · compétences techniques · 25 ans de parcours</p>
-    <a href="cv.html" class="btn-cv"><span data-fr="Consulter le CV" data-en="View CV">Consulter le CV</span> →</a>
-  </div>
 </main>
 
 <footer>
-  <p>© 2025 Kim Maurice</p>
-  <div class="footer-links">
-    <a href="https://instagram.com/salut_berta_rose/" target="_blank">Instagram</a>
+  <p>© 2025 Kim Maurice · Tiohtiá:ke / Montréal</p>
+  <nav class="footer-nav">
+    <a href="cv.html" data-fr="CV & Portfolio" data-en="CV & Portfolio">CV & Portfolio</a>
     <a href="mailto:info@kimmaurice.com">Email</a>
-    <a href="https://linkedin.com/in/kimmaurice" target="_blank">LinkedIn</a>
-    <a href="https://github.com/Bertarose/" target="_blank">Github</a>
-    <a href="https://www.imdb.com/fr-ca/name/nm9371635/" target="_blank">IMDb</a>
-  </div>
+    <a href="Kim_Maurice_CV_2026_MTL.pdf" target="_blank">CV PDF</a>
+  </nav>
 </footer>
 
 <script>
-// hover descriptions
-document.querySelectorAll('.grid-item[data-desc]').forEach(item => {
-  const el = item.querySelector('.grid-hover-desc');
-  if (el) el.textContent = item.getAttribute('data-desc');
-});
+// ══════════════════════════════════
+// BACKGROUND CANVAS — starfield
+// ══════════════════════════════════
+(function() {
+  const canvas = document.getElementById('bgCanvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [], animId;
 
-// ── THEME TOGGLE ──
+  function resize() {
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+
+  function initParticles() {
+    particles = [];
+    const count = Math.min(180, Math.floor((W * H) / 7000));
+    for (let i = 0; i < count; i++) {
+      particles.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        r: Math.random() * 1.2 + .2,
+        vx: (Math.random() - .5) * .18,
+        vy: (Math.random() - .5) * .18,
+        a: Math.random() * .6 + .2,
+      });
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    const theme = document.documentElement.getAttribute('data-theme');
+    const color = theme === 'dark' ? '255,255,255' : '0,0,0';
+    particles.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
+      if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${color},${p.a})`;
+      ctx.fill();
+    });
+    // draw connections
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const d  = Math.sqrt(dx*dx + dy*dy);
+        if (d < 90) {
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = `rgba(${color},${(.12*(1-d/90)).toFixed(3)})`;
+          ctx.lineWidth = .4;
+          ctx.stroke();
+        }
+      }
+    }
+    animId = requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', () => { resize(); initParticles(); });
+  resize(); initParticles(); draw();
+})();
+
+// ══════════════════════════════════
+// MINI CANVAS — Hors Champ visualizer
+// ══════════════════════════════════
+(function() {
+  const c  = document.getElementById('miniCanvas');
+  if (!c) return;
+  const ctx = c.getContext('2d');
+  let t = 0;
+
+  function resize() {
+    c.width  = c.offsetWidth;
+    c.height = c.offsetHeight;
+  }
+
+  function draw() {
+    resize();
+    const W = c.width, H = c.height;
+    ctx.clearRect(0, 0, W, H);
+    const theme = document.documentElement.getAttribute('data-theme');
+    const base  = theme === 'dark' ? 'rgba(255,255,255,' : 'rgba(0,0,0,';
+
+    const bars = 64;
+    const bw   = W / bars;
+    for (let i = 0; i < bars; i++) {
+      const freq  = (i / bars) * 3 + 1;
+      const phase = (i / bars) * Math.PI * 4;
+      const amp   = (.3 + .7 * Math.abs(Math.sin(i * .4))) * H * .42;
+      const h     = Math.abs(Math.sin(t * freq * .7 + phase)) * amp;
+      const a     = .12 + .55 * (h / (H * .42));
+      ctx.fillStyle = base + a.toFixed(3) + ')';
+      ctx.fillRect(i * bw + 1, H/2 - h/2, bw - 2, h);
+    }
+    t += .022;
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ══════════════════════════════════
+// THEME
+// ══════════════════════════════════
 const THEME_KEY = 'km-theme';
-const htmlEl     = document.documentElement;
-const toggleBtn  = document.getElementById('themeToggle');
-const logoImg    = document.getElementById('logoImg');
+const htmlEl    = document.documentElement;
+const toggleBtn = document.getElementById('themeToggle');
+const logoImg   = document.getElementById('logoImg');
 
 function setTheme(t) {
   htmlEl.setAttribute('data-theme', t);
@@ -600,10 +615,11 @@ function setTheme(t) {
 toggleBtn.addEventListener('click', () => {
   setTheme(htmlEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
 });
-// Init — dark par défaut
 setTheme(localStorage.getItem(THEME_KEY) || 'dark');
 
-// ── LANGUAGE ──
+// ══════════════════════════════════
+// LANGUAGE
+// ══════════════════════════════════
 let lang = localStorage.getItem('preferredLanguage') || 'fr';
 function applyLang(l) {
   htmlEl.lang = l;
@@ -620,6 +636,18 @@ document.getElementById('langBtn').addEventListener('click', () => {
   applyLang(lang);
 });
 applyLang(lang);
+
+// ══════════════════════════════════
+// HEADER — devient solid au scroll
+// ══════════════════════════════════
+(function() {
+  const hdr = document.querySelector('header');
+  function check() {
+    hdr.classList.toggle('solid', window.scrollY > 60);
+  }
+  window.addEventListener('scroll', check, {passive:true});
+  check();
+})();
 </script>
 </body>
 </html>
