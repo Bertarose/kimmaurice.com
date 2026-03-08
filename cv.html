@@ -1,419 +1,211 @@
 <!DOCTYPE html>
-<html lang="fr" data-theme="mutek">
+<html lang="fr" data-theme="dark">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Kim Maurice | CV Détaillé & Parcours</title>
-  <meta name="description" content="CV détaillé de Kim Maurice : 25 ans d'expérience en design, code et multimédia.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kim Maurice | CV · Technologue créative · Montréal</title>
+  <meta name="description" content="CV de Kim Maurice — designer multimédia et technologue créative.">
   <link rel="icon" type="image/x-icon" href="img/favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700;900&family=DM+Mono:wght@400;500&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
-  <script defer src="script.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-WYM83ME5LK"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-WYM83ME5LK',{anonymize_ip:true});</script>
 <style>
-/* =====================================================
-   THEMES — identical to index.html
-   ===================================================== */
-[data-theme="mutek"] {
-  --bg:#08061a;--bg2:#0d0b22;--text:#ffffff;--muted:rgba(255,255,255,0.52);--muted2:rgba(255,255,255,0.22);
-  --border:rgba(255,255,255,0.16);--border2:rgba(255,255,255,0.28);
-  --accent:#ffffff;--accent-dim:rgba(255,255,255,0.1);
-  --hover-bg:rgba(255,255,255,0.07);--badge-bg:rgba(255,255,255,0.12);--badge-txt:rgba(255,255,255,0.85);
-  --ticker-bg:rgba(8,6,26,0.8);--ticker-txt:rgba(255,255,255,0.6);
-  --btn-bg:transparent;--btn-txt:#fff;--btn-brd:rgba(255,255,255,0.55);--btn-hover-bg:#fff;--btn-hover-t:#000;
-  --collab-bg:rgba(8,6,26,0.55);--footer-bg:rgba(5,4,16,0.97);
-  --sw-bg:rgba(8,6,26,0.96);--sw-brd:rgba(255,255,255,0.15);--sw-active:#fff;--sw-active-t:#000;
-  --h-font:'Barlow Condensed',sans-serif;--b-font:'DM Mono',monospace;
-  --h-weight:400;--h-style:normal;--h-case:none;--h-spacing:-0.01em;
-  --logo-size:1.35rem;--logo-weight:700;--logo-spacing:0.02em;
-  --tl-line:rgba(255,255,255,0.2);--tl-dot:rgba(255,255,255,0.3);--tl-dot-h:#fff;--tl-glow:rgba(255,255,255,0.25);
-}
+/* ── DARK ── */
 [data-theme="dark"] {
-  --bg:#0a0a0a;--bg2:#111;--text:#f2f0eb;--muted:#666;--muted2:#333;
-  --border:rgba(255,255,255,0.08);--border2:rgba(255,255,255,0.13);
-  --accent:#39ff14;--accent-dim:rgba(57,255,20,0.1);
-  --hover-bg:rgba(255,255,255,0.05);--badge-bg:rgba(57,255,20,0.12);--badge-txt:#39ff14;
-  --ticker-bg:#39ff14;--ticker-txt:#000;
-  --btn-bg:#39ff14;--btn-txt:#000;--btn-brd:#39ff14;--btn-hover-bg:transparent;--btn-hover-t:#39ff14;
-  --collab-bg:rgba(0,0,0,0.35);--footer-bg:rgba(0,0,0,0.5);
-  --sw-bg:rgba(10,10,10,0.97);--sw-brd:rgba(255,255,255,0.09);--sw-active:#39ff14;--sw-active-t:#000;
-  --h-font:'Barlow Condensed',sans-serif;--b-font:'DM Mono',monospace;
-  --h-weight:900;--h-style:normal;--h-case:uppercase;--h-spacing:0.04em;
-  --logo-size:1.05rem;--logo-weight:700;--logo-spacing:0.2em;
-  --tl-line:rgba(57,255,20,0.2);--tl-dot:rgba(57,255,20,0.4);--tl-dot-h:#39ff14;--tl-glow:rgba(57,255,20,0.6);
+  --bg: #08061a; --text: #fff; --muted: rgba(255,255,255,0.5);
+  --border: rgba(255,255,255,0.14); --border2: rgba(255,255,255,0.26);
+  --accent: #fff;
+  --hover-bg: rgba(255,255,255,0.07);
+  --badge-bg: rgba(255,255,255,0.12); --badge-txt: rgba(255,255,255,0.85);
+  --ticker-bg: rgba(8,6,26,0.85); --ticker-txt: rgba(255,255,255,0.6);
+  --btn-bg: transparent; --btn-txt: #fff; --btn-brd: rgba(255,255,255,0.5);
+  --btn-hover-bg: #fff; --btn-hover-t: #000;
+  --footer-bg: rgba(5,4,16,0.97);
+  --h-font: 'Barlow Condensed', sans-serif; --b-font: 'DM Mono', monospace;
+  --h-weight: 400; --h-style: normal; --h-case: none; --h-spacing: -0.01em;
+  --logo-size: 1.4rem; --logo-weight: 700; --logo-spacing: 0.02em; --logo-case: uppercase;
+  --tl-line: rgba(255,255,255,0.18); --tl-dot: rgba(255,255,255,0.3);
+  --tl-dot-h: #fff; --tl-glow: rgba(255,255,255,0.2);
 }
-[data-theme="white"] {
-  --bg:#fafaf8;--bg2:#f2efe9;--text:#111;--muted:#888;--muted2:#ddd;
-  --border:#e0ddd8;--border2:#ccc;
-  --accent:#111;--accent-dim:rgba(0,0,0,0.05);
-  --hover-bg:#f0ede7;--badge-bg:rgba(0,0,0,0.07);--badge-txt:#111;
-  --ticker-bg:#111;--ticker-txt:#fafaf8;
-  --btn-bg:#111;--btn-txt:#fafaf8;--btn-brd:#111;--btn-hover-bg:transparent;--btn-hover-t:#111;
-  --collab-bg:rgba(0,0,0,0.02);--footer-bg:#fafaf8;
-  --sw-bg:rgba(250,250,248,0.97);--sw-brd:#e0ddd8;--sw-active:#111;--sw-active-t:#fafaf8;
-  --h-font:'Barlow Condensed',sans-serif;--b-font:'DM Mono',monospace;
-  --h-weight:900;--h-style:normal;--h-case:uppercase;--h-spacing:0.04em;
-  --logo-size:1.05rem;--logo-weight:700;--logo-spacing:0.2em;
-  --tl-line:#e0ddd8;--tl-dot:#ccc;--tl-dot-h:#111;--tl-glow:transparent;
-}
-[data-theme="cream"] {
-  --bg:#f5f0e8;--bg2:#ede5d8;--text:#2a1f0f;--muted:#9a8570;--muted2:#d8cebc;
-  --border:#d8cebc;--border2:#c8b8a0;
-  --accent:#c0392b;--accent-dim:rgba(192,57,43,0.1);
-  --hover-bg:#ede5d8;--badge-bg:rgba(192,57,43,0.12);--badge-txt:#c0392b;
-  --ticker-bg:#2a1f0f;--ticker-txt:#f5f0e8;
-  --btn-bg:#2a1f0f;--btn-txt:#f5f0e8;--btn-brd:#2a1f0f;--btn-hover-bg:transparent;--btn-hover-t:#2a1f0f;
-  --collab-bg:rgba(0,0,0,0.03);--footer-bg:#f5f0e8;
-  --sw-bg:rgba(245,240,232,0.97);--sw-brd:#d8cebc;--sw-active:#2a1f0f;--sw-active-t:#f5f0e8;
-  --h-font:'Instrument Serif',Georgia,serif;--b-font:'DM Mono',monospace;
-  --h-weight:400;--h-style:italic;--h-case:none;--h-spacing:-0.02em;
-  --logo-size:1rem;--logo-weight:400;--logo-spacing:0.08em;
-  --tl-line:#d8cebc;--tl-dot:#c8b8a0;--tl-dot-h:#c0392b;--tl-glow:transparent;
-}
-[data-theme="underground"] {
-  --bg:#141414;--bg2:#1a1a1a;--text:#f0f0f0;--muted:#666;--muted2:#2a2a2a;
-  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.12);
-  --accent:#ff2d78;--accent-dim:rgba(255,45,120,0.12);
-  --hover-bg:rgba(255,45,120,0.08);--badge-bg:rgba(255,45,120,0.15);--badge-txt:#ff2d78;
-  --ticker-bg:#ff2d78;--ticker-txt:#fff;
-  --btn-bg:#ff2d78;--btn-txt:#fff;--btn-brd:#ff2d78;--btn-hover-bg:transparent;--btn-hover-t:#ff2d78;
-  --collab-bg:rgba(0,0,0,0.4);--footer-bg:rgba(0,0,0,0.5);
-  --sw-bg:rgba(20,20,20,0.97);--sw-brd:rgba(255,255,255,0.09);--sw-active:#ff2d78;--sw-active-t:#fff;
-  --h-font:'Barlow Condensed',sans-serif;--b-font:'DM Mono',monospace;
-  --h-weight:900;--h-style:normal;--h-case:uppercase;--h-spacing:0.04em;
-  --logo-size:1.05rem;--logo-weight:700;--logo-spacing:0.2em;
-  --tl-line:rgba(255,45,120,0.2);--tl-dot:rgba(255,45,120,0.4);--tl-dot-h:#ff2d78;--tl-glow:rgba(255,45,120,0.5);
+/* ── LIGHT ── */
+[data-theme="light"] {
+  --bg: #f7f5f0; --text: #111; --muted: #888;
+  --border: #dedad4; --border2: #c8c4bc; --accent: #111;
+  --hover-bg: #eeeae3;
+  --badge-bg: rgba(0,0,0,0.07); --badge-txt: #111;
+  --ticker-bg: #111; --ticker-txt: #f7f5f0;
+  --btn-bg: #111; --btn-txt: #f7f5f0; --btn-brd: #111;
+  --btn-hover-bg: transparent; --btn-hover-t: #111;
+  --footer-bg: #f7f5f0;
+  --h-font: 'Barlow Condensed', sans-serif; --b-font: 'DM Mono', monospace;
+  --h-weight: 900; --h-style: normal; --h-case: uppercase; --h-spacing: 0.04em;
+  --logo-size: 1.1rem; --logo-weight: 700; --logo-spacing: 0.18em; --logo-case: uppercase;
+  --tl-line: #dedad4; --tl-dot: #c8c4bc; --tl-dot-h: #111; --tl-glow: transparent;
 }
 
-/* =====================================================
-   BASE
-   ===================================================== */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;}
-body{
-  font-family:var(--b-font);background:var(--bg);color:var(--text);
-  overflow-x:hidden;padding-bottom:4rem;
-  transition:background 0.5s ease,color 0.4s ease;
-}
-@media(min-width:769px){body{padding-bottom:0;}}
+body{font-family:var(--b-font);background:var(--bg);color:var(--text);overflow-x:hidden;transition:background .5s,color .4s;}
 ::selection{background:var(--accent);color:var(--btn-txt);}
 a{text-decoration:none;color:inherit;}
 
-/* =====================================================
-   THEME SWITCHER
-   ===================================================== */
-.theme-switcher{position:fixed;bottom:1.5rem;right:1.5rem;z-index:5000;display:flex;flex-direction:column;align-items:flex-end;gap:0.4rem;}
-.theme-switcher-label{font-family:var(--b-font);font-size:0.52rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);}
-.theme-buttons{display:flex;gap:0.35rem;background:var(--sw-bg);border:1px solid var(--sw-brd);padding:0.4rem;backdrop-filter:blur(16px);transition:background 0.4s,border-color 0.4s;}
-.theme-btn{width:26px;height:26px;border-radius:2px;border:2px solid transparent;cursor:pointer;transition:transform 0.15s,border-color 0.2s;flex-shrink:0;position:relative;}
-.theme-btn:hover{transform:scale(1.18);}
-.theme-btn.active{border-color:var(--sw-active);}
-.theme-btn[data-t="mutek"]{background:linear-gradient(135deg,#12083a 30%,#5020a0 100%);}
-.theme-btn[data-t="dark"]{background:linear-gradient(135deg,#0a0a0a 55%,#1a3a1a);box-shadow:inset 0 0 0 4px #39ff14;}
-.theme-btn[data-t="white"]{background:#fafaf8;box-shadow:inset 0 0 0 1px #ccc;}
-.theme-btn[data-t="cream"]{background:linear-gradient(135deg,#f5f0e8,#ede5d8);box-shadow:inset 0 0 0 1px #d8cebc;}
-.theme-btn[data-t="underground"]{background:linear-gradient(135deg,#141414,#2a0a14);box-shadow:inset 0 0 0 4px #ff2d78;}
-.theme-btn::after{content:attr(data-label);position:absolute;bottom:calc(100% + 6px);right:0;font-family:var(--b-font);font-size:0.52rem;letter-spacing:0.1em;text-transform:uppercase;background:var(--sw-bg);color:var(--text);padding:0.22rem 0.5rem;white-space:nowrap;border:1px solid var(--sw-brd);opacity:0;pointer-events:none;transition:opacity 0.15s;}
-.theme-btn:hover::after{opacity:1;}
+.theme-toggle {
+  font-family: var(--b-font); font-size: 0.75rem; line-height: 1;
+  background: transparent; color: var(--muted); border: 1px solid var(--border);
+  padding: 0.3rem 0.6rem; cursor: pointer; transition: color .2s, border-color .2s;
+  min-height: 32px; display: flex; align-items: center; user-select: none;
+}
+.theme-toggle:hover { color: var(--text); border-color: var(--border2); }
 
-/* =====================================================
-   HEADER
-   ===================================================== */
-header{
-  position:sticky;top:0;z-index:999;
-  padding:0 1.5rem;height:48px;
-  display:flex;justify-content:space-between;align-items:center;
-  background:var(--bg);border-bottom:1px solid var(--border);
-  backdrop-filter:blur(16px);transition:background 0.4s,border-color 0.4s;
+header {
+  position: sticky; top: 0; z-index: 999;
+  padding: 0 1.5rem; height: 56px;
+  display: flex; justify-content: space-between; align-items: center;
+  background: var(--bg); border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(16px); transition: background .5s, border-color .5s;
 }
-[data-theme="mutek"] header{background:transparent;border-bottom:none;}
-@media(min-width:768px){header{padding:0 3rem;height:52px;}}
+@media(min-width:768px){ header { padding: 0 2.5rem; height: 64px; } }
 
-.logo-text{
-  font-family:var(--h-font);font-weight:var(--logo-weight);font-style:var(--h-style);
-  font-size:var(--logo-size);letter-spacing:var(--logo-spacing);
-  text-transform:var(--h-case);color:var(--text);transition:color 0.2s;white-space:nowrap;
-}
-.logo-text:hover{color:var(--accent);}
-[data-theme="mutek"] .logo-text{
-  font-family:'Barlow Condensed',sans-serif;
-  font-size:1.5rem;letter-spacing:0.02em;font-weight:700;
-  font-style:normal;text-transform:uppercase;color:#fff;
-}
+.logo-link { display: flex; align-items: center; }
+.logo-img { width: 36px; height: 36px; object-fit: contain; transition: opacity .2s; }
+.logo-link:hover .logo-img { opacity: .65; }
 
-.cv-nav-links{display:none;align-items:center;flex:1;justify-content:center;gap:0;}
-@media(min-width:769px){.cv-nav-links{display:flex;}}
-.cv-nav-links a{
-  font-family:var(--b-font);font-size:0.62rem;font-weight:500;
-  letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);
-  padding:0 0.8rem;height:100%;display:flex;align-items:center;
-  transition:color 0.15s;white-space:nowrap;border-left:1px solid var(--border);
+.cv-nav-links { display: none; align-items: center; flex: 1; justify-content: center; gap: 0; }
+@media(min-width:769px){ .cv-nav-links { display: flex; } }
+.cv-nav-links a {
+  font-family: var(--b-font); font-size: .62rem; font-weight: 500;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--muted);
+  padding: 0 .8rem; height: 100%; display: flex; align-items: center;
+  transition: color .15s; white-space: nowrap; border-left: 1px solid var(--border);
 }
-.cv-nav-links a:first-child{border-left:none;}
-.cv-nav-links a:hover{color:var(--accent);}
+.cv-nav-links a:first-child { border-left: none; }
+.cv-nav-links a:hover { color: var(--accent); }
 
-.header-right{display:flex;align-items:center;flex-shrink:0;}
-.lang-btn{
-  font-family:var(--b-font);font-size:0.65rem;font-weight:500;letter-spacing:0.12em;
-  background:transparent;color:var(--muted);border:1px solid var(--border);
-  padding:0.35rem 0.7rem;cursor:pointer;transition:all 0.2s;min-height:32px;
+.header-right { display: flex; align-items: center; gap: .55rem; flex-shrink: 0; }
+.lang-btn {
+  font-family: var(--b-font); font-size: .62rem; font-weight: 500; letter-spacing: .12em;
+  background: transparent; color: var(--muted); border: 1px solid var(--border);
+  padding: .32rem .65rem; cursor: pointer; transition: all .2s; min-height: 32px;
 }
-.lang-btn:hover{color:var(--accent);border-color:var(--accent);}
+.lang-btn:hover { color: var(--text); border-color: var(--border2); }
 
 /* TICKER */
-.ticker-container{overflow:hidden;padding:0.35rem 0;background:var(--ticker-bg);border-bottom:1px solid var(--border);transition:background 0.4s;}
-.ticker-wrapper{display:inline-flex;white-space:nowrap;animation:ticker 40s linear infinite;}
-.ticker-item{font-family:var(--b-font);font-size:0.6rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--ticker-txt);padding:0 5rem;transition:color 0.4s;}
-@keyframes ticker{to{transform:translateX(-50%);}}
+.ticker-container { overflow: hidden; padding: .35rem 0; background: var(--ticker-bg); border-bottom: 1px solid var(--border); transition: background .5s; }
+.ticker-wrapper { display: inline-flex; white-space: nowrap; animation: ticker 40s linear infinite; }
+.ticker-item { font-family: var(--b-font); font-size: .6rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--ticker-txt); padding: 0 5rem; }
+@keyframes ticker { to { transform: translateX(-50%); } }
+[data-theme="dark"] .ticker-container { display: none; }
 
-/* =====================================================
-   HERO — MUTEK style: giant name, stark
-   ===================================================== */
-.hero{
-  padding:4rem 1.5rem 3.5rem;border-bottom:1px solid var(--border);
-  display:grid;grid-template-columns:1fr;gap:2rem;
-  position:relative;z-index:10;transition:border-color 0.4s;
+/* HERO */
+.hero {
+  padding: 4rem 1.5rem 3.5rem; border-bottom: 1px solid var(--border);
+  display: grid; grid-template-columns: 1fr; gap: 2rem;
+  transition: border-color .5s;
 }
-@media(min-width:768px){.hero{padding:6rem 3rem 5rem;grid-template-columns:1fr auto;align-items:end;gap:5rem;}}
-@media(min-width:1024px){.hero{grid-template-columns:2fr 1fr;}}
+@media(min-width:768px){ .hero { padding: 6rem 2.5rem 5rem; grid-template-columns: 2fr 1fr; align-items: end; gap: 5rem; } }
+[data-theme="dark"] .hero { background: linear-gradient(160deg,rgba(50,15,110,.35) 0%,rgba(8,6,26,.98) 60%); }
 
-/* MUTEK: name dominates full width, dark violet bg */
-[data-theme="mutek"] .hero{
-  grid-template-columns:1fr;gap:0;padding:5rem 3rem 4rem;
-  background: linear-gradient(160deg, rgba(50,15,110,0.4) 0%, rgba(8,6,26,0.95) 60%);
+.hero-eyebrow { font-family: var(--b-font); font-size: .6rem; letter-spacing: .22em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; }
+h1.hero-title {
+  font-family: var(--h-font); font-weight: var(--h-weight); font-style: var(--h-style);
+  font-size: clamp(4.5rem,13vw,10rem); line-height: .85;
+  letter-spacing: var(--h-spacing); text-transform: var(--h-case); color: var(--text);
 }
+[data-theme="dark"] h1.hero-title { font-weight: 400; font-size: clamp(4rem,12vw,9rem); color: #fff; }
 
-.hero-eyebrow{
-  font-family:var(--b-font);font-size:0.6rem;letter-spacing:0.22em;
-  text-transform:uppercase;color:var(--accent);margin-bottom:1.5rem;transition:color 0.4s;
-}
+.hero-right { display: flex; flex-direction: column; gap: 1.5rem; justify-content: flex-end; }
+.hero-subtitle { font-family: var(--b-font); font-size: .7rem; color: var(--muted); line-height: 1.75; }
+.hero-location { font-family: var(--b-font); font-size: .68rem; color: var(--muted); }
+.hero-actions { display: flex; flex-wrap: wrap; gap: .6rem; }
 
-h1.hero-title{
-  font-family:var(--h-font);font-weight:var(--h-weight);font-style:var(--h-style);
-  font-size:clamp(4.5rem,13vw,10rem);line-height:0.85;
-  letter-spacing:var(--h-spacing);text-transform:var(--h-case);
-  margin-bottom:0;color:var(--text);transition:font-family 0.3s,color 0.4s;
-}
-[data-theme="mutek"] h1.hero-title{
-  font-family:'Barlow Condensed',sans-serif;
-  font-weight:400;font-size:clamp(5rem,15vw,11rem);
-  letter-spacing:-0.01em;text-transform:none;font-style:normal;
-  color:#fff;line-height:0.9;
-  border-bottom:1px solid rgba(255,255,255,0.15);padding-bottom:2.5rem;margin-bottom:2.5rem;
-}
+.btn { font-family: var(--b-font); font-size: .68rem; font-weight: 500; letter-spacing: .12em; display: inline-flex; align-items: center; gap: .4rem; padding: .7rem 1.4rem; transition: all .2s; cursor: pointer; min-height: 42px; text-transform: uppercase; }
+.btn-primary { background: var(--btn-bg); color: var(--btn-txt); border: 1px solid var(--btn-brd); }
+.btn-primary:hover { background: var(--btn-hover-bg); color: var(--btn-hover-t); }
+[data-theme="dark"] .btn-primary:hover { background: #fff; color: #000; border-color: #fff; }
+.btn-secondary { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+.btn-secondary:hover { border-color: var(--border2); color: var(--text); }
 
-.hero-right{display:flex;flex-direction:column;gap:1.5rem;justify-content:flex-end;}
-[data-theme="mutek"] .hero-right{
-  flex-direction:row;align-items:flex-start;gap:4rem;flex-wrap:wrap;
-}
+/* CV SECTIONS */
+.cv-section { border-bottom: 1px solid var(--border); transition: border-color .5s; }
+.section-header { padding: 2.5rem 1.5rem 2rem; border-bottom: 1px solid var(--border); display: flex; align-items: baseline; gap: 1.5rem; flex-wrap: wrap; }
+@media(min-width:768px){ .section-header { padding: 3rem 2.5rem 2.5rem; } }
+.section-header h2 { font-family: var(--h-font); font-weight: var(--h-weight); font-style: var(--h-style); font-size: clamp(2.5rem,6vw,4rem); letter-spacing: var(--h-spacing); text-transform: var(--h-case); color: var(--text); line-height: .9; }
+[data-theme="dark"] .section-header h2 { font-weight: 400; }
+.section-tag { font-family: var(--b-font); font-size: .58rem; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); }
 
-.hero-subtitle{font-family:var(--b-font);font-size:0.7rem;color:var(--muted);line-height:1.75;max-width:38ch;transition:color 0.4s;}
-.hero-location{font-family:var(--b-font);font-size:0.68rem;color:var(--muted);letter-spacing:0.06em;transition:color 0.4s;}
-.hero-actions{display:flex;flex-wrap:wrap;gap:0.6rem;align-items:flex-start;}
+/* EXPERTISE */
+.expertise-grid { display: grid; grid-template-columns: 1fr 1fr; border-left: 1px solid var(--border); }
+@media(min-width:640px){ .expertise-grid { grid-template-columns: repeat(3,1fr); } }
+.expertise-card { padding: 1.75rem 1.5rem; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); transition: background .15s; }
+.expertise-card:hover { background: var(--hover-bg); }
+.expertise-number { font-family: var(--b-font); font-size: .56rem; color: var(--accent); margin-bottom: .6rem; letter-spacing: .1em; }
+.expertise-card h3 { font-family: var(--h-font); font-weight: var(--h-weight); font-style: var(--h-style); font-size: 1.1rem; letter-spacing: var(--h-spacing); text-transform: var(--h-case); margin-bottom: 1rem; color: var(--text); }
+[data-theme="dark"] .expertise-card h3 { font-weight: 500; }
+.expertise-card ul { list-style: none; }
+.expertise-card li { font-family: var(--b-font); font-size: .66rem; padding: .28rem 0 .28rem 1rem; position: relative; color: var(--muted); line-height: 1.4; }
+.expertise-card li::before { content: "–"; position: absolute; left: 0; color: var(--border2); }
 
-.btn{
-  font-family:var(--b-font);font-size:0.68rem;font-weight:500;letter-spacing:0.12em;
-  display:inline-flex;align-items:center;justify-content:center;gap:0.4rem;
-  padding:0.7rem 1.4rem;transition:all 0.2s;cursor:pointer;min-height:42px;
-  text-transform:uppercase;
-}
-.btn-primary{background:var(--btn-bg);color:var(--btn-txt);border:1px solid var(--btn-brd);}
-.btn-primary:hover{background:var(--btn-hover-bg);color:var(--btn-hover-t);}
-[data-theme="dark"] .btn-primary:hover,
-[data-theme="underground"] .btn-primary:hover,
-[data-theme="white"] .btn-primary:hover,
-[data-theme="cream"] .btn-primary:hover{background:var(--btn-hover-bg);}
-[data-theme="mutek"] .btn-primary{
-  font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:400;
-  text-transform:none;letter-spacing:0.02em;
-  border-color:rgba(255,255,255,0.6);
-}
-[data-theme="mutek"] .btn-primary:hover{background:#fff;color:#000;border-color:#fff;}
+/* TIMELINE */
+.timeline-grid { padding: 2.5rem 1.5rem; display: flex; flex-direction: column; }
+@media(min-width:768px){ .timeline-grid { padding: 3rem 2.5rem; } }
+.timeline-item { display: grid; grid-template-columns: 1fr; padding: 2.5rem 0 2.5rem 1.75rem; border-left: 1px solid var(--tl-line); position: relative; transition: border-color .2s; }
+@media(min-width:640px){ .timeline-item { grid-template-columns: 100px 1fr; gap: 3rem; padding-left: 0; border-left: none; } }
+.timeline-item:hover { border-left-color: var(--tl-dot-h); }
+.timeline-item + .timeline-item { border-top: 1px solid var(--border); }
+.timeline-item::before { content: ""; position: absolute; left: -4px; top: 2.6rem; width: 7px; height: 7px; background: var(--tl-dot); border-radius: 50%; transition: background .2s, box-shadow .2s; }
+.timeline-item:hover::before { background: var(--tl-dot-h); box-shadow: 0 0 8px var(--tl-glow); }
+@media(min-width:640px){ .timeline-item::before { display: none; } }
+.timeline-date { font-family: var(--b-font); font-size: .6rem; color: var(--muted); letter-spacing: .08em; line-height: 1.5; margin-bottom: .5rem; }
+@media(min-width:640px){ .timeline-date { margin-bottom: 0; padding-top: .2rem; text-align: right; } }
+.timeline-content h3 { font-family: var(--h-font); font-weight: var(--h-weight); font-style: var(--h-style); font-size: clamp(1.3rem,2.5vw,1.6rem); letter-spacing: var(--h-spacing); text-transform: var(--h-case); margin-bottom: .25rem; color: var(--text); }
+[data-theme="dark"] .timeline-content h3 { font-weight: 500; }
+.timeline-content h4 { font-family: var(--b-font); font-size: .66rem; color: var(--accent); margin-bottom: 1rem; font-weight: 400; letter-spacing: .06em; }
+.timeline-list { list-style: none; }
+.timeline-list li { font-family: var(--b-font); font-size: .68rem; padding: .28rem 0 .28rem 1rem; position: relative; color: var(--muted); line-height: 1.5; }
+.timeline-list li::before { content: "–"; position: absolute; left: 0; color: var(--border2); }
 
-.btn-secondary{background:transparent;color:var(--muted);border:1px solid var(--border);}
-.btn-secondary:hover{border-color:var(--text);color:var(--text);}
+/* EXPLORATIONS */
+.exploration-grid { display: grid; grid-template-columns: 1fr; }
+@media(min-width:640px){ .exploration-grid { grid-template-columns: repeat(2,1fr); } }
+@media(min-width:1024px){ .exploration-grid { grid-template-columns: repeat(3,1fr); } }
+.exploration-card { padding: 2rem 1.5rem; border-top: 1px solid var(--border); transition: background .15s; }
+@media(min-width:768px){ .exploration-card { padding: 2.5rem 2.5rem; } }
+.exploration-card:hover { background: var(--hover-bg); }
+.exploration-card h4 { font-family: var(--h-font); font-weight: var(--h-weight); font-style: var(--h-style); font-size: 1.1rem; letter-spacing: var(--h-spacing); text-transform: var(--h-case); margin-bottom: .75rem; color: var(--text); }
+[data-theme="dark"] .exploration-card h4 { font-weight: 500; }
+.exploration-card p { font-family: var(--b-font); font-size: .68rem; color: var(--muted); line-height: 1.75; }
 
-/* =====================================================
-   SECTIONS
-   ===================================================== */
-section.cv-section{border-bottom:1px solid var(--border);position:relative;z-index:10;transition:border-color 0.4s;}
+/* FOOTER CTA */
+.footer-cta-section { padding: 6rem 1.5rem; text-align: center; border-bottom: 1px solid var(--border); transition: border-color .5s; }
+@media(min-width:768px){ .footer-cta-section { padding: 9rem 2.5rem; } }
+.footer-cta-section h2 { font-family: var(--h-font); font-weight: var(--h-weight); font-style: var(--h-style); font-size: clamp(3rem,9vw,8rem); letter-spacing: var(--h-spacing); text-transform: var(--h-case); margin-bottom: 3rem; line-height: .88; color: var(--text); }
+[data-theme="dark"] .footer-cta-section h2 { font-weight: 400; }
+.cta-group { display: flex; flex-wrap: wrap; gap: .75rem; justify-content: center; margin-bottom: 3rem; }
+.footer-links-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; margin-bottom: 2rem; }
+.footer-link { font-family: var(--b-font); font-size: .62rem; color: var(--muted); letter-spacing: .12em; text-transform: uppercase; transition: color .15s; }
+.footer-link:hover { color: var(--accent); }
+.footer-copyright { font-family: var(--b-font); font-size: .6rem; color: var(--muted); letter-spacing: .1em; }
 
-.section-header{
-  padding:2.5rem 1.5rem 2rem;border-bottom:1px solid var(--border);
-  display:flex;align-items:baseline;gap:1.5rem;flex-wrap:wrap;transition:border-color 0.4s;
-}
-@media(min-width:768px){.section-header{padding:3rem 3rem 2.5rem;}}
+/* MOBILE NAV */
+.cv-mobile-nav { display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 2000; background: var(--footer-bg); backdrop-filter: blur(16px); border-top: 1px solid var(--border); padding: .4rem .5rem calc(.4rem + env(safe-area-inset-bottom)); transition: background .5s; }
+@media(max-width:768px){ .cv-mobile-nav { display: block; } }
+.cv-mobile-nav-inner { display: flex; justify-content: space-around; }
+.cv-mobile-nav a { font-family: var(--b-font); font-size: .58rem; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; justify-content: center; padding: .6rem .4rem; min-height: 44px; flex: 1; text-align: center; transition: color .15s; }
+.cv-mobile-nav a.active, .cv-mobile-nav a:hover { color: var(--accent); }
 
-.section-header h2{
-  font-family:var(--h-font);font-weight:var(--h-weight);font-style:var(--h-style);
-  font-size:clamp(2.5rem,6vw,4rem);letter-spacing:var(--h-spacing);
-  text-transform:var(--h-case);color:var(--text);line-height:0.9;
-  transition:font-family 0.3s,color 0.4s;
-}
-[data-theme="mutek"] .section-header h2{font-weight:300;}
-
-.section-tag{font-family:var(--b-font);font-size:0.58rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);transition:color 0.4s;}
-
-/* =====================================================
-   EXPERTISE GRID
-   ===================================================== */
-.expertise-grid{display:grid;grid-template-columns:1fr 1fr;border-left:1px solid var(--border);transition:border-color 0.4s;}
-@media(min-width:640px){.expertise-grid{grid-template-columns:repeat(3,1fr);}}
-
-.expertise-card{
-  padding:1.75rem 1.5rem;border-right:1px solid var(--border);border-bottom:1px solid var(--border);
-  transition:background 0.15s,border-color 0.4s;
-}
-.expertise-card:hover{background:var(--hover-bg);}
-.expertise-number{font-family:var(--b-font);font-size:0.56rem;color:var(--accent);margin-bottom:0.6rem;letter-spacing:0.1em;transition:color 0.4s;}
-.expertise-card h3{
-  font-family:var(--h-font);font-weight:var(--h-weight);font-style:var(--h-style);
-  font-size:1.1rem;letter-spacing:var(--h-spacing);text-transform:var(--h-case);
-  margin-bottom:1rem;color:var(--text);transition:font-family 0.3s,color 0.4s;
-}
-[data-theme="mutek"] .expertise-card h3{font-weight:500;}
-.expertise-card ul{list-style:none;padding:0;}
-.expertise-card li{
-  font-family:var(--b-font);font-size:0.66rem;padding:0.28rem 0 0.28rem 1rem;
-  position:relative;color:var(--muted);line-height:1.4;transition:color 0.4s;
-}
-.expertise-card li::before{content:"–";position:absolute;left:0;color:var(--border2);}
-
-/* =====================================================
-   TIMELINE
-   ===================================================== */
-.timeline-grid{padding:2.5rem 1.5rem;display:flex;flex-direction:column;}
-@media(min-width:768px){.timeline-grid{padding:3rem 3rem;}}
-
-.timeline-item{
-  display:grid;grid-template-columns:1fr;
-  padding:2.5rem 0 2.5rem 1.75rem;
-  border-left:1px solid var(--tl-line);
-  position:relative;transition:border-color 0.2s;
-}
-@media(min-width:640px){.timeline-item{grid-template-columns:100px 1fr;gap:3rem;padding-left:0;border-left:none;}}
-.timeline-item:hover{border-left-color:var(--accent);}
-.timeline-item+.timeline-item{border-top:1px solid var(--border);}
-
-.timeline-item::before{
-  content:"";position:absolute;left:-4px;top:2.6rem;
-  width:7px;height:7px;background:var(--tl-dot);border-radius:50%;
-  transition:background 0.2s,box-shadow 0.2s;
-}
-.timeline-item:hover::before{background:var(--tl-dot-h);box-shadow:0 0 8px var(--tl-glow);}
-@media(min-width:640px){.timeline-item::before{display:none;}}
-
-.timeline-date{
-  font-family:var(--b-font);font-size:0.6rem;color:var(--muted);
-  letter-spacing:0.08em;line-height:1.5;margin-bottom:0.5rem;transition:color 0.4s;
-}
-@media(min-width:640px){.timeline-date{margin-bottom:0;padding-top:0.2rem;text-align:right;}}
-
-.timeline-content h3{
-  font-family:var(--h-font);font-weight:var(--h-weight);font-style:var(--h-style);
-  font-size:clamp(1.3rem,2.5vw,1.6rem);letter-spacing:var(--h-spacing);
-  text-transform:var(--h-case);margin-bottom:0.25rem;color:var(--text);
-  transition:font-family 0.3s,color 0.4s;
-}
-[data-theme="mutek"] .timeline-content h3{font-weight:500;}
-.timeline-content h4{
-  font-family:var(--b-font);font-size:0.66rem;color:var(--accent);
-  margin-bottom:1rem;font-weight:400;letter-spacing:0.06em;transition:color 0.4s;
-}
-.timeline-list{list-style:none;padding:0;}
-.timeline-list li{
-  font-family:var(--b-font);font-size:0.68rem;
-  padding:0.28rem 0 0.28rem 1rem;position:relative;color:var(--muted);line-height:1.5;transition:color 0.4s;
-}
-.timeline-list li::before{content:"–";position:absolute;left:0;color:var(--border2);}
-
-/* =====================================================
-   EXPLORATIONS
-   ===================================================== */
-.exploration-grid{display:grid;grid-template-columns:1fr;}
-@media(min-width:640px){.exploration-grid{grid-template-columns:repeat(2,1fr);}}
-@media(min-width:1024px){.exploration-grid{grid-template-columns:repeat(3,1fr);}}
-
-.exploration-card{
-  padding:2rem 1.5rem;border-top:1px solid var(--border);transition:background 0.15s,border-color 0.4s;
-}
-@media(min-width:768px){
-  .exploration-card{padding:2.5rem 3rem;}
-  .exploration-card:nth-child(odd){border-right:1px solid var(--border);}
-}
-.exploration-card:hover{background:var(--hover-bg);}
-.exploration-card h4{
-  font-family:var(--h-font);font-weight:var(--h-weight);font-style:var(--h-style);
-  font-size:1.1rem;letter-spacing:var(--h-spacing);text-transform:var(--h-case);
-  margin-bottom:0.75rem;color:var(--text);transition:font-family 0.3s,color 0.4s;
-}
-[data-theme="mutek"] .exploration-card h4{font-weight:500;}
-.exploration-card p{font-family:var(--b-font);font-size:0.68rem;color:var(--muted);line-height:1.75;transition:color 0.4s;}
-
-/* =====================================================
-   CONTACT
-   ===================================================== */
-.footer-cta-section{
-  padding:6rem 1.5rem;text-align:center;border-bottom:1px solid var(--border);
-  position:relative;z-index:10;overflow:hidden;transition:border-color 0.4s;
-}
-@media(min-width:768px){.footer-cta-section{padding:9rem 3rem;}}
-
-.footer-cta-section h2{
-  font-family:var(--h-font);font-weight:var(--h-weight);font-style:var(--h-style);
-  font-size:clamp(3rem,9vw,8rem);letter-spacing:var(--h-spacing);
-  text-transform:var(--h-case);margin-bottom:3rem;line-height:0.88;
-  color:var(--text);transition:font-family 0.3s,color 0.4s;
-}
-[data-theme="mutek"] .footer-cta-section h2{font-weight:300;}
-
-.cta-group{display:flex;flex-wrap:wrap;gap:0.75rem;justify-content:center;margin-bottom:3rem;}
-.footer-links-row{display:flex;flex-wrap:wrap;justify-content:center;gap:2rem;margin-bottom:2rem;}
-.footer-link{font-family:var(--b-font);font-size:0.62rem;color:var(--muted);letter-spacing:0.12em;text-transform:uppercase;transition:color 0.15s;}
-.footer-link:hover{color:var(--accent);}
-.footer-copyright{font-family:var(--b-font);font-size:0.6rem;color:var(--muted);letter-spacing:0.1em;transition:color 0.4s;}
-
-/* =====================================================
-   MOBILE NAV
-   ===================================================== */
-.cv-mobile-nav{
-  display:none;position:fixed;bottom:0;left:0;right:0;z-index:2000;
-  background:var(--sw-bg);backdrop-filter:blur(16px);border-top:1px solid var(--border);
-  padding:0.4rem 0.5rem calc(0.4rem + env(safe-area-inset-bottom));transition:background 0.4s;
-}
-@media(max-width:768px){.cv-mobile-nav{display:block;}}
-.cv-mobile-nav-inner{display:flex;justify-content:space-around;}
-.cv-mobile-nav a{
-  font-family:var(--b-font);font-size:0.58rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;
-  color:var(--muted);display:flex;align-items:center;justify-content:center;
-  padding:0.6rem 0.4rem;min-height:44px;flex:1;text-align:center;transition:color 0.15s;
-}
-.cv-mobile-nav a.active,.cv-mobile-nav a:hover{color:var(--accent);}
-
-a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none !important;transition:none !important;}}
-@media(max-width:480px){.theme-switcher{bottom:5rem;right:1rem;}}
+a:focus-visible,button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+@media(prefers-reduced-motion:reduce){ *,*::before,*::after { animation: none !important; transition: none !important; } }
+@media(max-width:480px){ h1.hero-title { font-size: 3.5rem !important; } }
 </style>
 </head>
-
 <body class="lang-fr cv-page">
 
-<!-- THEME SWITCHER -->
-<div class="theme-switcher" role="group" aria-label="Choisir un thème">
-  <div class="theme-switcher-label">thème</div>
-  <div class="theme-buttons">
-    <button class="theme-btn active" data-t="mutek"       data-label="MUTEK"              title="MUTEK"></button>
-    <button class="theme-btn"        data-t="dark"        data-label="Noir · Néon"         title="Noir · Néon"></button>
-    <button class="theme-btn"        data-t="white"       data-label="Blanc · Éditorial"   title="Blanc · Éditorial"></button>
-    <button class="theme-btn"        data-t="cream"       data-label="Crème · Sérif"       title="Crème · Sérif"></button>
-    <button class="theme-btn"        data-t="underground" data-label="Rose · Underground"  title="Rose · Underground"></button>
-  </div>
-</div>
-
 <header>
-  <div class="nav-logo"><a href="index.html" class="logo-text">Kim Maurice</a></div>
+  <a href="index.html" class="logo-link" aria-label="Kim Maurice — accueil">
+    <img src="img/logo-dark.png" alt="Kim Maurice" class="logo-img" id="logoImg" width="36" height="36">
+  </a>
   <nav class="cv-nav-links">
     <a href="index.html" data-fr="← Accueil" data-en="← Home">← Accueil</a>
     <a href="#expertise">Expertise</a>
@@ -422,142 +214,20 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
     <a href="#contact">Contact</a>
   </nav>
   <div class="header-right">
+    <button class="theme-toggle" id="themeToggle" aria-label="Changer le thème">☀</button>
     <button class="lang-btn" id="langBtn">EN</button>
   </div>
 </header>
 
 <div class="ticker-container">
   <div class="ticker-wrapper">
-    <span class="ticker-item" data-fr="De nouveaux projets, idées et expérimentations s'y ajoutent au fil du temps." data-en="New projects, ideas and experiments are added over time.">De nouveaux projets, idées et expérimentations s'y ajoutent au fil du temps.</span>
-    <span class="ticker-item" data-fr="De nouveaux projets, idées et expérimentations s'y ajoutent au fil du temps." data-en="New projects, ideas and experiments are added over time.">De nouveaux projets, idées et expérimentations s'y ajoutent au fil du temps.</span>
-    <span class="ticker-item" data-fr="De nouveaux projets, idées et expérimentations s'y ajoutent au fil du temps." data-en="New projects, ideas and experiments are added over time.">De nouveaux projets, idées et expérimentations s'y ajoutent au fil du temps.</span>
-    <span class="ticker-item" data-fr="De nouveaux projets, idées et expérimentations s'y ajoutent au fil du temps." data-en="New projects, ideas and experiments are added over time.">De nouveaux projets, idées et expérimentations s'y ajoutent au fil du temps.</span>
+    <span class="ticker-item" data-fr="CV · Kim Maurice · Designer Multimédia · Technologue Créative · Montréal" data-en="CV · Kim Maurice · Multimedia Designer · Creative Technologist · Montreal">CV · Kim Maurice · Designer Multimédia · Technologue Créative · Montréal</span>
+    <span class="ticker-item" data-fr="CV · Kim Maurice · Designer Multimédia · Technologue Créative · Montréal" data-en="CV · Kim Maurice · Multimedia Designer · Creative Technologist · Montreal">CV · Kim Maurice · Designer Multimédia · Technologue Créative · Montréal</span>
+    <span class="ticker-item" data-fr="CV · Kim Maurice · Designer Multimédia · Technologue Créative · Montréal" data-en="CV · Kim Maurice · Multimedia Designer · Creative Technologist · Montreal">CV · Kim Maurice · Designer Multimédia · Technologue Créative · Montréal</span>
+    <span class="ticker-item" data-fr="CV · Kim Maurice · Designer Multimédia · Technologue Créative · Montréal" data-en="CV · Kim Maurice · Multimedia Designer · Creative Technologist · Montreal">CV · Kim Maurice · Designer Multimédia · Technologue Créative · Montréal</span>
   </div>
 </div>
 
-<!-- HERO -->
-<section class="hero" id="home">
-  <div class="hero-left">
-    <p class="hero-eyebrow">Curriculum Vitae</p>
-    <h1 class="hero-title" data-fr="Kim<br>Maurice" data-en="Kim<br>Maurice">Kim<br>Maurice</h1>
-  </div>
-  <div class="hero-right">
-    <div>
-      <p class="hero-subtitle" data-fr="25 ans de design, code et multimédia. Montréal, Québec." data-en="25 years of design, code and multimedia. Montreal, Quebec.">25 ans de design, code et multimédia. Montréal, Québec.</p>
-      <br>
-      <p class="hero-location"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a0c9cec6cfe0cbc9cdcdc1d5d2c9c3c58ec3cfcd">[email&#160;protected]</a></p>
-    </div>
-    <div class="hero-actions">
-      <a href="Kim_Maurice_CV_2026_MTL.pdf" target="_blank" class="btn btn-primary"><span data-fr="⬇ Télécharger" data-en="⬇ Download">⬇ Télécharger</span></a>
-      <a href="/cdn-cgi/l/email-protection#10797e767f507b797d7d7165627973753e737f7d" class="btn btn-secondary"><span data-fr="Écrire" data-en="Contact">Écrire</span></a>
-    </div>
-  </div>
-</section>
-
-<!-- EXPERTISE -->
-<section class="cv-section" id="expertise">
-  <div class="section-header">
-    <h2 data-fr="Expertises" data-en="Expertise">Expertises</h2>
-    <span class="section-tag">06 domaines</span>
-  </div>
-  <div class="expertise-grid">
-    <div class="expertise-card"><div class="expertise-number">01</div><h3 data-fr="Design UX/UI" data-en="UX/UI Design">Design UX/UI</h3><ul><li data-fr="Recherche utilisateur" data-en="User research">Recherche utilisateur</li><li data-fr="Wireframing & prototypage" data-en="Wireframing & prototyping">Wireframing & prototypage</li><li>Design systems</li><li data-fr="Tests utilisateurs" data-en="User testing">Tests utilisateurs</li></ul></div>
-    <div class="expertise-card"><div class="expertise-number">02</div><h3 data-fr="E-Learning" data-en="E-Learning">E-Learning</h3><ul><li>Articulate Storyline & Rise</li><li data-fr="Scénarisation pédagogique" data-en="Instructional design">Scénarisation pédagogique</li><li data-fr="Gamification" data-en="Gamification">Gamification</li><li>LMS (Docebo, Moodle)</li></ul></div>
-    <div class="expertise-card"><div class="expertise-number">03</div><h3 data-fr="Développement" data-en="Development">Développement</h3><ul><li>HTML / CSS / JavaScript</li><li>React & Next.js</li><li>Three.js & WebGL</li><li>API & intégrations</li></ul></div>
-    <div class="expertise-card"><div class="expertise-number">04</div><h3 data-fr="Production AV" data-en="AV Production">Production AV</h3><ul><li>After Effects & Premiere</li><li>Motion design</li><li data-fr="Design sonore" data-en="Sound design">Design sonore</li><li>Cinéma / TV</li></ul></div>
-    <div class="expertise-card"><div class="expertise-number">05</div><h3 data-fr="IA Générative" data-en="Generative AI">IA Générative</h3><ul><li>Stable Diffusion & ComfyUI</li><li>Prompt engineering</li><li data-fr="Workflows Python" data-en="Python workflows">Workflows Python</li><li>Midjourney</li></ul></div>
-    <div class="expertise-card"><div class="expertise-number">06</div><h3 data-fr="Outils" data-en="Tools">Outils</h3><ul><li>Adobe Creative Suite</li><li>Figma</li><li>Ableton Live</li><li>Git / Vercel</li></ul></div>
-  </div>
-</section>
-
-<!-- TIMELINE -->
-<section class="cv-section" id="experience">
-  <div class="section-header">
-    <h2 data-fr="Parcours" data-en="Experience">Parcours</h2>
-    <span class="section-tag">25 ans</span>
-  </div>
-  <div class="timeline-grid">
-    <div class="timeline-item">
-      <div class="timeline-date">2024–2025</div>
-      <div class="timeline-content">
-        <h3 data-fr="Designer Multimédia & Dev" data-en="Multimedia Designer & Dev">Designer Multimédia & Dev</h3>
-        <h4 data-fr="@ Projets personnels & freelance" data-en="@ Personal projects & freelance">@ Projets personnels & freelance</h4>
-        <ul class="timeline-list">
-          <li data-fr="Instruments musicaux expérimentaux (Latent Organ, Hors Champ)" data-en="Experimental musical instruments (Latent Organ, Hors Champ)">Instruments musicaux expérimentaux (Latent Organ, Hors Champ)</li>
-          <li data-fr="Radio streaming Still FM — Next.js + Mixcloud / Twitch" data-en="Still FM streaming radio — Next.js + Mixcloud / Twitch">Radio streaming Still FM — Next.js + Mixcloud / Twitch</li>
-          <li data-fr="IA générative : Stable Diffusion, ComfyUI, workflows Python" data-en="Generative AI: Stable Diffusion, ComfyUI, Python workflows">IA générative : Stable Diffusion, ComfyUI, workflows Python</li>
-        </ul>
-      </div>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-date">2020–2024</div>
-      <div class="timeline-content">
-        <h3 data-fr="Conceptrice Pédagogique & UX" data-en="Instructional Designer & UX">Conceptrice Pédagogique & UX</h3>
-        <h4>@ Technologia / GardaWorld</h4>
-        <ul class="timeline-list">
-          <li data-fr="15+ formations e-learning immersives (Articulate Storyline)" data-en="15+ immersive e-learning courses (Articulate Storyline)">15+ formations e-learning immersives (Articulate Storyline)</li>
-          <li data-fr="Scénarisation pédagogique et gamification" data-en="Instructional design and gamification">Scénarisation pédagogique et gamification</li>
-          <li data-fr="Supervision d'équipe créative, gestion de budgets" data-en="Creative team supervision, budget management">Supervision d'équipe créative, gestion de budgets</li>
-        </ul>
-      </div>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-date">2017–2021</div>
-      <div class="timeline-content">
-        <h3 data-fr="Designer Graphique & Multimédia" data-en="Graphic & Multimedia Designer">Designer Graphique & Multimédia</h3>
-        <h4 data-fr="@ Productions Cinéma & TV" data-en="@ Film & TV Productions">@ Productions Cinéma & TV</h4>
-        <ul class="timeline-list">
-          <li data-fr="15+ productions (Bad Blood, Unité 9, Kuessipan, Nadia Butterfly…)" data-en="15+ productions (Bad Blood, Unité 9, Kuessipan, Nadia Butterfly…)">15+ productions (Bad Blood, Unité 9, Kuessipan, Nadia Butterfly…)</li>
-          <li data-fr="Props numériques, interfaces fictives, motion design" data-en="Digital props, fictional interfaces, motion design">Props numériques, interfaces fictives, motion design</li>
-        </ul>
-      </div>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-date">2000–2016</div>
-      <div class="timeline-content">
-        <h3 data-fr="Designer Web & Multimédia" data-en="Web & Multimedia Designer">Designer Web & Multimédia</h3>
-        <h4>@ NURUN, LOTO-QUÉBEC, MARVVY, OXFAM</h4>
-        <ul class="timeline-list">
-          <li data-fr="Expériences web interactives & identités visuelles" data-en="Interactive web experiences & visual identities">Expériences web interactives & identités visuelles</li>
-          <li data-fr="Conseil stratégique en technologies (OXFAM)" data-en="Strategic technology consulting (OXFAM)">Conseil stratégique en technologies (OXFAM)</li>
-          <li data-fr="Installations interactives, production audiovisuelle" data-en="Interactive installations, audiovisual production">Installations interactives, production audiovisuelle</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- EXPLORATIONS -->
-<section class="cv-section" id="explorations">
-  <div class="section-header">
-    <h2 data-fr="Explorations" data-en="Explorations">Explorations</h2>
-    <span class="section-tag" data-fr="Projets personnels" data-en="Personal projects">Projets personnels</span>
-  </div>
-  <div class="exploration-grid">
-    <div class="exploration-card"><h4 data-fr="DJ & Radio" data-en="DJ & Radio">DJ & Radio</h4><p data-fr="DJ actif sur Still FM, radio underground montréalaise." data-en="Active DJ on Still FM, Montreal's underground radio.">DJ actif sur Still FM, radio underground montréalaise.</p></div>
-    <div class="exploration-card"><h4 data-fr="IA Générative" data-en="Generative AI">IA Générative</h4><p data-fr="Stable Diffusion, ComfyUI, workflows créatifs Python." data-en="Stable Diffusion, ComfyUI, creative Python workflows.">Stable Diffusion, ComfyUI, workflows créatifs Python.</p></div>
-    <div class="exploration-card"><h4 data-fr="Instruments Expérimentaux" data-en="Experimental Instruments">Instruments Expérimentaux</h4><p data-fr="MIDI, IA générative, visualisations 3D temps réel." data-en="MIDI, generative AI, real-time 3D visualizations.">MIDI, IA générative, visualisations 3D temps réel.</p></div>
-    <div class="exploration-card"><h4 data-fr="Développement Web" data-en="Web Development">Développement Web</h4><p data-fr="Three.js, Next.js, WebGL, technologies immersives." data-en="Three.js, Next.js, WebGL, immersive technologies.">Three.js, Next.js, WebGL, technologies immersives.</p></div>
-    <div class="exploration-card"><h4 data-fr="Design Sonore" data-en="Sound Design">Design Sonore</h4><p data-fr="Installations audio-visuelles pour artistes et événements." data-en="Audio-visual installations for artists and events.">Installations audio-visuelles pour artistes et événements.</p></div>
-    <div class="exploration-card"><h4 data-fr="Apprentissage Continu" data-en="Continuous Learning">Apprentissage Continu</h4><p data-fr="WebGL, IA, IoT, VR/AR, cultures numériques." data-en="WebGL, AI, IoT, VR/AR, digital cultures.">WebGL, IA, IoT, VR/AR, cultures numériques.</p></div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section class="footer-cta-section" id="contact">
-  <h2 data-fr="Travaillons<br>ensemble." data-en="Let's work<br>together.">Travaillons<br>ensemble.</h2>
-  <div class="cta-group">
-    <a href="/cdn-cgi/l/email-protection#b8d1d6ded7f8d3d1d5d5d9cdcad1dbdd96dbd7d5" class="btn btn-primary"><span data-fr="✉ Écrire" data-en="✉ Write">✉ Écrire</span></a>
-    <a href="Kim_Maurice_CV_2026_MTL.pdf" target="_blank" class="btn btn-secondary"><span data-fr="⬇ CV PDF" data-en="⬇ CV PDF">⬇ CV PDF</span></a>
-  </div>
-  <div class="footer-links-row">
-    <a href="/cdn-cgi/l/email-protection#f79e999198b79c9e9a9a9682859e9492d994989a" class="footer-link">Email</a>
-    <a href="https://linkedin.com/in/kimmaurice" target="_blank" class="footer-link">LinkedIn</a>
-    <a href="https://github.com/Bertarose/" target="_blank" class="footer-link">Github</a>
-    <a href="https://www.imdb.com/name/nm9371635/" target="_blank" class="footer-link">IMDb</a>
-  </div>
-  <p class="footer-copyright">© 2025 Kim Maurice</p>
-</section>
 
 <nav class="cv-mobile-nav" aria-label="Navigation mobile">
   <div class="cv-mobile-nav-inner">
@@ -569,36 +239,53 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
   </div>
 </nav>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-// THEME
-const THEME_KEY='km-theme';
-const html=document.documentElement;
-function setTheme(t){
-  html.setAttribute('data-theme',t);
-  localStorage.setItem(THEME_KEY,t);
-  document.querySelectorAll('.theme-btn').forEach(b=>b.classList.toggle('active',b.dataset.t===t));
+<script>
+// THEME TOGGLE
+const THEME_KEY = 'km-theme';
+const btn = document.getElementById('themeToggle');
+const logoImg = document.getElementById('logoImg');
+function setTheme(t) {
+  document.documentElement.setAttribute('data-theme', t);
+  localStorage.setItem(THEME_KEY, t);
+  btn.textContent = t === 'dark' ? '☀' : '☾';
+  if (logoImg) logoImg.src = t === 'dark' ? 'img/logo-light.png' : 'img/logo-dark.png';
 }
-document.querySelectorAll('.theme-btn').forEach(b=>b.addEventListener('click',()=>setTheme(b.dataset.t)));
-setTheme(localStorage.getItem(THEME_KEY)||'mutek');
+btn.addEventListener('click', () => {
+  setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+});
+setTheme(localStorage.getItem(THEME_KEY) || 'dark');
 
-// LANG
-let lang=localStorage.getItem('preferredLanguage')||'fr';
-function applyLang(l){
-  document.documentElement.lang=l;
-  document.body.classList.remove('lang-fr','lang-en');
-  document.body.classList.add('lang-'+l);
-  document.getElementById('langBtn').textContent=l==='fr'?'EN':'FR';
-  document.querySelectorAll('[data-fr][data-en]').forEach(el=>{el.innerHTML=el.getAttribute('data-'+l);});
+// LANGUAGE
+let lang = localStorage.getItem('preferredLanguage') || 'fr';
+function applyLang(l) {
+  document.documentElement.lang = l;
+  document.body.classList.toggle('lang-fr', l === 'fr');
+  document.body.classList.toggle('lang-en', l === 'en');
+  document.getElementById('langBtn').textContent = l === 'fr' ? 'EN' : 'FR';
+  document.querySelectorAll('[data-fr][data-en]').forEach(el => {
+    el.innerHTML = el.getAttribute('data-' + l);
+  });
 }
-document.getElementById('langBtn').addEventListener('click',()=>{
-  lang=lang==='fr'?'en':'fr';
-  localStorage.setItem('preferredLanguage',lang);
+document.getElementById('langBtn').addEventListener('click', () => {
+  lang = lang === 'fr' ? 'en' : 'fr';
+  localStorage.setItem('preferredLanguage', lang);
   applyLang(lang);
 });
 applyLang(lang);
 
-// MOBILE NAV
+// MOBILE NAV scroll highlight
 (function(){
-  if(window.innerWidth>768)return;
-  const links=document.querySelectorAll('.cv-mobile-nav a');
-  const s
+  if(window.innerWidth > 768) return;
+  const links = document.querySelectorAll('.cv-mobile-nav a');
+  const sections = document.querySelectorAll('section[id]');
+  function setActive(){
+    let cur = '';
+    sections.forEach(s => { if(window.pageYOffset >= s.offsetTop - 200) cur = s.id; });
+    links.forEach(l => l.classList.toggle('active', l.dataset.section === cur));
+  }
+  window.addEventListener('scroll', setActive, {passive:true});
+  setActive();
+})();
+</script>
+</body>
+</html>
