@@ -61,10 +61,10 @@ h1.hero-title {
   justify-content:space-between; flex-wrap:wrap; gap:1.5rem;
 }
 .hero-sub {
-  font-family:var(--bf); font-size:.68rem; color:var(--muted);
-  line-height:1.9; max-width:40ch;
+  font-family:var(--bf); font-size:.75rem; color:rgba(255,255,255,.78);
+  line-height:2.0; max-width:40ch;
 }
-[data-theme="light"] .hero-sub { color:#444; }
+[data-theme="light"] .hero-sub { color:#333; font-size:.76rem; }
 .hero-actions { display:flex; flex-wrap:wrap; gap:.6rem; align-items:center; }
 
 .btn-hero {
@@ -217,11 +217,11 @@ h1.hero-title {
 
 /* ── LIVE VISUALIZER block inside featured card ── */
 .exp-visual {
-  width:100%; aspect-ratio:16/9; position:relative; overflow:hidden;
-  background:rgba(0,0,0,.2); border:1px solid var(--border);
+  width:100%; min-height:220px; height:100%; position:relative; overflow:hidden;
+  background:rgba(20,15,50,.6); border:1px solid var(--border);
 }
-[data-theme="light"] .exp-visual { background:rgba(0,0,0,.04); }
-#miniCanvas { width:100%; height:100%; display:block; }
+[data-theme="light"] .exp-visual { background:rgba(0,0,0,.06); }
+#miniCanvas { position:absolute; inset:0; width:100%; height:100%; display:block; }
 
 /* ══════════════════════════════════════════════
    ABOUT STRIP
@@ -299,6 +299,13 @@ footer p { font-family:var(--bf); font-size:.55rem; color:var(--muted); letter-s
 .footer-nav { display:flex; gap:1.5rem; flex-wrap:wrap; }
 .footer-nav a { font-family:var(--bf); font-size:.55rem; color:var(--muted); letter-spacing:.1em; text-transform:uppercase; transition:color .15s; }
 .footer-nav a:hover { color:var(--text); }
+
+/* ── MOBILE READABILITY ── */
+@media(max-width:640px) {
+  .hero-sub { font-size:.8rem!important; line-height:1.9!important; }
+  .labo-intro-text { font-size:.75rem!important; }
+  .about-text { font-size:.78rem!important; }
+}
 </style>
 </head>
 <body class="lang-fr">
@@ -570,8 +577,9 @@ footer p { font-family:var(--bf); font-size:.55rem; color:var(--muted); letter-s
   let t = 0;
 
   function resize() {
-    c.width  = c.offsetWidth;
-    c.height = c.offsetHeight;
+    const rect = c.parentElement.getBoundingClientRect();
+    c.width  = rect.width  || c.offsetWidth  || 400;
+    c.height = rect.height || c.offsetHeight || 220;
   }
 
   function draw() {
