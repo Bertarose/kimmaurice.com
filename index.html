@@ -270,21 +270,6 @@ body.fade-out {
   document.getElementById('liveBadge').classList.add('visible');
 })();
 
-// LANGUAGE
-let lang = localStorage.getItem('preferredLanguage') || 'fr';
-function applyLang(l) {
-  document.documentElement.lang = l;
-  document.getElementById('langBtn').textContent = l === 'fr' ? 'EN' : 'FR';
-  document.querySelectorAll('[data-fr][data-en]').forEach(el => {
-    el.innerHTML = el.getAttribute('data-' + l);
-  });
-}
-document.getElementById('langBtn').addEventListener('click', () => {
-  lang = lang === 'fr' ? 'en' : 'fr';
-  localStorage.setItem('preferredLanguage', lang);
-  applyLang(lang);
-});
-applyLang(lang);
 
 // ENTER — fade out
 document.getElementById('enterLink').addEventListener('click', function(e) {
@@ -293,5 +278,6 @@ document.getElementById('enterLink').addEventListener('click', function(e) {
   setTimeout(() => { window.location.href = 'cv.html'; }, 380);
 });
 </script>
+<script src="script.js"></script>
 </body>
 </html>
