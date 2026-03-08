@@ -36,31 +36,7 @@
 }
 @media(min-width:768px) { [data-theme="dark"] .hero-text { padding:0 2.5rem 6.5rem; } }
 
-[data-theme="light"] .hero {
-  display:grid; grid-template-columns:1fr;
-  border-bottom:1px solid var(--border); overflow:hidden;
-}
-@media(min-width:768px) {
-  [data-theme="light"] .hero {
-    grid-template-columns:52% 48%;
-    min-height:calc(90vh - 64px);
-  }
-}
-[data-theme="light"] .hero-image {
-  position:relative; overflow:hidden; min-height:56vw; background:#ccc; order:0;
-}
-@media(min-width:768px) { [data-theme="light"] .hero-image { min-height:auto; } }
-[data-theme="light"] .hero-image img {
-  width:100%; height:100%; object-fit:cover; object-position:center 18%;
-  filter:var(--img-filter); transition:filter .6s;
-}
-[data-theme="light"] .hero:hover .hero-image img { filter:grayscale(70%) contrast(1.06) brightness(.82); }
-[data-theme="light"] .hero-text {
-  padding:2.5rem 1.75rem 3rem;
-  display:flex; flex-direction:column; justify-content:flex-end;
-  background:var(--bg); border-left:1px solid var(--border); order:1;
-}
-@media(min-width:768px) { [data-theme="light"] .hero-text { padding:3.5rem 3rem 4rem; } }
+/* light = dark, pas d'override hero */
 
 /* hero bottom nav bar — dark only */
 .hero-nav-bar { display:none; }
@@ -93,13 +69,11 @@ h1 {
   letter-spacing:var(--hls); text-transform:var(--hcase);
   color:var(--text); line-height:.9; margin-bottom:1.4rem; transition:color .3s;
 }
-[data-theme="dark"]  h1 { font-size:clamp(2.6rem,5.5vw,5.5rem); font-weight:400; color:#fff; text-shadow:0 2px 32px rgba(0,0,0,.4); }
-[data-theme="light"] h1 { font-size:clamp(2.8rem,5.8vw,5rem); font-weight:900; color:#111; }
+h1 { font-size:clamp(2.6rem,5.5vw,5.5rem); font-weight:400; color:#fff; text-shadow:0 2px 32px rgba(0,0,0,.4); }
 .hero-desc {
   font-family:var(--bf); font-size:.74rem; line-height:1.85;
   color:rgba(255,255,255,.78); max-width:38ch; margin-bottom:2rem;
 }
-[data-theme="light"] .hero-desc { color:#333; font-size:.75rem; }
 .hero-cta { display:flex; flex-wrap:wrap; gap:.6rem; align-items:center; }
 .btn-primary-hero {
   font-family:var(--bf); font-size:.62rem; font-weight:500;
@@ -110,13 +84,12 @@ h1 {
   transition:all .2s;
 }
 .btn-primary-hero:hover { background:var(--btn-hover-bg); color:var(--btn-hover-txt); }
-[data-theme="dark"] .btn-primary-hero {
+.btn-primary-hero {
   font-family:'Barlow Condensed',sans-serif; font-size:.95rem;
   font-weight:400; text-transform:none; letter-spacing:.02em;
   border-color:rgba(255,255,255,.55);
 }
-[data-theme="dark"]  .btn-primary-hero:hover { background:#fff; color:#000; border-color:#fff; }
-[data-theme="light"] .btn-primary-hero:hover { background:transparent; color:#111; }
+.btn-primary-hero:hover { background:#fff; color:#000; border-color:#fff; }
 .btn-ghost {
   font-family:var(--bf); font-size:.62rem; color:var(--muted);
   letter-spacing:.08em; padding:.72rem 0; min-height:42px;
@@ -152,7 +125,6 @@ h1 {
   letter-spacing:var(--hls); text-transform:var(--hcase);
 }
 [data-theme="dark"]  .grid-title { font-weight:500; font-size:clamp(1rem,2vw,1.15rem); }
-[data-theme="light"] .grid-title { font-size:clamp(.88rem,1.6vw,1rem); }
 
 .grid-meta { display:flex; flex-wrap:wrap; gap:.22rem; }
 .grid-meta span {
@@ -161,13 +133,10 @@ h1 {
 }
 .grid-meta .badge-complete { background:var(--badge-bg)!important; color:var(--badge-txt)!important; font-weight:500; }
 .grid-meta .badge-dev { background:rgba(180,140,0,.1)!important; }
-[data-theme="dark"]  .grid-meta .badge-dev { color:#c8a800!important; }
-[data-theme="light"] .grid-meta .badge-dev { color:#7a5c00!important; }
-.grid-hover-desc {
+[data-theme="dark"]  .grid-meta .badge-dev { color:#c8a800!important; }.grid-hover-desc {
   max-height:0; overflow:hidden; font-family:var(--bf); font-size:.58rem; line-height:1.55;
   transition:max-height .22s,opacity .22s,margin-top .22s; opacity:0;
 }
-[data-theme="light"] .grid-item:hover .grid-hover-desc { color:var(--bg); }
 @media(hover:none) { .grid-hover-desc { max-height:none!important; opacity:.65!important; margin-top:.4rem!important; } }
 
 /* ══════════════════════════════════════════════
@@ -233,7 +202,6 @@ h1 {
 [data-theme="dark"] .expertise-card h3 { font-weight:500; }
 .expertise-card ul { list-style:none; }
 .expertise-card li { font-family:var(--bf); font-size:.65rem; padding:.26rem 0 .26rem 1rem; position:relative; color:var(--muted); line-height:1.4; }
-[data-theme="light"] .expertise-card li { color:#444; font-size:.67rem; }
 .expertise-card li::before { content:"–"; position:absolute; left:0; color:var(--border2); }
 
 /* TIMELINE */
@@ -260,11 +228,8 @@ h1 {
 @media(min-width:640px) { .timeline-date { margin-bottom:0; padding-top:.2rem; text-align:right; } }
 .timeline-content h3 { font-family:var(--hf); font-weight:var(--hw); font-size:clamp(1.2rem,2.2vw,1.55rem); letter-spacing:var(--hls); text-transform:var(--hcase); margin-bottom:.25rem; color:var(--text); }
 [data-theme="dark"] .timeline-content h3 { font-weight:500; }
-.timeline-content h4 { font-family:var(--bf); font-size:.65rem; color:var(--accent); margin-bottom:1rem; font-weight:400; letter-spacing:.06em; }
-[data-theme="light"] .timeline-content h4 { color:#555; }
-.timeline-list { list-style:none; }
+.timeline-content h4 { font-family:var(--bf); font-size:.65rem; color:var(--accent); margin-bottom:1rem; font-weight:400; letter-spacing:.06em; }.timeline-list { list-style:none; }
 .timeline-list li { font-family:var(--bf); font-size:.67rem; padding:.26rem 0 .26rem 1rem; position:relative; color:var(--muted); line-height:1.5; }
-[data-theme="light"] .timeline-list li { color:#444; font-size:.69rem; }
 .timeline-list li::before { content:"–"; position:absolute; left:0; color:var(--border2); }
 
 /* EXPLORATIONS */
@@ -277,7 +242,6 @@ h1 {
 .exploration-card h4 { font-family:var(--hf); font-weight:var(--hw); font-size:1.1rem; letter-spacing:var(--hls); text-transform:var(--hcase); margin-bottom:.75rem; color:var(--text); }
 [data-theme="dark"] .exploration-card h4 { font-weight:500; }
 .exploration-card p { font-family:var(--bf); font-size:.67rem; color:var(--muted); line-height:1.8; }
-[data-theme="light"] .exploration-card p { color:#444; font-size:.69rem; }
 
 /* ══════════════════════════════════════════════
    CONTACT CTA
@@ -303,8 +267,7 @@ h1 {
 @media(max-width:768px) { .contact-section { padding-bottom:calc(6rem + 60px)!important; } }
 
 @media(max-width:380px) {
-  [data-theme="dark"]  h1 { font-size:2.2rem!important; }
-  [data-theme="light"] h1 { font-size:2.3rem!important; }
+  h1 { font-size:2.2rem!important; }
 }
 </style>
 </head>
@@ -323,7 +286,7 @@ h1 {
     <a href="#contact">Contact</a>
   </nav>
   <div class="header-right">
-    <button class="theme-toggle" id="themeToggle" aria-label="Changer le thème">☀</button>
+    <button class="theme-toggle" id="themeToggle" aria-label="Changer le thème" style="display:none">☀</button>
     <button class="lang-btn" id="langBtn">EN</button>
     <a href="Kim_Maurice_CV_2026_MTL.pdf" target="_blank" class="btn-header">⬇ CV PDF</a>
   </div>
@@ -662,11 +625,11 @@ h1 {
   <section class="contact-section" id="contact">
     <h2 data-fr="Travaillons<br>ensemble." data-en="Let's work<br>together.">Travaillons<br>ensemble.</h2>
     <div class="cta-group">
-      <a href="mailto:info@kimmaurice.com" class="btn btn-primary"><span data-fr="✉ Écrire" data-en="✉ Write">✉ Écrire</span></a>
+      <a href="/cdn-cgi/l/email-protection#85ecebe3eac5eeece8e8e4f0f7ece6e0abe6eae8" class="btn btn-primary"><span data-fr="✉ Écrire" data-en="✉ Write">✉ Écrire</span></a>
       <a href="Kim_Maurice_CV_2026_MTL.pdf" target="_blank" class="btn btn-secondary"><span data-fr="⬇ CV PDF" data-en="⬇ CV PDF">⬇ CV PDF</span></a>
     </div>
     <div class="footer-links-row">
-      <a href="mailto:info@kimmaurice.com" class="footer-link">Email</a>
+      <a href="/cdn-cgi/l/email-protection#afc6c1c9c0efc4c6c2c2cedaddc6ccca81ccc0c2" class="footer-link">Email</a>
       <a href="https://linkedin.com/in/kimmaurice" target="_blank" class="footer-link">LinkedIn</a>
       <a href="https://github.com/Bertarose/" target="_blank" class="footer-link">Github</a>
       <a href="https://www.imdb.com/name/nm9371635/" target="_blank" class="footer-link">IMDb</a>
@@ -688,7 +651,7 @@ h1 {
   </div>
 </nav>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ── HOVER DESCRIPTIONS ──
 document.querySelectorAll('.grid-item[data-desc]').forEach(item => {
   const el = item.querySelector('.grid-hover-desc');
@@ -738,11 +701,4 @@ applyLang(lang);
   function setActive() {
     let cur = '';
     sections.forEach(s => { if (window.pageYOffset >= s.offsetTop - 200) cur = s.id; });
-    links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + cur));
-  }
-  window.addEventListener('scroll', setActive, {passive:true});
-  setActive();
-})();
-</script>
-</body>
-</html>
+    links.forEa
