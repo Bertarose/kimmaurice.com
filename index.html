@@ -295,68 +295,71 @@ a { text-decoration: none; color: inherit; }
 .theme-btn:hover::after { opacity: 1; }
 
 /* =====================================================
-   HEADER — MUTEK style: razor thin, all caps micro
+   HEADER
    ===================================================== */
 header {
   position: sticky; top: 0; z-index: 999;
-  padding: 0 1.5rem;
-  height: 48px;
-  display: flex; justify-content: space-between; align-items: center;
+  padding: 0 2rem;
+  height: 56px;
+  display: flex; justify-content: space-between; align-items: center; gap: 2rem;
   background: var(--bg); border-bottom: 1px solid var(--border);
   backdrop-filter: blur(16px);
-  transition: background 0.4s, border-color 0.4s, height 0.3s;
+  transition: background 0.4s, border-color 0.4s;
 }
+@media (min-width: 768px) { header { padding: 0 3rem; height: 60px; } }
+
 /* MUTEK: header floats transparently over the image */
 [data-theme="mutek"] header {
   position: fixed;
   background: transparent;
   border-bottom: none;
 }
+
 /* MUTEK: hide ticker, it breaks the cinematic look */
 [data-theme="mutek"] .ticker-container { display: none; }
-/* MUTEK: hero takes full viewport, accounts for no ticker */
+/* MUTEK: hero takes full viewport */
 [data-theme="mutek"] .hero { min-height: 100vh; }
-@media (min-width: 768px) { header { padding: 0 3rem; height: 52px; } }
 
 .logo-text {
-  font-family: var(--h-font);
-  font-weight: var(--logo-weight);
-  font-style: var(--h-style);
-  font-size: var(--logo-size);
-  letter-spacing: var(--logo-spacing);
-  text-transform: var(--h-case);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 1.25rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   color: var(--text);
-  transition: color 0.2s, font-size 0.3s;
+  transition: color 0.2s;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 .logo-text:hover { color: var(--accent); }
 
-/* MUTEK: logo sobrement grand, sans-serif */
+/* MUTEK: slightly bigger, white */
 [data-theme="mutek"] .logo-text {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 1.5rem;
-  letter-spacing: 0.02em;
-  font-weight: 700;
-  font-style: normal;
-  text-transform: uppercase;
+  font-size: 1.35rem;
+  letter-spacing: 0.04em;
   color: #fff;
 }
+[data-theme="mutek"] .logo-text:hover { opacity: 0.75; color: #fff; }
 
-.header-right { display: flex; align-items: center; gap: 0.6rem; }
+.header-right { display: flex; align-items: center; gap: 0.5rem; flex-shrink: 0; }
 
 .lang-btn {
-  font-family: var(--b-font); font-size: 0.65rem; font-weight: 500; letter-spacing: 0.12em;
+  font-family: var(--b-font); font-size: 0.62rem; font-weight: 500; letter-spacing: 0.12em;
   background: transparent; color: var(--muted); border: 1px solid var(--border);
-  padding: 0.35rem 0.7rem; cursor: pointer; transition: all 0.2s; min-height: 32px;
+  padding: 0.3rem 0.65rem; cursor: pointer; transition: all 0.2s; min-height: 30px;
+  white-space: nowrap;
 }
 .lang-btn:hover { color: var(--accent); border-color: var(--accent); }
 
 .cv-link-header {
-  font-family: var(--b-font); font-size: 0.65rem; font-weight: 500; letter-spacing: 0.1em;
-  display: inline-flex; align-items: center; gap: 0.4rem;
-  padding: 0.35rem 0.85rem; border: 1px solid var(--border2); color: var(--text);
-  transition: all 0.2s; min-height: 32px; background: transparent;
+  font-family: var(--b-font); font-size: 0.62rem; font-weight: 500; letter-spacing: 0.1em;
+  display: inline-flex; align-items: center; gap: 0.35rem;
+  padding: 0.3rem 0.8rem; border: 1px solid var(--border2); color: var(--text);
+  transition: all 0.2s; min-height: 30px; background: transparent; white-space: nowrap;
 }
 .cv-link-header:hover { background: var(--accent); color: var(--btn-txt); border-color: var(--accent); }
+[data-theme="mutek"] .cv-link-header:hover { background: #fff; color: #000; border-color: #fff; }
 
 /* =====================================================
    TICKER
@@ -791,7 +794,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
       <a href="#projects" data-fr="Projets" data-en="Projects">Projets</a>
       <a href="cv.html#expertise" data-fr="Expertises" data-en="Expertise">Expertises</a>
       <a href="cv.html#explorations" data-fr="Explorations" data-en="Explorations">Explorations</a>
-      <a href="mailto:info@kimmaurice.com">Contact</a>
+      <a href="/cdn-cgi/l/email-protection#6f060109002f040602020e1a1d060c0a410c0002">Contact</a>
     </nav>
     <div class="hero-text">
       <p class="hero-kicker" data-fr="Montréal · 25 ans d'expérience" data-en="Montréal · 25 years experience">Montréal · 25 ans d'expérience</p>
@@ -953,7 +956,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ── HOVER DESCRIPTIONS
 document.querySelectorAll('.grid-item[data-desc]').forEach(item => {
   const el = item.querySelector('.grid-hover-desc');
@@ -978,7 +981,4 @@ function applyLang(l) {
   document.body.classList.remove('lang-fr','lang-en');
   document.body.classList.add('lang-'+l);
   document.getElementById('langBtn').textContent = l === 'fr' ? 'EN' : 'FR';
-  document.querySelectorAll('[data-fr][data-en]').forEach(el => { el.innerHTML = el.getAttribute('data-'+l); });
-}
-document.getElementById('langBtn').addEventListener('click', () => {
-  lan
+  document.querySelectorAll('[data-fr][
