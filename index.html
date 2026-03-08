@@ -1,638 +1,279 @@
 <!DOCTYPE html>
-<html lang="fr" data-theme="dark">
+<html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kim Maurice | Technologue créative · Montréal</title>
-  <meta name="description" content="Kim Maurice — technologue créative, designer multimédia, chercheuse en IA. Espace d'expérimentation à Montréal.">
+  <meta name="description" content="Kim Maurice — technologue créative, designer multimédia, Montréal.">
   <link rel="icon" type="image/x-icon" href="img/favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-WYM83ME5LK"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-WYM83ME5LK',{anonymize_ip:true});</script>
 <style>
-/* ══════════════════════════════════════════════
-   INDEX — PAGE D'ACCUEIL & LABO
-   ══════════════════════════════════════════════ */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html, body {
+  width:100%; height:100%;
+  overflow:hidden;
+  font-family:'DM Mono', monospace;
+  background:#000;
+  -webkit-font-smoothing:antialiased;
+}
+a { text-decoration:none; color:inherit; }
 
-/* ── CANVAS BACKGROUND ── */
-#bgCanvas {
-  position:fixed; inset:0; z-index:0;
+/* BACKGROUND */
+#bg { position:fixed; inset:0; z-index:0; }
+#bg-img {
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  object-fit:cover; object-position:center 20%;
+  display:block;
+}
+#bg-stream {
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  border:none; display:none;
   pointer-events:none;
-  opacity:1;
-  transition:opacity .4s;
+  /* hack YouTube/Twitch pour couvrir tout l'écran */
+  transform:scale(1.05);
 }
-[data-theme="light"] #bgCanvas { opacity:.18; }
 
-body { position:relative; }
-main { position:relative; z-index:1; }
+/* OVERLAY gradient */
+#overlay {
+  position:fixed; inset:0; z-index:1;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(4,2,14,.5)   0%,
+      rgba(4,2,14,.18)  35%,
+      rgba(4,2,14,.52)  70%,
+      rgba(4,2,14,.92)  100%
+    );
+}
 
-/* ── HERO — plein écran, texte seul ── */
-.hero {
-  min-height:100vh;
-  display:flex; flex-direction:column; justify-content:flex-end;
-  padding:0 1.5rem 4.5rem;
+/* GRAIN canvas */
+#grain-canvas {
+  position:fixed; inset:0; z-index:2;
+  pointer-events:none;
+  opacity:.5;
+  mix-blend-mode:overlay;
+}
+
+/* UI layer */
+.ui {
+  position:fixed; inset:0; z-index:3;
+  display:flex; flex-direction:column;
+  justify-content:space-between;
+  padding:1.75rem;
+}
+@media(min-width:768px) { .ui { padding:2.5rem; } }
+
+/* top */
+.top { display:flex; justify-content:space-between; align-items:flex-start; }
+.logo-img { width:32px; height:32px; object-fit:contain; opacity:.85; transition:opacity .2s; }
+.logo-img:hover { opacity:1; }
+.top-right { display:flex; align-items:center; gap:.6rem; }
+
+.lang-btn {
+  font-family:'DM Mono', monospace;
+  font-size:.55rem; letter-spacing:.16em; text-transform:uppercase;
+  color:rgba(255,255,255,.52); background:transparent;
+  border:1px solid rgba(255,255,255,.18);
+  padding:.32rem .58rem; cursor:pointer;
+  transition:color .2s, border-color .2s;
+}
+.lang-btn:hover { color:#fff; border-color:rgba(255,255,255,.5); }
+
+.live-badge {
+  display:none;
+  font-family:'DM Mono', monospace;
+  font-size:.52rem; letter-spacing:.18em; text-transform:uppercase;
+  color:#ff3b30; border:1px solid rgba(255,59,48,.4);
+  padding:.32rem .68rem;
+  align-items:center; gap:.4rem;
+}
+.live-badge.visible { display:flex; }
+.live-dot {
+  width:5px; height:5px; border-radius:50%; background:#ff3b30;
+  animation:livepulse 1.2s ease-in-out infinite;
+}
+@keyframes livepulse { 0%,100%{opacity:1} 50%{opacity:.25} }
+
+/* center — title */
+.center {
+  flex:1; display:flex; align-items:flex-end;
+  padding-bottom:.5rem;
+}
+.title-block { max-width:680px; }
+
+.kicker {
+  font-family:'DM Mono', monospace;
+  font-size:.54rem; letter-spacing:.24em; text-transform:uppercase;
+  color:rgba(255,255,255,.45); margin-bottom:1rem;
+  display:flex; align-items:center; gap:.7rem;
+}
+.kicker::before {
+  content:''; display:block; width:20px; height:1px;
+  background:rgba(255,255,255,.35);
+}
+
+h1 {
+  font-family:'Barlow Condensed', sans-serif;
+  font-weight:300;
+  font-size:clamp(2.6rem, 5.8vw, 6.2rem);
+  line-height:.88;
+  letter-spacing:-.01em;
+  color:rgba(255,255,255,.9);
+}
+
+/* bottom */
+.bottom { display:flex; justify-content:space-between; align-items:flex-end; }
+
+.bottom-left {
+  font-family:'DM Mono', monospace;
+  font-size:.52rem; letter-spacing:.12em; text-transform:uppercase;
+  color:rgba(255,255,255,.28); line-height:1.9;
+}
+
+/* enter button */
+.enter-link {
+  display:flex; align-items:center; gap:1rem;
+  font-family:'DM Mono', monospace;
+  font-size:.6rem; letter-spacing:.22em; text-transform:uppercase;
+  color:rgba(255,255,255,.65);
+  cursor:pointer; transition:color .25s;
+  user-select:none;
+}
+.enter-link:hover { color:#fff; }
+.enter-link:hover .enter-line { width:52px; background:#fff; }
+.enter-link:hover .enter-line::after { border-color:#fff; }
+
+.enter-line {
+  display:inline-block; width:38px; height:1px;
+  background:rgba(255,255,255,.5);
   position:relative;
+  transition:width .3s ease, background .25s;
 }
-@media(min-width:768px) { .hero { padding:0 2.5rem 6rem; } }
-
-.hero-eyebrow {
-  font-family:var(--bf); font-size:.58rem; letter-spacing:.26em;
-  text-transform:uppercase; color:var(--muted); margin-bottom:1.6rem;
-  display:flex; align-items:center; gap:.8rem;
-}
-.hero-eyebrow::before {
-  content:''; display:block; width:28px; height:1px; background:var(--muted);
-}
-
-h1.hero-title {
-  font-family:var(--hf); font-weight:var(--hw);
-  font-size:clamp(3.5rem,10vw,11rem);
-  line-height:.86; letter-spacing:var(--hls); text-transform:var(--hcase);
-  color:var(--text); margin-bottom:2.5rem;
-}
-[data-theme="dark"]  h1.hero-title { font-weight:300; color:#fff; }
-[data-theme="light"] h1.hero-title { font-weight:900; }
-
-.hero-bottom {
-  display:flex; align-items:flex-end;
-  justify-content:space-between; flex-wrap:wrap; gap:1.5rem;
-}
-.hero-sub {
-  font-family:var(--bf); font-size:.75rem; color:rgba(255,255,255,.78);
-  line-height:2.0; max-width:40ch;
-}
-[data-theme="light"] .hero-sub { color:#333; font-size:.76rem; }
-.hero-actions { display:flex; flex-wrap:wrap; gap:.6rem; align-items:center; }
-
-.btn-hero {
-  font-family:var(--bf); font-size:.62rem; font-weight:500;
-  letter-spacing:.1em; text-transform:uppercase;
-  display:inline-flex; align-items:center; gap:.4rem;
-  padding:.72rem 1.5rem; min-height:42px;
-  background:var(--btn-bg); color:var(--btn-txt); border:1px solid var(--btn-brd);
-  transition:all .2s;
-}
-[data-theme="dark"] .btn-hero {
-  font-family:'Barlow Condensed', sans-serif; font-size:.95rem;
-  font-weight:400; text-transform:none; letter-spacing:.02em;
-  border-color:rgba(255,255,255,.45);
-}
-.btn-hero:hover { background:var(--btn-hover-bg); color:var(--btn-hover-txt); }
-[data-theme="dark"]  .btn-hero:hover { background:#fff; color:#000; border-color:#fff; }
-[data-theme="light"] .btn-hero:hover { background:transparent; color:#111; }
-
-.btn-ghost-hero {
-  font-family:var(--bf); font-size:.62rem; color:var(--muted);
-  letter-spacing:.08em; padding:.72rem 0; min-height:42px;
-  display:inline-flex; align-items:center; transition:color .15s;
-}
-.btn-ghost-hero:hover { color:var(--text); }
-
-/* scroll hint */
-.scroll-hint {
-  position:absolute; right:1.5rem; bottom:5rem;
-  font-family:var(--bf); font-size:.52rem; letter-spacing:.2em;
-  text-transform:uppercase; color:var(--muted);
-  writing-mode:vertical-lr;
-  animation:nudge 2.5s ease-in-out infinite;
-}
-@media(min-width:768px) { .scroll-hint { right:2.5rem; } }
-@keyframes nudge {
-  0%,100% { transform:translateY(0); opacity:.6; }
-  50% { transform:translateY(8px); opacity:1; }
+.enter-line::after {
+  content:'';
+  position:absolute; right:-1px; top:-3px;
+  width:7px; height:7px;
+  border-top:1px solid rgba(255,255,255,.5);
+  border-right:1px solid rgba(255,255,255,.5);
+  transform:rotate(45deg);
+  transition:border-color .25s;
 }
 
-/* ══════════════════════════════════════════════
-   STATUS BAR
-   ══════════════════════════════════════════════ */
-.status-bar {
-  border-top:1px solid var(--border);
-  border-bottom:1px solid var(--border);
-  display:grid; grid-template-columns:1fr;
-}
-@media(min-width:640px)  { .status-bar { grid-template-columns:repeat(3,1fr); } }
-@media(min-width:1024px) { .status-bar { grid-template-columns:repeat(4,1fr); } }
-
-.status-item {
-  padding:1.2rem 1.5rem;
-  border-bottom:1px solid var(--border);
-  transition:background .15s;
-}
-@media(min-width:640px) {
-  .status-item {
-    border-right:1px solid var(--border);
-    border-bottom:none;
-  }
-  .status-item:last-child { border-right:none; }
-}
-@media(min-width:1024px) { .status-item:nth-child(4) { border-right:none; } }
-.status-item:hover { background:var(--hover-bg); }
-
-.status-label {
-  font-family:var(--bf); font-size:.5rem; letter-spacing:.2em;
-  text-transform:uppercase; color:var(--muted); margin-bottom:.45rem;
-}
-.status-value {
-  font-family:var(--hf); font-weight:var(--hw); font-size:1.1rem;
-  letter-spacing:var(--hls); text-transform:var(--hcase); color:var(--text);
-  line-height:1.1;
-}
-[data-theme="dark"] .status-value { font-weight:400; font-size:1.15rem; }
-.status-dot {
-  display:inline-block; width:6px; height:6px; border-radius:50%;
-  background:#4caf50; margin-right:.4rem;
-  animation:pulse 2s ease-in-out infinite;
-}
-@keyframes pulse {
-  0%,100% { opacity:1; transform:scale(1); }
-  50% { opacity:.5; transform:scale(.85); }
-}
-
-/* ══════════════════════════════════════════════
-   LABO SECTION
-   ══════════════════════════════════════════════ */
-.labo-section { padding:4rem 0; border-bottom:1px solid var(--border); }
-
-.labo-intro {
-  padding:0 1.5rem 2.5rem;
-  display:flex; align-items:flex-start; gap:3rem; flex-wrap:wrap;
-}
-@media(min-width:768px) { .labo-intro { padding:0 2.5rem 2.5rem; } }
-.labo-intro-text {
-  font-family:var(--bf); font-size:.68rem; color:var(--muted);
-  line-height:1.9; max-width:52ch; flex:1;
-}
-[data-theme="light"] .labo-intro-text { color:#444; }
-
-/* experiment cards */
-.experiments-grid {
-  display:grid; grid-template-columns:1fr;
-  border-top:1px solid var(--border); border-left:1px solid var(--border);
-}
-@media(min-width:640px)  { .experiments-grid { grid-template-columns:repeat(2,1fr); } }
-@media(min-width:1024px) { .experiments-grid { grid-template-columns:repeat(3,1fr); } }
-
-.experiment-card {
-  border-right:1px solid var(--border); border-bottom:1px solid var(--border);
-  padding:2rem 1.75rem; display:flex; flex-direction:column; gap:1.1rem;
-  transition:background .18s; position:relative; overflow:hidden;
-}
-.experiment-card:hover { background:var(--hover-bg); }
-.experiment-card.featured {
-  grid-column:1/-1;
-  display:grid; grid-template-columns:1fr;
-  background:var(--hover-bg);
-}
-@media(min-width:768px) { .experiment-card.featured { grid-template-columns:1fr 1fr; gap:3rem; align-items:start; } }
-
-.exp-num {
-  font-family:var(--bf); font-size:.5rem; letter-spacing:.15em;
-  color:var(--muted); font-weight:500;
-}
-.exp-title {
-  font-family:var(--hf); font-weight:var(--hw); font-size:clamp(1.2rem,2.5vw,1.6rem);
-  letter-spacing:var(--hls); text-transform:var(--hcase); color:var(--text); line-height:1.05;
-}
-[data-theme="dark"] .exp-title { font-weight:400; }
-.exp-desc {
-  font-family:var(--bf); font-size:.65rem; color:var(--muted); line-height:1.8; flex:1;
-}
-[data-theme="light"] .exp-desc { color:#444; }
-.exp-tags { display:flex; flex-wrap:wrap; gap:.22rem; }
-.exp-tag {
-  font-family:var(--bf); font-size:.49rem; letter-spacing:.06em;
-  padding:.11rem .42rem; background:rgba(128,128,128,.09); color:var(--muted);
-}
-.exp-link {
-  font-family:var(--bf); font-size:.58rem; letter-spacing:.12em;
-  text-transform:uppercase; color:var(--muted);
-  display:inline-flex; align-items:center; gap:.4rem;
-  border-bottom:1px solid var(--border); padding-bottom:.2rem;
-  transition:color .15s, border-color .15s; align-self:flex-start;
-}
-.exp-link:hover { color:var(--text); border-color:var(--text); }
-
-/* ── LIVE VISUALIZER block inside featured card ── */
-.exp-visual {
-  width:100%; min-height:220px; height:100%; position:relative; overflow:hidden;
-  background:rgba(20,15,50,.6); border:1px solid var(--border);
-}
-[data-theme="light"] .exp-visual { background:rgba(0,0,0,.06); }
-#miniCanvas { position:absolute; inset:0; width:100%; height:100%; display:block; }
-
-/* ══════════════════════════════════════════════
-   ABOUT STRIP
-   ══════════════════════════════════════════════ */
-.about-strip {
-  padding:5rem 1.5rem 5rem;
-  display:grid; grid-template-columns:1fr; gap:3rem;
-  border-bottom:1px solid var(--border);
-}
-@media(min-width:768px) {
-  .about-strip { padding:6rem 2.5rem; grid-template-columns:1fr 2fr; gap:6rem; align-items:start; }
-}
-.about-label {
-  font-family:var(--bf); font-size:.55rem; letter-spacing:.22em;
-  text-transform:uppercase; color:var(--muted); padding-top:.3rem;
-}
-.about-text {
-  font-family:var(--bf); font-size:.72rem; color:var(--muted);
-  line-height:2.0; max-width:60ch;
-}
-[data-theme="light"] .about-text { color:#444; }
-.about-text strong { color:var(--text); font-weight:500; }
-.about-link {
-  display:inline-block; margin-top:2rem;
-  font-family:var(--bf); font-size:.6rem; letter-spacing:.14em; text-transform:uppercase;
-  color:var(--muted); border-bottom:1px solid var(--border);
-  padding-bottom:.2rem; transition:color .15s, border-color .15s;
-}
-.about-link:hover { color:var(--text); border-color:var(--text); }
-
-/* ══════════════════════════════════════════════
-   CONTACT STRIP
-   ══════════════════════════════════════════════ */
-.contact-strip {
-  padding:5rem 1.5rem;
-  display:flex; flex-direction:column; gap:2rem; align-items:flex-start;
-}
-@media(min-width:768px) {
-  .contact-strip {
-    flex-direction:row; align-items:center; justify-content:space-between;
-    padding:5rem 2.5rem;
-  }
-}
-.contact-strip h2 {
-  font-family:var(--hf); font-weight:var(--hw);
-  font-size:clamp(2.5rem,7vw,6rem); letter-spacing:var(--hls);
-  text-transform:var(--hcase); color:var(--text); line-height:.88;
-}
-[data-theme="dark"] .contact-strip h2 { font-weight:300; }
-.contact-strip-right { display:flex; flex-direction:column; gap:1rem; align-items:flex-start; }
-@media(min-width:768px) { .contact-strip-right { align-items:flex-end; } }
-.contact-email {
-  font-family:var(--hf); font-weight:var(--hw); font-size:1.2rem;
-  letter-spacing:.04em; color:var(--muted); text-transform:lowercase;
-  transition:color .15s;
-}
-[data-theme="dark"] .contact-email { font-weight:400; }
-.contact-email:hover { color:var(--text); }
-.contact-social { display:flex; gap:1.2rem; flex-wrap:wrap; }
-.contact-social a {
-  font-family:var(--bf); font-size:.57rem; letter-spacing:.12em;
-  text-transform:uppercase; color:var(--muted); transition:color .15s;
-}
-.contact-social a:hover { color:var(--text); }
-
-/* footer */
-footer {
-  padding:1.2rem 1.5rem;
-  border-top:1px solid var(--border);
-  display:flex; flex-direction:column; gap:.8rem; align-items:center;
-  background:var(--footer-bg); transition:background .4s;
-}
-@media(min-width:768px) { footer { flex-direction:row; justify-content:space-between; padding:1.2rem 2.5rem; } }
-footer p { font-family:var(--bf); font-size:.55rem; color:var(--muted); letter-spacing:.1em; }
-.footer-nav { display:flex; gap:1.5rem; flex-wrap:wrap; }
-.footer-nav a { font-family:var(--bf); font-size:.55rem; color:var(--muted); letter-spacing:.1em; text-transform:uppercase; transition:color .15s; }
-.footer-nav a:hover { color:var(--text); }
-
-/* ── MOBILE READABILITY ── */
-@media(max-width:640px) {
-  .hero-sub { font-size:.8rem!important; line-height:1.9!important; }
-  .labo-intro-text { font-size:.75rem!important; }
-  .about-text { font-size:.78rem!important; }
+/* fade out on enter */
+body.fade-out {
+  opacity:0;
+  transition:opacity .4s ease;
 }
 </style>
 </head>
-<body class="lang-fr">
-
-<!-- Background canvas -->
-<canvas id="bgCanvas"></canvas>
-
-<header>
-  <a href="index.html" class="logo-link" aria-label="Kim Maurice — accueil">
-    <img src="img/logo-light.png" alt="Kim Maurice" class="logo-img" id="logoImg" width="34" height="34">
-  </a>
-  <nav class="header-center">
-    <a href="#labo" data-fr="Labo" data-en="Lab">Labo</a>
-    <a href="#about" data-fr="À propos" data-en="About">À propos</a>
-    <a href="cv.html" data-fr="CV & Portfolio" data-en="CV & Portfolio">CV & Portfolio</a>
-    <a href="#contact">Contact</a>
-  </nav>
-  <div class="header-right">
-    <button class="theme-toggle" id="themeToggle" aria-label="Changer le thème">☀</button>
-    <button class="lang-btn" id="langBtn">EN</button>
-    <a href="cv.html" class="btn-header" data-fr="CV →" data-en="CV →">CV →</a>
-  </div>
-</header>
-
-<main>
-
-  <!-- ── HERO ── -->
-  <section class="hero">
-    <p class="hero-eyebrow" data-fr="Tiohtiá:ke · Montréal · technologue créative" data-en="Tiohtiá:ke · Montréal · creative technologist">Tiohtiá:ke · Montréal · technologue créative</p>
-    <h1 class="hero-title" data-fr="Kim<br>Maurice" data-en="Kim<br>Maurice">Kim<br>Maurice</h1>
-    <div class="hero-bottom">
-      <p class="hero-sub" data-fr="Design, code, son, image. Un espace de recherche-création entre les disciplines — où la technologie devient un médium expressif." data-en="Design, code, sound, image. A research-creation space between disciplines — where technology becomes an expressive medium.">Design, code, son, image. Un espace de recherche-création entre les disciplines — où la technologie devient un médium expressif.</p>
-      <div class="hero-actions">
-        <a href="cv.html" class="btn-hero" data-fr="Voir le portfolio" data-en="View portfolio">Voir le portfolio</a>
-        <a href="#labo" class="btn-ghost-hero" data-fr="↓ expérimentations" data-en="↓ experiments">↓ expérimentations</a>
-      </div>
-    </div>
-    <span class="scroll-hint" aria-hidden="true">scroll</span>
-  </section>
-
-  <!-- ── STATUS BAR ── -->
-  <div class="status-bar">
-    <div class="status-item">
-      <div class="status-label" data-fr="Statut" data-en="Status">Statut</div>
-      <div class="status-value"><span class="status-dot"></span><span data-fr="Disponible" data-en="Available">Disponible</span></div>
-    </div>
-    <div class="status-item">
-      <div class="status-label" data-fr="Spécialité" data-en="Specialty">Spécialité</div>
-      <div class="status-value" data-fr="Multimédia · IA · Son" data-en="Multimedia · AI · Sound">Multimédia · IA · Son</div>
-    </div>
-    <div class="status-item">
-      <div class="status-label" data-fr="Base" data-en="Base">Base</div>
-      <div class="status-value">Montréal, QC</div>
-    </div>
-    <div class="status-item">
-      <div class="status-label" data-fr="Expérience" data-en="Experience">Expérience</div>
-      <div class="status-value" data-fr="25 ans" data-en="25 years">25 ans</div>
-    </div>
-  </div>
-
-  <!-- ── LABO ── -->
-  <section class="labo-section" id="labo">
-
-    <div class="section-label">
-      <span class="section-label-text" data-fr="Espace d'expérimentation" data-en="Experimentation space">Espace d'expérimentation</span>
-      <div class="section-label-line"></div>
-    </div>
-
-    <div class="labo-intro" style="padding-top:2rem;">
-      <p class="labo-intro-text" data-fr="Prototypes, recherches, instruments et interfaces expérimentales. Ce labo documente une pratique en mouvement — des idées en chantier, des outils qui se cherchent une forme." data-en="Prototypes, research, experimental instruments and interfaces. This lab documents a practice in motion — ideas under construction, tools searching for their form.">Prototypes, recherches, instruments et interfaces expérimentales. Ce labo documente une pratique en mouvement — des idées en chantier, des outils qui se cherchent une forme.</p>
-    </div>
-
-    <div class="experiments-grid">
-
-      <!-- FEATURED: Hors Champ -->
-      <div class="experiment-card featured" id="horsChamp">
-        <div>
-          <div class="exp-num">EXP — 001 · 2026</div>
-          <h2 class="exp-title" data-fr="Hors Champ" data-en="Hors Champ">Hors Champ</h2>
-          <p class="exp-desc" data-fr="Instrument de performance musicale en temps réel. IA générative (Gemini), synthèse audio, looper multi-pistes, contrôle MIDI. Une exploration de la co-création humain–machine dans un contexte de performance live." data-en="Real-time musical performance instrument. Generative AI (Gemini), audio synthesis, multi-track looper, MIDI control. An exploration of human–machine co-creation in a live performance context.">Instrument de performance musicale en temps réel. IA générative (Gemini), synthèse audio, looper multi-pistes, contrôle MIDI. Une exploration de la co-création humain–machine dans un contexte de performance live.</p>
-          <div class="exp-tags">
-            <span class="exp-tag">Gemini API</span>
-            <span class="exp-tag">MIDI</span>
-            <span class="exp-tag">Web Audio</span>
-            <span class="exp-tag">Three.js</span>
-            <span class="exp-tag">Performance</span>
-          </div>
-          <span class="exp-link" style="margin-top:.5rem; pointer-events:none; opacity:.45;" data-fr="🚧 En développement" data-en="🚧 In development">🚧 En développement</span>
-        </div>
-        <div class="exp-visual">
-          <canvas id="miniCanvas"></canvas>
-        </div>
-      </div>
-
-      <!-- Latent Organ -->
-      <a href="https://prototype-psi-liart.vercel.app/" target="_blank" class="experiment-card">
-        <div class="exp-num">EXP — 002 · 2025</div>
-        <h2 class="exp-title" data-fr="Latent Organ" data-en="Latent Organ">Latent Organ</h2>
-        <p class="exp-desc" data-fr="Instrument musical expérimental combinant clavier MIDI, traitement neural RAVE/DDSP et visualisation 3D en temps réel via WebSocket." data-en="Experimental musical instrument combining MIDI keyboard, RAVE/DDSP neural processing and real-time 3D visualization via WebSocket.">Instrument musical expérimental combinant clavier MIDI, traitement neural RAVE/DDSP et visualisation 3D en temps réel via WebSocket.</p>
-        <div class="exp-tags">
-          <span class="exp-tag">MIDI</span>
-          <span class="exp-tag">Three.js</span>
-          <span class="exp-tag">RAVE</span>
-          <span class="exp-tag">Python</span>
-        </div>
-        <span class="exp-link" data-fr="Voir le prototype →" data-en="View prototype →">Voir le prototype →</span>
-      </a>
-
-      <!-- Still FM -->
-      <a href="https://still-fm.vercel.app/" target="_blank" class="experiment-card">
-        <div class="exp-num">EXP — 003 · 2026</div>
-        <h2 class="exp-title" data-fr="Still FM" data-en="Still FM">Still FM</h2>
-        <p class="exp-desc" data-fr="Radio underground montréalaise. Player persistant, intégration Mixcloud, PWA, page residents. Architecture Next.js pensée pour l'écoute en continu." data-en="Montreal underground radio. Persistent player, Mixcloud integration, PWA, residents page. Next.js architecture designed for continuous listening.">Radio underground montréalaise. Player persistant, intégration Mixcloud, PWA, page residents. Architecture Next.js pensée pour l'écoute en continu.</p>
-        <div class="exp-tags">
-          <span class="exp-tag">Next.js</span>
-          <span class="exp-tag">Mixcloud API</span>
-          <span class="exp-tag">PWA</span>
-        </div>
-        <span class="exp-link" data-fr="Écouter →" data-en="Listen →">Écouter →</span>
-      </a>
-
-      <!-- Obscura -->
-      <a href="https://obscura-liart.vercel.app/" target="_blank" class="experiment-card">
-        <div class="exp-num">EXP — 004 · 2025</div>
-        <h2 class="exp-title" data-fr="Obscura" data-en="Obscura">Obscura</h2>
-        <p class="exp-desc" data-fr="Archive cinématographique dédiée aux films étranges, dérangeants, visionnaires. Interface sombre, navigation obsessionnelle." data-en="Cinematographic archive dedicated to strange, disturbing, visionary films. Dark interface, obsessive navigation.">Archive cinématographique dédiée aux films étranges, dérangeants, visionnaires. Interface sombre, navigation obsessionnelle.</p>
-        <div class="exp-tags">
-          <span class="exp-tag">HTML</span>
-          <span class="exp-tag">CSS</span>
-          <span class="exp-tag">JavaScript</span>
-        </div>
-        <span class="exp-link" data-fr="Explorer →" data-en="Explore →">Explorer →</span>
-      </a>
-
-      <!-- AI Generative Art -->
-      <a href="https://www.instagram.com/salut_berta_rose/" target="_blank" class="experiment-card">
-        <div class="exp-num">EXP — 005 · ongoing</div>
-        <h2 class="exp-title" data-fr="@thisisweirdai" data-en="@thisisweirdai">@thisisweirdai</h2>
-        <p class="exp-desc" data-fr="Exploration continue de l'IA générative — Stable Diffusion, ComfyUI, workflows créatifs. Esthétique halftone, duotone, écran de sérigraphie." data-en="Ongoing exploration of generative AI — Stable Diffusion, ComfyUI, creative workflows. Halftone, duotone, screen-printing aesthetics.">Exploration continue de l'IA générative — Stable Diffusion, ComfyUI, workflows créatifs. Esthétique halftone, duotone, écran de sérigraphie.</p>
-        <div class="exp-tags">
-          <span class="exp-tag">Stable Diffusion</span>
-          <span class="exp-tag">ComfyUI</span>
-          <span class="exp-tag">Python</span>
-        </div>
-        <span class="exp-link" data-fr="Instagram →" data-en="Instagram →">Instagram →</span>
-      </a>
-
-      <!-- Prochain projet -->
-      <div class="experiment-card" style="opacity:.45; cursor:default;">
-        <div class="exp-num">EXP — 006 · à venir</div>
-        <h2 class="exp-title" data-fr="Terrarium Numérique" data-en="Digital Terrarium">Terrarium Numérique</h2>
-        <p class="exp-desc" data-fr="Installation immersive : terrarium physique connecté à un monde VR/AR forestier. IoT, WebGL, capteurs biométriques." data-en="Immersive installation: physical terrarium connected to a VR/AR forest world. IoT, WebGL, biometric sensors.">Installation immersive : terrarium physique connecté à un monde VR/AR forestier. IoT, WebGL, capteurs biométriques.</p>
-        <div class="exp-tags">
-          <span class="exp-tag">WebGL</span>
-          <span class="exp-tag">IoT</span>
-          <span class="exp-tag">VR/AR</span>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ── À PROPOS ── -->
-  <section class="about-strip" id="about">
-    <div class="about-label" data-fr="À propos" data-en="About">À propos</div>
-    <div>
-      <p class="about-text" data-fr="Je suis <strong>Kim Maurice</strong>, technologue créative basée à <strong>Montréal</strong>. Depuis 25 ans, je navigue entre le design, le code, le son et l'image — d'abord dans les grandes agences interactives (NURUN, Loto-Québec), puis sur les plateaux de tournage québécois, en e-learning, et maintenant dans la recherche-création avec l'IA générative.<br><br>Je cherche des contextes où la technologie sert une vision artistique ou pédagogique. J'aime collaborer avec des artistes, des centres culturels, des institutions éducatives. Je crois que les outils les plus intéressants sont ceux qu'on n'a pas encore fini d'inventer." data-en="I'm <strong>Kim Maurice</strong>, a creative technologist based in <strong>Montréal</strong>. For 25 years I've navigated between design, code, sound and image — first in large interactive agencies (NURUN, Loto-Québec), then on Quebec film sets, in e-learning, and now in research-creation with generative AI.<br><br>I seek contexts where technology serves an artistic or pedagogical vision. I love collaborating with artists, cultural centres, educational institutions. I believe the most interesting tools are the ones we haven't finished inventing yet.">Je suis <strong>Kim Maurice</strong>, technologue créative basée à <strong>Montréal</strong>. Depuis 25 ans, je navigue entre le design, le code, le son et l'image — d'abord dans les grandes agences interactives (NURUN, Loto-Québec), puis sur les plateaux de tournage québécois, en e-learning, et maintenant dans la recherche-création avec l'IA générative.<br><br>Je cherche des contextes où la technologie sert une vision artistique ou pédagogique. J'aime collaborer avec des artistes, des centres culturels, des institutions éducatives. Je crois que les outils les plus intéressants sont ceux qu'on n'a pas encore fini d'inventer.</p>
-      <a href="cv.html" class="about-link" data-fr="Voir le CV complet & portfolio →" data-en="View full CV & portfolio →">Voir le CV complet & portfolio →</a>
-    </div>
-  </section>
-
-  <!-- ── CONTACT ── -->
-  <section class="contact-strip" id="contact">
-    <h2 data-fr="Travaillons<br>ensemble." data-en="Let's work<br>together.">Travaillons<br>ensemble.</h2>
-    <div class="contact-strip-right">
-      <a href="mailto:info@kimmaurice.com" class="contact-email">info@kimmaurice.com</a>
-      <div class="contact-social">
-        <a href="https://linkedin.com/in/kimmaurice" target="_blank">LinkedIn</a>
-        <a href="https://github.com/Bertarose/" target="_blank">Github</a>
-        <a href="https://instagram.com/salut_berta_rose/" target="_blank">Instagram</a>
-        <a href="https://www.imdb.com/name/nm9371635/" target="_blank">IMDb</a>
-      </div>
-    </div>
-  </section>
-
-</main>
-
-<footer>
-  <p>© 2025 Kim Maurice · Tiohtiá:ke / Montréal</p>
-  <nav class="footer-nav">
-    <a href="cv.html" data-fr="CV & Portfolio" data-en="CV & Portfolio">CV & Portfolio</a>
-    <a href="mailto:info@kimmaurice.com">Email</a>
-    <a href="Kim_Maurice_CV_2026_MTL.pdf" target="_blank">CV PDF</a>
-  </nav>
-</footer>
+<body>
 
 <script>
-// ══════════════════════════════════
-// BACKGROUND CANVAS — starfield
-// ══════════════════════════════════
+  /*
+   * ── CONFIGURATION ──────────────────────────────
+   *
+   * STREAM_URL = null        → affiche img.jpg
+   *
+   * Pour activer ton stream, remplace null par l'URL :
+   *
+   * Twitch  → 'https://player.twitch.tv/?channel=TON_CHANNEL&parent=kimmaurice.com&autoplay=true&muted=true'
+   * YouTube → 'https://www.youtube.com/embed/LIVE_ID?autoplay=1&mute=1'
+   *
+   * ───────────────────────────────────────────────
+   */
+  const STREAM_URL = null;
+</script>
+
+<div id="bg">
+  <img id="bg-img" src="img/img.jpg" alt="">
+  <iframe id="bg-stream" allow="autoplay; fullscreen" allowfullscreen></iframe>
+</div>
+
+<div id="overlay"></div>
+<canvas id="grain-canvas"></canvas>
+
+<div class="ui">
+
+  <div class="top">
+    <a href="index.html">
+      <img src="img/logo-light.png" alt="Kim Maurice" class="logo-img" width="32" height="32">
+    </a>
+    <div class="top-right">
+      <div class="live-badge" id="liveBadge"><span class="live-dot"></span><span>Live</span></div>
+      <button class="lang-btn" id="langBtn">EN</button>
+    </div>
+  </div>
+
+  <div class="center">
+    <div class="title-block">
+      <p class="kicker" data-fr="Montréal · Tiohtiá:ke" data-en="Montréal · Tiohtiá:ke">Montréal · Tiohtiá:ke</p>
+      <h1 data-fr="Technologue<br>créative —<br>multimédia,<br>son & image" data-en="Creative<br>Technologist —<br>multimedia,<br>sound & image">Technologue<br>créative —<br>multimédia,<br>son & image</h1>
+    </div>
+  </div>
+
+  <div class="bottom">
+    <div class="bottom-left">
+      <div>Kim Maurice</div>
+      <div>© 2025</div>
+    </div>
+    <a href="cv.html" class="enter-link" id="enterLink">
+      <span data-fr="Entrer" data-en="Enter">Entrer</span>
+      <span class="enter-line"></span>
+    </a>
+  </div>
+
+</div>
+
+<script>
+// GRAIN
 (function() {
-  const canvas = document.getElementById('bgCanvas');
-  const ctx = canvas.getContext('2d');
-  let W, H, particles = [], animId;
+  const canvas = document.getElementById('grain-canvas');
+  const ctx    = canvas.getContext('2d');
+  let W, H, id;
 
   function resize() {
     W = canvas.width  = window.innerWidth;
     H = canvas.height = window.innerHeight;
   }
 
-  function initParticles() {
-    particles = [];
-    const count = Math.min(180, Math.floor((W * H) / 7000));
-    for (let i = 0; i < count; i++) {
-      particles.push({
-        x: Math.random() * W,
-        y: Math.random() * H,
-        r: Math.random() * 1.2 + .2,
-        vx: (Math.random() - .5) * .18,
-        vy: (Math.random() - .5) * .18,
-        a: Math.random() * .6 + .2,
-      });
+  function tick() {
+    const img  = ctx.createImageData(W, H);
+    const data = img.data;
+    for (let i = 0; i < data.length; i += 4) {
+      const v     = Math.random() * 255 | 0;
+      data[i]     = v;
+      data[i + 1] = v;
+      data[i + 2] = v;
+      data[i + 3] = (Math.random() * 38) | 0;
     }
+    ctx.putImageData(img, 0, 0);
+    id = requestAnimationFrame(tick);
   }
 
-  function draw() {
-    ctx.clearRect(0, 0, W, H);
-    const theme = document.documentElement.getAttribute('data-theme');
-    const color = theme === 'dark' ? '255,255,255' : '0,0,0';
-    particles.forEach(p => {
-      p.x += p.vx; p.y += p.vy;
-      if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
-      if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(${color},${p.a})`;
-      ctx.fill();
-    });
-    // draw connections
-    for (let i = 0; i < particles.length; i++) {
-      for (let j = i + 1; j < particles.length; j++) {
-        const dx = particles[i].x - particles[j].x;
-        const dy = particles[i].y - particles[j].y;
-        const d  = Math.sqrt(dx*dx + dy*dy);
-        if (d < 90) {
-          ctx.beginPath();
-          ctx.moveTo(particles[i].x, particles[i].y);
-          ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = `rgba(${color},${(.12*(1-d/90)).toFixed(3)})`;
-          ctx.lineWidth = .4;
-          ctx.stroke();
-        }
-      }
-    }
-    animId = requestAnimationFrame(draw);
-  }
-
-  window.addEventListener('resize', () => { resize(); initParticles(); });
-  resize(); initParticles(); draw();
+  window.addEventListener('resize', () => { cancelAnimationFrame(id); resize(); tick(); });
+  resize(); tick();
 })();
 
-// ══════════════════════════════════
-// MINI CANVAS — Hors Champ visualizer
-// ══════════════════════════════════
+// STREAM vs IMAGE
 (function() {
-  const c  = document.getElementById('miniCanvas');
-  if (!c) return;
-  const ctx = c.getContext('2d');
-  let t = 0;
-
-  function resize() {
-    const rect = c.parentElement.getBoundingClientRect();
-    c.width  = rect.width  || c.offsetWidth  || 400;
-    c.height = rect.height || c.offsetHeight || 220;
-  }
-
-  function draw() {
-    resize();
-    const W = c.width, H = c.height;
-    ctx.clearRect(0, 0, W, H);
-    const theme = document.documentElement.getAttribute('data-theme');
-    const base  = theme === 'dark' ? 'rgba(255,255,255,' : 'rgba(0,0,0,';
-
-    const bars = 64;
-    const bw   = W / bars;
-    for (let i = 0; i < bars; i++) {
-      const freq  = (i / bars) * 3 + 1;
-      const phase = (i / bars) * Math.PI * 4;
-      const amp   = (.3 + .7 * Math.abs(Math.sin(i * .4))) * H * .42;
-      const h     = Math.abs(Math.sin(t * freq * .7 + phase)) * amp;
-      const a     = .12 + .55 * (h / (H * .42));
-      ctx.fillStyle = base + a.toFixed(3) + ')';
-      ctx.fillRect(i * bw + 1, H/2 - h/2, bw - 2, h);
-    }
-    t += .022;
-    requestAnimationFrame(draw);
-  }
-  draw();
+  if (!STREAM_URL) return;
+  document.getElementById('bg-img').style.display    = 'none';
+  const stream = document.getElementById('bg-stream');
+  stream.style.display = 'block';
+  stream.src           = STREAM_URL;
+  document.getElementById('liveBadge').classList.add('visible');
 })();
 
-// ══════════════════════════════════
-// THEME
-// ══════════════════════════════════
-const THEME_KEY = 'km-theme';
-const htmlEl    = document.documentElement;
-const toggleBtn = document.getElementById('themeToggle');
-const logoImg   = document.getElementById('logoImg');
-
-function setTheme(t) {
-  htmlEl.setAttribute('data-theme', t);
-  localStorage.setItem(THEME_KEY, t);
-  toggleBtn.textContent = t === 'dark' ? '☀' : '☾';
-  if (logoImg) logoImg.src = t === 'dark' ? 'img/logo-light.png' : 'img/logo-dark.png';
-}
-toggleBtn.addEventListener('click', () => {
-  setTheme(htmlEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
-});
-setTheme(localStorage.getItem(THEME_KEY) || 'dark');
-
-// ══════════════════════════════════
 // LANGUAGE
-// ══════════════════════════════════
 let lang = localStorage.getItem('preferredLanguage') || 'fr';
 function applyLang(l) {
-  htmlEl.lang = l;
-  document.body.classList.toggle('lang-fr', l === 'fr');
-  document.body.classList.toggle('lang-en', l === 'en');
+  document.documentElement.lang = l;
   document.getElementById('langBtn').textContent = l === 'fr' ? 'EN' : 'FR';
   document.querySelectorAll('[data-fr][data-en]').forEach(el => {
     el.innerHTML = el.getAttribute('data-' + l);
@@ -645,17 +286,12 @@ document.getElementById('langBtn').addEventListener('click', () => {
 });
 applyLang(lang);
 
-// ══════════════════════════════════
-// HEADER — devient solid au scroll
-// ══════════════════════════════════
-(function() {
-  const hdr = document.querySelector('header');
-  function check() {
-    hdr.classList.toggle('solid', window.scrollY > 60);
-  }
-  window.addEventListener('scroll', check, {passive:true});
-  check();
-})();
+// ENTER — fade out
+document.getElementById('enterLink').addEventListener('click', function(e) {
+  e.preventDefault();
+  document.body.classList.add('fade-out');
+  setTimeout(() => { window.location.href = 'cv.html'; }, 380);
+});
 </script>
 </body>
 </html>
