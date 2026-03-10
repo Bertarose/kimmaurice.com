@@ -16,27 +16,25 @@
 /* ══════════════════════════════════════════════
    HERO — cinématique dark / split light
    ══════════════════════════════════════════════ */
-[data-theme="dark"] .hero {
+.hero {
   position:relative; min-height:100vh; overflow:hidden; display:block;
 }
-[data-theme="dark"] .hero-image { position:absolute; inset:0; z-index:0; }
-[data-theme="dark"] .hero-image img {
+.hero-image { position:absolute; inset:0; z-index:0; }
+.hero-image img {
   width:100%; height:100%; object-fit:cover; object-position:center 20%;
   filter:var(--img-filter); transition:filter .8s;
 }
-[data-theme="dark"] .hero-image::after {
+.hero-image::after {
   content:''; position:absolute; inset:0; z-index:1;
   background:var(--hero-overlay);
 }
-[data-theme="dark"] .hero:hover .hero-image img { filter:brightness(.8) saturate(1.15); }
-[data-theme="dark"] .hero-text {
+.hero:hover .hero-image img { filter:brightness(.8) saturate(1.15); }
+.hero-text {
   position:absolute; bottom:0; left:0; z-index:2;
   padding:0 1.5rem 5.5rem; max-width:700px;
   display:flex; flex-direction:column; justify-content:flex-end;
 }
-@media(min-width:768px) { [data-theme="dark"] .hero-text { padding:0 2.5rem 6.5rem; } }
-
-/* light = dark, pas d'override hero */
+@media(min-width:768px) { .hero-text { padding:0 2.5rem 6.5rem; } }
 
 /* hero bottom nav bar — dark only */
 .hero-nav-bar { display:none; }
