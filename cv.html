@@ -174,6 +174,50 @@ h1 { font-size:clamp(2.6rem,5.5vw,5.5rem); font-weight:400; color:#fff; text-sha
 .collab-note { font-size:.57rem; color:var(--muted); font-style:italic; margin-top:.75rem; grid-column:1/-1; }
 
 /* ══════════════════════════════════════════════
+   SECTION IA — Styles additionnels
+   ══════════════════════════════════════════════ */
+.ai-intro {
+  padding: 2rem 1.5rem 2.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+@media(min-width:768px) {
+  .ai-intro {
+    padding: 2.5rem 2.5rem 3rem;
+  }
+}
+
+.ai-intro p {
+  font-family: var(--bf);
+  font-size: .72rem;
+  line-height: 1.75;
+  color: var(--muted);
+  max-width: 65ch;
+}
+
+.ai-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ai-list li {
+  font-family: var(--bf);
+  font-size: .63rem;
+  padding: .35rem 0 .35rem .9rem;
+  position: relative;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.ai-list li::before {
+  content: "–";
+  position: absolute;
+  left: 0;
+  color: var(--border2);
+}
+
+/* ══════════════════════════════════════════════
    CV SECTIONS — expertise, parcours, explorations
    ══════════════════════════════════════════════ */
 .cv-section { border-bottom:1px solid var(--border); transition:border-color .4s; }
@@ -309,6 +353,7 @@ h1 { font-size:clamp(2.6rem,5.5vw,5.5rem); font-weight:400; color:#fff; text-sha
     <nav class="hero-nav-bar">
       <a href="#projects" data-fr="Projets" data-en="Projects">Projets</a>
       <a href="#expertise">Expertise</a>
+      <a href="#ai" data-fr="IA Générative" data-en="AI">IA Générative</a>
       <a href="#experience" data-fr="Parcours" data-en="Experience">Parcours</a>
       <a href="#explorations">Explorations</a>
       <a href="#contact">Contact</a>
@@ -619,6 +664,93 @@ h1 { font-size:clamp(2.6rem,5.5vw,5.5rem); font-weight:400; color:#fff; text-sha
     </div>
   </section>
 
+  <!-- ══════════════════════════════════════════════
+       SECTION IA — INTELLIGENCE ARTIFICIELLE
+       ══════════════════════════════════════════════ -->
+  <section id="ai" class="cv-section">
+    <div class="section-header">
+      <h2 data-fr="IA Générative" data-en="Generative AI">IA Générative</h2>
+      <span class="section-tag" data-fr="06 DOMAINES" data-en="06 DOMAINS">06 DOMAINES</span>
+    </div>
+
+    <div class="ai-intro">
+      <p data-fr="Utilisation de l'intelligence artificielle comme outil de recherche, de création et de prototypage rapide pour développer de nouvelles formes d'expériences visuelles, sonores et interactives."
+         data-en="Using artificial intelligence as a research, creation and rapid prototyping tool to develop new forms of visual, sonic and interactive experiences.">
+        Utilisation de l'intelligence artificielle comme outil de recherche, de création et de prototypage rapide pour développer de nouvelles formes d'expériences visuelles, sonores et interactives.
+      </p>
+    </div>
+
+    <div class="expertise-grid">
+      
+      <!-- 01: Direction Artistique -->
+      <div class="expertise-card">
+        <div class="expertise-number">01</div>
+        <h3 data-fr="Direction Artistique" data-en="Art Direction">Direction Artistique</h3>
+        <ul class="ai-list">
+          <li data-fr="Midjourney, DALL·E, Firefly" data-en="Midjourney, DALL·E, Firefly">Midjourney, DALL·E, Firefly</li>
+          <li data-fr="Prompt engineering" data-en="Prompt engineering">Prompt engineering</li>
+          <li data-fr="Séries visuelles expérimentales" data-en="Experimental visual series">Séries visuelles expérimentales</li>
+        </ul>
+      </div>
+
+      <!-- 02: Vidéo Générative -->
+      <div class="expertise-card">
+        <div class="expertise-number">02</div>
+        <h3 data-fr="Vidéo Générative" data-en="Generative Video">Vidéo Générative</h3>
+        <ul class="ai-list">
+          <li data-fr="Pipelines image → animation" data-en="Image → animation pipelines">Pipelines image → animation</li>
+          <li data-fr="Exploration narrative" data-en="Narrative exploration">Exploration narrative</li>
+          <li data-fr="Projection mapping" data-en="Projection mapping">Projection mapping</li>
+        </ul>
+      </div>
+
+      <!-- 03: Expériences Immersives -->
+      <div class="expertise-card">
+        <div class="expertise-number">03</div>
+        <h3 data-fr="Expériences Immersives" data-en="Immersive Experiences">Expériences Immersives</h3>
+        <ul class="ai-list">
+          <li>TouchDesigner, Isadora</li>
+          <li data-fr="Installations audiovisuelles" data-en="Audiovisual installations">Installations audiovisuelles</li>
+          <li data-fr="Flux génératifs temps réel" data-en="Real-time generative flows">Flux génératifs temps réel</li>
+        </ul>
+      </div>
+
+      <!-- 04: Création Sonore -->
+      <div class="expertise-card">
+        <div class="expertise-number">04</div>
+        <h3 data-fr="Création Sonore" data-en="Sound Design">Création Sonore</h3>
+        <ul class="ai-list">
+          <li>Ableton Live, AI Audio</li>
+          <li data-fr="Composition expérimentale" data-en="Experimental composition">Composition expérimentale</li>
+          <li data-fr="Live coding & génératif" data-en="Live coding & generative">Live coding & génératif</li>
+        </ul>
+      </div>
+
+      <!-- 05: Prototypage -->
+      <div class="expertise-card">
+        <div class="expertise-number">05</div>
+        <h3 data-fr="Prototypage Rapide" data-en="Rapid Prototyping">Prototypage Rapide</h3>
+        <ul class="ai-list">
+          <li>VS Code, Google AI Studio</li>
+          <li data-fr="Interfaces conversationnelles" data-en="Conversational interfaces">Interfaces conversationnelles</li>
+          <li data-fr="Génération de contenu" data-en="Content generation">Génération de contenu</li>
+        </ul>
+      </div>
+
+      <!-- 06: Workflows -->
+      <div class="expertise-card">
+        <div class="expertise-number">06</div>
+        <h3 data-fr="Workflows Hybrides" data-en="Hybrid Workflows">Workflows Hybrides</h3>
+        <ul class="ai-list">
+          <li>ComfyUI, n8n, Python</li>
+          <li data-fr="Pipelines créatifs" data-en="Creative pipelines">Pipelines créatifs</li>
+          <li data-fr="Automatisation" data-en="Automation">Automatisation</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
   <!-- ── CONTACT ── -->
   <section class="contact-section" id="contact">
     <h2 data-fr="Travaillons<br>ensemble." data-en="Let's work<br>together.">Travaillons<br>ensemble.</h2>
@@ -644,7 +776,7 @@ h1 { font-size:clamp(2.6rem,5.5vw,5.5rem); font-weight:400; color:#fff; text-sha
     <a href="#home"         data-section="home"><span data-fr="Haut" data-en="Top">Haut</span></a>
     <a href="#projects"     data-section="collaborations"><span data-fr="Projets" data-en="Projects">Projets</span></a>
     <a href="#expertise"    data-section="expertise"><span>Expert.</span></a>
-    <a href="#experience"   data-section="experience"><span data-fr="Parcours" data-en="Exp.">Parcours</span></a>
+    <a href="#ai"           data-section="ai"><span>IA</span></a>
     <a href="#contact"      data-section="contact"><span>Contact</span></a>
   </div>
 </nav>
