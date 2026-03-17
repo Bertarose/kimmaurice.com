@@ -590,3 +590,265 @@ h1 { font-size:clamp(2.6rem,5.5vw,5.5rem); font-weight:400; color:#fff; text-sha
   font-size:.57rem; color:var(--muted); 
   font-style:italic; margin-top:.75rem; grid-column:1/-1; 
 }
+/* ═══════════════════════════════════════════════════════════
+   FONT SIZE FIXES — LISIBILITÉ MAXIMALE
+   Remplace les valeurs trop petites par des tailles lisibles
+   ════════════════════════════════════════════════════════════ */
+
+/* ── NAVIGATION & HEADER ── */
+.lang-btn {
+  font-size: 0.7rem !important;  /* était .56rem */
+}
+
+.btn-header {
+  font-size: 0.7rem !important;  /* était .56rem */
+}
+
+.header-center a {
+  font-size: 0.75rem !important;  /* était .6rem */
+  letter-spacing: 0.12em !important;
+}
+
+/* ── TICKER ── */
+.ticker-item {
+  font-size: 0.7rem !important;  /* était .56rem */
+}
+
+/* ── BUTTONS ── */
+.btn {
+  font-size: 0.8rem !important;  /* était .66rem */
+}
+
+.btn-secondary {
+  font-size: 0.75rem !important;
+}
+
+/* ── SECTION LABELS ── */
+.section-label-text {
+  font-size: 0.7rem !important;  /* était .55rem */
+}
+
+.section-tag {
+  font-size: 0.72rem !important;  /* était .57rem */
+}
+
+/* ── FOOTER ── */
+footer p {
+  font-size: 0.72rem !important;  /* était .57rem */
+}
+
+.footer-links a {
+  font-size: 0.72rem !important;  /* était .57rem */
+}
+
+.footer-link {
+  font-size: 0.75rem !important;
+}
+
+.footer-copyright {
+  font-size: 0.7rem !important;
+}
+
+/* ── MOBILE NAV ── */
+.mobile-nav a {
+  font-size: 0.7rem !important;  /* était .56rem */
+  min-height: 48px !important;  /* Plus grand pour touch */
+}
+
+/* ── HERO SECTION ── */
+.hero-kicker {
+  font-size: 0.72rem !important;  /* était .57rem */
+}
+
+.hero-desc {
+  font-size: 0.85rem !important;  /* était .74rem */
+  line-height: 1.9 !important;
+}
+
+.hero-nav-bar a {
+  font-size: 0.72rem !important;  /* était .57rem */
+  padding: 1rem 1.2rem !important;
+}
+
+@media(max-width: 640px) {
+  .hero-nav-bar a {
+    font-size: 0.68rem !important;  /* était .52rem */
+  }
+}
+
+/* ── PROJETS GRID ── */
+.grid-number {
+  font-size: 0.65rem !important;  /* était .5rem */
+}
+
+.grid-title {
+  font-size: clamp(1.1rem, 2vw, 1.3rem) !important;  /* était .9-1.1rem */
+}
+
+[data-theme="dark"] .grid-title {
+  font-size: clamp(1.15rem, 2.2vw, 1.35rem) !important;
+}
+
+.grid-meta span {
+  font-size: 0.62rem !important;  /* était .49rem */
+  padding: 0.2rem 0.5rem !important;
+}
+
+.grid-hover-desc {
+  font-size: 0.72rem !important;  /* était .58rem */
+  line-height: 1.65 !important;
+}
+
+/* ── CV SECTIONS ── */
+.section-header h2 {
+  font-size: clamp(2.8rem, 6.5vw, 4.5rem) !important;  /* augmenté */
+}
+
+/* ── EXPERTISE CARDS ── */
+.expertise-number {
+  font-size: 0.7rem !important;  /* était .55rem */
+}
+
+.expertise-card h3 {
+  font-size: 1.25rem !important;  /* était 1.1rem */
+}
+
+.expertise-card li {
+  font-size: 0.8rem !important;  /* était .65rem */
+  line-height: 1.5 !important;
+}
+
+/* ── TIMELINE ── */
+.timeline-date {
+  font-size: 0.75rem !important;  /* était .61rem */
+}
+
+.timeline-content h3 {
+  font-size: 1.25rem !important;  /* était 1.1rem */
+}
+
+.timeline-content h4 {
+  font-size: 0.8rem !important;  /* était .66rem */
+}
+
+.timeline-list li {
+  font-size: 0.78rem !important;  /* était .64rem */
+  line-height: 1.6 !important;
+}
+
+/* ── EXPLORATION CARDS ── */
+.exploration-card h4 {
+  font-size: 1.1rem !important;  /* était .95rem */
+}
+
+.exploration-card p {
+  font-size: 0.78rem !important;  /* était .63rem */
+  line-height: 1.7 !important;
+}
+
+/* ── CONTACT SECTION ── */
+.contact-section h2 {
+  font-size: clamp(2.5rem, 6.5vw, 4.2rem) !important;
+}
+
+/* ── COLLABORATIONS ── */
+.collab-summary {
+  padding: 1.2rem 1.5rem !important;
+}
+
+@media(min-width: 768px) {
+  .collab-summary {
+    padding: 1.2rem 2.5rem !important;
+  }
+}
+
+.project-number {
+  font-size: 0.65rem !important;  /* était .5rem */
+}
+
+.project-title {
+  font-size: 1.15rem !important;  /* augmenté */
+}
+
+.project-meta span {
+  font-size: 0.62rem !important;  /* était .49rem */
+  padding: 0.2rem 0.5rem !important;
+}
+
+.collab-group h3 {
+  font-size: 0.68rem !important;  /* était .54rem */
+}
+
+.collab-group li {
+  font-size: 0.78rem !important;  /* était .63rem */
+  line-height: 1.6 !important;
+}
+
+.collab-note {
+  font-size: 0.7rem !important;  /* était .57rem */
+}
+
+/* ── IA GÉNÉRATIVE SECTION ── */
+.ai-intro p {
+  font-size: 0.85rem !important;
+  line-height: 1.85 !important;
+}
+
+.ai-list li {
+  font-size: 0.8rem !important;
+}
+
+/* ── MOBILE OPTIMIZATIONS ── */
+@media(max-width: 640px) {
+  /* Garder les textes lisibles sur mobile */
+  .grid-title {
+    font-size: 1.05rem !important;
+  }
+  
+  .expertise-card h3,
+  .timeline-content h3 {
+    font-size: 1.15rem !important;
+  }
+  
+  .expertise-card li,
+  .timeline-list li,
+  .exploration-card p {
+    font-size: 0.75rem !important;
+  }
+  
+  .section-header h2 {
+    font-size: clamp(2.4rem, 8vw, 3.5rem) !important;
+  }
+}
+
+/* ── TOUCH TARGETS (WCAG) ── */
+button,
+.btn,
+a[href] {
+  min-height: 44px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.mobile-nav a,
+.hero-nav-bar a {
+  min-height: 48px !important;
+}
+
+/* ── LINE HEIGHT GLOBAL IMPROVEMENT ── */
+body {
+  font-size: 1rem !important;  /* Base 16px */
+  line-height: 1.6 !important;
+}
+
+p {
+  line-height: 1.7 !important;
+}
+
+/* ── CONTRAST AMÉLI
+ORÉ ── */
+.muted,
+[class*="muted"] {
+  color: rgba(255,255,255,0.75) !important;  /* Plus lisible que .52 */
+}
