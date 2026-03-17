@@ -328,7 +328,6 @@ h1 { font-size:clamp(2.6rem,5.5vw,5.5rem); font-weight:400; color:#fff; text-sha
     <a href="#contact">Contact</a>
   </nav>
   <div class="header-right">
-    <button class="theme-toggle" id="themeToggle" aria-label="Changer le thème" style="display:none">☀</button>
     <button class="lang-btn" id="langBtn">EN</button>
     <a href="Kim_Maurice_CV_2026_MTL.pdf" target="_blank" class="btn-header">⬇ CV PDF</a>
   </div>
@@ -861,20 +860,16 @@ h1 { font-size:clamp(2.6rem,5.5vw,5.5rem); font-weight:400; color:#fff; text-sha
 // ── THEME ──
 const THEME_KEY = 'km-theme';
 const htmlEl    = document.documentElement;
-const toggleBtn = document.getElementById('themeToggle');
 const logoImg   = document.getElementById('logoImg');
 
 function setTheme(t) {
   htmlEl.setAttribute('data-theme', t);
   localStorage.setItem(THEME_KEY, t);
-  toggleBtn.textContent = t === 'dark' ? '☀' : '☾';
   // Pas de changement de logo - toujours light
   if (logoImg) logoImg.src = 'img/logo-light.png';
 }
-toggleBtn.addEventListener('click', () => {
-  setTheme(htmlEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
-});
-setTheme(localStorage.getItem(THEME_KEY) || 'dark');
+// Toujours dark au chargement
+setTheme('dark');
 
 // ── LANGUAGE ──
 let lang = localStorage.getItem('preferredLanguage') || 'fr';
