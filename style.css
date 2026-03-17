@@ -852,3 +852,179 @@ ORÉ ── */
 [class*="muted"] {
   color: rgba(255,255,255,0.75) !important;  /* Plus lisible que .52 */
 }
+
+/* ══════════════════════════════════════════════════════════════════════
+   CSS ADDITIONNEL - Modifications Multimédia
+   À ajouter à la fin de style.css
+   ══════════════════════════════════════════════════════════════════════ */
+
+/* ── EXPERTISE GRID: 7 CARDS SUPPORT ── */
+@media(min-width: 640px) {
+  .expertise-grid {
+    grid-template-columns: repeat(3, 1fr); /* 3 colonnes */
+  }
+}
+
+@media(min-width: 1024px) {
+  .expertise-grid {
+    grid-template-columns: repeat(4, 1fr); /* 4 colonnes sur grand écran */
+  }
+}
+
+/* La 7e card prendra automatiquement sa place dans la grid */
+
+/* ── SECTION CLIENTS ── */
+.clients-content {
+  padding: 0 1.5rem 2.5rem;
+}
+
+@media(min-width: 768px) {
+  .clients-content {
+    padding: 0 2.5rem 3rem;
+  }
+}
+
+/* Intro */
+.clients-intro {
+  margin-bottom: 2.5rem;
+  padding: 1.5rem;
+  background: rgba(255,255,255,0.03);
+  border-left: 3px solid var(--accent);
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.clients-intro:hover {
+  background: rgba(255,255,255,0.05);
+  border-left-color: rgba(255,255,255,0.7);
+}
+
+.clients-intro p {
+  font-family: var(--bf);
+  font-size: 0.75rem;
+  line-height: 1.75;
+  color: var(--muted);
+  max-width: 70ch;
+}
+
+/* Clients Grid */
+.clients-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media(min-width: 640px) {
+  .clients-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+}
+
+@media(min-width: 900px) {
+  .clients-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2.5rem;
+  }
+}
+
+/* Force 4 colonnes sur desktop */
+@media(min-width: 1200px) {
+  .clients-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3rem;
+  }
+}
+
+/* Client Category */
+.client-category {
+  padding: 1.5rem;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.client-category:hover {
+  background: rgba(255,255,255,0.04);
+  border-color: var(--border2);
+  transform: translateY(-2px);
+}
+
+.client-category h4 {
+  font-family: var(--bf);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.client-category ul {
+  list-style: none;
+}
+
+.client-category li {
+  font-family: var(--bf);
+  font-size: 0.78rem;
+  padding: 0.35rem 0 0.35rem 1rem;
+  position: relative;
+  color: var(--muted);
+  line-height: 1.5;
+  transition: color 0.15s;
+}
+
+.client-category li::before {
+  content: "–";
+  position: absolute;
+  left: 0;
+  color: var(--border2);
+}
+
+.client-category li:hover {
+  color: var(--text);
+}
+
+/* Mobile optimizations */
+@media(max-width: 640px) {
+  .clients-intro {
+    padding: 1.25rem;
+  }
+  
+  .clients-intro p {
+    font-size: 0.7rem;
+    line-height: 1.65;
+  }
+  
+  .client-category {
+    padding: 1.25rem;
+  }
+  
+  .client-category h4 {
+    font-size: 0.65rem;
+  }
+  
+  .client-category li {
+    font-size: 0.75rem;
+  }
+}
+
+/* Dark/Light theme adjustments */
+[data-theme="dark"] .clients-intro {
+  background: rgba(255,255,255,0.035);
+}
+
+[data-theme="dark"] .client-category {
+  background: rgba(255,255,255,0.025);
+}
+
+[data-theme="light"] .clients-intro {
+  background: rgba(0,0,0,0.02);
+  border-left-color: rgba(0,0,0,0.3);
+}
+
+[data-theme="light"] .client-category {
+  background: rgba(0,0,0,0.015);
+  border-color: rgba(0,0,0,0.1);
+}
