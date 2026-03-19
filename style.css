@@ -326,8 +326,11 @@ h1 { font-size:clamp(2.6rem,5.5vw,5.5rem); font-weight:400; color:#fff; text-sha
    ══════════════════════════════════════════════ */
 .projects-grid {
   margin:1.5rem 1.5rem 0; /* FIXÉ: margins gauche/droite */
-  display:grid; grid-template-columns:1fr 1fr;
+  display:grid; grid-template-columns:1fr;
   border-top:1px solid var(--border); border-left:1px solid var(--border);
+}
+@media(min-width:500px) {
+  .projects-grid { grid-template-columns:1fr 1fr; }
 }
 @media(min-width:640px)  { 
   .projects-grid { 
@@ -1027,4 +1030,106 @@ ORÉ ── */
 [data-theme="light"] .client-category {
   background: rgba(0,0,0,0.015);
   border-color: rgba(0,0,0,0.1);
+}
+
+
+/* ══════════════════════════════════════════════════════════════════════
+   MOBILE FIX — mars 2026
+   Corrige le grid 2 colonnes illisible sur petits écrans
+   ══════════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 500px) {
+
+  /* ── EXPERTISE GRID → 1 COLONNE ── */
+  .expertise-grid {
+    grid-template-columns: 1fr !important;
+    margin: 0 0.75rem !important;
+  }
+
+  /* ── DESCRIPTIONS INLINE SUR TOUCH (pas de hover) ── */
+  /* Remplace le comportement hover:none qui les affiche TOUTES en même temps */
+  .grid-hover-desc {
+    display: none !important;
+  }
+
+  /* ── CELLULES GRID PROJETS ── */
+  .grid-item {
+    padding: 1rem 1rem !important;
+    min-height: auto !important;
+  }
+
+  .grid-title {
+    font-size: clamp(1rem, 4.5vw, 1.2rem) !important;
+    line-height: 1.15 !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .grid-number {
+    font-size: 0.6rem !important;
+    margin-bottom: 0.3rem !important;
+  }
+
+  .grid-meta {
+    gap: 0.2rem !important;
+  }
+
+  .grid-meta span {
+    font-size: 0.58rem !important;
+    padding: 0.15rem 0.4rem !important;
+  }
+
+  /* ── EXPERTISE CARDS ── */
+  .expertise-card {
+    padding: 1.25rem 1rem !important;
+  }
+
+  /* ── HEADER COMPACT ── */
+  header {
+    padding: 0 0.75rem !important;
+    height: 52px !important;
+  }
+
+  .header-center {
+    display: none !important;
+  }
+
+  /* ── SECTION LABELS ── */
+  .section-label {
+    padding: 2rem 0.75rem 1.25rem !important;
+  }
+
+  .section-header {
+    padding: 2rem 0.75rem 1.5rem !important;
+  }
+
+  .section-header h2 {
+    font-size: clamp(2rem, 9vw, 3rem) !important;
+  }
+
+  /* ── HERO SECTION ── */
+  .hero-text {
+    padding: 0 0.75rem 4rem !important;
+  }
+
+  h1 {
+    font-size: clamp(2.2rem, 9vw, 3.5rem) !important;
+    line-height: .92 !important;
+  }
+
+  /* ── TIMELINE ── */
+  .timeline-grid {
+    padding: 1.5rem 0.75rem !important;
+  }
+
+  /* ── TOUCH TARGETS: annuler le min-height:44px sur TOUS les liens
+        qui cassait le layout en forçant display:inline-flex partout ── */
+  .grid-item,
+  .grid-item a {
+    min-height: unset !important;
+    display: block !important;
+  }
+
+  .grid-meta span {
+    display: inline-flex !important;
+  }
 }

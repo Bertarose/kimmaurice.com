@@ -99,9 +99,10 @@ h1 { font-size:clamp(2.6rem,5.5vw,5.5rem); font-weight:400; color:#fff; text-sha
    PROJETS GRID
    ══════════════════════════════════════════════ */
 .projects-grid {
-  margin-top:1.5rem; display:grid; grid-template-columns:1fr 1fr;
+  margin-top:1.5rem; display:grid; grid-template-columns:1fr;
   border-top:1px solid var(--border); border-left:1px solid var(--border);
 }
+@media(min-width:500px)  { .projects-grid { grid-template-columns:1fr 1fr; } }
 @media(min-width:640px)  { .projects-grid { grid-template-columns:repeat(3,1fr); } }
 @media(min-width:1100px) { .projects-grid { grid-template-columns:repeat(4,1fr); } }
 
