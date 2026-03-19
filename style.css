@@ -826,12 +826,16 @@ footer p {
 
 /* ── TOUCH TARGETS (WCAG) ── */
 button,
-.btn,
-a[href] {
+.btn {
   min-height: 44px !important;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
+}
+
+/* Links: min touch target SANS flex centré (évite de casser les grid-item) */
+a[href]:not(.grid-item):not(.collab-item):not(.project-item) {
+  min-height: 44px !important;
 }
 
 .mobile-nav a,
@@ -1119,14 +1123,6 @@ ORÉ ── */
   /* ── TIMELINE ── */
   .timeline-grid {
     padding: 1.5rem 0.75rem !important;
-  }
-
-  /* ── TOUCH TARGETS: annuler le min-height:44px sur TOUS les liens
-        qui cassait le layout en forçant display:inline-flex partout ── */
-  .grid-item,
-  .grid-item a {
-    min-height: unset !important;
-    display: block !important;
   }
 
   .grid-meta span {
