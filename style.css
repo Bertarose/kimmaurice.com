@@ -1129,3 +1129,69 @@ ORÉ ── */
     display: inline-flex !important;
   }
 }
+
+/* ══════════════════════════════════════════════════════════════════════
+   FORMATION SECTION
+   ══════════════════════════════════════════════════════════════════════ */
+.formation-content {
+  padding: 0 1.5rem 2.5rem;
+}
+
+@media(min-width: 768px) {
+  .formation-content {
+    padding: 0 2.5rem 3rem;
+  }
+}
+
+.formation-list {
+  list-style: none;
+  margin-bottom: 1.5rem;
+}
+
+.formation-list li {
+  font-family: var(--bf);
+  font-size: 0.85rem;
+  padding: 0.6rem 0 0.6rem 1.2rem;
+  position: relative;
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
+  line-height: 1.5;
+}
+
+.formation-list li:last-child {
+  border-bottom: none;
+}
+
+.formation-list li::before {
+  content: "–";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+
+.formation-langues {
+  font-family: var(--bf);
+  font-size: 0.78rem;
+  color: var(--muted);
+  padding-top: 0.5rem;
+  line-height: 1.6;
+}
+
+.formation-langues span:first-child {
+  color: var(--text);
+  font-weight: 500;
+}
+
+@media(max-width: 640px) {
+  .formation-content {
+    padding: 0 1rem 2rem;
+  }
+  
+  .formation-list li {
+    font-size: 0.78rem;
+  }
+  
+  .formation-langues {
+    font-size: 0.72rem;
+  }
+}
