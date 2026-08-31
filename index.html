@@ -44,6 +44,144 @@
       pointer-events:none; opacity:.2; mix-blend-mode:overlay;
     }
 
+    /* ─── AMBIENT BLOBS (contained within hero) ─── */
+    .blobs {
+      position:absolute; inset:0; z-index:0;
+      overflow:hidden; pointer-events:none;
+    }
+    .blob {
+      position:absolute; border-radius:50%;
+      filter:blur(90px); mix-blend-mode:screen;
+      opacity:.38; will-change:transform;
+    }
+    .blob-1 {
+      width:46vw; height:46vw; top:-12%; left:-8%;
+      background:radial-gradient(circle, var(--pink) 0%, transparent 70%);
+      animation: drift1 26s ease-in-out infinite;
+    }
+    .blob-2 {
+      width:38vw; height:38vw; top:20%; right:-10%;
+      background:radial-gradient(circle, var(--blue) 0%, transparent 70%);
+      animation: drift2 32s ease-in-out infinite;
+    }
+    .blob-3 {
+      width:34vw; height:34vw; bottom:-14%; left:22%;
+      background:radial-gradient(circle, var(--green) 0%, transparent 70%);
+      opacity:.22;
+      animation: drift3 38s ease-in-out infinite;
+    }
+    @keyframes drift1 {
+      0%,100% { transform:translate(0,0) scale(1); }
+      50%     { transform:translate(6vw,8vh) scale(1.15); }
+    }
+    @keyframes drift2 {
+      0%,100% { transform:translate(0,0) scale(1); }
+      50%     { transform:translate(-8vw,-4vh) scale(1.1); }
+    }
+    @keyframes drift3 {
+      0%,100% { transform:translate(0,0) scale(1); }
+      50%     { transform:translate(4vw,-6vh) scale(1.2); }
+    }
+    @media(prefers-reduced-motion:reduce){
+      .blob { animation:none; }
+    }
+
+    /* ─── CURSOR GLOW ─── */
+    #cursor-glow {
+      position:fixed; top:0; left:0; z-index:2;
+      width:420px; height:420px; margin:-210px 0 0 -210px;
+      border-radius:50%; pointer-events:none;
+      background:radial-gradient(circle, rgba(201,255,61,.10) 0%, rgba(255,62,155,.06) 45%, transparent 72%);
+      opacity:0; transition:opacity .4s;
+      will-change:transform;
+    }
+    @media(hover:hover) and (pointer:fine){ #cursor-glow.active { opacity:1; } }
+
+    /* ─── REVEAL ON SCROLL (progressive enhancement — visible by default) ─── */
+    .reveal { opacity:1; transform:none; }
+    .js-ready .reveal {
+      opacity:0; transform:translateY(28px);
+      transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1);
+    }
+    .js-ready .reveal.in-view { opacity:1; transform:translateY(0); }
+    @media(prefers-reduced-motion:reduce){
+      .js-ready .reveal { opacity:1; transform:none; transition:none; }
+    }
+
+    /* ─── MARQUEE ─── */
+    .marquee {
+      position:relative; overflow:hidden;
+      border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+      background:var(--surface);
+      padding:1.1rem 0;
+    }
+    .marquee-track {
+      display:flex; width:max-content;
+      animation:marquee-scroll 38s linear infinite;
+    }
+    .marquee:hover .marquee-track { animation-play-state:paused; }
+    .marquee-item {
+      display:flex; align-items:center; gap:.9rem;
+      font-family:var(--ff-head); font-weight:500;
+      font-size:1rem; letter-spacing:.03em;
+      color:var(--sub); text-transform:uppercase;
+      padding:0 1.75rem; white-space:nowrap;
+    }
+    .marquee-item::after {
+      content:'◆'; font-size:.55rem; color:var(--green); margin-left:1.75rem;
+    }
+    @keyframes marquee-scroll {
+      from { transform:translateX(0); }
+      to   { transform:translateX(-50%); }
+    }
+    @media(prefers-reduced-motion:reduce){
+      .marquee-track { animation:none; }
+    }
+
+    /* ─── GALLERY ─── */
+    .gallery-note {
+      font-size:.72rem; color:var(--sub); letter-spacing:.04em;
+      margin-bottom:2rem; max-width:52ch; line-height:1.7;
+    }
+    .gallery-grid {
+      display:grid; grid-template-columns:repeat(2,1fr);
+      gap:1px; background:var(--line); border:1px solid var(--line);
+    }
+    @media(min-width:640px){ .gallery-grid { grid-template-columns:repeat(3,1fr); } }
+    .gallery-tile {
+      position:relative; aspect-ratio:4/5;
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      gap:.6rem; padding:1.5rem; text-align:center;
+      background:linear-gradient(150deg, var(--tile-a) 0%, var(--tile-b) 100%);
+      background-color:var(--surface);
+      overflow:hidden; cursor:default;
+      transition:transform .4s cubic-bezier(.2,.7,.2,1);
+    }
+    .gallery-tile::before {
+      content:''; position:absolute; inset:0;
+      background:rgba(8,7,13,.55);
+      transition:background .3s;
+    }
+    .gallery-tile:hover { transform:translateY(-4px); }
+    .gallery-tile:hover::before { background:rgba(8,7,13,.3); }
+    .gallery-tile-label, .gallery-tile-hint { position:relative; z-index:1; }
+    .gallery-tile-label {
+      font-family:var(--ff-head); font-size:.95rem; font-weight:600;
+      color:var(--text); letter-spacing:.01em; line-height:1.3;
+    }
+    .gallery-tile-hint {
+      font-size:.62rem; letter-spacing:.12em; text-transform:uppercase;
+      color:var(--sub); border:1px dashed rgba(242,241,246,.3);
+      padding:.3rem .6rem; border-radius:2px;
+    }
+    .gallery-tile-plus {
+      position:relative; z-index:1;
+      width:34px; height:34px; border-radius:50%;
+      border:1px solid rgba(242,241,246,.35);
+      display:flex; align-items:center; justify-content:center;
+      font-size:1.1rem; color:var(--sub); font-family:var(--ff-head);
+    }
+
     /* ─── NAV ─── */
     .nav {
       position:fixed; top:0; left:0; right:0; z-index:100;
@@ -559,6 +697,7 @@
 <body>
 
 <canvas id="grain"></canvas>
+<div id="cursor-glow"></div>
 
 <!-- NAV -->
 <header class="nav">
@@ -567,6 +706,7 @@
     <nav class="nav-links">
       <a href="#expertise"  data-fr="Expertises"  data-en="Expertise">Expertises</a>
       <a href="#parcours"   data-fr="Parcours"    data-en="Experience">Parcours</a>
+      <a href="#univers-visuel" data-fr="Visuel" data-en="Visuals">Visuel</a>
       <a href="#formation"  data-fr="Formation"   data-en="Education">Formation</a>
       <a href="#contact"   data-fr="Contact"     data-en="Contact">Contact</a>
     </nav>
@@ -576,6 +716,11 @@
 
 <!-- HERO -->
 <div class="hero">
+  <div class="blobs" aria-hidden="true">
+    <span class="blob blob-1"></span>
+    <span class="blob blob-2"></span>
+    <span class="blob blob-3"></span>
+  </div>
   <div class="hero-left">
     <p class="hero-eyebrow"
        data-fr="Montréal · Tiohtiá:ke"
@@ -632,14 +777,32 @@
   </div>
 </div>
 
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="marquee-track" id="marqueeTrack">
+    <span class="marquee-item">MAPP_MTL</span>
+    <span class="marquee-item">ASIASIE</span>
+    <span class="marquee-item">Centre PHI</span>
+    <span class="marquee-item">Bad Blood</span>
+    <span class="marquee-item">Unité 9</span>
+    <span class="marquee-item">Kuessipan</span>
+    <span class="marquee-item">Ex Machina · Robert Lepage</span>
+    <span class="marquee-item">Google Lyria</span>
+    <span class="marquee-item">Hydra</span>
+    <span class="marquee-item">Claude Code</span>
+    <span class="marquee-item">TypeScript</span>
+    <span class="marquee-item">OXFAM</span>
+  </div>
+</div>
+
 <!-- EXPERTISE -->
 <section id="expertise">
-  <div class="s-header">
+  <div class="s-header reveal">
     <h2 class="s-title" data-fr="Expertises" data-en="Expertise">Expertises</h2>
     <span class="s-count" data-fr="07 domaines" data-en="07 areas">07 domaines</span>
   </div>
   <div class="exp-grid">
-    <div class="exp-card">
+    <div class="exp-card reveal">
       <div class="exp-num">01</div>
       <h3 data-fr="Design UX/UI" data-en="UX/UI Design">Design UX/UI</h3>
       <ul>
@@ -648,7 +811,7 @@
         <li data-fr="Tests utilisateurs" data-en="User testing">Tests utilisateurs</li>
       </ul>
     </div>
-    <div class="exp-card">
+    <div class="exp-card reveal">
       <div class="exp-num">02</div>
       <h3 data-fr="E-Learning" data-en="E-Learning">E-Learning</h3>
       <ul>
@@ -658,7 +821,7 @@
         <li>LMS (Docebo, Moodle) · WCAG</li>
       </ul>
     </div>
-    <div class="exp-card">
+    <div class="exp-card reveal">
       <div class="exp-num">03</div>
       <h3 data-fr="Développement" data-en="Development">Développement</h3>
       <ul>
@@ -667,7 +830,7 @@
         <li>Three.js · WebGL · Python · API</li>
       </ul>
     </div>
-    <div class="exp-card">
+    <div class="exp-card reveal">
       <div class="exp-num">04</div>
       <h3 data-fr="Production AV" data-en="AV Production">Production AV</h3>
       <ul>
@@ -676,7 +839,7 @@
         <li data-fr="Design sonore · Cinéma/TV" data-en="Sound design · Film/TV">Design sonore · Cinéma/TV</li>
       </ul>
     </div>
-    <div class="exp-card">
+    <div class="exp-card reveal">
       <div class="exp-num">05</div>
       <h3 data-fr="IA Générative" data-en="Generative AI">IA Générative</h3>
       <ul>
@@ -685,7 +848,7 @@
         <li data-fr="Agents IA, prompt engineering" data-en="AI agents, prompt engineering">Agents IA, prompt engineering</li>
       </ul>
     </div>
-    <div class="exp-card">
+    <div class="exp-card reveal">
       <div class="exp-num">06</div>
       <h3 data-fr="Gestion de projets" data-en="Project management">Gestion de projets</h3>
       <ul>
@@ -694,7 +857,7 @@
         <li data-fr="Production culturelle" data-en="Cultural production">Production culturelle</li>
       </ul>
     </div>
-    <div class="exp-card" style="grid-column:1/-1;">
+    <div class="exp-card reveal" style="grid-column:1/-1;">
       <div class="exp-num">07</div>
       <h3 data-fr="Outils" data-en="Tools">Outils</h3>
       <ul style="display:flex; flex-wrap:wrap; gap:.15rem 2.5rem;">
@@ -713,13 +876,13 @@
 
 <!-- PARCOURS -->
 <section id="parcours">
-  <div class="s-header">
+  <div class="s-header reveal">
     <h2 class="s-title" data-fr="Parcours" data-en="Experience">Parcours</h2>
     <span class="s-count" data-fr="25+ ans" data-en="25+ years">25+ ans</span>
   </div>
   <div class="tl">
 
-    <div class="tl-item">
+    <div class="tl-item reveal">
       <div class="tl-date">2026 →</div>
       <div class="tl-content">
         <div class="tl-badge" data-fr="Nouveau poste" data-en="New role">Nouveau poste</div>
@@ -733,7 +896,7 @@
       </div>
     </div>
 
-    <div class="tl-item">
+    <div class="tl-item reveal">
       <div class="tl-date">2016–2025</div>
       <div class="tl-content">
         <h3 data-fr="Designer Multimédia & Dev" data-en="Multimedia Designer & Dev">Designer Multimédia & Dev</h3>
@@ -749,7 +912,7 @@
       </div>
     </div>
 
-    <div class="tl-item">
+    <div class="tl-item reveal">
       <div class="tl-date">2023–2024</div>
       <div class="tl-content">
         <h3 data-fr="Designer Multimédia & Coordo. Projets" data-en="Multimedia Designer & Project Coord.">Designer Multimédia & Coordo. Projets</h3>
@@ -762,7 +925,7 @@
       </div>
     </div>
 
-    <div class="tl-item">
+    <div class="tl-item reveal">
       <div class="tl-date">2020–2023</div>
       <div class="tl-content">
         <h3 data-fr="Designer Senior & Direction Artistique" data-en="Senior Designer & Art Direction">Designer Senior & Direction Artistique</h3>
@@ -775,7 +938,7 @@
       </div>
     </div>
 
-    <div class="tl-item">
+    <div class="tl-item reveal">
       <div class="tl-date">2016–2020</div>
       <div class="tl-content">
         <h3 data-fr="Designer Graphique & Multimédia" data-en="Graphic & Multimedia Designer">Designer Graphique & Multimédia</h3>
@@ -787,7 +950,7 @@
       </div>
     </div>
 
-    <div class="tl-item">
+    <div class="tl-item reveal">
       <div class="tl-date">2000–2016</div>
       <div class="tl-content">
         <h3 data-fr="Designer Web & Multimédia" data-en="Web & Multimedia Designer">Designer Web & Multimédia</h3>
@@ -806,12 +969,12 @@
 
 <!-- PROJETS EN COURS -->
 <section id="projets">
-  <div class="s-header">
+  <div class="s-header reveal">
     <h2 class="s-title" data-fr="Projet en cours" data-en="Current project">Projet en cours</h2>
     <span class="s-count">v56</span>
   </div>
 
-  <div class="projet-card">
+  <div class="projet-card reveal">
 
     <!-- Image (remplacer le src par ta capture d'écran) -->
     <div class="projet-img-wrap">
@@ -853,13 +1016,64 @@
   </div>
 </section>
 
+<!-- UNIVERS VISUEL (gallery placeholders — Kim to swap tiles for real images) -->
+<section id="univers-visuel">
+  <div class="s-header reveal">
+    <h2 class="s-title" data-fr="Univers visuel" data-en="Visual world">Univers visuel</h2>
+    <span class="s-count" data-fr="06 pièces" data-en="06 pieces">06 pièces</span>
+  </div>
+  <p class="gallery-note"
+     data-fr="Section prête pour tes visuels — remplace chaque tuile par une image ou un GIF (voir commentaire dans le code)."
+     data-en="Section ready for your visuals — swap each tile for an image or GIF (see the comment in the code).">
+    Section prête pour tes visuels — remplace chaque tuile par une image ou un GIF.
+  </p>
+  <div class="gallery-grid">
+    <!-- TUILE 1 : remplacer par une capture de MAPP_MTL (mapping projeté sur bâtiment) -->
+    <div class="gallery-tile reveal" style="--tile-a:rgba(255,62,155,.55); --tile-b:rgba(59,92,255,.5);">
+      <div class="gallery-tile-plus">+</div>
+      <div class="gallery-tile-label">MAPP_MTL</div>
+      <div class="gallery-tile-hint">Ajouter image</div>
+    </div>
+    <!-- TUILE 2 : remplacer par une capture d'ASIASIE (YATAI / POCHA) -->
+    <div class="gallery-tile reveal" style="--tile-a:rgba(201,255,61,.45); --tile-b:rgba(255,62,155,.4);">
+      <div class="gallery-tile-plus">+</div>
+      <div class="gallery-tile-label">ASIASIE — YATAI / POCHA</div>
+      <div class="gallery-tile-hint">Ajouter image</div>
+    </div>
+    <!-- TUILE 3 : remplacer par une capture ou GIF de Hors Champ en performance -->
+    <div class="gallery-tile reveal" style="--tile-a:rgba(59,92,255,.55); --tile-b:rgba(201,255,61,.35);">
+      <div class="gallery-tile-plus">+</div>
+      <div class="gallery-tile-label">Hors Champ — live</div>
+      <div class="gallery-tile-hint">Ajouter image / GIF</div>
+    </div>
+    <!-- TUILE 4 : remplacer par une photo de URA au Centre PHI -->
+    <div class="gallery-tile reveal" style="--tile-a:rgba(255,62,155,.5); --tile-b:rgba(201,255,61,.3);">
+      <div class="gallery-tile-plus">+</div>
+      <div class="gallery-tile-label">URA — Centre PHI</div>
+      <div class="gallery-tile-hint">Ajouter image</div>
+    </div>
+    <!-- TUILE 5 : remplacer par un accessoire/interface fictive tournage (Bad Blood, Unité 9…) -->
+    <div class="gallery-tile reveal" style="--tile-a:rgba(59,92,255,.45); --tile-b:rgba(255,62,155,.35);">
+      <div class="gallery-tile-plus">+</div>
+      <div class="gallery-tile-label">Cinéma & TV — props / interfaces</div>
+      <div class="gallery-tile-hint">Ajouter image</div>
+    </div>
+    <!-- TUILE 6 : remplacer par une pièce de @thisisweirdai -->
+    <div class="gallery-tile reveal" style="--tile-a:rgba(201,255,61,.5); --tile-b:rgba(59,92,255,.4);">
+      <div class="gallery-tile-plus">+</div>
+      <div class="gallery-tile-label">@thisisweirdai</div>
+      <div class="gallery-tile-hint">Ajouter image</div>
+    </div>
+  </div>
+</section>
+
 <!-- FORMATION -->
 <section id="formation">
-  <div class="s-header">
+  <div class="s-header reveal">
     <h2 class="s-title" data-fr="Formation" data-en="Education">Formation</h2>
     <span class="s-count" data-fr="Cégep Limoilou" data-en="Cégep Limoilou">Cégep Limoilou</span>
   </div>
-  <div class="client-group">
+  <div class="client-group reveal">
     <ul>
       <li data-fr="DEC — Technique multimédia" data-en="DEC — Multimedia Technology">DEC — Technique multimédia</li>
       <li data-fr="DEC — Informatique de gestion" data-en="DEC — Management Computing">DEC — Informatique de gestion</li>
@@ -954,6 +1168,55 @@
   }
   window.addEventListener('scroll',update,{passive:true});
   update();
+})();
+
+// REVEAL ON SCROLL — progressive enhancement, never hides content if JS fails
+(function(){
+  const els = document.querySelectorAll('.reveal');
+  if(!els.length) return;
+  if(!('IntersectionObserver' in window)){
+    return; // .reveal is visible by default in CSS — nothing to do
+  }
+  document.documentElement.classList.add('js-ready');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('in-view');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold:.12, rootMargin:'0px 0px -60px 0px' });
+  els.forEach((el,i)=>{
+    el.style.transitionDelay = Math.min((i%6)*60, 300) + 'ms';
+    io.observe(el);
+  });
+  // safety net: force-reveal everything after 3s in case of an edge case
+  setTimeout(()=>els.forEach(el=>el.classList.add('in-view')), 3000);
+})();
+
+// CURSOR GLOW
+(function(){
+  const glow = document.getElementById('cursor-glow');
+  if(!glow || !window.matchMedia('(hover:hover) and (pointer:fine)').matches) return;
+  let x=0,y=0,tx=0,ty=0,active=false;
+  function raf(){
+    x += (tx-x)*.15; y += (ty-y)*.15;
+    glow.style.transform = `translate(${x}px,${y}px)`;
+    requestAnimationFrame(raf);
+  }
+  window.addEventListener('mousemove',(e)=>{
+    tx=e.clientX; ty=e.clientY;
+    if(!active){ active=true; glow.classList.add('active'); }
+  });
+  window.addEventListener('mouseleave',()=>glow.classList.remove('active'));
+  raf();
+})();
+
+// MARQUEE — duplicate items once for a seamless loop
+(function(){
+  const track = document.getElementById('marqueeTrack');
+  if(!track) return;
+  track.innerHTML += track.innerHTML;
 })();
 </script>
 </body>
