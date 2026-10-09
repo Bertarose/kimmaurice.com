@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kim Maurice — Gestionnaire de projets numériques & Technologue créative · Montréal</title>
-  <meta name="description" content="Kim Maurice — gestionnaire de projets numériques, conceptrice technologique et artiste multimédia, Montréal.">
+  <title>Kim Maurice — Technologue créative, multimédia, son & image · Montréal</title>
+  <meta name="description" content="Kim Maurice — technologue créative, multimédia, son et image. Design multimédia, production audiovisuelle et coordination de projets culturels, Montréal.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -106,36 +106,6 @@
     .js-ready .reveal.in-view { opacity:1; transform:translateY(0); }
     @media(prefers-reduced-motion:reduce){
       .js-ready .reveal { opacity:1; transform:none; transition:none; }
-    }
-
-    /* ─── MARQUEE ─── */
-    .marquee {
-      position:relative; overflow:hidden;
-      border-top:1px solid var(--line); border-bottom:1px solid var(--line);
-      background:var(--surface);
-      padding:1.1rem 0;
-    }
-    .marquee-track {
-      display:flex; width:max-content;
-      animation:marquee-scroll 38s linear infinite;
-    }
-    .marquee:hover .marquee-track { animation-play-state:paused; }
-    .marquee-item {
-      display:flex; align-items:center; gap:.9rem;
-      font-family:var(--ff-head); font-weight:500;
-      font-size:1rem; letter-spacing:.03em;
-      color:var(--sub); text-transform:uppercase;
-      padding:0 1.75rem; white-space:nowrap;
-    }
-    .marquee-item::after {
-      content:'◆'; font-size:.55rem; color:var(--green); margin-left:1.75rem;
-    }
-    @keyframes marquee-scroll {
-      from { transform:translateX(0); }
-      to   { transform:translateX(-50%); }
-    }
-    @media(prefers-reduced-motion:reduce){
-      .marquee-track { animation:none; }
     }
 
     /* ─── GALLERY ─── */
@@ -729,18 +699,18 @@
       <strong>Technologue</strong><br>créative —<br>multimédia,<br>son & image
     </h1>
     <p class="hero-desc"
-       data-fr="Gestionnaire de projets numériques &amp; conceptrice technologique. Design, code, son, vidéo — je pilote des projets créatifs de A à Z depuis 25 ans, de la production culturelle au développement web."
-       data-en="Digital project manager &amp; creative technologist. Design, code, sound, video — I lead creative projects from A to Z for 25 years, from cultural production to web development.">
-      Gestionnaire de projets numériques &amp; conceptrice technologique. Design, code, son, vidéo — je pilote des projets créatifs de A à Z depuis 25 ans, de la production culturelle au développement web.
+       data-fr="Coordination de projets culturels &amp; technologie créative. Je fais avancer les projets d'artistes : calendriers, livrables, partenaires, contenus — avec un pied dans la musique depuis toujours."
+       data-en="Cultural project coordination &amp; creative technology. I keep artists' projects moving: schedules, deliverables, partners, content — with one foot in music all along.">
+      Coordination de projets culturels &amp; technologie créative. Je fais avancer les projets d'artistes : calendriers, livrables, partenaires, contenus — avec un pied dans la musique depuis toujours.
     </p>
     <div class="hero-meta">
       <div class="hero-meta-row">
         <span class="hero-meta-dot"></span>
-        <span data-fr="Disponible pour mandats freelance" data-en="Available for freelance mandates">Disponible pour mandats freelance</span>
+        <span data-fr="Disponible pour un poste permanent — novembre 2026" data-en="Available for a permanent role — November 2026">Disponible pour un poste permanent — novembre 2026</span>
       </div>
       <div class="hero-meta-row">
         <span class="hero-meta-dot"></span>
-        <span data-fr="Design · Code · Son · Vidéo · IA" data-en="Design · Code · Sound · Video · AI">Design · Code · Son · Vidéo · IA</span>
+        <span data-fr="Coordination · Artistes · Musique · Vidéo · Numérique" data-en="Coordination · Artists · Music · Video · Digital">Coordination · Artistes · Musique · Vidéo · Numérique</span>
       </div>
     </div>
     <div class="hero-cta">
@@ -763,11 +733,11 @@
     <div class="stat-label" data-fr="Ans d'expérience" data-en="Years of experience">Ans d'expérience</div>
   </div>
   <div class="stat">
-    <div class="stat-num">15+</div>
-    <div class="stat-label" data-fr="Formations livrées" data-en="Courses delivered">Formations livrées</div>
+    <div class="stat-num">20+</div>
+    <div class="stat-label" data-fr="Productions cinéma &amp; TV" data-en="Film &amp; TV productions">Productions cinéma &amp; TV</div>
   </div>
   <div class="stat">
-    <div class="stat-num">07</div>
+    <div class="stat-num">08</div>
     <div class="stat-label" data-fr="Domaines d'expertise" data-en="Areas of expertise">Domaines d'expertise</div>
   </div>
   <div class="stat">
@@ -776,33 +746,45 @@
   </div>
 </div>
 
-<!-- MARQUEE -->
-<div class="marquee">
-  <div class="marquee-track" id="marqueeTrack">
-    <span class="marquee-item">MAPP_MTL</span>
-    <span class="marquee-item">ASIASIE</span>
-    <span class="marquee-item">Centre PHI</span>
-    <span class="marquee-item">Bad Blood</span>
-    <span class="marquee-item">Unité 9</span>
-    <span class="marquee-item">Kuessipan</span>
-    <span class="marquee-item">Ex Machina · Robert Lepage</span>
-    <span class="marquee-item">Google Lyria</span>
-    <span class="marquee-item">Hydra</span>
-    <span class="marquee-item">Claude Code</span>
-    <span class="marquee-item">TypeScript</span>
-    <span class="marquee-item">OXFAM</span>
-  </div>
-</div>
 
 <!-- EXPERTISE -->
 <section id="expertise">
   <div class="s-header reveal">
     <h2 class="s-title" data-fr="Expertises" data-en="Expertise">Expertises</h2>
-    <span class="s-count" data-fr="07 domaines" data-en="07 areas">07 domaines</span>
+    <span class="s-count" data-fr="08 domaines" data-en="08 areas">08 domaines</span>
   </div>
   <div class="exp-grid">
     <div class="exp-card reveal">
       <div class="exp-num">01</div>
+      <h3 data-fr="Coordination de projets d'artistes" data-en="Artist project coordination">Coordination de projets d'artistes</h3>
+      <ul>
+        <li data-fr="Calendriers, livrables, échéances" data-en="Schedules, deliverables, deadlines">Calendriers, livrables, échéances</li>
+        <li data-fr="Relations artistes, partenaires, fournisseurs" data-en="Artist, partner &amp; vendor relations">Relations artistes, partenaires, fournisseurs</li>
+        <li data-fr="Booking, appels à artistes, logistique" data-en="Booking, artist calls, logistics">Booking, appels à artistes, logistique</li>
+        <li data-fr="Suivi budgétaire · Google Sheets &amp; Docs" data-en="Budget tracking · Google Sheets &amp; Docs">Suivi budgétaire · Google Sheets &amp; Docs</li>
+      </ul>
+    </div>
+    <div class="exp-card reveal">
+      <div class="exp-num">02</div>
+      <h3 data-fr="Musique &amp; son" data-en="Music &amp; sound">Musique &amp; son</h3>
+      <ul>
+        <li data-fr="URA — piano &amp; ambient, deux présentations au Centre PHI" data-en="URA — piano &amp; ambient, two presentations at Centre PHI">URA — piano &amp; ambient, deux présentations au Centre PHI</li>
+        <li data-fr="Bandes sonores pour des artistes" data-en="Soundtracks for artists">Bandes sonores pour des artistes</li>
+        <li data-fr="Still FM — radio communautaire : artistes, DJ, compositeur·rice·s, émissions" data-en="Still FM — community radio: artists, DJs, composers, shows">Still FM — radio communautaire : artistes, DJ, compositeur·rice·s, émissions</li>
+        <li data-fr="Synthés · machines &amp; instruments vintage · Ableton" data-en="Synths · vintage machines &amp; instruments · Ableton">Synthés · machines &amp; instruments vintage · Ableton</li>
+      </ul>
+    </div>
+    <div class="exp-card reveal">
+      <div class="exp-num">03</div>
+      <h3 data-fr="Contenus vidéo &amp; numériques" data-en="Video &amp; digital content">Contenus vidéo &amp; numériques</h3>
+      <ul>
+        <li data-fr="Montage vidéo, motion design" data-en="Video editing, motion design">Montage vidéo, motion design</li>
+        <li data-fr="Visuels pour réseaux sociaux &amp; promo" data-en="Social &amp; promo visuals">Visuels pour réseaux sociaux &amp; promo</li>
+        <li data-fr="Design sonore · Cinéma/TV (20+ productions)" data-en="Sound design · Film/TV (20+ productions)">Design sonore · Cinéma/TV (20+ productions)</li>
+      </ul>
+    </div>
+    <div class="exp-card reveal">
+      <div class="exp-num">04</div>
       <h3 data-fr="Design UX/UI" data-en="UX/UI Design">Design UX/UI</h3>
       <ul>
         <li data-fr="Recherche utilisateur" data-en="User research">Recherche utilisateur</li>
@@ -811,17 +793,14 @@
       </ul>
     </div>
     <div class="exp-card reveal">
-      <div class="exp-num">02</div>
+      <div class="exp-num">05</div>
       <h3 data-fr="E-Learning" data-en="E-Learning">E-Learning</h3>
       <ul>
-        <li data-fr="15+ formations immersives" data-en="15+ immersive courses">15+ formations immersives</li>
-        <li data-fr="Scénarisation, gamification, SCORM" data-en="Instructional design, gamification, SCORM">Scénarisation, gamification, SCORM</li>
-        <li data-fr="Métro, SQI, CIUSSS, Ville de Laval" data-en="Métro, SQI, CIUSSS, Ville de Laval">Métro, SQI, CIUSSS, Ville de Laval</li>
-        <li>LMS (Docebo, Moodle) · WCAG</li>
+        <li>LMS</li>
       </ul>
     </div>
     <div class="exp-card reveal">
-      <div class="exp-num">03</div>
+      <div class="exp-num">06</div>
       <h3 data-fr="Développement" data-en="Development">Développement</h3>
       <ul>
         <li>TypeScript · LitElement · Vite</li>
@@ -830,16 +809,7 @@
       </ul>
     </div>
     <div class="exp-card reveal">
-      <div class="exp-num">04</div>
-      <h3 data-fr="Production AV" data-en="AV Production">Production AV</h3>
-      <ul>
-        <li data-fr="Vidéo & montage" data-en="Video & editing">Vidéo & montage</li>
-        <li data-fr="Motion design" data-en="Motion design">Motion design</li>
-        <li data-fr="Design sonore · Cinéma/TV" data-en="Sound design · Film/TV">Design sonore · Cinéma/TV</li>
-      </ul>
-    </div>
-    <div class="exp-card reveal">
-      <div class="exp-num">05</div>
+      <div class="exp-num">07</div>
       <h3 data-fr="IA Générative" data-en="Generative AI">IA Générative</h3>
       <ul>
         <li>Claude Code · Stable Diffusion · ComfyUI</li>
@@ -848,21 +818,14 @@
       </ul>
     </div>
     <div class="exp-card reveal">
-      <div class="exp-num">06</div>
-      <h3 data-fr="Gestion de projets" data-en="Project management">Gestion de projets</h3>
-      <ul>
-        <li data-fr="Opérations, budgets, échéanciers" data-en="Operations, budgets, timelines">Opérations, budgets, échéanciers</li>
-        <li data-fr="Équipes, partenaires, fournisseurs" data-en="Teams, partners, vendors">Équipes, partenaires, fournisseurs</li>
-        <li data-fr="Production culturelle" data-en="Cultural production">Production culturelle</li>
-      </ul>
-    </div>
-    <div class="exp-card reveal" style="grid-column:1/-1;">
-      <div class="exp-num">07</div>
+      <div class="exp-num">08</div>
       <h3 data-fr="Outils" data-en="Tools">Outils</h3>
-      <ul style="display:flex; flex-wrap:wrap; gap:.15rem 2.5rem;">
+      <ul>
+        <li>Google Sheets · Docs · Apps Script</li>
+        <li>Notion · Make.com · Tally</li>
+        <li>Adobe CC · Premiere · Audition</li>
         <li>Figma · Adobe XD</li>
         <li>Articulate Storyline</li>
-        <li>Adobe CC · Audition</li>
         <li>DaVinci Resolve</li>
         <li>Ableton · Logic Pro</li>
         <li>Max/MSP</li>
@@ -882,13 +845,15 @@
   <div class="tl">
 
     <div class="tl-item reveal">
-      <div class="tl-date">2026 →</div>
+      <div class="tl-date">2026</div>
       <div class="tl-content">
-        <div class="tl-badge" data-fr="Nouveau poste" data-en="New role">Nouveau poste</div>
-        <h3 data-fr="Adjointe à la direction — projets numériques et opérations" data-en="Executive Assistant — Digital Projects & Operations">Adjointe à la direction — projets numériques et opérations</h3>
+        <h3 data-fr="Adjointe à la direction — coordination de projets et opérations" data-en="Executive Assistant — Project Coordination & Operations">Adjointe à la direction — coordination de projets et opérations</h3>
         <h4 data-fr="MAPP_MTL et ASIASIE — festivals culturels internationaux" data-en="MAPP_MTL and ASIASIE — international cultural festivals">MAPP_MTL et ASIASIE — festivals culturels internationaux</h4>
         <ul>
-          <li data-fr="Pilotage transversal : équipes, artistes, bénévoles, partenaires, fournisseurs, échéanciers et suivi budgétaire" data-en="Cross-functional leadership: teams, artists, volunteers, partners, vendors, timelines and budget tracking">Pilotage transversal : équipes, artistes, bénévoles, partenaires, fournisseurs, échéanciers et suivi budgétaire</li>
+          <li data-fr="Accompagnement des artistes : accueil, horaires, besoins logistiques et techniques" data-en="Artist support: hospitality, schedules, logistical and technical needs">Accompagnement des artistes : accueil, horaires, besoins logistiques et techniques</li>
+          <li data-fr="Contribution au booking d'artistes et à la programmation" data-en="Contributed to artist booking and programming">Contribution au booking d'artistes et à la programmation</li>
+          <li data-fr="Coordination de MINUTE_MAPP 2026 : appel à vidéos, suivi des livrables et des échéances des artistes" data-en="Coordinated MINUTE_MAPP 2026: video call, tracking artists' deliverables and deadlines">Coordination de MINUTE_MAPP 2026 : appel à vidéos, suivi des livrables et des échéances des artistes</li>
+          <li data-fr="Pilotage transversal : équipes, bénévoles, partenaires, fournisseurs, échéanciers et suivi budgétaire" data-en="Cross-functional coordination: teams, volunteers, partners, vendors, timelines and budget tracking">Pilotage transversal : équipes, bénévoles, partenaires, fournisseurs, échéanciers et suivi budgétaire</li>
           <li data-fr="Conception et développement de la web app du festival — TypeScript, LitElement, Vite, UX mobile" data-en="Design and development of the festival's web app — TypeScript, LitElement, Vite, mobile UX">Conception et développement de la web app du festival — TypeScript, LitElement, Vite, UX mobile</li>
           <li data-fr="Outils internes et automatisation — Google Apps Script, Google Sheets, API Google AI/Gemini et Claude Code" data-en="Internal tools and automation — Google Apps Script, Google Sheets, Google AI/Gemini API and Claude Code">Outils internes et automatisation — Google Apps Script, Google Sheets, API Google AI/Gemini et Claude Code</li>
         </ul>
@@ -902,9 +867,10 @@
         <h4 data-fr="Projets personnels & freelance" data-en="Personal projects & freelance">Projets personnels & freelance</h4>
         <ul>
           <li data-fr="Instruments musicaux expérimentaux — Latent Organ, Hors Champ" data-en="Experimental musical instruments — Latent Organ, Hors Champ">Instruments musicaux expérimentaux — Latent Organ, Hors Champ</li>
-          <li data-fr="Radio streaming Still FM — Next.js + Mixcloud / Twitch" data-en="Still FM streaming radio — Next.js + Mixcloud / Twitch">Radio streaming Still FM — Next.js + Mixcloud / Twitch</li>
+          <li data-fr="Still FM — radio communautaire en ligne réunissant artistes, DJ et compositeur·rice·s autour d'émissions (Next.js + Mixcloud / Twitch)" data-en="Still FM — online community radio bringing together artists, DJs and composers through radio shows (Next.js + Mixcloud / Twitch)">Still FM — radio communautaire en ligne réunissant artistes, DJ et compositeur·rice·s autour d'émissions (Next.js + Mixcloud / Twitch)</li>
           <li data-fr="IA générative : Stable Diffusion, ComfyUI, workflows Python" data-en="Generative AI : Stable Diffusion, ComfyUI, Python workflows">IA générative : Stable Diffusion, ComfyUI, workflows Python</li>
-          <li data-fr="Création musicale (URA) pour deux présentations au Centre PHI" data-en="Music creation (URA) for two presentations at Centre PHI">Création musicale (URA) pour deux présentations au Centre PHI</li>
+          <li data-fr="URA — compositions piano et ambient (synthétiseurs, machines et instruments vintage), deux présentations au Centre PHI" data-en="URA — piano and ambient compositions (synthesizers, vintage machines and instruments), two presentations at Centre PHI">URA — compositions piano et ambient (synthétiseurs, machines et instruments vintage), deux présentations au Centre PHI</li>
+          <li data-fr="Bandes sonores pour des projets d'artistes" data-en="Soundtracks for artists' projects">Bandes sonores pour des projets d'artistes</li>
           <li data-fr="Performance avec Kimura Byol" data-en="Performance with Kimura Byol">Performance avec Kimura Byol</li>
           <li data-fr="Performances numériques dans plusieurs festivals queers" data-en="Digital performances at several queer festivals">Performances numériques dans plusieurs festivals queers</li>
         </ul>
@@ -928,7 +894,7 @@
       <div class="tl-date">2020–2023</div>
       <div class="tl-content">
         <h3 data-fr="Designer Senior & Direction Artistique" data-en="Senior Designer & Art Direction">Designer Senior & Direction Artistique</h3>
-        <h4>Développement de modules de formation en ligne portant sur la réponse aux incidents critiques, la gestion de crise et des enjeux de sécurité internationale (attentats, menaces, protocoles d'intervention).</h4>
+        <h4 data-fr="Entreprise internationale — studio de formation numérique interne" data-en="International company — in-house digital learning studio">Entreprise internationale — studio de formation numérique interne</h4>
         <ul>
           <li data-fr="Direction artistique de formations numériques à grande échelle" data-en="Art direction for large-scale digital training">Direction artistique de formations numériques à grande échelle</li>
           <li data-fr="Supervision d'équipe créative, gestion de budgets" data-en="Creative team supervision, budget management">Supervision d'équipe créative, gestion de budgets</li>
@@ -943,7 +909,7 @@
         <h3 data-fr="Designer Graphique & Multimédia" data-en="Graphic & Multimedia Designer">Designer Graphique & Multimédia</h3>
         <h4 data-fr="Productions Cinéma & TV (Freelance)" data-en="Film & TV Productions (Freelance)">Productions Cinéma & TV (Freelance)</h4>
         <ul>
-          <li data-fr="15+ productions (Bad Blood, Unité 9, Kuessipan, Nadia Butterfly…)" data-en="15+ productions (Bad Blood, Unité 9, Kuessipan, Nadia Butterfly…)">15+ productions (Bad Blood, Unité 9, Kuessipan, Nadia Butterfly…)</li>
+          <li data-fr="20+ productions (Bad Blood, Unité 9, Kuessipan, Nadia Butterfly…)" data-en="20+ productions (Bad Blood, Unité 9, Kuessipan, Nadia Butterfly…)">20+ productions (Bad Blood, Unité 9, Kuessipan, Nadia Butterfly…)</li>
           <li data-fr="Props numériques, interfaces fictives, motion design" data-en="Digital props, fictional interfaces, motion design">Props numériques, interfaces fictives, motion design</li>
         </ul>
       </div>
@@ -1037,11 +1003,11 @@
 <section id="contact">
   <div class="contact-left">
     <p class="contact-tag" data-fr="Travaillons ensemble" data-en="Let's work together">Travaillons ensemble</p>
-    <h2 class="contact-headline" data-fr="Un projet en tête ?" data-en="Got a project in mind?">Un projet en tête ?</h2>
+    <h2 class="contact-headline" data-fr="On se parle ?" data-en="Let's talk?">On se parle ?</h2>
     <p class="contact-sub"
-       data-fr="Disponible pour mandats freelance,<br>collaborations créatives et projets multimédia."
-       data-en="Available for freelance mandates,<br>creative collaborations and multimedia projects.">
-      Disponible pour mandats freelance,<br>collaborations créatives et projets multimédia.
+       data-fr="Disponible dès novembre 2026 pour un poste permanent<br>en coordination de projets culturels, musicaux ou numériques."
+       data-en="Available from November 2026 for a permanent role<br>in cultural, music or digital project coordination.">
+      Disponible dès novembre 2026 pour un poste permanent<br>en coordination de projets culturels, musicaux ou numériques.
     </p>
   </div>
   <div class="contact-right">
@@ -1160,12 +1126,6 @@
   raf();
 })();
 
-// MARQUEE — duplicate items once for a seamless loop
-(function(){
-  const track = document.getElementById('marqueeTrack');
-  if(!track) return;
-  track.innerHTML += track.innerHTML;
-})();
 </script>
 
 <!-- POP-UP DISPO 1er NOVEMBRE (retirer cette ligne pour l'enlever) -->
