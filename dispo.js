@@ -1,232 +1,242 @@
-/* ==========================================================================
-   DISPO — petit pop-up « nouveau défi dès le 1er novembre »
-   Autonome : injecte son CSS + son HTML. Pour le retirer, supprimer
-   la balise <script src="dispo.js"> dans index.html (et ce fichier).
-   ========================================================================== */
+/* dispo.js — module « disponibilité » (nœud style TouchDesigner) + bille lumineuse « mise à jour en cours »
+   Pour retirer : supprimer la ligne <script src="dispo.js" defer></script> dans index.html.
+   Réglages rapides ci-dessous. */
 (function () {
-  const START = new Date(2026, 10, 1);          // 1er novembre 2026 (mois 0-indexé)
-  const STORE_KEY = 'km-dispo-closed';
-  const EMAIL = 'info@kimmaurice.com';
+  'use strict';
 
-  const T = {
+  // ─── RÉGLAGES ───
+  var CFG = {
+    availableFrom: new Date(2026, 10, 1),   // 1er novembre 2026 (mois 10 = novembre)
+    email: 'info@kimmaurice.com',
+    cv: 'CV_Kim_Maurice_2026.pdf',
+    showCard: true,        // le nœud « disponibilité »
+    showOrb: true,         // la bille lumineuse « mise à jour en cours »
+    orbPassSeconds: 11,    // durée d'une traversée
+    orbPauseSeconds: 7,    // pause entre deux traversées
+    cardDelayMs: 1200
+  };
+
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var langBtn = document.getElementById('langBtn');
+  function lang() { return langBtn && langBtn.textContent.trim() === 'FR' ? 'en' : 'fr'; }
+
+  var T = {
     fr: {
-      subject: 'Un nouveau défi pour toi dès le 1er novembre',
-      days: n => n === 1 ? 'Plus que 1 jour' : `Plus que ${n} jours`,
-      now: 'Disponible dès maintenant',
-      pill: 'Dispo le 1er nov.',
-      pillNow: 'Dispo maintenant',
-      yay: ['Allô!', 'Engage-moi!', 'Yé!', 'On jase?', '✦ bonne idée ✦', 'Encore!']
+      tag: 'disponibilité', date: '1er nov.', title: 'Je cherche mon prochain défi',
+      text: 'Contrat, mandat ou poste : je suis libre dès le 1er novembre pour un nouveau projet créatif ou techno.',
+      mode: 'contrat · mandat · poste', k1: 'début', k2: 'mode', k3: 'statut', k4: 'T-moins',
+      open: 'ouvert', now: 'Disponible maintenant',
+      left: function (n) { return n === 1 ? 'Plus que 1 jour' : 'Plus que ' + n + ' jours'; },
+      leftShort: function (n) { return n + ' j'; },
+      write: 'M’écrire', cv: 'Voir le CV', close: 'Fermer',
+      orb: 'Mise à jour du site en cours…'
     },
     en: {
-      subject: 'A new challenge for you from November 1st',
-      days: n => n === 1 ? 'Just 1 day to go' : `${n} days to go`,
-      now: 'Available now',
-      pill: 'Free Nov 1',
-      pillNow: 'Available now',
-      yay: ['Hi!', 'Hire me!', 'Yay!', "Let's talk?", '✦ good idea ✦', 'Again!']
+      tag: 'availability', date: 'Nov. 1', title: 'Looking for my next challenge',
+      text: 'Contract, assignment or position: I’m available from November 1 for a new creative or tech project.',
+      mode: 'contract · assignment · position', k1: 'start', k2: 'mode', k3: 'status', k4: 'T-minus',
+      open: 'open', now: 'Available now',
+      left: function (n) { return n === 1 ? '1 day left' : n + ' days left'; },
+      leftShort: function (n) { return n + ' d'; },
+      write: 'Write me', cv: 'View CV', close: 'Close',
+      orb: 'Site update in progress…'
     }
   };
 
-  /* ---------- CSS ---------- */
-  const css = `
-  .dispo{position:fixed;right:1.5rem;bottom:1.5rem;z-index:998;width:min(340px,calc(100vw - 1.5rem));
-    font-family:var(--ff);color:var(--text);pointer-events:none}
-  @media(max-width:767px){.dispo{right:.75rem;left:.75rem;width:auto;bottom:calc(56px + .75rem + env(safe-area-inset-bottom,0px))}}
-  .dispo-card{pointer-events:auto;position:relative;margin-top:44px;padding:1.6rem 1.4rem 1.3rem;
-    background:var(--surface);border:1px solid rgba(242,241,246,.3);border-radius:14px;
-    box-shadow:5px 5px 0 var(--pink);transform-origin:85% 100%;
-    transform:translateY(24px) rotate(2deg) scale(.9);opacity:0;visibility:hidden;
-    transition:transform .5s cubic-bezier(.34,1.56,.64,1),opacity .3s,visibility 0s .5s}
-  .dispo.open .dispo-card{transform:rotate(-1.5deg);opacity:1;visibility:visible;
-    transition:transform .5s cubic-bezier(.34,1.56,.64,1),opacity .3s,visibility 0s}
-  .dispo-close{position:absolute;top:.55rem;right:.6rem;width:30px;height:30px;border-radius:50%;
-    border:1px solid transparent;background:none;color:var(--sub);font-size:1.1rem;line-height:1;cursor:pointer;
-    font-family:var(--ff-head);transition:color .2s,border-color .2s}
-  .dispo-close:hover{color:var(--text);border-color:var(--line)}
-
-  /* la bestiole */
-  .dispo-blob{position:absolute;left:1.1rem;top:-52px;width:78px;height:66px;padding:0;border:0;background:none;
-    cursor:pointer;-webkit-tap-highlight-color:transparent}
-  .dispo-blob svg{width:100%;height:100%;overflow:visible;display:block;transform-origin:50% 100%;
-    animation:dispo-bob 3.2s ease-in-out infinite}
-  .dispo-blob.squish svg{animation:dispo-squish .45s cubic-bezier(.34,1.56,.64,1)}
-  .dispo-lid{transform-box:fill-box;transform-origin:center;animation:dispo-blink 4.6s infinite}
-  @keyframes dispo-bob{0%,100%{transform:translateY(0) scale(1,1)}50%{transform:translateY(-3px) scale(.98,1.03)}}
-  @keyframes dispo-squish{0%{transform:scale(1,1)}35%{transform:scale(1.22,.74)}70%{transform:scale(.9,1.12)}100%{transform:scale(1,1)}}
-  @keyframes dispo-blink{0%,92%,100%{transform:scaleY(0)}95%{transform:scaleY(1)}}
-  .dispo-blob:focus-visible{outline:2px solid var(--green);outline-offset:4px;border-radius:50%}
-  .dispo-say{position:absolute;left:92px;top:-44px;padding:.35rem .6rem;border-radius:10px 10px 10px 2px;
-    background:var(--text);color:var(--bg);font-family:var(--ff-head);font-weight:600;font-size:.8rem;white-space:nowrap;
-    opacity:0;transform:translateY(6px) scale(.9);transition:opacity .2s,transform .25s cubic-bezier(.34,1.56,.64,1);pointer-events:none}
-  .dispo-say.show{opacity:1;transform:none}
-
-  .dispo-date{font-family:var(--ff-head);font-weight:700;font-size:2.6rem;line-height:.9;letter-spacing:-.03em;
-    color:var(--green);margin:.35rem 0 .7rem}
-  .dispo-title{font-family:var(--ff-head);font-weight:600;font-size:1.15rem;line-height:1.2;margin-bottom:.45rem}
-  .dispo-text{font-size:.78rem;line-height:1.65;color:var(--sub);margin-bottom:1rem;max-width:34ch}
-  .dispo-count{display:inline-flex;align-items:center;gap:.5rem;font-size:.72rem;color:var(--text);
-    border:1px dashed rgba(242,241,246,.3);border-radius:999px;padding:.3rem .75rem;margin-bottom:1.1rem}
-  .dispo-count::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);
-    animation:blink-dot 2s infinite}
-  .dispo-actions{display:flex;gap:.5rem;flex-wrap:wrap}
-  .dispo-actions .btn{padding:.7rem 1.1rem;border-radius:999px}
-  .dispo-actions .btn-primary{background:var(--green)}
-  .dispo-actions .btn-primary:hover{background:var(--text)}
-
-  /* pastille quand c'est fermé */
-  .dispo-pill{pointer-events:auto;position:absolute;right:0;bottom:0;display:flex;align-items:center;gap:.5rem;
-    padding:.35rem .9rem .35rem .35rem;border-radius:999px;border:1px solid rgba(242,241,246,.3);
-    background:var(--surface);color:var(--text);font-family:var(--ff);font-size:.72rem;font-weight:600;cursor:pointer;
-    box-shadow:3px 3px 0 var(--pink);opacity:0;visibility:hidden;transform:scale(.6);
-    transition:transform .4s cubic-bezier(.34,1.56,.64,1),opacity .25s,visibility 0s .4s}
-  .dispo.mini .dispo-pill{opacity:1;visibility:visible;transform:none;transition:transform .4s cubic-bezier(.34,1.56,.64,1),opacity .25s,visibility 0s}
-  .dispo-pill:hover{transform:translateY(-2px) rotate(-2deg)}
-  .dispo-pill svg{width:30px;height:26px;overflow:visible}
-  .dispo-pill:focus-visible,.dispo-close:focus-visible,.dispo-actions .btn:focus-visible{outline:2px solid var(--green);outline-offset:3px}
-
-  .dispo-bit{position:fixed;z-index:999;pointer-events:none;font-size:.9rem;line-height:1}
-
-  @media(prefers-reduced-motion:reduce){
-    .dispo-blob svg,.dispo-lid{animation:none}
-    .dispo-card,.dispo.open .dispo-card{transition:opacity .2s,visibility 0s;transform:none}
-  }`;
-  const style = document.createElement('style');
-  style.textContent = css;
-  document.head.appendChild(style);
-
-  /* ---------- la bestiole (SVG) ---------- */
-  const blobSVG = (id, small) => `
-  <svg viewBox="0 0 80 68" aria-hidden="true">
-    <defs><linearGradient id="${id}" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#c9ff3d"/><stop offset="1" stop-color="#8ff0b0"/></linearGradient></defs>
-    <path d="M40 4C60 4 76 18 77 38c1 17-8 27-37 27S2 55 3 38C4 18 20 4 40 4Z" fill="url(#${id})"/>
-    ${small ? '' : '<ellipse cx="20" cy="44" rx="6" ry="3.5" fill="#ff3e9b" opacity=".55"/><ellipse cx="60" cy="44" rx="6" ry="3.5" fill="#ff3e9b" opacity=".55"/>'}
-    <g class="dispo-eye" data-cx="30" data-cy="32">
-      <ellipse cx="30" cy="32" rx="7.5" ry="9" fill="#fff"/>
-      <circle class="dispo-pupil" cx="30" cy="33" r="4.2" fill="#08070d"/>
-      <ellipse class="dispo-lid" cx="30" cy="32" rx="8" ry="9.5" fill="#c9ff3d"/>
-    </g>
-    <g class="dispo-eye" data-cx="50" data-cy="32">
-      <ellipse cx="50" cy="32" rx="7.5" ry="9" fill="#fff"/>
-      <circle class="dispo-pupil" cx="50" cy="33" r="4.2" fill="#08070d"/>
-      <ellipse class="dispo-lid" cx="50" cy="32" rx="8" ry="9.5" fill="#b0f76a"/>
-    </g>
-    <path d="M35 49q5 5 10 0" stroke="#08070d" stroke-width="2.4" fill="none" stroke-linecap="round"/>
-  </svg>`;
-
-  /* ---------- HTML ---------- */
-  const root = document.createElement('aside');
-  root.className = 'dispo';
-  root.setAttribute('aria-label', 'Disponibilité');
-  root.innerHTML = `
-    <div class="dispo-card" role="dialog" aria-labelledby="dispoTitle">
-      <button class="dispo-blob" type="button" aria-label="Clique-moi">${blobSVG('dispoG1')}</button>
-      <span class="dispo-say" aria-live="polite"></span>
-      <button class="dispo-close" type="button" aria-label="Fermer">×</button>
-      <p class="dispo-date" data-fr="1er nov." data-en="Nov 1">1er nov.</p>
-      <h2 class="dispo-title" id="dispoTitle" data-fr="Je cherche mon prochain défi" data-en="Looking for my next challenge">Je cherche mon prochain défi</h2>
-      <p class="dispo-text"
-         data-fr="Contrat, mandat ou poste : je suis libre dès le 1er novembre pour un nouveau projet créatif ou techno."
-         data-en="Contract, mandate or full-time role: I'm free from November 1st for a new creative or tech project.">Contrat, mandat ou poste : je suis libre dès le 1er novembre pour un nouveau projet créatif ou techno.</p>
-      <div class="dispo-count"></div>
-      <div class="dispo-actions">
-        <a class="btn btn-primary dispo-mail" href="#"><span data-fr="M'écrire" data-en="Email me">M'écrire</span></a>
-        <a class="btn btn-secondary" href="Kim_Maurice_CV_2026_MTL.pdf" target="_blank"><span data-fr="Voir le CV" data-en="See my CV">Voir le CV</span></a>
-      </div>
-    </div>
-    <button class="dispo-pill" type="button" aria-label="Voir ma disponibilité">${blobSVG('dispoG2', true)}<span class="dispo-pill-txt"></span></button>`;
-  document.body.appendChild(root);
-
-  const $ = s => root.querySelector(s);
-  const card = $('.dispo-card'), blob = $('.dispo-blob'), say = $('.dispo-say');
-  const closeBtn = $('.dispo-close'), pill = $('.dispo-pill');
-  const langBtn = document.getElementById('langBtn');
-  const reduce = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
-
-  /* ---------- langue (suit le bouton FR/EN du site) ---------- */
-  const lang = () => (langBtn && langBtn.textContent.trim() === 'FR') ? 'en' : 'fr';
-  function render() {
-    const t = T[lang()];
-    const today = new Date(); today.setHours(0, 0, 0, 0);
-    const days = Math.round((START - today) / 864e5);
-    const ready = days <= 0;
-    $('.dispo-count').textContent = ready ? t.now : t.days(days);
-    $('.dispo-pill-txt').textContent = ready ? t.pillNow : t.pill;
-    $('.dispo-mail').href = `mailto:${EMAIL}?subject=${encodeURIComponent(t.subject)}`;
-    closeBtn.setAttribute('aria-label', lang() === 'fr' ? 'Fermer' : 'Close');
+  function daysLeft() {
+    var t = new Date(); t.setHours(0, 0, 0, 0);
+    return Math.ceil((CFG.availableFrom - t) / 86400000);
   }
-  if (langBtn) langBtn.addEventListener('click', () => setTimeout(render, 0));
-  render();
 
-  /* ---------- ouvrir / fermer ---------- */
-  function open() {
-    root.classList.remove('mini'); root.classList.add('open');
-    try { localStorage.removeItem(STORE_KEY); } catch (e) {}
+  // ─── STYLES ───
+  var css = [
+    '.kd-node{position:fixed;right:1.25rem;bottom:1.25rem;z-index:9000;width:min(332px,calc(100vw - 2rem));',
+    'background:rgba(10,9,17,.94);border:1px solid rgba(242,241,246,.22);color:#f2f1f6;font-family:"IBM Plex Mono",ui-monospace,monospace;',
+    'box-shadow:0 0 0 1px rgba(201,255,61,.08),0 18px 50px rgba(0,0,0,.55),0 0 40px rgba(59,92,255,.12);',
+    'opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease;backdrop-filter:blur(8px)}',
+    '.kd-node.kd-in{opacity:1;transform:none}',
+    '.kd-node.kd-out{opacity:0;transform:translateY(10px);pointer-events:none}',
+    '.kd-head{display:flex;align-items:center;gap:.55rem;padding:.5rem .65rem;background:linear-gradient(90deg,rgba(201,255,61,.16),rgba(201,255,61,.03));border-bottom:1px solid rgba(242,241,246,.16);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase}',
+    '.kd-led{width:.45rem;height:.45rem;background:#c9ff3d;box-shadow:0 0 8px #c9ff3d;animation:kdblink 1.6s steps(2,end) infinite}',
+    '@keyframes kdblink{50%{opacity:.25}}',
+    '.kd-name{color:#c9ff3d;font-weight:600}',
+    '.kd-type{margin-left:auto;padding:.1rem .35rem;border:1px solid rgba(242,241,246,.3);color:rgba(242,241,246,.7);font-size:.55rem}',
+    '.kd-x{appearance:none;background:none;border:0;color:rgba(242,241,246,.6);font:inherit;font-size:.85rem;line-height:1;cursor:pointer;padding:.1rem .25rem}',
+    '.kd-x:hover{color:#ff3e9b}',
+    '.kd-scope{position:relative;height:38px;overflow:hidden;border-bottom:1px solid rgba(242,241,246,.12);background:',
+    'linear-gradient(rgba(242,241,246,.05) 1px,transparent 1px) 0 0/100% 9.5px,linear-gradient(90deg,rgba(242,241,246,.05) 1px,transparent 1px) 0 0/16px 100%,#07060c}',
+    '.kd-scope svg{position:absolute;left:0;top:0;width:200%;height:100%;animation:kdscroll 5s linear infinite}',
+    '@keyframes kdscroll{to{transform:translateX(-50%)}}',
+    '.kd-body{padding:.85rem .85rem .35rem}',
+    '.kd-date{font-family:"Space Grotesk",sans-serif;font-size:2rem;font-weight:700;letter-spacing:-.03em;line-height:1;color:#c9ff3d;text-transform:uppercase}',
+    '.kd-title{font-family:"Space Grotesk",sans-serif;font-size:1rem;font-weight:600;margin:.45rem 0 .4rem;line-height:1.2}',
+    '.kd-text{font-size:.72rem;line-height:1.65;color:rgba(242,241,246,.66);margin:0 0 .8rem}',
+    '.kd-params{border:1px solid rgba(242,241,246,.14);margin-bottom:.8rem}',
+    '.kd-row{display:grid;grid-template-columns:5.2rem 1fr;gap:.5rem;padding:.32rem .55rem;font-size:.64rem;border-bottom:1px solid rgba(242,241,246,.09)}',
+    '.kd-row:last-child{border-bottom:0}',
+    '.kd-k{color:rgba(242,241,246,.45);text-transform:uppercase;letter-spacing:.08em}',
+    '.kd-v{color:#f2f1f6}',
+    '.kd-v.ok{color:#c9ff3d}.kd-v.hot{color:#ff3e9b}',
+    '.kd-actions{display:flex;gap:.5rem;padding:0 .85rem .85rem}',
+    '.kd-btn{flex:1;text-align:center;text-decoration:none;font:600 .64rem "IBM Plex Mono",monospace;letter-spacing:.1em;text-transform:uppercase;padding:.55rem .5rem;border:1px solid rgba(242,241,246,.35);color:#f2f1f6;transition:all .2s}',
+    '.kd-btn.main{background:#c9ff3d;border-color:#c9ff3d;color:#08070d}',
+    '.kd-btn:hover{background:#ff3e9b;border-color:#ff3e9b;color:#08070d}',
+    '.kd-port{position:absolute;top:50%;width:.6rem;height:.6rem;border:1px solid #c9ff3d;background:#08070d;transform:translateY(-50%) rotate(45deg)}',
+    '.kd-port.l{left:-.34rem}.kd-port.r{right:-.34rem;background:#c9ff3d;box-shadow:0 0 8px #c9ff3d}',
+    '#kd-orb{position:fixed;inset:0;width:100%;height:100%;z-index:9500;pointer-events:none}',
+    '.kd-orb-label{position:fixed;left:0;top:0;z-index:9501;pointer-events:none;white-space:nowrap;opacity:0;',
+    'font:600 .62rem "IBM Plex Mono",monospace;letter-spacing:.14em;text-transform:uppercase;color:#08070d;background:#c9ff3d;padding:.3rem .55rem;',
+    'box-shadow:0 0 18px rgba(201,255,61,.55);will-change:transform,opacity}',
+    '.kd-orb-static{position:fixed;left:1rem;bottom:1rem;z-index:9400;pointer-events:none;font:600 .6rem "IBM Plex Mono",monospace;letter-spacing:.14em;text-transform:uppercase;color:#08070d;background:#c9ff3d;padding:.3rem .55rem}',
+    '@media(max-width:768px){.kd-node{right:.75rem;bottom:4.9rem}.kd-date{font-size:1.6rem}}',
+    '@media(prefers-reduced-motion:reduce){.kd-led,.kd-scope svg{animation:none}.kd-node{transition:none}}'
+  ].join('');
+  var st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
+
+  // ─── NŒUD « DISPONIBILITÉ » ───
+  var node, closed = false;
+  try { closed = sessionStorage.getItem('kd-closed') === '1'; } catch (e) {}
+
+  function sinePath() {
+    var p = 'M0 19', i, x, y;
+    for (i = 0; i <= 400; i += 4) {
+      x = i; y = 19 + Math.sin(i / 400 * Math.PI * 6) * 9 * (0.55 + 0.45 * Math.sin(i / 400 * Math.PI * 2));
+      p += ' L' + x + ' ' + y.toFixed(1);
+    }
+    return p;
   }
-  function close() {
-    root.classList.remove('open'); root.classList.add('mini');
-    try { localStorage.setItem(STORE_KEY, '1'); } catch (e) {}
+
+  function buildCard() {
+    node = document.createElement('aside');
+    node.className = 'kd-node';
+    node.setAttribute('role', 'complementary');
+    node.innerHTML =
+      '<span class="kd-port l"></span><span class="kd-port r"></span>' +
+      '<div class="kd-head"><span class="kd-led"></span><span class="kd-name" data-k="tag"></span><span class="kd-type">CHOP</span>' +
+      '<button class="kd-x" type="button" data-k="close" aria-label="">×</button></div>' +
+      '<div class="kd-scope"><svg viewBox="0 0 400 38" preserveAspectRatio="none" aria-hidden="true">' +
+      '<path d="' + sinePath() + '" fill="none" stroke="#c9ff3d" stroke-width="1.2"/>' +
+      '<path transform="translate(400 0)" d="' + sinePath() + '" fill="none" stroke="#c9ff3d" stroke-width="1.2"/></svg></div>' +
+      '<div class="kd-body"><div class="kd-date" data-k="date"></div><div class="kd-title" data-k="title"></div><p class="kd-text" data-k="text"></p>' +
+      '<div class="kd-params">' +
+      '<div class="kd-row"><span class="kd-k" data-k="k1"></span><span class="kd-v">2026-11-01</span></div>' +
+      '<div class="kd-row"><span class="kd-k" data-k="k2"></span><span class="kd-v" data-k="mode"></span></div>' +
+      '<div class="kd-row"><span class="kd-k" data-k="k3"></span><span class="kd-v ok">● <span data-k="open"></span></span></div>' +
+      '<div class="kd-row"><span class="kd-k" data-k="k4"></span><span class="kd-v hot" data-k="left"></span></div>' +
+      '</div></div>' +
+      '<div class="kd-actions"><a class="kd-btn main" data-k="write" href="mailto:' + CFG.email + '"></a>' +
+      '<a class="kd-btn" data-k="cv" href="' + CFG.cv + '" target="_blank" rel="noopener"></a></div>';
+    document.body.appendChild(node);
+    node.querySelector('.kd-x').addEventListener('click', function () {
+      node.classList.remove('kd-in'); node.classList.add('kd-out');
+      try { sessionStorage.setItem('kd-closed', '1'); } catch (e) {}
+      setTimeout(function () { if (node && node.parentNode) node.parentNode.removeChild(node); }, 600);
+    });
+    renderCard();
+    setTimeout(function () { node.classList.add('kd-in'); }, CFG.cardDelayMs);
   }
-  closeBtn.addEventListener('click', () => { close(); pill.focus({ preventScroll: true }); });
-  pill.addEventListener('click', open);
-  document.addEventListener('keydown', e => { if (e.key === 'Escape' && root.classList.contains('open')) close(); });
 
-  let wasClosed = false;
-  try { wasClosed = localStorage.getItem(STORE_KEY) === '1'; } catch (e) {}
-  if (wasClosed) root.classList.add('mini');
-  else setTimeout(open, 2200);
-
-  /* ---------- les yeux suivent le curseur ---------- */
-  const eyes = [...root.querySelectorAll('.dispo-eye')];
-  function look(x, y) {
-    eyes.forEach(eye => {
-      const svg = eye.ownerSVGElement, r = svg.getBoundingClientRect();
-      if (!r.width) return;
-      const k = r.width / 80;
-      const ex = r.left + (+eye.dataset.cx) * k, ey = r.top + (+eye.dataset.cy) * k;
-      const a = Math.atan2(y - ey, x - ex);
-      const d = Math.min(3.2, Math.hypot(x - ex, y - ey) / 40);
-      const p = eye.querySelector('.dispo-pupil');
-      p.setAttribute('cx', +eye.dataset.cx + Math.cos(a) * d);
-      p.setAttribute('cy', +eye.dataset.cy + 1 + Math.sin(a) * d * 1.2);
+  function renderCard() {
+    if (!node) return;
+    var t = T[lang()], n = daysLeft();
+    var map = {
+      tag: t.tag, date: t.date, title: t.title, text: t.text, k1: t.k1, k2: t.k2, k3: t.k3, k4: t.k4,
+      mode: t.mode, open: t.open, write: t.write, cv: t.cv,
+      left: n > 0 ? t.left(n) : t.now
+    };
+    node.querySelectorAll('[data-k]').forEach(function (el) {
+      var k = el.getAttribute('data-k');
+      if (k === 'close') { el.setAttribute('aria-label', t.close); return; }
+      if (map[k] !== undefined) el.textContent = map[k];
     });
   }
-  let raf = 0;
-  window.addEventListener('pointermove', e => {
-    if (raf) return;
-    raf = requestAnimationFrame(() => { raf = 0; look(e.clientX, e.clientY); });
-  }, { passive: true });
-  window.addEventListener('pointerdown', e => look(e.clientX, e.clientY), { passive: true });
 
-  /* ---------- clic sur la bestiole : squish + confettis + petite phrase ---------- */
-  let sayTimer, sayIdx = 0;
-  blob.addEventListener('click', () => {
-    blob.classList.remove('squish'); void blob.offsetWidth; blob.classList.add('squish');
-    const words = T[lang()].yay;
-    say.textContent = words[sayIdx++ % words.length];
-    say.classList.add('show');
-    clearTimeout(sayTimer); sayTimer = setTimeout(() => say.classList.remove('show'), 1400);
-    if (!reduce) burst(blob.getBoundingClientRect());
-  });
+  // ─── BILLE LUMINEUSE ───
+  var canvas, ctx, label, W = 0, H = 0, dpr = 1;
+  var trail = [], t0 = 0, state = 'wait', phase = 0, baseY = 0.5, amp = 0.25, raf = 0;
 
-  function burst(r) {
-    const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
-    const glyphs = ['◆', '✦', '●', '♥'], colors = ['#c9ff3d', '#ff3e9b', '#3b5cff', '#f2f1f6'];
-    for (let i = 0; i < 16; i++) {
-      const s = document.createElement('span');
-      s.className = 'dispo-bit';
-      s.textContent = glyphs[i % glyphs.length];
-      s.style.color = colors[(i * 7) % colors.length];
-      s.style.left = cx + 'px'; s.style.top = cy + 'px';
-      document.body.appendChild(s);
-      const a = -Math.PI / 2 + (Math.random() - .5) * Math.PI * 1.4;
-      const dist = 50 + Math.random() * 70;
-      const dx = Math.cos(a) * dist, dy = Math.sin(a) * dist;
-      s.animate([
-        { transform: 'translate(-50%,-50%) scale(.4) rotate(0deg)', opacity: 1 },
-        { transform: `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) scale(1) rotate(${Math.random() * 360}deg)`, opacity: 1, offset: .6 },
-        { transform: `translate(calc(-50% + ${dx * 1.1}px), calc(-50% + ${dy + 60}px)) scale(.7) rotate(${Math.random() * 540}deg)`, opacity: 0 }
-      ], { duration: 900 + Math.random() * 400, easing: 'cubic-bezier(.2,.7,.3,1)' }).onfinish = () => s.remove();
-    }
+  function resize() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    canvas.width = W * dpr; canvas.height = H * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   }
+
+  function startPass(now) {
+    state = 'pass'; t0 = now; trail.length = 0;
+    phase = Math.random() * Math.PI * 2;
+    baseY = 0.3 + Math.random() * 0.4;
+    amp = 0.12 + Math.random() * 0.14;
+    label.textContent = T[lang()].orb;
+  }
+
+  function frame(now) {
+    raf = requestAnimationFrame(frame);
+    if (state === 'wait') {
+      if (!t0) t0 = now;
+      if (now - t0 > (trail.length ? CFG.orbPauseSeconds : 2500) * (trail.length ? 1000 : 1)) startPass(now);
+      return;
+    }
+    var p = (now - t0) / (CFG.orbPassSeconds * 1000);
+    if (p >= 1) {
+      state = 'wait'; t0 = now; trail.length = 0; trail.push(0);
+      ctx.clearRect(0, 0, W, H); label.style.opacity = 0; return;
+    }
+    // trajectoire : traverse l'écran de gauche à droite avec ondulations
+    var x = -60 + p * (W + 120);
+    var y = H * (baseY + amp * Math.sin(p * Math.PI * 2 * 1.6 + phase) + 0.05 * Math.sin(p * 31));
+    trail.push({ x: x, y: y });
+    if (trail.length > 70) trail.shift();
+
+    ctx.clearRect(0, 0, W, H);
+    ctx.globalCompositeOperation = 'lighter';
+    var i, pt, k, r;
+    for (i = 0; i < trail.length; i++) {
+      pt = trail[i]; k = i / trail.length;
+      r = 2 + k * 9;
+      ctx.beginPath();
+      ctx.fillStyle = 'rgba(201,255,61,' + (k * k * 0.5).toFixed(3) + ')';
+      ctx.arc(pt.x, pt.y, r, 0, 6.2832); ctx.fill();
+    }
+    // halo + noyau
+    var g = ctx.createRadialGradient(x, y, 0, x, y, 46);
+    g.addColorStop(0, 'rgba(255,255,255,.95)');
+    g.addColorStop(.14, 'rgba(201,255,61,.9)');
+    g.addColorStop(.45, 'rgba(201,255,61,.22)');
+    g.addColorStop(1, 'rgba(201,255,61,0)');
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, 46, 0, 6.2832); ctx.fill();
+    ctx.globalCompositeOperation = 'source-over';
+
+    var fade = Math.min(1, p / 0.06, (1 - p) / 0.06);
+    label.style.opacity = fade.toFixed(2);
+    label.style.transform = 'translate(' + Math.round(Math.min(x + 22, W - label.offsetWidth - 12)) + 'px,' + Math.round(Math.max(y - 38, 8)) + 'px)';
+  }
+
+  function buildOrb() {
+    if (reduce) {
+      var s = document.createElement('div'); s.className = 'kd-orb-static'; s.id = 'kd-orb-static';
+      s.textContent = T[lang()].orb; document.body.appendChild(s);
+      return;
+    }
+    canvas = document.createElement('canvas'); canvas.id = 'kd-orb'; canvas.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(canvas); ctx = canvas.getContext('2d');
+    label = document.createElement('div'); label.className = 'kd-orb-label'; label.setAttribute('role', 'status');
+    document.body.appendChild(label);
+    resize(); window.addEventListener('resize', resize);
+    raf = requestAnimationFrame(frame);
+  }
+
+  function init() {
+    if (CFG.showCard && !closed) buildCard();
+    if (CFG.showOrb) buildOrb();
+    if (langBtn) langBtn.addEventListener('click', function () {
+      setTimeout(function () {
+        renderCard();
+        if (label && state === 'pass') label.textContent = T[lang()].orb;
+        var s = document.getElementById('kd-orb-static'); if (s) s.textContent = T[lang()].orb;
+      }, 0);
+    });
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();
