@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kim Maurice — Technologue créative, multimédia, son & image · Montréal</title>
+  <title>Kim Maurice — Coordonnatrice numérique · Chargée de projet numérique · Technologue créative</title>
  <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-WYM83ME5LK"></script>
 <script>
@@ -13,7 +13,7 @@
   gtag('config', 'G-WYM83ME5LK');
 </script>
   
-   <meta name="description" content="Kim Maurice — technologue créative, multimédia, son et image. Design multimédia, production audiovisuelle et coordination de projets culturels, Montréal.">
+   <meta name="description" content="Kim Maurice — technologue créative, coordonnatrice numérique et chargée de projet numérique à Montréal. Développement web (TypeScript, PWA), UX/UI, e-learning, son et audiovisuel, IA générative; coordination de projets culturels et événementiels. Plus de 25 ans d'expérience.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -116,6 +116,38 @@
     @media(prefers-reduced-motion:reduce){
       .js-ready .reveal { opacity:1; transform:none; transition:none; }
     }
+
+
+    /* ─── THREE-PILLAR POSITIONING ─── */
+    .pillars-intro {
+      max-width: 68ch; color: var(--sub); line-height: 1.8;
+      font-size: .9rem; margin: -1.1rem 0 2rem;
+    }
+    .pillars-grid {
+      display:grid; grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:1px; background:var(--line); border:1px solid var(--line);
+    }
+    .pillar {
+      min-height: 310px; padding: clamp(1.25rem,2.4vw,2.25rem);
+      background:linear-gradient(155deg,rgba(255,255,255,.035),rgba(255,255,255,.008));
+      display:flex; flex-direction:column; align-items:flex-start;
+      transition:background .25s ease, transform .25s ease;
+    }
+    .pillar:hover { background:linear-gradient(155deg,rgba(201,255,61,.08),rgba(255,255,255,.015)); }
+    .pillar-index { color:var(--accent); font-size:.72rem; letter-spacing:.12em; margin-bottom:2rem; }
+    .pillar h3 { font-size:clamp(1.25rem,2vw,1.8rem); line-height:1.12; margin-bottom:1rem; }
+    .pillar p { color:var(--sub); font-size:.8rem; line-height:1.8; margin-bottom:1.2rem; }
+    .pillar ul { list-style:none; display:grid; gap:.55rem; margin-bottom:1.6rem; }
+    .pillar li { color:var(--text); font-size:.72rem; line-height:1.55; }
+    .pillar li::before { content:"↳ "; color:var(--accent); }
+    .pillar-link { margin-top:auto; font-size:.72rem; color:var(--accent); border-bottom:1px solid rgba(201,255,61,.45); padding-bottom:.25rem; }
+    .portfolio-filter-note {
+      display:flex; align-items:center; gap:.7rem; color:var(--sub);
+      font-size:.72rem; line-height:1.7; margin-bottom:1.4rem;
+    }
+    .portfolio-filter-note::before { content:""; width:1.7rem; height:1px; background:var(--accent); flex:0 0 auto; }
+    .portfolio-type { text-transform:uppercase; letter-spacing:.1em; }
+    @media(max-width:800px) { .pillars-grid { grid-template-columns:1fr; } .pillar { min-height:0; } .pillar-index { margin-bottom:1.2rem; } }
 
     /* ─── GALLERY ─── */
     .gallery-note {
@@ -481,6 +513,46 @@
       text-transform:uppercase; color:var(--green);
     }
 
+    /* ─── PORTFOLIO / CASE STUDIES ─── */
+    .portfolio-intro{max-width:68ch;color:var(--sub);font-size:.9rem;line-height:1.85;margin:-1.5rem 0 2.5rem}
+    .portfolio-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+    .portfolio-card{background:var(--surface);min-width:0;display:flex;flex-direction:column;transition:background .25s}
+    .portfolio-card:hover{background:#12101d}
+    .portfolio-visual{aspect-ratio:16/10;position:relative;overflow:hidden;background:#111;display:flex;align-items:center;justify-content:center;padding:1.5rem}
+    .portfolio-visual::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,62,155,.17),transparent 48%,rgba(59,92,255,.2));pointer-events:none}
+    .portfolio-visual img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+
+    .portfolio-icon{color:var(--green);background:radial-gradient(circle at 30% 20%,rgba(255,62,155,.18),transparent 55%),radial-gradient(circle at 80% 90%,rgba(59,92,255,.22),transparent 55%),#0d0b16;border-bottom:1px solid var(--line)}
+    .portfolio-icon svg{position:relative;z-index:1;opacity:.95}
+    /* ─── CAROUSEL (images de projet) ─── */
+    .portfolio-visual.carousel{padding:0}
+    .carousel-track{position:absolute;inset:0;display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+    .carousel-track::-webkit-scrollbar{display:none}
+    .portfolio-visual .carousel-track img{position:static;inset:auto;flex:0 0 100%;width:100%;height:100%;object-fit:cover;scroll-snap-align:start;user-select:none;-webkit-user-drag:none}
+    .carousel-btn{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:2.4rem;height:2.4rem;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.25);background:rgba(8,7,13,.6);backdrop-filter:blur(6px);color:var(--text);font-size:1.1rem;line-height:1;cursor:pointer;opacity:0;transition:opacity .25s,background .2s,color .2s,border-color .2s}
+    .carousel-btn.prev{left:.75rem}.carousel-btn.next{right:.75rem}
+    .carousel:hover .carousel-btn,.carousel:focus-within .carousel-btn{opacity:1}
+    .carousel-btn:hover{background:var(--green);color:var(--bg);border-color:var(--green)}
+    .carousel-btn:disabled{opacity:0!important;pointer-events:none}
+    .carousel-dots{position:absolute;left:0;right:0;bottom:.75rem;z-index:3;display:flex;justify-content:center;gap:.4rem}
+    .carousel-dot{width:.45rem;height:.45rem;padding:0;border:1px solid rgba(255,255,255,.6);border-radius:50%;background:transparent;cursor:pointer;transition:background .2s,transform .2s}
+    .carousel-dot.active{background:var(--green);border-color:var(--green);transform:scale(1.25)}
+    .carousel-count{position:absolute;top:.75rem;right:.75rem;z-index:3;font-size:.6rem;letter-spacing:.12em;padding:.25rem .5rem;background:rgba(8,7,13,.6);color:var(--text);pointer-events:none}
+    @media(hover:none){.carousel-btn{opacity:1;width:2.1rem;height:2.1rem}}
+    @media(prefers-reduced-motion:reduce){.carousel-track{scroll-behavior:auto}}
+    .visual-placeholder{position:relative;z-index:1;text-align:left;width:100%;height:100%;display:flex;flex-direction:column;justify-content:space-between;border:1px solid rgba(255,255,255,.18);padding:1rem}
+    .visual-code{font-size:.62rem;letter-spacing:.14em;color:var(--green);text-transform:uppercase}
+    .visual-title{font-family:var(--ff-head);font-size:clamp(1.5rem,3vw,2.7rem);line-height:.95;text-transform:uppercase;letter-spacing:-.04em;max-width:12ch}
+    .visual-bottom{font-size:.65rem;color:var(--sub);letter-spacing:.08em;text-transform:uppercase}
+    .portfolio-copy{padding:1.5rem;display:flex;flex-direction:column;gap:.85rem;flex:1}
+    .portfolio-type{font-size:.65rem;letter-spacing:.13em;text-transform:uppercase;color:var(--pink)}
+    .portfolio-copy h3{font-size:1.35rem;font-weight:500;line-height:1.15}
+    .portfolio-copy p{font-size:.82rem;line-height:1.8;color:var(--sub)}
+    .portfolio-tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:auto;padding-top:.4rem}
+    .portfolio-tags span{font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--line);padding:.28rem .45rem;color:#c9c7d2}
+    .portfolio-note{font-size:.7rem;color:#777;line-height:1.6;margin-top:1.25rem}
+    @media(max-width:680px){.portfolio-grid{grid-template-columns:1fr}.portfolio-copy{padding:1.25rem}}
+
     /* ─── EXPERTISE ─── */
     .exp-grid {
       display:grid;
@@ -620,6 +692,12 @@
       margin-bottom:1.25rem;
     }
     .contact-sub { font-size:.9rem; color:#888; line-height:1.75; }
+    .contact-photo {
+      width:92px; height:92px; border-radius:50%;
+      object-fit:cover; object-position:center 22%;
+      margin-bottom:1.75rem;
+      border:2px solid var(--line);
+    }
     .contact-right {
       display:flex; flex-direction:column; gap:1rem; align-items:flex-start;
     }
@@ -683,6 +761,8 @@
   <span class="nav-name">Kim Maurice</span>
   <div class="nav-right">
     <nav class="nav-links">
+      <a href="#axes" data-fr="Les 3 axes" data-en="Three strengths">Les 3 axes</a>
+      <a href="#projets" data-fr="Projets" data-en="Projects">Projets</a>
       <a href="#expertise"  data-fr="Expertises"  data-en="Expertise">Expertises</a>
       <a href="#parcours"   data-fr="Parcours"    data-en="Experience">Parcours</a>
       <a href="#formation"  data-fr="Formation"   data-en="Education">Formation</a>
@@ -701,33 +781,32 @@
   </div>
   <div class="hero-left">
     <p class="hero-eyebrow"
-       data-fr="Montréal · Tiohtiá:ke"
-       data-en="Montréal · Tiohtiá:ke">Montréal · Tiohtiá:ke</p>
-    <h1 data-fr="<strong>Technologue</strong><br>créative —<br>multimédia,<br>son & image"
-        data-en="<strong>Creative</strong><br>Technologist —<br>multimedia,<br>sound & image">
-      <strong>Technologue</strong><br>créative —<br>multimédia,<br>son & image
+       data-fr="Coordonnatrice numérique · Chargée de projet numérique · Montréal"
+       data-en="Digital Coordinator · Digital Project Manager · Montréal">Coordonnatrice numérique · Chargée de projet numérique · Montréal</p>
+    <h1 data-fr="<strong>Coordination.</strong><br>Technique.<br>Création." data-en="<strong>Coordination.</strong><br>Technology.<br>Creative work.">
+      <strong>Coordination.</strong><br>Technique.<br>Création.
     </h1>
     <p class="hero-desc"
-       data-fr="Coordination de projets culturels &amp; technologie créative. Je fais avancer les projets d'artistes : calendriers, livrables, partenaires, contenus — avec un pied dans la musique depuis toujours."
-       data-en="Cultural project coordination &amp; creative technology. I keep artists' projects moving: schedules, deliverables, partners, content — with one foot in music all along.">
-      Coordination de projets culturels &amp; technologie créative. Je fais avancer les projets d'artistes : calendriers, livrables, partenaires, contenus — avec un pied dans la musique depuis toujours.
+       data-fr="Technologue créative, coordonnatrice numérique et chargée de projet numérique. Après plus de 25 ans à toucher à tout — design, code, son, image, production — j’ai une vision d’ensemble des projets : je comprends autant la création que la technique. Autodidacte, je m’adapte vite, je développe moi-même mes outils (TypeScript, PWA, Google Apps Script, IA) et je peux mener plusieurs projets de front, de l’idée jusqu’à la livraison."
+       data-en="Creative technologist, digital coordinator and digital project manager. After 25+ years of working across everything — design, code, sound, image, production — I see projects as a whole: I understand creative work and technology alike. Self-taught, I learn fast, build my own tools (TypeScript, PWA, Google Apps Script, AI) and can run several projects at once, from idea to delivery.">
+      Technologue créative, coordonnatrice numérique et chargée de projet numérique. Après plus de 25 ans à toucher à tout — design, code, son, image, production — j’ai une vision d’ensemble des projets : je comprends autant la création que la technique. Autodidacte, je m’adapte vite, je développe moi-même mes outils (TypeScript, PWA, Google Apps Script, IA) et je peux mener plusieurs projets de front, de l’idée jusqu’à la livraison.
     </p>
     <div class="hero-meta">
       <div class="hero-meta-row">
         <span class="hero-meta-dot"></span>
-        <span data-fr="Disponible pour un poste permanent — novembre 2026" data-en="Available for a permanent role — November 2026">Disponible pour un poste permanent — novembre 2026</span>
+        <span data-fr="Ouverte aux rôles de coordination numérique, chargée de projet numérique et création technologique" data-en="Open to digital coordination, digital project management and creative technology roles">Ouverte aux rôles de coordination numérique, chargée de projet numérique et création technologique</span>
       </div>
       <div class="hero-meta-row">
         <span class="hero-meta-dot"></span>
-        <span data-fr="Coordination · Artistes · Musique · Vidéo · Numérique" data-en="Coordination · Artists · Music · Video · Digital">Coordination · Artistes · Musique · Vidéo · Numérique</span>
+        <span data-fr="Coordination numérique · Développement web · UX/UI · E-learning · Son &amp; AV · IA · Festivals" data-en="Digital coordination · Web development · UX/UI · E-learning · Sound &amp; AV · AI · Festivals">Coordination numérique · Développement web · UX/UI · E-learning · Son &amp; AV · IA · Festivals</span>
       </div>
     </div>
     <div class="hero-cta">
-      <a href="Kim_Maurice_CV_2026_MTL.pdf" target="_blank" class="btn btn-primary">
+      <a href="CV_Kim_Maurice_2026.pdf" target="_blank" class="btn btn-primary">
         <span data-fr="⬇ Télécharger le CV" data-en="⬇ Download CV">⬇ Télécharger le CV</span>
       </a>
-      <a href="#parcours" class="btn btn-secondary"
-         data-fr="↓ Voir le parcours" data-en="↓ See experience">↓ Voir le parcours</a>
+      <a href="#projets" class="btn btn-secondary"
+         data-fr="↓ Découvrir les projets" data-en="↓ Explore projects">↓ Découvrir les projets</a>
     </div>
   </div>
   <div class="hero-right">
@@ -735,26 +814,64 @@
   </div>
 </div>
 
-<!-- STATS -->
+<!-- REPÈRES -->
 <div class="statsbar">
-  <div class="stat">
-    <div class="stat-num">25+</div>
-    <div class="stat-label" data-fr="Ans d'expérience" data-en="Years of experience">Ans d'expérience</div>
-  </div>
-  <div class="stat">
-    <div class="stat-num">20+</div>
-    <div class="stat-label" data-fr="Productions cinéma &amp; TV" data-en="Film &amp; TV productions">Productions cinéma &amp; TV</div>
-  </div>
-  <div class="stat">
-    <div class="stat-num">08</div>
-    <div class="stat-label" data-fr="Domaines d'expertise" data-en="Areas of expertise">Domaines d'expertise</div>
-  </div>
-  <div class="stat">
-    <div class="stat-num">∞</div>
-    <div class="stat-label" data-fr="Curiosité" data-en="Curiosity">Curiosité</div>
-  </div>
+  <div class="stat"><div class="stat-num">25+</div><div class="stat-label" data-fr="Ans en multimédia" data-en="Years in multimedia">Ans en multimédia</div></div>
+  <div class="stat"><div class="stat-num">20+</div><div class="stat-label" data-fr="Productions cinéma &amp; TV" data-en="Film &amp; TV productions">Productions cinéma &amp; TV</div></div>
+  <div class="stat"><div class="stat-num">360°</div><div class="stat-label" data-fr="De la planification au terrain" data-en="From planning to on-site delivery">De la planification au terrain</div></div>
+  <div class="stat"><div class="stat-num">01</div><div class="stat-label" data-fr="Coordination + technologie" data-en="Coordination + technology">Coordination + technologie</div></div>
 </div>
 
+<!-- TROIS AXES COMPLÉMENTAIRES -->
+<section id="axes">
+  <div class="s-header reveal">
+    <h2 class="s-title" data-fr="Trois forces. Une seule approche." data-en="Three strengths. One integrated approach.">Trois forces. Une seule approche.</h2>
+    <span class="s-count" data-fr="Profil hybride" data-en="Hybrid profile">Profil hybride</span>
+  </div>
+  <p class="pillars-intro"
+     data-fr="Je ne choisis pas entre coordination, technique et création : je sais les faire travailler ensemble. Cette polyvalence me permet de comprendre les besoins artistiques, d’anticiper les contraintes de production et de contribuer concrètement à la réalisation."
+     data-en="I don't choose between coordination, technology and creative work: I bring them together. This range lets me understand artistic needs, anticipate production constraints and contribute hands-on to delivery.">
+    Je ne choisis pas entre coordination, technique et création : je sais les faire travailler ensemble. Cette polyvalence me permet de comprendre les besoins artistiques, d’anticiper les contraintes de production et de contribuer concrètement à la réalisation.
+  </p>
+  <div class="pillars-grid">
+    <article class="pillar reveal">
+      <span class="pillar-index">01 / PRODUCTION</span>
+      <h3 data-fr="Coordination de projets, d’événements &amp; de festivals" data-en="Project, event &amp; festival coordination">Coordination de projets, d’événements &amp; de festivals</h3>
+      <p data-fr="Faire avancer les opérations avec méthode, clarté et une vision d’ensemble, du calendrier au terrain." data-en="Move operations forward with structure, clarity and a big-picture view—from schedules to on-site delivery.">Faire avancer les opérations avec méthode, clarté et une vision d’ensemble, du calendrier au terrain.</p>
+      <ul>
+        <li data-fr="Échéanciers, livrables et suivi" data-en="Schedules, deliverables and follow-up">Échéanciers, livrables et suivi</li>
+        <li data-fr="Équipes, artistes, fournisseurs et bénévoles" data-en="Teams, artists, vendors and volunteers">Équipes, artistes, fournisseurs et bénévoles</li>
+        <li data-fr="Logistique, budgets et coordination terrain" data-en="Logistics, budgets and on-site coordination">Logistique, budgets et coordination terrain</li>
+        <li data-fr="Coordination numérique : horaires, présences, équipements et outils de production" data-en="Digital coordination: schedules, attendance, equipment and production tools">Coordination numérique : horaires, présences, équipements et outils de production</li>
+      </ul>
+      <a class="pillar-link" href="#projets" data-fr="Voir MAPP_MTL &amp; ASIASIE ↗" data-en="Explore MAPP_MTL &amp; ASIASIE ↗">Voir MAPP_MTL &amp; ASIASIE ↗</a>
+    </article>
+    <article class="pillar reveal">
+      <span class="pillar-index">02 / TECHNIQUE</span>
+      <h3 data-fr="Coordination technique &amp; audiovisuelle" data-en="Technical &amp; audiovisual coordination">Coordination technique &amp; audiovisuelle</h3>
+      <p data-fr="Comprendre les besoins techniques et les transformer en installations et opérations fiables sur le terrain." data-en="Translate technical requirements into reliable setups and on-site operations.">Comprendre les besoins techniques et les transformer en installations et opérations fiables sur le terrain.</p>
+      <ul>
+        <li data-fr="Son, vidéo, projection et équipement" data-en="Sound, video, projection and equipment">Son, vidéo, projection et équipement</li>
+        <li data-fr="Plans électriques, visites de site et logistique" data-en="Electrical plans, site visits and logistics">Plans électriques, visites de site et logistique</li>
+        <li data-fr="Résolution de problèmes en contexte réel" data-en="Practical problem-solving on site">Résolution de problèmes en contexte réel</li>
+        <li data-fr="Ingénierie du son sur site · points de vente (iPads, Square, Wi-Fi)" data-en="On-site sound engineering · point-of-sale systems (iPads, Square, Wi-Fi)">Ingénierie du son sur site · points de vente (iPads, Square, Wi-Fi)</li>
+      </ul>
+      <a class="pillar-link" href="#projets" data-fr="Voir les productions terrain ↗" data-en="Explore on-site productions ↗">Voir les productions terrain ↗</a>
+    </article>
+    <article class="pillar reveal">
+      <span class="pillar-index">03 / CRÉATION &amp; NUMÉRIQUE</span>
+      <h3 data-fr="Artiste numérique &amp; développeuse créative" data-en="Digital artist &amp; creative developer">Artiste numérique &amp; développeuse créative</h3>
+      <p data-fr="Imaginer et prototyper des outils, interfaces et expériences où se rencontrent son, image, code et interaction." data-en="Imagine and prototype tools, interfaces and experiences at the intersection of sound, image, code and interaction.">Imaginer et prototyper des outils, interfaces et expériences où se rencontrent son, image, code et interaction.</p>
+      <ul>
+        <li data-fr="Applications web et outils de production : TypeScript, LitElement, PWA mobile" data-en="Web apps and production tools: TypeScript, LitElement, mobile PWA">Applications web et outils de production : TypeScript, LitElement, PWA mobile</li>
+        <li data-fr="Performance sonore, vidéo et installations interactives" data-en="Sound performance, video and interactive installations">Performance sonore, vidéo et installations interactives</li>
+        <li data-fr="Prototypage, IA et technologies créatives" data-en="Prototyping, AI and creative technologies">Prototypage, IA et technologies créatives</li>
+        <li data-fr="IA générative : images, son en temps réel, agents, code assisté" data-en="Generative AI: images, real-time sound, agents, AI-assisted code">IA générative : images, son en temps réel, agents, code assisté</li>
+      </ul>
+      <a class="pillar-link" href="#projets" data-fr="Voir Hors Champ &amp; URA ↗" data-en="Explore Hors Champ &amp; URA ↗">Voir Hors Champ &amp; URA ↗</a>
+    </article>
+  </div>
+</section>
 
 <!-- EXPERTISE -->
 <section id="expertise">
@@ -765,12 +882,14 @@
   <div class="exp-grid">
     <div class="exp-card reveal">
       <div class="exp-num">01</div>
-      <h3 data-fr="Coordination de projets d'artistes" data-en="Artist project coordination">Coordination de projets d'artistes</h3>
+      <h3 data-fr="Coordination de projets &amp; festivals" data-en="Project &amp; festival coordination">Coordination de projets &amp; festivals</h3>
       <ul>
         <li data-fr="Calendriers, livrables, échéances" data-en="Schedules, deliverables, deadlines">Calendriers, livrables, échéances</li>
         <li data-fr="Relations artistes, partenaires, fournisseurs" data-en="Artist, partner &amp; vendor relations">Relations artistes, partenaires, fournisseurs</li>
         <li data-fr="Booking, appels à artistes, logistique" data-en="Booking, artist calls, logistics">Booking, appels à artistes, logistique</li>
         <li data-fr="Suivi budgétaire · Google Sheets &amp; Docs" data-en="Budget tracking · Google Sheets &amp; Docs">Suivi budgétaire · Google Sheets &amp; Docs</li>
+        <li data-fr="Minutage, montage et démontage, plans électriques, permis municipaux" data-en="Run-of-show, build and strike, electrical plans, municipal permits">Minutage, montage et démontage, plans électriques, permis municipaux</li>
+        <li data-fr="Commandites, subventions · coordination numérique (Notion, Make.com, Tally)" data-en="Sponsorships, grants · digital coordination (Notion, Make.com, Tally)">Commandites, subventions · coordination numérique (Notion, Make.com, Tally)</li>
       </ul>
     </div>
     <div class="exp-card reveal">
@@ -805,7 +924,9 @@
       <div class="exp-num">05</div>
       <h3 data-fr="E-Learning" data-en="E-Learning">E-Learning</h3>
       <ul>
+        <li data-fr="Scénarisation, storyboards" data-en="Scripting, storyboards">Scénarisation, storyboards</li>
         <li>LMS</li>
+        <li>Articulate Storyline / Rise</li>
       </ul>
     </div>
     <div class="exp-card reveal">
@@ -815,6 +936,8 @@
         <li>TypeScript · LitElement · Vite</li>
         <li>HTML · CSS · JS · React · Next.js</li>
         <li>Three.js · WebGL · Python · API</li>
+        <li data-fr="GitHub · applications web mobiles (PWA)" data-en="GitHub · mobile web apps (PWA)">GitHub · applications web mobiles (PWA)</li>
+        <li data-fr="Web app publique de festival · outils internes et automatisation" data-en="Public festival web app · internal tools and automation">Web app publique de festival · outils internes et automatisation</li>
       </ul>
     </div>
     <div class="exp-card reveal">
@@ -824,6 +947,11 @@
         <li>Claude Code · Stable Diffusion · ComfyUI</li>
         <li data-fr="API : Google AI, Gemini, Lyria" data-en="API: Google AI, Gemini, Lyria">API : Google AI, Gemini, Lyria</li>
         <li data-fr="Agents IA, prompt engineering" data-en="AI agents, prompt engineering">Agents IA, prompt engineering</li>
+        <li data-fr="Images : Stable Diffusion, ComfyUI, workflows Python" data-en="Images: Stable Diffusion, ComfyUI, Python workflows">Images : Stable Diffusion, ComfyUI, workflows Python</li>
+        <li data-fr="Son : génération musicale en temps réel avec Google Lyria RealTime (Hors Champ)" data-en="Sound: real-time music generation with Google Lyria RealTime (Hors Champ)">Son : génération musicale en temps réel avec Google Lyria RealTime (Hors Champ)</li>
+        <li data-fr="Code assisté par IA : Claude Code, outils internes et automatisation avec Gemini" data-en="AI-assisted development: Claude Code, internal tools and automation with Gemini">Code assisté par IA : Claude Code, outils internes et automatisation avec Gemini</li>
+        <li data-fr="Intégration pionnière dans les workflows d’une équipe et accompagnement à l’adoption (Technologia Formation)" data-en="Pioneering integration into a team’s workflows and adoption support (Technologia Formation)">Intégration pionnière dans les workflows d’une équipe et accompagnement à l’adoption (Technologia Formation)</li>
+        <li data-fr="Exploration de ces outils dès leurs débuts" data-en="Working with these tools since their early days">Exploration de ces outils dès leurs débuts</li>
       </ul>
     </div>
     <div class="exp-card reveal">
@@ -856,13 +984,15 @@
     <div class="tl-item reveal">
       <div class="tl-date" data-fr="Juin – oct. 2026" data-en="June – Oct. 2026">Juin – oct. 2026</div>
       <div class="tl-content">
-        <h3 data-fr="Adjointe à la direction — coordination de projets et opérations" data-en="Executive Assistant — Project Coordination & Operations">Adjointe à la direction — coordination de projets et opérations</h3>
+        <h3 data-fr="Adjointe à la direction — coordination numérique et production" data-en="Executive Assistant — Digital Coordination & Production">Adjointe à la direction — coordination numérique et production</h3>
         <h4 data-fr="MAPP_MTL — festival international de projection mapping" data-en="MAPP_MTL — international projection mapping festival">MAPP_MTL — festival international de projection mapping</h4>
         <ul>
+          <li data-fr="Coordination du minutage du festival et des échéanciers de montage, de diffusion et de démontage" data-en="Coordinated the festival run-of-show and build, presentation and strike schedules">Coordination du minutage du festival et des échéanciers de montage, de diffusion et de démontage</li>
           <li data-fr="Accompagnement des artistes : accueil, horaires, besoins logistiques et techniques" data-en="Artist support: hospitality, schedules, logistical and technical needs">Accompagnement des artistes : accueil, horaires, besoins logistiques et techniques</li>
           <li data-fr="Contribution au booking d'artistes et à la programmation" data-en="Contributed to artist booking and programming">Contribution au booking d'artistes et à la programmation</li>
+          <li data-fr="Conception des plans électriques; appui à la direction de production lors des visites de terrain et des démarches de permis auprès de la Ville" data-en="Designed electrical plans; supported production management during site visits and city permit applications">Conception des plans électriques; appui à la direction de production lors des visites de terrain et des démarches de permis auprès de la Ville</li>
           <li data-fr="MINUTE_MAPP 2026 : programmation de la page de dépôt des vidéos et suivi auprès des artistes pour que chacun ait les bonnes consignes" data-en="MINUTE_MAPP 2026: built the video submission page and followed up with artists so everyone had the right instructions">MINUTE_MAPP 2026 : programmation de la page de dépôt des vidéos et suivi auprès des artistes pour que chacun ait les bonnes consignes</li>
-          <li data-fr="Pilotage transversal : équipes, bénévoles, partenaires, fournisseurs, échéanciers et suivi budgétaire" data-en="Cross-functional coordination: teams, volunteers, partners, vendors, timelines and budget tracking">Pilotage transversal : équipes, bénévoles, partenaires, fournisseurs, échéanciers et suivi budgétaire</li>
+          <li data-fr="Pilotage transversal : équipes, bénévoles, partenaires, fournisseurs, personnel contractuel, échéanciers et suivi budgétaire; contribution aux commandites et aux subventions (listes partagées dans Notion)" data-en="Cross-functional coordination: teams, volunteers, partners, vendors, contractors, timelines and budget tracking; contributed to sponsorships and grants (shared lists in Notion)">Pilotage transversal : équipes, bénévoles, partenaires, fournisseurs, personnel contractuel, échéanciers et suivi budgétaire; contribution aux commandites et aux subventions (listes partagées dans Notion)</li>
           <li data-fr="Conception et développement de la web app du festival — TypeScript, LitElement, Vite, UX mobile" data-en="Design and development of the festival's web app — TypeScript, LitElement, Vite, mobile UX">Conception et développement de la web app du festival — TypeScript, LitElement, Vite, UX mobile</li>
           <li data-fr="Outils internes et automatisation — Google Apps Script, Google Sheets, API Google AI/Gemini et Claude Code" data-en="Internal tools and automation — Google Apps Script, Google Sheets, Google AI/Gemini API and Claude Code">Outils internes et automatisation — Google Apps Script, Google Sheets, API Google AI/Gemini et Claude Code</li>
         </ul>
@@ -872,10 +1002,11 @@
     <div class="tl-item reveal">
       <div class="tl-date" data-fr="Mars – juin 2026" data-en="March – June 2026">Mars – juin 2026</div>
       <div class="tl-content">
-        <h3 data-fr="Adjointe à la direction — numérique, son et audiovisuel (pigiste)" data-en="Executive Assistant — Digital, Sound &amp; AV (freelance)">Adjointe à la direction — numérique, son et audiovisuel (pigiste)</h3>
-        <h4 data-fr="ASIASIE — festivals YATAI MTL et POCHA MTL" data-en="ASIASIE — YATAI MTL and POCHA MTL festivals">ASIASIE — festivals YATAI MTL et POCHA MTL</h4>
+        <h3 data-fr="Pigiste — coordination de production, numérique, son et audiovisuel" data-en="Freelance — Production Coordination, Digital, Sound &amp; AV">Pigiste — coordination de production, numérique, son et audiovisuel</h3>
+        <h4 data-fr="ASIASIE — festivals YATAI MTL, POCHA MTL et Semaine du Japon" data-en="ASIASIE — YATAI MTL, POCHA MTL festivals and Japan Week">ASIASIE — festivals YATAI MTL, POCHA MTL et Semaine du Japon</h4>
         <ul>
-          <li data-fr="Responsable du son et de l'audiovisuel sur les sites des festivals : équipement, installation, soutien aux artistes et aux spectacles" data-en="Sound and AV lead on festival sites: equipment, set-up, support for artists and performances">Responsable du son et de l'audiovisuel sur les sites des festivals : équipement, installation, soutien aux artistes et aux spectacles</li>
+          <li data-fr="Coordination du minutage des festivals, en soutien à la direction de production" data-en="Coordinated festival run-of-show in support of production management">Coordination du minutage des festivals, en soutien à la direction de production</li>
+          <li data-fr="Responsable du son et de l'audiovisuel sur les sites des festivals (ingénieure du son) : équipement, installation, soutien aux artistes et aux spectacles" data-en="Sound and AV lead on festival sites (sound engineer): equipment, set-up, support for artists and performances">Responsable du son et de l'audiovisuel sur les sites des festivals (ingénieure du son) : équipement, installation, soutien aux artistes et aux spectacles</li>
           <li data-fr="Conception et développement des applications web des festivals et de tout le volet numérique : sites, outils internes, contenus" data-en="Design and development of the festivals' web apps and all digital work: websites, internal tools, content">Conception et développement des applications web des festivals et de tout le volet numérique : sites, outils internes, contenus</li>
           <li data-fr="Installation et gestion des points de vente (iPads, paiement Square, Wi-Fi) et suivi des ventes" data-en="Set-up and management of points of sale (iPads, Square payments, Wi-Fi) and sales tracking">Installation et gestion des points de vente (iPads, paiement Square, Wi-Fi) et suivi des ventes</li>
         </ul>
@@ -905,8 +1036,8 @@
         <h3 data-fr="Designer Multimédia & Coordo. Projets" data-en="Multimedia Designer & Project Coord.">Designer Multimédia & Coordo. Projets</h3>
         <h4>Technologia Formation</h4>
         <ul>
-          <li data-fr="Coordination de projets pour Métro, SQI, CIUSSS, Ville de Laval" data-en="Project coordination for Métro, SQI, CIUSSS, Ville de Laval">Coordination de projets pour Métro, SQI, CIUSSS, Ville de Laval</li>
-          <li data-fr="Intégration pionnière de l'IA générative dans les workflows" data-en="Pioneering integration of generative AI into workflows">Intégration pionnière de l'IA générative dans les workflows</li>
+          <li data-fr="Coordination de projets pour Métro, SQI, CIUSSS, Ville de Laval et Transcontinental" data-en="Project coordination for Métro, SQI, CIUSSS, Ville de Laval and Transcontinental">Coordination de projets pour Métro, SQI, CIUSSS, Ville de Laval et Transcontinental</li>
+          <li data-fr="Intégration pionnière de l'IA générative dans les workflows; accompagnement de l'équipe dans son adoption, après avoir exploré ces outils dès leurs débuts" data-en="Pioneering integration of generative AI into workflows; supported the team in adopting it, after exploring these tools from their early days">Intégration pionnière de l'IA générative dans les workflows; accompagnement de l'équipe dans son adoption, après avoir exploré ces outils dès leurs débuts</li>
           <li data-fr="Stratégie UX, production vidéo/audio, Articulate Storyline/Rise" data-en="UX strategy, video/audio production, Articulate Storyline/Rise">Stratégie UX, production vidéo/audio, Articulate Storyline/Rise</li>
         </ul>
       </div>
@@ -916,7 +1047,7 @@
       <div class="tl-date">2020–2023</div>
       <div class="tl-content">
         <h3 data-fr="Designer Senior & Direction Artistique" data-en="Senior Designer & Art Direction">Designer Senior & Direction Artistique</h3>
-        <h4 data-fr="Entreprise internationale — studio de formation numérique interne" data-en="International company — in-house digital learning studio">Entreprise internationale — studio de formation numérique interne</h4>
+        <h4 data-fr="Entreprise de haute sécurité — studio de formation numérique interne" data-en="High-security company — in-house digital learning studio">Entreprise de haute sécurité — studio de formation numérique interne</h4>
         <ul>
           <li data-fr="Direction artistique de formations numériques à grande échelle" data-en="Art direction for large-scale digital training">Direction artistique de formations numériques à grande échelle</li>
           <li data-fr="Supervision d'équipe créative, gestion de budgets" data-en="Creative team supervision, budget management">Supervision d'équipe créative, gestion de budgets</li>
@@ -938,15 +1069,48 @@
     </div>
 
     <div class="tl-item reveal">
-      <div class="tl-date">2000–2016</div>
+      <div class="tl-date" data-fr="Déc. 2014 – fév. 2016" data-en="Dec. 2014 – Feb. 2016">Déc. 2014 – fév. 2016</div>
       <div class="tl-content">
-        <h3 data-fr="Designer Web & Multimédia" data-en="Web & Multimedia Designer">Designer Web & Multimédia</h3>
-        <h4>NURUN · LOTO-QUÉBEC · MARVVY · OXFAM · EX MACHINA (ROBERT LEPAGE)</h4>
+        <h3 data-fr="Designer senior" data-en="Senior Designer">Designer senior</h3>
+        <h4 data-fr="MARVVY — Koh Samui, Thaïlande (entreprise de marketing)" data-en="MARVVY — Koh Samui, Thailand (marketing company)">MARVVY — Koh Samui, Thaïlande (entreprise de marketing)</h4>
+      </div>
+    </div>
+
+    <div class="tl-item reveal">
+      <div class="tl-date" data-fr="Mars 2013 – janv. 2014" data-en="March 2013 – Jan. 2014">Mars 2013 – janv. 2014</div>
+      <div class="tl-content">
+        <h3 data-fr="Conseillère multimédia et technologies" data-en="Multimedia & Technology Advisor">Conseillère multimédia et technologies</h3>
+        <h4 data-fr="Oxfam — Phnom Penh, Cambodge" data-en="Oxfam — Phnom Penh, Cambodia">Oxfam — Phnom Penh, Cambodge</h4>
+        <ul>
+          <li data-fr="Création de contenus web, graphiques et vidéo pour des projets de développement international" data-en="Created web, graphic and video content for international development projects">Création de contenus web, graphiques et vidéo pour des projets de développement international</li>
+          <li data-fr="Conseil stratégique en technologies" data-en="Strategic technology consulting">Conseil stratégique en technologies</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tl-item reveal">
+      <div class="tl-date">2009–2010</div>
+      <div class="tl-content">
+        <h3 data-fr="Designer web et multimédia (employée)" data-en="Web & Multimedia Designer (employee)">Designer web et multimédia (employée)</h3>
+        <h4 data-fr="NURUN — Québec et Montréal" data-en="NURUN — Quebec City and Montreal">NURUN — Québec et Montréal</h4>
         <ul>
           <li data-fr="Expériences web interactives & identités visuelles" data-en="Interactive web experiences & visual identities">Expériences web interactives & identités visuelles</li>
-          <li data-fr="Conseil stratégique en technologies (OXFAM)" data-en="Strategic technology consulting (OXFAM)">Conseil stratégique en technologies (OXFAM)</li>
-          <li data-fr="Installations interactives & production audiovisuelle" data-en="Interactive installations & audiovisual production">Installations interactives & production audiovisuelle</li>
-          <li data-fr="Le Moulin à images — Ex Machina / Robert Lepage" data-en="Le Moulin à images — Ex Machina / Robert Lepage">Le Moulin à images — Ex Machina / Robert Lepage</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tl-item reveal">
+      <div class="tl-date">2000–2016</div>
+      <div class="tl-content">
+        <h3 data-fr="Pigiste et autres expériences" data-en="Freelance & other experience">Pigiste et autres expériences</h3>
+        <h4 data-fr="Débuts à Québec, Loto-Québec, Ex Machina / Robert Lepage" data-en="Early career in Quebec City, Loto-Québec, Ex Machina / Robert Lepage">Débuts à Québec, Loto-Québec, Ex Machina / Robert Lepage</h4>
+        <ul>
+          <li data-fr="Débuts à Québec chez Hatem Communication et Caméléon" data-en="Started out in Quebec City at Hatem Communication and Caméléon">Débuts à Québec chez Hatem Communication et Caméléon</li>
+          <li data-fr="Le Moulin à images, Ex Machina / Robert Lepage (400e anniversaire de Québec, 2008) : artiste visuel" data-en="Le Moulin à images, Ex Machina / Robert Lepage (Quebec City's 400th anniversary, 2008): visual artist">Le Moulin à images, Ex Machina / Robert Lepage (400e anniversaire de Québec, 2008) : artiste visuel</li>
+          <li data-fr="Loto-Québec : projets web et multimédia" data-en="Loto-Québec: web and multimedia projects">Loto-Québec : projets web et multimédia</li>
+          <li data-fr="Installations interactives, identités visuelles et production audiovisuelle" data-en="Interactive installations, visual identities and audiovisual production">Installations interactives, identités visuelles et production audiovisuelle</li>
+          <li data-fr="Participation à un documentaire en Corée du Sud avec Benson Lee" data-en="Contributed to a documentary in South Korea with Benson Lee">Participation à un documentaire en Corée du Sud avec Benson Lee</li>
+          <li data-fr="Enseignement contractuel de l'anglais dans des écoles" data-en="Contract English teaching in schools">Enseignement contractuel de l'anglais dans des écoles</li>
         </ul>
       </div>
     </div>
@@ -954,53 +1118,40 @@
   </div>
 </section>
 
-<!-- PROJETS EN COURS -->
+<!-- PROJETS / ÉTUDES DE CAS -->
 <section id="projets">
   <div class="s-header reveal">
-    <h2 class="s-title" data-fr="Projet en cours" data-en="Current project">Projet en cours</h2>
-    <span class="s-count">v56</span>
+    <h2 class="s-title" data-fr="Des projets, trois expertises" data-en="Projects across three strengths">Des projets, trois expertises</h2>
+    <span class="s-count" data-fr="Production · création · technologie" data-en="Production · creativity · technology">Production · création · technologie</span>
   </div>
-
-  <div class="projet-card reveal">
-
-    <!-- Image (remplacer le src par ta capture d'écran) -->
-    <div class="projet-img-wrap">
-<img src="img/horschamp.png" alt="Hors Champ — interface de l'application de performance live">
-    </div>
-
-    <!-- Contenu -->
-    <div class="projet-body">
-      <div class="projet-eyebrow">
-        <span data-fr="Instrument numérique" data-en="Digital instrument">Instrument numérique</span>
-        <span class="projet-version">v56</span>
-      </div>
-
-      <h3 class="projet-title">Hors Champ</h3>
-
-      <p class="projet-desc"
-         data-fr="Un laboratoire de création musicale en temps réel, pensé autour d'une idée simple : l'IA est là pour accompagner le musicien, pas pour le remplacer. Ce qui m'intéresse, c'est l'intégration de vrais instruments — synthés, claviers, machines vintage, contrôleurs MIDI — qui dialoguent en direct avec la génération sonore par IA, les boîtes à rythmes et le looper. On joue, et l'IA répond."
-         data-en="A real-time music creation lab built around a simple idea: AI is there to accompany the musician, not replace them. What interests me is bringing real instruments into the loop — synths, keyboards, vintage machines, MIDI controllers — playing live alongside AI sound generation, drum machines and a looper. You play, and the AI answers.">
-        Un laboratoire de création musicale en temps réel, pensé autour d'une idée simple : l'IA est là pour accompagner le musicien, pas pour le remplacer. Ce qui m'intéresse, c'est l'intégration de vrais instruments — synthés, claviers, machines vintage, contrôleurs MIDI — qui dialoguent en direct avec la génération sonore par IA, les boîtes à rythmes et le looper. On joue, et l'IA répond.
-      </p>
-
-      <div class="projet-tags">
-        <span class="projet-tag">Google Lyria RealTime</span>
-        <span class="projet-tag">Web Audio API</span>
-        <span class="projet-tag">MIDI</span>
-        <span class="projet-tag">WebSockets</span>
-        <span class="projet-tag" data-fr="Instruments live" data-en="Live instruments">Instruments live</span>
-        <span class="projet-tag">Live Performance</span>
-      </div>
-
-      <div>
-        <div class="projet-status">
-          <span class="projet-status-dot"></span>
-          <span data-fr="En développement actif · Présentation prévue à l'automne 2026" data-en="In active development · Presentation planned for fall 2026">En développement actif · Présentation prévue à l'automne 2026</span>
-        </div>
-      </div>
-    </div>
-
+  <p class="portfolio-intro" data-fr="Une sélection de projets qui montre ma façon de travailler : comprendre les besoins, organiser les personnes et les moyens, résoudre les enjeux techniques et livrer des expériences utiles et sensibles." data-en="A selection showing how I work: understand the brief, coordinate people and resources, solve technical challenges and deliver useful, thoughtful experiences.">Une sélection de projets qui montre ma façon de travailler : comprendre les besoins, organiser les personnes et les moyens, résoudre les enjeux techniques et livrer des expériences utiles et sensibles.</p>
+  <div class="portfolio-grid">
+    <article class="portfolio-card reveal">
+      <div class="portfolio-visual portfolio-icon" role="img" aria-label="MAPP_MTL — festival international de projection mapping"><svg viewBox="0 0 64 64" width="96" height="96" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="10" width="40" height="26" rx="2"/><path d="M12 44h32M28 36v8"/><path d="M52 14l8-4v36l-8-4" opacity=".6"/></svg></div>
+      <div class="portfolio-copy"><span class="portfolio-type">Coordination numérique &amp; production de festival</span><h3>MAPP_MTL — festival international de projection mapping</h3><p data-fr="Coordination du minutage et des échéanciers de montage, diffusion et démontage; liens avec artistes, fournisseurs, contractuels et bénévoles. Contribution aux visites de terrain, plans électriques et démarches de permis. Développement d’outils numériques pour les horaires, disponibilités, présences et équipements, ainsi que de la page de dépôt vidéo de MINUTE_MAPP 2026." data-en="Coordinated run-of-show and build, presentation and strike schedules; worked with artists, vendors, contractors and volunteers. Supported site visits, electrical plans and permit processes. Built digital tools for schedules, availability, volunteer attendance and equipment, plus the MINUTE_MAPP 2026 video submission page.">Coordination du minutage et des échéanciers de montage, diffusion et démontage; liens avec artistes, fournisseurs, contractuels et bénévoles. Contribution aux visites de terrain, plans électriques et démarches de permis. Développement d’outils numériques pour les horaires, disponibilités, présences et équipements, ainsi que de la page de dépôt vidéo de MINUTE_MAPP 2026.</p><div class="portfolio-tags"><span>Production</span><span>Artistes &amp; équipes</span><span>Web app</span><span>TypeScript</span><span>Google Apps Script</span></div></div>
+    </article>
+    <article class="portfolio-card reveal">
+      <div class="portfolio-visual portfolio-icon" role="img" aria-label="ASIASIE — YATAI MTL, POCHA MTL et Semaine du Japon"><svg viewBox="0 0 64 64" width="96" height="96" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 32h6M18 20v24M26 12v40M34 22v20M42 16v32M50 26v12M58 32h2"/></svg></div>
+      <div class="portfolio-copy"><span class="portfolio-type">Coordination de production, numérique, son &amp; AV</span><h3>ASIASIE — YATAI MTL, POCHA MTL et Semaine du Japon</h3><p data-fr="Coordination du minutage en soutien à la direction de production et responsabilité du son et de l’audiovisuel sur site : équipement, installation et soutien aux artistes. Mise en place des points de vente avec iPads, Square et Wi-Fi, puis suivi des ventes des bars et de la cantine. Conception et développement d’applications web et d’outils numériques pour les festivals." data-en="Coordinated event timing in support of production management and led on-site sound and audiovisual operations, including equipment, setup and artist support. Set up point-of-sale systems using iPads, Square and Wi-Fi, and tracked bar and canteen sales. Designed and developed festival web apps and digital tools.">Coordination du minutage en soutien à la direction de production et responsabilité du son et de l’audiovisuel sur site : équipement, installation et soutien aux artistes. Mise en place des points de vente avec iPads, Square et Wi-Fi, puis suivi des ventes des bars et de la cantine. Conception et développement d’applications web et d’outils numériques pour les festivals.</p><div class="portfolio-tags"><span>Son &amp; AV</span><span>Logistique</span><span>Square</span><span>Wi-Fi</span><span>Applications web</span></div></div>
+    </article>
+    <article class="portfolio-card reveal">
+      <div class="portfolio-visual portfolio-icon" role="img" aria-label="Hors Champ — instrument musical augmenté par l’IA"><svg viewBox="0 0 64 64" width="96" height="96" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="32" cy="32" r="16"/><path d="M32 32l8-10"/><path d="M10 52h44M10 12h10M44 12h10" opacity=".6"/></svg></div>
+      <div class="portfolio-copy"><span class="portfolio-type">Recherche artistique &amp; prototypage</span><h3>Hors Champ — instrument musical augmenté par l’IA (v56)</h3><p data-fr="Projet personnel en développement : un environnement de création musicale en temps réel où l’IA accompagne le jeu instrumental plutôt que de le remplacer. Synthés, claviers, machines vintage et contrôleurs MIDI dialoguent en direct avec la génération sonore par IA, les boîtes à rythmes et le looper. Présentation prévue à l'automne 2026." data-en="Personal project in development: a real-time music environment where AI accompanies live instrumental performance rather than replacing it. Synths, keyboards, vintage machines and MIDI controllers interact live with AI sound generation, drum machines and looping. Presentation planned for fall 2026.">Projet personnel en développement : un environnement de création musicale en temps réel où l’IA accompagne le jeu instrumental plutôt que de le remplacer. Synthés, claviers, machines vintage et contrôleurs MIDI dialoguent en direct avec la génération sonore par IA, les boîtes à rythmes et le looper. Présentation prévue à l'automne 2026.</p><div class="portfolio-tags"><span>Google Lyria RealTime</span><span>Web Audio API</span><span>MIDI</span><span>WebSockets</span><span>Prototypage</span></div></div>
+    </article>
+    <article class="portfolio-card reveal">
+      <div class="portfolio-visual portfolio-icon" role="img" aria-label="URA — Kimura Byol"><svg viewBox="0 0 64 64" width="96" height="96" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="14" width="48" height="36" rx="2"/><path d="M20 14v36M32 14v36M44 14v36"/><path d="M16 14v20h8V14M28 14v20h8V14M40 14v20h8V14" fill="currentColor" opacity=".5"/></svg></div>
+      <div class="portfolio-copy"><span class="portfolio-type">Collaboration artistique</span><h3>URA — Kimura Byol</h3><p data-fr="Composition musicale pour le projet de l’artiste Kimura Byol : pièces pour piano et textures ambient réalisées avec synthétiseurs, machines anciennes et instruments vintage. Le projet a fait l’objet de deux présentations au Centre PHI." data-en="Original music composed for artist Kimura Byol: piano pieces and ambient textures created with synthesizers, vintage machines and instruments. The project was presented twice at Centre PHI.">Composition musicale pour le projet de l’artiste Kimura Byol : pièces pour piano et textures ambient réalisées avec synthétiseurs, machines anciennes et instruments vintage. Le projet a fait l’objet de deux présentations au Centre PHI.</p><div class="portfolio-tags"><span>Composition</span><span>Design sonore</span><span>Performance</span><span>Collaboration</span></div></div>
+    </article>
+    <article class="portfolio-card reveal">
+      <div class="portfolio-visual portfolio-icon" role="img" aria-label="Technologia Formation — expériences d’apprentissage"><svg viewBox="0 0 64 64" width="96" height="96" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="12" width="52" height="34" rx="2"/><path d="M26 22l14 7-14 7z"/><path d="M20 54h24M32 46v8"/></svg></div>
+      <div class="portfolio-copy"><span class="portfolio-type">Gestion de projets &amp; design multimédia</span><h3>Technologia Formation — expériences d’apprentissage</h3><p data-fr="Gestion de projets de formation en ligne pour Metro, la Société québécoise des infrastructures, des CIUSSS, la Ville de Laval et Transcontinental. Production de bout en bout : scénarisation, storyboards, design, vidéo, audio et animation; coordination de tournages et accompagnement de l’équipe dans l’adoption de l’IA générative." data-en="Managed online learning projects for Metro, the Société québécoise des infrastructures, CIUSSS, Ville de Laval and Transcontinental. End-to-end production included scripting, storyboards, design, video, audio and animation, coordinating shoots and helping the team adopt generative AI.">Gestion de projets de formation en ligne pour Metro, la Société québécoise des infrastructures, des CIUSSS, la Ville de Laval et Transcontinental. Production de bout en bout : scénarisation, storyboards, design, vidéo, audio et animation; coordination de tournages et accompagnement de l’équipe dans l’adoption de l’IA générative.</p><div class="portfolio-tags"><span>Gestion de projet</span><span>UX/UI</span><span>Vidéo &amp; audio</span><span>Storyline / Rise</span><span>IA générative</span></div></div>
+    </article>
+    <article class="portfolio-card reveal">
+      <div class="portfolio-visual portfolio-icon" role="img" aria-label="Cinéma et télévision — accessoires numériques"><svg viewBox="0 0 64 64" width="96" height="96" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="14" width="48" height="36" rx="2"/><path d="M8 24h48M18 14l-4 10M30 14l-4 10M42 14l-4 10M54 14l-4 10"/><circle cx="32" cy="38" r="5" opacity=".7"/></svg></div>
+      <div class="portfolio-copy"><span class="portfolio-type">Design pour la production audiovisuelle</span><h3>Cinéma et télévision — accessoires numériques</h3><p data-fr="Création d’écrans, d’interfaces fictives et d’éléments de motion design pour plus de 20 productions, dont Bad Blood, Unité 9, Kuessipan et Nadia, Butterfly. Collaboration avec les départements artistiques et la production pour concevoir des visuels cohérents avec les besoins du tournage." data-en="Created screen graphics, fictional interfaces and motion design elements for 20+ productions, including Bad Blood, Unité 9, Kuessipan and Nadia, Butterfly. Worked with art departments and production teams to deliver visuals tailored to each shoot.">Création d’écrans, d’interfaces fictives et d’éléments de motion design pour plus de 20 productions, dont Bad Blood, Unité 9, Kuessipan et Nadia, Butterfly. Collaboration avec les départements artistiques et la production pour concevoir des visuels cohérents avec les besoins du tournage.</p><div class="portfolio-tags"><span>Design d’interface</span><span>Motion design</span><span>Production TV</span><span>Adobe CC</span></div></div>
+    </article>
   </div>
+  <p class="portfolio-note" data-fr="Chaque projet montre une facette différente de mon approche : organiser la production, comprendre les contraintes techniques et contribuer à la création." data-en="Each project highlights a different part of my approach: coordinating production, understanding technical constraints and contributing creatively.">Chaque projet montre une facette différente de mon approche : organiser la production, comprendre les contraintes techniques et contribuer à la création.</p>
 </section>
 
 <!-- FORMATION -->
@@ -1024,16 +1175,17 @@
 <!-- CONTACT -->
 <section id="contact">
   <div class="contact-left">
+    <img src="img/kim-portrait.jpg" alt="Kim Maurice" class="contact-photo" loading="lazy">
     <p class="contact-tag" data-fr="Travaillons ensemble" data-en="Let's work together">Travaillons ensemble</p>
     <h2 class="contact-headline" data-fr="On se parle ?" data-en="Let's talk?">On se parle ?</h2>
     <p class="contact-sub"
-       data-fr="Disponible dès novembre 2026 pour un poste permanent<br>en coordination de projets culturels, musicaux ou numériques."
-       data-en="Available from November 2026 for a permanent role<br>in cultural, music or digital project coordination.">
-      Disponible dès novembre 2026 pour un poste permanent<br>en coordination de projets culturels, musicaux ou numériques.
+       data-fr="Disponible comme coordonnatrice numérique ou chargée de projet numérique, au sein d’équipes où la technique, la production et la création se rencontrent."
+       data-en="Available as a digital coordinator or digital project manager, on teams where technology, production and creative work meet.">
+      Disponible comme coordonnatrice numérique ou chargée de projet numérique, au sein d’équipes où la technique, la production et la création se rencontrent.
     </p>
   </div>
   <div class="contact-right">
-    <a href="Kim_Maurice_CV_2026_MTL.pdf" target="_blank" class="btn btn-primary">
+    <a href="CV_Kim_Maurice_2026.pdf" target="_blank" class="btn btn-primary">
       <span data-fr="⬇ Télécharger le CV" data-en="⬇ Download CV">⬇ Télécharger le CV</span>
     </a>
     <a href="mailto:info@kimmaurice.com" class="contact-email">info@kimmaurice.com</a>
@@ -1051,6 +1203,7 @@
 
 <!-- MOBILE NAV -->
 <nav class="mob-nav">
+  <a href="#projets" data-fr="Projets" data-en="Projects">Projets</a>
   <a href="#expertise"  data-fr="Expert."  data-en="Expert.">Expert.</a>
   <a href="#parcours"   data-fr="Parcours" data-en="Exp.">Parcours</a>
   <a href="#formation"  data-fr="Format."  data-en="Educ.">Format.</a>
@@ -1151,6 +1304,49 @@
 </script>
 
 <!-- POP-UP DISPO 1er NOVEMBRE (retirer cette ligne pour l'enlever) -->
+<script>
+// CAROUSEL — images de projet
+(function(){
+  const T={fr:{prev:'Image précédente',next:'Image suivante',go:'Aller à l’image '},en:{prev:'Previous image',next:'Next image',go:'Go to image '}};
+  const langBtn=document.getElementById('langBtn');
+  const curLang=()=>langBtn&&langBtn.textContent.trim()==='FR'?'en':'fr';
+  document.querySelectorAll('.carousel').forEach(car=>{
+    const track=car.querySelector('.carousel-track');
+    const slides=track.querySelectorAll('img');
+    const prev=car.querySelector('.prev'), next=car.querySelector('.next');
+    const dotsBox=car.querySelector('.carousel-dots'), count=car.querySelector('.carousel-count');
+    const n=slides.length; let idx=0;
+    if(n<2){[prev,next,dotsBox,count].forEach(e=>e.remove());return;}
+    const dots=[...slides].map((_,k)=>{
+      const d=document.createElement('button'); d.type='button'; d.className='carousel-dot';
+      d.addEventListener('click',()=>go(k)); dotsBox.appendChild(d); return d;
+    });
+    function labels(){
+      const t=T[curLang()];
+      prev.setAttribute('aria-label',t.prev); next.setAttribute('aria-label',t.next);
+      dots.forEach((d,k)=>d.setAttribute('aria-label',t.go+(k+1)));
+    }
+    function render(){
+      dots.forEach((d,k)=>d.classList.toggle('active',k===idx));
+      count.textContent=(idx+1)+' / '+n;
+      prev.disabled=idx===0; next.disabled=idx===n-1;
+    }
+    function go(k){ idx=Math.max(0,Math.min(n-1,k)); track.scrollTo({left:idx*track.clientWidth}); render(); }
+    prev.addEventListener('click',()=>go(idx-1));
+    next.addEventListener('click',()=>go(idx+1));
+    track.addEventListener('scroll',()=>{
+      const k=Math.round(track.scrollLeft/track.clientWidth);
+      if(k!==idx){idx=k;render();}
+    },{passive:true});
+    track.addEventListener('keydown',e=>{
+      if(e.key==='ArrowLeft'){e.preventDefault();go(idx-1);}
+      if(e.key==='ArrowRight'){e.preventDefault();go(idx+1);}
+    });
+    if(langBtn) langBtn.addEventListener('click',()=>setTimeout(labels,0));
+    labels(); render();
+  });
+})();
+</script>
 <script src="dispo.js" defer></script>
 </body>
 </html>
