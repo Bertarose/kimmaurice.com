@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kim Maurice — Coordination de festivals · Technologies interactives · Création numérique</title>
+ <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WYM83ME5LK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-WYM83ME5LK');
+</script>
+  
+   <meta name="description" content="Kim Maurice — coordination de festivals et de production, coordination technique audiovisuelle et création numérique. Plus de 25 ans à relier équipes, technologies et expériences artistiques à Montréal.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:      #08070d;
+      --surface: #0d0b16;
+      --line:    rgba(242,241,246,.14);
+      --text:    #f2f1f6;
+      --sub:     rgba(242,241,246,.62);
+      --accent:  #c9ff3d;
+      --blue:    #3b5cff;
+      --pink:    #ff3e9b;
+      --green:   #c9ff3d;
+      --gold:    var(--green);
+      --ff: 'IBM Plex Mono', ui-monospace, monospace;
+      --ff-head: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; font-size:16px; }
+    body {
+      background: var(--bg);
+      background-image: radial-gradient(50% 50%, #08070d 0%, #0d0b1a 55%, #08070d 100%);
+      background-attachment: fixed;
+      color: var(--text);
+      font-family: var(--ff);
+      letter-spacing:.01em;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { text-decoration:none; color:inherit; }
+    h1,h2,h3,h4 { font-family: var(--ff-head); }
+
+    /* ─── GRAIN ─── */
+    #grain {
+      position:fixed; inset:0; z-index:999;
+      pointer-events:none; opacity:.2; mix-blend-mode:overlay;
+    }
+
+    /* ─── AMBIENT BLOBS (contained within hero) ─── */
+    .blobs {
+      position:absolute; inset:0; z-index:0;
+      overflow:hidden; pointer-events:none;
+    }
+    .blob {
+      position:absolute; border-radius:50%;
+      filter:blur(90px); mix-blend-mode:screen;
+      opacity:.38; will-change:transform;
+    }
+    .blob-1 {
+      width:46vw; height:46vw; top:-12%; left:-8%;
+      background:radial-gradient(circle, var(--pink) 0%, transparent 70%);
+      animation: drift1 26s ease-in-out infinite;
+    }
+    .blob-2 {
+      width:38vw; height:38vw; top:20%; right:-10%;
+      background:radial-gradient(circle, var(--blue) 0%, transparent 70%);
+      animation: drift2 32s ease-in-out infinite;
+    }
+    .blob-3 {
+      width:34vw; height:34vw; bottom:-14%; left:22%;
+      background:radial-gradient(circle, var(--green) 0%, transparent 70%);
+      opacity:.22;
+      animation: drift3 38s ease-in-out infinite;
+    }
+    @keyframes drift1 {
+      0%,100% { transform:translate(0,0) scale(1); }
+      50%     { transform:translate(6vw,8vh) scale(1.15); }
+    }
+    @keyframes drift2 {
+      0%,100% { transform:translate(0,0) scale(1); }
+      50%     { transform:translate(-8vw,-4vh) scale(1.1); }
+    }
+    @keyframes drift3 {
+      0%,100% { transform:translate(0,0) scale(1); }
+      50%     { transform:translate(4vw,-6vh) scale(1.2); }
+    }
+    @media(prefers-reduced-motion:reduce){
+      .blob { animation:none; }
+    }
+
+    /* ─── CURSOR GLOW ─── */
+    #cursor-glow {
+      position:fixed; top:0; left:0; z-index:2;
+      width:420px; height:420px; margin:-210px 0 0 -210px;
+      border-radius:50%; pointer-events:none;
+      background:radial-gradient(circle, rgba(201,255,61,.10) 0%, rgba(255,62,155,.06) 45%, transparent 72%);
+      opacity:0; transition:opacity .4s;
+      will-change:transform;
+    }
+    @media(hover:hover) and (pointer:fine){ #cursor-glow.active { opacity:1; } }
+
+    /* ─── REVEAL ON SCROLL (progressive enhancement — visible by default) ─── */
+    .reveal { opacity:1; transform:none; }
+    .js-ready .reveal {
+      opacity:0; transform:translateY(28px);
+      transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1);
+    }
+    .js-ready .reveal.in-view { opacity:1; transform:translateY(0); }
+    @media(prefers-reduced-motion:reduce){
+      .js-ready .reveal { opacity:1; transform:none; transition:none; }
+    }
+
+
+    /* ─── THREE-PILLAR POSITIONING ─── */
+    .pillars-intro {
+      max-width: 68ch; color: var(--sub); line-height: 1.8;
+      font-size: .9rem; margin: -1.1rem 0 2rem;
+    }
+    .pillars-grid {
+      display:grid; grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:1px; background:var(--line); border:1px solid var(--line);
+    }
+    .pillar {
+      min-height: 310px; padding: clamp(1.25rem,2.4vw,2.25rem);
+      background:linear-gradient(155deg,rgba(255,255,255,.035),rgba(255,255,255,.008));
+      display:flex; flex-direction:column; align-items:flex-start;
+      transition:background .25s ease, transform .25s ease;
+    }
+    .pillar:hover { background:linear-gradient(155deg,rgba(201,255,61,.08),rgba(255,255,255,.015)); }
+    .pillar-index { color:var(--accent); font-size:.72rem; letter-spacing:.12em; margin-bottom:2rem; }
+    .pillar h3 { font-size:clamp(1.25rem,2vw,1.8rem); line-height:1.12; margin-bottom:1rem; }
+    .pillar p { color:var(--sub); font-size:.8rem; line-height:1.8; margin-bottom:1.2rem; }
+    .pillar ul { list-style:none; display:grid; gap:.55rem; margin-bottom:1.6rem; }
+    .pillar li { color:var(--text); font-size:.72rem; line-height:1.55; }
+    .pillar li::before { content:"↳ "; color:var(--accent); }
+    .pillar-link { margin-top:auto; font-size:.72rem; color:var(--accent); border-bottom:1px solid rgba(201,255,61,.45); padding-bottom:.25rem; }
+    .portfolio-filter-note {
+      display:flex; align-items:center; gap:.7rem; color:var(--sub);
+      font-size:.72rem; line-height:1.7; margin-bottom:1.4rem;
+    }
+    .portfolio-filter-note::before { content:""; width:1.7rem; height:1px; background:var(--accent); flex:0 0 auto; }
+    .portfolio-type { text-transform:uppercase; letter-spacing:.1em; }
+    @media(max-width:800px) { .pillars-grid { grid-template-columns:1fr; } .pillar { min-height:0; } .pillar-index { margin-bottom:1.2rem; } }
+
+    /* ─── GALLERY ─── */
+    .gallery-note {
+      font-size:.72rem; color:var(--sub); letter-spacing:.04em;
+      margin-bottom:2rem; max-width:52ch; line-height:1.7;
+    }
+    .gallery-grid {
+      display:grid; grid-template-columns:repeat(2,1fr);
+      gap:1px; background:var(--line); border:1px solid var(--line);
+    }
+    @media(min-width:640px){ .gallery-grid { grid-template-columns:repeat(3,1fr); } }
+    .gallery-tile {
+      position:relative; aspect-ratio:4/5;
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      gap:.6rem; padding:1.5rem; text-align:center;
+      background:linear-gradient(150deg, var(--tile-a) 0%, var(--tile-b) 100%);
+      background-color:var(--surface);
+      overflow:hidden; cursor:default;
+      transition:transform .4s cubic-bezier(.2,.7,.2,1);
+    }
+    .gallery-tile::before {
+      content:''; position:absolute; inset:0;
+      background:rgba(8,7,13,.55);
+      transition:background .3s;
+    }
+    .gallery-tile:hover { transform:translateY(-4px); }
+    .gallery-tile:hover::before { background:rgba(8,7,13,.3); }
+    .gallery-tile-label, .gallery-tile-hint { position:relative; z-index:1; }
+    .gallery-tile-label {
+      font-family:var(--ff-head); font-size:.95rem; font-weight:600;
+      color:var(--text); letter-spacing:.01em; line-height:1.3;
+    }
+    .gallery-tile-hint {
+      font-size:.62rem; letter-spacing:.12em; text-transform:uppercase;
+      color:var(--sub); border:1px dashed rgba(242,241,246,.3);
+      padding:.3rem .6rem; border-radius:2px;
+    }
+    .gallery-tile-plus {
+      position:relative; z-index:1;
+      width:34px; height:34px; border-radius:50%;
+      border:1px solid rgba(242,241,246,.35);
+      display:flex; align-items:center; justify-content:center;
+      font-size:1.1rem; color:var(--sub); font-family:var(--ff-head);
+    }
+
+    /* ─── NAV ─── */
+    .nav {
+      position:fixed; top:0; left:0; right:0; z-index:100;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:0 2.5rem; height:60px;
+      background:rgba(8,7,13,.86);
+      backdrop-filter:blur(20px);
+      border-bottom:1px solid var(--line);
+    }
+    .nav-name {
+      font-size:.8rem; font-weight:600;
+      letter-spacing:.12em; text-transform:uppercase; color:var(--text);
+    }
+    .nav-right { display:flex; align-items:center; gap:2rem; }
+    .nav-links { display:none; gap:2rem; }
+    @media(min-width:768px){ .nav-links { display:flex; } }
+    .nav-links a {
+      font-size:.72rem; font-weight:500;
+      text-transform:uppercase;
+      color:var(--sub); letter-spacing:.1em;
+      transition:color .2s;
+    }
+    .nav-links a:hover { color:var(--green); }
+    .lang-btn {
+      font-size:.7rem; font-weight:600; letter-spacing:.1em;
+      color:var(--sub); background:transparent;
+      border:1px solid var(--line);
+      padding:.3rem .7rem; cursor:pointer;
+      transition:color .2s, border-color .2s;
+      font-family:var(--ff);
+      text-transform:uppercase;
+    }
+    .lang-btn:hover { color:var(--text); border-color:rgba(242,241,246,.4); }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height:100vh; padding-top:60px;
+      display:grid; grid-template-columns:1fr;
+      position:relative; overflow:hidden;
+    }
+    @media(min-width:900px){
+      .hero { grid-template-columns:1fr 1fr; }
+    }
+
+    /* left — text */
+    .hero-left {
+      display:flex; flex-direction:column; justify-content:center;
+      padding:5rem 2.5rem 5rem;
+      position:relative; z-index:1;
+    }
+    @media(min-width:900px){ .hero-left { padding:5rem 4rem 5rem 3.5rem; } }
+
+    .hero-eyebrow {
+      font-size:.72rem; font-weight:600; letter-spacing:.14em;
+      text-transform:uppercase; color:var(--green);
+      margin-bottom:2rem;
+      display:flex; align-items:center; gap:.6rem;
+    }
+    .hero-eyebrow::before { content:'['; opacity:.7; }
+    .hero-eyebrow::after  { content:']'; opacity:.7; }
+
+    .hero h1 {
+      font-family: var(--ff-head);
+      font-size:clamp(2.6rem, 6vw, 5.2rem);
+      font-weight:500; line-height:.95;
+      letter-spacing:-.03em; color:var(--text);
+      text-transform:uppercase;
+      margin-bottom:2rem;
+    }
+    .hero h1 strong { font-weight:700; }
+
+    .hero-desc {
+      font-size:.9rem; font-weight:400; line-height:1.75;
+      color:var(--sub); max-width:42ch; margin-bottom:2.5rem;
+      font-family:var(--ff);
+    }
+
+    .hero-meta {
+      display:flex; flex-direction:column; gap:.5rem;
+      margin-bottom:3rem;
+    }
+    .hero-meta-row {
+      display:flex; align-items:center; gap:.75rem;
+      font-size:.75rem; letter-spacing:.04em; color:var(--sub);
+    }
+    .hero-meta-dot {
+      width:6px; height:6px; border-radius:50%;
+      background:var(--green); flex-shrink:0;
+      box-shadow:0 0 8px var(--green);
+    }
+
+    .hero-cta { display:flex; gap:.75rem; flex-wrap:wrap; }
+    .btn {
+      font-family:var(--ff); font-size:.72rem; font-weight:600;
+      letter-spacing:.08em; text-transform:uppercase;
+      padding:.85rem 1.5rem; cursor:pointer;
+      display:inline-flex; align-items:center; gap:.5rem;
+      transition:all .2s;
+    }
+    .btn-primary { background:var(--text); color:var(--bg); }
+    .btn-primary:hover { background:var(--green); color:var(--bg); }
+    .btn-secondary {
+      background:transparent; color:var(--text);
+      border:1px solid rgba(242,241,246,.34);
+    }
+    .btn-secondary:hover { border-color:var(--green); color:var(--green); }
+
+    /* right — image */
+    .hero-right {
+      position:relative; min-height:50vw;
+    }
+    @media(min-width:900px){ .hero-right { min-height:unset; } }
+    .hero-right img {
+      position:absolute; inset:0;
+      width:100%; height:100%;
+      object-fit:cover; object-position:center 15%;
+    }
+    .hero-right::after {
+      content:''; position:absolute; inset:0;
+      background:linear-gradient(
+        to right,
+        rgba(10,10,10,1) 0%,
+        rgba(10,10,10,.3) 40%,
+        rgba(10,10,10,.0) 100%
+      );
+    }
+    @media(max-width:899px){
+      .hero-right::after {
+        background:linear-gradient(
+          to bottom,
+          rgba(10,10,10,.0) 0%,
+          rgba(10,10,10,.95) 100%
+        );
+      }
+    }
+
+    /* ─── STATS BAR ─── */
+    .statsbar {
+      background:var(--line);
+      display:grid; gap:1px;
+      grid-template-columns:repeat(2,1fr);
+    }
+    @media(min-width:640px){ .statsbar { grid-template-columns:repeat(4,1fr); } }
+    .stat {
+      padding:2rem 2.5rem;
+      background:var(--surface);
+    }
+    .stat:last-child { background:linear-gradient(135deg,var(--pink) 0%,var(--blue) 100%); }
+    .stat-num {
+      font-family:var(--ff-head);
+      font-size:2.75rem; font-weight:500;
+      letter-spacing:-.02em; color:var(--text);
+      line-height:1; margin-bottom:.5rem;
+    }
+    .stat:last-child .stat-num,
+    .stat:last-child .stat-label { color:var(--bg); }
+    .stat-label {
+      font-size:.68rem; font-weight:600;
+      color:var(--sub); letter-spacing:.1em; text-transform:uppercase;
+    }
+
+    /* ─── SECTIONS ─── */
+    section { padding:6rem 2.5rem; border-top:1px solid var(--line); }
+
+    /* ── PROJETS ── */
+    .projet-card {
+      display:grid;
+      grid-template-columns:1fr;
+      gap:0;
+      border:1px solid rgba(242,241,246,.3);
+      border-radius:2px;
+      overflow:hidden;
+      background:linear-gradient(120deg,rgba(255,62,155,.18) 0%,rgba(59,92,255,.2) 42%,rgba(13,11,22,.92) 70%);
+    }
+    @media(min-width:900px){
+      .projet-card { grid-template-columns:1fr 1fr; }
+    }
+    .projet-img-wrap {
+      position:relative;
+      aspect-ratio:16/10;
+      background:var(--surface);
+      overflow:hidden;
+    }
+    .projet-img-wrap img {
+      width:100%; height:100%;
+      object-fit:cover;
+      display:block;
+      transition:transform .6s ease;
+    }
+    .projet-card:hover .projet-img-wrap img {
+      transform:scale(1.03);
+    }
+    .projet-img-placeholder {
+      width:100%; height:100%;
+      display:flex; flex-direction:column;
+      align-items:center; justify-content:center;
+      gap:1rem;
+      background: linear-gradient(135deg,#0a0a0a 0%,#141414 50%,#0f0f0f 100%);
+      color:#333;
+      font-size:.75rem;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    .projet-img-placeholder svg {
+      opacity:.18;
+    }
+    .projet-img-placeholder span {
+      opacity:.35;
+      letter-spacing:.2em;
+    }
+    .projet-body {
+      padding:2.5rem;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      gap:1.25rem;
+    }
+    @media(min-width:900px){ .projet-body { padding:3rem 3.5rem; } }
+    .projet-eyebrow {
+      font-size:.72rem;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:var(--pink);
+      font-weight:600;
+      display:flex;
+      align-items:center;
+      gap:.6rem;
+    }
+    .projet-eyebrow::before {
+      content:'';
+      display:inline-block;
+      width:1.5rem; height:1px;
+      background:var(--pink);
+    }
+    .projet-version {
+      font-size:.68rem;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+      color:var(--text);
+      background:var(--blue);
+      border:none;
+      border-radius:2px;
+      padding:.25rem .6rem;
+    }
+    .projet-title {
+      font-family:var(--ff-head);
+      font-size:clamp(2rem,5vw,3.4rem);
+      font-weight:500;
+      letter-spacing:-.02em;
+      line-height:.95;
+      color:var(--text);
+      text-transform:uppercase;
+      font-style:normal;
+    }
+    .projet-desc {
+      font-size:.88rem;
+      line-height:1.8;
+      color:var(--sub);
+      max-width:42ch;
+    }
+    .projet-tags {
+      display:flex;
+      flex-wrap:wrap;
+      gap:.4rem;
+    }
+    .projet-tag {
+      font-size:.65rem;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+      color:var(--sub);
+      border:1px solid var(--line);
+      border-radius:2px;
+      padding:.2rem .55rem;
+    }
+    .projet-status {
+      display:inline-flex;
+      align-items:center;
+      gap:.4rem;
+      font-size:.7rem;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+      color:var(--sub);
+    }
+    .projet-status-dot {
+      width:6px; height:6px;
+      border-radius:50%;
+      background:var(--green);
+      box-shadow:0 0 8px var(--green);
+      animation:blink-dot 2s infinite;
+    }
+    @keyframes blink-dot {
+      0%,100%{opacity:1} 50%{opacity:.3}
+    }
+    .projet-upload-hint {
+      font-size:.68rem;
+      color:#2a2a2a;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+      margin-top:.5rem;
+    }
+    @media(min-width:768px){ section { padding:8rem 3.5rem; } }
+
+    .s-header {
+      display:flex; align-items:baseline;
+      justify-content:space-between; flex-wrap:wrap;
+      gap:1rem; margin-bottom:3.5rem;
+      border-bottom:1px solid var(--line); padding-bottom:1.25rem;
+    }
+    .s-title {
+      font-family:var(--ff-head);
+      font-size:clamp(1.8rem,4vw,3rem);
+      font-weight:500; letter-spacing:-.02em;
+      text-transform:uppercase;
+      color:var(--text);
+    }
+    .s-count {
+      font-size:.7rem; font-weight:600; letter-spacing:.12em;
+      text-transform:uppercase; color:var(--green);
+    }
+
+    /* ─── PORTFOLIO / CASE STUDIES ─── */
+    .portfolio-intro{max-width:68ch;color:var(--sub);font-size:.9rem;line-height:1.85;margin:-1.5rem 0 2.5rem}
+    .portfolio-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+    .portfolio-card{background:var(--surface);min-width:0;display:flex;flex-direction:column;transition:background .25s}
+    .portfolio-card:hover{background:#12101d}
+    .portfolio-visual{aspect-ratio:16/10;position:relative;overflow:hidden;background:#111;display:flex;align-items:center;justify-content:center;padding:1.5rem}
+    .portfolio-visual::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,62,155,.17),transparent 48%,rgba(59,92,255,.2));pointer-events:none}
+    .portfolio-visual img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+
+    /* ─── CAROUSEL (images de projet) ─── */
+    .portfolio-visual.carousel{padding:0}
+    .carousel-track{position:absolute;inset:0;display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+    .carousel-track::-webkit-scrollbar{display:none}
+    .portfolio-visual .carousel-track img{position:static;inset:auto;flex:0 0 100%;width:100%;height:100%;object-fit:cover;scroll-snap-align:start;user-select:none;-webkit-user-drag:none}
+    .carousel-btn{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:2.4rem;height:2.4rem;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.25);background:rgba(8,7,13,.6);backdrop-filter:blur(6px);color:var(--text);font-size:1.1rem;line-height:1;cursor:pointer;opacity:0;transition:opacity .25s,background .2s,color .2s,border-color .2s}
+    .carousel-btn.prev{left:.75rem}.carousel-btn.next{right:.75rem}
+    .carousel:hover .carousel-btn,.carousel:focus-within .carousel-btn{opacity:1}
+    .carousel-btn:hover{background:var(--green);color:var(--bg);border-color:var(--green)}
+    .carousel-btn:disabled{opacity:0!important;pointer-events:none}
+    .carousel-dots{position:absolute;left:0;right:0;bottom:.75rem;z-index:3;display:flex;justify-content:center;gap:.4rem}
+    .carousel-dot{width:.45rem;height:.45rem;padding:0;border:1px solid rgba(255,255,255,.6);border-radius:50%;background:transparent;cursor:pointer;transition:background .2s,transform .2s}
+    .carousel-dot.active{background:var(--green);border-color:var(--green);transform:scale(1.25)}
+    .carousel-count{position:absolute;top:.75rem;right:.75rem;z-index:3;font-size:.6rem;letter-spacing:.12em;padding:.25rem .5rem;background:rgba(8,7,13,.6);color:var(--text);pointer-events:none}
+    @media(hover:none){.carousel-btn{opacity:1;width:2.1rem;height:2.1rem}}
+    @media(prefers-reduced-motion:reduce){.carousel-track{scroll-behavior:auto}}
+    .visual-placeholder{position:relative;z-index:1;text-align:left;width:100%;height:100%;display:flex;flex-direction:column;justify-content:space-between;border:1px solid rgba(255,255,255,.18);padding:1rem}
+    .visual-code{font-size:.62rem;letter-spacing:.14em;color:var(--green);text-transform:uppercase}
+    .visual-title{font-family:var(--ff-head);font-size:clamp(1.5rem,3vw,2.7rem);line-height:.95;text-transform:uppercase;letter-spacing:-.04em;max-width:12ch}
+    .visual-bottom{font-size:.65rem;color:var(--sub);letter-spacing:.08em;text-transform:uppercase}
+    .portfolio-copy{padding:1.5rem;display:flex;flex-direction:column;gap:.85rem;flex:1}
+    .portfolio-type{font-size:.65rem;letter-spacing:.13em;text-transform:uppercase;color:var(--pink)}
+    .portfolio-copy h3{font-size:1.35rem;font-weight:500;line-height:1.15}
+    .portfolio-copy p{font-size:.82rem;line-height:1.8;color:var(--sub)}
+    .portfolio-tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:auto;padding-top:.4rem}
+    .portfolio-tags span{font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--line);padding:.28rem .45rem;color:#c9c7d2}
+    .portfolio-note{font-size:.7rem;color:#777;line-height:1.6;margin-top:1.25rem}
+    @media(max-width:680px){.portfolio-grid{grid-template-columns:1fr}.portfolio-copy{padding:1.25rem}}
+
+    /* ─── EXPERTISE ─── */
+    .exp-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fill, minmax(260px,1fr));
+      gap:1px; background:var(--line);
+      border:1px solid var(--line);
+    }
+    .exp-card {
+      background:var(--surface); padding:2rem 2rem 2.25rem;
+      border-top:2px solid var(--blue);
+      transition:background .2s;
+    }
+    .exp-card:nth-child(3n+2) { border-top-color:var(--pink); }
+    .exp-card:nth-child(3n+3) { border-top-color:var(--green); }
+    .exp-card:hover { background:#12101d; }
+    .exp-num {
+      font-size:.68rem; font-weight:600; letter-spacing:.1em;
+      color:var(--sub); margin-bottom:.85rem;
+      font-family:var(--ff);
+    }
+    .exp-card h3 {
+      font-size:1.2rem; font-weight:500;
+      color:var(--text); margin-bottom:1.1rem; line-height:1.25;
+    }
+    .exp-card ul { list-style:none; }
+    .exp-card li {
+      font-size:.82rem; line-height:1.85;
+      color:var(--sub); padding-left:.9rem; position:relative;
+    }
+    .exp-card li::before {
+      content:''; position:absolute; left:0; top:.7em;
+      width:3px; height:3px; border-radius:50%;
+      background:var(--green);
+    }
+
+    /* ─── PARCOURS ─── */
+    .tl { display:flex; flex-direction:column; }
+    .tl-item {
+      display:grid; gap:1rem;
+      grid-template-columns:1fr;
+      padding:2.75rem 0; border-bottom:1px solid var(--line);
+    }
+    @media(min-width:640px){
+      .tl-item { grid-template-columns:120px 1fr; gap:3rem; }
+    }
+    .tl-date {
+      font-size:.82rem; font-weight:500;
+      color:#d0d0d0; letter-spacing:.02em; padding-top:.25rem;
+    }
+    @media(min-width:640px){ .tl-date { text-align:right; } }
+    .tl-badge {
+      display:inline-flex; align-items:center;
+      font-size:.65rem; font-weight:600; letter-spacing:.1em;
+      text-transform:uppercase; color:#000;
+      background:var(--gold); padding:.2rem .6rem;
+      margin-bottom:.75rem;
+    }
+    .tl-content h3 {
+      font-size:clamp(1.2rem,2.5vw,1.75rem);
+      font-weight:400; color:var(--text);
+      margin-bottom:.2rem; line-height:1.2;
+    }
+    .tl-content h4 {
+      font-size:.82rem; font-weight:400;
+      color:#888; margin-bottom:1.25rem;
+    }
+    .tl-content ul { list-style:none; }
+    .tl-content li {
+      font-size:.875rem; line-height:1.85;
+      color:#b0b0b0; padding-left:.9rem; position:relative;
+    }
+    .tl-content li::before {
+      content:''; position:absolute; left:0; top:.7em;
+      width:3px; height:3px; border-radius:50%; background:#555;
+    }
+    .tl-content li a {
+      color:#b0b0b0; text-decoration:underline; text-underline-offset:2px;
+      transition:color .2s;
+    }
+    .tl-content li a:hover { color:#f5f5f5; }
+
+    /* ─── UNIVERS (2-col) ─── */
+    .univers-grid {
+      display:grid; grid-template-columns:1fr;
+      gap:5rem;
+    }
+    @media(min-width:900px){ .univers-grid { grid-template-columns:1fr 1fr; gap:6rem; } }
+
+    .client-group { margin-bottom:2.5rem; }
+    .client-group:last-child { margin-bottom:0; }
+    .client-group h3 {
+      font-size:.7rem; font-weight:600; letter-spacing:.16em;
+      text-transform:uppercase; color:var(--gold);
+      margin-bottom:1rem; padding-bottom:.6rem;
+      border-bottom:1px solid var(--line);
+    }
+    .client-group ul { list-style:none; }
+    .client-group li {
+      font-size:.9rem; line-height:2;
+      color:#c0c0c0; padding-left:.9rem; position:relative;
+    }
+    .client-group li::before {
+      content:''; position:absolute; left:0; top:.75em;
+      width:3px; height:3px; border-radius:50%; background:#444;
+    }
+
+    .explor-row {
+      display:flex; align-items:baseline;
+      justify-content:space-between; gap:1.5rem;
+      padding:1.25rem 0; border-bottom:1px solid var(--line);
+    }
+    .explor-row:first-child { border-top:1px solid var(--line); }
+    .explor-name {
+      font-size:1.05rem; font-weight:400; color:var(--text);
+    }
+    .explor-tag {
+      font-size:.75rem; color:#888; flex-shrink:0; text-align:right;
+    }
+
+    /* ─── CONTACT ─── */
+    #contact {
+      display:grid; grid-template-columns:1fr;
+      gap:3rem; align-items:center;
+    }
+    @media(min-width:768px){
+      #contact { grid-template-columns:1fr auto; }
+    }
+    .contact-left {}
+    .contact-tag {
+      font-size:.72rem; font-weight:600; letter-spacing:.18em;
+      text-transform:uppercase; color:var(--gold); margin-bottom:1.25rem;
+    }
+    .contact-headline {
+      font-size:clamp(2rem,5vw,4rem);
+      font-weight:300; line-height:1.1;
+      letter-spacing:-.03em; color:var(--text);
+      margin-bottom:1.25rem;
+    }
+    .contact-sub { font-size:.9rem; color:#888; line-height:1.75; }
+    .contact-right {
+      display:flex; flex-direction:column; gap:1rem; align-items:flex-start;
+    }
+    @media(min-width:768px){ .contact-right { align-items:flex-end; } }
+    .contact-email {
+      font-size:clamp(1rem, 2vw, 1.35rem); font-weight:400;
+      color:var(--text); letter-spacing:-.01em;
+      border-bottom:1px solid rgba(255,255,255,.2);
+      padding-bottom:.15rem;
+      transition:color .2s, border-color .2s;
+    }
+    .contact-email:hover { color:var(--gold); border-color:var(--gold); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top:1px solid var(--line);
+      padding:1.5rem 2.5rem;
+      display:flex; justify-content:space-between;
+      align-items:center; flex-wrap:wrap; gap:1rem 2rem;
+    }
+    footer span { font-size:.75rem; color:#555; letter-spacing:.03em; }
+
+    /* ─── MOBILE NAV ─── */
+    .mob-nav {
+      display:flex; position:fixed; bottom:0; left:0; right:0; z-index:100;
+      background:rgba(10,10,10,.96); backdrop-filter:blur(20px);
+      border-top:1px solid var(--line);
+    }
+    @media(min-width:768px){ .mob-nav { display:none; } }
+    .mob-nav a {
+      flex:1; padding:.9rem .4rem;
+      font-size:.65rem; font-weight:500; letter-spacing:.05em;
+      text-transform:uppercase; color:#777; text-align:center;
+      border-right:1px solid var(--line);
+      transition:color .15s, background .15s;
+    }
+    .mob-nav a:last-child { border-right:none; }
+    .mob-nav a.active, .mob-nav a:hover { color:var(--text); background:rgba(255,255,255,.04); }
+
+    /* ─── FADE IN ─── */
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(16px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    .hero-eyebrow { animation:fadeUp .6s .1s both; }
+    .hero h1      { animation:fadeUp .7s .2s both; }
+    .hero-desc    { animation:fadeUp .6s .38s both; }
+    .hero-meta    { animation:fadeUp .6s .5s both; }
+    .hero-cta     { animation:fadeUp .6s .6s both; }
+
+    @media(max-width:767px){ footer { padding-bottom:calc(1.5rem + 56px); } }
+  </style>
+</head>
+<body>
+
+<canvas id="grain"></canvas>
+<div id="cursor-glow"></div>
+
+<!-- NAV -->
+<header class="nav">
+  <span class="nav-name">Kim Maurice</span>
+  <div class="nav-right">
+    <nav class="nav-links">
+      <a href="#axes" data-fr="Les 3 axes" data-en="Three strengths">Les 3 axes</a>
+      <a href="#projets" data-fr="Projets" data-en="Projects">Projets</a>
+      <a href="#expertise"  data-fr="Expertises"  data-en="Expertise">Expertises</a>
+      <a href="#parcours"   data-fr="Parcours"    data-en="Experience">Parcours</a>
+      <a href="#formation"  data-fr="Formation"   data-en="Education">Formation</a>
+      <a href="#contact"   data-fr="Contact"     data-en="Contact">Contact</a>
+    </nav>
+    <button class="lang-btn" id="langBtn">EN</button>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="blobs" aria-hidden="true">
+    <span class="blob blob-1"></span>
+    <span class="blob blob-2"></span>
+    <span class="blob blob-3"></span>
+  </div>
+  <div class="hero-left">
+    <p class="hero-eyebrow"
+       data-fr="Montréal · Tiohtiá:ke"
+       data-en="Montréal · Tiohtiá:ke">Montréal · Tiohtiá:ke</p>
+    <h1 data-fr="<strong>Coordination.</strong><br>Technique.<br>Création." data-en="<strong>Coordination.</strong><br>Technology.<br>Creative work.">
+      <strong>Coordination.</strong><br>Technique.<br>Création.
+    </h1>
+    <p class="hero-desc"
+       data-fr="Je fais le lien entre les équipes, les réalités du terrain et les idées créatives. Depuis plus de 25 ans, je coordonne des productions culturelles, prends en charge des enjeux techniques audiovisuels et conçois des expériences numériques — du plan de match jusqu’à la réalisation."
+       data-en="I connect teams, on-site realities and creative ideas. With 25+ years of experience, I coordinate cultural productions, handle audiovisual technical needs and build digital experiences—from planning through delivery.">
+      Je fais le lien entre les équipes, les réalités du terrain et les idées créatives. Depuis plus de 25 ans, je coordonne des productions culturelles, prends en charge des enjeux techniques audiovisuels et conçois des expériences numériques — du plan de match jusqu’à la réalisation.
+    </p>
+    <div class="hero-meta">
+      <div class="hero-meta-row">
+        <span class="hero-meta-dot"></span>
+        <span data-fr="Ouverte aux rôles en production, coordination technique et création numérique" data-en="Open to production, technical coordination and digital creativity roles">Ouverte aux rôles en production, coordination technique et création numérique</span>
+      </div>
+      <div class="hero-meta-row">
+        <span class="hero-meta-dot"></span>
+        <span data-fr="Production · Coordination · Arts · Technique · Numérique" data-en="Production · Coordination · Arts · Technical · Digital">Production · Coordination · Arts · Technique · Numérique</span>
+      </div>
+    </div>
+    <div class="hero-cta">
+      <a href="CV_Kim_Maurice_2026.pdf" target="_blank" class="btn btn-primary">
+        <span data-fr="⬇ Télécharger le CV" data-en="⬇ Download CV">⬇ Télécharger le CV</span>
+      </a>
+      <a href="#projets" class="btn btn-secondary"
+         data-fr="↓ Découvrir les projets" data-en="↓ Explore projects">↓ Découvrir les projets</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img src="img/img.jpg" alt="Kim Maurice">
+  </div>
+</div>
+
+<!-- REPÈRES -->
+<div class="statsbar">
+  <div class="stat"><div class="stat-num">25+</div><div class="stat-label" data-fr="Ans en multimédia" data-en="Years in multimedia">Ans en multimédia</div></div>
+  <div class="stat"><div class="stat-num">20+</div><div class="stat-label" data-fr="Productions cinéma &amp; TV" data-en="Film &amp; TV productions">Productions cinéma &amp; TV</div></div>
+  <div class="stat"><div class="stat-num">360°</div><div class="stat-label" data-fr="De la planification au terrain" data-en="From planning to on-site delivery">De la planification au terrain</div></div>
+  <div class="stat"><div class="stat-num">01</div><div class="stat-label" data-fr="Coordination + technologie" data-en="Coordination + technology">Coordination + technologie</div></div>
+</div>
+
+<!-- TROIS AXES COMPLÉMENTAIRES -->
+<section id="axes">
+  <div class="s-header reveal">
+    <h2 class="s-title" data-fr="Trois forces. Une seule approche." data-en="Three strengths. One integrated approach.">Trois forces. Une seule approche.</h2>
+    <span class="s-count" data-fr="Profil hybride" data-en="Hybrid profile">Profil hybride</span>
+  </div>
+  <p class="pillars-intro"
+     data-fr="Je ne choisis pas entre coordination, technique et création : je sais les faire travailler ensemble. Cette polyvalence me permet de comprendre les besoins artistiques, d’anticiper les contraintes de production et de contribuer concrètement à la réalisation."
+     data-en="I don't choose between coordination, technology and creative work: I bring them together. This range lets me understand artistic needs, anticipate production constraints and contribute hands-on to delivery.">
+    Je ne choisis pas entre coordination, technique et création : je sais les faire travailler ensemble. Cette polyvalence me permet de comprendre les besoins artistiques, d’anticiper les contraintes de production et de contribuer concrètement à la réalisation.
+  </p>
+  <div class="pillars-grid">
+    <article class="pillar reveal">
+      <span class="pillar-index">01 / PRODUCTION</span>
+      <h3 data-fr="Coordination de festivals &amp; projets" data-en="Festival &amp; project coordination">Coordination de festivals &amp; projets</h3>
+      <p data-fr="Faire avancer les opérations avec méthode, clarté et une vision d’ensemble, du calendrier au terrain." data-en="Move operations forward with structure, clarity and a big-picture view—from schedules to on-site delivery.">Faire avancer les opérations avec méthode, clarté et une vision d’ensemble, du calendrier au terrain.</p>
+      <ul>
+        <li data-fr="Échéanciers, livrables et suivi" data-en="Schedules, deliverables and follow-up">Échéanciers, livrables et suivi</li>
+        <li data-fr="Équipes, artistes, fournisseurs et bénévoles" data-en="Teams, artists, vendors and volunteers">Équipes, artistes, fournisseurs et bénévoles</li>
+        <li data-fr="Logistique, budgets et coordination terrain" data-en="Logistics, budgets and on-site coordination">Logistique, budgets et coordination terrain</li>
+      </ul>
+      <a class="pillar-link" href="#projets" data-fr="Voir MAPP_MTL &amp; ASIASIE ↗" data-en="Explore MAPP_MTL &amp; ASIASIE ↗">Voir MAPP_MTL &amp; ASIASIE ↗</a>
+    </article>
+    <article class="pillar reveal">
+      <span class="pillar-index">02 / TECHNIQUE</span>
+      <h3 data-fr="Coordination technique &amp; audiovisuelle" data-en="Technical &amp; audiovisual coordination">Coordination technique &amp; audiovisuelle</h3>
+      <p data-fr="Comprendre les besoins techniques et les transformer en installations et opérations fiables sur le terrain." data-en="Translate technical requirements into reliable setups and on-site operations.">Comprendre les besoins techniques et les transformer en installations et opérations fiables sur le terrain.</p>
+      <ul>
+        <li data-fr="Son, vidéo, projection et équipement" data-en="Sound, video, projection and equipment">Son, vidéo, projection et équipement</li>
+        <li data-fr="Plans électriques, visites de site et logistique" data-en="Electrical plans, site visits and logistics">Plans électriques, visites de site et logistique</li>
+        <li data-fr="Résolution de problèmes en contexte réel" data-en="Practical problem-solving on site">Résolution de problèmes en contexte réel</li>
+      </ul>
+      <a class="pillar-link" href="#projets" data-fr="Voir les productions terrain ↗" data-en="Explore on-site productions ↗">Voir les productions terrain ↗</a>
+    </article>
+    <article class="pillar reveal">
+      <span class="pillar-index">03 / CRÉATION &amp; NUMÉRIQUE</span>
+      <h3 data-fr="Artiste numérique &amp; développeuse créative" data-en="Digital artist &amp; creative developer">Artiste numérique &amp; développeuse créative</h3>
+      <p data-fr="Imaginer et prototyper des outils, interfaces et expériences où se rencontrent son, image, code et interaction." data-en="Imagine and prototype tools, interfaces and experiences at the intersection of sound, image, code and interaction.">Imaginer et prototyper des outils, interfaces et expériences où se rencontrent son, image, code et interaction.</p>
+      <ul>
+        <li data-fr="Applications web et outils de production" data-en="Web apps and production tools">Applications web et outils de production</li>
+        <li data-fr="Performance sonore, vidéo et installations interactives" data-en="Sound performance, video and interactive installations">Performance sonore, vidéo et installations interactives</li>
+        <li data-fr="Prototypage, IA et technologies créatives" data-en="Prototyping, AI and creative technologies">Prototypage, IA et technologies créatives</li>
+      </ul>
+      <a class="pillar-link" href="#projets" data-fr="Voir Hors Champ &amp; URA ↗" data-en="Explore Hors Champ &amp; URA ↗">Voir Hors Champ &amp; URA ↗</a>
+    </article>
+  </div>
+</section>
+
+<!-- EXPERTISE -->
+<section id="expertise">
+  <div class="s-header reveal">
+    <h2 class="s-title" data-fr="Expertises" data-en="Expertise">Expertises</h2>
+    <span class="s-count" data-fr="08 domaines" data-en="08 areas">08 domaines</span>
+  </div>
+  <div class="exp-grid">
+    <div class="exp-card reveal">
+      <div class="exp-num">01</div>
+      <h3 data-fr="Coordination de festivals" data-en="Festival coordination">Coordination de festivals</h3>
+      <ul>
+        <li data-fr="Calendriers, livrables, échéances" data-en="Schedules, deliverables, deadlines">Calendriers, livrables, échéances</li>
+        <li data-fr="Relations artistes, partenaires, fournisseurs" data-en="Artist, partner &amp; vendor relations">Relations artistes, partenaires, fournisseurs</li>
+        <li data-fr="Booking, appels à artistes, logistique" data-en="Booking, artist calls, logistics">Booking, appels à artistes, logistique</li>
+        <li data-fr="Suivi budgétaire · Google Sheets &amp; Docs" data-en="Budget tracking · Google Sheets &amp; Docs">Suivi budgétaire · Google Sheets &amp; Docs</li>
+      </ul>
+    </div>
+    <div class="exp-card reveal">
+      <div class="exp-num">02</div>
+      <h3 data-fr="Musique &amp; son" data-en="Music &amp; sound">Musique &amp; son</h3>
+      <ul>
+        <li data-fr="URA, musique pour l'artiste Kimura Byol — Centre PHI" data-en="URA, music for artist Kimura Byol — Centre PHI">URA, musique pour l'artiste Kimura Byol — Centre PHI</li>
+        <li data-fr="Bandes sonores pour des artistes" data-en="Soundtracks for artists">Bandes sonores pour des artistes</li>
+        <li data-fr="Émission de recherche musicale — Still FM, N10.AS" data-en="Music discovery radio show — Still FM, N10.AS">Émission de recherche musicale — Still FM, N10.AS</li>
+        <li data-fr="Synthés · machines &amp; instruments vintage · Ableton" data-en="Synths · vintage machines &amp; instruments · Ableton">Synthés · machines &amp; instruments vintage · Ableton</li>
+      </ul>
+    </div>
+    <div class="exp-card reveal">
+      <div class="exp-num">03</div>
+      <h3 data-fr="Contenus vidéo &amp; numériques" data-en="Video &amp; digital content">Contenus vidéo &amp; numériques</h3>
+      <ul>
+        <li data-fr="Montage vidéo, motion design" data-en="Video editing, motion design">Montage vidéo, motion design</li>
+        <li data-fr="Visuels pour réseaux sociaux &amp; promo" data-en="Social &amp; promo visuals">Visuels pour réseaux sociaux &amp; promo</li>
+        <li data-fr="Design sonore · Cinéma/TV (20+ productions)" data-en="Sound design · Film/TV (20+ productions)">Design sonore · Cinéma/TV (20+ productions)</li>
+      </ul>
+    </div>
+    <div class="exp-card reveal">
+      <div class="exp-num">04</div>
+      <h3 data-fr="Design UX/UI" data-en="UX/UI Design">Design UX/UI</h3>
+      <ul>
+        <li data-fr="Recherche utilisateur" data-en="User research">Recherche utilisateur</li>
+        <li data-fr="Wireframing & prototypage" data-en="Wireframing & prototyping">Wireframing & prototypage</li>
+        <li data-fr="Tests utilisateurs" data-en="User testing">Tests utilisateurs</li>
+      </ul>
+    </div>
+    <div class="exp-card reveal">
+      <div class="exp-num">05</div>
+      <h3 data-fr="E-Learning" data-en="E-Learning">E-Learning</h3>
+      <ul>
+        <li>LMS</li>
+      </ul>
+    </div>
+    <div class="exp-card reveal">
+      <div class="exp-num">06</div>
+      <h3 data-fr="Développement" data-en="Development">Développement</h3>
+      <ul>
+        <li>TypeScript · LitElement · Vite</li>
+        <li>HTML · CSS · JS · React · Next.js</li>
+        <li>Three.js · WebGL · Python · API</li>
+      </ul>
+    </div>
+    <div class="exp-card reveal">
+      <div class="exp-num">07</div>
+      <h3 data-fr="IA Générative" data-en="Generative AI">IA Générative</h3>
+      <ul>
+        <li>Claude Code · Stable Diffusion · ComfyUI</li>
+        <li data-fr="API : Google AI, Gemini, Lyria" data-en="API: Google AI, Gemini, Lyria">API : Google AI, Gemini, Lyria</li>
+        <li data-fr="Agents IA, prompt engineering" data-en="AI agents, prompt engineering">Agents IA, prompt engineering</li>
+      </ul>
+    </div>
+    <div class="exp-card reveal">
+      <div class="exp-num">08</div>
+      <h3 data-fr="Outils" data-en="Tools">Outils</h3>
+      <ul>
+        <li>Google Sheets · Docs · Apps Script</li>
+        <li>Notion · Make.com · Tally</li>
+        <li>Adobe CC · Premiere · Audition</li>
+        <li>Figma · Adobe XD</li>
+        <li>Articulate Storyline</li>
+        <li>DaVinci Resolve</li>
+        <li>Ableton · Logic Pro</li>
+        <li>Max/MSP</li>
+        <li>TouchDesigner</li>
+        <li>GitHub</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PARCOURS -->
+<section id="parcours">
+  <div class="s-header reveal">
+    <h2 class="s-title" data-fr="Parcours" data-en="Experience">Parcours</h2>
+    <span class="s-count" data-fr="25+ ans" data-en="25+ years">25+ ans</span>
+  </div>
+  <div class="tl">
+
+    <div class="tl-item reveal">
+      <div class="tl-date" data-fr="Juin – oct. 2026" data-en="June – Oct. 2026">Juin – oct. 2026</div>
+      <div class="tl-content">
+        <h3 data-fr="Adjointe à la direction — coordination de projets et opérations" data-en="Executive Assistant — Project Coordination & Operations">Adjointe à la direction — coordination de projets et opérations</h3>
+        <h4 data-fr="MAPP_MTL — festival international de projection mapping" data-en="MAPP_MTL — international projection mapping festival">MAPP_MTL — festival international de projection mapping</h4>
+        <ul>
+          <li data-fr="Accompagnement des artistes : accueil, horaires, besoins logistiques et techniques" data-en="Artist support: hospitality, schedules, logistical and technical needs">Accompagnement des artistes : accueil, horaires, besoins logistiques et techniques</li>
+          <li data-fr="Contribution au booking d'artistes et à la programmation" data-en="Contributed to artist booking and programming">Contribution au booking d'artistes et à la programmation</li>
+          <li data-fr="MINUTE_MAPP 2026 : programmation de la page de dépôt des vidéos et suivi auprès des artistes pour que chacun ait les bonnes consignes" data-en="MINUTE_MAPP 2026: built the video submission page and followed up with artists so everyone had the right instructions">MINUTE_MAPP 2026 : programmation de la page de dépôt des vidéos et suivi auprès des artistes pour que chacun ait les bonnes consignes</li>
+          <li data-fr="Pilotage transversal : équipes, bénévoles, partenaires, fournisseurs, échéanciers et suivi budgétaire" data-en="Cross-functional coordination: teams, volunteers, partners, vendors, timelines and budget tracking">Pilotage transversal : équipes, bénévoles, partenaires, fournisseurs, échéanciers et suivi budgétaire</li>
+          <li data-fr="Conception et développement de la web app du festival — TypeScript, LitElement, Vite, UX mobile" data-en="Design and development of the festival's web app — TypeScript, LitElement, Vite, mobile UX">Conception et développement de la web app du festival — TypeScript, LitElement, Vite, UX mobile</li>
+          <li data-fr="Outils internes et automatisation — Google Apps Script, Google Sheets, API Google AI/Gemini et Claude Code" data-en="Internal tools and automation — Google Apps Script, Google Sheets, Google AI/Gemini API and Claude Code">Outils internes et automatisation — Google Apps Script, Google Sheets, API Google AI/Gemini et Claude Code</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tl-item reveal">
+      <div class="tl-date" data-fr="Mars – juin 2026" data-en="March – June 2026">Mars – juin 2026</div>
+      <div class="tl-content">
+        <h3 data-fr="Adjointe à la direction — numérique, son et audiovisuel (pigiste)" data-en="Executive Assistant — Digital, Sound &amp; AV (freelance)">Adjointe à la direction — numérique, son et audiovisuel (pigiste)</h3>
+        <h4 data-fr="ASIASIE — festivals YATAI MTL et POCHA MTL" data-en="ASIASIE — YATAI MTL and POCHA MTL festivals">ASIASIE — festivals YATAI MTL et POCHA MTL</h4>
+        <ul>
+          <li data-fr="Responsable du son et de l'audiovisuel sur les sites des festivals : équipement, installation, soutien aux artistes et aux spectacles" data-en="Sound and AV lead on festival sites: equipment, set-up, support for artists and performances">Responsable du son et de l'audiovisuel sur les sites des festivals : équipement, installation, soutien aux artistes et aux spectacles</li>
+          <li data-fr="Conception et développement des applications web des festivals et de tout le volet numérique : sites, outils internes, contenus" data-en="Design and development of the festivals' web apps and all digital work: websites, internal tools, content">Conception et développement des applications web des festivals et de tout le volet numérique : sites, outils internes, contenus</li>
+          <li data-fr="Installation et gestion des points de vente (iPads, paiement Square, Wi-Fi) et suivi des ventes" data-en="Set-up and management of points of sale (iPads, Square payments, Wi-Fi) and sales tracking">Installation et gestion des points de vente (iPads, paiement Square, Wi-Fi) et suivi des ventes</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tl-item reveal">
+      <div class="tl-date">2016–2025</div>
+      <div class="tl-content">
+        <h3 data-fr="Designer Multimédia & Dev" data-en="Multimedia Designer & Dev">Designer Multimédia & Dev</h3>
+        <h4 data-fr="Projets personnels & freelance" data-en="Personal projects & freelance">Projets personnels & freelance</h4>
+        <ul>
+          <li data-fr="Instruments musicaux expérimentaux — Latent Organ, Hors Champ" data-en="Experimental musical instruments — Latent Organ, Hors Champ">Instruments musicaux expérimentaux — Latent Organ, Hors Champ</li>
+          <li data-fr="Émission de recherche musicale à la radio pendant plusieurs années, sur Still FM et N10.AS; page de gestion SoundCloud pour Still FM" data-en="Music discovery radio show for several years on Still FM and N10.AS; SoundCloud management page for Still FM">Émission de recherche musicale à la radio pendant plusieurs années, sur Still FM et N10.AS; page de gestion SoundCloud pour Still FM</li>
+          <li data-fr="IA générative : Stable Diffusion, ComfyUI, workflows Python" data-en="Generative AI : Stable Diffusion, ComfyUI, Python workflows">IA générative : Stable Diffusion, ComfyUI, workflows Python</li>
+          <li data-fr="URA — collaboration avec l'artiste Kimura Byol : composition de la musique, pièces piano et ambient (synthétiseurs, machines et instruments vintage), deux présentations au Centre PHI" data-en="URA — collaboration with artist Kimura Byol: composed the music, piano and ambient pieces (synthesizers, vintage machines and instruments), two presentations at Centre PHI">URA — collaboration avec l'artiste Kimura Byol : composition de la musique, pièces piano et ambient (synthétiseurs, machines et instruments vintage), deux présentations au Centre PHI</li>
+          <li data-fr="Bandes sonores pour des projets d'artistes" data-en="Soundtracks for artists' projects">Bandes sonores pour des projets d'artistes</li>
+          <li data-fr="VJ dans de nombreux festivals et concerts" data-en="VJ at many festivals and concerts">VJ dans de nombreux festivals et concerts</li>
+          <li data-fr="Performances numériques dans plusieurs festivals queers" data-en="Digital performances at several queer festivals">Performances numériques dans plusieurs festivals queers</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tl-item reveal">
+      <div class="tl-date">2023–2024</div>
+      <div class="tl-content">
+        <h3 data-fr="Designer Multimédia & Coordo. Projets" data-en="Multimedia Designer & Project Coord.">Designer Multimédia & Coordo. Projets</h3>
+        <h4>Technologia Formation</h4>
+        <ul>
+          <li data-fr="Coordination de projets pour Métro, SQI, CIUSSS, Ville de Laval" data-en="Project coordination for Métro, SQI, CIUSSS, Ville de Laval">Coordination de projets pour Métro, SQI, CIUSSS, Ville de Laval</li>
+          <li data-fr="Intégration pionnière de l'IA générative dans les workflows" data-en="Pioneering integration of generative AI into workflows">Intégration pionnière de l'IA générative dans les workflows</li>
+          <li data-fr="Stratégie UX, production vidéo/audio, Articulate Storyline/Rise" data-en="UX strategy, video/audio production, Articulate Storyline/Rise">Stratégie UX, production vidéo/audio, Articulate Storyline/Rise</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tl-item reveal">
+      <div class="tl-date">2020–2023</div>
+      <div class="tl-content">
+        <h3 data-fr="Designer Senior & Direction Artistique" data-en="Senior Designer & Art Direction">Designer Senior & Direction Artistique</h3>
+        <h4 data-fr="Entreprise internationale — studio de formation numérique interne" data-en="International company — in-house digital learning studio">Entreprise internationale — studio de formation numérique interne</h4>
+        <ul>
+          <li data-fr="Direction artistique de formations numériques à grande échelle" data-en="Art direction for large-scale digital training">Direction artistique de formations numériques à grande échelle</li>
+          <li data-fr="Supervision d'équipe créative, gestion de budgets" data-en="Creative team supervision, budget management">Supervision d'équipe créative, gestion de budgets</li>
+          <li data-fr="UX/UI, vidéo, animation, design sonore, standards LMS" data-en="UX/UI, video, animation, sound design, LMS standards">UX/UI, vidéo, animation, design sonore, standards LMS</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tl-item reveal">
+      <div class="tl-date">2016–2020</div>
+      <div class="tl-content">
+        <h3 data-fr="Designer Graphique & Multimédia" data-en="Graphic & Multimedia Designer">Designer Graphique & Multimédia</h3>
+        <h4 data-fr="Productions Cinéma & TV (Freelance)" data-en="Film & TV Productions (Freelance)">Productions Cinéma & TV (Freelance)</h4>
+        <ul>
+          <li data-fr="20+ productions (Bad Blood, Unité 9, Kuessipan, Nadia Butterfly…)" data-en="20+ productions (Bad Blood, Unité 9, Kuessipan, Nadia Butterfly…)">20+ productions (Bad Blood, Unité 9, Kuessipan, Nadia Butterfly…)</li>
+          <li data-fr="Props numériques, interfaces fictives, motion design" data-en="Digital props, fictional interfaces, motion design">Props numériques, interfaces fictives, motion design</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tl-item reveal">
+      <div class="tl-date">2000–2016</div>
+      <div class="tl-content">
+        <h3 data-fr="Designer Web & Multimédia" data-en="Web & Multimedia Designer">Designer Web & Multimédia</h3>
+        <h4>NURUN · LOTO-QUÉBEC · MARVVY · OXFAM · EX MACHINA (ROBERT LEPAGE)</h4>
+        <ul>
+          <li data-fr="Expériences web interactives & identités visuelles" data-en="Interactive web experiences & visual identities">Expériences web interactives & identités visuelles</li>
+          <li data-fr="Conseil stratégique en technologies (OXFAM)" data-en="Strategic technology consulting (OXFAM)">Conseil stratégique en technologies (OXFAM)</li>
+          <li data-fr="Installations interactives & production audiovisuelle" data-en="Interactive installations & audiovisual production">Installations interactives & production audiovisuelle</li>
+          <li data-fr="Le Moulin à images — Ex Machina / Robert Lepage" data-en="Le Moulin à images — Ex Machina / Robert Lepage">Le Moulin à images — Ex Machina / Robert Lepage</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROJETS / ÉTUDES DE CAS -->
+<section id="projets">
+  <div class="s-header reveal">
+    <h2 class="s-title" data-fr="Des projets, trois expertises" data-en="Projects across three strengths">Des projets, trois expertises</h2>
+    <span class="s-count" data-fr="Production · création · technologie" data-en="Production · creativity · technology">Production · création · technologie</span>
+  </div>
+  <p class="portfolio-intro" data-fr="Une sélection de projets qui montre ma façon de travailler : comprendre les besoins, organiser les personnes et les moyens, résoudre les enjeux techniques et livrer des expériences utiles et sensibles. Les visuels sont prévus pour accueillir des captures d’écran, plans ou photos de production." data-en="A selection showing how I work: understand the brief, coordinate people and resources, solve technical challenges and deliver useful, thoughtful experiences. The visual areas are ready for screenshots, plans or production photos.">Une sélection de projets qui montre ma façon de travailler : comprendre les besoins, organiser les personnes et les moyens, résoudre les enjeux techniques et livrer des expériences utiles et sensibles. Les visuels sont prévus pour accueillir des captures d’écran, plans ou photos de production.</p>
+  <div class="portfolio-grid">
+    <article class="portfolio-card reveal">
+      <div class="portfolio-visual carousel" role="group" aria-roledescription="carrousel" aria-label="MAPP_MTL — festival international de projection mapping">
+        <div class="carousel-track" tabindex="0">
+          <img src="img/mapp-mtl.jpg" alt="MAPP_MTL — festival international de projection mapping — image 1" loading="lazy" draggable="false">
+          <img src="img/tempo.png" alt="MAPP_MTL — festival international de projection mapping — image 2" loading="lazy" draggable="false">
+          <img src="img/tempo.png" alt="MAPP_MTL — festival international de projection mapping — image 3" loading="lazy" draggable="false">
+        </div>
+        <button type="button" class="carousel-btn prev" aria-label="Image précédente">&#8592;</button>
+        <button type="button" class="carousel-btn next" aria-label="Image suivante">&#8594;</button>
+        <div class="carousel-dots"></div>
+        <span class="carousel-count" aria-hidden="true"></span>
+      </div>
+      <div class="portfolio-copy"><span class="portfolio-type">Coordination de production &amp; numérique</span><h3>MAPP_MTL — festival international de projection mapping</h3><p data-fr="Coordination du minutage et des échéanciers de montage, diffusion et démontage; liens avec artistes, fournisseurs, contractuels et bénévoles. Contribution aux visites de terrain, plans électriques et démarches de permis. Développement d’outils numériques pour les horaires, disponibilités, présences et équipements, ainsi que de la page de dépôt vidéo de MINUTE_MAPP 2026." data-en="Coordinated run-of-show and build, presentation and strike schedules; worked with artists, vendors, contractors and volunteers. Supported site visits, electrical plans and permit processes. Built digital tools for schedules, availability, volunteer attendance and equipment, plus the MINUTE_MAPP 2026 video submission page.">Coordination du minutage et des échéanciers de montage, diffusion et démontage; liens avec artistes, fournisseurs, contractuels et bénévoles. Contribution aux visites de terrain, plans électriques et démarches de permis. Développement d’outils numériques pour les horaires, disponibilités, présences et équipements, ainsi que de la page de dépôt vidéo de MINUTE_MAPP 2026.</p><div class="portfolio-tags"><span>Production</span><span>Artistes &amp; équipes</span><span>Web app</span><span>TypeScript</span><span>Google Apps Script</span></div></div>
+    </article>
+    <article class="portfolio-card reveal">
+      <div class="portfolio-visual carousel" role="group" aria-roledescription="carrousel" aria-label="ASIASIE — YATAI MTL, POCHA MTL et Semaine du Japon">
+        <div class="carousel-track" tabindex="0">
+          <img src="img/tempo.png" alt="ASIASIE — YATAI MTL, POCHA MTL et Semaine du Japon — image 1" loading="lazy" draggable="false">
+          <img src="img/tempo.png" alt="ASIASIE — YATAI MTL, POCHA MTL et Semaine du Japon — image 2" loading="lazy" draggable="false">
+          <img src="img/tempo.png" alt="ASIASIE — YATAI MTL, POCHA MTL et Semaine du Japon — image 3" loading="lazy" draggable="false">
+        </div>
+        <button type="button" class="carousel-btn prev" aria-label="Image précédente">&#8592;</button>
+        <button type="button" class="carousel-btn next" aria-label="Image suivante">&#8594;</button>
+        <div class="carousel-dots"></div>
+        <span class="carousel-count" aria-hidden="true"></span>
+      </div>
+      <div class="portfolio-copy"><span class="portfolio-type">Coordination technique &amp; événementielle</span><h3>ASIASIE — YATAI MTL, POCHA MTL et Semaine du Japon</h3><p data-fr="Coordination du minutage en soutien à la direction de production et responsabilité du son et de l’audiovisuel sur site : équipement, installation et soutien aux artistes. Mise en place des points de vente avec iPads, Square et Wi-Fi, puis suivi des ventes des bars et de la cantine. Conception et développement d’applications web et d’outils numériques pour les festivals." data-en="Coordinated event timing in support of production management and led on-site sound and audiovisual operations, including equipment, setup and artist support. Set up point-of-sale systems using iPads, Square and Wi-Fi, and tracked bar and canteen sales. Designed and developed festival web apps and digital tools.">Coordination du minutage en soutien à la direction de production et responsabilité du son et de l’audiovisuel sur site : équipement, installation et soutien aux artistes. Mise en place des points de vente avec iPads, Square et Wi-Fi, puis suivi des ventes des bars et de la cantine. Conception et développement d’applications web et d’outils numériques pour les festivals.</p><div class="portfolio-tags"><span>Son &amp; AV</span><span>Logistique</span><span>Square</span><span>Wi-Fi</span><span>Applications web</span></div></div>
+    </article>
+    <article class="portfolio-card reveal">
+      <div class="portfolio-visual carousel" role="group" aria-roledescription="carrousel" aria-label="Hors Champ — instrument musical augmenté par l’IA">
+        <div class="carousel-track" tabindex="0">
+          <img src="img/tempo.png" alt="Hors Champ — instrument musical augmenté par l’IA — image 1" loading="lazy" draggable="false">
+          <img src="img/tempo.png" alt="Hors Champ — instrument musical augmenté par l’IA — image 2" loading="lazy" draggable="false">
+          <img src="img/tempo.png" alt="Hors Champ — instrument musical augmenté par l’IA — image 3" loading="lazy" draggable="false">
+        </div>
+        <button type="button" class="carousel-btn prev" aria-label="Image précédente">&#8592;</button>
+        <button type="button" class="carousel-btn next" aria-label="Image suivante">&#8594;</button>
+        <div class="carousel-dots"></div>
+        <span class="carousel-count" aria-hidden="true"></span>
+      </div>
+      <div class="portfolio-copy"><span class="portfolio-type">Recherche artistique &amp; prototypage</span><h3>Hors Champ — instrument musical augmenté par l’IA</h3><p data-fr="Projet personnel en développement : un environnement de création musicale en temps réel où l’IA accompagne le jeu instrumental plutôt que de le remplacer. Le projet explore le dialogue entre instruments joués en direct, synthétiseurs, contrôleurs MIDI, génération sonore, boîtes à rythmes et looper." data-en="Personal project in development: a real-time music environment where AI accompanies live instrumental performance rather than replacing it. It explores interaction between live instruments, synthesizers, MIDI controllers, AI sound generation, drum machines and looping.">Projet personnel en développement : un environnement de création musicale en temps réel où l’IA accompagne le jeu instrumental plutôt que de le remplacer. Le projet explore le dialogue entre instruments joués en direct, synthétiseurs, contrôleurs MIDI, génération sonore, boîtes à rythmes et looper.</p><div class="portfolio-tags"><span>Google Lyria RealTime</span><span>Web Audio API</span><span>MIDI</span><span>WebSockets</span><span>Prototypage</span></div></div>
+    </article>
+    <article class="portfolio-card reveal">
+      <div class="portfolio-visual carousel" role="group" aria-roledescription="carrousel" aria-label="URA — Kimura Byol">
+        <div class="carousel-track" tabindex="0">
+          <img src="img/tempo.png" alt="URA — Kimura Byol — image 1" loading="lazy" draggable="false">
+          <img src="img/tempo.png" alt="URA — Kimura Byol — image 2" loading="lazy" draggable="false">
+          <img src="img/tempo.png" alt="URA — Kimura Byol — image 3" loading="lazy" draggable="false">
+        </div>
+        <button type="button" class="carousel-btn prev" aria-label="Image précédente">&#8592;</button>
+        <button type="button" class="carousel-btn next" aria-label="Image suivante">&#8594;</button>
+        <div class="carousel-dots"></div>
+        <span class="carousel-count" aria-hidden="true"></span>
+      </div>
+      <div class="portfolio-copy"><span class="portfolio-type">Collaboration artistique</span><h3>URA — Kimura Byol</h3><p data-fr="Composition musicale pour le projet de l’artiste Kimura Byol : pièces pour piano et textures ambient réalisées avec synthétiseurs, machines anciennes et instruments vintage. Le projet a fait l’objet de deux présentations au Centre PHI." data-en="Original music composed for artist Kimura Byol: piano pieces and ambient textures created with synthesizers, vintage machines and instruments. The project was presented twice at Centre PHI.">Composition musicale pour le projet de l’artiste Kimura Byol : pièces pour piano et textures ambient réalisées avec synthétiseurs, machines anciennes et instruments vintage. Le projet a fait l’objet de deux présentations au Centre PHI.</p><div class="portfolio-tags"><span>Composition</span><span>Design sonore</span><span>Performance</span><span>Collaboration</span></div></div>
+    </article>
+    <article class="portfolio-card reveal">
+      <div class="portfolio-visual carousel" role="group" aria-roledescription="carrousel" aria-label="Technologia Formation — expériences d’apprentissage">
+        <div class="carousel-track" tabindex="0">
+          <img src="img/tempo.png" alt="Technologia Formation — expériences d’apprentissage — image 1" loading="lazy" draggable="false">
+          <img src="img/tempo.png" alt="Technologia Formation — expériences d’apprentissage — image 2" loading="lazy" draggable="false">
+          <img src="img/tempo.png" alt="Technologia Formation — expériences d’apprentissage — image 3" loading="lazy" draggable="false">
+        </div>
+        <button type="button" class="carousel-btn prev" aria-label="Image précédente">&#8592;</button>
+        <button type="button" class="carousel-btn next" aria-label="Image suivante">&#8594;</button>
+        <div class="carousel-dots"></div>
+        <span class="carousel-count" aria-hidden="true"></span>
+      </div>
+      <div class="portfolio-copy"><span class="portfolio-type">Gestion de projets &amp; design multimédia</span><h3>Technologia Formation — expériences d’apprentissage</h3><p data-fr="Gestion de projets de formation en ligne pour Metro, la Société québécoise des infrastructures, des CIUSSS, la Ville de Laval et Transcontinental. Production de bout en bout : scénarisation, storyboards, design, vidéo, audio et animation; coordination de tournages et accompagnement de l’équipe dans l’adoption de l’IA générative." data-en="Managed online learning projects for Metro, the Société québécoise des infrastructures, CIUSSS, Ville de Laval and Transcontinental. End-to-end production included scripting, storyboards, design, video, audio and animation, coordinating shoots and helping the team adopt generative AI.">Gestion de projets de formation en ligne pour Metro, la Société québécoise des infrastructures, des CIUSSS, la Ville de Laval et Transcontinental. Production de bout en bout : scénarisation, storyboards, design, vidéo, audio et animation; coordination de tournages et accompagnement de l’équipe dans l’adoption de l’IA générative.</p><div class="portfolio-tags"><span>Gestion de projet</span><span>UX/UI</span><span>Vidéo &amp; audio</span><span>Storyline / Rise</span><span>IA générative</span></div></div>
+    </article>
+    <article class="portfolio-card reveal">
+      <div class="portfolio-visual carousel" role="group" aria-roledescription="carrousel" aria-label="Cinéma et télévision — accessoires numériques">
+        <div class="carousel-track" tabindex="0">
+          <img src="img/tempo.png" alt="Cinéma et télévision — accessoires numériques — image 1" loading="lazy" draggable="false">
+          <img src="img/tempo.png" alt="Cinéma et télévision — accessoires numériques — image 2" loading="lazy" draggable="false">
+          <img src="img/tempo.png" alt="Cinéma et télévision — accessoires numériques — image 3" loading="lazy" draggable="false">
+        </div>
+        <button type="button" class="carousel-btn prev" aria-label="Image précédente">&#8592;</button>
+        <button type="button" class="carousel-btn next" aria-label="Image suivante">&#8594;</button>
+        <div class="carousel-dots"></div>
+        <span class="carousel-count" aria-hidden="true"></span>
+      </div>
+      <div class="portfolio-copy"><span class="portfolio-type">Design pour la production audiovisuelle</span><h3>Cinéma et télévision — accessoires numériques</h3><p data-fr="Création d’écrans, d’interfaces fictives et d’éléments de motion design pour plus de 20 productions, dont Bad Blood, Unité 9, Kuessipan et Nadia, Butterfly. Collaboration avec les départements artistiques et la production pour concevoir des visuels cohérents avec les besoins du tournage." data-en="Created screen graphics, fictional interfaces and motion design elements for 20+ productions, including Bad Blood, Unité 9, Kuessipan and Nadia, Butterfly. Worked with art departments and production teams to deliver visuals tailored to each shoot.">Création d’écrans, d’interfaces fictives et d’éléments de motion design pour plus de 20 productions, dont Bad Blood, Unité 9, Kuessipan et Nadia, Butterfly. Collaboration avec les départements artistiques et la production pour concevoir des visuels cohérents avec les besoins du tournage.</p><div class="portfolio-tags"><span>Design d’interface</span><span>Motion design</span><span>Production TV</span><span>Adobe CC</span></div></div>
+    </article>
+  </div>
+  <p class="portfolio-note" data-fr="Chaque projet montre une facette différente de mon approche : organiser la production, comprendre les contraintes techniques et contribuer à la création. Les visuels présentés sont des panneaux graphiques de repérage à remplacer par des images réelles de projets avant publication." data-en="Each project highlights a different part of my approach: coordinating production, understanding technical constraints and contributing creatively. The current graphic panels are placeholders to replace with real project images before publication.">Chaque projet montre une facette différente de mon approche : organiser la production, comprendre les contraintes techniques et contribuer à la création. Les visuels présentés sont des panneaux graphiques de repérage à remplacer par des images réelles de projets avant publication.</p>
+</section>
+
+<!-- FORMATION -->
+<section id="formation">
+  <div class="s-header reveal">
+    <h2 class="s-title" data-fr="Formation" data-en="Education">Formation</h2>
+    <span class="s-count" data-fr="Cégep Limoilou" data-en="Cégep Limoilou">Cégep Limoilou</span>
+  </div>
+  <div class="client-group reveal">
+    <ul>
+      <li data-fr="DEC — Technique multimédia" data-en="DEC — Multimedia Technology">DEC — Technique multimédia</li>
+      <li data-fr="DEC — Informatique de gestion" data-en="DEC — Management Computing">DEC — Informatique de gestion</li>
+      <li data-fr="DEC — Sciences humaines" data-en="DEC — Human Sciences">DEC — Sciences humaines</li>
+    </ul>
+  </div>
+  <p class="contact-sub" style="margin-top:1.5rem;">
+    <span data-fr="Langues : Français (langue maternelle), Anglais (niveau professionnel)" data-en="Languages: French (native), English (professional level)">Langues : Français (langue maternelle), Anglais (niveau professionnel)</span>
+  </p>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-left">
+    <p class="contact-tag" data-fr="Travaillons ensemble" data-en="Let's work together">Travaillons ensemble</p>
+    <h2 class="contact-headline" data-fr="On se parle ?" data-en="Let's talk?">On se parle ?</h2>
+    <p class="contact-sub"
+       data-fr="Disponible pour contribuer à des équipes où la production, les technologies audiovisuelles et la création se rencontrent."
+       data-en="Available to join teams where production, audiovisual technology and creative work meet.">
+      Disponible pour contribuer à des équipes où la production, les technologies audiovisuelles et la création se rencontrent.
+    </p>
+  </div>
+  <div class="contact-right">
+    <a href="CV_Kim_Maurice_2026.pdf" target="_blank" class="btn btn-primary">
+      <span data-fr="⬇ Télécharger le CV" data-en="⬇ Download CV">⬇ Télécharger le CV</span>
+    </a>
+    <a href="mailto:info@kimmaurice.com" class="contact-email">info@kimmaurice.com</a>
+  </div>
+</section>
+
+<footer>
+  <span>Kim Maurice · Montréal · © 2026</span>
+  <div style="display:flex; gap:1.5rem; align-items:center;">
+    <a href="https://linkedin.com/in/kimmaurice" target="_blank" style="font-size:.75rem; color:#777; letter-spacing:.03em; transition:color .2s;" onmouseover="this.style.color='#f5f5f5'" onmouseout="this.style.color='#777'">LinkedIn</a>
+    <a href="https://www.imdb.com/name/nm9371635/" target="_blank" style="font-size:.75rem; color:#777; letter-spacing:.03em; transition:color .2s;" onmouseover="this.style.color='#f5f5f5'" onmouseout="this.style.color='#777'">IMDb</a>
+  </div>
+  <span data-fr="Technologue créative" data-en="Creative Technologist">Technologue créative</span>
+</footer>
+
+<!-- MOBILE NAV -->
+<nav class="mob-nav">
+  <a href="#projets" data-fr="Projets" data-en="Projects">Projets</a>
+  <a href="#expertise"  data-fr="Expert."  data-en="Expert.">Expert.</a>
+  <a href="#parcours"   data-fr="Parcours" data-en="Exp.">Parcours</a>
+  <a href="#formation"  data-fr="Format."  data-en="Educ.">Format.</a>
+  <a href="#contact"    data-fr="Contact"  data-en="Contact">Contact</a>
+</nav>
+
+<script>
+// GRAIN
+(function(){
+  const c=document.getElementById('grain'),ctx=c.getContext('2d');
+  let W,H,id;
+  function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight;}
+  function tick(){
+    const img=ctx.createImageData(W,H),d=img.data;
+    for(let i=0;i<d.length;i+=4){
+      const v=Math.random()*255|0;
+      d[i]=d[i+1]=d[i+2]=v;
+      d[i+3]=(Math.random()*22)|0;
+    }
+    ctx.putImageData(img,0,0);
+    id=requestAnimationFrame(tick);
+  }
+  window.addEventListener('resize',()=>{cancelAnimationFrame(id);resize();tick();});
+  resize();tick();
+})();
+
+// LANG
+(function(){
+  let lang='fr';
+  const btn=document.getElementById('langBtn');
+  function apply(){
+    document.querySelectorAll('[data-fr]').forEach(el=>{
+      const val=el.getAttribute('data-'+lang);
+      if(!val) return;
+      if(val.includes('<br>')||val.includes('<strong>')) el.innerHTML=val;
+      else el.textContent=val;
+    });
+    btn.textContent=lang==='fr'?'EN':'FR';
+  }
+  btn.addEventListener('click',()=>{ lang=lang==='fr'?'en':'fr'; apply(); });
+})();
+
+// MOBILE NAV ACTIVE
+(function(){
+  const links=document.querySelectorAll('.mob-nav a');
+  const sections=document.querySelectorAll('section[id]');
+  function update(){
+    let cur='';
+    sections.forEach(s=>{ if(window.scrollY>=s.offsetTop-130) cur=s.id; });
+    links.forEach(a=>{ a.classList.toggle('active',a.getAttribute('href')==='#'+cur); });
+  }
+  window.addEventListener('scroll',update,{passive:true});
+  update();
+})();
+
+// REVEAL ON SCROLL — progressive enhancement, never hides content if JS fails
+(function(){
+  const els = document.querySelectorAll('.reveal');
+  if(!els.length) return;
+  if(!('IntersectionObserver' in window)){
+    return; // .reveal is visible by default in CSS — nothing to do
+  }
+  document.documentElement.classList.add('js-ready');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('in-view');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold:.12, rootMargin:'0px 0px -60px 0px' });
+  els.forEach((el,i)=>{
+    el.style.transitionDelay = Math.min((i%6)*60, 300) + 'ms';
+    io.observe(el);
+  });
+  // safety net: force-reveal everything after 3s in case of an edge case
+  setTimeout(()=>els.forEach(el=>el.classList.add('in-view')), 3000);
+})();
+
+// CURSOR GLOW
+(function(){
+  const glow = document.getElementById('cursor-glow');
+  if(!glow || !window.matchMedia('(hover:hover) and (pointer:fine)').matches) return;
+  let x=0,y=0,tx=0,ty=0,active=false;
+  function raf(){
+    x += (tx-x)*.15; y += (ty-y)*.15;
+    glow.style.transform = `translate(${x}px,${y}px)`;
+    requestAnimationFrame(raf);
+  }
+  window.addEventListener('mousemove',(e)=>{
+    tx=e.clientX; ty=e.clientY;
+    if(!active){ active=true; glow.classList.add('active'); }
+  });
+  window.addEventListener('mouseleave',()=>glow.classList.remove('active'));
+  raf();
+})();
+
+</script>
+
+<!-- POP-UP DISPO 1er NOVEMBRE (retirer cette ligne pour l'enlever) -->
+<script>
+// CAROUSEL — images de projet
+(function(){
+  const T={fr:{prev:'Image précédente',next:'Image suivante',go:'Aller à l’image '},en:{prev:'Previous image',next:'Next image',go:'Go to image '}};
+  const langBtn=document.getElementById('langBtn');
+  const curLang=()=>langBtn&&langBtn.textContent.trim()==='FR'?'en':'fr';
+  document.querySelectorAll('.carousel').forEach(car=>{
+    const track=car.querySelector('.carousel-track');
+    const slides=track.querySelectorAll('img');
+    const prev=car.querySelector('.prev'), next=car.querySelector('.next');
+    const dotsBox=car.querySelector('.carousel-dots'), count=car.querySelector('.carousel-count');
+    const n=slides.length; let idx=0;
+    if(n<2){[prev,next,dotsBox,count].forEach(e=>e.remove());return;}
+    const dots=[...slides].map((_,k)=>{
+      const d=document.createElement('button'); d.type='button'; d.className='carousel-dot';
+      d.addEventListener('click',()=>go(k)); dotsBox.appendChild(d); return d;
+    });
+    function labels(){
+      const t=T[curLang()];
+      prev.setAttribute('aria-label',t.prev); next.setAttribute('aria-label',t.next);
+      dots.forEach((d,k)=>d.setAttribute('aria-label',t.go+(k+1)));
+    }
+    function render(){
+      dots.forEach((d,k)=>d.classList.toggle('active',k===idx));
+      count.textContent=(idx+1)+' / '+n;
+      prev.disabled=idx===0; next.disabled=idx===n-1;
+    }
+    function go(k){ idx=Math.max(0,Math.min(n-1,k)); track.scrollTo({left:idx*track.clientWidth}); render(); }
+    prev.addEventListener('click',()=>go(idx-1));
+    next.addEventListener('click',()=>go(idx+1));
+    track.addEventListener('scroll',()=>{
+      const k=Math.round(track.scrollLeft/track.clientWidth);
+      if(k!==idx){idx=k;render();}
+    },{passive:true});
+    track.addEventListener('keydown',e=>{
+      if(e.key==='ArrowLeft'){e.preventDefault();go(idx-1);}
+      if(e.key==='ArrowRight'){e.preventDefault();go(idx+1);}
+    });
+    if(langBtn) langBtn.addEventListener('click',()=>setTimeout(labels,0));
+    labels(); render();
+  });
+})();
+</script>
+<script src="dispo.js" defer></script>
+</body>
+</html>
