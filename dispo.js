@@ -10,7 +10,7 @@
     email: 'info@kimmaurice.com',
     cv: 'CV_Kim_Maurice_2026.pdf',
     showCard: true,        // le nœud « disponibilité »
-    showOrb: true,         // la bille lumineuse « mise à jour en cours »
+    showOrb: false,         // la bille lumineuse « mise à jour en cours »
     orbPassSeconds: 11,    // durée d'une traversée
     orbPauseSeconds: 7,    // pause entre deux traversées
     cardDelayMs: 1200
