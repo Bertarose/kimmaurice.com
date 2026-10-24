@@ -21,6 +21,7 @@
    'section,footer{position:relative;z-index:1}'+
    '.hb-btn{position:fixed;left:1rem;bottom:1rem;z-index:9000;font:600 .62rem "IBM Plex Mono",monospace;letter-spacing:.12em;text-transform:uppercase;'+
    'color:#f2f1f6;background:rgba(8,7,13,.72);border:1px solid rgba(242,241,246,.28);padding:.45rem .7rem;cursor:pointer;backdrop-filter:blur(6px)}'+
+   '@media(max-width:767px){.hb-btn{left:auto;right:.75rem;bottom:auto;top:calc(60px + .6rem);font-size:.56rem;padding:.35rem .55rem}}'+
    '.hb-btn:hover{border-color:#c9ff3d;color:#c9ff3d}.hb-btn.on{border-color:#c9ff3d;color:#c9ff3d}'+
    '.hb-btn i{display:inline-block;width:.45rem;height:.45rem;border-radius:50%;background:#555;margin-right:.45rem}.hb-btn.on i{background:#c9ff3d;box-shadow:0 0 8px #c9ff3d}';
   document.head.appendChild(css);
