@@ -88,7 +88,9 @@
     'font:600 .62rem "IBM Plex Mono",monospace;letter-spacing:.14em;text-transform:uppercase;color:#08070d;background:#c9ff3d;padding:.3rem .55rem;',
     'box-shadow:0 0 18px rgba(201,255,61,.55);will-change:transform,opacity}',
     '.kd-orb-static{position:fixed;left:1rem;bottom:1rem;z-index:9400;pointer-events:none;font:600 .6rem "IBM Plex Mono",monospace;letter-spacing:.14em;text-transform:uppercase;color:#08070d;background:#c9ff3d;padding:.3rem .55rem}',
-    '@media(max-width:768px){.kd-node{right:.75rem;bottom:4.9rem}.kd-date{font-size:1.6rem}}',
+    '@media(max-width:768px){.kd-node{left:.75rem;right:.75rem;width:auto;bottom:calc(3.6rem + env(safe-area-inset-bottom))}.kd-port{display:none}',
+    '.kd-scope,.kd-text,.kd-params{display:none}.kd-body{display:flex;align-items:baseline;gap:.6rem;flex-wrap:wrap;padding:.6rem .75rem .5rem}',
+    '.kd-date{font-size:1.25rem}.kd-title{font-size:.8rem;margin:0}.kd-actions{padding:0 .75rem .7rem}.kd-btn{padding:.6rem .4rem}}',
     '@media(prefers-reduced-motion:reduce){.kd-led,.kd-scope svg{animation:none}.kd-node{transition:none}}'
   ].join('');
   var st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);

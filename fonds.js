@@ -66,7 +66,23 @@
    '.fd-pop p{margin:0;color:#9fb3a5}'+
    '.fd-pop .fermer{justify-self:center;background:none;border:0;color:#9fb3a5;text-decoration:underline;cursor:pointer;font:inherit}'+
    '[hidden].fd-btn{display:none}'+
-   '@media(max-width:767px){.fd-barre{left:auto;right:.75rem;bottom:auto;top:calc(60px + .6rem);flex-direction:column;align-items:flex-end}'+
+   '.fd-mob{display:none}'+
+   /* Téléphone : un seul petit bouton « Fond » sous l'en-tête, qui ouvre un panneau */
+   '@media(max-width:767px){'+
+     '.fd-mob{display:flex;align-items:center;gap:.4rem;position:fixed;right:.75rem;top:calc(60px + .6rem);z-index:9001;padding:.5rem .7rem;font-size:.6rem}'+
+     '.fd-mob b{display:inline-block;width:.55rem;height:.55rem;border-radius:50%;background:linear-gradient(90deg,#c9ff3d 50%,transparent 50%);border:1px solid #c9ff3d}'+
+     '.fd-barre{left:.75rem;right:.75rem;bottom:auto;top:calc(60px + 3.3rem);max-width:none;flex-direction:column;align-items:stretch;gap:.5rem;padding:.6rem;'+
+       'background:rgba(8,7,13,.94);border:1px solid rgba(242,241,246,.22);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);'+
+       'visibility:hidden;opacity:0;transform:translateY(-6px);transition:opacity .2s,transform .2s,visibility 0s .2s}'+
+     '.fd-barre.ouvert{visibility:visible;opacity:1;transform:none;transition:opacity .2s,transform .2s}'+
+     '.fd-choix{display:grid;grid-template-columns:repeat(3,1fr);font-size:.62rem}'+
+     '.fd-choix span{display:none}'+
+     '.fd-choix button{padding:.75rem .3rem;border-right:1px solid rgba(242,241,246,.14)}'+
+     '.fd-choix button:last-child{border-right:0}'+
+     '.fd-btn{font-size:.62rem;padding:.75rem .7rem;text-align:left}'+
+     '.fd-sp{position:static;width:100%;padding:0;border:0;background:none}'+
+   '}'+
+   '@media(max-width:767px) and (prefers-reduced-motion:reduce){.fd-barre{transition:none}}';
      '.fd-btn,.fd-choix{font-size:.56rem}.fd-btn,.fd-choix span,.fd-choix button{padding:.35rem .5rem}}';
   document.head.appendChild(css);
 
@@ -81,6 +97,13 @@
     '<div class="fd-sp" hidden></div>'+
     '<div class="fd-pop" hidden role="dialog"><b class="l-titre"></b><div class="qr"></div><p class="l-texte"></p><button type="button" class="fermer"></button></div>';
   document.body.appendChild(barre);
+  // Téléphone : bouton qui ouvre / ferme le panneau
+  var bMob=document.createElement('button');bMob.type='button';bMob.className='fd-btn fd-mob';
+  bMob.setAttribute('aria-expanded','false');bMob.innerHTML='<b></b><span></span>';
+  document.body.appendChild(bMob);
+  function panneau(o){barre.classList.toggle('ouvert',o);bMob.setAttribute('aria-expanded',String(o));bMob.classList.toggle('on',o)}
+  bMob.onclick=function(e){e.stopPropagation();panneau(!barre.classList.contains('ouvert'))};
+  document.addEventListener('click',function(e){if(barre.classList.contains('ouvert')&&!barre.contains(e.target))panneau(false)});
   // Couches de fond : télé, voile, fenêtre 3D (dans cet ordre)
   var couche=document.createElement('div');couche.id='fd-fonds';couche.setAttribute('aria-hidden','true');
   var voile=document.createElement('div');voile.id='fd-voile';voile.style.background='rgba('+CFG.couleurVoile+','+CFG.voile+')';voile.style.opacity='0';
@@ -98,6 +121,7 @@
     bHt.querySelector('span').textContent=etatHt==='on'?t('htOn'):etatHt==='load'?t('load'):etatHt==='err'?t('err'):t('ht');
     bTel.querySelector('span').textContent=etatTel.n>0?t('telOn'):t('tel');
     bSp.querySelector('span').textContent='♫ '+t('sp');
+    bMob.querySelector('span').textContent=t('fond');
     barre.querySelector('.l-titre').textContent=t('titre');
     barre.querySelector('.fermer').textContent=t('fermer');
     barre.querySelector('.l-texte').textContent=texteTel?t(texteTel):'';
@@ -260,7 +284,7 @@
     if(!pop.querySelector('.qr').firstChild){texteTel='prep';libelles();Tele.demanderQR()}
   };
   pop.querySelector('.fermer').onclick=function(){pop.hidden=true;bTel.focus()};
-  document.addEventListener('keydown',function(e){if(e.key==='Escape'){pop.hidden=true;sp.hidden=true}});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'){pop.hidden=true;sp.hidden=true;panneau(false)}});
 
   // --- Playlist Spotify (lecteur intégré, chargé au premier clic) ---
   var mSp=/open\.spotify\.com\/(?:intl-[a-z-]+\/)?(playlist|album|track)\/([A-Za-z0-9]+)/.exec(CFG.playlist||'');
