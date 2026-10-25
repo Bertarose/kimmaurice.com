@@ -14,8 +14,8 @@
     opaciteFenetre:.3,         // luminosité de la fenêtre 3D (0 à 1)
     intensite:1.2,             // amplitude du mouvement de la fenêtre 3D
     opaciteTele:1,             // opacité de la télé (0 à 1)
-    voile:.62,                 // voile sombre entre la télé et le texte (0 = aucun, 1 = noir)
-    couleurVoile:'8,6,26',     // couleur du voile (rgb), celle du fond du site
+    voile:.8,                  // voile noir entre la télé et le texte (0 = aucun, 1 = noir complet)
+    couleurVoile:'0,0,0',      // couleur du voile (rgb) : noir
     pageTele:'/hors-champ-tv/hors-champ-tv.html'
   };
   var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
