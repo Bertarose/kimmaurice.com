@@ -145,6 +145,27 @@ body.manette { overflow: hidden; touch-action: manipulation; -webkit-user-select
 #mnKick { width: 10px; height: 10px; border-radius: 50%; background: #2a1310; display: inline-block; }
 #mnKick.kick { background: var(--rouge); box-shadow: 0 0 8px var(--rouge); }
 .mn-erreur { grid-column: 1 / -1; color: var(--rouge); font-size: 11px; line-height: 1.5; }
+.mn { padding-bottom: calc(76px + env(safe-area-inset-bottom)) !important; }
+.mn-onglets { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+  padding: 8px max(14px, env(safe-area-inset-right)) max(10px, env(safe-area-inset-bottom)) max(14px, env(safe-area-inset-left)); background: #000; border-top: 1px solid var(--cadre); }
+.mn-onglets button { height: 48px; border-radius: 12px; background: #0f1411; border: 1px solid var(--cadre); font-family: var(--osd); font-size: 22px; }
+.mn-onglets button.on { color: var(--phosphore); border-color: var(--phosphore-dim); background: #14321f; }
+.mn-regie { position: fixed; inset: 0 0 calc(66px + env(safe-area-inset-bottom)) 0; z-index: 10; overflow-y: auto; -webkit-overflow-scrolling: touch; background: var(--noir); touch-action: auto; -webkit-user-select: none; user-select: none; }
+.mn-vues { position: sticky; top: 0; z-index: 2; display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; padding: max(10px, env(safe-area-inset-top)) 14px 8px; background: var(--noir); }
+.mn-vues button { padding: 10px 0; border-radius: 8px; font-family: var(--osd); font-size: 20px; background: #0f1411; }
+.mn-vues button.on { background: #1a231d; border-color: var(--papier); }
+.mn-vues button[data-v="a"].on { color: var(--phosphore); } .mn-vues button[data-v="b"].on { color: var(--ambre); }
+.mn-regie .seul-ordi { display: none !important; }
+.mn-regie #horsligne { display: none !important; }
+.mn-regie[data-vue="a"] #platB, .mn-regie[data-vue="a"] #blocMaitre,
+.mn-regie[data-vue="b"] #platA, .mn-regie[data-vue="b"] #blocMaitre,
+.mn-regie[data-vue="m"] .platines { display: none; }
+.mn-regie .platines { grid-template-columns: 1fr; }
+.mn-regie .regie-wrap { padding-top: 4px; }
+.mn-regie .ctrl { grid-template-columns: 88px 1fr 46px; }
+.mn-regie input[type=range] { height: 32px; }
+.mn-regie button { padding: 10px 12px; }
+.mn-regie select, .mn-regie input[type=text] { padding: 10px; font-size: 16px; }
 #qrBloc { display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: center; }
 #qr { background: #fff; padding: 8px; border-radius: 6px; width: 132px; height: 132px; }
 #qr img, #qr canvas { width: 116px !important; height: 116px !important; }
@@ -190,12 +211,12 @@ body.manette { overflow: hidden; touch-action: manipulation; -webkit-user-select
   <div class="regie-wrap">
     <div id="horsligne" hidden>L'écran n'est pas ouvert. Ouvre <b>hors-champ-tv.html</b> dans un autre onglet et clique sur Allumer.</div>
 
-    <section class="bloc" id="blocManette">
+    <section class="bloc seul-ordi" id="blocManette">
       <h2>Manette <small>contrôle depuis ton téléphone</small></h2>
       <div id="qrBloc"><div id="qr" hidden></div><p class="note" id="qrNote">Pour utiliser ton téléphone comme manette, lance l'écran avec <b>serveur.py</b> (voir LISEZMOI).</p></div>
     </section>
 
-    <div class="bloc">
+    <div class="bloc" id="blocCroix">
       <div class="croix"><span class="a">A</span><input type="range" id="xfade" min="0" max="1" step="0.01" value="0.5" aria-label="Crossfader"><span class="b">B</span></div>
       <div class="rang">
         <button id="xA">Tout A</button><button id="xM">Milieu</button><button id="xB">Tout B</button>
@@ -209,13 +230,13 @@ body.manette { overflow: hidden; touch-action: manipulation; -webkit-user-select
       <section class="bloc" id="platB" data-i="1"></section>
     </div>
 
-    <section class="bloc">
+    <section class="bloc" id="blocMaitre">
       <h2>Maître <small>son et image globale</small></h2>
       <div class="maitre">
         <div style="display:grid;gap:8px">
-          <span class="etiq">Écoute</span>
-          <select id="source"></select>
-          <div class="rang"><button id="autoriser">Autoriser l'audio</button></div>
+          <span class="etiq seul-ordi">Écoute</span>
+          <select id="source" class="seul-ordi"></select>
+          <div class="rang seul-ordi"><button id="autoriser">Autoriser l'audio</button></div>
           <div class="vu">
             <span>Basses</span><span class="niveau"><i id="vuB"></i></span>
             <span>Énergie</span><span class="niveau"><i id="vuE"></i></span>
@@ -223,16 +244,16 @@ body.manette { overflow: hidden; touch-action: manipulation; -webkit-user-select
           </div>
           <div class="ctrl"><label for="m-sens">Sensibilité</label><input type="range" id="m-sens" min="0" max="100" step="1"><output id="o-m-sens"></output></div>
           <div class="rang"><label for="m-bpm">BPM horloge</label><input type="number" id="m-bpm" min="60" max="200" style="width:70px"><button id="tap">Tap <kbd>T</kbd></button></div>
-          <p class="note">Pour Spotify : sortie du Mac sur un périphérique à sorties multiples qui inclut BlackHole, puis choisis BlackHole ici.</p>
-          <span class="etiq">Playlist Spotify</span>
-          <div class="rang"><input type="text" id="spLien" placeholder="Colle le lien de ta playlist" aria-label="Lien Spotify"><button id="spOk">Charger</button></div>
-          <iframe id="spLecteur" hidden title="Lecteur Spotify" style="width:100%;height:152px;border:0;border-radius:8px" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+          <p class="note seul-ordi">Pour Spotify : sortie du Mac sur un périphérique à sorties multiples qui inclut BlackHole, puis choisis BlackHole ici.</p>
+          <span class="etiq seul-ordi">Playlist Spotify</span>
+          <div class="rang seul-ordi"><input type="text" id="spLien" placeholder="Colle le lien de ta playlist" aria-label="Lien Spotify"><button id="spOk">Charger</button></div>
+          <iframe id="spLecteur" class="seul-ordi" hidden title="Lecteur Spotify" style="width:100%;height:152px;border:0;border-radius:8px" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
         </div>
         <div style="display:grid;gap:8px" id="maitreImage"></div>
       </div>
     </section>
 
-    <div class="touches">
+    <div class="touches seul-ordi">
       <kbd>Espace</kbd> zapper les deux · <kbd>Q</kbd> zapper A · <kbd>W</kbd> zapper B · <kbd>←</kbd><kbd>→</kbd> crossfader · <kbd>N</kbd> noir · <kbd>T</kbd> tap<br>
       Sur l'écran : <kbd>H</kbd> régie · <kbd>F</kbd> plein écran
     </div>
@@ -268,6 +289,14 @@ body.manette { overflow: hidden; touch-action: manipulation; -webkit-user-select
       <button id="mnNoir" class="noir">Noir</button>
     </div>
   </div>
+  <div id="mnRegie" class="mn-regie" data-vue="a" hidden>
+    <div class="mn-vues" role="tablist">
+      <button data-v="a" class="on">Platine A</button><button data-v="b">Platine B</button><button data-v="m">Maître</button>
+    </div>
+  </div>
+  <nav class="mn-onglets" role="tablist">
+    <button data-o="jouer" class="on">▶ Jouer</button><button data-o="regie">☰ Régie complète</button>
+  </nav>
 </template>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
@@ -630,10 +659,10 @@ function demarrerEcran() {
 /* ==================================================================== */
 /*                               RÉGIE                                  */
 /* ==================================================================== */
-function demarrerRegie() {
-  document.body.classList.add('regie');
-  document.body.appendChild($('tpl-regie').content.cloneNode(true));
-  const envoyer = (m) => canalBC.postMessage(m);
+function demarrerRegie(opts = {}) {
+  if (!opts.conteneur) document.body.classList.add('regie');
+  (opts.conteneur || document.body).appendChild($('tpl-regie').content.cloneNode(true));
+  const envoyer = opts.envoyer || ((m) => canalBC.postMessage(m));
   const regler = (deck, cle, val) => envoyer({ type: 'regler', deck, cle, val });
 
   // --- Construction des platines ---
@@ -748,7 +777,7 @@ function demarrerRegie() {
   const PLAYLIST_DEFAUT = 'https://open.spotify.com/playlist/0xx4H1cOq9LO7UhrK3F2rQ';
   let lienSp = PLAYLIST_DEFAUT;
   try { lienSp = localStorage.getItem('hct-spotify') || PLAYLIST_DEFAUT; } catch (e) {}
-  $('spLien').value = lienSp; chargerSpotify(lienSp);
+  $('spLien').value = lienSp; if (!opts.conteneur) chargerSpotify(lienSp);
 
   // --- QR de la manette ---
   // Sur le Mac (localhost) : via serveur.py et le Wi-Fi. En ligne (GitHub Pages) : via PeerJS.
@@ -790,7 +819,8 @@ function demarrerRegie() {
   }
 
   let vuDernier = 0, ecranVu = 0;
-  canalBC.onmessage = ({ data: m }) => {
+  if (opts.abonner) opts.abonner(recevoirRegie); else canalBC.onmessage = ({ data }) => recevoirRegie(data);
+  function recevoirRegie(m) {
     if (m.type === 'etat') { etat = m.etat; majUI(); }
     else if (m.type === 'statut') {
       ecranVu = performance.now();
@@ -806,7 +836,7 @@ function demarrerRegie() {
         c.niv.style.width = (w * etat.decks[i].opacite * 100) + '%';
       });
     }
-  };
+  }
   setInterval(() => { $('horsligne').hidden = performance.now() - ecranVu < 1500; }, 500);
   envoyer({ type: 'bonjour' });
 
@@ -940,7 +970,9 @@ function demarrerManette() {
     es.onmessage = (e) => { try { traiter(JSON.parse(e.data)); } catch (err) {} };
   }
   function lien(ok, txt) { enLigne = ok; $('mnLien').classList.toggle('ok', ok); $('mnLienTxt').textContent = txt; if (ok) erreur(''); }
+  let versRegie = null;
   function traiter(m) {
+      if (versRegie) { try { versRegie(m); } catch (e) {} }
       if (m.type === 'etat') { etat = m.etat; majTout(); }
       else if (m.type === 'statut') {
         const t = (d, L) => d && d.info ? `${L} · ${d.info.titre}${d.info.annee ? ' (' + d.info.annee + ')' : ''}` : `${L} · ${d ? d.msg : '—'}`;
@@ -964,6 +996,23 @@ function demarrerManette() {
       lien(false, 'Hors ligne'); peer.destroy(); setTimeout(connecterPair, 3000);
     });
   }
+  // Onglets Jouer / Régie complète
+  let regieConstruite = false;
+  document.querySelectorAll('.mn-onglets button').forEach(b => b.onclick = () => {
+    document.querySelectorAll('.mn-onglets button').forEach(x => x.classList.toggle('on', x === b));
+    const regie = b.dataset.o === 'regie';
+    if (regie && !regieConstruite) {
+      regieConstruite = true;
+      demarrerRegie({ conteneur: $('mnRegie'), envoyer, abonner: (f) => { versRegie = f; } });
+      versRegie({ type: 'etat', etat });
+    }
+    $('mnRegie').hidden = !regie;
+  });
+  document.querySelectorAll('.mn-vues button').forEach(b => b.onclick = () => {
+    document.querySelectorAll('.mn-vues button').forEach(x => x.classList.toggle('on', x === b));
+    $('mnRegie').dataset.vue = b.dataset.v; $('mnRegie').scrollTop = 0;
+  });
+
   if (idEcran) connecterPair();
   else fetch('/hct/adresse').then(r => { if (!r.ok) throw 0; connecter(); envoyer({ type: 'bonjour' }); })
     .catch(() => erreur('Scanne le QR code affiché dans la régie de l\'écran pour connecter la manette.'));
