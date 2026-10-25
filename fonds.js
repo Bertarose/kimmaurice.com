@@ -109,6 +109,13 @@
   var voile=document.createElement('div');voile.id='fd-voile';voile.style.background='rgba('+CFG.couleurVoile+','+CFG.voile+')';voile.style.opacity='0';
   couche.appendChild(voile);
   document.body.insertBefore(couche,document.body.firstChild);
+  // Le contenu du site passe toujours devant le fond (même les blocs sans position, comme la barre de chiffres)
+  Array.prototype.forEach.call(document.body.children,function(el){
+    if(el===couche||el===barre||/^(SCRIPT|STYLE|LINK|TEMPLATE)$/.test(el.tagName))return;
+    var cs=getComputedStyle(el);
+    if(cs.position==='static'){el.style.position='relative';el.style.zIndex='1'}
+    else if(cs.position==='relative'&&cs.zIndex==='auto')el.style.zIndex='1';
+  });
   var bHt=barre.querySelector('#fd-ht'),bTel=barre.querySelector('#fd-tel'),pop=barre.querySelector('.fd-pop');
   var bSp=barre.querySelector('#fd-spb'),sp=barre.querySelector('.fd-sp');
   var etatHt='off',etatTel={n:0},texteTel='';
@@ -301,6 +308,12 @@
     };
   }
   bTel.addEventListener('click',function(){sp.hidden=true;bSp.classList.remove('on')});
+
+  // Pendant la salle de projection, le fond se met en pause (moins de vidéos à charger)
+  window.addEventListener('salle:etat',function(e){
+    if(e.detail&&e.detail.ouverte){Tele.arreter();Fenetre.arreter();barre.style.display='none';bMob.style.display='none'}
+    else{barre.style.display='';bMob.style.display='';appliquer(choix,false)}
+  });
 
   appliquer(choix,false);
 })();

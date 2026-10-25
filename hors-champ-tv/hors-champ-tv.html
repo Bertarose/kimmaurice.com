@@ -61,6 +61,10 @@ body.contenir .platine video { object-fit: contain; }
 #tiroir header strong { font-family: var(--osd); font-size: 22px; font-weight: 400; color: var(--phosphore); margin-right: auto; }
 #tiroir iframe { width: 100%; height: 100%; border: 0; background: var(--noir); }
 body.fond #accueil, body.fond #tiroir { display: none !important; }
+body.poche { touch-action: none; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+body.poche #canal { font-size: clamp(30px, 11vw, 64px); text-align: right; }
+body.poche #tiers { font-size: 18px; bottom: max(24px, env(safe-area-inset-bottom)); }
+.astuce { left: 50%; top: 50%; transform: translate(-50%, -50%); width: max-content; max-width: 86vw; box-sizing: border-box; text-align: left; font-size: clamp(17px, 5.4vw, 24px); line-height: 1.45; background: rgba(0,0,0,.6); padding: 16px 20px; border: 1px solid var(--phosphore-dim); }
 #tiroir.semi { opacity: .35; } #tiroir.semi:hover { opacity: 1; }
 
 /* ========================= RÉGIE ========================= */
@@ -376,6 +380,9 @@ function demarrerEcran() {
   const FOND = new URLSearchParams(location.search).has('fond');
   const DANS_SITE = FOND && window.parent !== window;
   if (FOND) document.body.classList.add('fond');
+  // hors-champ-tv.html?fond&poche : télé de poche, jouée au doigt sur un téléphone
+  const POCHE = FOND && new URLSearchParams(location.search).has('poche');
+  if (POCHE) document.body.classList.add('poche');
 
   const A = {
     ctx: null, analyser: null, flux: null, freq: null, temps: null,
@@ -485,6 +492,7 @@ function demarrerEcran() {
       v.classList.add('actif'); ancien.classList.remove('actif'); setTimeout(() => ancien.pause(), 60);
       p.pret[k] = false;
       canal = canal % 99 + 1; afficherOSD(p.info[k]);
+      if (DANS_SITE && p.info[k]) parent.postMessage({ source: 'hct', type: 'film', deck: i, titre: String(p.info[k].titre || ''), annee: String(p.info[k].annee || '') }, '*');
       diffuserStatut();
       precharger(i, false);
     }, 100);
@@ -683,6 +691,60 @@ function demarrerEcran() {
   $('semi').onclick = () => { tiroir.classList.toggle('semi'); $('semi').classList.toggle('on'); };
   $('detacher').onclick = () => { window.open(location.pathname + '#regie', 'hct-regie', 'width=900,height=900'); basculerRegie(false); };
 
+  // --- Télé de poche : gestes au doigt ---
+  function demarrerPoche() {
+    etat.maitre.canal = true; etat.maitre.titres = true; etat.decks.forEach(d => { d.zap = 16; });
+    const EFFETS = [
+      ['Normal', {}], ['N&B', { nb: true }], ['Négatif', { inverse: true }], ['Miroir', { miroir: true }],
+      ['Acide', { teinte: 160, saturation: 2.2 }], ['Plongée', { zoom: 1.8 }], ['Rêve', { flou: 4, luminosite: 1.25 }]
+    ];
+    const BASE = { nb: false, inverse: false, miroir: false, teinte: 0, saturation: 1, zoom: 1, flou: 0, luminosite: 1 };
+    let effet = 0;
+    const msg = $('canal');
+    function annonce(txt) { msg.textContent = txt; msg.classList.remove('cache'); clearTimeout(annonce.t); annonce.t = setTimeout(() => msg.classList.add('cache'), 1400); }
+    function poserEffet(n) {
+      effet = (n + EFFETS.length) % EFFETS.length;
+      etat.decks.forEach(d => Object.assign(d, BASE, EFFETS[effet][1]));
+      appliquerVitesses(); annonce(EFFETS[effet][0]);
+    }
+    // Astuce de départ
+    const astuce = document.createElement('div'); astuce.className = 'astuce osd';
+    astuce.innerHTML = '↑ glisse pour zapper<br>↔ glisse pour mélanger<br>• tape pour un effet<br>● maintiens pour le stroboscope';
+    $('scene').appendChild(astuce);
+    const cacherAstuce = () => astuce.classList.add('cache');
+    setTimeout(cacherAstuce, 6000);
+
+    let x0 = 0, y0 = 0, t0 = 0, xf0 = 0.5, geste = null, appui = null, actif = false;
+    document.addEventListener('pointerdown', (e) => {
+      actif = true; cacherAstuce();
+      x0 = e.clientX; y0 = e.clientY; t0 = performance.now(); xf0 = etat.maitre.xfade; geste = null;
+      clearTimeout(appui);
+      appui = setTimeout(() => { if (!geste) { geste = 'strobe'; etat.maitre.strobe = true; annonce('STROBE'); } }, 450);
+    });
+    document.addEventListener('pointermove', (e) => {
+      if (!actif) return;
+      const dx = e.clientX - x0, dy = e.clientY - y0;
+      if (!geste && Math.hypot(dx, dy) > 14) { clearTimeout(appui); geste = Math.abs(dx) > Math.abs(dy) ? 'melange' : 'vertical'; }
+      if (geste === 'melange') {
+        etat.maitre.xfade = pinces(xf0 + dx / (innerWidth * 0.8), 0, 1);
+        annonce('A ' + '▮'.repeat(Math.round((1 - etat.maitre.xfade) * 6)) + '|' + '▮'.repeat(Math.round(etat.maitre.xfade * 6)) + ' B');
+      }
+    });
+    const fin = (e) => {
+      if (!actif) return; actif = false; clearTimeout(appui);
+      const dx = e.clientX - x0, dy = e.clientY - y0, dt = performance.now() - t0;
+      if (geste === 'strobe') { etat.maitre.strobe = false; msg.classList.add('cache'); }
+      else if (geste === 'vertical' && Math.abs(dy) > 50) {
+        if (dy < 0) { zapper(0); zapper(1); }
+        else { const n = 1 + Math.floor(Math.random() * 12); etat.decks.forEach((d, i) => { d.bac = (n + i * 3) % 13 || 1; d.requete = ''; chargerBac(i); }); annonce('NOUVEAU SUJET'); }
+      }
+      else if (!geste && dt < 350 && Math.hypot(dx, dy) < 14) poserEffet(effet + 1);
+      geste = null; diffuserEtat();
+    };
+    document.addEventListener('pointerup', fin); document.addEventListener('pointercancel', fin);
+    document.addEventListener('contextmenu', (e) => e.preventDefault());
+  }
+
   function allumer(avecRegie) {
     $('accueil').hidden = true;
     if (!A.ctx) A.ctx = new AudioContext();
@@ -695,6 +757,7 @@ function demarrerEcran() {
   if (FOND) {
     // Décor : démarre tout seul (vidéos muettes), au rythme de l'horloge interne.
     $('accueil').hidden = true; salve = 1; chargerBac(0); chargerBac(1);
+    if (POCHE) demarrerPoche();
     addEventListener('message', (e) => {
       if (!DANS_SITE || e.source !== window.parent || !e.data || e.data.source !== 'hct-site') return;
       if (e.data.type !== 'qr') return;
@@ -711,6 +774,12 @@ function demarrerEcran() {
       }).catch(() => parent.postMessage({ source: 'hct', type: 'erreur' }, '*'));
     });
     if (DANS_SITE) parent.postMessage({ source: 'hct', type: 'pret' }, '*');
+    // Le site parent a besoin de savoir quand on bouge la souris ou qu'on appuie sur Échap dans la télé
+    if (DANS_SITE) {
+      let derniere = 0;
+      addEventListener('pointermove', () => { const t = performance.now(); if (t - derniere > 250) { derniere = t; parent.postMessage({ source: 'hct', type: 'activite' }, '*'); } });
+      addEventListener('keydown', (e) => { if (e.key === 'Escape') parent.postMessage({ source: 'hct', type: 'echap' }, '*'); });
+    }
   }
 
   function pleinEcran() { if (!document.fullscreenElement) document.documentElement.requestFullscreen?.().catch(() => {}); else document.exitFullscreen?.(); }
