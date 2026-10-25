@@ -1,0 +1,1060 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hors Champ TV</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+/* Deux modes dans un fichier :
+   - l'ÉCRAN (par défaut) : image pure pour le projecteur, aucune interface visible ;
+   - la RÉGIE (#regie) : table de mixage à deux platines, dans un panneau ou une fenêtre à part. */
+:root {
+  --noir: #050605;
+  --verre: #0c100d;
+  --cadre: #23322a;
+  --phosphore: #6dff9a;
+  --phosphore-dim: #3b8a58;
+  --ambre: #ffb347;           /* platine B */
+  --papier: #e9e4d6;
+  --rouge: #ff4a3d;
+  --osd: "VT323", "Courier New", monospace;
+  --ui: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { height: 100%; margin: 0; background: var(--noir); color: var(--papier); font-family: var(--ui); font-size: 12px; }
+body.ecran { overflow: hidden; }
+body.ecran.inactif { cursor: none; }
+button, select, input { font: inherit; color: var(--papier); }
+button:focus-visible, select:focus-visible, input:focus-visible { outline: 2px solid var(--phosphore); outline-offset: 2px; }
+
+/* ========================= ÉCRAN ========================= */
+#scene { position: fixed; inset: 0; overflow: hidden; background: #000; }
+.platine { position: absolute; inset: -3%; will-change: transform, filter, opacity; }
+.platine video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; }
+.platine video.actif { opacity: 1; }
+body.contenir .platine video { object-fit: contain; }
+#neige { position: absolute; inset: 0; width: 100%; height: 100%; image-rendering: pixelated; pointer-events: none; mix-blend-mode: screen; opacity: 0; }
+#lignes { position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(to bottom, rgba(0,0,0,.28) 0 1px, transparent 1px 3px); }
+#vignette { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,.78) 100%); }
+#flash { position: absolute; inset: 0; background: #fff; opacity: 0; pointer-events: none; mix-blend-mode: overlay; }
+#noir { position: absolute; inset: 0; background: #000; opacity: 0; transition: opacity .35s; pointer-events: none; }
+.osd { position: absolute; font-family: var(--osd); color: var(--phosphore); text-shadow: 0 0 6px rgba(109,255,154,.55), 2px 2px 0 rgba(0,0,0,.6); pointer-events: none; transition: opacity .4s; }
+#canal { top: max(4vh, 24px); right: max(4vw, 24px); font-size: clamp(32px, 6vw, 84px); }
+#tiers { left: max(4vw, 24px); bottom: max(5vh, 24px); max-width: min(70ch, 80vw); font-size: clamp(18px, 2.2vw, 30px); line-height: 1.05; }
+#tiers .src { color: var(--phosphore-dim); font-size: .75em; }
+.osd.cache { opacity: 0; }
+
+#accueil { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; background: rgba(5,6,5,.92); padding: 24px; }
+#accueil .carte { display: grid; gap: 16px; max-width: 520px; }
+#accueil h1 { margin: 0; font-family: var(--osd); font-weight: 400; font-size: clamp(48px, 9vw, 96px); line-height: .9; color: var(--phosphore); text-shadow: 0 0 10px rgba(109,255,154,.5); }
+#accueil p { margin: 0; line-height: 1.6; font-size: 13px; opacity: .85; }
+.gros { font-family: var(--osd); font-size: 30px; padding: 8px 20px; color: var(--phosphore); background: var(--verre); border: 1px solid var(--phosphore-dim); border-radius: 4px; cursor: pointer; justify-self: start; }
+
+/* Panneau régie flottant sur l'écran (contient la régie en iframe) */
+#tiroir { position: fixed; top: 12px; left: 12px; bottom: 12px; width: min(820px, calc(100vw - 24px)); z-index: 40; display: grid; grid-template-rows: auto 1fr;
+  background: var(--noir); border: 1px solid var(--cadre); border-radius: 6px; box-shadow: 0 10px 40px rgba(0,0,0,.6); overflow: hidden; }
+#tiroir header { display: flex; align-items: center; gap: 8px; padding: 6px 8px 6px 12px; border-bottom: 1px solid var(--cadre); background: var(--verre); }
+#tiroir header strong { font-family: var(--osd); font-size: 22px; font-weight: 400; color: var(--phosphore); margin-right: auto; }
+#tiroir iframe { width: 100%; height: 100%; border: 0; background: var(--noir); }
+body.fond #accueil, body.fond #tiroir { display: none !important; }
+#tiroir.semi { opacity: .35; } #tiroir.semi:hover { opacity: 1; }
+
+/* ========================= RÉGIE ========================= */
+body.regie { overflow-y: auto; }
+.regie-wrap { display: grid; gap: 12px; padding: 12px 14px 24px; }
+.bloc { border: 1px solid var(--cadre); border-radius: 6px; padding: 12px; display: grid; gap: 10px; background: var(--verre); min-width: 0; }
+.bloc h2 { margin: 0; font-family: var(--osd); font-weight: 400; font-size: 26px; line-height: 1; display: flex; align-items: baseline; gap: 10px; }
+.bloc h2 small { font-family: var(--ui); font-size: 11px; opacity: .6; }
+#platA h2 { color: var(--phosphore); } #platB h2 { color: var(--ambre); }
+.platines { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 640px) { .platines { grid-template-columns: 1fr; } }
+.etiq { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; opacity: .55; }
+.ctrl { display: grid; grid-template-columns: 82px 1fr 38px; align-items: center; gap: 8px; }
+.ctrl output { font-variant-numeric: tabular-nums; text-align: right; opacity: .7; font-size: 11px; }
+input[type=range] { width: 100%; accent-color: var(--phosphore); min-width: 0; }
+#platB input[type=range] { accent-color: var(--ambre); }
+select, input[type=text], input[type=number] { background: #070a08; border: 1px solid var(--cadre); border-radius: 3px; padding: 5px 7px; min-width: 0; }
+select { width: 100%; }
+button { background: #101611; border: 1px solid var(--cadre); border-radius: 3px; padding: 5px 9px; cursor: pointer; }
+button:hover { border-color: var(--phosphore-dim); }
+button.on { background: #14321f; border-color: var(--phosphore); color: var(--phosphore); }
+#platB button.on { background: #3a2a12; border-color: var(--ambre); color: var(--ambre); }
+button.alerte.on { background: #3a1210; border-color: var(--rouge); color: var(--rouge); }
+.rang { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.rang > input[type=text] { flex: 1; }
+.antenne { font-family: var(--osd); font-size: 18px; line-height: 1.1; min-height: 2.3em; padding: 6px 8px; background: #000; border-radius: 3px; color: var(--phosphore); overflow: hidden; }
+#platB .antenne { color: var(--ambre); }
+.antenne small { display: block; font-family: var(--ui); font-size: 10px; opacity: .55; color: var(--papier); }
+.niveau { height: 4px; border-radius: 2px; background: #1a241d; overflow: hidden; } .niveau i { display: block; height: 100%; width: 0; background: currentColor; }
+.croix { display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: center; font-family: var(--osd); font-size: 26px; }
+.croix .a { color: var(--phosphore); } .croix .b { color: var(--ambre); }
+#xfade { accent-color: var(--papier); height: 26px; }
+.maitre { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 10px 16px; }
+.vu { display: grid; grid-template-columns: 60px 1fr; gap: 6px 10px; align-items: center; font-size: 11px; }
+.vu .niveau i { background: var(--phosphore); }
+#temoin { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #2a1310; vertical-align: middle; }
+#temoin.kick { background: var(--rouge); box-shadow: 0 0 8px var(--rouge); }
+.note { font-size: 11px; opacity: .6; line-height: 1.5; }
+.touches { font-size: 11px; opacity: .55; line-height: 1.8; }
+kbd { font-family: var(--ui); font-size: 10px; border: 1px solid var(--cadre); border-radius: 3px; padding: 0 4px; }
+#horsligne { padding: 10px 12px; border: 1px solid var(--rouge); color: var(--rouge); border-radius: 6px; }
+
+/* ========================= MANETTE (téléphone) ========================= */
+body.manette { overflow: hidden; touch-action: manipulation; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+.mn { height: 100%; display: grid; grid-template-rows: auto auto auto auto 1fr auto auto; gap: 12px;
+  padding: max(12px, env(safe-area-inset-top)) max(14px, env(safe-area-inset-right)) max(14px, env(safe-area-inset-bottom)) max(14px, env(safe-area-inset-left));
+  max-width: 520px; margin: 0 auto; }
+.mn-tete { display: grid; grid-template-columns: 1fr auto; gap: 4px 10px; align-items: center; }
+.mn-tete b { font-family: var(--osd); font-weight: 400; font-size: 24px; color: var(--phosphore); }
+.mn-lien { font-size: 11px; display: flex; align-items: center; gap: 6px; opacity: .8; }
+.mn-lien i { width: 8px; height: 8px; border-radius: 50%; background: var(--rouge); display: inline-block; }
+.mn-lien.ok i { background: var(--phosphore); box-shadow: 0 0 6px var(--phosphore); }
+.mn-air { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.mn-air div { font-family: var(--osd); font-size: 15px; line-height: 1.05; padding: 6px 8px; border-radius: 6px; background: #000; min-height: 2.4em; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.mn-air .a { color: var(--phosphore); } .mn-air .b { color: var(--ambre); }
+.mn-cible { display: grid; grid-template-columns: 1fr 1fr 1fr; background: #000; border-radius: 10px; padding: 4px; gap: 4px; }
+.mn-cible button { border: 0; border-radius: 8px; padding: 10px 0; font-family: var(--osd); font-size: 22px; background: transparent; color: var(--papier); opacity: .6; }
+.mn-cible button.on { opacity: 1; background: #1a231d; }
+.mn-cible button.on[data-c="0"] { color: var(--phosphore); } .mn-cible button.on[data-c="1"] { color: var(--ambre); }
+.mn-croix { position: relative; height: 64px; border-radius: 14px; background: linear-gradient(90deg, rgba(109,255,154,.18), #0c100d 50%, rgba(255,179,71,.18)); border: 1px solid var(--cadre); touch-action: none; }
+.mn-croix span { position: absolute; top: 50%; transform: translateY(-50%); font-family: var(--osd); font-size: 26px; pointer-events: none; }
+.mn-croix .ga { left: 14px; color: var(--phosphore); } .mn-croix .gb { right: 14px; color: var(--ambre); }
+.mn-croix .milieu { position: absolute; left: 50%; top: 10px; bottom: 10px; width: 1px; background: var(--cadre); }
+.mn-curseur { position: absolute; top: 6px; bottom: 6px; width: 46px; margin-left: -23px; border-radius: 10px; background: var(--papier); box-shadow: 0 2px 10px rgba(0,0,0,.6); pointer-events: none; }
+.mn-zaps { display: grid; grid-template-columns: 1fr 1.1fr 1fr; gap: 10px; }
+.mn-zaps button { height: 72px; border-radius: 16px; font-family: var(--osd); font-size: 28px; background: #101611; border: 1px solid var(--cadre); line-height: .9; }
+.mn-zaps .za { color: var(--phosphore); border-color: var(--phosphore-dim); } .mn-zaps .zb { color: var(--ambre); border-color: #8a6128; }
+.mn-zaps small { display: block; font-family: var(--ui); font-size: 10px; opacity: .6; margin-top: 4px; }
+.mn-pads { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; align-content: stretch; min-height: 0; }
+.mn-pads button { border-radius: 14px; background: #0f1411; border: 1px solid var(--cadre); font-family: var(--osd); font-size: 22px; line-height: 1; min-height: 56px; touch-action: none; transition: transform .06s, background .06s; }
+.mn-pads button small { display: block; font-family: var(--ui); font-size: 9px; opacity: .5; margin-top: 3px; letter-spacing: .08em; }
+.mn-pads button.presse { background: #1d3a27; border-color: var(--phosphore); color: var(--phosphore); transform: scale(.96); box-shadow: 0 0 18px rgba(109,255,154,.35) inset; }
+.mn-pads button.verrouille { border-color: var(--phosphore); color: var(--phosphore); }
+.mn-pads .strobe.presse { background: #f4f4f4; color: #000; }
+.mn-sujets { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; scrollbar-width: none; }
+.mn-sujets::-webkit-scrollbar { display: none; }
+.mn-sujets button { flex: none; border-radius: 999px; padding: 9px 14px; background: #0f1411; border: 1px solid var(--cadre); white-space: nowrap; }
+.mn-sujets button.on { border-color: var(--papier); background: #1a231d; }
+.mn-bas { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.mn-bas button { height: 50px; border-radius: 12px; background: #0f1411; border: 1px solid var(--cadre); font-size: 12px; }
+.mn-bas button.on { border-color: var(--phosphore); color: var(--phosphore); background: #14321f; }
+.mn-bas .noir.on { border-color: var(--rouge); color: var(--rouge); background: #3a1210; }
+#mnKick { width: 10px; height: 10px; border-radius: 50%; background: #2a1310; display: inline-block; }
+#mnKick.kick { background: var(--rouge); box-shadow: 0 0 8px var(--rouge); }
+.mn-erreur { grid-column: 1 / -1; color: var(--rouge); font-size: 11px; line-height: 1.5; }
+.mn { padding-bottom: calc(76px + env(safe-area-inset-bottom)) !important; }
+.mn-onglets { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+  padding: 8px max(14px, env(safe-area-inset-right)) max(10px, env(safe-area-inset-bottom)) max(14px, env(safe-area-inset-left)); background: #000; border-top: 1px solid var(--cadre); }
+.mn-onglets button { height: 48px; border-radius: 12px; background: #0f1411; border: 1px solid var(--cadre); font-family: var(--osd); font-size: 22px; }
+.mn-onglets button.on { color: var(--phosphore); border-color: var(--phosphore-dim); background: #14321f; }
+.mn-regie { position: fixed; inset: 0 0 calc(66px + env(safe-area-inset-bottom)) 0; z-index: 10; overflow-y: auto; -webkit-overflow-scrolling: touch; background: var(--noir); touch-action: auto; -webkit-user-select: none; user-select: none; }
+.mn-vues { position: sticky; top: 0; z-index: 2; display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; padding: max(10px, env(safe-area-inset-top)) 14px 8px; background: var(--noir); }
+.mn-vues button { padding: 10px 0; border-radius: 8px; font-family: var(--osd); font-size: 20px; background: #0f1411; }
+.mn-vues button.on { background: #1a231d; border-color: var(--papier); }
+.mn-vues button[data-v="a"].on { color: var(--phosphore); } .mn-vues button[data-v="b"].on { color: var(--ambre); }
+.mn-regie .seul-ordi { display: none !important; }
+.mn-regie #horsligne { display: none !important; }
+.mn-regie[data-vue="a"] #platB, .mn-regie[data-vue="a"] #blocMaitre,
+.mn-regie[data-vue="b"] #platA, .mn-regie[data-vue="b"] #blocMaitre,
+.mn-regie[data-vue="m"] .platines { display: none; }
+.mn-regie .platines { grid-template-columns: 1fr; }
+.mn-regie .regie-wrap { padding-top: 4px; }
+.mn-regie .ctrl { grid-template-columns: 88px 1fr 46px; }
+.mn-regie input[type=range] { height: 32px; }
+.mn-regie button { padding: 10px 12px; }
+.mn-regie select, .mn-regie input[type=text] { padding: 10px; font-size: 16px; }
+#qrBloc { display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: center; }
+#qr { background: #fff; padding: 8px; border-radius: 6px; width: 132px; height: 132px; }
+#qr img, #qr canvas { width: 116px !important; height: 116px !important; }
+@media (prefers-reduced-motion: reduce) { .osd { transition: none; } }
+</style>
+</head>
+<body>
+
+<!-- ======================= ÉCRAN ======================= -->
+<template id="tpl-ecran">
+  <div id="scene" aria-hidden="true">
+    <div class="platine" id="p0"><video muted playsinline preload="auto"></video><video muted playsinline preload="auto"></video></div>
+    <div class="platine" id="p1"><video muted playsinline preload="auto"></video><video muted playsinline preload="auto"></video></div>
+    <canvas id="neige" width="192" height="108"></canvas>
+    <div id="lignes"></div>
+    <div id="vignette"></div>
+    <div id="flash"></div>
+    <div id="noir"></div>
+    <div id="canal" class="osd cache">CH 01</div>
+    <div id="tiers" class="osd cache"><div id="titre"></div><div class="src" id="source"></div></div>
+  </div>
+  <section id="accueil">
+    <div class="carte">
+      <h1>Hors Champ TV</h1>
+      <p>Deux platines d'archives à mixer en direct. L'image reste propre : tout se contrôle dans la régie.</p>
+      <button class="gros" id="allumer">▶ Allumer</button>
+      <p class="note">Ensuite <kbd>H</kbd> ouvre ou ferme la régie, <kbd>F</kbd> met en plein écran. Pour le projecteur, mets cet écran en plein écran sur le projecteur et ouvre la régie en fenêtre séparée sur ton ordi.</p>
+    </div>
+  </section>
+  <aside id="tiroir" hidden>
+    <header>
+      <strong>Régie</strong>
+      <button id="semi" title="Rendre le panneau transparent">Transparent</button>
+      <button id="detacher">Fenêtre séparée</button>
+      <button id="fermerTiroir" aria-label="Fermer la régie">Fermer ✕</button>
+    </header>
+    <iframe id="cadreRegie" title="Régie" allow="microphone"></iframe>
+  </aside>
+</template>
+
+<!-- ======================= RÉGIE ======================= -->
+<template id="tpl-regie">
+  <div class="regie-wrap">
+    <div id="horsligne" hidden>L'écran n'est pas ouvert. Ouvre <b>hors-champ-tv.html</b> dans un autre onglet et clique sur Allumer.</div>
+
+    <section class="bloc seul-ordi" id="blocManette">
+      <h2>Manette <small>contrôle depuis ton téléphone</small></h2>
+      <div id="qrBloc"><div id="qr" hidden></div><p class="note" id="qrNote">Pour utiliser ton téléphone comme manette, lance l'écran avec <b>serveur.py</b> (voir LISEZMOI).</p></div>
+    </section>
+
+    <div class="bloc" id="blocCroix">
+      <div class="croix"><span class="a">A</span><input type="range" id="xfade" min="0" max="1" step="0.01" value="0.5" aria-label="Crossfader"><span class="b">B</span></div>
+      <div class="rang">
+        <button id="xA">Tout A</button><button id="xM">Milieu</button><button id="xB">Tout B</button>
+        <button id="zapTout">Zapper les deux <kbd>Espace</kbd></button>
+        <button id="noirBtn" class="alerte">Noir <kbd>N</kbd></button>
+      </div>
+    </div>
+
+    <div class="platines">
+      <section class="bloc" id="platA" data-i="0"></section>
+      <section class="bloc" id="platB" data-i="1"></section>
+    </div>
+
+    <section class="bloc" id="blocMaitre">
+      <h2>Maître <small>son et image globale</small></h2>
+      <div class="maitre">
+        <div style="display:grid;gap:8px">
+          <span class="etiq seul-ordi">Écoute</span>
+          <select id="source" class="seul-ordi"></select>
+          <div class="rang seul-ordi"><button id="autoriser">Autoriser l'audio</button></div>
+          <div class="vu">
+            <span>Basses</span><span class="niveau"><i id="vuB"></i></span>
+            <span>Énergie</span><span class="niveau"><i id="vuE"></i></span>
+            <span>Kick</span><span><span id="temoin"></span> <span id="nbKicks">0</span></span>
+          </div>
+          <div class="ctrl"><label for="m-sens">Sensibilité</label><input type="range" id="m-sens" min="0" max="100" step="1"><output id="o-m-sens"></output></div>
+          <div class="rang"><label for="m-bpm">BPM horloge</label><input type="number" id="m-bpm" min="60" max="200" style="width:70px"><button id="tap">Tap <kbd>T</kbd></button></div>
+          <p class="note seul-ordi">Pour Spotify : sortie du Mac sur un périphérique à sorties multiples qui inclut BlackHole, puis choisis BlackHole ici.</p>
+          <span class="etiq seul-ordi">Playlist Spotify</span>
+          <div class="rang seul-ordi"><input type="text" id="spLien" placeholder="Colle le lien de ta playlist" aria-label="Lien Spotify"><button id="spOk">Charger</button></div>
+          <iframe id="spLecteur" class="seul-ordi" hidden title="Lecteur Spotify" style="width:100%;height:152px;border:0;border-radius:8px" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
+        <div style="display:grid;gap:8px" id="maitreImage"></div>
+      </div>
+    </section>
+
+    <div class="touches seul-ordi">
+      <kbd>Espace</kbd> zapper les deux · <kbd>Q</kbd> zapper A · <kbd>W</kbd> zapper B · <kbd>←</kbd><kbd>→</kbd> crossfader · <kbd>N</kbd> noir · <kbd>T</kbd> tap<br>
+      Sur l'écran : <kbd>H</kbd> régie · <kbd>F</kbd> plein écran
+    </div>
+  </div>
+</template>
+
+<!-- ======================= MANETTE ======================= -->
+<template id="tpl-manette">
+  <div class="mn">
+    <div class="mn-tete">
+      <b>Hors Champ TV</b>
+      <span class="mn-lien" id="mnLien"><i></i><span id="mnLienTxt">Connexion…</span> <span id="mnKick"></span></span>
+      <div class="mn-air"><div class="a" id="mnA">A —</div><div class="b" id="mnB">B —</div></div>
+      <div class="mn-erreur" id="mnErreur" hidden></div>
+    </div>
+    <div class="mn-cible" role="group" aria-label="Platine contrôlée">
+      <button data-c="0">A</button><button data-c="2" class="on">A + B</button><button data-c="1">B</button>
+    </div>
+    <div class="mn-croix" id="mnCroix" aria-label="Crossfader">
+      <span class="ga">A</span><span class="gb">B</span><div class="milieu"></div><div class="mn-curseur" id="mnCurseur" style="left:50%"></div>
+    </div>
+    <div class="mn-zaps">
+      <button class="za" data-z="0">ZAP A</button>
+      <button data-z="2">ZAP ⇄<small>les deux</small></button>
+      <button class="zb" data-z="1">ZAP B</button>
+    </div>
+    <div class="mn-pads" id="mnPads"></div>
+    <div class="mn-sujets" id="mnSujets"></div>
+    <div class="mn-bas">
+      <button id="mnVerrou">Verrou<br><small>pads fixes</small></button>
+      <button id="mnAuto" class="on">Zap auto</button>
+      <button id="mnTap">Tap</button>
+      <button id="mnNoir" class="noir">Noir</button>
+    </div>
+  </div>
+  <div id="mnRegie" class="mn-regie" data-vue="a" hidden>
+    <div class="mn-vues" role="tablist">
+      <button data-v="a" class="on">Platine A</button><button data-v="b">Platine B</button><button data-v="m">Maître</button>
+    </div>
+  </div>
+  <nav class="mn-onglets" role="tablist">
+    <button data-o="jouer" class="on">▶ Jouer</button><button data-o="regie">☰ Régie complète</button>
+  </nav>
+</template>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/peerjs@1.5.4/dist/peerjs.min.js"></script>
+<script>
+"use strict";
+const MODE = location.hash === '#regie' ? 'regie' : location.hash.startsWith('#manette') ? 'manette' : 'ecran';
+const canalBC = new BroadcastChannel('hors-champ-tv');
+const $ = (id) => document.getElementById(id);
+const pinces = (v, a, b) => Math.min(b, Math.max(a, v));
+
+/* ----- Bacs ----- */
+const PRELINGER = 'collection:prelinger AND mediatype:movies';
+const SUJETS = [
+  ['Tout Prelinger', ''],
+  ['Usines', 'industry OR industrial OR manufacturing OR factories OR machinery'],
+  ['Science', 'science OR technology OR physics OR chemistry'],
+  ['Danse et musique', 'dance OR dancing OR music OR musicals'],
+  ['Réclames', 'advertising OR advertisements OR commercials OR sales'],
+  ['Futur', 'future OR atomic OR space OR automation'],
+  ['Villes', 'cities OR urban OR traffic OR highways'],
+  ['Voitures', 'automobiles OR cars OR driving'],
+  ['Nature', 'nature OR animals OR agriculture OR farming'],
+  ['Corps et hygiène', 'hygiene OR health OR body OR sports'],
+  ['Guerre froide', '"civil defense" OR communism OR propaganda OR war'],
+  ['Cuisine', 'food OR cooking OR kitchens'],
+  ['Mode', 'fashion OR clothing OR beauty'],
+  ['Mes vidéos (dossier videos)', '__local__']
+];
+
+/* ----- État partagé (l'écran en est le propriétaire) ----- */
+const deckDefaut = (i) => ({ bac: i === 0 ? 1 : 3, requete: '', prelingerSeul: true,
+  opacite: 1, vitesse: 1, contraste: 1.1, saturation: 1, luminosite: 1, teinte: 0, flou: 0, zoom: 1,
+  nb: false, inverse: false, miroir: false, gel: false, fusion: i === 0 ? 'normal' : 'screen', kick: 0.5, zap: 8 });
+let etat = {
+  decks: [deckDefaut(0), deckDefaut(1)],
+  maitre: { xfade: 0.5, grain: 0.3, epoque: 0.2, flash: 0.35, lignes: true, vignette: true, pauseAuto: true,
+    titres: false, canal: false, noir: false, strobe: false, contenir: false, source: 'horloge', sens: 55, bpm: 124 }
+};
+
+/* ==================================================================== */
+/*                               ÉCRAN                                  */
+/* ==================================================================== */
+function demarrerEcran() {
+  document.body.classList.add('ecran');
+  document.body.appendChild($('tpl-ecran').content.cloneNode(true));
+  // hors-champ-tv.html?fond : décor de fond pour un site (voir hors-champ-tv-fond.js)
+  const FOND = new URLSearchParams(location.search).has('fond');
+  const DANS_SITE = FOND && window.parent !== window;
+  if (FOND) document.body.classList.add('fond');
+
+  const A = {
+    ctx: null, analyser: null, flux: null, freq: null, temps: null,
+    basseMoy: 0, basseLongue: 0.05, energieMax: 0.002, energie: 0, basse: 0, prec: 0,
+    dernierKick: 0, kicks: 0, pause: false, pauseDepuis: 0, prochainTic: 0, taps: []
+  };
+  let punch = 0, salve = 0, canal = 1;
+
+  // --- Platines ---
+  const P = [0, 1].map(i => {
+    const el = $('p' + i);
+    return { el, v: [...el.querySelectorAll('video')], actif: 0, pret: [false, false], info: [null, null],
+      pool: [], meta: new Map(), jeton: null, attente: false, msg: 'Chargement…', nomBac: '' };
+  });
+
+  const melange = (t) => { for (let i = t.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [t[i], t[j]] = [t[j], t[i]]; } return t; };
+  async function jsonAvecDelai(url, ms = 12000) {
+    const c = new AbortController(); const t = setTimeout(() => c.abort(), ms);
+    try { const r = await fetch(url, { signal: c.signal }); if (!r.ok) throw new Error(r.status); return await r.json(); }
+    finally { clearTimeout(t); }
+  }
+
+  async function chargerBac(i) {
+    const d = etat.decks[i], p = P[i];
+    const [nom, sujet] = SUJETS[d.bac] || SUJETS[0];
+    p.pool = []; p.meta = new Map();
+    if (d.requete) {
+      p.nomBac = 'Fouille : ' + d.requete;
+    } else p.nomBac = nom;
+    p.msg = 'Je creuse…'; diffuserStatut();
+
+    if (!d.requete && sujet === '__local__') {
+      try {
+        const html = await (await fetch('videos/')).text();
+        const urls = [...html.matchAll(/href="([^"?#]+\.(?:mp4|mov|webm|m4v))"/gi)].map(m => m[1]);
+        p.pool = melange(urls.map(u => ({ local: 'videos/' + u, titre: decodeURIComponent(u).replace(/\.[^.]+$/, '') })));
+        p.msg = p.pool.length ? `${p.pool.length} vidéos locales` : 'Dossier videos vide';
+      } catch (e) { p.msg = 'Dossier videos introuvable (à côté du fichier html)'; }
+      diffuserStatut(); if (p.pool.length) precharger(i, true); return;
+    }
+
+    let q = d.requete ? `(${d.requete})` : (sujet ? `subject:(${sujet})` : '');
+    q = d.requete && !d.prelingerSeul ? 'mediatype:movies AND ' + q : PRELINGER + (q ? ' AND ' + q : '');
+    const url = 'https://archive.org/advancedsearch.php?q=' + encodeURIComponent(q) +
+      '&fl[]=identifier&fl[]=title&fl[]=year&fl[]=date&rows=500&page=1&output=json';
+    try {
+      const j = await jsonAvecDelai(url);
+      const docs = (j.response && j.response.docs) || [];
+      p.pool = melange(docs.map(x => ({ id: x.identifier, titre: x.title, annee: x.year || (x.date ? String(x.date).slice(0, 4) : '') })));
+      p.msg = p.pool.length ? `${p.pool.length} bobines` : 'Rien trouvé';
+    } catch (e) { p.msg = 'Archive injoignable'; }
+    diffuserStatut();
+    if (p.pool.length) precharger(i, true);
+  }
+
+  async function resoudre(p, it) {
+    if (it.local) return { url: it.local, titre: it.titre, annee: '', source: 'Dossier local' };
+    if (p.meta.has(it.id)) return p.meta.get(it.id);
+    try {
+      const m = await jsonAvecDelai('https://archive.org/metadata/' + encodeURIComponent(it.id));
+      const mp4 = (m.files || []).filter(f => /\.mp4$/i.test(f.name) && Number(f.size || 0) > 200000).sort((a, b) => Number(a.size) - Number(b.size));
+      if (!mp4.length) { p.meta.set(it.id, null); return null; }
+      const f = mp4[0];
+      const r = { url: 'https://archive.org/download/' + encodeURIComponent(it.id) + '/' + f.name.split('/').map(encodeURIComponent).join('/'),
+        titre: it.titre || it.id, annee: it.annee, source: 'archive.org/details/' + it.id };
+      p.meta.set(it.id, r); return r;
+    } catch (e) { return null; }
+  }
+
+  function chargerVideo(v, url) {
+    return new Promise((res) => {
+      let fini = false;
+      const fin = (ok) => { if (fini) return; fini = true; clearTimeout(t); v.onloadedmetadata = v.onseeked = v.onerror = null; res(ok); };
+      const t = setTimeout(() => fin(false), 15000);
+      v.onerror = () => fin(false);
+      v.onloadedmetadata = () => { const d = v.duration; if (isFinite(d) && d > 20) v.currentTime = Math.random() * Math.max(0, d - 25) + 3; else fin(true); };
+      v.onseeked = () => fin(true);
+      v.src = url; v.load();
+    });
+  }
+
+  async function precharger(i, puisZapper) {
+    const p = P[i], jeton = {}; p.jeton = jeton;
+    const k = 1 - p.actif; p.pret[k] = false;
+    for (let essai = 0; essai < 6 && p.pool.length; essai++) {
+      const it = p.pool.shift(); p.pool.push(it);
+      const info = await resoudre(p, it); if (p.jeton !== jeton) return;
+      if (!info) continue;
+      const ok = await chargerVideo(p.v[k], info.url); if (p.jeton !== jeton) return;
+      if (ok) { p.pret[k] = true; p.info[k] = info; if (puisZapper || p.attente) zapper(i); return; }
+    }
+  }
+
+  function poids(i) { const x = etat.maitre.xfade; return i === 0 ? Math.min(1, 2 * (1 - x)) : Math.min(1, 2 * x); }
+
+  function zapper(i) {
+    const p = P[i], k = 1 - p.actif;
+    if (!p.pret[k]) { p.attente = true; return; }
+    p.attente = false;
+    salve = Math.max(salve, 0.9 * poids(i) * etat.decks[i].opacite);
+    setTimeout(() => {
+      const ancien = p.v[p.actif]; p.actif = k;
+      const v = p.v[k]; v.playbackRate = vitesse(i); v.play().catch(() => {});
+      v.classList.add('actif'); ancien.classList.remove('actif'); setTimeout(() => ancien.pause(), 60);
+      p.pret[k] = false;
+      canal = canal % 99 + 1; afficherOSD(p.info[k]);
+      diffuserStatut();
+      precharger(i, false);
+    }, 100);
+  }
+
+  function vitesse(i) { return pinces(etat.decks[i].vitesse * (A.pause && etat.maitre.pauseAuto ? 0.5 : 1), 0.0625, 4); }
+  function appliquerVitesses() { P.forEach((p, i) => { const v = p.v[p.actif]; if (v) v.playbackRate = vitesse(i); if (etat.decks[i].gel) v.pause(); else if (v.src && v.paused) v.play().catch(() => {}); }); }
+
+  let tC, tT;
+  function afficherOSD(info) {
+    const c = $('canal'), t = $('tiers');
+    if (etat.maitre.canal) { c.textContent = 'CH ' + String(canal).padStart(2, '0'); c.classList.remove('cache'); clearTimeout(tC); tC = setTimeout(() => c.classList.add('cache'), 2200); }
+    if (etat.maitre.titres && info) {
+      $('titre').textContent = (info.titre || '').toUpperCase() + (info.annee ? '  (' + info.annee + ')' : '');
+      $('source').textContent = info.source || '';
+      t.classList.remove('cache'); clearTimeout(tT); tT = setTimeout(() => t.classList.add('cache'), 6000);
+    }
+  }
+
+  // --- Audio ---
+  async function brancherAudio(id) {
+    if (A.flux) { A.flux.getTracks().forEach(t => t.stop()); A.flux = null; A.analyser = null; }
+    if (id === 'horloge') { A.prochainTic = performance.now(); return; }
+    try {
+      A.flux = await navigator.mediaDevices.getUserMedia({ audio: { deviceId: { exact: id }, echoCancellation: false, noiseSuppression: false, autoGainControl: false } });
+      if (!A.ctx) A.ctx = new AudioContext();
+      if (A.ctx.state === 'suspended') await A.ctx.resume().catch(() => {});
+      const src = A.ctx.createMediaStreamSource(A.flux);
+      A.analyser = A.ctx.createAnalyser(); A.analyser.fftSize = 2048; A.analyser.smoothingTimeConstant = 0.15;
+      src.connect(A.analyser);
+      A.freq = new Uint8Array(A.analyser.frequencyBinCount); A.temps = new Float32Array(A.analyser.fftSize);
+    } catch (e) { etat.maitre.source = 'horloge'; diffuserEtat(); }
+  }
+
+  function surKick(t) {
+    A.dernierKick = t; A.kicks++; punch = 1;
+    etat.decks.forEach((d, i) => {
+      if (d.gel || !d.zap) return;
+      const decal = i === 1 ? Math.floor(d.zap / 2) : 0;   // B coupe en décalé de A
+      if ((A.kicks + decal) % d.zap === 0) zapper(i);
+    });
+  }
+
+  function analyser(t) {
+    if (etat.maitre.source === 'horloge' || !A.analyser) {
+      const per = 60000 / etat.maitre.bpm;
+      if (t >= A.prochainTic) { surKick(t); A.prochainTic += per; if (t - A.prochainTic > per) A.prochainTic = t + per; }
+      A.energie = 0.55 + 0.2 * Math.sin(t / 4000); A.basse = A.energie * 0.8;
+      if (A.pause) { A.pause = false; appliquerVitesses(); }
+      return;
+    }
+    A.analyser.getByteFrequencyData(A.freq); A.analyser.getFloatTimeDomainData(A.temps);
+    const hz = A.ctx.sampleRate / A.analyser.fftSize, b0 = Math.max(1, Math.floor(40 / hz)), b1 = Math.ceil(130 / hz);
+    let s = 0; for (let i = b0; i <= b1; i++) s += A.freq[i]; const basse = s / ((b1 - b0 + 1) * 255);
+    let r = 0; for (let i = 0; i < A.temps.length; i++) r += A.temps[i] * A.temps[i]; r = Math.sqrt(r / A.temps.length);
+    A.energieMax = Math.max(r, A.energieMax * 0.9995, 0.002);
+    A.energie = A.energie * 0.85 + (r / A.energieMax) * 0.15; A.basse = basse;
+    const seuil = 1.8 - 0.65 * (etat.maitre.sens / 100), monte = basse - A.prec; A.prec = basse;
+    if (basse > A.basseMoy * seuil && basse > 0.22 && monte > 0 && t - A.dernierKick > 230) surKick(t);
+    A.basseMoy = A.basseMoy * 0.97 + basse * 0.03;
+    A.basseLongue = Math.max(A.basseMoy, A.basseLongue * 0.9997, 0.05);
+    if (A.basseMoy < A.basseLongue * 0.35) {
+      if (!A.pauseDepuis) A.pauseDepuis = t;
+      if (!A.pause && t - A.pauseDepuis > 2200) { A.pause = true; appliquerVitesses(); }
+    } else {
+      A.pauseDepuis = 0;
+      if (A.pause) { A.pause = false; appliquerVitesses(); if (etat.maitre.pauseAuto) { P.forEach((p, i) => { if (!etat.decks[i].gel && poids(i) > 0.2) zapper(i); }); punch = 1.4; } }
+    }
+  }
+
+  // --- Rendu ---
+  const neige = $('neige'), nctx = neige.getContext('2d'), img = nctx.createImageData(neige.width, neige.height);
+  const reduit = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function boucle(t) {
+    analyser(t);
+    const m = etat.maitre, e = Math.min(1, A.energie), enPause = A.pause && m.pauseAuto;
+    P.forEach((p, i) => {
+      const d = etat.decks[i], pk = punch * d.kick;
+      const sat = enPause ? 0.12 : d.saturation * (0.75 + 0.5 * e);
+      const f = [
+        `contrast(${(d.contraste + 0.3 * pk).toFixed(3)})`,
+        `saturate(${(d.nb ? 0 : sat).toFixed(3)})`,
+        `brightness(${(d.luminosite * (1 + 0.35 * pk)).toFixed(3)})`,
+        `sepia(${m.epoque.toFixed(2)})`,
+        d.teinte ? `hue-rotate(${d.teinte}deg)` : '',
+        d.inverse ? 'invert(1)' : '',
+        (d.flou || enPause) ? `blur(${(d.flou + (enPause ? 1.2 : 0)).toFixed(1)}px)` : ''
+      ].join(' ');
+      p.el.style.filter = f;
+      p.el.style.opacity = (d.opacite * poids(i)).toFixed(3);
+      p.el.style.mixBlendMode = d.fusion;
+      const j = !reduit && pk > 0.4 ? (Math.random() - 0.5) * 10 * pk : 0;
+      p.el.style.transform = `translate(${j.toFixed(1)}px, ${(j * 0.3).toFixed(1)}px) scale(${((d.miroir ? -1 : 1) * d.zoom * (1 + 0.04 * pk)).toFixed(4)}, ${(d.zoom * (1 + 0.04 * pk)).toFixed(4)})`;
+    });
+    const stro = m.strobe && !reduit ? (Math.floor(t / 55) % 2 ? 0.95 : 0) : 0;
+    $('flash').style.mixBlendMode = m.strobe ? 'normal' : 'overlay';
+    $('flash').style.opacity = Math.max(stro, m.flash * punch * punch * 0.6).toFixed(3);
+    $('noir').style.opacity = m.noir ? 1 : 0;
+    $('lignes').hidden = !m.lignes; $('vignette').hidden = !m.vignette;
+    document.body.classList.toggle('contenir', m.contenir);
+    const a = Math.max(salve, m.grain * (0.12 + 0.18 * e));
+    if (a > 0.01) { const dd = img.data; for (let k = 0; k < dd.length; k += 4) { const g = (Math.random() * 255) | 0; dd[k] = dd[k + 1] = dd[k + 2] = g; dd[k + 3] = 255; } nctx.putImageData(img, 0, 0); }
+    neige.style.opacity = a > 0.01 ? a : 0;
+    punch *= 0.86; salve *= 0.78;
+    requestAnimationFrame(boucle);
+  }
+
+  // --- Communication avec la régie ---
+  // Relais réseau pour la manette du téléphone (actif seulement avec serveur.py).
+  let relais = false, envoiStatutReseau = 0;
+  const poster = (m) => fetch('/hct/statut', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(m) }).catch(() => {});
+  fetch('/hct/adresse').then(r => r.ok ? r.json() : null).then(j => {
+    if (!j) return;
+    relais = true;
+    const es = new EventSource('/hct/flux?role=ecran');
+    es.onmessage = (e) => { try { recevoir(JSON.parse(e.data)); } catch (err) {} };
+    poster({ type: 'etat', etat });
+  }).catch(() => {});
+
+  // Manette en ligne : connexion directe téléphone ↔ écran via PeerJS (gratuit, sans serveur à toi).
+  const pairs = new Set(); let idPair = null;
+  const versPairs = (m) => pairs.forEach(c => { if (c.open) try { c.send(m); } catch (e) {} });
+  let pairPret = null, resoudrePair = null;
+  function attendrePair() {
+    if (!pairPret) { pairPret = new Promise((ok) => { resoudrePair = ok; }); demarrerPair(); }
+    return pairPret;
+  }
+  function majConnexionSite() { if (DANS_SITE) parent.postMessage({ source: 'hct', type: 'connexion', n: pairs.size }, '*'); }
+  function demarrerPair(essai = 0) {
+    if (!window.Peer) return;
+    let id = null; try { id = localStorage.getItem('hct-pair'); } catch (e) {}
+    if (!id || essai) { id = 'hct-' + Math.random().toString(36).slice(2, 8); try { localStorage.setItem('hct-pair', id); } catch (e) {} }
+    const peer = new Peer(id);
+    peer.on('open', (i) => { idPair = i; diffuserStatut(); if (resoudrePair) resoudrePair(i); });
+    peer.on('connection', (c) => {
+      c.on('open', () => { pairs.add(c); c.send({ type: 'etat', etat }); majConnexionSite(); });
+      c.on('data', (m) => recevoir(m));
+      const fin = () => { if (pairs.delete(c)) majConnexionSite(); };
+      c.on('close', fin); c.on('error', fin);
+    });
+    peer.on('disconnected', () => { try { peer.reconnect(); } catch (e) {} });
+    peer.on('error', (e) => { if (e.type === 'unavailable-id' && essai < 3) { peer.destroy(); demarrerPair(essai + 1); } });
+  }
+  if (!FOND) attendrePair();   // en fond de site : seulement quand un visiteur demande le QR
+
+  function diffuserEtat() { const m = { type: 'etat', etat }; canalBC.postMessage(m); if (relais) poster(m); versPairs(m); }
+  function diffuserStatut() {
+    const m = { type: 'statut', basse: A.basse, energie: A.energie, kicks: A.kicks, pause: A.pause,
+      decks: P.map(p => ({ info: p.info[p.actif], bac: p.nomBac, msg: p.msg })), pair: idPair };
+    canalBC.postMessage(m);
+    if (++envoiStatutReseau % 3 === 0) { if (relais) poster(m); versPairs(m); }
+  }
+  setInterval(diffuserStatut, 80);
+
+  canalBC.onmessage = ({ data }) => recevoir(data);
+  function recevoir(m) {
+    if (m.type === 'bonjour') { diffuserEtat(); diffuserStatut(); }
+    else if (m.type === 'regler') {
+      const cible = m.deck == null ? etat.maitre : etat.decks[m.deck];
+      if (!cible || !Object.prototype.hasOwnProperty.call(cible, m.cle) || typeof m.val !== typeof cible[m.cle]) return;
+      const avant = cible[m.cle]; cible[m.cle] = m.val;
+      if (m.cle === 'source' && avant !== m.val) brancherAudio(m.val);
+      if (m.cle === 'vitesse' || m.cle === 'gel') appliquerVitesses();
+      if (m.cle === 'bac' && m.deck != null) { etat.decks[m.deck].requete = ''; chargerBac(m.deck); }
+      diffuserEtat();
+    }
+    else if (m.type === 'creuser') { const d = etat.decks[m.deck]; d.requete = m.requete; d.prelingerSeul = m.prelingerSeul; chargerBac(m.deck); diffuserEtat(); }
+    else if (m.type === 'zapper') { (m.deck == null ? [0, 1] : [m.deck]).forEach(zapper); }
+    else if (m.type === 'tap') tap();
+  }
+
+  function tap() {
+    const t = performance.now(); A.taps = A.taps.filter(x => t - x < 3000); A.taps.push(t);
+    if (A.taps.length >= 3) { const e = A.taps.slice(1).map((x, i) => x - A.taps[i]); const moy = e.reduce((a, b) => a + b, 0) / e.length;
+      etat.maitre.bpm = Math.round(60000 / moy); A.prochainTic = t + moy; diffuserEtat(); }
+  }
+
+  // --- Panneau régie (iframe) ---
+  const tiroir = $('tiroir');
+  function basculerRegie(ouvrir) {
+    const o = ouvrir ?? tiroir.hidden;
+    if (o && !$('cadreRegie').src) $('cadreRegie').src = location.pathname + '#regie';
+    tiroir.hidden = !o;
+  }
+  $('fermerTiroir').onclick = () => basculerRegie(false);
+  $('semi').onclick = () => { tiroir.classList.toggle('semi'); $('semi').classList.toggle('on'); };
+  $('detacher').onclick = () => { window.open(location.pathname + '#regie', 'hct-regie', 'width=900,height=900'); basculerRegie(false); };
+
+  function allumer(avecRegie) {
+    $('accueil').hidden = true;
+    if (!A.ctx) A.ctx = new AudioContext();
+    navigator.wakeLock?.request('screen').catch(() => {});
+    salve = 1; chargerBac(0); chargerBac(1);
+    if (avecRegie) basculerRegie(true);
+  }
+  $('allumer').onclick = () => allumer(true);
+
+  if (FOND) {
+    // Décor : démarre tout seul (vidéos muettes), au rythme de l'horloge interne.
+    $('accueil').hidden = true; salve = 1; chargerBac(0); chargerBac(1);
+    addEventListener('message', (e) => {
+      if (!DANS_SITE || e.source !== window.parent || !e.data || e.data.source !== 'hct-site') return;
+      if (e.data.type !== 'qr') return;
+      const delai = new Promise((_, ko) => setTimeout(() => ko(new Error('delai')), 15000));
+      Promise.race([attendrePair(), delai]).then((id) => {
+        const url = location.origin + location.pathname + '#manette-' + id;
+        let img = null;
+        if (window.QRCode) {
+          const boite = document.createElement('div');
+          new QRCode(boite, { text: url, width: 320, height: 320, correctLevel: QRCode.CorrectLevel.M });
+          const cv = boite.querySelector('canvas'); img = cv ? cv.toDataURL('image/png') : null;
+        }
+        parent.postMessage({ source: 'hct', type: 'qr', url, img }, '*');
+      }).catch(() => parent.postMessage({ source: 'hct', type: 'erreur' }, '*'));
+    });
+    if (DANS_SITE) parent.postMessage({ source: 'hct', type: 'pret' }, '*');
+  }
+
+  function pleinEcran() { if (!document.fullscreenElement) document.documentElement.requestFullscreen?.().catch(() => {}); else document.exitFullscreen?.(); }
+  document.addEventListener('keydown', (e) => {
+    const k = e.key.toLowerCase();
+    if (k === 'h') { if (!FOND) basculerRegie(); }
+    else if (k === 'f') pleinEcran();
+    else if (k === ' ') { e.preventDefault(); zapper(0); zapper(1); }
+    else if (k === 'q') zapper(0);
+    else if (k === 'w') zapper(1);
+    else if (k === 'n') { etat.maitre.noir = !etat.maitre.noir; diffuserEtat(); }
+  });
+  // La régie (iframe) transmet aussi H et F à l'écran.
+  window.addEventListener('message', (e) => { if (e.data === 'hct:h') basculerRegie(); if (e.data === 'hct:f') pleinEcran(); });
+
+  let tInactif;
+  document.addEventListener('mousemove', () => { document.body.classList.remove('inactif'); clearTimeout(tInactif); tInactif = setTimeout(() => document.body.classList.add('inactif'), 2500); });
+
+  requestAnimationFrame(boucle);
+}
+
+/* ==================================================================== */
+/*                               RÉGIE                                  */
+/* ==================================================================== */
+function demarrerRegie(opts = {}) {
+  if (!opts.conteneur) document.body.classList.add('regie');
+  (opts.conteneur || document.body).appendChild($('tpl-regie').content.cloneNode(true));
+  const envoyer = opts.envoyer || ((m) => canalBC.postMessage(m));
+  const regler = (deck, cle, val) => envoyer({ type: 'regler', deck, cle, val });
+
+  // --- Construction des platines ---
+  const CURSEURS = [
+    ['opacite', 'Opacité', 0, 1, 0.01, (v) => Math.round(v * 100) + '%'],
+    ['vitesse', 'Vitesse', 0.25, 2, 0.05, (v) => v.toFixed(2) + '×'],
+    ['contraste', 'Contraste', 0.5, 2.5, 0.05, (v) => v.toFixed(2)],
+    ['saturation', 'Couleur', 0, 2.5, 0.05, (v) => v.toFixed(2)],
+    ['luminosite', 'Lumière', 0.3, 1.8, 0.05, (v) => v.toFixed(2)],
+    ['teinte', 'Teinte', 0, 360, 1, (v) => Math.round(v) + '°'],
+    ['flou', 'Flou', 0, 8, 0.1, (v) => v.toFixed(1)],
+    ['zoom', 'Zoom', 1, 2.5, 0.01, (v) => v.toFixed(2) + '×'],
+    ['kick', 'Réagit au kick', 0, 1, 0.01, (v) => Math.round(v * 100) + '%']
+  ];
+  const BASCULES = [['nb', 'Noir et blanc'], ['inverse', 'Inverser'], ['miroir', 'Miroir'], ['gel', 'Geler']];
+  const FUSIONS = [['normal', 'Normal'], ['screen', 'Superposer (screen)'], ['lighten', 'Éclaircir'], ['multiply', 'Multiplier'], ['overlay', 'Incrustation'], ['difference', 'Différence'], ['exclusion', 'Exclusion']];
+  const ZAPS = [[0, 'À la main'], [1, '1 kick'], [2, '2 kicks'], [4, '4 kicks'], [8, '8 kicks'], [16, '16 kicks'], [32, '32 kicks']];
+
+  const ctl = { decks: [{}, {}], maitre: {} };
+
+  function curseur(parent, id, label, min, max, pas, fmt, surChange) {
+    const row = document.createElement('div'); row.className = 'ctrl';
+    row.innerHTML = `<label for="${id}">${label}</label><input type="range" id="${id}" min="${min}" max="${max}" step="${pas}"><output></output>`;
+    const inp = row.querySelector('input'), out = row.querySelector('output');
+    inp.addEventListener('input', () => { out.textContent = fmt(+inp.value); surChange(+inp.value); });
+    inp.addEventListener('dblclick', () => inp.dispatchEvent(new Event('reset')));
+    parent.appendChild(row);
+    return { maj: (v) => { if (document.activeElement !== inp) inp.value = v; out.textContent = fmt(+v); } };
+  }
+
+  ['platA', 'platB'].forEach((idSec, i) => {
+    const sec = $(idSec), c = ctl.decks[i], L = i === 0 ? 'A' : 'B';
+    sec.innerHTML = `
+      <h2>Platine ${L} <small>${i === 0 ? 'touche Q' : 'touche W'}</small></h2>
+      <div class="antenne"><span class="t">—</span><small class="s"></small></div>
+      <div class="niveau" style="color:${i === 0 ? 'var(--phosphore)' : 'var(--ambre)'}"><i></i></div>
+      <span class="etiq">Sujet</span>
+      <select class="bac" aria-label="Sujet de la platine ${L}">${SUJETS.map((s, k) => `<option value="${k}">${s[0]}</option>`).join('')}</select>
+      <div class="rang"><input type="text" class="req" placeholder="Creuser : robots, dance, 1950…" aria-label="Recherche platine ${L}"><button class="go">Creuser</button></div>
+      <label class="note"><input type="checkbox" class="pre" checked> Seulement Prelinger</label>
+      <div class="rang"><button class="suiv">Film suivant</button>
+        <select class="zap" style="width:auto" aria-label="Zap automatique platine ${L}">${ZAPS.map(z => `<option value="${z[0]}">Zap : ${z[1]}</option>`).join('')}</select></div>
+      <span class="etiq">Effets</span>
+      <div class="curs" style="display:grid;gap:6px"></div>
+      <div class="rang bas"></div>
+      <div class="ctrl" style="grid-template-columns:82px 1fr"><label>Fusion</label><select class="fus" aria-label="Mode de fusion platine ${L}">${FUSIONS.map(f => `<option value="${f[0]}">${f[1]}</option>`).join('')}</select></div>
+      <div class="rang"><button class="raz">Réinitialiser les effets</button></div>`;
+    c.titre = sec.querySelector('.t'); c.sous = sec.querySelector('.s'); c.niv = sec.querySelector('.niveau i');
+    c.bac = sec.querySelector('.bac'); c.bac.onchange = () => regler(i, 'bac', +c.bac.value);
+    const req = sec.querySelector('.req'), pre = sec.querySelector('.pre');
+    const creuser = () => { if (req.value.trim()) envoyer({ type: 'creuser', deck: i, requete: req.value.trim(), prelingerSeul: pre.checked }); };
+    sec.querySelector('.go').onclick = creuser; req.addEventListener('keydown', (e) => { if (e.key === 'Enter') creuser(); });
+    sec.querySelector('.suiv').onclick = () => envoyer({ type: 'zapper', deck: i });
+    c.zap = sec.querySelector('.zap'); c.zap.onchange = () => regler(i, 'zap', +c.zap.value);
+    c.fus = sec.querySelector('.fus'); c.fus.onchange = () => regler(i, 'fusion', c.fus.value);
+    const curs = sec.querySelector('.curs');
+    CURSEURS.forEach(([cle, lab, mn, mx, pas, fmt]) => { c[cle] = curseur(curs, `d${i}-${cle}`, lab, mn, mx, pas, fmt, (v) => regler(i, cle, v)); });
+    const bas = sec.querySelector('.bas');
+    BASCULES.forEach(([cle, lab]) => { const b = document.createElement('button'); b.textContent = lab; b.onclick = () => regler(i, cle, !b.classList.contains('on')); bas.appendChild(b); c[cle] = b; });
+    sec.querySelector('.raz').onclick = () => {
+      const d = deckDefaut(i);
+      ['vitesse', 'contraste', 'saturation', 'luminosite', 'teinte', 'flou', 'zoom', 'nb', 'inverse', 'miroir'].forEach(k => regler(i, k, d[k]));
+    };
+  });
+
+  // --- Maître ---
+  const mi = $('maitreImage'); const cm = ctl.maitre;
+  const etiq = document.createElement('span'); etiq.className = 'etiq'; etiq.textContent = 'Image globale'; mi.appendChild(etiq);
+  cm.grain = curseur(mi, 'm-grain', 'Neige', 0, 1, 0.01, v => Math.round(v * 100) + '%', v => regler(null, 'grain', v));
+  cm.epoque = curseur(mi, 'm-epoque', "Teinte d'époque", 0, 1, 0.01, v => Math.round(v * 100) + '%', v => regler(null, 'epoque', v));
+  cm.flash = curseur(mi, 'm-flash', 'Flash au kick', 0, 1, 0.01, v => Math.round(v * 100) + '%', v => regler(null, 'flash', v));
+  const bm = document.createElement('div'); bm.className = 'rang'; mi.appendChild(bm);
+  [['lignes', 'Lignes télé'], ['vignette', 'Vignette'], ['pauseAuto', 'Ralenti dans les breaks'], ['contenir', 'Image entière'], ['titres', 'Titres à l\'écran'], ['canal', 'N° de chaîne']]
+    .forEach(([cle, lab]) => { const b = document.createElement('button'); b.textContent = lab; b.onclick = () => regler(null, cle, !b.classList.contains('on')); bm.appendChild(b); cm[cle] = b; });
+
+  const xf = $('xfade');
+  xf.addEventListener('input', () => regler(null, 'xfade', +xf.value));
+  $('xA').onclick = () => regler(null, 'xfade', 0); $('xM').onclick = () => regler(null, 'xfade', 0.5); $('xB').onclick = () => regler(null, 'xfade', 1);
+  $('zapTout').onclick = () => envoyer({ type: 'zapper' });
+  $('noirBtn').onclick = () => regler(null, 'noir', !$('noirBtn').classList.contains('on'));
+  const sens = $('m-sens'); sens.addEventListener('input', () => { $('o-m-sens').textContent = sens.value; regler(null, 'sens', +sens.value); });
+  $('m-bpm').addEventListener('change', (e) => regler(null, 'bpm', pinces(+e.target.value || 124, 60, 200)));
+  $('tap').onclick = () => envoyer({ type: 'tap' });
+  $('source').onchange = (e) => regler(null, 'source', e.target.value);
+
+  async function listerEntrees() {
+    let ent = []; try { ent = (await navigator.mediaDevices.enumerateDevices()).filter(d => d.kind === 'audioinput'); } catch (e) {}
+    const sel = $('source'), cur = sel.value || etat.maitre.source;
+    sel.innerHTML = '<option value="horloge">Horloge interne (sans son)</option>' + ent.map(d => `<option value="${d.deviceId}">${(d.label || 'Entrée audio').replace(/</g, '&lt;')}</option>`).join('');
+    sel.value = [...sel.options].some(o => o.value === cur) ? cur : 'horloge';
+    return ent;
+  }
+  $('autoriser').onclick = async () => {
+    try { const s = await navigator.mediaDevices.getUserMedia({ audio: true }); s.getTracks().forEach(t => t.stop()); } catch (e) {}
+    const ent = await listerEntrees();
+    const bh = ent.find(d => /blackhole/i.test(d.label));
+    if (bh && $('source').value === 'horloge') { $('source').value = bh.deviceId; regler(null, 'source', bh.deviceId); }
+  };
+  navigator.mediaDevices?.addEventListener?.('devicechange', listerEntrees);
+  listerEntrees();
+
+  // --- Spotify : lecteur intégré, lien mémorisé dans ce navigateur ---
+  function chargerSpotify(lien) {
+    const m = /open\.spotify\.com\/(?:intl-[a-z-]+\/)?(playlist|album|track|artist|show)\/([A-Za-z0-9]+)/.exec(lien || '');
+    if (!m) return false;
+    const f = $('spLecteur'); f.src = `https://open.spotify.com/embed/${m[1]}/${m[2]}?theme=0`; f.hidden = false;
+    try { localStorage.setItem('hct-spotify', lien); } catch (e) {}
+    return true;
+  }
+  $('spOk').onclick = () => { if (!chargerSpotify($('spLien').value.trim())) $('spLien').value = 'Lien Spotify non reconnu'; };
+  $('spLien').addEventListener('keydown', (e) => { if (e.key === 'Enter') $('spOk').click(); });
+  const PLAYLIST_DEFAUT = 'https://open.spotify.com/playlist/0xx4H1cOq9LO7UhrK3F2rQ';
+  let lienSp = PLAYLIST_DEFAUT;
+  try { lienSp = localStorage.getItem('hct-spotify') || PLAYLIST_DEFAUT; } catch (e) {}
+  $('spLien').value = lienSp; if (!opts.conteneur) chargerSpotify(lienSp);
+
+  // --- QR de la manette ---
+  // Sur le Mac (localhost) : via serveur.py et le Wi-Fi. En ligne (GitHub Pages) : via PeerJS.
+  let urlQR = '';
+  function montrerQR(url, note) {
+    if (url === urlQR) return; urlQR = url;
+    $('qrNote').innerHTML = `${note}<br><b style="user-select:all;word-break:break-all">${url}</b>`;
+    $('qr').innerHTML = '';
+    if (window.QRCode) { $('qr').hidden = false; new QRCode($('qr'), { text: url, width: 116, height: 116, correctLevel: QRCode.CorrectLevel.M }); }
+  }
+  const surLeMac = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
+  if (surLeMac) {
+    fetch('/hct/adresse').then(r => r.ok ? r.json() : null).then(j => {
+      if (j) montrerQR(`http://${j.ip}:${j.port}${location.pathname}#manette`, 'Scanne avec l\'appareil photo du téléphone (même Wi-Fi que le Mac).');
+    }).catch(() => {});
+  }
+  function qrEnLigne(id) {
+    if (!id || surLeMac) return;
+    montrerQR(location.origin + location.pathname + '#manette-' + id, 'Scanne avec l\'appareil photo du téléphone. Marche sur n\'importe quel réseau.');
+  }
+
+  // --- Réception ---
+  function majUI() {
+    etat.decks.forEach((d, i) => {
+      const c = ctl.decks[i];
+      if (document.activeElement !== c.bac) c.bac.value = d.requete ? '' : d.bac;
+      c.zap.value = d.zap; c.fus.value = d.fusion;
+      CURSEURS.forEach(([cle]) => c[cle].maj(d[cle]));
+      BASCULES.forEach(([cle]) => c[cle].classList.toggle('on', !!d[cle]));
+    });
+    const m = etat.maitre;
+    if (document.activeElement !== xf) xf.value = m.xfade;
+    ['grain', 'epoque', 'flash'].forEach(k => cm[k].maj(m[k]));
+    ['lignes', 'vignette', 'pauseAuto', 'contenir', 'titres', 'canal'].forEach(k => cm[k].classList.toggle('on', !!m[k]));
+    $('noirBtn').classList.toggle('on', m.noir);
+    if (document.activeElement !== sens) { sens.value = m.sens; $('o-m-sens').textContent = m.sens; }
+    if (document.activeElement !== $('m-bpm')) $('m-bpm').value = m.bpm;
+    if ([...$('source').options].some(o => o.value === m.source)) $('source').value = m.source;
+  }
+
+  let vuDernier = 0, ecranVu = 0;
+  if (opts.abonner) opts.abonner(recevoirRegie); else canalBC.onmessage = ({ data }) => recevoirRegie(data);
+  function recevoirRegie(m) {
+    if (m.type === 'etat') { etat = m.etat; majUI(); }
+    else if (m.type === 'statut') {
+      ecranVu = performance.now();
+      $('vuB').style.width = Math.min(100, m.basse * 140) + '%';
+      $('vuE').style.width = Math.min(100, m.energie * 100) + '%';
+      if (m.kicks !== vuDernier) { vuDernier = m.kicks; $('nbKicks').textContent = m.kicks; $('temoin').classList.add('kick'); setTimeout(() => $('temoin').classList.remove('kick'), 90); }
+      qrEnLigne(m.pair);
+      m.decks.forEach((d, i) => {
+        const c = ctl.decks[i];
+        c.titre.textContent = d.info ? (d.info.titre || '—') + (d.info.annee ? ' (' + d.info.annee + ')' : '') : '—';
+        c.sous.textContent = (d.bac ? d.bac + ' · ' : '') + d.msg;
+        const x = etat.maitre.xfade, w = i === 0 ? Math.min(1, 2 * (1 - x)) : Math.min(1, 2 * x);
+        c.niv.style.width = (w * etat.decks[i].opacite * 100) + '%';
+      });
+    }
+  }
+  setInterval(() => { $('horsligne').hidden = performance.now() - ecranVu < 1500; }, 500);
+  envoyer({ type: 'bonjour' });
+
+  // --- Clavier ---
+  document.addEventListener('keydown', (e) => {
+    if (e.target.tagName === 'INPUT' && e.target.type === 'text') return;
+    if (e.target.tagName === 'SELECT' && e.key !== ' ') return;
+    const k = e.key.toLowerCase();
+    if (k === ' ') { e.preventDefault(); envoyer({ type: 'zapper' }); }
+    else if (k === 'q') envoyer({ type: 'zapper', deck: 0 });
+    else if (k === 'w') envoyer({ type: 'zapper', deck: 1 });
+    else if (k === 'arrowleft' || k === 'arrowright') { if (e.target.type === 'range') return; e.preventDefault(); regler(null, 'xfade', pinces(etat.maitre.xfade + (k === 'arrowright' ? 0.05 : -0.05), 0, 1)); }
+    else if (k === 'n') $('noirBtn').click();
+    else if (k === 't') envoyer({ type: 'tap' });
+    else if ((k === 'h' || k === 'f') && window.parent !== window) window.parent.postMessage('hct:' + k, '*');
+  });
+}
+
+/* ==================================================================== */
+/*                     MANETTE (téléphone, même Wi-Fi)                  */
+/* ==================================================================== */
+function demarrerManette() {
+  document.body.classList.add('manette');
+  document.body.appendChild($('tpl-manette').content.cloneNode(true));
+  let cible = 2, verrou = false, enLigne = false, dernierKick = 0;
+
+  const idEcran = (location.hash.match(/^#manette-(.+)$/) || [])[1];
+  let conn = null;
+  const envoyer = (m) => {
+    if (idEcran) { if (conn && conn.open) conn.send(m); return; }
+    fetch('/hct/cmd', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(m) })
+      .catch(() => erreur('Le Mac ne répond pas. Vérifie que serveur.py tourne et que tu es sur le même Wi-Fi.'));
+  };
+  const decks = () => cible === 2 ? [0, 1] : [cible];
+  const regler = (deck, cle, val) => envoyer({ type: 'regler', deck, cle, val });
+  const vibrer = () => { try { navigator.vibrate?.(8); } catch (e) {} };
+  function erreur(txt) { const e = $('mnErreur'); e.textContent = txt; e.hidden = !txt; }
+
+  // Cible A / A+B / B
+  document.querySelectorAll('.mn-cible button').forEach(b => b.onclick = () => {
+    cible = +b.dataset.c; document.querySelectorAll('.mn-cible button').forEach(x => x.classList.toggle('on', x === b)); majSujets(); majAuto();
+  });
+
+  // Crossfader tactile (double-tap = milieu)
+  const croix = $('mnCroix'), curs = $('mnCurseur');
+  let glisse = false, dernierEnvoi = 0, dernierTap = 0;
+  const xDe = (e) => { const r = croix.getBoundingClientRect(); return pinces((e.clientX - r.left - 23) / (r.width - 46), 0, 1); };
+  const poserX = (x, forcer) => {
+    curs.style.left = `calc(23px + ${x} * (100% - 46px))`;
+    const t = performance.now(); if (forcer || t - dernierEnvoi > 40) { dernierEnvoi = t; regler(null, 'xfade', +x.toFixed(3)); }
+  };
+  croix.addEventListener('pointerdown', (e) => {
+    const t = performance.now();
+    if (t - dernierTap < 300) { poserX(0.5, true); dernierTap = 0; return; }
+    dernierTap = t; glisse = true; croix.setPointerCapture(e.pointerId); poserX(xDe(e));
+  });
+  croix.addEventListener('pointermove', (e) => { if (glisse) poserX(xDe(e)); });
+  const finGlisse = (e) => { if (!glisse) return; glisse = false; poserX(xDe(e), true); };
+  croix.addEventListener('pointerup', finGlisse); croix.addEventListener('pointercancel', finGlisse);
+
+  // Zaps
+  document.querySelectorAll('.mn-zaps button').forEach(b => b.onclick = () => {
+    vibrer(); const z = +b.dataset.z; envoyer(z === 2 ? { type: 'zapper' } : { type: 'zapper', deck: z });
+  });
+
+  // Pads d'effets : on tient = effet actif, on relâche = retour. Avec Verrou, un tap allume/éteint.
+  const PADS = [
+    { nom: 'N&B', sous: 'noir et blanc', cle: 'nb', val: true },
+    { nom: 'Inverser', sous: 'négatif', cle: 'inverse', val: true },
+    { nom: 'Miroir', sous: 'symétrie', cle: 'miroir', val: true },
+    { nom: 'Zoom', sous: 'plonge', cle: 'zoom', val: 1.9 },
+    { nom: 'Flou', sous: 'rêve', cle: 'flou', val: 5 },
+    { nom: 'Ralenti', sous: '× 0.35', cle: 'vitesse', val: 0.35 },
+    { nom: 'Turbo', sous: '× 3', cle: 'vitesse', val: 3 },
+    { nom: 'Acide', sous: 'teinte qui tourne', cle: 'teinte', anime: true },
+    { nom: 'Strobe', sous: 'flash blanc', cle: 'strobe', val: true, maitre: true, classe: 'strobe' }
+  ];
+  const pads = $('mnPads');
+  PADS.forEach(pad => {
+    const b = document.createElement('button'); b.innerHTML = `${pad.nom}<small>${pad.sous}</small>`; if (pad.classe) b.className = pad.classe;
+    let avant = null, minuterie = null, actif = false;
+    const cibles = () => pad.maitre ? [null] : decks();
+    const lire = (d) => d == null ? etat.maitre[pad.cle] : etat.decks[d][pad.cle];
+    const allumer = () => {
+      if (actif) return; actif = true; vibrer(); b.classList.add('presse');
+      avant = cibles().map(d => [d, lire(d)]);
+      if (pad.anime) { let h = lire(cibles()[0]) || 0; minuterie = setInterval(() => { h = (h + 9) % 360; cibles().forEach(d => regler(d, 'teinte', h)); }, 60); }
+      else cibles().forEach(d => regler(d, pad.cle, pad.val));
+    };
+    const eteindre = () => {
+      if (!actif) return; actif = false; b.classList.remove('presse', 'verrouille'); clearInterval(minuterie);
+      (avant || []).forEach(([d, v]) => regler(d, pad.cle, v));
+    };
+    b.addEventListener('pointerdown', (e) => {
+      e.preventDefault();
+      if (verrou) { if (actif) eteindre(); else { allumer(); b.classList.add('verrouille'); b.classList.remove('presse'); } return; }
+      b.setPointerCapture(e.pointerId); allumer();
+    });
+    const relache = () => { if (!verrou) eteindre(); };
+    b.addEventListener('pointerup', relache); b.addEventListener('pointercancel', relache);
+    b.addEventListener('contextmenu', (e) => e.preventDefault());
+    pads.appendChild(b);
+  });
+
+  // Sujets
+  const sujets = $('mnSujets');
+  SUJETS.forEach((s, k) => { const b = document.createElement('button'); b.textContent = s[0].replace(' (dossier videos)', ''); b.dataset.k = k;
+    b.onclick = () => { vibrer(); decks().forEach(d => regler(d, 'bac', k)); }; sujets.appendChild(b); });
+  function majSujets() {
+    const k = etat.decks[cible === 1 ? 1 : 0];
+    [...sujets.children].forEach(b => b.classList.toggle('on', !k.requete && +b.dataset.k === k.bac));
+  }
+
+  // Barre du bas
+  $('mnVerrou').onclick = () => { verrou = !verrou; $('mnVerrou').classList.toggle('on', verrou); };
+  $('mnTap').onclick = () => { vibrer(); envoyer({ type: 'tap' }); };
+  $('mnNoir').onclick = () => { vibrer(); regler(null, 'noir', !etat.maitre.noir); };
+  $('mnAuto').onclick = () => { const on = !$('mnAuto').classList.contains('on'); decks().forEach(d => regler(d, 'zap', on ? 8 : 0)); };
+  function majAuto() { $('mnAuto').classList.toggle('on', decks().some(d => etat.decks[d].zap > 0)); }
+
+  // Réception de l'état depuis l'écran
+  function majTout() {
+    if (!glisse) curs.style.left = `calc(23px + ${etat.maitre.xfade} * (100% - 46px))`;
+    $('mnNoir').classList.toggle('on', etat.maitre.noir);
+    majSujets(); majAuto();
+  }
+  function connecter() {
+    const es = new EventSource('/hct/flux?role=manette');
+    es.onopen = () => { enLigne = true; $('mnLien').classList.add('ok'); $('mnLienTxt').textContent = 'Connectée'; erreur(''); };
+    es.onerror = () => { enLigne = false; $('mnLien').classList.remove('ok'); $('mnLienTxt').textContent = 'Reconnexion…'; };
+    es.onmessage = (e) => { try { traiter(JSON.parse(e.data)); } catch (err) {} };
+  }
+  function lien(ok, txt) { enLigne = ok; $('mnLien').classList.toggle('ok', ok); $('mnLienTxt').textContent = txt; if (ok) erreur(''); }
+  let versRegie = null;
+  function traiter(m) {
+      if (versRegie) { try { versRegie(m); } catch (e) {} }
+      if (m.type === 'etat') { etat = m.etat; majTout(); }
+      else if (m.type === 'statut') {
+        const t = (d, L) => d && d.info ? `${L} · ${d.info.titre}${d.info.annee ? ' (' + d.info.annee + ')' : ''}` : `${L} · ${d ? d.msg : '—'}`;
+        $('mnA').textContent = t(m.decks[0], 'A'); $('mnB').textContent = t(m.decks[1], 'B');
+        if (m.kicks !== dernierKick) { dernierKick = m.kicks; $('mnKick').classList.add('kick'); setTimeout(() => $('mnKick').classList.remove('kick'), 90); }
+      }
+      else if (m.type === 'ecran-present') envoyer({ type: 'bonjour' });
+  }
+  function connecterPair() {
+    if (!window.Peer) { erreur('Impossible de charger la connexion (internet requis).'); return; }
+    lien(false, 'Connexion…');
+    const peer = new Peer();
+    peer.on('open', () => {
+      conn = peer.connect(idEcran, { reliable: true });
+      conn.on('open', () => { lien(true, 'Connectée'); envoyer({ type: 'bonjour' }); });
+      conn.on('data', traiter);
+      conn.on('close', () => { lien(false, 'Reconnexion…'); peer.destroy(); setTimeout(connecterPair, 2000); });
+    });
+    peer.on('error', (e) => {
+      if (e.type === 'peer-unavailable') erreur("L'écran n'est pas allumé. Ouvre la page sur l'ordi, clique Allumer, puis rescanne si besoin.");
+      lien(false, 'Hors ligne'); peer.destroy(); setTimeout(connecterPair, 3000);
+    });
+  }
+  // Onglets Jouer / Régie complète
+  let regieConstruite = false;
+  document.querySelectorAll('.mn-onglets button').forEach(b => b.onclick = () => {
+    document.querySelectorAll('.mn-onglets button').forEach(x => x.classList.toggle('on', x === b));
+    const regie = b.dataset.o === 'regie';
+    if (regie && !regieConstruite) {
+      regieConstruite = true;
+      demarrerRegie({ conteneur: $('mnRegie'), envoyer, abonner: (f) => { versRegie = f; } });
+      versRegie({ type: 'etat', etat });
+    }
+    $('mnRegie').hidden = !regie;
+  });
+  document.querySelectorAll('.mn-vues button').forEach(b => b.onclick = () => {
+    document.querySelectorAll('.mn-vues button').forEach(x => x.classList.toggle('on', x === b));
+    $('mnRegie').dataset.vue = b.dataset.v; $('mnRegie').scrollTop = 0;
+  });
+
+  if (idEcran) connecterPair();
+  else fetch('/hct/adresse').then(r => { if (!r.ok) throw 0; connecter(); envoyer({ type: 'bonjour' }); })
+    .catch(() => erreur('Scanne le QR code affiché dans la régie de l\'écran pour connecter la manette.'));
+  navigator.wakeLock?.request('screen').catch(() => {});
+}
+
+if (MODE === 'regie') demarrerRegie(); else if (MODE === 'manette') demarrerManette(); else demarrerEcran();
+</script>
+</body>
+</html>
