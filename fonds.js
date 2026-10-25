@@ -16,7 +16,8 @@
     opaciteTele:1,             // opacité de la télé (0 à 1)
     voile:.8,                  // voile noir entre la télé et le texte (0 = aucun, 1 = noir complet)
     couleurVoile:'0,0,0',      // couleur du voile (rgb) : noir
-    pageTele:'/hors-champ-tv/hors-champ-tv.html'
+    pageTele:'/hors-champ-tv/hors-champ-tv.html',
+    playlist:'https://open.spotify.com/playlist/0xx4H1cOq9LO7UhrK3F2rQ'   // '' pour retirer le bouton Playlist
   };
   var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
   var tactile=window.matchMedia&&matchMedia('(hover: none) and (pointer: coarse)').matches;
@@ -26,10 +27,10 @@
   function lang(){return langBtn&&langBtn.textContent.trim()==='FR'?'en':'fr';}
   var T={
     fr:{fond:'Fond',fen:'Fenêtre 3D',tv:'Hors Champ TV',deux:'Les deux',ht:'Head tracking',htOn:'Head tracking : actif · Recentrer',load:'Chargement…',err:'Caméra indisponible',
-        tel:'Mixe avec ton téléphone',telOn:'Téléphone connecté',pop:'Scanne avec l\'appareil photo de ton téléphone : zappe, mélange les deux chaînes, ajoute des effets.',
+        tel:'Mixe avec ton téléphone',sp:'Playlist',telOn:'Téléphone connecté',pop:'Scanne avec l\'appareil photo de ton téléphone : zappe, mélange les deux chaînes, ajoute des effets.',
         prep:'Préparation…',errTel:'Connexion impossible pour l\'instant. Réessaie dans un moment.',fermer:'Fermer',titre:'● TÉLÉCOMMANDE'},
     en:{fond:'Background',fen:'3D window',tv:'Hors Champ TV',deux:'Both',ht:'Head tracking',htOn:'Head tracking: on · Recenter',load:'Loading…',err:'Camera unavailable',
-        tel:'Mix it with your phone',telOn:'Phone connected',pop:'Scan with your phone camera: zap, blend both channels, add effects.',
+        tel:'Mix it with your phone',sp:'Playlist',telOn:'Phone connected',pop:'Scan with your phone camera: zap, blend both channels, add effects.',
         prep:'Getting ready…',errTel:'Can\'t connect right now. Try again in a moment.',fermer:'Close',titre:'● REMOTE'}
   };
   function t(k){return T[lang()][k];}
@@ -56,7 +57,9 @@
    '.fd-choix button[aria-pressed="true"]{opacity:1;color:#c9ff3d}'+
    '.fd-pop{position:absolute;left:0;bottom:calc(100% + .5rem);width:250px;box-sizing:border-box;padding:16px;background:rgba(5,6,5,.9);border:1px solid #2f7a4a;'+
      'backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 10px 40px rgba(0,0,0,.4);display:grid;gap:10px;text-align:center;color:#e9e4d6;font:11px/1.55 "IBM Plex Mono",monospace}'+
-   '.fd-pop[hidden]{display:none}'+
+   '.fd-pop[hidden],.fd-sp[hidden]{display:none}'+
+   '.fd-sp{position:absolute;left:0;bottom:calc(100% + .5rem);width:min(352px,calc(100vw - 2rem));background:rgba(8,7,13,.85);border:1px solid rgba(242,241,246,.28);padding:6px;box-sizing:border-box;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}'+
+   '.fd-sp iframe{display:block;width:100%;height:152px;border:0;border-radius:10px}'+
    '.fd-pop b{font:400 1.1rem/1 "IBM Plex Mono",monospace;letter-spacing:.08em;color:#6dff9a;text-shadow:0 0 8px rgba(109,255,154,.5)}'+
    '.fd-pop .qr{width:176px;height:176px;justify-self:center;background:#fff;padding:8px;box-sizing:border-box;display:grid;place-items:center}'+
    '.fd-pop .qr img{width:100%;height:100%;image-rendering:pixelated}'+
@@ -74,6 +77,8 @@
     '<button type="button" data-f="fenetre"></button><button type="button" data-f="tele"></button><button type="button" data-f="deux"></button></div>'+
     '<button type="button" class="fd-btn" id="fd-ht"><i></i><span></span></button>'+
     '<button type="button" class="fd-btn" id="fd-tel" hidden><i></i><span></span></button>'+
+    '<button type="button" class="fd-btn" id="fd-spb" hidden><span></span></button>'+
+    '<div class="fd-sp" hidden></div>'+
     '<div class="fd-pop" hidden role="dialog"><b class="l-titre"></b><div class="qr"></div><p class="l-texte"></p><button type="button" class="fermer"></button></div>';
   document.body.appendChild(barre);
   // Couches de fond : télé, voile, fenêtre 3D (dans cet ordre)
@@ -82,6 +87,7 @@
   couche.appendChild(voile);
   document.body.insertBefore(couche,document.body.firstChild);
   var bHt=barre.querySelector('#fd-ht'),bTel=barre.querySelector('#fd-tel'),pop=barre.querySelector('.fd-pop');
+  var bSp=barre.querySelector('#fd-spb'),sp=barre.querySelector('.fd-sp');
   var etatHt='off',etatTel={n:0},texteTel='';
   function libelles(){
     barre.querySelector('.l-fond').textContent=t('fond');
@@ -91,6 +97,7 @@
     barre.querySelector('.fd-choix').setAttribute('aria-label',t('fond'));
     bHt.querySelector('span').textContent=etatHt==='on'?t('htOn'):etatHt==='load'?t('load'):etatHt==='err'?t('err'):t('ht');
     bTel.querySelector('span').textContent=etatTel.n>0?t('telOn'):t('tel');
+    bSp.querySelector('span').textContent='♫ '+t('sp');
     barre.querySelector('.l-titre').textContent=t('titre');
     barre.querySelector('.fermer').textContent=t('fermer');
     barre.querySelector('.l-texte').textContent=texteTel?t(texteTel):'';
@@ -253,7 +260,23 @@
     if(!pop.querySelector('.qr').firstChild){texteTel='prep';libelles();Tele.demanderQR()}
   };
   pop.querySelector('.fermer').onclick=function(){pop.hidden=true;bTel.focus()};
-  document.addEventListener('keydown',function(e){if(e.key==='Escape')pop.hidden=true});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'){pop.hidden=true;sp.hidden=true}});
+
+  // --- Playlist Spotify (lecteur intégré, chargé au premier clic) ---
+  var mSp=/open\.spotify\.com\/(?:intl-[a-z-]+\/)?(playlist|album|track)\/([A-Za-z0-9]+)/.exec(CFG.playlist||'');
+  if(mSp){
+    bSp.hidden=false;
+    bSp.onclick=function(){
+      pop.hidden=true;
+      if(!sp.firstChild){
+        var f=document.createElement('iframe');f.title='Playlist Spotify';f.loading='lazy';
+        f.allow='autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture';
+        f.src='https://open.spotify.com/embed/'+mSp[1]+'/'+mSp[2]+'?theme=0';sp.appendChild(f);
+      }
+      sp.hidden=!sp.hidden;bSp.classList.toggle('on',!sp.hidden);
+    };
+  }
+  bTel.addEventListener('click',function(){sp.hidden=true;bSp.classList.remove('on')});
 
   appliquer(choix,false);
 })();
