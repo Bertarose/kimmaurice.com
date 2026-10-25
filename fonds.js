@@ -17,7 +17,7 @@
     voile:.8,                  // voile noir entre la télé et le texte (0 = aucun, 1 = noir complet)
     couleurVoile:'0,0,0',      // couleur du voile (rgb) : noir
     pageTele:'/hors-champ-tv/hors-champ-tv.html',
-    playlist:'https://open.spotify.com/playlist/0xx4H1cOq9LO7UhrK3F2rQ'   // '' pour retirer le bouton Playlist
+    playlist:'https://open.spotify.com/playlist/7cDQVIXpJ0aDcwmSuCEyHC'   // '' pour retirer le bouton Playlist
   };
   var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
   var tactile=window.matchMedia&&matchMedia('(hover: none) and (pointer: coarse)').matches;
