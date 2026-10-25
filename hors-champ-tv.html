@@ -101,6 +101,53 @@ button.alerte.on { background: #3a1210; border-color: var(--rouge); color: var(-
 .touches { font-size: 11px; opacity: .55; line-height: 1.8; }
 kbd { font-family: var(--ui); font-size: 10px; border: 1px solid var(--cadre); border-radius: 3px; padding: 0 4px; }
 #horsligne { padding: 10px 12px; border: 1px solid var(--rouge); color: var(--rouge); border-radius: 6px; }
+
+/* ========================= MANETTE (téléphone) ========================= */
+body.manette { overflow: hidden; touch-action: manipulation; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+.mn { height: 100%; display: grid; grid-template-rows: auto auto auto auto 1fr auto auto; gap: 12px;
+  padding: max(12px, env(safe-area-inset-top)) max(14px, env(safe-area-inset-right)) max(14px, env(safe-area-inset-bottom)) max(14px, env(safe-area-inset-left));
+  max-width: 520px; margin: 0 auto; }
+.mn-tete { display: grid; grid-template-columns: 1fr auto; gap: 4px 10px; align-items: center; }
+.mn-tete b { font-family: var(--osd); font-weight: 400; font-size: 24px; color: var(--phosphore); }
+.mn-lien { font-size: 11px; display: flex; align-items: center; gap: 6px; opacity: .8; }
+.mn-lien i { width: 8px; height: 8px; border-radius: 50%; background: var(--rouge); display: inline-block; }
+.mn-lien.ok i { background: var(--phosphore); box-shadow: 0 0 6px var(--phosphore); }
+.mn-air { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.mn-air div { font-family: var(--osd); font-size: 15px; line-height: 1.05; padding: 6px 8px; border-radius: 6px; background: #000; min-height: 2.4em; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.mn-air .a { color: var(--phosphore); } .mn-air .b { color: var(--ambre); }
+.mn-cible { display: grid; grid-template-columns: 1fr 1fr 1fr; background: #000; border-radius: 10px; padding: 4px; gap: 4px; }
+.mn-cible button { border: 0; border-radius: 8px; padding: 10px 0; font-family: var(--osd); font-size: 22px; background: transparent; color: var(--papier); opacity: .6; }
+.mn-cible button.on { opacity: 1; background: #1a231d; }
+.mn-cible button.on[data-c="0"] { color: var(--phosphore); } .mn-cible button.on[data-c="1"] { color: var(--ambre); }
+.mn-croix { position: relative; height: 64px; border-radius: 14px; background: linear-gradient(90deg, rgba(109,255,154,.18), #0c100d 50%, rgba(255,179,71,.18)); border: 1px solid var(--cadre); touch-action: none; }
+.mn-croix span { position: absolute; top: 50%; transform: translateY(-50%); font-family: var(--osd); font-size: 26px; pointer-events: none; }
+.mn-croix .ga { left: 14px; color: var(--phosphore); } .mn-croix .gb { right: 14px; color: var(--ambre); }
+.mn-croix .milieu { position: absolute; left: 50%; top: 10px; bottom: 10px; width: 1px; background: var(--cadre); }
+.mn-curseur { position: absolute; top: 6px; bottom: 6px; width: 46px; margin-left: -23px; border-radius: 10px; background: var(--papier); box-shadow: 0 2px 10px rgba(0,0,0,.6); pointer-events: none; }
+.mn-zaps { display: grid; grid-template-columns: 1fr 1.1fr 1fr; gap: 10px; }
+.mn-zaps button { height: 72px; border-radius: 16px; font-family: var(--osd); font-size: 28px; background: #101611; border: 1px solid var(--cadre); line-height: .9; }
+.mn-zaps .za { color: var(--phosphore); border-color: var(--phosphore-dim); } .mn-zaps .zb { color: var(--ambre); border-color: #8a6128; }
+.mn-zaps small { display: block; font-family: var(--ui); font-size: 10px; opacity: .6; margin-top: 4px; }
+.mn-pads { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; align-content: stretch; min-height: 0; }
+.mn-pads button { border-radius: 14px; background: #0f1411; border: 1px solid var(--cadre); font-family: var(--osd); font-size: 22px; line-height: 1; min-height: 56px; touch-action: none; transition: transform .06s, background .06s; }
+.mn-pads button small { display: block; font-family: var(--ui); font-size: 9px; opacity: .5; margin-top: 3px; letter-spacing: .08em; }
+.mn-pads button.presse { background: #1d3a27; border-color: var(--phosphore); color: var(--phosphore); transform: scale(.96); box-shadow: 0 0 18px rgba(109,255,154,.35) inset; }
+.mn-pads button.verrouille { border-color: var(--phosphore); color: var(--phosphore); }
+.mn-pads .strobe.presse { background: #f4f4f4; color: #000; }
+.mn-sujets { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; scrollbar-width: none; }
+.mn-sujets::-webkit-scrollbar { display: none; }
+.mn-sujets button { flex: none; border-radius: 999px; padding: 9px 14px; background: #0f1411; border: 1px solid var(--cadre); white-space: nowrap; }
+.mn-sujets button.on { border-color: var(--papier); background: #1a231d; }
+.mn-bas { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.mn-bas button { height: 50px; border-radius: 12px; background: #0f1411; border: 1px solid var(--cadre); font-size: 12px; }
+.mn-bas button.on { border-color: var(--phosphore); color: var(--phosphore); background: #14321f; }
+.mn-bas .noir.on { border-color: var(--rouge); color: var(--rouge); background: #3a1210; }
+#mnKick { width: 10px; height: 10px; border-radius: 50%; background: #2a1310; display: inline-block; }
+#mnKick.kick { background: var(--rouge); box-shadow: 0 0 8px var(--rouge); }
+.mn-erreur { grid-column: 1 / -1; color: var(--rouge); font-size: 11px; line-height: 1.5; }
+#qrBloc { display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: center; }
+#qr { background: #fff; padding: 8px; border-radius: 6px; width: 132px; height: 132px; }
+#qr img, #qr canvas { width: 116px !important; height: 116px !important; }
 @media (prefers-reduced-motion: reduce) { .osd { transition: none; } }
 </style>
 </head>
@@ -142,6 +189,11 @@ kbd { font-family: var(--ui); font-size: 10px; border: 1px solid var(--cadre); b
 <template id="tpl-regie">
   <div class="regie-wrap">
     <div id="horsligne" hidden>L'écran n'est pas ouvert. Ouvre <b>hors-champ-tv.html</b> dans un autre onglet et clique sur Allumer.</div>
+
+    <section class="bloc" id="blocManette">
+      <h2>Manette <small>contrôle depuis ton téléphone</small></h2>
+      <div id="qrBloc"><div id="qr" hidden></div><p class="note" id="qrNote">Pour utiliser ton téléphone comme manette, lance l'écran avec <b>serveur.py</b> (voir LISEZMOI).</p></div>
+    </section>
 
     <div class="bloc">
       <div class="croix"><span class="a">A</span><input type="range" id="xfade" min="0" max="1" step="0.01" value="0.5" aria-label="Crossfader"><span class="b">B</span></div>
@@ -187,9 +239,42 @@ kbd { font-family: var(--ui); font-size: 10px; border: 1px solid var(--cadre); b
   </div>
 </template>
 
+<!-- ======================= MANETTE ======================= -->
+<template id="tpl-manette">
+  <div class="mn">
+    <div class="mn-tete">
+      <b>Hors Champ TV</b>
+      <span class="mn-lien" id="mnLien"><i></i><span id="mnLienTxt">Connexion…</span> <span id="mnKick"></span></span>
+      <div class="mn-air"><div class="a" id="mnA">A —</div><div class="b" id="mnB">B —</div></div>
+      <div class="mn-erreur" id="mnErreur" hidden></div>
+    </div>
+    <div class="mn-cible" role="group" aria-label="Platine contrôlée">
+      <button data-c="0">A</button><button data-c="2" class="on">A + B</button><button data-c="1">B</button>
+    </div>
+    <div class="mn-croix" id="mnCroix" aria-label="Crossfader">
+      <span class="ga">A</span><span class="gb">B</span><div class="milieu"></div><div class="mn-curseur" id="mnCurseur" style="left:50%"></div>
+    </div>
+    <div class="mn-zaps">
+      <button class="za" data-z="0">ZAP A</button>
+      <button data-z="2">ZAP ⇄<small>les deux</small></button>
+      <button class="zb" data-z="1">ZAP B</button>
+    </div>
+    <div class="mn-pads" id="mnPads"></div>
+    <div class="mn-sujets" id="mnSujets"></div>
+    <div class="mn-bas">
+      <button id="mnVerrou">Verrou<br><small>pads fixes</small></button>
+      <button id="mnAuto" class="on">Zap auto</button>
+      <button id="mnTap">Tap</button>
+      <button id="mnNoir" class="noir">Noir</button>
+    </div>
+  </div>
+</template>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/peerjs@1.5.4/dist/peerjs.min.js"></script>
 <script>
 "use strict";
-const MODE = location.hash === '#regie' ? 'regie' : 'ecran';
+const MODE = location.hash === '#regie' ? 'regie' : location.hash.startsWith('#manette') ? 'manette' : 'ecran';
 const canalBC = new BroadcastChannel('hors-champ-tv');
 const $ = (id) => document.getElementById(id);
 const pinces = (v, a, b) => Math.min(b, Math.max(a, v));
@@ -220,7 +305,7 @@ const deckDefaut = (i) => ({ bac: i === 0 ? 1 : 3, requete: '', prelingerSeul: t
 let etat = {
   decks: [deckDefaut(0), deckDefaut(1)],
   maitre: { xfade: 0.5, grain: 0.3, epoque: 0.2, flash: 0.35, lignes: true, vignette: true, pauseAuto: true,
-    titres: false, canal: false, noir: false, contenir: false, source: 'horloge', sens: 55, bpm: 124 }
+    titres: false, canal: false, noir: false, strobe: false, contenir: false, source: 'horloge', sens: 55, bpm: 124 }
 };
 
 /* ==================================================================== */
@@ -429,7 +514,9 @@ function demarrerEcran() {
       const j = !reduit && pk > 0.4 ? (Math.random() - 0.5) * 10 * pk : 0;
       p.el.style.transform = `translate(${j.toFixed(1)}px, ${(j * 0.3).toFixed(1)}px) scale(${((d.miroir ? -1 : 1) * d.zoom * (1 + 0.04 * pk)).toFixed(4)}, ${(d.zoom * (1 + 0.04 * pk)).toFixed(4)})`;
     });
-    $('flash').style.opacity = (m.flash * punch * punch * 0.6).toFixed(3);
+    const stro = m.strobe && !reduit ? (Math.floor(t / 55) % 2 ? 0.95 : 0) : 0;
+    $('flash').style.mixBlendMode = m.strobe ? 'normal' : 'overlay';
+    $('flash').style.opacity = Math.max(stro, m.flash * punch * punch * 0.6).toFixed(3);
     $('noir').style.opacity = m.noir ? 1 : 0;
     $('lignes').hidden = !m.lignes; $('vignette').hidden = !m.vignette;
     document.body.classList.toggle('contenir', m.contenir);
@@ -441,14 +528,47 @@ function demarrerEcran() {
   }
 
   // --- Communication avec la régie ---
-  function diffuserEtat() { canalBC.postMessage({ type: 'etat', etat }); }
+  // Relais réseau pour la manette du téléphone (actif seulement avec serveur.py).
+  let relais = false, envoiStatutReseau = 0;
+  const poster = (m) => fetch('/hct/statut', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(m) }).catch(() => {});
+  fetch('/hct/adresse').then(r => r.ok ? r.json() : null).then(j => {
+    if (!j) return;
+    relais = true;
+    const es = new EventSource('/hct/flux?role=ecran');
+    es.onmessage = (e) => { try { recevoir(JSON.parse(e.data)); } catch (err) {} };
+    poster({ type: 'etat', etat });
+  }).catch(() => {});
+
+  // Manette en ligne : connexion directe téléphone ↔ écran via PeerJS (gratuit, sans serveur à toi).
+  const pairs = new Set(); let idPair = null;
+  const versPairs = (m) => pairs.forEach(c => { if (c.open) try { c.send(m); } catch (e) {} });
+  function demarrerPair(essai = 0) {
+    if (!window.Peer) return;
+    let id = null; try { id = localStorage.getItem('hct-pair'); } catch (e) {}
+    if (!id || essai) { id = 'hct-' + Math.random().toString(36).slice(2, 8); try { localStorage.setItem('hct-pair', id); } catch (e) {} }
+    const peer = new Peer(id);
+    peer.on('open', (i) => { idPair = i; diffuserStatut(); });
+    peer.on('connection', (c) => {
+      c.on('open', () => { pairs.add(c); c.send({ type: 'etat', etat }); });
+      c.on('data', (m) => recevoir(m));
+      c.on('close', () => pairs.delete(c)); c.on('error', () => pairs.delete(c));
+    });
+    peer.on('disconnected', () => { try { peer.reconnect(); } catch (e) {} });
+    peer.on('error', (e) => { if (e.type === 'unavailable-id' && essai < 3) { peer.destroy(); demarrerPair(essai + 1); } });
+  }
+  demarrerPair();
+
+  function diffuserEtat() { const m = { type: 'etat', etat }; canalBC.postMessage(m); if (relais) poster(m); versPairs(m); }
   function diffuserStatut() {
-    canalBC.postMessage({ type: 'statut', basse: A.basse, energie: A.energie, kicks: A.kicks, pause: A.pause,
-      decks: P.map(p => ({ info: p.info[p.actif], bac: p.nomBac, msg: p.msg })) });
+    const m = { type: 'statut', basse: A.basse, energie: A.energie, kicks: A.kicks, pause: A.pause,
+      decks: P.map(p => ({ info: p.info[p.actif], bac: p.nomBac, msg: p.msg })), pair: idPair };
+    canalBC.postMessage(m);
+    if (++envoiStatutReseau % 3 === 0) { if (relais) poster(m); versPairs(m); }
   }
   setInterval(diffuserStatut, 80);
 
-  canalBC.onmessage = ({ data: m }) => {
+  canalBC.onmessage = ({ data }) => recevoir(data);
+  function recevoir(m) {
     if (m.type === 'bonjour') { diffuserEtat(); diffuserStatut(); }
     else if (m.type === 'regler') {
       const cible = m.deck == null ? etat.maitre : etat.decks[m.deck];
@@ -461,7 +581,7 @@ function demarrerEcran() {
     else if (m.type === 'creuser') { const d = etat.decks[m.deck]; d.requete = m.requete; d.prelingerSeul = m.prelingerSeul; chargerBac(m.deck); diffuserEtat(); }
     else if (m.type === 'zapper') { (m.deck == null ? [0, 1] : [m.deck]).forEach(zapper); }
     else if (m.type === 'tap') tap();
-  };
+  }
 
   function tap() {
     const t = performance.now(); A.taps = A.taps.filter(x => t - x < 3000); A.taps.push(t);
@@ -630,6 +750,26 @@ function demarrerRegie() {
   try { lienSp = localStorage.getItem('hct-spotify') || PLAYLIST_DEFAUT; } catch (e) {}
   $('spLien').value = lienSp; chargerSpotify(lienSp);
 
+  // --- QR de la manette ---
+  // Sur le Mac (localhost) : via serveur.py et le Wi-Fi. En ligne (GitHub Pages) : via PeerJS.
+  let urlQR = '';
+  function montrerQR(url, note) {
+    if (url === urlQR) return; urlQR = url;
+    $('qrNote').innerHTML = `${note}<br><b style="user-select:all;word-break:break-all">${url}</b>`;
+    $('qr').innerHTML = '';
+    if (window.QRCode) { $('qr').hidden = false; new QRCode($('qr'), { text: url, width: 116, height: 116, correctLevel: QRCode.CorrectLevel.M }); }
+  }
+  const surLeMac = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
+  if (surLeMac) {
+    fetch('/hct/adresse').then(r => r.ok ? r.json() : null).then(j => {
+      if (j) montrerQR(`http://${j.ip}:${j.port}${location.pathname}#manette`, 'Scanne avec l\'appareil photo du téléphone (même Wi-Fi que le Mac).');
+    }).catch(() => {});
+  }
+  function qrEnLigne(id) {
+    if (!id || surLeMac) return;
+    montrerQR(location.origin + location.pathname + '#manette-' + id, 'Scanne avec l\'appareil photo du téléphone. Marche sur n\'importe quel réseau.');
+  }
+
   // --- Réception ---
   function majUI() {
     etat.decks.forEach((d, i) => {
@@ -657,6 +797,7 @@ function demarrerRegie() {
       $('vuB').style.width = Math.min(100, m.basse * 140) + '%';
       $('vuE').style.width = Math.min(100, m.energie * 100) + '%';
       if (m.kicks !== vuDernier) { vuDernier = m.kicks; $('nbKicks').textContent = m.kicks; $('temoin').classList.add('kick'); setTimeout(() => $('temoin').classList.remove('kick'), 90); }
+      qrEnLigne(m.pair);
       m.decks.forEach((d, i) => {
         const c = ctl.decks[i];
         c.titre.textContent = d.info ? (d.info.titre || '—') + (d.info.annee ? ' (' + d.info.annee + ')' : '') : '—';
@@ -684,7 +825,152 @@ function demarrerRegie() {
   });
 }
 
-if (MODE === 'regie') demarrerRegie(); else demarrerEcran();
+/* ==================================================================== */
+/*                     MANETTE (téléphone, même Wi-Fi)                  */
+/* ==================================================================== */
+function demarrerManette() {
+  document.body.classList.add('manette');
+  document.body.appendChild($('tpl-manette').content.cloneNode(true));
+  let cible = 2, verrou = false, enLigne = false, dernierKick = 0;
+
+  const idEcran = (location.hash.match(/^#manette-(.+)$/) || [])[1];
+  let conn = null;
+  const envoyer = (m) => {
+    if (idEcran) { if (conn && conn.open) conn.send(m); return; }
+    fetch('/hct/cmd', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(m) })
+      .catch(() => erreur('Le Mac ne répond pas. Vérifie que serveur.py tourne et que tu es sur le même Wi-Fi.'));
+  };
+  const decks = () => cible === 2 ? [0, 1] : [cible];
+  const regler = (deck, cle, val) => envoyer({ type: 'regler', deck, cle, val });
+  const vibrer = () => { try { navigator.vibrate?.(8); } catch (e) {} };
+  function erreur(txt) { const e = $('mnErreur'); e.textContent = txt; e.hidden = !txt; }
+
+  // Cible A / A+B / B
+  document.querySelectorAll('.mn-cible button').forEach(b => b.onclick = () => {
+    cible = +b.dataset.c; document.querySelectorAll('.mn-cible button').forEach(x => x.classList.toggle('on', x === b)); majSujets(); majAuto();
+  });
+
+  // Crossfader tactile (double-tap = milieu)
+  const croix = $('mnCroix'), curs = $('mnCurseur');
+  let glisse = false, dernierEnvoi = 0, dernierTap = 0;
+  const xDe = (e) => { const r = croix.getBoundingClientRect(); return pinces((e.clientX - r.left - 23) / (r.width - 46), 0, 1); };
+  const poserX = (x, forcer) => {
+    curs.style.left = `calc(23px + ${x} * (100% - 46px))`;
+    const t = performance.now(); if (forcer || t - dernierEnvoi > 40) { dernierEnvoi = t; regler(null, 'xfade', +x.toFixed(3)); }
+  };
+  croix.addEventListener('pointerdown', (e) => {
+    const t = performance.now();
+    if (t - dernierTap < 300) { poserX(0.5, true); dernierTap = 0; return; }
+    dernierTap = t; glisse = true; croix.setPointerCapture(e.pointerId); poserX(xDe(e));
+  });
+  croix.addEventListener('pointermove', (e) => { if (glisse) poserX(xDe(e)); });
+  const finGlisse = (e) => { if (!glisse) return; glisse = false; poserX(xDe(e), true); };
+  croix.addEventListener('pointerup', finGlisse); croix.addEventListener('pointercancel', finGlisse);
+
+  // Zaps
+  document.querySelectorAll('.mn-zaps button').forEach(b => b.onclick = () => {
+    vibrer(); const z = +b.dataset.z; envoyer(z === 2 ? { type: 'zapper' } : { type: 'zapper', deck: z });
+  });
+
+  // Pads d'effets : on tient = effet actif, on relâche = retour. Avec Verrou, un tap allume/éteint.
+  const PADS = [
+    { nom: 'N&B', sous: 'noir et blanc', cle: 'nb', val: true },
+    { nom: 'Inverser', sous: 'négatif', cle: 'inverse', val: true },
+    { nom: 'Miroir', sous: 'symétrie', cle: 'miroir', val: true },
+    { nom: 'Zoom', sous: 'plonge', cle: 'zoom', val: 1.9 },
+    { nom: 'Flou', sous: 'rêve', cle: 'flou', val: 5 },
+    { nom: 'Ralenti', sous: '× 0.35', cle: 'vitesse', val: 0.35 },
+    { nom: 'Turbo', sous: '× 3', cle: 'vitesse', val: 3 },
+    { nom: 'Acide', sous: 'teinte qui tourne', cle: 'teinte', anime: true },
+    { nom: 'Strobe', sous: 'flash blanc', cle: 'strobe', val: true, maitre: true, classe: 'strobe' }
+  ];
+  const pads = $('mnPads');
+  PADS.forEach(pad => {
+    const b = document.createElement('button'); b.innerHTML = `${pad.nom}<small>${pad.sous}</small>`; if (pad.classe) b.className = pad.classe;
+    let avant = null, minuterie = null, actif = false;
+    const cibles = () => pad.maitre ? [null] : decks();
+    const lire = (d) => d == null ? etat.maitre[pad.cle] : etat.decks[d][pad.cle];
+    const allumer = () => {
+      if (actif) return; actif = true; vibrer(); b.classList.add('presse');
+      avant = cibles().map(d => [d, lire(d)]);
+      if (pad.anime) { let h = lire(cibles()[0]) || 0; minuterie = setInterval(() => { h = (h + 9) % 360; cibles().forEach(d => regler(d, 'teinte', h)); }, 60); }
+      else cibles().forEach(d => regler(d, pad.cle, pad.val));
+    };
+    const eteindre = () => {
+      if (!actif) return; actif = false; b.classList.remove('presse', 'verrouille'); clearInterval(minuterie);
+      (avant || []).forEach(([d, v]) => regler(d, pad.cle, v));
+    };
+    b.addEventListener('pointerdown', (e) => {
+      e.preventDefault();
+      if (verrou) { if (actif) eteindre(); else { allumer(); b.classList.add('verrouille'); b.classList.remove('presse'); } return; }
+      b.setPointerCapture(e.pointerId); allumer();
+    });
+    const relache = () => { if (!verrou) eteindre(); };
+    b.addEventListener('pointerup', relache); b.addEventListener('pointercancel', relache);
+    b.addEventListener('contextmenu', (e) => e.preventDefault());
+    pads.appendChild(b);
+  });
+
+  // Sujets
+  const sujets = $('mnSujets');
+  SUJETS.forEach((s, k) => { const b = document.createElement('button'); b.textContent = s[0].replace(' (dossier videos)', ''); b.dataset.k = k;
+    b.onclick = () => { vibrer(); decks().forEach(d => regler(d, 'bac', k)); }; sujets.appendChild(b); });
+  function majSujets() {
+    const k = etat.decks[cible === 1 ? 1 : 0];
+    [...sujets.children].forEach(b => b.classList.toggle('on', !k.requete && +b.dataset.k === k.bac));
+  }
+
+  // Barre du bas
+  $('mnVerrou').onclick = () => { verrou = !verrou; $('mnVerrou').classList.toggle('on', verrou); };
+  $('mnTap').onclick = () => { vibrer(); envoyer({ type: 'tap' }); };
+  $('mnNoir').onclick = () => { vibrer(); regler(null, 'noir', !etat.maitre.noir); };
+  $('mnAuto').onclick = () => { const on = !$('mnAuto').classList.contains('on'); decks().forEach(d => regler(d, 'zap', on ? 8 : 0)); };
+  function majAuto() { $('mnAuto').classList.toggle('on', decks().some(d => etat.decks[d].zap > 0)); }
+
+  // Réception de l'état depuis l'écran
+  function majTout() {
+    if (!glisse) curs.style.left = `calc(23px + ${etat.maitre.xfade} * (100% - 46px))`;
+    $('mnNoir').classList.toggle('on', etat.maitre.noir);
+    majSujets(); majAuto();
+  }
+  function connecter() {
+    const es = new EventSource('/hct/flux?role=manette');
+    es.onopen = () => { enLigne = true; $('mnLien').classList.add('ok'); $('mnLienTxt').textContent = 'Connectée'; erreur(''); };
+    es.onerror = () => { enLigne = false; $('mnLien').classList.remove('ok'); $('mnLienTxt').textContent = 'Reconnexion…'; };
+    es.onmessage = (e) => { try { traiter(JSON.parse(e.data)); } catch (err) {} };
+  }
+  function lien(ok, txt) { enLigne = ok; $('mnLien').classList.toggle('ok', ok); $('mnLienTxt').textContent = txt; if (ok) erreur(''); }
+  function traiter(m) {
+      if (m.type === 'etat') { etat = m.etat; majTout(); }
+      else if (m.type === 'statut') {
+        const t = (d, L) => d && d.info ? `${L} · ${d.info.titre}${d.info.annee ? ' (' + d.info.annee + ')' : ''}` : `${L} · ${d ? d.msg : '—'}`;
+        $('mnA').textContent = t(m.decks[0], 'A'); $('mnB').textContent = t(m.decks[1], 'B');
+        if (m.kicks !== dernierKick) { dernierKick = m.kicks; $('mnKick').classList.add('kick'); setTimeout(() => $('mnKick').classList.remove('kick'), 90); }
+      }
+      else if (m.type === 'ecran-present') envoyer({ type: 'bonjour' });
+  }
+  function connecterPair() {
+    if (!window.Peer) { erreur('Impossible de charger la connexion (internet requis).'); return; }
+    lien(false, 'Connexion…');
+    const peer = new Peer();
+    peer.on('open', () => {
+      conn = peer.connect(idEcran, { reliable: true });
+      conn.on('open', () => { lien(true, 'Connectée'); envoyer({ type: 'bonjour' }); });
+      conn.on('data', traiter);
+      conn.on('close', () => { lien(false, 'Reconnexion…'); peer.destroy(); setTimeout(connecterPair, 2000); });
+    });
+    peer.on('error', (e) => {
+      if (e.type === 'peer-unavailable') erreur("L'écran n'est pas allumé. Ouvre la page sur l'ordi, clique Allumer, puis rescanne si besoin.");
+      lien(false, 'Hors ligne'); peer.destroy(); setTimeout(connecterPair, 3000);
+    });
+  }
+  if (idEcran) connecterPair();
+  else fetch('/hct/adresse').then(r => { if (!r.ok) throw 0; connecter(); envoyer({ type: 'bonjour' }); })
+    .catch(() => erreur('Scanne le QR code affiché dans la régie de l\'écran pour connecter la manette.'));
+  navigator.wakeLock?.request('screen').catch(() => {});
+}
+
+if (MODE === 'regie') demarrerRegie(); else if (MODE === 'manette') demarrerManette(); else demarrerEcran();
 </script>
 </body>
 </html>
