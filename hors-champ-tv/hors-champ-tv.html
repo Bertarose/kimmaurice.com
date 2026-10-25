@@ -311,6 +311,34 @@ const pinces = (v, a, b) => Math.min(b, Math.max(a, v));
 
 /* ----- Bacs ----- */
 const PRELINGER = 'collection:prelinger AND mediatype:movies';
+
+/* ----- Filtre de contenu (silencieux) -----
+   Écarte les films dont les sujets, le titre ou la description parlent de violence
+   ou de souffrance animale. Le filtre se base sur les fiches de l'archive : il en
+   attrape la grande majorité, pas 100 %. Pour un film qui passe quand même, utilise
+   « Retirer ce film » dans la régie, puis copie la liste dans EXCLUS ci-dessous. */
+const MOTS_EXCLUS = [
+  // violence, guerre, crime
+  'war', 'wartime', 'warfare', 'combat', 'battle', 'battles', 'violence', 'violent', 'killing', 'killed', 'murder', 'crime', 'criminals',
+  'atrocities', 'atrocity', 'execution', 'executions', 'torture', 'massacre', 'genocide', 'holocaust', 'concentration camps',
+  'bombing', 'bombings', 'bombs', 'weapons', 'firearms', 'guns', 'shooting', 'riots', 'lynching', 'terrorism', 'invasion',
+  'casualties', 'wounded', 'corpses', 'dead bodies', 'death', 'accidents', 'traffic accidents', 'car crashes', 'crash', 'disasters',
+  'hiroshima', 'nagasaki', 'nuclear warfare', 'atomic bomb', 'military', 'army', 'navy', 'soldiers', 'troops', 'nazi', 'nazis',
+  'police brutality', 'prisons', 'electric chair', 'gore', 'blood', 'surgery',
+  // souffrance animale
+  'slaughter', 'slaughtering', 'slaughterhouse', 'slaughterhouses', 'abattoir', 'meat packing', 'meat industry', 'packing houses',
+  'butchering', 'butchers', 'hunting', 'hunters', 'trapping', 'traps', 'whaling', 'sealing', 'bullfight', 'bullfighting',
+  'rodeo', 'rodeos', 'cockfighting', 'dog fighting', 'animal experimentation', 'vivisection', 'animal testing', 'fur trade',
+  'taxidermy', 'animal cruelty', 'cruelty', 'pest control', 'exterminators', 'poison', 'branding', 'castration'
+];
+const EXCLUS = [];   // identifiants archive.org retirés à la main, ex. ['MeatPack1950', 'AutoCras1955']
+const FILTRE_REQ = ' AND NOT (' + ['subject', 'title', 'description'].map(c =>
+  c + ':(' + MOTS_EXCLUS.map(m => m.includes(' ') ? '"' + m + '"' : m).join(' OR ') + ')').join(' OR ') + ')';
+// Version courte (sujets seulement), si l'archive refuse la requête longue.
+const FILTRE_COURT = ' AND NOT subject:(' + MOTS_EXCLUS.map(m => m.includes(' ') ? '"' + m + '"' : m).join(' OR ') + ')';
+const FILTRE_TITRE = new RegExp('\\b(' + MOTS_EXCLUS.map(m => m.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|') + ')\\b', 'i');
+function exclusLocaux() { try { return JSON.parse(localStorage.getItem('hct-exclus') || '[]'); } catch (e) { return []; } }
+function estExclu(id, titre) { return EXCLUS.includes(id) || exclusLocaux().includes(id) || FILTRE_TITRE.test(titre || ''); }
 const SUJETS = [
   ['Tout Prelinger', ''],
   ['Usines', 'industry OR industrial OR manufacturing OR factories OR machinery'],
@@ -320,9 +348,9 @@ const SUJETS = [
   ['Futur', 'future OR atomic OR space OR automation'],
   ['Villes', 'cities OR urban OR traffic OR highways'],
   ['Voitures', 'automobiles OR cars OR driving'],
-  ['Nature', 'nature OR animals OR agriculture OR farming'],
+  ['Nature', 'nature OR plants OR flowers OR gardens OR weather OR oceans'],
   ['Corps et hygiène', 'hygiene OR health OR body OR sports'],
-  ['Guerre froide', '"civil defense" OR communism OR propaganda OR war'],
+  ['Télévision', 'television OR broadcasting OR radio'],
   ['Cuisine', 'food OR cooking OR kitchens'],
   ['Mode', 'fashion OR clothing OR beauty'],
   ['Mes vidéos (dossier videos)', '__local__']
@@ -391,12 +419,15 @@ function demarrerEcran() {
 
     let q = d.requete ? `(${d.requete})` : (sujet ? `subject:(${sujet})` : '');
     q = d.requete && !d.prelingerSeul ? 'mediatype:movies AND ' + q : PRELINGER + (q ? ' AND ' + q : '');
-    const url = 'https://archive.org/advancedsearch.php?q=' + encodeURIComponent(q) +
+    const urlDe = (f) => 'https://archive.org/advancedsearch.php?q=' + encodeURIComponent(q + f) +
       '&fl[]=identifier&fl[]=title&fl[]=year&fl[]=date&rows=500&page=1&output=json';
     try {
-      const j = await jsonAvecDelai(url);
+      let j;
+      try { j = await jsonAvecDelai(urlDe(FILTRE_REQ)); }
+      catch (e) { j = await jsonAvecDelai(urlDe(FILTRE_COURT)); }
       const docs = (j.response && j.response.docs) || [];
-      p.pool = melange(docs.map(x => ({ id: x.identifier, titre: x.title, annee: x.year || (x.date ? String(x.date).slice(0, 4) : '') })));
+      p.pool = melange(docs.filter(x => !estExclu(x.identifier, String(x.title || '')))
+        .map(x => ({ id: x.identifier, titre: x.title, annee: x.year || (x.date ? String(x.date).slice(0, 4) : '') })));
       p.msg = p.pool.length ? `${p.pool.length} bobines` : 'Rien trouvé';
     } catch (e) { p.msg = 'Archive injoignable'; }
     diffuserStatut();
@@ -412,7 +443,7 @@ function demarrerEcran() {
       if (!mp4.length) { p.meta.set(it.id, null); return null; }
       const f = mp4[0];
       const r = { url: 'https://archive.org/download/' + encodeURIComponent(it.id) + '/' + f.name.split('/').map(encodeURIComponent).join('/'),
-        titre: it.titre || it.id, annee: it.annee, source: 'archive.org/details/' + it.id };
+        titre: it.titre || it.id, annee: it.annee, source: 'archive.org/details/' + it.id, id: it.id };
       p.meta.set(it.id, r); return r;
     } catch (e) { return null; }
   }
@@ -623,6 +654,16 @@ function demarrerEcran() {
     else if (m.type === 'creuser') { const d = etat.decks[m.deck]; d.requete = m.requete; d.prelingerSeul = m.prelingerSeul; chargerBac(m.deck); diffuserEtat(); }
     else if (m.type === 'zapper') { (m.deck == null ? [0, 1] : [m.deck]).forEach(zapper); }
     else if (m.type === 'tap') tap();
+    else if (m.type === 'bannir' && (m.deck === 0 || m.deck === 1)) {
+      const p = P[m.deck], info = p.info[p.actif];
+      if (info && info.id) {
+        const l = exclusLocaux(); if (!l.includes(info.id)) l.push(info.id);
+        try { localStorage.setItem('hct-exclus', JSON.stringify(l)); } catch (e) {}
+        p.pool = p.pool.filter(it => it.id !== info.id);
+        diffuserEtat();
+      }
+      zapper(m.deck);
+    }
   }
 
   function tap() {
@@ -738,7 +779,7 @@ function demarrerRegie(opts = {}) {
       <select class="bac" aria-label="Sujet de la platine ${L}">${SUJETS.map((s, k) => `<option value="${k}">${s[0]}</option>`).join('')}</select>
       <div class="rang"><input type="text" class="req" placeholder="Creuser : robots, dance, 1950…" aria-label="Recherche platine ${L}"><button class="go">Creuser</button></div>
       <label class="note"><input type="checkbox" class="pre" checked> Seulement Prelinger</label>
-      <div class="rang"><button class="suiv">Film suivant</button>
+      <div class="rang"><button class="suiv">Film suivant</button><button class="bannir" title="Ne plus jamais montrer ce film">Retirer ce film</button>
         <select class="zap" style="width:auto" aria-label="Zap automatique platine ${L}">${ZAPS.map(z => `<option value="${z[0]}">Zap : ${z[1]}</option>`).join('')}</select></div>
       <span class="etiq">Effets</span>
       <div class="curs" style="display:grid;gap:6px"></div>
@@ -751,6 +792,7 @@ function demarrerRegie(opts = {}) {
     const creuser = () => { if (req.value.trim()) envoyer({ type: 'creuser', deck: i, requete: req.value.trim(), prelingerSeul: pre.checked }); };
     sec.querySelector('.go').onclick = creuser; req.addEventListener('keydown', (e) => { if (e.key === 'Enter') creuser(); });
     sec.querySelector('.suiv').onclick = () => envoyer({ type: 'zapper', deck: i });
+    sec.querySelector('.bannir').onclick = () => envoyer({ type: 'bannir', deck: i });
     c.zap = sec.querySelector('.zap'); c.zap.onchange = () => regler(i, 'zap', +c.zap.value);
     c.fus = sec.querySelector('.fus'); c.fus.onchange = () => regler(i, 'fusion', c.fus.value);
     const curs = sec.querySelector('.curs');
