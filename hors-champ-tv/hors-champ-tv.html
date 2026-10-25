@@ -851,7 +851,7 @@ function demarrerRegie(opts = {}) {
   }
   $('spOk').onclick = () => { if (!chargerSpotify($('spLien').value.trim())) $('spLien').value = 'Lien Spotify non reconnu'; };
   $('spLien').addEventListener('keydown', (e) => { if (e.key === 'Enter') $('spOk').click(); });
-  const PLAYLIST_DEFAUT = 'https://open.spotify.com/playlist/0xx4H1cOq9LO7UhrK3F2rQ';
+  const PLAYLIST_DEFAUT = 'https://open.spotify.com/playlist/7cDQVIXpJ0aDcwmSuCEyHC';
   let lienSp = PLAYLIST_DEFAUT;
   try { lienSp = localStorage.getItem('hct-spotify') || PLAYLIST_DEFAUT; } catch (e) {}
   $('spLien').value = lienSp; if (!opts.conteneur) chargerSpotify(lienSp);
