@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+  <script>/* Version noir et blanc : appliquée avant l'affichage pour éviter un flash de couleur */try{if(localStorage.getItem('kim-nb')==='1')document.documentElement.classList.add('nb')}catch(e){}</script>
   <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kim Maurice — Coordonnatrice numérique · Chargée de projet numérique · Technologue créative</title>
@@ -775,6 +776,28 @@
     .btn-tv-fl { color:var(--green); font-size:.9rem; margin-left:.3rem; }
     @media(prefers-reduced-motion:reduce){ .btn-tv-led { animation:none; } }
 
+    /* ─── VERSION NOIR ET BLANC ───
+       Chaque bloc de la page (et les fonds, la télé, les widgets) passe en niveaux de gris.
+       Le filtre est posé sur les enfants directs de <body> pour ne pas casser les éléments fixes. */
+    body > * { transition:filter .6s ease; }
+    html.nb body > * { filter:grayscale(1) contrast(1.06); }
+    .nb-switch {
+      display:inline-flex; align-items:center; gap:.45rem; cursor:pointer;
+      background:transparent; border:1px solid var(--line); color:var(--sub);
+      padding:.3rem .6rem; font:600 .66rem/1 var(--ff-mono); letter-spacing:.1em; text-transform:uppercase;
+      transition:color .2s, border-color .2s;
+    }
+    .nb-switch:hover { color:var(--text); border-color:rgba(242,241,246,.4); }
+    .nb-switch:focus-visible, .lang-btn:focus-visible { outline:2px solid var(--green); outline-offset:2px; }
+    .nb-piste { position:relative; width:1.7rem; height:.85rem; border-radius:999px; background:linear-gradient(90deg,var(--pink),var(--blue)); transition:background .3s; }
+    .nb-bille { position:absolute; top:.1rem; left:.1rem; width:.65rem; height:.65rem; border-radius:50%; background:var(--green); box-shadow:0 0 6px var(--green); transition:transform .3s, background .3s, box-shadow .3s; }
+    html.nb .nb-switch { color:var(--text); }
+    html.nb .nb-piste { background:#3a3a3a; }
+    html.nb .nb-bille { transform:translateX(.85rem); background:#fff; box-shadow:none; }
+    .nav-right { gap:1rem; }
+    @media(min-width:768px){ .nav-right { gap:2rem; } }
+    @media(prefers-reduced-motion:reduce){ body > *, .nb-bille, .nb-piste { transition:none; } }
+
     /* ─── TYPOGRAPHIE CONTEMPORAINE ───
        Inter Tight (titres) + Inter (texte courant). IBM Plex Mono seulement pour les petites étiquettes. */
     body { letter-spacing:0; }
@@ -812,6 +835,10 @@
       <a href="#formation"  data-fr="Formation"   data-en="Education">Formation</a>
       <a href="#contact"   data-fr="Contact"     data-en="Contact">Contact</a>
     </nav>
+    <button class="nb-switch" id="nbBtn" type="button" role="switch" aria-checked="false" title="Couleur / noir et blanc">
+      <span class="nb-piste" aria-hidden="true"><span class="nb-bille"></span></span>
+      <span class="nb-lbl" data-fr="N&amp;B" data-en="B&amp;W">N&amp;B</span>
+    </button>
     <button class="lang-btn" id="langBtn">EN</button>
   </div>
 </header>
@@ -1328,6 +1355,18 @@
   }
   window.addEventListener('resize',()=>{cancelAnimationFrame(id);resize();tick();});
   resize();tick();
+})();
+
+// NOIR ET BLANC
+(function(){
+  const b=document.getElementById('nbBtn'); if(!b) return;
+  const maj=()=>b.setAttribute('aria-checked',String(document.documentElement.classList.contains('nb')));
+  b.addEventListener('click',()=>{
+    const on=document.documentElement.classList.toggle('nb');
+    try{ localStorage.setItem('kim-nb', on?'1':'0'); }catch(e){}
+    maj();
+  });
+  maj();
 })();
 
 // LANG

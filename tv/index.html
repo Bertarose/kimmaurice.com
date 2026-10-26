@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="fr">
 <head>
+<script>try{if(localStorage.getItem('kim-nb')==='1')document.documentElement.classList.add('nb')}catch(e){}</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Hors Champ TV — Kim Maurice</title>
@@ -16,6 +17,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
   html, body { margin: 0; height: 100%; background: #000; }
+  html.nb body > * { filter: grayscale(1) contrast(1.06); }
   noscript { display: block; color: #f2f1f6; font: 16px/1.6 Inter, sans-serif; padding: 2rem; }
   noscript a { color: #c9ff3d; }
 </style>
