@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <script>/* Version noir et blanc : appliquée avant l'affichage pour éviter un flash de couleur */try{if(localStorage.getItem('kim-nb')==='1')document.documentElement.classList.add('nb')}catch(e){}</script>
+  <script>/* Noir et blanc par défaut ; la couleur seulement si le visiteur l'a choisie. Appliqué avant l'affichage, sans flash. */(function(){var c=false;try{c=localStorage.getItem('kim-nb')==='0'}catch(e){}if(!c)document.documentElement.classList.add('nb')})();</script>
   <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kim Maurice — Coordonnatrice numérique · Chargée de projet numérique · Technologue créative</title>
@@ -790,10 +790,10 @@
     .nb-switch:hover { color:var(--text); border-color:rgba(242,241,246,.4); }
     .nb-switch:focus-visible, .lang-btn:focus-visible { outline:2px solid var(--green); outline-offset:2px; }
     .nb-piste { position:relative; width:1.7rem; height:.85rem; border-radius:999px; background:linear-gradient(90deg,var(--pink),var(--blue)); transition:background .3s; }
-    .nb-bille { position:absolute; top:.1rem; left:.1rem; width:.65rem; height:.65rem; border-radius:50%; background:var(--green); box-shadow:0 0 6px var(--green); transition:transform .3s, background .3s, box-shadow .3s; }
-    html.nb .nb-switch { color:var(--text); }
+    .nb-bille { position:absolute; top:.1rem; left:.1rem; width:.65rem; height:.65rem; border-radius:50%; background:var(--green); box-shadow:0 0 6px var(--green); transform:translateX(.85rem); transition:transform .3s, background .3s, box-shadow .3s; }
+    html:not(.nb) .nb-switch { color:var(--text); }
     html.nb .nb-piste { background:#3a3a3a; }
-    html.nb .nb-bille { transform:translateX(.85rem); background:#fff; box-shadow:none; }
+    html.nb .nb-bille { transform:none; background:#fff; box-shadow:none; }
     .nav-right { gap:1rem; }
     @media(min-width:768px){ .nav-right { gap:2rem; } }
     @media(prefers-reduced-motion:reduce){ body > *, .nb-bille, .nb-piste { transition:none; } }
@@ -835,9 +835,9 @@
       <a href="#formation"  data-fr="Formation"   data-en="Education">Formation</a>
       <a href="#contact"   data-fr="Contact"     data-en="Contact">Contact</a>
     </nav>
-    <button class="nb-switch" id="nbBtn" type="button" role="switch" aria-checked="false" title="Couleur / noir et blanc">
+    <button class="nb-switch" id="nbBtn" type="button" role="switch" aria-checked="false" title="Afficher le site en couleur">
       <span class="nb-piste" aria-hidden="true"><span class="nb-bille"></span></span>
-      <span class="nb-lbl" data-fr="N&amp;B" data-en="B&amp;W">N&amp;B</span>
+      <span class="nb-lbl" data-fr="Couleur" data-en="Colour">Couleur</span>
     </button>
     <button class="lang-btn" id="langBtn">EN</button>
   </div>
@@ -1360,7 +1360,7 @@
 // NOIR ET BLANC
 (function(){
   const b=document.getElementById('nbBtn'); if(!b) return;
-  const maj=()=>b.setAttribute('aria-checked',String(document.documentElement.classList.contains('nb')));
+  const maj=()=>b.setAttribute('aria-checked',String(!document.documentElement.classList.contains('nb')));
   b.addEventListener('click',()=>{
     const on=document.documentElement.classList.toggle('nb');
     try{ localStorage.setItem('kim-nb', on?'1':'0'); }catch(e){}
