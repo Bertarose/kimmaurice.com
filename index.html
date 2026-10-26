@@ -779,8 +779,9 @@
     /* ─── VERSION NOIR ET BLANC ───
        Chaque bloc de la page (et les fonds, la télé, les widgets) passe en niveaux de gris.
        Le filtre est posé sur les enfants directs de <body> pour ne pas casser les éléments fixes. */
-    body > * { transition:filter .6s ease; }
-    html.nb body > * { filter:grayscale(1) contrast(1.06); }
+    /* La photo du cube (.hero-right) reste en couleur : on filtre le reste du hero bloc par bloc. */
+    body > *, .hero > * { transition:filter .6s ease; }
+    html.nb body > *:not(.hero), html.nb .hero > *:not(.hero-right) { filter:grayscale(1) contrast(1.06); }
     .nb-switch {
       display:inline-flex; align-items:center; gap:.45rem; cursor:pointer;
       background:transparent; border:1px solid var(--line); color:var(--sub);
