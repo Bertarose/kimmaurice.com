@@ -91,12 +91,6 @@
     salle = document.createElement('div');
     salle.className = 'salle'; salle.setAttribute('role', 'dialog'); salle.setAttribute('aria-modal', 'true');
     salle.setAttribute('aria-label', 'Hors Champ TV');
-    cadre = document.createElement('iframe');
-    cadre.title = 'Hors Champ TV';
-    cadre.setAttribute('allow', 'autoplay; fullscreen');
-    cadre.src = CFG.page + '?fond' + (mobile ? '&poche' : '');
-    salle.appendChild(cadre);
-    if (!reduce) { var a = document.createElement('div'); a.className = 'allumage'; salle.appendChild(a); }
     salle.insertAdjacentHTML('beforeend',
       '<div class="ui haut">' +
         (autonome ? '<a class="bouton retour" href="' + CFG.retour + '"></a>' : '<button type="button" class="retour"></button>') +
@@ -151,10 +145,29 @@
     else document.exitFullscreen && document.exitFullscreen();
   }
 
+  // La télé est recréée à chaque allumage : une iframe neuve, son adresse posée AVANT son insertion.
+  // Ainsi elle repart toujours de zéro et n'ajoute aucune étape à l'historique du navigateur
+  // (changer l'adresse d'une iframe existante, ex. about:blank, crée des étapes que « Retour » rejouait).
+  function allumerTele() {
+    eteindreTele();
+    cadre = document.createElement('iframe');
+    cadre.title = 'Hors Champ TV';
+    cadre.setAttribute('allow', 'autoplay; fullscreen');
+    cadre.src = CFG.page + '?fond' + (mobile ? '&poche' : '') + '&t=' + Date.now();
+    salle.insertBefore(cadre, salle.firstChild);
+    if (!reduce) { var a = document.createElement('div'); a.className = 'allumage'; cadre.after(a); setTimeout(function () { a.remove(); }, 1000); }
+  }
+  function eteindreTele() {
+    if (cadre) { cadre.remove(); cadre = null; }
+    var a = salle && salle.querySelector('.allumage'); if (a) a.remove();
+  }
+
   function ouvrir(viaHistorique) {
     if (ouverte) return;
     ouverte = true;
-    if (!salle) construire(); else { cadre.src = CFG.page + '?fond' + (mobile ? '&poche' : ''); }
+    if (!salle) construire();
+    reinitManette();
+    allumerTele();
     document.documentElement.classList.add('salle-ouverte');
     window.dispatchEvent(new CustomEvent('salle:etat', { detail: { ouverte: true } }));
     salle.style.display = '';
@@ -168,7 +181,7 @@
     ouverte = false;
     if (document.fullscreenElement) document.exitFullscreen();
     salle.classList.remove('on');
-    setTimeout(function () { if (!ouverte) { salle.style.display = 'none'; cadre.src = 'about:blank'; reinitManette(); } }, 500);
+    setTimeout(function () { if (!ouverte) { salle.style.display = 'none'; eteindreTele(); reinitManette(); } }, 500);
     document.documentElement.classList.remove('salle-ouverte');
     window.dispatchEvent(new CustomEvent('salle:etat', { detail: { ouverte: false } }));
     if (viaBouton && location.hash === '#tv') history.back();
