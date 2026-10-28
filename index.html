@@ -1155,7 +1155,7 @@
           <li data-fr="Fonction : graphisme — département artistique" data-en="Role: graphics — art department">Fonction : graphisme — département artistique</li>
           <li data-fr="Interfaces UI pour les écrans visibles à l'image (moniteurs, téléphones, panneaux); signalétique, documents, affiches et supports graphiques pour décors" data-en="UI for on-screen displays (monitors, phones, signage); signage, documents, posters and graphic materials for sets">Interfaces UI pour les écrans visibles à l'image (moniteurs, téléphones, panneaux); signalétique, documents, affiches et supports graphiques pour décors</li>
           <li data-fr="Collaboration étroite avec les directeurs artistiques et les départements de production" data-en="Close collaboration with art directors and production departments">Collaboration étroite avec les directeurs artistiques et les départements de production</li>
-          <li data-fr="Props numériques, interfaces fictives, motion design" data-en="Digital props, fictional interfaces, motion design">Props numériques, interfaces fictives, motion design</li>
+          <li class="figuration" data-fr="Aussi devant la caméra, en figuration : &lt;em&gt;Laurence Anyways&lt;/em&gt; (Xavier Dolan, 2012) · &lt;em&gt;The Art of More&lt;/em&gt; (série, 2015–2016) · &lt;em&gt;Arsenal&lt;/em&gt; · &lt;em&gt;What’s Your Raashee?&lt;/em&gt; (Bollywood, tourné en Inde, 2009)" data-en="Also in front of the camera, as a background performer: &lt;em&gt;Laurence Anyways&lt;/em&gt; (Xavier Dolan, 2012) · &lt;em&gt;The Art of More&lt;/em&gt; (series, 2015–2016) · &lt;em&gt;Arsenal&lt;/em&gt; · &lt;em&gt;What’s Your Raashee?&lt;/em&gt; (Bollywood, shot in India, 2009)">Aussi devant la caméra, en figuration : <em>Laurence Anyways</em> (Xavier Dolan, 2012) · <em>The Art of More</em> (série, 2015–2016) · <em>Arsenal</em> · <em>What’s Your Raashee?</em> (Bollywood, tourné en Inde, 2009)</li>
         </ul>
       </div>
     </div>
@@ -1378,7 +1378,7 @@
     document.querySelectorAll('[data-fr]').forEach(el=>{
       const val=el.getAttribute('data-'+lang);
       if(!val) return;
-      if(val.includes('<br>')||val.includes('<strong>')) el.innerHTML=val;
+      if(val.includes('<br>')||val.includes('<strong>')||val.includes('<em>')) el.innerHTML=val;
       else el.textContent=val;
     });
     btn.textContent=lang==='fr'?'EN':'FR';
