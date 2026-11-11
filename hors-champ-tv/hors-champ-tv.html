@@ -390,6 +390,8 @@ function demarrerEcran() {
     dernierKick: 0, kicks: 0, pause: false, pauseDepuis: 0, prochainTic: 0, taps: []
   };
   let punch = 0, salve = 0, canal = 1;
+  // Chaîne commune : rôle de cet écran ('hote' = la régie de tout le monde, 'invite' = suit la régie, null = télé privée)
+  const DIRECT = { actif: false, role: null };
 
   // --- Platines ---
   const P = [0, 1].map(i => {
@@ -406,6 +408,7 @@ function demarrerEcran() {
   }
 
   async function chargerBac(i) {
+    if (DIRECT.role === 'invite') return;   // la régie charge le sujet et envoie les films
     const d = etat.decks[i], p = P[i];
     const [nom, sujet] = SUJETS[d.bac] || SUJETS[0];
     p.pool = []; p.meta = new Map();
@@ -455,26 +458,31 @@ function demarrerEcran() {
     } catch (e) { return null; }
   }
 
-  function chargerVideo(v, url) {
+  function chargerVideo(v, url, debut) {
     return new Promise((res) => {
       let fini = false;
       const fin = (ok) => { if (fini) return; fini = true; clearTimeout(t); v.onloadedmetadata = v.onseeked = v.onerror = null; res(ok); };
       const t = setTimeout(() => fin(false), 15000);
       v.onerror = () => fin(false);
-      v.onloadedmetadata = () => { const d = v.duration; if (isFinite(d) && d > 20) v.currentTime = Math.random() * Math.max(0, d - 25) + 3; else fin(true); };
+      v.onloadedmetadata = () => {
+        const d = v.duration;
+        if (typeof debut === 'number') { const cible = isFinite(d) ? pinces(debut, 0, Math.max(0, d - 1)) : debut; if (cible > 0.2) v.currentTime = cible; else fin(true); return; }
+        if (isFinite(d) && d > 20) v.currentTime = Math.random() * Math.max(0, d - 25) + 3; else fin(true);
+      };
       v.onseeked = () => fin(true);
       v.src = url; v.load();
     });
   }
 
   async function precharger(i, puisZapper) {
+    if (DIRECT.role === 'invite') return;   // l'invité ne prépare pas ses propres films
     const p = P[i], jeton = {}; p.jeton = jeton;
     const k = 1 - p.actif; p.pret[k] = false;
     for (let essai = 0; essai < 6 && p.pool.length; essai++) {
       const it = p.pool.shift(); p.pool.push(it);
-      const info = await resoudre(p, it); if (p.jeton !== jeton) return;
+      const info = await resoudre(p, it); if (p.jeton !== jeton || DIRECT.role === 'invite') return;
       if (!info) continue;
-      const ok = await chargerVideo(p.v[k], info.url); if (p.jeton !== jeton) return;
+      const ok = await chargerVideo(p.v[k], info.url); if (p.jeton !== jeton || DIRECT.role === 'invite') return;
       if (ok) { p.pret[k] = true; p.info[k] = info; if (puisZapper || p.attente) zapper(i); return; }
     }
   }
@@ -482,19 +490,26 @@ function demarrerEcran() {
   function poids(i) { const x = etat.maitre.xfade; return i === 0 ? Math.min(1, 2 * (1 - x)) : Math.min(1, 2 * x); }
 
   function zapper(i) {
+    if (DIRECT.role === 'invite') return;   // l'invité attend les films de la régie
     const p = P[i], k = 1 - p.actif;
     if (!p.pret[k]) { p.attente = true; return; }
     p.attente = false;
+    basculer(i);
+  }
+  // Passe la platine i sur la vidéo préparée dans son lecteur caché
+  function basculer(i) {
+    const p = P[i], k = 1 - p.actif;
     salve = Math.max(salve, 0.9 * poids(i) * etat.decks[i].opacite);
     setTimeout(() => {
       const ancien = p.v[p.actif]; p.actif = k;
-      const v = p.v[k]; v.playbackRate = vitesse(i); v.play().catch(() => {});
+      const v = p.v[k]; v.playbackRate = vitesse(i); if (!etat.decks[i].gel) v.play().catch(() => {});
       v.classList.add('actif'); ancien.classList.remove('actif'); setTimeout(() => ancien.pause(), 60);
       p.pret[k] = false;
       canal = canal % 99 + 1; afficherOSD(p.info[k]);
       if (DANS_SITE && p.info[k]) parent.postMessage({ source: 'hct', type: 'film', deck: i, titre: String(p.info[k].titre || ''), annee: String(p.info[k].annee || '') }, '*');
       diffuserStatut();
-      precharger(i, false);
+      if (DIRECT.role === 'hote') directFilm(i);
+      if (DIRECT.role !== 'invite') precharger(i, false);
     }, 100);
   }
 
@@ -528,6 +543,8 @@ function demarrerEcran() {
   }
 
   function surKick(t) {
+    if (DIRECT.role === 'invite') return;   // le tempo vient de la régie
+    if (DIRECT.role === 'hote') directKick();
     A.dernierKick = t; A.kicks++; punch = 1;
     etat.decks.forEach((d, i) => {
       if (d.gel || !d.zap) return;
@@ -536,7 +553,16 @@ function demarrerEcran() {
     });
   }
 
+  // Musique jouée par la salle de projection (site parent) : elle remplace l'horloge interne
+  function recevoirAudio(d) {
+    A.externe = performance.now();
+    A.basse = pinces(Number(d.basse) || 0, 0, 1);
+    A.energie = pinces(Number(d.energie) || 0, 0, 1.5);
+    if (d.kick) surKick(performance.now());
+  }
+
   function analyser(t) {
+    if (performance.now() - (A.externe || 0) < 700) return;   // la musique du site mène la danse
     if (etat.maitre.source === 'horloge' || !A.analyser) {
       const per = 60000 / etat.maitre.bpm;
       if (t >= A.prochainTic) { surKick(t); A.prochainTic += per; if (t - A.prochainTic > per) A.prochainTic = t + per; }
@@ -638,7 +664,7 @@ function demarrerEcran() {
   }
   if (!FOND) attendrePair();   // en fond de site : seulement quand un visiteur demande le QR
 
-  function diffuserEtat() { const m = { type: 'etat', etat }; canalBC.postMessage(m); if (relais) poster(m); versPairs(m); }
+  function diffuserEtat() { const m = { type: 'etat', etat }; canalBC.postMessage(m); if (relais) poster(m); versPairs(m); directEtatChange(); }
   function diffuserStatut() {
     const m = { type: 'statut', basse: A.basse, energie: A.energie, kicks: A.kicks, pause: A.pause,
       decks: P.map(p => ({ info: p.info[p.actif], bac: p.nomBac, msg: p.msg })), pair: idPair };
@@ -649,7 +675,8 @@ function demarrerEcran() {
 
   canalBC.onmessage = ({ data }) => recevoir(data);
   function recevoir(m) {
-    if (m.type === 'bonjour') { diffuserEtat(); diffuserStatut(); }
+    if (m.type === 'bonjour') { diffuserEtat(); diffuserStatut(); return; }
+    if (DIRECT.role === 'invite' && directTransmettre(m)) return;
     else if (m.type === 'regler') {
       const cible = m.deck == null ? etat.maitre : etat.decks[m.deck];
       if (!cible || !Object.prototype.hasOwnProperty.call(cible, m.cle) || typeof m.val !== typeof cible[m.cle]) return;
@@ -660,7 +687,7 @@ function demarrerEcran() {
       diffuserEtat();
     }
     else if (m.type === 'creuser') { const d = etat.decks[m.deck]; d.requete = m.requete; d.prelingerSeul = m.prelingerSeul; chargerBac(m.deck); diffuserEtat(); }
-    else if (m.type === 'zapper') { (m.deck == null ? [0, 1] : [m.deck]).forEach(zapper); }
+    else if (m.type === 'zapper') zapperManuel(m.deck == null ? null : m.deck);
     else if (m.type === 'tap') tap();
     else if (m.type === 'bannir' && (m.deck === 0 || m.deck === 1)) {
       const p = P[m.deck], info = p.info[p.actif];
@@ -678,6 +705,273 @@ function demarrerEcran() {
     const t = performance.now(); A.taps = A.taps.filter(x => t - x < 3000); A.taps.push(t);
     if (A.taps.length >= 3) { const e = A.taps.slice(1).map((x, i) => x - A.taps[i]); const moy = e.reduce((a, b) => a + b, 0) / e.length;
       etat.maitre.bpm = Math.round(60000 / moy); A.prochainTic = t + moy; diffuserEtat(); }
+  }
+
+  /* ================================================================
+     CHAÎNE COMMUNE — tout le monde voit la même télé, en direct.
+     Le premier écran à arriver prend l'identifiant fixe DIRECT_ID sur le
+     serveur PeerJS et devient la régie (hôte). Les suivants s'y connectent
+     (invités) : ils reçoivent les films, le tempo et les réglages, et
+     envoient leurs gestes à la régie. Si la régie part, un invité reprend
+     l'identifiant automatiquement. Seules les commandes voyagent : chaque
+     écran charge lui-même les films depuis archive.org.
+     ================================================================ */
+  const DIRECT_ID = 'horschamptv-chaine-commune-v1';
+  const CLES_PLATINE = ['opacite', 'vitesse', 'contraste', 'saturation', 'luminosite', 'teinte', 'flou', 'zoom',
+    'nb', 'inverse', 'miroir', 'gel', 'fusion', 'kick', 'zap', 'bac', 'requete', 'prelingerSeul'];
+  const CLES_MAITRE = ['xfade', 'grain', 'epoque', 'flash', 'lignes', 'vignette', 'pauseAuto', 'noir', 'strobe', 'bpm', 'contenir'];
+  const NOMS = ['Bobine', 'Pellicule', 'Super 8', 'Antenne', 'Mire', 'Cathode', 'Zapette', 'Magnéto', 'Lanterne', 'Kinéscope', 'Neige', 'Projo'];
+  Object.assign(DIRECT, {
+    peer: null, conns: new Set(), hote: null, essai: 0, minuterie: 0,
+    nom: NOMS[Math.floor(Math.random() * NOMS.length)] + ' ' + String(10 + Math.floor(Math.random() * 90)),
+    auteur: null, applique: false, dernier: null, tEtat: 0, envoiPrevu: 0, fil: new Map(), aEteInvite: false
+  });
+
+  const nettoyerNom = (n) => String(n || '').replace(/[<>]/g, '').slice(0, 24) || 'Quelqu’un';
+  function partage() {
+    return {
+      decks: etat.decks.map(d => Object.fromEntries(CLES_PLATINE.map(k => [k, d[k]]))),
+      maitre: Object.fromEntries(CLES_MAITRE.map(k => [k, etat.maitre[k]]))
+    };
+  }
+  function signalerSite(extra) {
+    if (DANS_SITE) parent.postMessage(Object.assign({ source: 'hct', type: 'direct', role: DIRECT.role, actif: DIRECT.actif,
+      n: DIRECT.role === 'hote' ? DIRECT.conns.size + 1 : (DIRECT.n || 1) }, extra || {}), '*');
+  }
+  function action(a, extra) {
+    // Fil des actions : limité à une ligne par personne et par type toutes les 3 s
+    const nom = DIRECT.auteur || DIRECT.nom, cle = nom + '|' + a, t = performance.now();
+    if (t - (DIRECT.fil.get(cle) || 0) < 3000) return;
+    DIRECT.fil.set(cle, t);
+    const m = Object.assign({ t: 'action', nom, a }, extra || {});
+    versInvites(m); if (DANS_SITE) parent.postMessage({ source: 'hct', type: 'direct-action', nom, a, d: m.d, s: m.s }, '*');
+  }
+  function versInvites(m) { DIRECT.conns.forEach(c => { if (c.open) try { c.send(m); } catch (e) {} }); }
+
+  // --- Démarrer / arrêter ---
+  function directDemarrer() {
+    if (DIRECT.actif || !window.Peer) { if (!window.Peer) signalerSite({ erreur: true }); return; }
+    DIRECT.actif = true; DIRECT.essai = 0; signalerSite({ etape: 'connexion' });
+    devenirHote();
+  }
+  function directArreter() {
+    DIRECT.actif = false; clearTimeout(DIRECT.minuterie);
+    const etaitInvite = DIRECT.role === 'invite';
+    DIRECT.conns.forEach(c => { try { c.close(); } catch (e) {} }); DIRECT.conns.clear();
+    if (DIRECT.peer) { try { DIRECT.peer.destroy(); } catch (e) {} DIRECT.peer = null; }
+    DIRECT.role = null; DIRECT.hote = null;
+    if (etaitInvite) { chargerBac(0); chargerBac(1); }   // retour à sa télé privée
+    signalerSite();
+  }
+  function reessayer(delai) {
+    if (!DIRECT.actif) return;
+    clearTimeout(DIRECT.minuterie);
+    DIRECT.essai++;
+    DIRECT.minuterie = setTimeout(devenirHote, delai ?? Math.min(8000, 300 + Math.random() * 1200 * DIRECT.essai));
+  }
+
+  // --- Régie (hôte) ---
+  function devenirHote() {
+    if (!DIRECT.actif) return;
+    const peer = new Peer(DIRECT_ID);
+    let ouvert = false;
+    peer.on('open', () => {
+      ouvert = true; DIRECT.peer = peer; DIRECT.role = 'hote'; DIRECT.essai = 0; DIRECT.dernier = partage();
+      if (DIRECT.aEteInvite) { DIRECT.aEteInvite = false; chargerBac(0); chargerBac(1); }   // reprend la régie : recharge les bacs
+      signalerSite();
+    });
+    peer.on('connection', (c) => {
+      c.on('open', () => {
+        DIRECT.conns.add(c); c.vu = Date.now();
+        c.send({ t: 'bienvenue', etat: partage(), films: [0, 1].map(filmCourant), n: DIRECT.conns.size + 1 });
+        versInvites({ t: 'n', n: DIRECT.conns.size + 1 }); signalerSite();
+      });
+      c.on('data', (m) => recevoirInvite(c, m));
+      const fin = () => {
+        if (!DIRECT.conns.delete(c)) return;
+        versInvites({ t: 'n', n: DIRECT.conns.size + 1 }); signalerSite();
+        if (c.nom) { DIRECT.auteur = c.nom; action('part'); DIRECT.auteur = null; }
+      };
+      c.on('close', fin); c.on('error', fin);
+    });
+    peer.on('disconnected', () => { try { peer.reconnect(); } catch (e) {} });
+    peer.on('error', (e) => {
+      if (!ouvert && e.type === 'unavailable-id') { peer.destroy(); rejoindre(); }      // une régie existe : on la rejoint
+      else if (!ouvert) { peer.destroy(); reessayer(3000); }
+    });
+  }
+  function filmCourant(i) {
+    const p = P[i], info = p.info[p.actif], v = p.v[p.actif];
+    if (!info || !info.url) return null;
+    return { deck: i, info: { url: info.url, titre: info.titre, annee: info.annee, source: info.source, id: info.id }, temps: v.currentTime || 0, at: Date.now() };
+  }
+  function directFilm(i) { const f = filmCourant(i); if (f) versInvites(Object.assign({ t: 'film' }, f)); }
+  function directKick() { if (DIRECT.conns.size) versInvites({ t: 'k' }); }
+  // Toutes les 5 s, la régie redonne la position des films pour corriger les écarts
+  setInterval(() => { if (DIRECT.role === 'hote' && DIRECT.conns.size) versInvites({ t: 'pos', films: [0, 1].map(filmCourant) }); }, 5000);
+  // Veille : WebRTC peut mettre longtemps à signaler un départ. Les invités envoient un signe de vie
+  // toutes les 5 s ; une connexion muette depuis 15 s est fermée, des deux côtés.
+  setInterval(() => {
+    const t = Date.now();
+    if (DIRECT.role === 'invite' && DIRECT.hote) {
+      if (DIRECT.hote.open) try { DIRECT.hote.send({ t: 'p' }); } catch (e) {}
+      if (t - (DIRECT.vuHote || t) > 15000) { try { DIRECT.hote.close(); } catch (e) {} }
+    }
+    if (DIRECT.role === 'hote') DIRECT.conns.forEach(c => { if (t - (c.vu || t) > 15000) { try { c.close(); } catch (e) {} } });
+  }, 5000);
+
+  const COMMANDES_PERMISES = ['regler', 'zapper', 'creuser', 'bannir', 'tap'];
+  function recevoirInvite(c, m) {
+    c.vu = Date.now();
+    if (!m || typeof m !== 'object' || m.t === 'p') return;
+    if (m.t === 'bonjour') {
+      c.nom = nettoyerNom(m.nom); DIRECT.auteur = c.nom; action('arrive'); DIRECT.auteur = null; return;
+    }
+    DIRECT.auteur = c.nom || 'Quelqu’un';
+    try {
+      if (m.t === 'cmd' && m.m && COMMANDES_PERMISES.includes(m.m.type)) {
+        const cmd = m.m;
+        if (cmd.type === 'regler' && (cmd.cle === 'source' || cmd.cle === 'titres' || cmd.cle === 'canal')) return;
+        if (cmd.deck != null && cmd.deck !== 0 && cmd.deck !== 1) return;
+        if (cmd.type === 'creuser') { cmd.requete = String(cmd.requete || '').slice(0, 120); action('creuse', { s: cmd.requete }); }
+        if (cmd.type === 'bannir') action('retire');
+        recevoir(cmd);
+      }
+      else if (m.t === 'prop' && m.etat) fusionner(m.etat);
+    } finally { DIRECT.auteur = null; }
+  }
+  // Applique les réglages proposés par un invité (gestes de la télé de poche, etc.)
+  function fusionner(e) {
+    let change = false, bacs = [];
+    (Array.isArray(e.decks) ? e.decks.slice(0, 2) : []).forEach((d, i) => {
+      if (!d || typeof d !== 'object') return;
+      CLES_PLATINE.forEach(k => {
+        if (k in d && typeof d[k] === typeof etat.decks[i][k] && d[k] !== etat.decks[i][k]) {
+          etat.decks[i][k] = typeof d[k] === 'string' ? d[k].slice(0, 120) : d[k]; change = true;
+          if (k === 'bac' || k === 'requete') bacs.push(i);
+        }
+      });
+    });
+    if (e.maitre && typeof e.maitre === 'object') CLES_MAITRE.forEach(k => {
+      if (k in e.maitre && typeof e.maitre[k] === typeof etat.maitre[k] && e.maitre[k] !== etat.maitre[k]) { etat.maitre[k] = e.maitre[k]; change = true; }
+    });
+    if (!change) return;
+    appliquerVitesses();
+    [...new Set(bacs)].forEach(i => chargerBac(i));
+    diffuserEtat();
+  }
+  // Décrit, pour le fil, ce qui vient de changer (côté régie)
+  function decrireChangements(avant, apres) {
+    if (!avant) return;
+    const m0 = avant.maitre, m1 = apres.maitre;
+    if (m0.xfade !== m1.xfade) action('mix');
+    if (!m0.strobe && m1.strobe) action('strobe');
+    if (m0.noir !== m1.noir) action(m1.noir ? 'noir' : 'rallume');
+    apres.decks.forEach((d, i) => {
+      const a = avant.decks[i];
+      if (d.bac !== a.bac && !d.requete) action('sujet', { d: i, s: (SUJETS[d.bac] || SUJETS[0])[0] });
+      if (!a.nb && d.nb) action('nb');
+      if (!a.inverse && d.inverse) action('inverse');
+      if (!a.miroir && d.miroir) action('miroir');
+      if (a.teinte !== d.teinte || a.zoom !== d.zoom || a.flou !== d.flou || a.vitesse !== d.vitesse || a.saturation !== d.saturation) action('image');
+    });
+  }
+  function directEtatChange() {
+    if (DIRECT.applique || !DIRECT.role) return;
+    if (DIRECT.role === 'hote') {
+      const apres = partage(); decrireChangements(DIRECT.dernier, apres); DIRECT.dernier = apres;
+      planifier(() => versInvites({ t: 'etat', etat: partage() }));
+    } else planifier(() => { if (DIRECT.hote && DIRECT.hote.open) DIRECT.hote.send({ t: 'prop', etat: partage() }); });
+  }
+  // Regroupe les envois rapprochés (crossfader au doigt, etc.) : au plus un envoi toutes les 90 ms
+  function planifier(f) {
+    DIRECT.envoi = f;
+    if (DIRECT.envoiPrevu) return;
+    const attente = Math.max(0, 90 - (performance.now() - DIRECT.tEtat));
+    DIRECT.envoiPrevu = setTimeout(() => { DIRECT.envoiPrevu = 0; DIRECT.tEtat = performance.now(); const g = DIRECT.envoi; DIRECT.envoi = null; if (g) g(); }, attente);
+  }
+
+  // --- Invité ---
+  function rejoindre() {
+    if (!DIRECT.actif) return;
+    const peer = new Peer();
+    peer.on('open', () => {
+      const c = peer.connect(DIRECT_ID, { reliable: true });
+      c.on('open', () => {
+        DIRECT.peer = peer; DIRECT.hote = c; DIRECT.role = 'invite'; DIRECT.aEteInvite = true; DIRECT.essai = 0; DIRECT.vuHote = Date.now();
+        P.forEach(p => { p.jeton = {}; p.attente = false; });   // abandonne ses propres chargements
+        c.send({ t: 'bonjour', nom: DIRECT.nom }); signalerSite();
+      });
+      c.on('data', recevoirHote);
+      c.on('close', () => {
+        if (DIRECT.hote !== c) return;
+        DIRECT.hote = null; DIRECT.role = null; peer.destroy(); DIRECT.peer = null;
+        signalerSite({ etape: 'relais' });
+        reessayer(200 + Math.random() * 1500);   // la régie est partie : quelqu'un reprend le flambeau
+      });
+    });
+    peer.on('error', (e) => {
+      peer.destroy();
+      if (DIRECT.hote) return;
+      reessayer(e.type === 'peer-unavailable' ? 300 + Math.random() * 900 : 3000);
+    });
+  }
+  function recevoirHote(m) {
+    DIRECT.vuHote = Date.now();
+    if (!m || typeof m !== 'object') return;
+    if (m.t === 'bienvenue') {
+      DIRECT.n = m.n; appliquerPartage(m.etat);
+      (m.films || []).forEach(f => f && afficherFilm(f));
+      signalerSite();
+    }
+    else if (m.t === 'etat') appliquerPartage(m.etat);
+    else if (m.t === 'film') afficherFilm(m);
+    else if (m.t === 'pos') (m.films || []).forEach(f => f && afficherFilm(f, true));
+    else if (m.t === 'k') { A.kicks++; punch = 1; }
+    else if (m.t === 'n') { DIRECT.n = m.n; signalerSite(); }
+    else if (m.t === 'action' && DANS_SITE) parent.postMessage({ source: 'hct', type: 'direct-action', nom: nettoyerNom(m.nom), a: String(m.a || '').slice(0, 20), d: m.d, s: typeof m.s === 'string' ? m.s.slice(0, 60) : undefined }, '*');
+  }
+  function appliquerPartage(e) {
+    if (!e || typeof e !== 'object') return;
+    (Array.isArray(e.decks) ? e.decks.slice(0, 2) : []).forEach((d, i) => {
+      if (d && typeof d === 'object') CLES_PLATINE.forEach(k => { if (k in d && typeof d[k] === typeof etat.decks[i][k]) etat.decks[i][k] = d[k]; });
+    });
+    if (e.maitre && typeof e.maitre === 'object') CLES_MAITRE.forEach(k => { if (k in e.maitre && typeof e.maitre[k] === typeof etat.maitre[k]) etat.maitre[k] = e.maitre[k]; });
+    appliquerVitesses();
+    DIRECT.applique = true; try { diffuserEtat(); } finally { DIRECT.applique = false; }
+  }
+  // Montre le film que la régie diffuse, au même moment du film (latence comprise)
+  function afficherFilm(f, simpleSynchro) {
+    if (!f || (f.deck !== 0 && f.deck !== 1) || !f.info || typeof f.info.url !== 'string' || !/^https:\/\/archive\.org\/|^videos\//.test(f.info.url)) return;
+    const i = f.deck, p = P[i], cur = p.info[p.actif];
+    const temps = (Number(f.temps) || 0) + Math.max(0, Math.min(5, (Date.now() - (Number(f.at) || Date.now())) / 1000));
+    if (cur && cur.url === f.info.url) {
+      const v = p.v[p.actif];
+      if (Math.abs((v.currentTime || 0) - temps) > 2.5) v.currentTime = temps;
+      return;
+    }
+    if (simpleSynchro && p.chargeDirect === f.info.url) return;   // déjà en cours de chargement
+    const jeton = {}; p.jetonDirect = jeton; p.jeton = {}; p.chargeDirect = f.info.url;
+    const k = 1 - p.actif, t0 = Date.now();
+    chargerVideo(p.v[k], f.info.url, temps).then((ok) => {
+      if (!ok || p.jetonDirect !== jeton || DIRECT.role !== 'invite') return;
+      p.chargeDirect = null;
+      try { p.v[k].currentTime = temps + (Date.now() - t0) / 1000; } catch (e) {}
+      p.pret[k] = true; p.info[k] = f.info; basculer(i);
+    });
+  }
+  // Un invité envoie ses commandes à la régie au lieu de les appliquer lui-même
+  function directTransmettre(m) {
+    if (m.type === 'regler' && (m.cle === 'source' || m.cle === 'titres' || m.cle === 'canal')) return false;   // réglages personnels
+    if (!COMMANDES_PERMISES.includes(m.type)) return false;
+    if (DIRECT.hote && DIRECT.hote.open) DIRECT.hote.send({ t: 'cmd', m });
+    return true;
+  }
+  // Zap demandé par une personne (manette, clavier, geste) : passe par la régie et apparaît dans le fil
+  function zapperManuel(deck) {
+    if (DIRECT.role === 'invite') { directTransmettre({ type: 'zapper', deck }); return; }
+    if (DIRECT.role === 'hote') action('zap', { d: deck });
+    (deck == null ? [0, 1] : [deck]).forEach(zapper);
   }
 
   // --- Panneau régie (iframe) ---
@@ -719,14 +1013,14 @@ function demarrerEcran() {
       actif = true; cacherAstuce();
       x0 = e.clientX; y0 = e.clientY; t0 = performance.now(); xf0 = etat.maitre.xfade; geste = null;
       clearTimeout(appui);
-      appui = setTimeout(() => { if (!geste) { geste = 'strobe'; etat.maitre.strobe = true; annonce('STROBE'); } }, 450);
+      appui = setTimeout(() => { if (!geste) { geste = 'strobe'; etat.maitre.strobe = true; annonce('STROBE'); diffuserEtat(); } }, 450);
     });
     document.addEventListener('pointermove', (e) => {
       if (!actif) return;
       const dx = e.clientX - x0, dy = e.clientY - y0;
       if (!geste && Math.hypot(dx, dy) > 14) { clearTimeout(appui); geste = Math.abs(dx) > Math.abs(dy) ? 'melange' : 'vertical'; }
       if (geste === 'melange') {
-        etat.maitre.xfade = pinces(xf0 + dx / (innerWidth * 0.8), 0, 1);
+        etat.maitre.xfade = pinces(xf0 + dx / (innerWidth * 0.8), 0, 1); diffuserEtat();
         annonce('A ' + '▮'.repeat(Math.round((1 - etat.maitre.xfade) * 6)) + '|' + '▮'.repeat(Math.round(etat.maitre.xfade * 6)) + ' B');
       }
     });
@@ -735,7 +1029,7 @@ function demarrerEcran() {
       const dx = e.clientX - x0, dy = e.clientY - y0, dt = performance.now() - t0;
       if (geste === 'strobe') { etat.maitre.strobe = false; msg.classList.add('cache'); }
       else if (geste === 'vertical' && Math.abs(dy) > 50) {
-        if (dy < 0) { zapper(0); zapper(1); }
+        if (dy < 0) zapperManuel(null);
         else { const n = 1 + Math.floor(Math.random() * 12); etat.decks.forEach((d, i) => { d.bac = (n + i * 3) % 13 || 1; d.requete = ''; chargerBac(i); }); annonce('NOUVEAU SUJET'); }
       }
       else if (!geste && dt < 350 && Math.hypot(dx, dy) < 14) poserEffet(effet + 1);
@@ -760,6 +1054,8 @@ function demarrerEcran() {
     if (POCHE) demarrerPoche();
     addEventListener('message', (e) => {
       if (!DANS_SITE || e.source !== window.parent || !e.data || e.data.source !== 'hct-site') return;
+      if (e.data.type === 'commune') { if (e.data.on) directDemarrer(); else directArreter(); return; }
+      if (e.data.type === 'audio') { recevoirAudio(e.data); return; }
       if (e.data.type !== 'qr') return;
       const delai = new Promise((_, ko) => setTimeout(() => ko(new Error('delai')), 15000));
       Promise.race([attendrePair(), delai]).then((id) => {
@@ -774,6 +1070,7 @@ function demarrerEcran() {
       }).catch(() => parent.postMessage({ source: 'hct', type: 'erreur' }, '*'));
     });
     if (DANS_SITE) parent.postMessage({ source: 'hct', type: 'pret' }, '*');
+    addEventListener('pagehide', () => { if (DIRECT.actif) directArreter(); });
     // Le site parent a besoin de savoir quand on bouge la souris ou qu'on appuie sur Échap dans la télé
     if (DANS_SITE) {
       let derniere = 0;
@@ -787,9 +1084,9 @@ function demarrerEcran() {
     const k = e.key.toLowerCase();
     if (k === 'h') { if (!FOND) basculerRegie(); }
     else if (k === 'f') pleinEcran();
-    else if (k === ' ') { e.preventDefault(); zapper(0); zapper(1); }
-    else if (k === 'q') zapper(0);
-    else if (k === 'w') zapper(1);
+    else if (k === ' ') { e.preventDefault(); zapperManuel(null); }
+    else if (k === 'q') zapperManuel(0);
+    else if (k === 'w') zapperManuel(1);
     else if (k === 'n') { etat.maitre.noir = !etat.maitre.noir; diffuserEtat(); }
   });
   // La régie (iframe) transmet aussi H et F à l'écran.
