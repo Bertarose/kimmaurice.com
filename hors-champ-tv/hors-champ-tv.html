@@ -143,6 +143,23 @@ body.manette { overflow: hidden; touch-action: manipulation; -webkit-user-select
 .mn-sujets::-webkit-scrollbar { display: none; }
 .mn-sujets button { flex: none; border-radius: 999px; padding: 9px 14px; background: #0f1411; border: 1px solid var(--cadre); white-space: nowrap; }
 .mn-sujets button.on { border-color: var(--papier); background: #1a231d; }
+/* Bloc Thème : bien séparé des effets */
+.mn-theme { margin-top: 6px; padding: 10px 10px 8px; border-radius: 14px; background: #070908; border: 1px dashed #3a4a3f; display: grid; gap: 8px; }
+.mn-theme-tete { display: flex; align-items: center; justify-content: space-between; font-family: var(--osd); font-size: 16px; letter-spacing: .12em; color: var(--ambre); }
+.mn-theme-tete small { font-family: var(--ui); font-size: 10px; letter-spacing: 0; opacity: .6; color: var(--papier); }
+.mn-theme .mn-sujets button { font-family: var(--ui); font-size: 13px; padding: 8px 13px; background: #121812; }
+.mn-theme .mn-sujets button.perso { border-style: dashed; border-color: var(--ambre); color: var(--ambre); }
+.mn-theme .mn-sujets button.perso.on { border-style: solid; background: #2a2010; }
+.mn-theme .mn-sujets button.ajout { border-color: var(--ambre); color: var(--ambre); font-weight: 600; }
+.mn-theme-form { display: grid; grid-template-columns: 1fr auto; gap: 8px; }
+.mn-theme-form[hidden] { display: none; }
+.mn-theme-form input { min-width: 0; padding: 11px 12px; font-size: 16px; border-radius: 10px; background: #000; color: var(--papier); border: 1px solid var(--ambre); -webkit-user-select: text; user-select: text; }
+.mn-theme-form button { padding: 0 16px; border-radius: 10px; background: var(--ambre); color: #000; border: 0; font-weight: 600; }
+.mn-theme-aide { font-size: 10px; opacity: .55; line-height: 1.4; }
+/* La manette défile si l'écran est court : plus rien ne se chevauche */
+body.manette { overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: none; }
+body.manette .mn { height: auto; min-height: 100%; grid-template-rows: none; grid-auto-rows: auto; align-content: start; }
+body.manette .mn-pads { grid-auto-rows: 62px; min-height: auto; }
 .mn-bas { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
 .mn-bas button { height: 50px; border-radius: 12px; background: #0f1411; border: 1px solid var(--cadre); font-size: 12px; }
 .mn-bas button.on { border-color: var(--phosphore); color: var(--phosphore); background: #14321f; }
@@ -286,7 +303,15 @@ body.manette { overflow: hidden; touch-action: manipulation; -webkit-user-select
       <button class="zb" data-z="1">ZAP B</button>
     </div>
     <div class="mn-pads" id="mnPads"></div>
-    <div class="mn-sujets" id="mnSujets"></div>
+    <div class="mn-theme">
+      <div class="mn-theme-tete">THÈME <small>thème perso : maintenir pour effacer</small></div>
+      <div class="mn-sujets" id="mnSujets"></div>
+      <form class="mn-theme-form" id="mnThemeForm" hidden>
+        <input id="mnThemeTxt" type="text" maxlength="60" enterkeyhint="go" autocomplete="off" placeholder="ex. robots, swimming, Montreal…">
+        <button type="submit">Chercher</button>
+      </form>
+      <div class="mn-theme-aide" id="mnThemeAide" hidden>Les mots anglais trouvent plus de films (l'archive est en anglais).</div>
+    </div>
     <div class="mn-bas">
       <button id="mnVerrou">Verrou<br><small>pads fixes</small></button>
       <button id="mnAuto" class="on">Zap auto</button>
@@ -1384,13 +1409,40 @@ function demarrerManette() {
     pads.appendChild(b);
   });
 
-  // Sujets
+  // Thèmes : la liste de base + les thèmes perso (gardés sur le téléphone)
   const sujets = $('mnSujets');
-  SUJETS.forEach((s, k) => { const b = document.createElement('button'); b.textContent = s[0].replace(' (dossier videos)', ''); b.dataset.k = k;
-    b.onclick = () => { vibrer(); decks().forEach(d => regler(d, 'bac', k)); }; sujets.appendChild(b); });
+  const lirePerso = () => { try { return JSON.parse(localStorage.getItem('hct-themes') || '[]'); } catch (e) { return []; } };
+  const ecrirePerso = (l) => { try { localStorage.setItem('hct-themes', JSON.stringify(l.slice(0, 20))); } catch (e) {} };
+  const chercher = (mot) => { vibrer(); decks().forEach(d => envoyer({ type: 'creuser', deck: d, requete: mot, prelingerSeul: true })); };
+  function dessinerSujets() {
+    sujets.innerHTML = '';
+    const ajout = document.createElement('button'); ajout.className = 'ajout'; ajout.textContent = '+ Thème';
+    ajout.onclick = () => { const f = $('mnThemeForm'); f.hidden = !f.hidden; $('mnThemeAide').hidden = f.hidden; if (!f.hidden) $('mnThemeTxt').focus(); };
+    sujets.appendChild(ajout);
+    lirePerso().forEach(mot => {
+      const b = document.createElement('button'); b.className = 'perso'; b.textContent = mot; b.dataset.mot = mot;
+      let tenu = null, efface = false;
+      b.addEventListener('pointerdown', () => { efface = false; tenu = setTimeout(() => {
+        efface = true; vibrer(); ecrirePerso(lirePerso().filter(m => m !== mot)); dessinerSujets(); majSujets(); }, 700); });
+      const lacher = () => clearTimeout(tenu);
+      b.addEventListener('pointerup', lacher); b.addEventListener('pointercancel', lacher); b.addEventListener('pointerleave', lacher);
+      b.addEventListener('contextmenu', (e) => e.preventDefault());
+      b.onclick = () => { if (!efface) chercher(mot); };
+      sujets.appendChild(b);
+    });
+    SUJETS.forEach((s, k) => { const b = document.createElement('button'); b.textContent = s[0].replace(' (dossier videos)', ''); b.dataset.k = k;
+      b.onclick = () => { vibrer(); decks().forEach(d => regler(d, 'bac', k)); }; sujets.appendChild(b); });
+  }
+  $('mnThemeForm').addEventListener('submit', (e) => {
+    e.preventDefault(); const mot = $('mnThemeTxt').value.trim().replace(/\s+/g, ' ').slice(0, 60); if (!mot) return;
+    ecrirePerso([mot, ...lirePerso().filter(m => m.toLowerCase() !== mot.toLowerCase())]);
+    $('mnThemeTxt').value = ''; $('mnThemeTxt').blur(); $('mnThemeForm').hidden = true; $('mnThemeAide').hidden = true;
+    dessinerSujets(); chercher(mot); sujets.scrollLeft = 0;
+  });
+  dessinerSujets();
   function majSujets() {
     const k = etat.decks[cible === 1 ? 1 : 0];
-    [...sujets.children].forEach(b => b.classList.toggle('on', !k.requete && +b.dataset.k === k.bac));
+    [...sujets.children].forEach(b => b.classList.toggle('on', b.dataset.mot != null ? k.requete === b.dataset.mot : (b.dataset.k != null && !k.requete && +b.dataset.k === k.bac)));
   }
 
   // Barre du bas
