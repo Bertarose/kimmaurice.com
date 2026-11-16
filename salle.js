@@ -260,8 +260,8 @@
     function nomPropre(f) { return decodeURIComponent(f).replace(/\.[^.]+$/, '').replace(/^\d+[\s._-]+/, '').replace(/[_]+/g, ' ').trim(); }
     function versPiste(nom, titre) { return { url: CFG.media + encodeURIComponent(nom), titre: titre || nomPropre(nom) }; }
     // La liste vient du dépôt GitHub (rien à mettre à jour à la main) ; sinon d'un fichier media/playlist.json
-    var chargement = (function () {
-      try { var c = JSON.parse(sessionStorage.getItem('hct-pistes') || 'null'); if (c && Date.now() - c.t < 600000) { pistes = c.l; return Promise.resolve(pistes); } } catch (e) {}
+    function charger(forcer) {
+      try { var c = JSON.parse(sessionStorage.getItem('hct-pistes') || 'null'); if (!forcer && c && c.l && c.l.length && Date.now() - c.t < 600000) { pistes = c.l; return Promise.resolve(pistes); } } catch (e) {}
       return fetch('https://api.github.com/repos/' + CFG.depot + '/contents' + CFG.media.replace(/\/$/, ''))
         .then(function (r) { if (!r.ok) throw 0; return r.json(); })
         .then(function (l) { return l.filter(function (f) { return f.type === 'file' && EXT.test(f.name); }).map(function (f) { return f.name; }).sort(function (a, b) { return a.localeCompare(b, 'fr', { numeric: true }); }).map(function (n) { return versPiste(n); }); })
@@ -270,8 +270,13 @@
             .then(function (l) { return (Array.isArray(l) ? l : []).map(function (x) { return typeof x === 'string' ? versPiste(x) : versPiste(x.fichier, x.titre); }); });
         })
         .catch(function () { return []; })
-        .then(function (l) { pistes = l; try { sessionStorage.setItem('hct-pistes', JSON.stringify({ t: Date.now(), l: l })); } catch (e) {} libelles(); return l; });
-    })();
+        .then(function (l) {
+          pistes = l;
+          try { if (l.length) sessionStorage.setItem('hct-pistes', JSON.stringify({ t: Date.now(), l: l })); else sessionStorage.removeItem('hct-pistes'); } catch (e) {}
+          libelles(); return l;
+        });
+    }
+    var chargement = charger(false);
 
     function joue() { return !!(audio && !audio.paused); }
     function libellesMusique() {
@@ -354,7 +359,10 @@
     }
     return {
       // Allumage de la salle : la musique démarre si le visiteur l'a ouverte d'un clic (et ne l'a pas coupée)
-      demarrer: function (parClic) { if (veut && parClic) jouer(); else libellesMusique(); },
+      demarrer: function (parClic) {
+        if (pistes && pistes.length) { if (veut && parClic) jouer(); else libellesMusique(); return; }
+        charger(true).then(function () { libellesMusique(); });   // le bouton ▶ apparaît s'il y a de la musique
+      },
       arreter: function () { stop(false); cancelAnimationFrame(boucle); boucle = 0; },
       basculer: basculer, stop: stop, suivante: suivante, libelles: libellesMusique, pret: chargement
     };
