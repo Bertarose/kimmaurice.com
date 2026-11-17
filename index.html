@@ -928,7 +928,7 @@
         <a class="btn btn-primary" href="https://horschamp.ai.studio" target="_blank" rel="noopener" data-fr="Essayer l’app ↗" data-en="Try the app ↗">Essayer l’app ↗</a>
         <a class="btn btn-secondary" href="https://horschamp.vercel.app/" data-href-fr="https://horschamp.vercel.app/" data-href-en="https://horschamp.vercel.app/en/" target="_blank" rel="noopener" data-fr="Découvrir le projet ↗" data-en="About the project ↗">Découvrir le projet ↗</a>
       </div>
-      <p class="hc-note" data-fr="Sur ordinateur, dans Chrome ou Edge. Avec ta clé Gemini gratuite, ou sans IA en mode synthé local." data-en="On a computer, in Chrome or Edge. With your free Gemini key, or without AI in local synth mode.">Sur ordinateur, dans Chrome ou Edge. Avec ta clé Gemini gratuite, ou sans IA en mode synthé local.</p>
+      <p class="hc-note" data-fr="Sur ordinateur seulement (pas sur téléphone), dans Chrome ou Edge. Avec ta clé Gemini gratuite, ou sans IA en mode synthé local." data-en="Desktop only (not on phones), in Chrome or Edge. With your free Gemini key, or without AI in local synth mode.">Sur ordinateur seulement (pas sur téléphone), dans Chrome ou Edge. Avec ta clé Gemini gratuite, ou sans IA en mode synthé local.</p>
     </div>
     <a class="hc-shot" href="https://horschamp.ai.studio" target="_blank" rel="noopener" aria-label="Ouvrir l’app Hors Champ" data-aria-fr="Ouvrir l’app Hors Champ" data-aria-en="Open the Hors Champ app">
       <img src="img/horschamp-app.webp" alt="" loading="lazy" width="1400" height="878">
@@ -1437,6 +1437,7 @@
     document.querySelectorAll('[data-href-fr]').forEach(el=>{ el.setAttribute('href', el.getAttribute('data-href-'+lang)); });
     document.querySelectorAll('[data-aria-fr]').forEach(el=>{ el.setAttribute('aria-label', el.getAttribute('data-aria-'+lang)); });
     btn.textContent=lang==='fr'?'EN':'FR';
+    document.documentElement.lang=lang;
   }
   btn.addEventListener('click',()=>{ lang=lang==='fr'?'en':'fr'; apply(); });
 })();
@@ -1545,5 +1546,19 @@
 <script src="dispo.js" defer></script>
 <script src="fonds.js" defer></script>
 <script src="salle.js" defer></script>
+<script>
+/* Hors Champ : l'app est faite pour ordinateur. Sur un téléphone, les liens de l'app mènent à la page du projet, qui l'explique. */
+(() => {
+  const touchOnly = matchMedia('(pointer: coarse)').matches && !matchMedia('(hover: hover)').matches;
+  if (!touchOnly || Math.min(screen.width, screen.height) >= 600) return;
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('a[href^="https://horschamp.ai.studio"]');
+    if (!a) return;
+    e.preventDefault();
+    const en = document.documentElement.lang === 'en';
+    window.open(en ? 'https://horschamp.vercel.app/en/#essayer' : 'https://horschamp.vercel.app/#essayer', '_blank', 'noopener');
+  });
+})();
+</script>
 </body>
 </html>
