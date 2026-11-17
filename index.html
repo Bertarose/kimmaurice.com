@@ -776,6 +776,26 @@
     .btn-tv-fl { color:var(--green); font-size:.9rem; margin-left:.3rem; }
     @media(prefers-reduced-motion:reduce){ .btn-tv-led { animation:none; } }
 
+    /* ─── HORS CHAMP : MISE EN AVANT ─── */
+    .hc-spot { position:relative; border-top:1px solid var(--line); border-bottom:1px solid var(--line); background:radial-gradient(circle at 85% 20%,rgba(255,62,155,.16),transparent 55%),radial-gradient(circle at 10% 90%,rgba(201,255,61,.08),transparent 50%),#0b0a12; }
+    .hc-spot-in { max-width:1280px; margin:0 auto; padding:clamp(3rem,7vw,5.5rem) clamp(1.25rem,4vw,3rem); display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.15fr); gap:clamp(2rem,5vw,4.5rem); align-items:center; }
+    .hc-badge { display:inline-flex; align-items:center; gap:.55rem; font-family:var(--ff-mono); font-size:.68rem; letter-spacing:.12em; text-transform:uppercase; color:var(--green); border:1px solid rgba(201,255,61,.45); padding:.35rem .7rem; }
+    .hc-badge::before { content:""; width:.45rem; height:.45rem; border-radius:50%; background:var(--green); box-shadow:0 0 8px var(--green); animation:tvled 1.6s steps(2,end) infinite; }
+    .hc-spot h2 { font-family:var(--ff-head); font-weight:600; font-size:clamp(2.6rem,6vw,4.8rem); letter-spacing:-.04em; line-height:.95; margin:1.1rem 0 .9rem; }
+    .hc-lead { font-size:1.05rem; line-height:1.65; color:rgba(242,241,246,.78); max-width:46ch; }
+    .hc-actions { display:flex; flex-wrap:wrap; gap:.8rem; margin-top:1.8rem; }
+    .hc-note { margin-top:1.1rem; font-family:var(--ff-mono); font-size:.66rem; letter-spacing:.05em; color:var(--sub); max-width:52ch; line-height:1.7; }
+    .hc-shot { position:relative; display:block; border:1px solid var(--line); overflow:hidden; background:#111; aspect-ratio:16/10; }
+    .hc-shot img { width:100%; height:100%; object-fit:cover; object-position:top left; display:block; transition:transform .6s ease; }
+    .hc-shot:hover img { transform:scale(1.03); }
+    .hc-shot:focus-visible { outline:2px solid var(--green); outline-offset:3px; }
+    .hc-shot-cap { position:absolute; left:.8rem; bottom:.8rem; font-family:var(--ff-mono); font-size:.62rem; letter-spacing:.1em; text-transform:uppercase; background:rgba(0,0,0,.72); color:#fff; padding:.35rem .6rem; }
+    .portfolio-links { display:flex; flex-wrap:wrap; gap:.5rem 1.2rem; }
+    .portfolio-links a { font-family:var(--ff-mono); font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; color:var(--green); text-decoration:none; border-bottom:1px solid rgba(201,255,61,.4); }
+    .portfolio-links a:hover { border-color:var(--green); }
+    @media(max-width:860px){ .hc-spot-in { grid-template-columns:1fr; } .hc-shot { order:-1; } }
+    @media(prefers-reduced-motion:reduce){ .hc-badge::before { animation:none; } .hc-shot img { transition:none; } }
+
     /* ─── VERSION NOIR ET BLANC ───
        Chaque bloc de la page (et les fonds, la télé, les widgets) passe en niveaux de gris.
        Le filtre est posé sur les enfants directs de <body> pour ne pas casser les éléments fixes. */
@@ -829,6 +849,7 @@
   <span class="nav-name">Kim Maurice</span>
   <div class="nav-right">
     <nav class="nav-links">
+      <a href="#hors-champ">Hors Champ</a>
       <a href="#axes" data-fr="Les 3 axes" data-en="Three strengths">Les 3 axes</a>
       <a href="#projets" data-fr="Projets" data-en="Projects">Projets</a>
       <a href="#expertise"  data-fr="Expertises"  data-en="Expertise">Expertises</a>
@@ -893,6 +914,28 @@
     <img src="img/img.jpg" alt="Kim Maurice">
   </div>
 </div>
+
+<!-- HORS CHAMP : MISE EN AVANT -->
+<section class="hc-spot" id="hors-champ" aria-labelledby="hc-titre">
+  <div class="hc-spot-in">
+    <div>
+      <span class="hc-badge" data-fr="Nouveau · bêta publique en ligne" data-en="New · public beta online">Nouveau · bêta publique en ligne</span>
+      <h2 id="hc-titre">Hors Champ</h2>
+      <p class="hc-lead"
+         data-fr="Mon instrument de performance augmenté par l’IA : des concepts, des mots et des états deviennent de la musique en temps réel (Google Lyria), avec boîte à rythmes, synthés, rack d’effets et visuels Hydra. Ça tourne directement dans le navigateur."
+         data-en="My AI-augmented performance instrument: concepts, words and states turn into music in real time (Google Lyria), with a drum machine, synths, an effects rack and Hydra visuals. It runs right in your browser.">Mon instrument de performance augmenté par l’IA : des concepts, des mots et des états deviennent de la musique en temps réel (Google Lyria), avec boîte à rythmes, synthés, rack d’effets et visuels Hydra. Ça tourne directement dans le navigateur.</p>
+      <div class="hc-actions">
+        <a class="btn btn-primary" href="https://horschamp.ai.studio" target="_blank" rel="noopener" data-fr="Essayer l’app ↗" data-en="Try the app ↗">Essayer l’app ↗</a>
+        <a class="btn btn-secondary" href="https://horschamp.vercel.app/" data-href-fr="https://horschamp.vercel.app/" data-href-en="https://horschamp.vercel.app/en/" target="_blank" rel="noopener" data-fr="Découvrir le projet ↗" data-en="About the project ↗">Découvrir le projet ↗</a>
+      </div>
+      <p class="hc-note" data-fr="Sur ordinateur, dans Chrome ou Edge. Avec ta clé Gemini gratuite, ou sans IA en mode synthé local." data-en="On a computer, in Chrome or Edge. With your free Gemini key, or without AI in local synth mode.">Sur ordinateur, dans Chrome ou Edge. Avec ta clé Gemini gratuite, ou sans IA en mode synthé local.</p>
+    </div>
+    <a class="hc-shot" href="https://horschamp.ai.studio" target="_blank" rel="noopener" aria-label="Ouvrir l’app Hors Champ" data-aria-fr="Ouvrir l’app Hors Champ" data-aria-en="Open the Hors Champ app">
+      <img src="img/horschamp-app.webp" alt="" loading="lazy" width="1800" height="884">
+      <span class="hc-shot-cap">horschamp.ai.studio</span>
+    </a>
+  </div>
+</section>
 
 <!-- REPÈRES -->
 <div class="statsbar">
@@ -1273,8 +1316,8 @@
       <div class="portfolio-copy"><span class="portfolio-type">Coordination de production, numérique, son &amp; AV</span><h3>ASIASIE — YATAI MTL, POCHA MTL et Semaine du Japon</h3><p data-fr="Coordination du minutage en soutien à la direction de production et responsabilité du son et de l’audiovisuel sur site : équipement, installation et soutien aux artistes. Mise en place des points de vente avec iPads, Square et Wi-Fi, puis suivi des ventes des bars et de la cantine. Conception et développement d’applications web et d’outils numériques pour les festivals." data-en="Coordinated event timing in support of production management and led on-site sound and audiovisual operations, including equipment, setup and artist support. Set up point-of-sale systems using iPads, Square and Wi-Fi, and tracked bar and canteen sales. Designed and developed festival web apps and digital tools.">Coordination du minutage en soutien à la direction de production et responsabilité du son et de l’audiovisuel sur site : équipement, installation et soutien aux artistes. Mise en place des points de vente avec iPads, Square et Wi-Fi, puis suivi des ventes des bars et de la cantine. Conception et développement d’applications web et d’outils numériques pour les festivals.</p><div class="portfolio-tags"><span>Son &amp; AV</span><span>Logistique</span><span>Square</span><span>Wi-Fi</span><span>Applications web</span></div></div>
     </article>
     <article class="portfolio-card reveal">
-      <div class="portfolio-visual"><img src="img/horschamps.png" alt="Hors Champ — instrument musical augmenté par l’IA — interface du synthétiseur VJ Hydra" loading="lazy"></div>
-      <div class="portfolio-copy"><span class="portfolio-type">Recherche artistique &amp; prototypage</span><h3>Hors Champ — instrument musical augmenté par l’IA (v56)</h3><p data-fr="Projet personnel en développement : un environnement de création musicale en temps réel où l’IA accompagne le jeu instrumental plutôt que de le remplacer. Synthés, claviers, machines vintage et contrôleurs MIDI dialoguent en direct avec la génération sonore par IA, les boîtes à rythmes et le looper. Présentation prévue à l'automne 2026." data-en="Personal project in development: a real-time music environment where AI accompanies live instrumental performance rather than replacing it. Synths, keyboards, vintage machines and MIDI controllers interact live with AI sound generation, drum machines and looping. Presentation planned for fall 2026.">Projet personnel en développement : un environnement de création musicale en temps réel où l’IA accompagne le jeu instrumental plutôt que de le remplacer. Synthés, claviers, machines vintage et contrôleurs MIDI dialoguent en direct avec la génération sonore par IA, les boîtes à rythmes et le looper. Présentation prévue à l'automne 2026.</p><div class="portfolio-tags"><span>Google Lyria RealTime</span><span>Web Audio API</span><span>MIDI</span><span>WebSockets</span><span>Prototypage</span></div></div>
+      <div class="portfolio-visual"><img src="img/horschamp-app.webp" alt="Hors Champ — interface de l’app : séquenceur, contextes musicaux et rack d’effets" loading="lazy"></div>
+      <div class="portfolio-copy"><span class="portfolio-type">Recherche artistique &amp; prototypage</span><h3>Hors Champ — instrument musical augmenté par l’IA</h3><p data-fr="Projet personnel, maintenant en bêta publique : un environnement de création musicale en temps réel où l’IA accompagne le jeu instrumental plutôt que de le remplacer. Synthés, claviers, machines vintage et contrôleurs MIDI dialoguent en direct avec la génération sonore par IA, les boîtes à rythmes, le looper et les visuels Hydra." data-en="Personal project, now in public beta: a real-time music environment where AI accompanies live instrumental performance rather than replacing it. Synths, keyboards, vintage machines and MIDI controllers interact live with AI sound generation, drum machines, looping and Hydra visuals.">Projet personnel, maintenant en bêta publique : un environnement de création musicale en temps réel où l’IA accompagne le jeu instrumental plutôt que de le remplacer. Synthés, claviers, machines vintage et contrôleurs MIDI dialoguent en direct avec la génération sonore par IA, les boîtes à rythmes, le looper et les visuels Hydra.</p><div class="portfolio-links"><a href="https://horschamp.ai.studio" target="_blank" rel="noopener" data-fr="Essayer l’app ↗" data-en="Try the app ↗">Essayer l’app ↗</a><a href="https://horschamp.vercel.app/" data-href-fr="https://horschamp.vercel.app/" data-href-en="https://horschamp.vercel.app/en/" target="_blank" rel="noopener" data-fr="Page du projet ↗" data-en="Project page ↗">Page du projet ↗</a></div><div class="portfolio-tags"><span>Google Lyria RealTime</span><span>Web Audio API</span><span>MIDI</span><span>Hydra</span><span>WebSockets</span></div></div>
     </article>
     <article class="portfolio-card reveal">
       <div class="portfolio-visual portfolio-icon" role="img" aria-label="URA — Kimura Byol"><svg viewBox="0 0 64 64" width="96" height="96" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="14" width="48" height="36" rx="2"/><path d="M20 14v36M32 14v36M44 14v36"/><path d="M16 14v20h8V14M28 14v20h8V14M40 14v20h8V14" fill="currentColor" opacity=".5"/></svg></div>
@@ -1391,6 +1434,8 @@
       if(val.includes('<br>')||val.includes('<strong>')||val.includes('<em>')) el.innerHTML=val;
       else el.textContent=val;
     });
+    document.querySelectorAll('[data-href-fr]').forEach(el=>{ el.setAttribute('href', el.getAttribute('data-href-'+lang)); });
+    document.querySelectorAll('[data-aria-fr]').forEach(el=>{ el.setAttribute('aria-label', el.getAttribute('data-aria-'+lang)); });
     btn.textContent=lang==='fr'?'EN':'FR';
   }
   btn.addEventListener('click',()=>{ lang=lang==='fr'?'en':'fr'; apply(); });
