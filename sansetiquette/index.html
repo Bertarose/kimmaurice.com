@@ -124,6 +124,9 @@ section.block h2.sec { font-family: var(--font-display); font-weight: 800; font-
 
 .dltop { margin: 18px 0 4px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; }
 .dltop span { font-size: 14px; color: var(--muted); }
+.weblink { display: inline-block; margin-top: 8px; padding: 6px 12px; border: 1.5px solid var(--ink); color: var(--ink); font-weight: 600; font-size: 14px; text-decoration: none; }
+.weblink:hover, .weblink:focus-visible { background: var(--ink); color: var(--paper); }
+.webdom { display: block; font-size: 12px; color: var(--muted); margin-top: 4px; }
 </style>
 </head>
 <body>
@@ -269,7 +272,7 @@ const UI = {
     tags: { C: "Confirmé", D: "Déduit", N: "Non précisé" },
     status: { "OFFICIEL": "Officiel", "PROVISOIRE": "Provisoire", "EN ATTENTE": "Site web" },
     man: "Un homme torse nu?", woman: "Une femme torse nu?", others: "Corps hors catégories, trans, non binaires",
-    base: "La règle repose sur :", wrote: "Ce que le spa a écrit", bref: "En bref", note: "À noter :", web: "Sur son site web :", nothing: "Rien sur la poitrine.",
+    base: "La règle repose sur :", wrote: "Ce que le spa a écrit", bref: "En bref", note: "À noter :", web: "Sur son site web :", nothing: "Rien sur la poitrine.", seerule: "Voir la page du spa",
     q: ["« ", " »"],
     count: n => `${n} spa${n > 1 ? "s" : ""} affiché${n > 1 ? "s" : ""}`,
     stats: ["établissements contactés par courriel", "sites web consultés : aucun ne précise si la poitrine doit être couverte", "seul spa confirme que le haut est facultatif pour toute personne", "spas obligent les femmes à couvrir leur poitrine (confirmé par écrit)"]
@@ -281,7 +284,7 @@ const UI = {
     tags: { C: "Confirmed", D: "Inferred", N: "Not specified" },
     status: { "OFFICIEL": "Official", "PROVISOIRE": "Provisional", "EN ATTENTE": "Website" },
     man: "A man topless?", woman: "A woman topless?", others: "Bodies outside the categories, trans, non-binary",
-    base: "The rule is based on:", wrote: "What the spa wrote (translated from French)", bref: "In short", note: "Note:", web: "On its website:", nothing: "Nothing about the chest.",
+    base: "The rule is based on:", wrote: "What the spa wrote (translated from French)", bref: "In short", note: "Note:", web: "On its website:", nothing: "Nothing about the chest.", seerule: "See the spa’s page",
     q: ["“", "”"],
     count: n => `${n} spa${n > 1 ? "s" : ""} shown`,
     stats: ["establishments contacted by email", "websites checked: none says whether the chest must be covered", "spa confirms that a top is optional for everyone", "spas require women to cover their chest (confirmed in writing)"]
@@ -312,7 +315,7 @@ function card(s) {
   const rules = s.cat === "attente" ? "" : `<dl class="qa">${qa(t.man, s.homme)}${qa(t.woman, s.femme)}${qa(t.others, s.autres)}</dl><div class="base"><b>${t.base}</b> ${esc(s.base)}</div>`;
   const wrote = quotes ? `<details><summary>${t.wrote}</summary>${quotes}<div class="src">${esc(s.source)}</div></details>` : (s.source ? `<div class="src">${esc(s.source)}</div>` : "");
   const note = s.note ? `<div class="note"><b>${t.note}</b> ${esc(s.note)}</div>` : "";
-  const web = s.url ? `<div class="web"><b>${t.web}</b> ${esc(s.web)} <b>${t.nothing}</b><br><a href="${esc(s.url)}">${esc(s.url.replace(/^https?:\/\/(www\.)?/, ""))}</a></div>` : "";
+  const web = s.url ? `<div class="web"><b>${t.web}</b> ${esc(s.web)} <b>${t.nothing}</b><a class="weblink" href="${esc(s.url)}" target="_blank" rel="noopener">${t.seerule} <span aria-hidden="true">↗</span></a><span class="webdom">${esc(s.url.replace(/^https?:\/\/(www\.)?/, "").split("/")[0])}</span></div>` : "";
   return `<article class="card ${s.cat === "attente" ? "attente" : ""}">
     <div class="head"><div><h2>${esc(s.name)}</h2><div class="place">${esc(s.place)}</div></div><span class="pill ${STCLS[s.status] || ""}">${t.status[s.status] || s.status}</span></div>
     <div class="catname">${esc(t.cats[s.cat])}</div>
