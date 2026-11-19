@@ -65,6 +65,18 @@
         <lastmod>2026-11-19</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://www.kimmaurice.com/sansetiquette/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.kimmaurice.com/sansetiquette/en/"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kimmaurice.com/sansetiquette/"/>
+    </url>
+    <url>
+        <loc>https://www.kimmaurice.com/sansetiquette/en/</loc>
+        <lastmod>2026-11-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://www.kimmaurice.com/sansetiquette/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.kimmaurice.com/sansetiquette/en/"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kimmaurice.com/sansetiquette/"/>
     </url>
     
 </urlset>
