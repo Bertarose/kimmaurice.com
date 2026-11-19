@@ -158,9 +158,31 @@ details blockquote { margin: 8px 0; padding-left: 10px; border-left: 2px solid v
 .web { font-size: 13px; border-top: 1px solid var(--line); padding-top: 10px; }
 .web a { word-break: break-all; }
 .empty { padding: 32px 0; color: var(--muted); }
-footer { border-top: 3px solid var(--ink); margin-top: 32px; padding: 24px 0 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; font-size: 14px; }
-footer h3 { font-family: var(--font-display); font-size: 16px; margin: 0 0 6px; }
-footer p { margin: 0 0 8px; max-width: 60ch; }
+.about { border-top: 3px solid var(--ink); margin-top: 40px; padding: 28px 20px 64px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 28px 40px; font-size: 14px; }
+.about h3 { font-family: var(--font-display); font-size: 16px; margin: 0 0 6px; }
+.about p { margin: 0 0 8px; max-width: 60ch; }
+/* Pied de page : bande sombre qui ferme la page */
+footer.site { --f-bg: #111111; --f-ink: #f2f2f0; --f-muted: #b5b5b0; --f-line: #3a3a38; background: var(--f-bg); color: var(--f-ink); padding: 48px 0 28px; font-size: 15px; }
+:root[data-theme="dark"] footer.site { --f-bg: #1d1d1c; --f-muted: #a6a6a2; --f-line: #3a3a38; border-top: 1px solid var(--line); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) footer.site { --f-bg: #1d1d1c; --f-muted: #a6a6a2; --f-line: #3a3a38; border-top: 1px solid var(--line); } }
+footer.site a { color: var(--f-ink); text-underline-offset: 3px; }
+footer.site a:hover { text-decoration-thickness: 2px; }
+footer.site a:focus-visible { outline: 2px solid var(--f-ink); outline-offset: 3px; }
+.fgrid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.2fr; gap: 32px 40px; }
+.fname { font-family: var(--font-display); font-weight: 800; font-size: 22px; letter-spacing: .04em; text-transform: uppercase; text-decoration: none; }
+.fbrand p { color: var(--f-muted); margin: 10px 0 0; max-width: 34ch; }
+footer.site h2 { font-family: var(--font-display); font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--f-muted); margin: 4px 0 12px; }
+footer.site ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.fcol p { margin: 0 0 12px; overflow-wrap: anywhere; }
+.fbottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 24px; margin-top: 40px; padding-top: 18px; border-top: 1px solid var(--f-line); font-size: 13px; color: var(--f-muted); }
+.fbottom a { color: var(--f-muted) !important; }
+.fup { font-weight: 600; text-decoration: none; }
+@media (max-width: 860px) { .fgrid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 640px) {
+  .fgrid { grid-template-columns: 1fr; gap: 28px; }
+  footer.site { padding: 40px 0 96px; }
+  .fbottom { flex-direction: column; }
+}
 
 .video { margin: 0 0 24px; }
 .video video { width: 100%; display: block; background: #000; aspect-ratio: 16 / 9; }
@@ -241,7 +263,7 @@ section.block h2.sec { font-family: var(--font-display); font-weight: 800; font-
 </style>
 </head>
 <body>
-<header class="top">
+<header class="top" id="top">
   <div class="wrap">
     <div class="mast">
       <div class="brand">Sans étiquette<small data-i18n="tagline">Enquêtes et ressources pour les personnes queer</small></div>
@@ -315,7 +337,7 @@ section.block h2.sec { font-family: var(--font-display); font-weight: 800; font-
   </section>
 </main>
 
-<footer id="apropos" class="wrap">
+<section id="apropos" class="wrap about">
   <div data-i18n="f1">
     <h3>La méthode</h3>
     <p>Du 1er au 16 novembre 2026, 19 établissements ont été contactés par courriel. Dix-huit spas avec des installations communes font partie de l’enquête; le Spa Ovarium, qui n’offre que des soins individuels, a été écarté. Tous ont reçu la même question : peut-on profiter des installations torse nu, selon qu’on est un homme, une femme, ou une personne dont le corps ne correspond pas à ces catégories? Les citations sont reproduites mot pour mot. Chaque spa cité a reçu son texte avec la possibilité de le corriger avant publication. La Source a demandé que ses courriels ne soient pas cités : sa fiche résume la règle sans les citer.</p>
@@ -333,6 +355,35 @@ section.block h2.sec { font-family: var(--font-display); font-weight: 800; font-
     <p>Sans étiquette est une série d’enquêtes et de ressources pour les personnes queer, trans, non binaires, et pour toutes celles dont le corps ou l’identité ne rentre pas dans les cases. Torse nu au spa en est la première enquête.</p>
     <p>L’enquête, les courriels et les choix éditoriaux sont de Kim Maurice. Des outils d’intelligence artificielle ont servi à classer les réponses, à mettre en page et à relire. Toutes les citations ont été vérifiées contre les courriels originaux.</p>
     <p>Une correction ou une réponse à ajouter? Écrivez à <a href="mailto:sansetiquette.enquete@gmail.com">sansetiquette.enquete@gmail.com</a>.</p>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="fgrid">
+      <div class="fbrand">
+        <a class="fname" href="#top">Sans étiquette</a>
+        <p data-i18n="ftag">Enquêtes et ressources pour les personnes queer, trans, non binaires, et pour toutes celles dont le corps ne rentre pas dans les cases.</p>
+      </div>
+      <nav class="fcol" aria-labelledby="fnavh">
+        <h2 id="fnavh" data-i18n="fnavh">Cette enquête</h2>
+        <ul data-i18n="fnav"><li><a href="#repertoire">Le répertoire</a></li><li><a href="#enquete">L’enquête complète</a></li><li><a href="#histoire">Un peu d’histoire</a></li><li><a href="#apropos">La méthode</a></li></ul>
+      </nav>
+      <div class="fcol">
+        <h2 data-i18n="fdlh">Télécharger</h2>
+        <ul data-i18n="fdl"><li><a href="pdf/Torse_nu_au_spa_resume.pdf">Le résumé (PDF, 3 pages)</a></li><li><a href="pdf/Torse_nu_au_spa_enquete.pdf">Le dossier complet (PDF, 22 pages)</a></li></ul>
+      </div>
+      <div class="fcol">
+        <h2 data-i18n="fcth">Écrire</h2>
+        <p data-i18n="fct">Une correction, une réponse de spa ou une idée d’enquête : <a href="mailto:sansetiquette.enquete@gmail.com">sansetiquette.enquete@gmail.com</a></p>
+        <p><a id="otherlang" href="en/" lang="en" hreflang="en">English version</a></p>
+      </div>
+    </div>
+    <div class="fbottom">
+      <span data-i18n="fcopy">© 2026 Kim Maurice · <a href="https://www.kimmaurice.com/">kimmaurice.com</a></span>
+      <span data-i18n="fcall">Les règles peuvent changer : appelez le spa avant d’y aller.</span>
+      <a class="fup" href="#top" data-i18n="fup">↑ Haut de page</a>
+    </div>
   </div>
 </footer>
 
@@ -354,6 +405,16 @@ const EN = {
   search: "Region",
   rulelbl: "Rule",
   totop: "↑ Filters",
+  ftag: "Investigations and resources for queer, trans and non-binary people, and for anyone whose body doesn’t fit the boxes.",
+  fnavh: "This investigation",
+  fnav: '<li><a href="#repertoire">The directory</a></li><li><a href="#enquete">The full investigation</a></li><li><a href="#histoire">A bit of history</a></li><li><a href="#apropos">The method</a></li>',
+  fdlh: "Download",
+  fdl: '<li><a href="pdf/Topless_at_the_spa_summary.pdf">The summary (PDF, 3 pages)</a></li><li><a href="pdf/Topless_at_the_spa_investigation.pdf">The full report (PDF, 22 pages)</a></li>',
+  fcth: "Get in touch",
+  fct: 'A correction, a spa’s reply or an idea for an investigation: <a href="mailto:sansetiquette.enquete@gmail.com">sansetiquette.enquete@gmail.com</a>',
+  fcopy: '© 2026 Kim Maurice · <a href="https://www.kimmaurice.com/">kimmaurice.com</a>',
+  fcall: "Rules can change: call the spa before you go.",
+  fup: "↑ Back to top",
   accsel: "Reduced mobility",
   howto: '<span class="dot yes" style="display:inline-block"></span> Topless allowed for everyone &nbsp; <span class="dot maybe" style="display:inline-block"></span> Choice of swimsuit or rule to be clarified &nbsp; <span class="dot no" style="display:inline-block"></span> Top required for some people &nbsp; <span class="dot" style="display:inline-block"></span> No answer. The spas answered in French; summaries are translated. Rules can change: call the spa before you go.',
   empty: "No spa matches. Try another filter.",
@@ -509,6 +570,10 @@ function setLang(lang, save) {
       history.replaceState(null, "", u);
     } catch (e) {}
   }
+  const ol = document.getElementById("otherlang"), other = state.lang === "en" ? "fr" : "en";
+  ol.textContent = other === "en" ? "English version" : "Version française";
+  ol.lang = ol.hreflang = other;
+  ol.href = other === PAGE_LANG ? "./" : (PAGE_LANG === "fr" ? "en/" : "../?lang=fr");
   render();
   paintThemeBtn();
 }
@@ -556,6 +621,11 @@ try {
 } catch (e) {}
 try { const h = location.hash.slice(1); if (CATKEYS.includes(h)) state.cat = h; } catch (e) {}
 
+document.getElementById("otherlang").addEventListener("click", e => {
+  e.preventDefault();
+  setLang(state.lang === "en" ? "fr" : "en", true);
+  window.scrollTo({ top: 0 });
+});
 document.querySelector(".lang").addEventListener("click", e => { const b = e.target.closest("button"); if (b) setLang(b.dataset.lang, true); });
 document.getElementById("cats").addEventListener("click", e => {
   const b = e.target.closest(".chip"); if (!b) return;
