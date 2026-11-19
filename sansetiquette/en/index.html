@@ -73,7 +73,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&amp;display=swap" rel="stylesheet">
-<script>try{var t=localStorage.getItem("se-theme");if(t==="dark"||t==="light")document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem("se-theme");if(t==="dark"||t==="light")document.documentElement.dataset.theme=t;if(localStorage.getItem("se-mascot")==="off")document.documentElement.classList.add("nomascot")}catch(e){}</script>
 <style>
 /* Layout : en-tête éditorial noir et blanc, filtres collants, grille de fiches par spa. */
 :root {
@@ -259,6 +259,32 @@ section.block h2.sec { font-family: var(--font-display); font-weight: 800; font-
 .card { gap: 6px; }
 .card .weblink { align-self: flex-start; margin-top: 6px; }
 @media (max-width: 640px) { .card .weblink { align-self: stretch; } }
+
+/* Personnage en serviette : coin inférieur gauche, se ferme avec le X */
+.mascot { position: fixed; left: 14px; bottom: 14px; z-index: 9; width: 96px; padding: 8px 8px 4px; background: var(--paper); border: 1.5px solid var(--ink); border-radius: 16px; box-shadow: 0 3px 12px rgba(0,0,0,.18); animation: m-in .7s ease-out 1.2s both; }
+.nomascot .mascot { display: none; }
+.mascot svg { display: block; width: 100%; height: auto; color: var(--ink); overflow: visible; }
+.mascot .o { fill: var(--paper); stroke: currentColor; stroke-width: 2.6; stroke-linejoin: round; stroke-linecap: round; }
+.mascot .l { fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.mascot .t1 { fill: none; stroke: currentColor; stroke-width: 13; stroke-linecap: round; stroke-linejoin: round; }
+.mascot .t2 { fill: none; stroke: var(--paper); stroke-width: 7.8; stroke-linecap: round; stroke-linejoin: round; }
+.mascot .k { fill: currentColor; }
+.mascot .hl { fill: none; stroke: var(--paper); stroke-width: 1.4; stroke-linecap: round; opacity: .8; }
+.mascot .s { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; opacity: 0; animation: m-steam 3.6s ease-in-out infinite; }
+.mascot .st2 { animation-delay: 1.2s; } .mascot .st3 { animation-delay: 2.4s; }
+.mascot .body { animation: m-bob 3.2s ease-in-out infinite alternate; }
+.mascot .wave { transform-box: view-box; transform-origin: 94px 82px; animation: m-wave 5s ease-in-out 2s infinite; }
+.mascot .eyes { transform-box: fill-box; transform-origin: center; animation: m-blink 4.6s infinite; }
+.mascot-x { position: absolute; top: -12px; right: -12px; z-index: 1; width: 30px; height: 30px; padding: 0; border-radius: 50%; border: 1.5px solid var(--ink); background: var(--paper); color: var(--ink); font: 700 18px/1 var(--font-body); cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.mascot-x:hover { background: var(--ink); color: var(--paper); }
+@keyframes m-in { from { transform: translateY(120%); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes m-bob { to { transform: translateY(-2px); } }
+@keyframes m-wave { 0%, 45%, 100% { transform: rotate(0); } 9% { transform: rotate(-16deg); } 18% { transform: rotate(10deg); } 27% { transform: rotate(-16deg); } 36% { transform: rotate(8deg); } }
+@keyframes m-blink { 0%, 93%, 100% { transform: scaleY(1); } 96% { transform: scaleY(.1); } }
+@keyframes m-steam { 0% { transform: translateY(8px); opacity: 0; } 40% { opacity: .5; } 100% { transform: translateY(-12px); opacity: 0; } }
+@media (max-width: 640px) { .mascot { width: 70px; left: 10px; bottom: 12px; padding: 6px 6px 2px; border-radius: 12px; } .mascot-x { width: 32px; height: 32px; top: -14px; right: -14px; } }
+@media (prefers-reduced-motion: reduce) { .mascot, .mascot * { animation: none !important; } .mascot .s { opacity: .4; } }
+@media print { .mascot { display: none; } }
 </style>
 </head>
 <body>
@@ -500,6 +526,38 @@ section.block h2.sec { font-family: var(--font-display); font-weight: 800; font-
   </div>
 </footer>
 
+<div class="mascot" id="mascot">
+  <button type="button" class="mascot-x" id="mascotx" aria-label="Close the character" title="Close the character">×</button>
+  <svg viewBox="0 0 140 215" role="img" aria-label="Small topless character with a towel around the waist, waving" id="mascotsvg">
+<g class="steam"><path class="s st1" d="M20 92c-6-7 6-11 0-18s6-11 0-18"></path><path class="s st2" d="M30 100c-6-7 6-11 0-18s6-11 0-18"></path><path class="s st3" d="M120 96c-6-7 6-11 0-18s6-11 0-18"></path></g>
+<g class="body">
+<path class="t1" d="M61 162 L60 198"></path><path class="t2" d="M61 162 L60 198"></path>
+<path class="t1" d="M79 162 L80 198"></path><path class="t2" d="M79 162 L80 198"></path>
+<ellipse class="o" cx="56" cy="203" rx="8" ry="4.5"></ellipse><ellipse class="o" cx="84" cy="203" rx="8" ry="4.5"></ellipse>
+<path class="t1" d="M46 82 L41 106 L42 126"></path><path class="t2" d="M46 82 L41 106 L42 126"></path>
+<circle class="o" cx="42" cy="130" r="5.5"></circle>
+<g class="wave"><path class="t1" d="M94 82 L109 66 L113 46"></path><path class="t2" d="M94 82 L109 66 L113 46"></path>
+<circle class="o" cx="113.5" cy="41" r="6"></circle></g>
+<path class="o" d="M63 52 L63 70 Q70 74 77 70 L77 52 Z"></path>
+<path class="o" d="M63 67 C55 68 47 70 44 77 C41 84 44 92 47 100 C49 110 50 120 50 130 L90 130 C90 120 91 110 93 100 C96 92 99 84 96 77 C93 70 85 68 77 67 Q70 71 63 67 Z"></path>
+<path class="l" d="M55 99 Q62 104 68 100.5 M72 100.5 Q78 104 85 99"></path><circle class="k" cx="61" cy="97.5" r="1.1"></circle><circle class="k" cx="79" cy="97.5" r="1.1"></circle>
+<path class="l" d="M70 116 q-1 2 0 3"></path>
+<path class="o" d="M49 124 L91 124 L96 166 Q70 171 44 166 Z"></path>
+<path class="l" d="M79 124 L84 168"></path>
+<path class="o" d="M79 124 L88 124 L84 133 Z"></path>
+<path class="l" d="M45.5 154 Q70 158 94.5 154 M45 159 Q70 163 95 159"></path>
+<ellipse class="o" cx="53.5" cy="44" rx="3.5" ry="6"></ellipse><ellipse class="o" cx="86.5" cy="44" rx="3.5" ry="6"></ellipse>
+<ellipse class="o" cx="70" cy="42" rx="16.5" ry="19.5"></ellipse>
+<path class="k" d="M53.5 41 C51 27 57 17 68 14 C76 11 88 14 90 22 C92 28 89 34 87.5 40 C86 33 82 29 76 28 C68 27 61 29 57 34 C55.5 36 54.5 38.5 54 41 Z"></path>
+<path d="M63 21 Q74 15 86 20" class="hl" stroke-width="1.4" stroke-linecap="round" opacity=".8"></path>
+<path class="l" d="M61 36.5 L66.5 35.5 M73.5 35.5 L79 36.5"></path>
+<g class="eyes"><ellipse class="k" cx="64" cy="42" rx="1.7" ry="2.1"></ellipse><ellipse class="k" cx="76" cy="42" rx="1.7" ry="2.1"></ellipse></g>
+<path class="l" d="M70 44 Q68.5 48.5 71 49"></path>
+<path class="l" d="M65.5 53 Q70 56.5 74.5 53"></path>
+</g>
+  </svg>
+</div>
+
 <a href="#repertoire" class="totop" id="totop" hidden="" data-i18n="totop">↑ Filters</a>
 <script>window.FR_STRINGS = {"tagline":"Enquêtes et ressources pour les personnes queer","issue":"Enquête nº 1","kicker":"Enquête indépendante · Montréal et environs · État au 19 novembre 2026","h1":"Torse nu au spa : une règle pour qui?","dek":"Les personnes queer, trans, non binaires, ou dont le corps ne rentre pas dans les cases peuvent-elles profiter du spa sans se couvrir le torse? Voici ce que les spas ont répondu par écrit, et ce que les autres affichent sur leur site web.","vidcap":"Illustration générée par IA.","punch":"L’obligation de porter un maillot est une chose; l’obligation de couvrir sa poitrine en est une autre.","dltop":"<a class=\"btn primary\" href=\"pdf/Torse_nu_au_spa_resume.pdf\">Télécharger le résumé (PDF, 3 pages)<\/a> <span>Ou le <a href=\"pdf/Torse_nu_au_spa_enquete.pdf\">dossier complet<\/a>, avec les réponses écrites des spas, la méthode et les sources.<\/span>","nav":"<a href=\"#repertoire\">Le répertoire<\/a><a href=\"#enquete\">Lire l’enquête complète<\/a><a href=\"#histoire\">Un peu d’histoire<\/a><a href=\"#apropos\">À propos<\/a>","rulelbl":"Règle","search":"Région","accsel":"Mobilité réduite","howto":"<span class=\"dot yes\" style=\"display:inline-block\"><\/span> Torse nu permis pour toute personne &nbsp; <span class=\"dot maybe\" style=\"display:inline-block\"><\/span> Choix du maillot ou règle à préciser &nbsp; <span class=\"dot no\" style=\"display:inline-block\"><\/span> Haut exigé pour certaines personnes &nbsp; <span class=\"dot\" style=\"display:inline-block\"><\/span> Pas de réponse. Les règles peuvent changer : appelez le spa avant d’y aller.","enqh":"Lire l’enquête complète","enqp":"Le dossier d’enquête de 21 pages contient les réponses reçues et publiables, citées mot pour mot, la méthode, ce que dit chaque site web, un peu d’histoire et les sources. Pour les journalistes : les courriels originaux sont conservés et disponibles sur demande.","dl":"\n      <a class=\"btn primary\" href=\"pdf/Torse_nu_au_spa_resume.pdf\">Le résumé (PDF, 3 pages)<\/a>\n      <a class=\"btn\" href=\"pdf/Torse_nu_au_spa_enquete.pdf\">Le dossier complet (PDF, 21 pages)<\/a>\n      <a class=\"btn\" href=\"pdf/Topless_at_the_spa_investigation.pdf\" lang=\"en\">Download the report (PDF, English)<\/a>\n    ","hish":"Un peu d’histoire","hisbig":"Il y a moins de cent ans, le torse des hommes aussi devait être caché. La règle a changé pour eux. Pas pour les femmes.","tepcap":"<i>Le Tepidarium<\/i>, Lawrence Alma-Tadema, 1881. Lady Lever Art Gallery. Domaine public. Le tepidarium était la salle tiède des thermes romains. C’est une vision du XIXe siècle, peinte par un homme, de l’Antiquité et du corps féminin.","timeline":"\n        <li><b>Rome antique<\/b>Bain froid, salle tiède, bain chaud : déjà notre parcours de spa. Selon les époques, femmes et hommes se baignaient séparément ou ensemble. L’empereur Hadrien a interdit les bains mixtes; ça n’a pas duré.<\/li>\n        <li><b>Paris, Moyen Âge<\/b>Plusieurs dizaines d’étuves, des bains publics à vapeur, comme un hammam.<\/li>\n        <li><b>Finlande<\/b>Au sauna, on va généralement nu, femmes et hommes séparément dans les saunas publics. Depuis des siècles.<\/li>\n        <li><b>New Jersey, 1891<\/b>Un homme reçoit une amende pour un maillot « inconvenant ». En 1910, le haut est encore obligatoire pour les hommes.<\/li>\n        <li><b>Années 1930<\/b>Les hommes se battent pour être torse nu à la plage. En 1939, 67 % du public approuve.<\/li>\n        <li><b>Saint-Sauveur, années 1960<\/b>Le premier spa nordique du Québec commence dans le sauna d’une maison privée.<\/li>\n        <li><b>Aujourd’hui<\/b>Plus de 100 spas nordiques au Québec. La règle du haut de maillot n’est écrite sur aucun des 18 sites consultés.<\/li>\n      ","hissrc":"Sources : History.com; Livres Hebdo (Georges Vigarello, <i>Le propre et le sale<\/i>); Visit Finland; Historical Society of Ocean Grove; Strøm spa nordique; Tourisme Montréal. Liens complets dans le dossier PDF.","f1":"\n    <h3>La méthode<\/h3>\n    <p>Du 1er au 16 novembre 2026, 19 établissements ont été contactés par courriel. Dix-huit spas avec des installations communes font partie de l’enquête; le Spa Ovarium, qui n’offre que des soins individuels, a été écarté. Tous ont reçu la même question : peut-on profiter des installations torse nu, selon qu’on est un homme, une femme, ou une personne dont le corps ne correspond pas à ces catégories? Les citations sont reproduites mot pour mot. Chaque spa cité a reçu son texte avec la possibilité de le corriger avant publication. La Source a demandé que ses courriels ne soient pas cités : sa fiche résume la règle sans les citer.<\/p>\n    <p>Les sites web de 18 spas ont aussi été consultés. Aucun ne précise si la poitrine doit être couverte.<\/p>\n    <p>Le 19 novembre, j’ai aussi cherché ce que chaque spa dit sur l’accès pour les personnes à mobilité réduite, sur son site et dans les évaluations de Kéroul, un organisme qui visite les lieux pour mesurer leur accessibilité (sa cote est la seule reconnue par le ministère du Tourisme du Québec). Aucun site ne dit que ses bains sont accessibles en fauteuil roulant, et onze n’en parlent pas du tout. Appelez avant votre visite.<\/p>\n    <p>Pour planifier une sortie accessible, Kéroul publie le détail de chaque lieu qu’il a évalué : <a href=\"https://www.keroul.qc.ca/\" target=\"_blank\" rel=\"noopener\">keroul.qc.ca<\/a>.<\/p>\n    <p>Je n’ai pas insisté auprès des spas qui n’ont pas voulu répondre. Pour eux, la fiche résume ce que dit leur site web. Les données viennent de deux sources seulement : ce que les spas m’ont écrit, et ce qu’ils affichent sur leur site. Le but est d’informer, pas de juger les réponses.<\/p>\n  ","f2":"\n    <h3>Ce qui reste à évaluer<\/h3>\n    <p>Ce répertoire ne tranche aucune question juridique. Depuis 2016, la Charte des droits et libertés de la personne du Québec interdit la discrimination fondée sur le sexe et sur l’identité ou l’expression de genre. Un spa peut-il imposer un haut aux femmes et pas aux hommes? La question mériterait d’être posée à des juristes et à la CDPDJ.<\/p>\n  ","f3":"\n    <h3>À propos de Sans étiquette<\/h3>\n    <p>Sans étiquette est une série d’enquêtes et de ressources pour les personnes queer, trans, non binaires, et pour toutes celles dont le corps ou l’identité ne rentre pas dans les cases. Torse nu au spa en est la première enquête.<\/p>\n    <p>L’enquête, les courriels et les choix éditoriaux sont de Kim Maurice. Des outils d’intelligence artificielle ont servi à classer les réponses, à mettre en page et à relire. Toutes les citations ont été vérifiées contre les courriels originaux.<\/p>\n    <p>Une correction ou une réponse à ajouter? Écrivez à <a href=\"mailto:sansetiquette.enquete@gmail.com\">sansetiquette.enquete@gmail.com<\/a>.<\/p>\n  ","ftag":"Enquêtes et ressources pour les personnes queer, trans, non binaires, et pour toutes celles dont le corps ne rentre pas dans les cases.","fnavh":"Cette enquête","fnav":"<li><a href=\"#repertoire\">Le répertoire<\/a><\/li><li><a href=\"#enquete\">L’enquête complète<\/a><\/li><li><a href=\"#histoire\">Un peu d’histoire<\/a><\/li><li><a href=\"#apropos\">La méthode<\/a><\/li>","fdlh":"Télécharger","fdl":"<li><a href=\"pdf/Torse_nu_au_spa_resume.pdf\">Le résumé (PDF, 3 pages)<\/a><\/li><li><a href=\"pdf/Torse_nu_au_spa_enquete.pdf\">Le dossier complet (PDF, 21 pages)<\/a><\/li>","fcth":"Écrire","fct":"Une correction, une réponse de spa ou une idée d’enquête : <a href=\"mailto:sansetiquette.enquete@gmail.com\">sansetiquette.enquete@gmail.com<\/a>","fcopy":"© 2026 Kim Maurice · <a href=\"https://www.kimmaurice.com/\">kimmaurice.com<\/a>","fcall":"Les règles peuvent changer : appelez le spa avant d’y aller.","fup":"↑ Haut de page","totop":"↑ Filtres","vidalt":"Cinq personnes aux morphologies différentes, en maillot de bain, torse nu.","tepalt":"Peinture d’une femme nue allongée sur une peau de bête dans une salle de bain romaine en marbre."};</script>
 <script>
@@ -568,6 +626,7 @@ const UI = {
     accnote: "Aucun spa ne dit que ses bains sont accessibles en fauteuil roulant. « Accès partiel » veut dire que certaines parties le sont (vestiaires, soins, ascenseur). Appelez le spa avant votre visite.",
     regions: { all: "Toutes les régions", mtl: "Montréal", monteregie: "Montérégie (Rive-Sud)", laurentides: "Laurentides", estrie: "Cantons-de-l’Est", lanaudiere: "Lanaudière" },
     empty: "Aucun spa ne correspond. Essayez un autre filtre.",
+    mascotAlt: "Petit personnage torse nu, une serviette autour de la taille, qui salue", mascotClose: "Fermer le personnage",
     toDark: "Sombre", toLight: "Clair", themeAria: "Thème", darkTitle: "Mode sombre", lightTitle: "Mode clair",
     filter: "Filtrer par règle",
     cats: { all: "Tous les spas", tous: "Torse nu pour toute personne", choix: "Choix du maillot, torse nu non confirmé", corps: "Selon le corps ou l’identité", fh: "Règle femmes / hommes", vague: "Règle à préciser", attente: "Pas de réponse : d’après leur site web" },
@@ -585,6 +644,7 @@ const UI = {
     accnote: "No spa says its baths are wheelchair accessible. “Partial access” means some areas are (changing rooms, treatments, elevator). Call the spa before your visit.",
     regions: { all: "All regions", mtl: "Montreal", monteregie: "Montérégie (South Shore)", laurentides: "Laurentians", estrie: "Eastern Townships", lanaudiere: "Lanaudière" },
     empty: "No spa matches. Try another filter.",
+    mascotAlt: "Small topless character with a towel around the waist, waving", mascotClose: "Close the character",
     toDark: "Dark", toLight: "Light", themeAria: "Theme", darkTitle: "Dark mode", lightTitle: "Light mode",
     filter: "Filter by rule",
     cats: { all: "All spas", tous: "Topless for everyone", choix: "Choice of swimsuit, topless not confirmed", corps: "Depends on the body or identity", fh: "Women / men rule", vague: "Rule to be clarified", attente: "No answer: from their website" },
@@ -690,6 +750,8 @@ function setLang(lang, save) {
       history.replaceState(null, "", u);
     } catch (e) {}
   }
+  document.getElementById("mascotsvg").setAttribute("aria-label", t.mascotAlt);
+  const mx = document.getElementById("mascotx"); mx.setAttribute("aria-label", t.mascotClose); mx.title = t.mascotClose;
   const ol = document.getElementById("otherlang"), other = state.lang === "en" ? "fr" : "en";
   ol.textContent = other === "en" ? "English version" : "Version française";
   ol.lang = ol.hreflang = other;
@@ -741,6 +803,11 @@ try {
 } catch (e) {}
 try { const h = location.hash.slice(1); if (CATKEYS.includes(h)) state.cat = h; } catch (e) {}
 
+// Personnage : se ferme avec le X, et reste fermé aux visites suivantes.
+document.getElementById("mascotx").addEventListener("click", () => {
+  document.getElementById("mascot").hidden = true;
+  try { localStorage.setItem("se-mascot", "off"); } catch (e) {}
+});
 document.getElementById("otherlang").addEventListener("click", e => {
   e.preventDefault();
   setLang(state.lang === "en" ? "fr" : "en", true);
