@@ -121,6 +121,9 @@ section.block h2.sec { font-family: var(--font-display); font-weight: 800; font-
 .lang button { font: inherit; font-size: 12px; font-weight: 700; letter-spacing: .06em; background: var(--paper); color: var(--ink); border: 0; padding: 4px 9px; cursor: pointer; }
 .lang button + button { border-left: 1px solid var(--ink); }
 .lang button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+
+.dltop { margin: 18px 0 4px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; }
+.dltop span { font-size: 14px; color: var(--muted); }
 </style>
 </head>
 <body>
@@ -144,6 +147,7 @@ section.block h2.sec { font-family: var(--font-display); font-weight: 800; font-
     </figure>
     <p class="punch" data-i18n="punch">L’obligation de porter un maillot est une chose; l’obligation de couvrir sa poitrine en est une autre.</p>
     <div class="stats" id="stats"></div>
+    <p class="dltop" data-i18n="dltop"><a class="btn primary" href="pdf/Torse_nu_au_spa_enquete.pdf">Télécharger le dossier complet (PDF)</a> <span>Toutes les réponses mot pour mot, la méthode et les sources.</span></p>
     <nav class="jump" aria-label="Sections" data-i18n="nav"><a href="#repertoire">Le répertoire</a><a href="#enquete">Lire l’enquête complète</a><a href="#histoire">Un peu d’histoire</a><a href="#apropos">À propos</a></nav>
   </div>
 </header>
@@ -160,13 +164,13 @@ section.block h2.sec { font-family: var(--font-display); font-weight: 800; font-
 </div>
 
 <main class="wrap">
-  <p class="howto" data-i18n="howto"><b>Comment lire :</b> <span class="dot yes" style="display:inline-block"></span> oui &nbsp; <span class="dot no" style="display:inline-block"></span> non &nbsp; <span class="dot maybe" style="display:inline-block"></span> probablement &nbsp; <span class="dot" style="display:inline-block"></span> pas clair. <span class="tag">Confirmé</span> = écrit par le spa · <span class="tag">Déduit</span> = découle de sa réponse, sans confirmation · <span class="tag">Non précisé</span> = le spa n’a pas répondu à ce point. Les politiques peuvent changer : écrivez au spa avant votre visite.</p>
+  <p class="howto" data-i18n="howto"><b>Comment lire :</b> <span class="dot yes" style="display:inline-block"></span> oui, torse nu permis &nbsp; <span class="dot no" style="display:inline-block"></span> non, poitrine à couvrir &nbsp; <span class="dot maybe" style="display:inline-block"></span> probablement &nbsp; <span class="dot" style="display:inline-block"></span> pas clair. <span class="tag">Confirmé</span> = écrit par le spa · <span class="tag">Déduit</span> = découle de sa réponse, sans confirmation · <span class="tag">Non précisé</span> = le spa n’a pas répondu à ce point. Les politiques peuvent changer : écrivez au spa avant votre visite.</p>
   <div class="grid" id="grid"></div>
   <p class="empty" id="empty" hidden data-i18n="empty">Aucun spa ne correspond. Essayez un autre filtre.</p>
 
   <section class="block" id="enquete">
     <h2 class="sec" data-i18n="enqh">Lire l’enquête complète</h2>
-    <p style="max-width:65ch" data-i18n="enqp">Le dossier d’enquête de 15 pages contient toutes les réponses des spas, mot pour mot, la méthode, ce que dit chaque site web, un peu d’histoire et les sources. Pour les journalistes : les courriels originaux sont conservés et disponibles sur demande.</p>
+    <p style="max-width:65ch" data-i18n="enqp">Le dossier d’enquête de 18 pages contient toutes les réponses des spas, mot pour mot, la méthode, ce que dit chaque site web, un peu d’histoire et les sources. Pour les journalistes : les courriels originaux sont conservés et disponibles sur demande.</p>
     <div class="dl" data-i18n="dl">
       <a class="btn primary" href="pdf/Torse_nu_au_spa_enquete.pdf">Télécharger le dossier (PDF, français)</a>
       <a class="btn" href="pdf/Topless_at_the_spa_investigation.pdf" lang="en">Download the report (PDF, English)</a>
@@ -227,11 +231,12 @@ const EN = {
   nav: '<a href="#repertoire">The directory</a><a href="#enquete">Read the full investigation</a><a href="#histoire">A bit of history</a><a href="#apropos">About</a>',
   search: "Search",
   searchph: "Spa name or town",
-  howto: '<b>How to read:</b> <span class="dot yes" style="display:inline-block"></span> yes &nbsp; <span class="dot no" style="display:inline-block"></span> no &nbsp; <span class="dot maybe" style="display:inline-block"></span> probably &nbsp; <span class="dot" style="display:inline-block"></span> unclear. <span class="tag">Confirmed</span> = written by the spa · <span class="tag">Inferred</span> = follows from its reply, without explicit confirmation · <span class="tag">Not specified</span> = the spa did not answer this point. The spas answered in French; their quotes are translated. Policies can change: write to the spa before your visit.',
+  howto: '<b>How to read:</b> <span class="dot yes" style="display:inline-block"></span> yes, topless allowed &nbsp; <span class="dot no" style="display:inline-block"></span> no, chest must be covered &nbsp; <span class="dot maybe" style="display:inline-block"></span> probably &nbsp; <span class="dot" style="display:inline-block"></span> unclear. <span class="tag">Confirmed</span> = written by the spa · <span class="tag">Inferred</span> = follows from its reply, without explicit confirmation · <span class="tag">Not specified</span> = the spa did not answer this point. The spas answered in French; their quotes are translated. Policies can change: write to the spa before your visit.',
   empty: "No spa matches. Try another filter.",
   enqh: "Read the full investigation",
-  enqp: "The 15-page report contains every spa’s reply, word for word, the method, what each website says, a bit of history and the sources. For journalists: the original emails are kept and available on request.",
+  enqp: "The 18-page report contains every spa’s reply, word for word, the method, what each website says, a bit of history and the sources. For journalists: the original emails are kept and available on request.",
   dl: '<a class="btn primary" href="pdf/Topless_at_the_spa_investigation.pdf">Download the report (PDF, English)</a> <a class="btn" href="pdf/Torse_nu_au_spa_enquete.pdf" lang="fr">Télécharger le dossier (PDF, français)</a>',
+  dltop: '<a class="btn primary" href="pdf/Topless_at_the_spa_investigation.pdf">Download the full report (PDF)</a> <span>Every reply word for word, the method and the sources.</span>',
   hish: "A bit of history",
   hisbig: "Less than a hundred years ago, men had to cover their chests too. The rule changed for them. Not for women.",
   tepalt: "Painting of a nude woman lying on an animal skin in a marble Roman bath.",
