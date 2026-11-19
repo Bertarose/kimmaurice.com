@@ -118,19 +118,23 @@ section.block h2.sec { font-family: var(--font-display); font-weight: 800; font-
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 
 .mastr { display: flex; align-items: center; gap: 14px; }
-.lang { display: inline-flex; border: 1px solid var(--ink); }
-.lang button { font: inherit; font-size: 12px; font-weight: 700; letter-spacing: .06em; background: var(--paper); color: var(--ink); border: 0; padding: 4px 9px; cursor: pointer; }
-.lang button + button { border-left: 1px solid var(--ink); }
-.lang button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.seg { display: inline-flex; border: 1px solid var(--ink); border-radius: 6px; }
+.seg button:first-child { border-radius: 5px 0 0 5px; }
+.seg button:last-child { border-radius: 0 5px 5px 0; }
+.seg button { font: inherit; font-size: 13px; font-weight: 700; letter-spacing: .04em; background: var(--paper); color: var(--ink); border: 0; min-height: 40px; min-width: 44px; padding: 0 12px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; cursor: pointer; }
+.seg button + button { border-left: 1px solid var(--ink); }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.seg button:hover:not([aria-pressed="true"]) { background: var(--panel); }
+.seg button:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; position: relative; z-index: 1; }
+.seg .ico { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+.themes button[data-theme-set="dark"] .ico { fill: currentColor; }
+.banner { display: block; width: auto; height: auto; max-width: 100%; max-height: clamp(220px, 44vh, 440px); }
 
 .dltop { margin: 18px 0 4px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; }
 .dltop span { font-size: 14px; color: var(--muted); }
 .weblink { display: inline-block; margin-top: 8px; padding: 6px 12px; border: 1.5px solid var(--ink); color: var(--ink); font-weight: 600; font-size: 14px; text-decoration: none; }
 .weblink:hover, .weblink:focus-visible { background: var(--ink); color: var(--paper); }
 .webdom { display: block; font-size: 12px; color: var(--muted); margin-top: 4px; }
-.theme { font: inherit; font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; background: var(--paper); color: var(--ink); border: 1px solid var(--ink); padding: 4px 9px; cursor: pointer; }
-.theme:hover, .theme:focus-visible { background: var(--ink); color: var(--paper); }
-.theme .ti { font-size: 13px; }
 .acc { font-size: 13px; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--line); }
 #region, #accsel { font: inherit; font-size: 15px; border: 1px solid var(--ink); background: var(--paper); color: var(--ink); border-radius: 6px; padding: 7px 10px; min-width: 240px; }
 .weblink { display: table; margin-top: 10px; }
@@ -140,7 +144,9 @@ section.block h2.sec { font-family: var(--font-display); font-weight: 800; font-
 .totop { position: fixed; right: 14px; bottom: 14px; z-index: 10; background: var(--ink); color: var(--paper); text-decoration: none; font-weight: 700; font-size: 14px; padding: 10px 14px; border-radius: 999px; box-shadow: 0 2px 10px rgba(0,0,0,.25); }
 @media (max-width: 640px) {
   .brand small { display: block; margin: 4px 0 0; }
-  .mastr { width: 100%; justify-content: space-between; }
+  .mastr { width: 100%; justify-content: space-between; gap: 8px; }
+  .seg button { min-height: 44px; padding: 0 10px; }
+  .themes .tl { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
   #cats { display: none !important; }
   .mobonly { display: flex !important; }
   .controls .row { flex-direction: column; align-items: stretch; gap: 4px; }
@@ -175,8 +181,8 @@ section.block h2.sec { font-family: var(--font-display); font-weight: 800; font-
       <div class="brand">Sans étiquette<small data-i18n="tagline">Enquêtes et ressources pour les personnes queer</small></div>
       <div class="mastr">
         <span class="issue" data-i18n="issue">Enquête nº 1</span>
-        <button type="button" class="theme" id="theme" aria-pressed="false"><span id="themelbl">Sombre</span></button>
-        <div class="lang" role="group" aria-label="Langue / Language">
+        <div class="seg themes" id="theme" role="group" aria-label="Thème"><button type="button" data-theme-set="light" aria-pressed="true"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></svg><span class="tl" id="tlight">Clair</span></button><button type="button" data-theme-set="dark" aria-pressed="false"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg><span class="tl" id="tdark">Sombre</span></button></div>
+        <div class="seg lang" role="group" aria-label="Langue / Language">
           <button type="button" data-lang="fr" lang="fr" aria-pressed="true">FR</button><button type="button" data-lang="en" lang="en" aria-pressed="false">EN</button>
         </div>
       </div>
@@ -185,7 +191,7 @@ section.block h2.sec { font-family: var(--font-display); font-weight: 800; font-
     <h1 data-i18n="h1">Torse nu au spa : une règle pour qui?</h1>
     <p class="dek" data-i18n="dek">Les personnes queer, trans, non binaires, ou dont le corps ne rentre pas dans les cases peuvent-elles profiter du spa sans se couvrir le torse? Voici ce que les spas ont répondu par écrit, et ce que les autres affichent sur leur site web.</p>
     <figure class="video" id="video" style="margin:0 0 24px">
-      <img class="banner" src="img/banniere.jpg" style="display:block;width:100%;height:auto" data-i18n-alt="vidalt" alt="Cinq personnes aux morphologies différentes, en maillot de bain, torse nu.">
+      <img class="banner" src="img/banniere.jpg" width="1376" height="768" data-i18n-alt="vidalt" alt="Cinq personnes aux morphologies différentes, en maillot de bain, torse nu.">
       <figcaption data-i18n="vidcap">Illustration générée par IA.</figcaption>
     </figure>
     <p class="punch" data-i18n="punch">L’obligation de porter un maillot est une chose; l’obligation de couvrir sa poitrine en est une autre.</p>
@@ -321,7 +327,7 @@ const UI = {
     accs: { all: "Toutes les infos", partiel: "Accès partiel indiqué", non: "Peu ou pas accessible", inconnu: "Rien trouvé" },
     accnote: "Aucun spa ne dit que ses bains sont accessibles en fauteuil roulant. « Accès partiel » veut dire que certaines parties le sont (vestiaires, soins, ascenseur). Appelez le spa avant votre visite.",
     regions: { all: "Toutes les régions", mtl: "Montréal", monteregie: "Montérégie (Rive-Sud)", laurentides: "Laurentides", estrie: "Cantons-de-l’Est", lanaudiere: "Lanaudière" },
-    toDark: "Sombre", toLight: "Clair", themeAria: "Changer le thème : clair ou sombre",
+    toDark: "Sombre", toLight: "Clair", themeAria: "Thème", darkTitle: "Mode sombre", lightTitle: "Mode clair",
     filter: "Filtrer par règle",
     cats: { all: "Tous les spas", tous: "Torse nu pour toute personne", choix: "Choix du maillot, torse nu non confirmé", corps: "Selon le corps ou l’identité", fh: "Règle femmes / hommes", vague: "Règle à préciser", attente: "Pas de réponse : d’après leur site web" },
     tags: { C: "Confirmé", D: "Déduit", N: "Non précisé" },
@@ -337,7 +343,7 @@ const UI = {
     accs: { all: "All information", partiel: "Partial access stated", non: "Little or no access", inconnu: "Nothing found" },
     accnote: "No spa says its baths are wheelchair accessible. “Partial access” means some areas are (changing rooms, treatments, elevator). Call the spa before your visit.",
     regions: { all: "All regions", mtl: "Montreal", monteregie: "Montérégie (South Shore)", laurentides: "Laurentians", estrie: "Eastern Townships", lanaudiere: "Lanaudière" },
-    toDark: "Dark", toLight: "Light", themeAria: "Switch theme: light or dark",
+    toDark: "Dark", toLight: "Light", themeAria: "Theme", darkTitle: "Dark mode", lightTitle: "Light mode",
     filter: "Filter by rule",
     cats: { all: "All spas", tous: "Topless for everyone", choix: "Choice of swimsuit, topless not confirmed", corps: "Depends on the body or identity", fh: "Women / men rule", vague: "Rule to be clarified", attente: "No answer: from their website" },
     tags: { C: "Confirmed", D: "Inferred", N: "Not specified" },
@@ -443,14 +449,20 @@ function isDark() {
   try { return matchMedia("(prefers-color-scheme: dark)").matches; } catch (e) { return false; }
 }
 function paintThemeBtn() {
-  const b = document.getElementById("theme"), d = isDark();
-  b.setAttribute("aria-pressed", String(d));
-  b.setAttribute("aria-label", T().themeAria);
-  document.getElementById("themelbl").textContent = d ? T().toLight : T().toDark;
+  const g = document.getElementById("theme"), d = isDark(), t = T();
+  g.setAttribute("aria-label", t.themeAria);
+  g.querySelectorAll("button").forEach(b => {
+    const dark = b.dataset.themeSet === "dark";
+    b.setAttribute("aria-pressed", String(dark === d));
+    b.title = dark ? t.darkTitle : t.lightTitle;
+  });
+  document.getElementById("tlight").textContent = t.toLight;
+  document.getElementById("tdark").textContent = t.toDark;
 }
 try { const th = localStorage.getItem("se-theme"); if (th === "dark" || th === "light") document.documentElement.dataset.theme = th; } catch (e) {}
-document.getElementById("theme").addEventListener("click", () => {
-  const next = isDark() ? "light" : "dark";
+document.getElementById("theme").addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  const next = b.dataset.themeSet === "dark" ? "dark" : "light";
   document.documentElement.dataset.theme = next;
   try { localStorage.setItem("se-theme", next); } catch (e) {}
   paintThemeBtn();
