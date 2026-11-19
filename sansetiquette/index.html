@@ -246,7 +246,7 @@ section.block h2.sec { font-family: var(--font-display); font-weight: 800; font-
 <footer id="apropos" class="wrap">
   <div data-i18n="f1">
     <h3>La méthode</h3>
-    <p>Du 1er au 16 novembre 2026, 19 établissements ont reçu par courriel la même question : peut-on profiter des installations torse nu, selon qu’on est un homme, une femme, ou une personne dont le corps ne correspond pas à ces catégories? Les citations sont reproduites mot pour mot. Chaque spa cité a reçu son texte avec la possibilité de le corriger avant publication. La Source a demandé que ses courriels ne soient pas cités : sa fiche résume la règle sans les citer.</p>
+    <p>Du 1er au 16 novembre 2026, 18 spas ont reçu par courriel la même question : peut-on profiter des installations torse nu, selon qu’on est un homme, une femme, ou une personne dont le corps ne correspond pas à ces catégories? Les citations sont reproduites mot pour mot. Chaque spa cité a reçu son texte avec la possibilité de le corriger avant publication. La Source a demandé que ses courriels ne soient pas cités : sa fiche résume la règle sans les citer.</p>
     <p>Les sites web de 18 spas ont aussi été consultés. Aucun ne précise si la poitrine doit être couverte.</p>
     <p>Le 19 novembre, j’ai aussi cherché ce que chaque spa dit sur l’accès pour les personnes à mobilité réduite, sur son site et dans les fiches de Kéroul (la seule cote d’accessibilité reconnue par le ministère du Tourisme du Québec). Aucun site ne dit que ses bains sont accessibles en fauteuil roulant, et onze n’en parlent pas du tout. Appelez avant votre visite.</p>
     <p>Pour planifier une sortie accessible, Kéroul publie les fiches détaillées des lieux évalués : <a href="https://www.keroul.qc.ca/" target="_blank" rel="noopener">keroul.qc.ca</a>.</p>
@@ -302,7 +302,7 @@ const EN = {
         <li><b>Today</b>More than 100 Nordic spas in Quebec. The swimsuit-top rule is written on none of the 18 websites checked.</li>`,
   hissrc: "Sources: History.com; Livres Hebdo (Georges Vigarello, <i>Le propre et le sale</i>); Visit Finland; Historical Society of Ocean Grove; Strøm spa nordique; Tourisme Montréal. Full links in the PDF report.",
   f1: `<h3>The method</h3>
-    <p>From November 1 to 16, 2026, 19 establishments received the same question by email: can you use the facilities topless, whether you are a man, a woman, or a person whose body doesn’t fit these categories? Quotes are reproduced word for word (translated from French here). Each spa quoted received its text with the chance to correct it before publication. La Source asked that its emails not be quoted: its profile summarizes the rule without quoting them.</p>
+    <p>From November 1 to 16, 2026, 18 spas received the same question by email: can you use the facilities topless, whether you are a man, a woman, or a person whose body doesn’t fit these categories? Quotes are reproduced word for word (translated from French here). Each spa quoted received its text with the chance to correct it before publication. La Source asked that its emails not be quoted: its profile summarizes the rule without quoting them.</p>
     <p>The websites of 18 spas were also checked. None says whether the chest must be covered.</p>
     <p>On November 19, I also looked for what each spa says about access for people with reduced mobility, on its website and in Kéroul’s listings (the only accessibility rating recognized by Quebec’s Ministry of Tourism). No website says its baths are wheelchair accessible, and eleven do not mention it at all. Call before your visit.</p>
     <p>To plan an accessible outing, Kéroul publishes detailed listings of the places it has assessed: <a href="https://www.keroul.qc.ca/" target="_blank" rel="noopener">keroul.qc.ca</a>.</p>
@@ -330,7 +330,7 @@ const UI = {
     base: "La règle repose sur :", wrote: "Ce que le spa a écrit", bref: "En bref", note: "À noter :", web: "Sur son site web :", nothing: "Rien sur la poitrine.", seerule: "Voir la page du spa", more: "Voir le détail",  accpfx: "Mobilité réduite :", access: "Accessibilité (mobilité réduite) :",
     q: ["« ", " »"],
     count: n => `${n} spa${n > 1 ? "s" : ""} affiché${n > 1 ? "s" : ""}`,
-    stats: ["établissements contactés par courriel", "sites web consultés : aucun ne précise si la poitrine doit être couverte", "seul spa confirme que le haut est facultatif pour toute personne", "spas obligent les femmes à couvrir leur poitrine (confirmé par écrit)"]
+    stats: ["spas contactés par courriel, et leurs sites web consultés", "site web, sur 18, dit si la poitrine doit être couverte", "seul spa confirme que le haut est facultatif pour toute personne", "spas obligent les femmes à couvrir leur poitrine (confirmé par écrit)"]
   },
   en: {
     title: "Sans étiquette · Topless at the spa",
@@ -346,7 +346,7 @@ const UI = {
     base: "The rule is based on:", wrote: "What the spa wrote (translated from French)", bref: "In short", note: "Note:", web: "On its website:", nothing: "Nothing about the chest.", seerule: "See the spa’s page", more: "See the details", accpfx: "Reduced mobility:", access: "Accessibility (reduced mobility):",
     q: ["“", "”"],
     count: n => `${n} spa${n > 1 ? "s" : ""} shown`,
-    stats: ["establishments contacted by email", "websites checked: none says whether the chest must be covered", "spa confirms that a top is optional for everyone", "spas require women to cover their chest (confirmed in writing)"]
+    stats: ["spas contacted by email, and their websites checked", "websites, out of 18, say whether the chest must be covered", "spa confirms that a top is optional for everyone", "spas require women to cover their chest (confirmed in writing)"]
   }
 };
 const CATKEYS = ["all", "tous", "choix", "corps", "fh", "vague", "attente"];
@@ -426,7 +426,7 @@ function setLang(lang, save) {
     const n = a === "all" ? DATA.fr.length : DATA.fr.filter(s => s.acc === a).length;
     return `<option value="${a}"${a === state.acc ? " selected" : ""}>${t.accs[a]} (${n})</option>`;
   }).join("");
-  document.getElementById("stats").innerHTML = [[DATA.n_total, t.stats[0]], [DATA.n_web, t.stats[1]], [1, t.stats[2]], [DATA.n_no_women, t.stats[3]]]
+  document.getElementById("stats").innerHTML = [[DATA.n_web, t.stats[0]], [0, t.stats[1]], [1, t.stats[2]], [DATA.n_no_women, t.stats[3]]]
     .map(([n, s]) => `<div class="stat"><b>${n}</b><span>${s}</span></div>`).join("");
   if (save) {
     try { localStorage.setItem("se-lang", state.lang); } catch (e) {}
