@@ -519,6 +519,26 @@ fieldset.fg legend { padding: 0; margin-bottom: 8px; }
 .map .leaflet-tile-pane { filter: grayscale(1) contrast(.92) brightness(1.04); }
 :root[data-theme="dark"] .map .leaflet-tile-pane { filter: grayscale(1) invert(1) brightness(.82) contrast(.9); }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .map .leaflet-tile-pane { filter: grayscale(1) invert(1) brightness(.82) contrast(.9); } }
+
+/* Haut de page : texte à gauche, illustration à droite (une colonne sur petit écran) */
+.herogrid { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-areas: "a" "f" "b"; gap: 0 56px; }
+.hero-a { grid-area: a; } .herofig { grid-area: f; margin: 0 0 24px; } .hero-b { grid-area: b; }
+.hero-b .herocta { margin: 0 0 28px; }
+.herofig .banner { width: 100%; max-height: none; }
+@media (min-width: 960px) {
+  .herogrid { grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr); grid-template-areas: "a f" "b f"; align-items: start; }
+  .hero-a h1 { font-size: clamp(44px, 4.6vw, 64px); }
+  .herofig { align-self: center; margin: 0; }
+  .hero-b { align-self: end; }
+  .hero-b .punch { margin-bottom: 22px; }
+  .hero .stats { margin-top: 36px; }
+}
+:root[data-theme="dark"] .herofig .banner { filter: invert(.93); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .herofig .banner { filter: invert(.93); } }
+@media (prefers-reduced-motion: no-preference) {
+  .hero-a, .herofig, .hero-b { animation: rise .8s cubic-bezier(.2,.7,.2,1) both; }
+  .herofig { animation-delay: .12s; } .hero-b { animation-delay: .22s; }
+}
 </style>
 </head>
 <body>
@@ -547,16 +567,22 @@ fieldset.fg legend { padding: 0; margin-bottom: 8px; }
 <main id="contenu">
 <div class="hero" id="top">
   <div class="wrap">
-    <p class="kicker" data-i18n="kicker">Enquête indépendante · Québec et Ontario · État au 20 novembre 2026</p>
-    <h1 data-i18n="h1">Torse nu au spa : une règle pour qui?</h1>
-    <p class="dek" data-i18n="dek">Les personnes queer, trans, non binaires, ou dont le corps ne rentre pas dans les cases peuvent-elles profiter du spa sans se couvrir le torse? Voici ce que les spas ont répondu par écrit, et ce que les autres affichent sur leur site web.</p>
-    <figure class="video" id="video" style="margin:0 0 24px">
-      <img class="banner" src="img/banniere.jpg" width="1376" height="768" data-i18n-alt="vidalt" alt="Cinq personnes aux morphologies différentes, en maillot de bain, torse nu.">
-      <figcaption data-i18n="vidcap">Illustration générée par IA.</figcaption>
-    </figure>
-    <p class="punch" data-i18n="punch">L’obligation de porter un maillot est une chose; l’obligation de couvrir sa poitrine en est une autre.</p>
+    <div class="herogrid">
+      <div class="hero-a">
+        <p class="kicker" data-i18n="kicker">Enquête indépendante · Québec et Ontario · État au 20 novembre 2026</p>
+        <h1 data-i18n="h1">Torse nu au spa : une règle pour qui?</h1>
+        <p class="dek" data-i18n="dek">Les personnes queer, trans, non binaires, ou dont le corps ne rentre pas dans les cases peuvent-elles profiter du spa sans se couvrir le torse? Voici ce que les spas ont répondu par écrit, et ce que les autres affichent sur leur site web.</p>
+      </div>
+      <figure class="video herofig" id="video">
+        <img class="banner" src="img/banniere.jpg" width="1376" height="768" data-i18n-alt="vidalt" alt="Cinq personnes aux morphologies différentes, en maillot de bain, torse nu.">
+        <figcaption data-i18n="vidcap">Illustration générée par IA.</figcaption>
+      </figure>
+      <div class="hero-b">
+        <p class="punch" data-i18n="punch">L’obligation de porter un maillot est une chose; l’obligation de couvrir sa poitrine en est une autre.</p>
+        <p class="herocta" data-i18n="herocta"><a class="btn primary" href="#repertoire">Explorer les lieux</a> <a class="btn" href="#temoignages">Témoigner</a></p>
+      </div>
+    </div>
     <div class="stats" id="stats"><div class="stat"><b><span class="cu" aria-hidden="true" data-n="126">126</span><span class="sr">126</span></b><span>lieux dans le répertoire : 81 au Québec, 45 en Ontario</span></div><div class="stat"><b><span class="cu" aria-hidden="true" data-n="18">18</span><span class="sr">18</span></b><span>spas contactés par courriel (enquête nº 1); 108 autres lieux en attente d’info</span></div><div class="stat"><b><span class="cu" aria-hidden="true" data-n="1">1</span><span class="sr">1</span></b><span>seul spa, sur les 18 contactés, confirme que le haut est facultatif pour toute personne</span></div><div class="stat"><b><span class="cu" aria-hidden="true" data-n="5">5</span><span class="sr">5</span></b><span>spas, sur les 18, obligent les femmes à couvrir leur poitrine (confirmé par écrit)</span></div></div>
-    <p class="herocta" data-i18n="herocta"><a class="btn primary" href="#repertoire">Explorer les lieux</a> <a class="btn" href="#temoignages">Témoigner</a></p>
   </div>
 </div>
 <section class="controls" id="repertoire" aria-labelledby="reph">
