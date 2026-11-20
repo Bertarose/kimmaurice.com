@@ -22,8 +22,8 @@
 
   var T = {
     fr: {
-      tag: 'disponibilité', date: '1er nov.', title: 'Je cherche mon prochain défi',
-      text: 'Contrat, mandat ou poste : je suis libre dès le 1er novembre pour un nouveau projet créatif ou techno.',
+      tag: 'disponibilité', date: 'Dès maintenant', title: 'Je cherche mon prochain défi',
+      text: 'Contrat, mandat ou poste : je suis libre dès maintenant pour un nouveau projet créatif ou techno.',
       mode: 'contrat · mandat · poste', k1: 'début', k2: 'mode', k3: 'statut', k4: 'T-moins',
       open: 'ouvert', now: 'Disponible maintenant',
       left: function (n) { return n === 1 ? 'Plus que 1 jour' : 'Plus que ' + n + ' jours'; },
@@ -32,8 +32,8 @@
       orb: 'Mise à jour du site en cours…'
     },
     en: {
-      tag: 'availability', date: 'Nov. 1', title: 'Looking for my next challenge',
-      text: 'Contract, assignment or position: I’m available from November 1 for a new creative or tech project.',
+      tag: 'availability', date: 'Available now', title: 'Looking for my next challenge',
+      text: 'Contract, assignment or position: I’m available now for a new creative or tech project.',
       mode: 'contract · assignment · position', k1: 'start', k2: 'mode', k3: 'status', k4: 'T-minus',
       open: 'open', now: 'Available now',
       left: function (n) { return n === 1 ? '1 day left' : n + ' days left'; },
@@ -121,10 +121,8 @@
       '<path transform="translate(400 0)" d="' + sinePath() + '" fill="none" stroke="#c9ff3d" stroke-width="1.2"/></svg></div>' +
       '<div class="kd-body"><div class="kd-date" data-k="date"></div><div class="kd-title" data-k="title"></div><p class="kd-text" data-k="text"></p>' +
       '<div class="kd-params">' +
-      '<div class="kd-row"><span class="kd-k" data-k="k1"></span><span class="kd-v">2026-11-01</span></div>' +
       '<div class="kd-row"><span class="kd-k" data-k="k2"></span><span class="kd-v" data-k="mode"></span></div>' +
       '<div class="kd-row"><span class="kd-k" data-k="k3"></span><span class="kd-v ok">● <span data-k="open"></span></span></div>' +
-      '<div class="kd-row"><span class="kd-k" data-k="k4"></span><span class="kd-v hot" data-k="left"></span></div>' +
       '</div></div>' +
       '<div class="kd-actions"><a class="kd-btn main" data-k="write" href="mailto:' + CFG.email + '"></a>' +
       '<a class="kd-btn" data-k="cv" href="' + CFG.cv + '" target="_blank" rel="noopener"></a></div>';
