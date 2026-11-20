@@ -519,6 +519,26 @@ fieldset.fg legend { padding: 0; margin-bottom: 8px; }
 .map .leaflet-tile-pane { filter: grayscale(1) contrast(.92) brightness(1.04); }
 :root[data-theme="dark"] .map .leaflet-tile-pane { filter: grayscale(1) invert(1) brightness(.82) contrast(.9); }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .map .leaflet-tile-pane { filter: grayscale(1) invert(1) brightness(.82) contrast(.9); } }
+
+/* Haut de page : texte à gauche, illustration à droite (une colonne sur petit écran) */
+.herogrid { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-areas: "a" "f" "b"; gap: 0 56px; }
+.hero-a { grid-area: a; } .herofig { grid-area: f; margin: 0 0 24px; } .hero-b { grid-area: b; }
+.hero-b .herocta { margin: 0 0 28px; }
+.herofig .banner { width: 100%; max-height: none; }
+@media (min-width: 960px) {
+  .herogrid { grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr); grid-template-areas: "a f" "b f"; align-items: start; }
+  .hero-a h1 { font-size: clamp(44px, 4.6vw, 64px); }
+  .herofig { align-self: center; margin: 0; }
+  .hero-b { align-self: end; }
+  .hero-b .punch { margin-bottom: 22px; }
+  .hero .stats { margin-top: 36px; }
+}
+:root[data-theme="dark"] .herofig .banner { filter: invert(.93); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .herofig .banner { filter: invert(.93); } }
+@media (prefers-reduced-motion: no-preference) {
+  .hero-a, .herofig, .hero-b { animation: rise .8s cubic-bezier(.2,.7,.2,1) both; }
+  .herofig { animation-delay: .12s; } .hero-b { animation-delay: .22s; }
+}
 </style>
 </head>
 <body>
@@ -547,16 +567,22 @@ fieldset.fg legend { padding: 0; margin-bottom: 8px; }
 <main id="contenu">
 <div class="hero" id="top">
   <div class="wrap">
-    <p class="kicker" data-i18n="kicker">Independent investigation · Quebec and Ontario · As of November 20, 2026</p>
-    <h1 data-i18n="h1">Topless at the spa: a rule for whom?</h1>
-    <p class="dek" data-i18n="dek">Can queer, trans and non-binary people, or anyone whose body doesn’t fit the boxes, enjoy a spa without covering their chest? Here is what the spas answered in writing, and what the others post on their websites.</p>
-    <figure class="video" id="video" style="margin:0 0 24px">
-      <img class="banner" src="../img/banniere.jpg" width="1376" height="768" data-i18n-alt="vidalt" alt="Five people with different body types, in swimwear, topless.">
-      <figcaption data-i18n="vidcap">AI-generated illustration.</figcaption>
-    </figure>
-    <p class="punch" data-i18n="punch">Having to wear a swimsuit is one thing. Having to cover your chest is another.</p>
+    <div class="herogrid">
+      <div class="hero-a">
+        <p class="kicker" data-i18n="kicker">Independent investigation · Quebec and Ontario · As of November 20, 2026</p>
+        <h1 data-i18n="h1">Topless at the spa: a rule for whom?</h1>
+        <p class="dek" data-i18n="dek">Can queer, trans and non-binary people, or anyone whose body doesn’t fit the boxes, enjoy a spa without covering their chest? Here is what the spas answered in writing, and what the others post on their websites.</p>
+      </div>
+      <figure class="video herofig" id="video">
+        <img class="banner" src="../img/banniere.jpg" width="1376" height="768" data-i18n-alt="vidalt" alt="Five people with different body types, in swimwear, topless.">
+        <figcaption data-i18n="vidcap">AI-generated illustration.</figcaption>
+      </figure>
+      <div class="hero-b">
+        <p class="punch" data-i18n="punch">Having to wear a swimsuit is one thing. Having to cover your chest is another.</p>
+        <p class="herocta" data-i18n="herocta"><a class="btn primary" href="#repertoire">Explore the places</a> <a class="btn" href="#temoignages">Share your story</a></p>
+      </div>
+    </div>
     <div class="stats" id="stats"><div class="stat"><b><span class="cu" aria-hidden="true" data-n="126">126</span><span class="sr">126</span></b><span>places in the directory: 81 in Quebec, 45 in Ontario</span></div><div class="stat"><b><span class="cu" aria-hidden="true" data-n="18">18</span><span class="sr">18</span></b><span>spas contacted by email (investigation no. 1); 108 other places waiting for information</span></div><div class="stat"><b><span class="cu" aria-hidden="true" data-n="1">1</span><span class="sr">1</span></b><span>spa, out of the 18 contacted, confirms that a top is optional for everyone</span></div><div class="stat"><b><span class="cu" aria-hidden="true" data-n="5">5</span><span class="sr">5</span></b><span>spas, out of the 18, require women to cover their chest (confirmed in writing)</span></div></div>
-    <p class="herocta" data-i18n="herocta"><a class="btn primary" href="#repertoire">Explore the places</a> <a class="btn" href="#temoignages">Share your story</a></p>
   </div>
 </div>
 <section class="controls" id="repertoire" aria-labelledby="reph">
