@@ -679,6 +679,86 @@ footer.site a[aria-current="page"] { font-weight: 700; text-decoration-thickness
 .temform fieldset { display: flex; flex-wrap: wrap; gap: 8px; }
 .temform fieldset legend { width: 100%; }
 .temform fieldset .opt { margin: 0; }
+
+/* ===== Chiffres clés plus gros ===== */
+.stat b { font-size: 48px; }
+.stat > span { display: block; margin-top: 4px; font-size: 15px; }
+
+/* ===== Téléphone : filtres rangés derrière un bouton, textes et chiffres plus grands ===== */
+.fopen, .fdonew { display: none; }
+@media (max-width: 640px) {
+  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+  .ctop { gap: 10px; margin-bottom: 4px; }
+  .views { width: 100%; }
+  .views button { flex: 1; min-height: 46px; font-size: 15px; }
+  .views button span { font-size: 15px; }
+  .fopen { display: inline-flex; width: 100%; align-items: center; justify-content: center; gap: 10px; min-height: 50px; font: inherit; font-size: 17px; font-weight: 800; border: 2px solid var(--ink); border-radius: 8px; background: var(--paper); color: var(--ink); cursor: pointer; }
+  .fopen .ico { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; }
+  .fopen .fn { min-width: 24px; height: 24px; font-size: 14px; }
+  .fopen[aria-expanded="true"] { background: var(--ink); color: var(--paper); }
+  .fopen[aria-expanded="true"] .fn { background: var(--paper); color: var(--ink); }
+  .fsheet:not(.open) { display: none; }
+  .fsheet.open { border: 1.5px solid var(--ink); border-radius: 10px; padding: 16px 14px 14px; margin-top: 10px; }
+  .fsheet .opts { flex-direction: column; align-items: stretch; }
+  .fsheet .opt { font-size: 16px; padding: 11px 12px; }
+  .fsheet .opt .n { margin-left: auto; padding-left: 8px; }
+  .fsheet .fmore { flex-direction: column; align-items: stretch; margin-top: 20px; gap: 8px; }
+  .fsheet .fmore > .label { margin: 0; }
+  .fsheet .fmore .dd { width: 100%; }
+  .fsheet .fbtn { width: 100%; justify-content: flex-start; min-height: 50px; font-size: 16px; }
+  .fsheet .fbtn .ico { margin-left: auto; }
+  .fsheet .fpanel, .fsheet .fpanel.wide { position: static; left: auto; right: auto; bottom: auto; width: auto; min-width: 0; max-height: none; overflow: visible; box-shadow: none; border: 0; border-radius: 0; padding: 10px 0 6px; }
+  .fsheet .plg { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .fdonew { display: block; margin: 18px 0 0; }
+  .fdone { width: 100%; min-height: 52px; font: inherit; font-size: 17px; font-weight: 800; border: 0; border-radius: 8px; background: var(--ink); color: var(--paper); cursor: pointer; }
+  .fdone:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+  .controls { padding: 24px 0 16px; }
+  .active { margin-top: 12px; }
+  .afchip, .clearall { font-size: 15px; padding: 8px 12px; }
+
+  /* Chiffres clés : 2 x 2, gros chiffres */
+  .stats { grid-template-columns: 1fr 1fr; column-gap: 20px; }
+  .stat { padding: 16px 0 8px; }
+  .stat b { font-size: 50px; }
+  .stat > span { font-size: 15.5px; line-height: 1.4; }
+
+  /* Textes plus lisibles */
+  .kicker { font-size: 14px; }
+  .label { font-size: 14px; }
+  .opt { font-size: 16px; }
+  .opt .n { font-size: 15px; }
+  .place, .card.mini .place, .row .place { font-size: 15.5px; }
+  .tag2 { font-size: 14.5px; padding: 3px 11px; }
+  .rgh { font-size: 24px; }
+  .gn { font-size: 15px; }
+  .rgsub, .rulenote, .mapnote, .howto, .accnote { font-size: 16px; }
+  .resbar .count { font-size: 20px; }
+  .verdict { font-size: 19px; }
+  .card .bref, .card.mini .bref, .rpanel .bref { font-size: 16.5px; }
+  .card h4 { font-size: 23px; }
+  .card.mini h4 { font-size: 20px; }
+  .more summary { font-size: 17px; }
+  .more, .note, .src, .web, .acc, .base, details { font-size: 16px; }
+  .qa dt { font-size: 14px; }
+  .qa dd { font-size: 16.5px; }
+  .weblink { font-size: 16px; padding: 10px 12px; }
+  .morebtn { font-size: 17px; }
+  .video figcaption, .hist figcaption { font-size: 14.5px; }
+  .tiles .tt { font-size: 16.5px; }
+  .tiles b { font-size: 24px; }
+  .row h4 { font-size: 19px; }
+  .row .rv { font-size: 16.5px; }
+  .rbtn { font-size: 15px; }
+  .crumbs { font-size: 16px; }
+  .psec p, .newslist li, .timeline li, .temoin p, .temrules li { font-size: 17px; }
+  .temform .hint, .temreq { font-size: 15.5px; }
+  footer.site { font-size: 16.5px; }
+  .fbrand p { font-size: 16.5px; }
+  .fbottom { font-size: 15px; }
+  footer.site h2 { font-size: 14px; }
+  .dlpanel a span { font-size: 15px; }
+  .totop { font-size: 15px; padding: 11px 16px; }
+}
 </style>
 </head>
 <body data-page="enquete">
@@ -885,6 +965,7 @@ const EN = {
   suiteh: "Keep reading",
   tiles: '<li><a data-pg="enquete" href="investigation.html"><span class="tn" aria-hidden="true">01</span><b>The investigation</b><span class="tt">The method, the full report as a PDF and its accessible versions.</span><i aria-hidden="true">→</i></a></li><li><a data-pg="histoire" href="history.html"><span class="tn" aria-hidden="true">02</span><b>A bit of history</b><span class="tt">Less than a hundred years ago, men had to cover their chests too.</span><i aria-hidden="true">→</i></a></li><li><a data-pg="actualite" href="news.html"><span class="tn" aria-hidden="true">03</span><b>In the news</b><span class="tt">When access rules turn into conflicts, and what the law says.</span><i aria-hidden="true">→</i></a></li><li class="hot"><a data-pg="temoigner" href="share.html"><span class="tn" aria-hidden="true">04</span><b>Share your story</b><span class="tt">Tell us how it went for you. Nothing is published without your consent.</span><i aria-hidden="true">→</i></a></li>',
   vcards: "Cards",
+  fopen: "Filters",
   qlbl: "Search a place, a city or a region",
   qph: "Search a place, a city…",
   vlist: "List",
@@ -963,6 +1044,7 @@ const UI = {
     viewsaria: "Affichage", maplbl: "Carte des lieux du répertoire", maperr: "La carte n’a pas pu se charger. La liste contient les mêmes lieux.",
     nplaces: n => `${n} lieu${n > 1 ? "x" : ""}`, seecard: "Voir la fiche", zoomin: "Cliquer pour zoomer.",
     moreenq: n => n > 1 ? `Voir les ${n} autres réponses` : "Voir l’autre réponse", rowopen: "Détails",
+    fdone: n => n ? `Voir ${n > 1 ? `les ${n} lieux` : "le lieu"}` : "Aucun lieu : modifier les filtres", nact: n => `${n} filtre${n > 1 ? "s" : ""} actif${n > 1 ? "s" : ""}`,
     accs: { all: "Toutes les infos", partiel: "Accès partiel indiqué", non: "Peu ou pas accessible", inconnu: "Rien trouvé", pasverif: "Pas encore vérifié" },
     accnote: "Aucun spa ne dit que ses bains sont accessibles en fauteuil roulant. « Accès partiel » veut dire que certaines parties le sont (vestiaires, soins, ascenseur). Appelez le spa avant votre visite.",
     provs: { all: "Toutes les provinces", qc: "Québec", on: "Ontario" }, soon: "à venir",
@@ -995,6 +1077,7 @@ const UI = {
     viewsaria: "View", maplbl: "Map of the places in the directory", maperr: "The map could not load. The list holds the same places.",
     nplaces: n => `${n} place${n > 1 ? "s" : ""}`, seecard: "See the card", zoomin: "Click to zoom in.",
     moreenq: n => n > 1 ? `Show the other ${n} answers` : "Show the other answer", rowopen: "Details",
+    fdone: n => n ? `Show ${n > 1 ? `the ${n} places` : "the place"}` : "No place: change the filters", nact: n => `${n} active filter${n > 1 ? "s" : ""}`,
     accs: { all: "All information", partiel: "Partial access stated", non: "Little or no access", inconnu: "Nothing found", pasverif: "Not checked yet" },
     accnote: "No spa says its baths are wheelchair accessible. “Partial access” means some areas are (changing rooms, treatments, elevator). Call the spa before your visit.",
     provs: { all: "All provinces", qc: "Quebec", on: "Ontario" }, soon: "coming soon",
@@ -1100,7 +1183,7 @@ function qa(label, v) {
 }
 function weblink(s) {
   const t = T();
-  return s.url ? `<a class="weblink" href="${esc(s.url)}" target="_blank" rel="noopener">${(t.links || {})[s.link] || t.seerule}<span class="sr"> : ${esc(s.name)}</span> <span aria-hidden="true">↗</span><span class="sr"> ${t.newtab}</span></a>` : "";
+  return s.url ? `<a class="weblink" href="${esc(s.url)}" target="_blank" rel="noopener">${(t.links || {})[s.link] || t.seerule}<span class="sr"> : ${esc(s.name)}</span> <span aria-hidden="true">↗\uFE0E</span><span class="sr"> ${t.newtab}</span></a>` : "";
 }
 // Le détail d'un lieu (règles, citations, site web, accessibilité), commun aux fiches et à la liste
 function extra(s) {
@@ -1196,6 +1279,9 @@ function renderActive() {
   const el = document.getElementById("active");
   el.innerHTML = chips.length ? `<span class="label">${t.activeh}</span>` + chips.map(([k, v, l]) => `<button type="button" class="afchip" data-k="${k}" data-v="${v}">${esc(l)} <span aria-hidden="true">×</span><span class="sr"> : ${t.remove}</span></button>`).join("") + `<button type="button" class="clearall">${t.clearall}</button>` : "";
   el.hidden = !chips.length;
+  const na = chips.filter(c => c[0] !== "q").length, nb = document.getElementById("n-all");
+  nb.textContent = na || ""; nb.hidden = !na;
+  document.getElementById("sr-all").textContent = na ? " : " + t.nact(na) : "";
 }
 
 // ---- Résultats ----
@@ -1235,6 +1321,7 @@ function render() {
   em.hidden = list.length > 0;
   em.innerHTML = list.length ? "" : `${esc(t.empty)} <button type="button" class="clearall">${t.clearall}</button>`;
   document.getElementById("count").textContent = t.count(list.length);
+  document.getElementById("fdone").textContent = t.fdone(list.length);
   if (map && state.view === "map") updateMap(true);
   syncURL();
 }
@@ -1299,6 +1386,16 @@ function clearAll(paint = true) {
   for (const k in KEYS) state[k].clear();
   state.q = state.qraw = ""; document.getElementById("q").value = "";
   return paint ? update() : Promise.resolve();
+}
+
+// ---- Téléphone : les filtres se rangent derrière un bouton « Filtres » ----
+function small() { try { return matchMedia("(max-width: 640px)").matches; } catch (e) { return false; } }
+function sheet(open) {
+  const b = document.getElementById("fopen"), fs = document.getElementById("fsheet");
+  if (!b || !fs) return;
+  b.setAttribute("aria-expanded", String(open));
+  fs.classList.toggle("open", open);
+  if (!open) closeMenus();
 }
 
 // ---- Vue fiches / liste / carte ----
@@ -1569,6 +1666,13 @@ document.addEventListener("click", e => {
     return;
   }
   if (e.target.closest(".clearall")) { clearAll().then(() => { const f = document.querySelector("#o-rule input"); if (f) f.focus(); }); return; }
+  if (e.target.closest("#fopen")) { sheet(document.getElementById("fopen").getAttribute("aria-expanded") !== "true"); return; }
+  if (e.target.closest("#fdone")) {
+    sheet(false);
+    const r = document.querySelector(".resbar"); if (r) r.scrollIntoView({ behavior: RM ? "auto" : "smooth", block: "start" });
+    return;
+  }
+  if (e.target.closest("#totop") && small()) { sheet(true); }
   if (e.target.closest("#morebtn")) { showMore("pend"); return; }
   if (e.target.closest("#moreenq")) { showMore("enq"); return; }
   const rb = e.target.closest(".rbtn"); if (rb) { toggleRow(rb); return; }
@@ -1582,15 +1686,19 @@ document.addEventListener("click", e => {
     document.getElementById(dd.getAttribute("aria-controls")).hidden = !open;
     return;
   }
+  if (small() && e.target.closest(".fsheet")) return; // téléphone : les sections du tiroir restent ouvertes
   if (!e.target.closest(".ddpanel") || e.target.closest(".ddpanel a")) closeMenus();
 });
 document.addEventListener("keydown", e => {
   if (e.key !== "Escape") return;
-  const b = document.querySelector('[data-dd][aria-expanded="true"]'); if (b) { closeMenus(); b.focus(); }
+  const b = document.querySelector('[data-dd][aria-expanded="true"]'); if (b) { closeMenus(); b.focus(); return; }
+  const fs = document.getElementById("fsheet");
+  if (fs && fs.classList.contains("open") && fs.contains(document.activeElement)) { sheet(false); document.getElementById("fopen").focus(); }
 });
 document.addEventListener("focusin", e => {
   document.querySelectorAll('[data-dd][aria-expanded="true"]').forEach(b => {
     const p = document.getElementById(b.getAttribute("aria-controls"));
+    if (small() && p.closest(".fsheet")) return;
     if (!p.contains(e.target) && e.target !== b) { b.setAttribute("aria-expanded", "false"); p.hidden = true; }
   });
 });

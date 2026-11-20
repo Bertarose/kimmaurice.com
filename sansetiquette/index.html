@@ -679,6 +679,86 @@ footer.site a[aria-current="page"] { font-weight: 700; text-decoration-thickness
 .temform fieldset { display: flex; flex-wrap: wrap; gap: 8px; }
 .temform fieldset legend { width: 100%; }
 .temform fieldset .opt { margin: 0; }
+
+/* ===== Chiffres clés plus gros ===== */
+.stat b { font-size: 48px; }
+.stat > span { display: block; margin-top: 4px; font-size: 15px; }
+
+/* ===== Téléphone : filtres rangés derrière un bouton, textes et chiffres plus grands ===== */
+.fopen, .fdonew { display: none; }
+@media (max-width: 640px) {
+  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+  .ctop { gap: 10px; margin-bottom: 4px; }
+  .views { width: 100%; }
+  .views button { flex: 1; min-height: 46px; font-size: 15px; }
+  .views button span { font-size: 15px; }
+  .fopen { display: inline-flex; width: 100%; align-items: center; justify-content: center; gap: 10px; min-height: 50px; font: inherit; font-size: 17px; font-weight: 800; border: 2px solid var(--ink); border-radius: 8px; background: var(--paper); color: var(--ink); cursor: pointer; }
+  .fopen .ico { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; }
+  .fopen .fn { min-width: 24px; height: 24px; font-size: 14px; }
+  .fopen[aria-expanded="true"] { background: var(--ink); color: var(--paper); }
+  .fopen[aria-expanded="true"] .fn { background: var(--paper); color: var(--ink); }
+  .fsheet:not(.open) { display: none; }
+  .fsheet.open { border: 1.5px solid var(--ink); border-radius: 10px; padding: 16px 14px 14px; margin-top: 10px; }
+  .fsheet .opts { flex-direction: column; align-items: stretch; }
+  .fsheet .opt { font-size: 16px; padding: 11px 12px; }
+  .fsheet .opt .n { margin-left: auto; padding-left: 8px; }
+  .fsheet .fmore { flex-direction: column; align-items: stretch; margin-top: 20px; gap: 8px; }
+  .fsheet .fmore > .label { margin: 0; }
+  .fsheet .fmore .dd { width: 100%; }
+  .fsheet .fbtn { width: 100%; justify-content: flex-start; min-height: 50px; font-size: 16px; }
+  .fsheet .fbtn .ico { margin-left: auto; }
+  .fsheet .fpanel, .fsheet .fpanel.wide { position: static; left: auto; right: auto; bottom: auto; width: auto; min-width: 0; max-height: none; overflow: visible; box-shadow: none; border: 0; border-radius: 0; padding: 10px 0 6px; }
+  .fsheet .plg { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .fdonew { display: block; margin: 18px 0 0; }
+  .fdone { width: 100%; min-height: 52px; font: inherit; font-size: 17px; font-weight: 800; border: 0; border-radius: 8px; background: var(--ink); color: var(--paper); cursor: pointer; }
+  .fdone:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+  .controls { padding: 24px 0 16px; }
+  .active { margin-top: 12px; }
+  .afchip, .clearall { font-size: 15px; padding: 8px 12px; }
+
+  /* Chiffres clés : 2 x 2, gros chiffres */
+  .stats { grid-template-columns: 1fr 1fr; column-gap: 20px; }
+  .stat { padding: 16px 0 8px; }
+  .stat b { font-size: 50px; }
+  .stat > span { font-size: 15.5px; line-height: 1.4; }
+
+  /* Textes plus lisibles */
+  .kicker { font-size: 14px; }
+  .label { font-size: 14px; }
+  .opt { font-size: 16px; }
+  .opt .n { font-size: 15px; }
+  .place, .card.mini .place, .row .place { font-size: 15.5px; }
+  .tag2 { font-size: 14.5px; padding: 3px 11px; }
+  .rgh { font-size: 24px; }
+  .gn { font-size: 15px; }
+  .rgsub, .rulenote, .mapnote, .howto, .accnote { font-size: 16px; }
+  .resbar .count { font-size: 20px; }
+  .verdict { font-size: 19px; }
+  .card .bref, .card.mini .bref, .rpanel .bref { font-size: 16.5px; }
+  .card h4 { font-size: 23px; }
+  .card.mini h4 { font-size: 20px; }
+  .more summary { font-size: 17px; }
+  .more, .note, .src, .web, .acc, .base, details { font-size: 16px; }
+  .qa dt { font-size: 14px; }
+  .qa dd { font-size: 16.5px; }
+  .weblink { font-size: 16px; padding: 10px 12px; }
+  .morebtn { font-size: 17px; }
+  .video figcaption, .hist figcaption { font-size: 14.5px; }
+  .tiles .tt { font-size: 16.5px; }
+  .tiles b { font-size: 24px; }
+  .row h4 { font-size: 19px; }
+  .row .rv { font-size: 16.5px; }
+  .rbtn { font-size: 15px; }
+  .crumbs { font-size: 16px; }
+  .psec p, .newslist li, .timeline li, .temoin p, .temrules li { font-size: 17px; }
+  .temform .hint, .temreq { font-size: 15.5px; }
+  footer.site { font-size: 16.5px; }
+  .fbrand p { font-size: 16.5px; }
+  .fbottom { font-size: 15px; }
+  footer.site h2 { font-size: 14px; }
+  .dlpanel a span { font-size: 15px; }
+  .totop { font-size: 15px; padding: 11px 16px; }
+}
 </style>
 </head>
 <body data-page="home">
@@ -731,7 +811,9 @@ footer.site a[aria-current="page"] { font-weight: 700; text-decoration-thickness
       <h2 class="dirh" id="reph" data-i18n="reph">Le répertoire</h2>
       <div class="search"><label class="sr" for="q" data-i18n="qlbl">Chercher un lieu, une ville ou une région</label><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg><input id="q" type="search" autocomplete="off" spellcheck="false" data-i18n-ph="qph" placeholder="Chercher un lieu, une ville…"></div>
       <div class="seg views" id="views" role="group" aria-label="Affichage"><button type="button" data-view="cards" aria-pressed="true"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3.5" y="3.5" width="7" height="7" rx="1"></rect><rect x="13.5" y="3.5" width="7" height="7" rx="1"></rect><rect x="3.5" y="13.5" width="7" height="7" rx="1"></rect><rect x="13.5" y="13.5" width="7" height="7" rx="1"></rect></svg><span data-i18n="vcards">Fiches</span></button><button type="button" data-view="rows" aria-pressed="false"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 6h13M8 12h13M8 18h13M3.5 6h.01M3.5 12h.01M3.5 18h.01"></path></svg><span data-i18n="vlist">Liste</span></button><button type="button" data-view="map" aria-pressed="false"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m9 4-6 2v14l6-2 6 2 6-2V4l-6 2-6-2Z"></path><path d="M9 4v14M15 6v14"></path></svg><span data-i18n="vmap">Carte</span></button></div>
+      <button type="button" class="fopen" id="fopen" aria-expanded="false" aria-controls="fsheet"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 6h16M7 12h10M10 18h4"></path></svg><span data-i18n="fopen">Filtres</span><span class="fn" id="n-all" hidden=""></span><span class="sr" id="sr-all"></span></button>
     </div>
+    <div class="fsheet" id="fsheet">
     <fieldset class="fg">
       <legend class="label" data-i18n="lgrule">La règle</legend>
       <div class="opts" id="o-rule"><label class="opt" data-k="rule" data-v="tous"><input type="checkbox" name="rule" value="tous"><span class="box" aria-hidden="true"></span><span class="dot yes" aria-hidden="true"></span><span class="t">Torse nu pour toute personne</span><span class="n">1</span></label><label class="opt" data-k="rule" data-v="choix"><input type="checkbox" name="rule" value="choix"><span class="box" aria-hidden="true"></span><span class="dot maybe" aria-hidden="true"></span><span class="t">Choix du maillot, torse nu non confirmé</span><span class="n">3</span></label><label class="opt" data-k="rule" data-v="corps"><input type="checkbox" name="rule" value="corps"><span class="box" aria-hidden="true"></span><span class="dot maybe" aria-hidden="true"></span><span class="t">Selon le corps ou l’identité</span><span class="n">3</span></label><label class="opt" data-k="rule" data-v="fh"><input type="checkbox" name="rule" value="fh"><span class="box" aria-hidden="true"></span><span class="dot no" aria-hidden="true"></span><span class="t">Règle femmes / hommes</span><span class="n">3</span></label><label class="opt" data-k="rule" data-v="vague"><input type="checkbox" name="rule" value="vague"><span class="box" aria-hidden="true"></span><span class="dot maybe" aria-hidden="true"></span><span class="t">Règle à préciser</span><span class="n">2</span></label><label class="opt" data-k="rule" data-v="attente"><input type="checkbox" name="rule" value="attente"><span class="box" aria-hidden="true"></span><span class="dot " aria-hidden="true"></span><span class="t">Pas de réponse : d’après leur site web</span><span class="n">6</span></label><label class="opt" data-k="rule" data-v="pending"><input type="checkbox" name="rule" value="pending"><span class="box" aria-hidden="true"></span><span class="dot pending" aria-hidden="true"></span><span class="t">En attente d’info : pas encore contactés</span><span class="n">108</span></label></div>
@@ -755,6 +837,8 @@ footer.site a[aria-current="page"] { font-weight: 700; text-decoration-thickness
         <div class="ddpanel fpanel" id="p-acc" hidden=""><fieldset><legend class="plg" data-i18n="lgacc">Mobilité réduite</legend><div class="opts col" id="o-acc"><label class="opt" data-k="acc" data-v="partiel"><input type="checkbox" name="acc" value="partiel"><span class="box" aria-hidden="true"></span><span class="t">Accès partiel indiqué</span><span class="n">5</span></label><label class="opt" data-k="acc" data-v="non"><input type="checkbox" name="acc" value="non"><span class="box" aria-hidden="true"></span><span class="t">Peu ou pas accessible</span><span class="n">5</span></label><label class="opt" data-k="acc" data-v="inconnu"><input type="checkbox" name="acc" value="inconnu"><span class="box" aria-hidden="true"></span><span class="t">Rien trouvé</span><span class="n">8</span></label><label class="opt" data-k="acc" data-v="pasverif"><input type="checkbox" name="acc" value="pasverif"><span class="box" aria-hidden="true"></span><span class="t">Pas encore vérifié</span><span class="n">108</span></label></div></fieldset></div>
       </div>
     </div>
+    <p class="fdonew"><button type="button" class="fdone" id="fdone">Voir les 126 lieux</button></p>
+    </div>
     <div class="active" id="active" hidden=""></div>
   </div>
 </section>
@@ -771,126 +855,126 @@ footer.site a[aria-current="page"] { font-weight: 700; text-decoration-thickness
     <p class="verdict"><span class="dot yes" aria-hidden="true"></span>Torse nu permis pour toute personne</p>
     <p class="bref">Femmes et hommes peuvent être torse nu : même règle pour tout le monde. Apportez maillot et sandales.</p>
     <div class="tags"><span class="tag2">Mobilité réduite : Peu ou pas accessible</span></div>
-    <a class="weblink" href="https://spawilliamgray.com/faq/" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Spa William Gray</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://spawilliamgray.com/faq/" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Spa William Gray</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>Voir le détail<span class="sr"> : Spa William Gray</span></summary><dl class="qa"><div><dt><span class="dot yes" aria-hidden="true"></span>Un homme torse nu?</dt><dd>Oui <span class="tag">Confirmé</span></dd></div><div><dt><span class="dot yes" aria-hidden="true"></span>Une femme torse nu?</dt><dd>Oui <span class="tag">Confirmé</span></dd></div><div><dt><span class="dot " aria-hidden="true"></span>Corps hors catégories, trans, non binaires</dt><dd>Même règle pour toute personne <span class="tag">Confirmé</span></dd></div></dl><div class="base"><b>La règle repose sur :</b> Aucune distinction</div><div class="lab">Ce que le spa a écrit</div><blockquote>« Dans nos installations thermales, le port d’un bas de maillot de bain opaque couvrant les parties génitales et les fesses est obligatoire. Le port d’un haut de maillot est toutefois au choix de chaque personne. »</blockquote><blockquote>« Cette règle s’applique à toute notre clientèle, sans distinction de sexe, d’identité ou d’expression de genre, d’apparence ou de morphologie. »</blockquote><blockquote>« À l’extérieur des espaces thermaux et des vestiaires, nous demandons à tous de porter un peignoir ou des vêtements couvrant le haut et le bas du corps. »</blockquote><div class="src">Direction marketing, Gray Collection · courriel du 3 nov. 2026 (corrige une première réponse du 1er nov.). Texte validé par le spa le 16 nov. 2026.</div><div class="web"><b>Sur son site web :</b> FAQ en anglais : « Please bring your own sandals and bathing suit if accessing the thermal circuit. » (apporter maillot et sandales pour le circuit thermal)</div><div class="acc"><b>Accessibilité (mobilité réduite) :</b> Rien trouvé sur son site au sujet de l’accessibilité. Kéroul (2024) cote « non accessible » l’Hôtel William Gray, où se trouve le spa; le spa n’a pas été évalué à part.</div></details>
   </article><article class="card tone-maybe" id="lieu-1" style="--i:1">
     <h4 tabindex="-1">Rainspa</h4><div class="place">Vieux-Montréal</div>
     <p class="verdict"><span class="dot maybe" aria-hidden="true"></span>Choix de la tenue</p>
     <p class="bref">Maillot obligatoire au hammam. Le spa recommandait d’abord un haut aux femmes, puis il a écrit laisser « le choix de la tenue » à chaque personne.</p>
     <div class="tags"><span class="tag2">Mobilité réduite : Rien trouvé</span></div>
-    <a class="weblink" href="https://rainspa.ca/fr/page-daccueil/a-propos/votre-visite/" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Rainspa</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://rainspa.ca/fr/page-daccueil/a-propos/votre-visite/" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Rainspa</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>Voir le détail<span class="sr"> : Rainspa</span></summary><dl class="qa"><div><dt><span class="dot maybe" aria-hidden="true"></span>Un homme torse nu?</dt><dd>Probablement : slip ou short « recommandé » <span class="tag">Déduit</span></dd></div><div><dt><span class="dot " aria-hidden="true"></span>Une femme torse nu?</dt><dd>Haut « recommandé » (3 nov.), puis « le choix de la tenue » (15 nov.); torse nu jamais nommé <span class="tag">Déduit</span></dd></div><div><dt><span class="dot " aria-hidden="true"></span>Corps hors catégories, trans, non binaires</dt><dd>« Nous vous laissons le choix de la tenue » <span class="tag">Confirmé</span></dd></div></dl><div class="base"><b>La règle repose sur :</b> Recommandations selon l’identité, puis choix de la personne</div><div class="note"><b>À noter :</b> La réponse du 15 nov. laisse « le choix de la tenue », sans employer les mots « torse nu ».</div><div class="lab">Ce que le spa a écrit</div><blockquote>« Le port d’un maillot de bain est requis. Pour le confort de l’ensemble de notre clientèle, nous recommandons aux personnes qui s’identifient comme femmes de porter un maillot une pièce ou un deux-pièces avec haut, et aux personnes qui s’identifient comme hommes de porter un slip ou un short de bain. Ces recommandations s’appliquent indépendamment de la morphologie de chacun. (3 nov.) »</blockquote><blockquote>« Comme indiqué dans nos recommandations, le port du maillot de bain est obligatoire. Nous vous laissons toutefois le choix de la tenue, selon ce qui vous convient le mieux et dans laquelle vous vous sentez à l’aise. (15 nov.) »</blockquote><blockquote>« Des serviettes et des peignoirs sont également mis à votre disposition afin que vous puissiez vous couvrir au besoin, tout au long de votre expérience. (15 nov.) »</blockquote><div class="src">Réception du Rainspa · courriels du 3 et du 15 nov. 2026 (consignes du hammam).</div><div class="web"><b>Sur son site web :</b> « Le maillot de bain est requis dans le hammam. » Pour les soins : « Vous pouvez également porter vos sous-vêtements ou un maillot de bain. »</div><div class="acc"><b>Accessibilité (mobilité réduite) :</b> Rien trouvé sur son site au sujet de l’accessibilité.</div></details>
   </article><article class="card tone-maybe" id="lieu-2" style="--i:2">
     <h4 tabindex="-1">L'Orangerie</h4><div class="place">Vieux-Montréal</div>
     <p class="verdict"><span class="dot maybe" aria-hidden="true"></span>Maillot de son choix, torse nu non précisé</p>
     <p class="bref">Chaque personne porte le maillot où elle est à l’aise et qui correspond à son identité. Le spa ne dit pas si le torse nu est permis. Apportez un maillot.</p>
     <div class="tags"><span class="tag2">Mobilité réduite : Rien trouvé</span></div>
-    <a class="weblink" href="https://lorangerie.ca/" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : L'Orangerie</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://lorangerie.ca/" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : L'Orangerie</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>Voir le détail<span class="sr"> : L'Orangerie</span></summary><dl class="qa"><div><dt><span class="dot " aria-hidden="true"></span>Un homme torse nu?</dt><dd>Non précisé <span class="tag">Non précisé</span></dd></div><div><dt><span class="dot " aria-hidden="true"></span>Une femme torse nu?</dt><dd>Non précisé <span class="tag">Non précisé</span></dd></div><div><dt><span class="dot " aria-hidden="true"></span>Corps hors catégories, trans, non binaires</dt><dd>Maillot « qui correspond le mieux à son identité » <span class="tag">Confirmé</span></dd></div></dl><div class="base"><b>La règle repose sur :</b> Confort et identité</div><div class="note"><b>À noter :</b> La réponse ne précise pas si le torse nu est permis. Le spa a validé ce texte le 17 nov. sans rien ajouter.</div><div class="lab">Ce que le spa a écrit</div><blockquote>« De façon générale, nous invitons chaque personne à porter le type de maillot de bain dans lequel elle se sent à l’aise et qui correspond le mieux à son identité, tout en respectant notre objectif de maintenir un environnement accueillant et confortable pour l’ensemble de la clientèle. »</blockquote><blockquote>« Comme notre clientèle est admise à partir de l’âge de 16 ans, nous accordons une importance particulière au maintien d’un cadre respectueux pour tous. »</blockquote><div class="src">Équipe des réservations · courriel du 10 nov. 2026. Texte validé par le spa le 17 nov. 2026.</div><div class="web"><b>Sur son site web :</b> « Que dois-je apporter? Un maillot de bain. »</div><div class="acc"><b>Accessibilité (mobilité réduite) :</b> Rien trouvé sur son site au sujet de l’accessibilité. L’ancienne FAQ du Scandinave Spa Vieux-Montréal, au même endroit, disait que les installations « ne sont pas aménagées pour des personnes en fauteuil roulant ».</div></details>
   </article><article class="card tone-maybe" id="lieu-3" style="--i:3">
     <h4 tabindex="-1">AWU (ex-Skyspa DIX30)</h4><div class="place">Brossard</div>
     <p class="verdict"><span class="dot maybe" aria-hidden="true"></span>Maillot de son choix, torse nu non précisé</p>
     <p class="bref">Choix du maillot sans distinction de genre ou de corps; un « maillot convenable » est exigé pour tout le monde. Apportez maillot et sandales.</p>
     <div class="tags"><span class="tag2">Mobilité réduite : Accès partiel indiqué</span></div>
-    <a class="weblink" href="https://awu.com/pages/preparer-ma-visite" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : AWU (ex-Skyspa DIX30)</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://awu.com/pages/preparer-ma-visite" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : AWU (ex-Skyspa DIX30)</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>Voir le détail<span class="sr"> : AWU (ex-Skyspa DIX30)</span></summary><dl class="qa"><div><dt><span class="dot maybe" aria-hidden="true"></span>Un homme torse nu?</dt><dd>Probablement oui : « le choix du maillot vous appartient » <span class="tag">Déduit</span></dd></div><div><dt><span class="dot " aria-hidden="true"></span>Une femme torse nu?</dt><dd>Choix du maillot « sans distinction selon le genre ou la morphologie »; torse nu non nommé <span class="tag">Déduit</span></dd></div><div><dt><span class="dot " aria-hidden="true"></span>Corps hors catégories, trans, non binaires</dt><dd>« Chaque personne peut choisir la tenue dans laquelle elle se sent à l'aise » <span class="tag">Confirmé</span></dd></div></dl><div class="base"><b>La règle repose sur :</b> Choix de la personne; « maillot convenable » pour tous</div><div class="note"><b>À noter :</b> La réponse ne dit pas si un « maillot convenable » peut être un bas seulement, pour une femme comme pour un homme.</div><div class="lab">Ce que le spa a écrit</div><blockquote>« Chez AWU, le choix du maillot vous appartient. Nous ne faisons aucune distinction selon le genre ou la morphologie : chaque personne peut choisir la tenue dans laquelle elle se sent à l'aise. »</blockquote><blockquote>« Nous demandons toutefois à l'ensemble de notre clientèle de respecter un principe de décence. AWU n'est pas un établissement naturiste et nous accueillons des personnes de moins de 18 ans; le port d'un maillot convenable est donc exigé pour toutes et tous, en tout temps. »</blockquote><blockquote>« Cette règle s'applique de la même façon à chaque personne, sans égard à son identité ou à son corps. »</blockquote><div class="src">Responsable des opérations, service à la clientèle · courriel du 18 nov. 2026, en réponse à l’avis de publication.</div><div class="web"><b>Sur son site web :</b> « À prévoir : Un maillot de bain et des sandales. »</div><div class="acc"><b>Accessibilité (mobilité réduite) :</b> Site : réception, vestiaires et salles de massage accessibles, mais « le cycle thermal n’est toutefois pas adapté ».</div></details>
   </article><article class="card tone-maybe" id="lieu-4" style="--i:4">
     <h4 tabindex="-1">Bota Bota</h4><div class="place">Vieux-Port de Montréal</div>
     <p class="verdict"><span class="dot maybe" aria-hidden="true"></span>Femmes torse nu une fois installées</p>
     <p class="bref">Hommes torse nu. Femmes torse nu une fois installées, avec un haut pour circuler. Pour les autres corps, le spa fait confiance à la personne. Tout maillot est accepté, même très couvrant.</p>
     <div class="tags"><span class="tag2">Mobilité réduite : Peu ou pas accessible</span></div>
-    <a class="weblink" href="https://botabota.ca/questions/" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Bota Bota</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://botabota.ca/questions/" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Bota Bota</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>Voir le détail<span class="sr"> : Bota Bota</span></summary><dl class="qa"><div><dt><span class="dot yes" aria-hidden="true"></span>Un homme torse nu?</dt><dd>Oui <span class="tag">Confirmé</span></dd></div><div><dt><span class="dot maybe" aria-hidden="true"></span>Une femme torse nu?</dt><dd>Oui une fois installée; haut en déplacement <span class="tag">Confirmé</span></dd></div><div><dt><span class="dot " aria-hidden="true"></span>Corps hors catégories, trans, non binaires</dt><dd>Selon la présence d’une poitrine; « nous vous ferions confiance » <span class="tag">Confirmé</span></dd></div></dl><div class="base"><b>La règle repose sur :</b> Présence d’une poitrine</div><div class="lab">Ce que le spa a écrit</div><blockquote>« […] nous permettons aux personnes qui le souhaitent de découvrir leur buste lorsqu'elles sont installées dans les espaces de détente ou dans les installations. Nous demandons toutefois qu'un vêtement adapté à l'eau couvrant le haut du corps soit porté lors des déplacements entre les différentes zones. (3 nov.) »</blockquote><blockquote>« Pour répondre simplement, non, cette consigne ne s'applique pas à l'ensemble de la clientèle de la même façon. En pratique, elle concerne généralement davantage les femmes, puisque les hommes n'ont généralement pas de poitrine et peuvent donc circuler torse nu dans les espaces concernés. (6 nov.) »</blockquote><blockquote>« Lorsqu'une personne a des questions concernant sa situation particulière, que ce soit en lien avec son expression de genre, une condition comme la gynécomastie ou toute autre réalité personnelle, nous l'invitons à communiquer avec nous. (6 nov.) »</blockquote><div class="src">Service des réservations (1er nov.) et supervision de l'expérience client (3 et 6 nov. 2026).</div><div class="web"><b>Sur son site web :</b> « Nous acceptons tout maillot de bain, y compris à grande couvrance, fait dans un matériel approprié pour l’eau. »</div><div class="acc"><b>Accessibilité (mobilité réduite) :</b> Rien trouvé sur son site au sujet de l’accessibilité. Kéroul (2024) : « non accessible ». Les vestiaires ne sont accessibles que par des escaliers, et il n’y a pas de toilettes adaptées.</div></details>
   </article><article class="card tone-no" id="lieu-5" style="--i:5">
     <h4 tabindex="-1">Spa Bolton</h4><div class="place">Bolton-Est</div>
     <p class="verdict"><span class="dot no" aria-hidden="true"></span>Haut requis si poitrine</p>
     <p class="bref">Hommes torse nu; haut ou une-pièce pour les femmes. Personnes trans et non binaires : tenue selon leur identité, mais haut requis si la poitrine « nécessite » un haut. Maillot, sandales et bouteille d’eau obligatoires.</p>
     <div class="tags"><span class="tag2">Mobilité réduite : Accès partiel indiqué</span></div>
-    <a class="weblink" href="https://www.spabolton.com/reservation/" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Spa Bolton</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://www.spabolton.com/reservation/" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Spa Bolton</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>Voir le détail<span class="sr"> : Spa Bolton</span></summary><dl class="qa"><div><dt><span class="dot yes" aria-hidden="true"></span>Un homme torse nu?</dt><dd>Oui <span class="tag">Confirmé</span></dd></div><div><dt><span class="dot no" aria-hidden="true"></span>Une femme torse nu?</dt><dd>Non : haut ou une-pièce requis <span class="tag">Confirmé</span></dd></div><div><dt><span class="dot " aria-hidden="true"></span>Corps hors catégories, trans, non binaires</dt><dd>Tenue selon son identité et son confort, mais haut requis pour « les personnes ayant une poitrine nécessitant un haut de maillot » <span class="tag">Confirmé</span></dd></div></dl><div class="base"><b>La règle repose sur :</b> Présence d’une poitrine, « cadre familial »</div><div class="note"><b>À noter :</b> La réponse ne précise pas qui juge qu’une poitrine « nécessite » un haut, ni si une femme sans poitrine peut porter seulement un bas.</div><div class="lab">Ce que le spa a écrit</div><blockquote>« En tant que spa grand public accueillant une clientèle variée, incluant des familles et de jeunes enfants lors de certaines matinées réservées à cet effet, notre code vestimentaire s'aligne sur les normes d'usage habituelles au Québec. »</blockquote><blockquote>« [Un homme peut-il profiter des installations torse nu, avec seulement un bas de maillot?] Oui. »</blockquote><blockquote>« [Une femme peut-elle faire la même chose?] Non, le port d'un haut de maillot (ou d'un maillot une-pièce) est requis. »</blockquote><blockquote>« Concrètement, chaque personne est invitée à porter une tenue de bain (maillot une-pièce, deux-pièces ou bas de maillot seul) qui correspond à son identité de genre et à son confort, tout en respectant le cadre familial de l'établissement (le haut du corps doit être couvert pour les personnes ayant une poitrine nécessitant un haut de maillot selon les normes habituelles en lieux publics). »</blockquote><blockquote>« Notre équipe reste également disponible en toute discrétion à l'accueil ou par téléphone si un client souhaite obtenir des précisions avant sa visite. »</blockquote><div class="src">Spa Bolton · courriel du 17 nov. 2026, en réponse à l’avis de publication.</div><div class="web"><b>Sur son site web :</b> « Vous devez apporter (obligatoires) : Sandales, Bouteille d’eau, Maillot de bain. »</div><div class="acc"><b>Accessibilité (mobilité réduite) :</b> Site : installations « disponibles pour les personnes à mobilité réduite, mais malheureusement présentement non disponibles pour les personnes en fauteuil roulant ».</div></details>
   </article><article class="card tone-no" id="lieu-6" style="--i:6">
     <h4 tabindex="-1">Spa le Finlandais</h4><div class="place">Rosemère</div>
     <p class="verdict"><span class="dot no" aria-hidden="true"></span>Haut requis pour les femmes</p>
     <p class="bref">Les femmes doivent couvrir leur poitrine en tout temps. Rien de précisé pour les hommes ni pour les autres corps. Maillot obligatoire.</p>
     <div class="tags"><span class="tag2">Mobilité réduite : Rien trouvé</span></div>
-    <a class="weblink" href="https://spalefinlandais.com/termes-et-conditions/" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Spa le Finlandais</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://spalefinlandais.com/termes-et-conditions/" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Spa le Finlandais</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>Voir le détail<span class="sr"> : Spa le Finlandais</span></summary><dl class="qa"><div><dt><span class="dot maybe" aria-hidden="true"></span>Un homme torse nu?</dt><dd>Probablement oui (question posée le 10 nov., sans réponse) <span class="tag">Déduit</span></dd></div><div><dt><span class="dot no" aria-hidden="true"></span>Une femme torse nu?</dt><dd>Non : poitrine couverte en tout temps <span class="tag">Confirmé</span></dd></div><div><dt><span class="dot " aria-hidden="true"></span>Corps hors catégories, trans, non binaires</dt><dd>Rien au-delà de « toute personne s’identifiant comme femme » <span class="tag">Non précisé</span></dd></div></dl><div class="base"><b>La règle repose sur :</b> Identité de genre</div><div class="note"><b>À noter :</b> La réponse ne précise pas la règle pour les hommes.</div><div class="lab">Ce que le spa a écrit</div><blockquote>« Afin d'assurer le respect de notre politique vestimentaire, toute personne s'identifiant comme femme doit avoir la poitrine couverte en tout temps dans l'ensemble de nos installations, qu'elle porte un maillot une pièce ou deux pièces. »</blockquote><div class="src">Département des relations clients · courriel du 2 nov. 2026.</div><div class="web"><b>Sur son site web :</b> « Le port du maillot de bain est obligatoire dans les zones de l’expérience thermale. »</div><div class="acc"><b>Accessibilité (mobilité réduite) :</b> Rien trouvé sur son site au sujet de l’accessibilité.</div></details>
   </article><article class="card tone-no" id="lieu-7" style="--i:7">
     <h4 tabindex="-1">Balnea</h4><div class="place">Bromont</div>
     <p class="verdict"><span class="dot no" aria-hidden="true"></span>Haut requis pour les femmes</p>
     <p class="bref">Hommes torse nu; haut obligatoire pour les femmes. Le spa invite à lui parler de toute « situation particulière ». Maillot obligatoire en tout temps.</p>
     <div class="tags"><span class="tag2">Mobilité réduite : Peu ou pas accessible</span></div>
-    <a class="weblink" href="https://www.balnea.ca/politiques/" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Balnea</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://www.balnea.ca/politiques/" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Balnea</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>Voir le détail<span class="sr"> : Balnea</span></summary><dl class="qa"><div><dt><span class="dot yes" aria-hidden="true"></span>Un homme torse nu?</dt><dd>Oui <span class="tag">Confirmé</span></dd></div><div><dt><span class="dot no" aria-hidden="true"></span>Une femme torse nu?</dt><dd>Non : haut obligatoire <span class="tag">Confirmé</span></dd></div><div><dt><span class="dot " aria-hidden="true"></span>Corps hors catégories, trans, non binaires</dt><dd>« Situation particulière » à signaler au spa <span class="tag">Confirmé</span></dd></div></dl><div class="base"><b>La règle repose sur :</b> Femmes / hommes</div><div class="note"><b>À noter :</b> Le 4 nov., le spa écrivait que sa politique « s’applique de la même façon à l’ensemble de notre clientèle ».</div><div class="lab">Ce que le spa a écrit</div><blockquote>« Le port du maillot de bain est obligatoire en tout temps dans nos installations thermales, incluant les bains, les saunas, les aires de détente et lors des déplacements entre les différentes zones. (4 nov.) »</blockquote><blockquote>« Pour répondre à votre question, un homme peut profiter des installations avec seulement un bas de maillot de bain. (10 nov.) »</blockquote><blockquote>« En ce qui concerne les femmes, notre politique prévoit le port du haut de maillot dans nos installations. (10 nov.) »</blockquote><blockquote>« Nous comprenons toutefois que chaque personne a une réalité qui lui est propre. Si vous souhaitez nous faire part d’une situation particulière, n’hésitez pas à nous en informer. (10 nov.) »</blockquote><blockquote>« Nous sommes toutefois conscients que les besoins et les réalités de notre clientèle évoluent. Nous souhaitons donc rester à l'écoute de notre clientèle et continuer à réfléchir aux façons de faire évoluer nos pratiques afin d'offrir une expérience toujours plus inclusive et agréable pour tous. (16 nov.) »</blockquote><div class="src">Équipe des réservations · courriels du 4, du 10 et du 16 nov. 2026. Texte validé par le spa le 16 nov. 2026.</div><div class="web"><b>Sur son site web :</b> « Le port du maillot de bain est obligatoire dans les installations. »</div><div class="acc"><b>Accessibilité (mobilité réduite) :</b> Site : « notre site présente des défis d’accessibilité pour les personnes à mobilité réduite ». Le spa demande de le contacter avant la visite pour voir les accommodements possibles.</div></details>
   </article><article class="card tone-no" id="lieu-8" style="--i:8">
     <h4 tabindex="-1">La Source Bains Nordiques</h4><div class="place">Rawdon</div>
     <p class="verdict"><span class="dot no" aria-hidden="true"></span>Haut requis pour les femmes</p>
     <p class="bref">Hommes torse nu; haut et bas obligatoires pour les femmes. Rien de précisé pour les autres corps. Maillot, sandales et pièce d’identité.</p>
     <div class="tags"><span class="tag2">Mobilité réduite : Peu ou pas accessible</span></div>
-    <a class="weblink" href="https://www.lasourcespa.com/fr/services/1/bains-nordiques" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : La Source Bains Nordiques</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://www.lasourcespa.com/fr/services/1/bains-nordiques" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : La Source Bains Nordiques</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>Voir le détail<span class="sr"> : La Source Bains Nordiques</span></summary><dl class="qa"><div><dt><span class="dot yes" aria-hidden="true"></span>Un homme torse nu?</dt><dd>Oui <span class="tag">Confirmé</span></dd></div><div><dt><span class="dot no" aria-hidden="true"></span>Une femme torse nu?</dt><dd>Non : haut obligatoire <span class="tag">Confirmé</span></dd></div><div><dt><span class="dot " aria-hidden="true"></span>Corps hors catégories, trans, non binaires</dt><dd>Non précisé <span class="tag">Non précisé</span></dd></div></dl><div class="base"><b>La règle repose sur :</b> Femmes / hommes</div><div class="src">Règle confirmée par courriel par l’équipe du spa, les 3 et 4 nov. 2026. À la demande du spa, ses courriels ne sont pas cités.</div><div class="web"><b>Sur son site web :</b> « Le port du maillot de bain est obligatoire; des sandales ainsi qu’une pièce d’identité par personne. »</div><div class="acc"><b>Accessibilité (mobilité réduite) :</b> Site : « Site difficilement accessible aux personnes à mobilité réduite, veuillez communiquer avec La Source pour plus de détails. »</div></details>
   </article><article class="card tone-no" id="lieu-9" style="--i:9">
     <h4 tabindex="-1">Spa Carré St-Louis</h4><div class="place">Plateau-Mont-Royal</div>
     <p class="verdict"><span class="dot no" aria-hidden="true"></span>Haut requis pour les femmes</p>
     <p class="bref">Femmes : maillot une ou deux pièces, torse nu non permis. Hommes : short. Maillot et sandales obligatoires.</p>
     <div class="tags"><span class="tag2">Mobilité réduite : Rien trouvé</span></div>
-    <a class="weblink" href="https://www.spacarrestlouis.com/reservation/" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Spa Carré St-Louis</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://www.spacarrestlouis.com/reservation/" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Spa Carré St-Louis</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>Voir le détail<span class="sr"> : Spa Carré St-Louis</span></summary><dl class="qa"><div><dt><span class="dot maybe" aria-hidden="true"></span>Un homme torse nu?</dt><dd>Probablement : short obligatoire, haut non mentionné <span class="tag">Déduit</span></dd></div><div><dt><span class="dot no" aria-hidden="true"></span>Une femme torse nu?</dt><dd>Non : « le torse nu n’est pas autorisé » <span class="tag">Confirmé</span></dd></div><div><dt><span class="dot " aria-hidden="true"></span>Corps hors catégories, trans, non binaires</dt><dd>Non précisé <span class="tag">Non précisé</span></dd></div></dl><div class="base"><b>La règle repose sur :</b> Femmes / hommes</div><div class="lab">Ce que le spa a écrit</div><blockquote>« Hommes : Le port d’un short de bain est obligatoire. Les maillots de type slip ou string ne sont pas acceptés. »</blockquote><blockquote>« Femmes : Le port d’un maillot de bain une ou deux pièces est obligatoire tout au long de l’expérience. Le torse nu n’est pas autorisé. »</blockquote><blockquote>« Pour tous : Les sous-vêtements ne sont pas acceptés en remplacement d’un maillot de bain. »</blockquote><div class="src">Spa Carré Saint-Louis · courriel du 11 nov. 2026.</div><div class="web"><b>Sur son site web :</b> « Le maillot de bain et les sandales sont obligatoires sur le site. »</div><div class="acc"><b>Accessibilité (mobilité réduite) :</b> Rien trouvé sur son site au sujet de l’accessibilité.</div></details>
   </article><article class="card tone-maybe" id="lieu-10" style="--i:10">
     <h4 tabindex="-1">Spa Nordic Station</h4><div class="place">Magog</div>
     <p class="verdict"><span class="dot maybe" aria-hidden="true"></span>Maillot requis, haut non précisé</p>
     <p class="bref">Maillot obligatoire, même règle pour toute la clientèle; le spa ne dit pas si un bas seul suffit. Maillot et sandales.</p>
     <div class="tags"><span class="tag2">Mobilité réduite : Rien trouvé</span></div>
-    <a class="weblink" href="https://spanordicstation.com/fr/termes-conditions" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Spa Nordic Station</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://spanordicstation.com/fr/termes-conditions" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Spa Nordic Station</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>Voir le détail<span class="sr"> : Spa Nordic Station</span></summary><dl class="qa"><div><dt><span class="dot " aria-hidden="true"></span>Un homme torse nu?</dt><dd>« Maillot » au minimum; bas seul non précisé <span class="tag">Non précisé</span></dd></div><div><dt><span class="dot " aria-hidden="true"></span>Une femme torse nu?</dt><dd>« Maillot » au minimum; bas seul non précisé <span class="tag">Non précisé</span></dd></div><div><dt><span class="dot " aria-hidden="true"></span>Corps hors catégories, trans, non binaires</dt><dd>« Ces règlements s’appliquent pour toute notre clientèle » <span class="tag">Confirmé</span></dd></div></dl><div class="base"><b>La règle repose sur :</b> Même règle pour tous, contenu à préciser</div><div class="note"><b>À noter :</b> La réponse ne précise pas si un bas de maillot seul est accepté.</div><div class="lab">Ce que le spa a écrit</div><blockquote>« Nous demandons à tous nos clients de minimalement porter un maillot de bains dans nos aires de détente, dans nos bains ainsi que dans nos saunas. Le port de sandales est également obligatoire pour vos déplacements sur le site […]. »</blockquote><blockquote>« Ces règlements s'appliquent pour toute notre clientèle. »</blockquote><div class="src">Équipe de la réception · courriel du 3 nov. 2026.</div><div class="web"><b>Sur son site web :</b> « Maillot de bain et sandales sont obligatoires sur le site. »</div><div class="acc"><b>Accessibilité (mobilité réduite) :</b> Rien trouvé sur son site au sujet de l’accessibilité.</div></details>
   </article><article class="card tone-maybe" id="lieu-11" style="--i:11">
     <h4 tabindex="-1">Amerispa Spa Nordique</h4><div class="place">Morin-Heights</div>
     <p class="verdict"><span class="dot maybe" aria-hidden="true"></span>Règle à préciser</p>
     <p class="bref">Pas de politique écrite sur le torse nu : le spa demande une « tenue de baignade appropriée ». Il dit vouloir clarifier ses pratiques, dans un souci d’inclusion.</p>
     <div class="tags"><span class="tag2">Mobilité réduite : Rien trouvé</span></div>
-    <a class="weblink" href="https://amerispa.ca/faq/" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Amerispa Spa Nordique</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://amerispa.ca/faq/" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Amerispa Spa Nordique</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>Voir le détail<span class="sr"> : Amerispa Spa Nordique</span></summary><dl class="qa"><div><dt><span class="dot " aria-hidden="true"></span>Un homme torse nu?</dt><dd>Non précisé <span class="tag">Non précisé</span></dd></div><div><dt><span class="dot " aria-hidden="true"></span>Une femme torse nu?</dt><dd>Non précisé <span class="tag">Non précisé</span></dd></div><div><dt><span class="dot " aria-hidden="true"></span>Corps hors catégories, trans, non binaires</dt><dd>Pas de politique écrite; le spa veut « clarifier nos pratiques, dans un souci de respect et d’inclusion » <span class="tag">Confirmé</span></dd></div></dl><div class="base"><b>La règle repose sur :</b> « Tenue de baignade appropriée »; pas de politique écrite</div><div class="note"><b>À noter :</b> La réponse ne précise pas si un bas de maillot seul est une « tenue de baignade appropriée », ni pour qui.</div><div class="lab">Ce que le spa a écrit</div><blockquote>« À l’heure actuelle, nous n’avons pas de politique écrite encadrant précisément les situations que vous soulevez. (19 nov.) »</blockquote><blockquote>« Selon nos règlements, nous demandons simplement à notre clientèle de porter une tenue de baignade appropriée dans nos installations. (19 nov.) »</blockquote><blockquote>« Nous souhaitons avant tout que chaque personne puisse profiter de nos installations dans un environnement accueillant, respectueux et où chacun se sent à l’aise. (19 nov.) »</blockquote><blockquote>« Vos questions sont tout à fait pertinentes et nous invitent à réfléchir à la meilleure façon de clarifier nos pratiques, dans un souci de respect et d’inclusion pour l’ensemble de notre clientèle. (19 nov.) »</blockquote><div class="src">Réception, Amerispa Spa Nordique Morin-Heights · courriel du 19 nov. 2026, le jour de la publication.</div><div class="web"><b>Sur son site web :</b> « Apportez votre maillot de bain et profitez des plans d’eau des hôtels ou de nos spas nordiques avant ou après un soin. » Aucune règle vestimentaire.</div><div class="acc"><b>Accessibilité (mobilité réduite) :</b> Rien trouvé sur son site au sujet de l’accessibilité.</div></details>
   </article><article class="card tone-none" id="lieu-12" style="--i:12">
     <h4 tabindex="-1">Förena</h4><div class="place">Saint-Bruno-de-Montarville</div>
     <p class="verdict"><span class="dot " aria-hidden="true"></span>Politique en révision</p>
     <p class="bref">Selon le spa, sa politique est en révision. Son site demande d’apporter un maillot. Rien sur la poitrine.</p>
     <div class="tags"><span class="tag2">Mobilité réduite : Accès partiel indiqué</span></div>
-    <a class="weblink" href="https://www.forena.ca/fr/faq" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Förena</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://www.forena.ca/fr/faq" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Förena</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>Voir le détail<span class="sr"> : Förena</span></summary><div class="note"><b>À noter :</b> Politique « en révision » selon le spa; précisions promises, pas encore reçues.</div><div class="lab">Ce que le spa a écrit</div><blockquote>« Dans nos espaces thermaux, le port du maillot de bain est requis. »</blockquote><div class="src">Service à la clientèle · courriel du 2 nov. 2026. Politique en révision selon le spa.</div><div class="web"><b>Sur son site web :</b> Liste de choses à apporter : « un maillot de bain pour l’expérience thermale ».</div><div class="acc"><b>Accessibilité (mobilité réduite) :</b> Rien trouvé sur son site au sujet de l’accessibilité. Kéroul (2025) : « partiellement accessible ». Ascenseur, toilettes et douche adaptées, sauna et bain de vapeur de plain-pied; les bassins sont accessibles par des marches avec main courante.</div></details>
   </article><article class="card tone-none" id="lieu-13" style="--i:13">
     <h4 tabindex="-1">Strøm spa nordique (3 spas)</h4><div class="place">Île-des-Sœurs, Saint-Sauveur, Mont-Saint-Hilaire</div>
     <p class="verdict"><span class="dot " aria-hidden="true"></span>Pas de réponse</p>
     <p class="bref">Le site demande maillot et sandales « pour des raisons d’hygiène et de sécurité ». Rien sur la poitrine.</p>
     <div class="tags"><span class="tag2">Mobilité réduite : Accès partiel indiqué</span></div>
-    <a class="weblink" href="https://www.stromspa.com/pages/preparer-votre-visite" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Strøm spa nordique (3 spas)</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://www.stromspa.com/pages/preparer-votre-visite" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Strøm spa nordique (3 spas)</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>Voir le détail<span class="sr"> : Strøm spa nordique (3 spas)</span></summary><div class="web"><b>Sur son site web :</b> « Porter des sandales et un maillot de bain pour des raisons d’hygiène et de sécurité. »</div><div class="acc"><b>Accessibilité (mobilité réduite) :</b> Site : Île-des-Sœurs et Saint-Sauveur n’ont « pas de rampe d’accès pour les fauteuils roulants ». À Mont-Saint-Hilaire, une rampe mène à la réception, au restaurant et aux soins, mais « l’expérience thermale et les vestiaires ne sont pas accessibles ».</div></details>
   </article><article class="card tone-none" id="lieu-14" style="--i:14">
     <h4 tabindex="-1">Scandinave Spa Mont-Tremblant</h4><div class="place">Mont-Tremblant</div>
     <p class="verdict"><span class="dot " aria-hidden="true"></span>Pas de réponse</p>
     <p class="bref">Le site dit : maillot obligatoire, sandales suggérées. Rien sur la poitrine.</p>
     <div class="tags"><span class="tag2">Mobilité réduite : Peu ou pas accessible</span></div>
-    <a class="weblink" href="https://www.scandinave.com/fr/termes-et-conditions" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Scandinave Spa Mont-Tremblant</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://www.scandinave.com/fr/termes-et-conditions" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Scandinave Spa Mont-Tremblant</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>Voir le détail<span class="sr"> : Scandinave Spa Mont-Tremblant</span></summary><div class="web"><b>Sur son site web :</b> « Le port du maillot de bain est obligatoire et les sandales sont suggérées. »</div><div class="acc"><b>Accessibilité (mobilité réduite) :</b> Site : installations « pas aménagées pour des personnes en fauteuil roulant », avec « plusieurs escaliers tout au long de l’expérience ».</div></details>
   </article><article class="card tone-none" id="lieu-15" style="--i:15">
     <h4 tabindex="-1">Spa Eastman</h4><div class="place">Eastman</div>
     <p class="verdict"><span class="dot " aria-hidden="true"></span>Pas de réponse</p>
     <p class="bref">Le site suggère d’apporter un maillot. Aucune règle écrite sur la tenue.</p>
     <div class="tags"><span class="tag2">Mobilité réduite : Accès partiel indiqué</span></div>
-    <a class="weblink" href="https://www.spa-eastman.com/planifier-mon-premier-sejour/" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Spa Eastman</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://www.spa-eastman.com/planifier-mon-premier-sejour/" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Spa Eastman</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>Voir le détail<span class="sr"> : Spa Eastman</span></summary><div class="web"><b>Sur son site web :</b> Liste de choses à apporter : « Votre maillot de bain (ou deux pour éviter d’en remettre un trempé!) ». Aucune règle écrite trouvée.</div><div class="acc"><b>Accessibilité (mobilité réduite) :</b> Site : soins, restaurant et aires communes accessibles par ascenseur, chambres adaptées, mais « les installations de thermothérapie ne sont pas accessibles ».</div></details>
   </article><article class="card tone-none" id="lieu-16" style="--i:16">
     <h4 tabindex="-1">Spa Ofuro</h4><div class="place">Morin-Heights</div>
     <p class="verdict"><span class="dot " aria-hidden="true"></span>Pas de réponse</p>
     <p class="bref">Le site dit : maillot et sandales obligatoires. Rien sur la poitrine.</p>
     <div class="tags"><span class="tag2">Mobilité réduite : Rien trouvé</span></div>
-    <a class="weblink" href="https://spaofuro.com/faq-reglements/" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Spa Ofuro</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://spaofuro.com/faq-reglements/" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Spa Ofuro</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>Voir le détail<span class="sr"> : Spa Ofuro</span></summary><div class="web"><b>Sur son site web :</b> « Le maillot de bain et les sandales sont obligatoires. »</div><div class="acc"><b>Accessibilité (mobilité réduite) :</b> Rien trouvé sur son site au sujet de l’accessibilité.</div></details>
   </article><article class="card tone-none" id="lieu-17" style="--i:17">
     <h4 tabindex="-1">JOY Wellness Club</h4><div class="place">Centre-ville (rue de la Montagne)</div>
     <p class="verdict"><span class="dot " aria-hidden="true"></span>Pas de réponse</p>
     <p class="bref">Le site (en anglais) demande un maillot au sauna et dans les bains. Rien sur la poitrine.</p>
     <div class="tags"><span class="tag2">Mobilité réduite : Rien trouvé</span></div>
-    <a class="weblink" href="https://joywellnessclub.ca/en/pages/termes-et-conditions" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : JOY Wellness Club</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://joywellnessclub.ca/en/pages/termes-et-conditions" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : JOY Wellness Club</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>Voir le détail<span class="sr"> : JOY Wellness Club</span></summary><div class="web"><b>Sur son site web :</b> En anglais seulement : « […] bathing suits for sauna cold plunge and warm baths. » (maillot requis au sauna, au bain froid et au bain thermal)</div><div class="acc"><b>Accessibilité (mobilité réduite) :</b> Rien trouvé sur son site au sujet de l’accessibilité.</div></details>
   </article></div>
       <p class="morewrap"><button type="button" class="morebtn" id="moreenq" hidden="" data-shown="18"></button></p>
@@ -902,127 +986,127 @@ footer.site a[aria-current="page"] { font-weight: 700; text-decoration-thickness
     <h4 tabindex="-1">Strøm spa nordique Vieux-Québec</h4><div class="place">Québec · Région de Québec</div>
     
     <p class="bref">Bains nordiques.</p>
-    <a class="weblink" href="https://www.stromspa.com/pages/preparer-votre-visite" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Strøm spa nordique Vieux-Québec</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://www.stromspa.com/pages/preparer-votre-visite" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Strøm spa nordique Vieux-Québec</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>À noter<span class="sr"> : Strøm spa nordique Vieux-Québec</span></summary><div class="note">Même chaîne que Strøm, qui fait partie de l’enquête nº 1 et n’a pas répondu.</div></details>
   </article><article class="card mini tone-pending" id="lieu-19" style="--i:1">
     <h4 tabindex="-1">Le Nordique Spa Stoneham</h4><div class="place">Stoneham-et-Tewkesbury · Région de Québec</div>
     
     <p class="bref">Bains nordiques au bord de la rivière Jacques-Cartier.</p>
-    <a class="weblink" href="https://www.quebec-cite.com/fr/entreprises/le-nordique-spa-stoneham" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Le Nordique Spa Stoneham</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://www.quebec-cite.com/fr/entreprises/le-nordique-spa-stoneham" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Le Nordique Spa Stoneham</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-20" style="--i:2">
     <h4 tabindex="-1">Sibéria Spa</h4><div class="place">Lac-Beauport · Région de Québec</div>
     
     <p class="bref">Bains nordiques en forêt.</p>
-    <a class="weblink" href="https://siberiaspa.com/en/pages/useful-information" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Sibéria Spa</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://siberiaspa.com/en/pages/useful-information" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Sibéria Spa</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-21" style="--i:3">
     <h4 tabindex="-1">Spa des Neiges</h4><div class="place">Sainte-Anne-de-Beaupré · Région de Québec</div>
     
     <p class="bref">Bains nordiques extérieurs.</p>
-    <a class="weblink" href="https://www.quebec-cite.com/fr/entreprises/spa-des-neiges" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Spa des Neiges</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://www.quebec-cite.com/fr/entreprises/spa-des-neiges" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Spa des Neiges</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-22" style="--i:4">
     <h4 tabindex="-1">Le Versant Mont-Sainte-Anne</h4><div class="place">Saint-Ferréol-les-Neiges · Région de Québec</div>
     
     <p class="bref">Bains nordiques au bord d’un lac (à confirmer).</p>
-    <a class="weblink" href="https://www.quebec-cite.com/fr/entreprises/le-versant-mont-sainte-anne" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Le Versant Mont-Sainte-Anne</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://www.quebec-cite.com/fr/entreprises/le-versant-mont-sainte-anne" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Le Versant Mont-Sainte-Anne</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-23" style="--i:5">
     <h4 tabindex="-1">Aroma Spa (Village Vacances Valcartier)</h4><div class="place">Saint-Gabriel-de-Valcartier · Région de Québec</div>
     
     <p class="bref">Bain vapeur et sauna finlandais.</p>
-    <a class="weblink" href="https://valcartier.com/en/plan/security-rules" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Aroma Spa (Village Vacances Valcartier)</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://valcartier.com/en/plan/security-rules" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Aroma Spa (Village Vacances Valcartier)</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>À noter<span class="sr"> : Aroma Spa (Village Vacances Valcartier)</span></summary><div class="note">Leur page de règles demande le maillot en tout temps et une « tenue de baignade appropriée »; le string et les vêtements transparents sont interdits.</div></details>
   </article><article class="card mini tone-pending" id="lieu-24" style="--i:6">
     <h4 tabindex="-1">AWŪ sanctuaire urbain Québec (ancien SKYSPA Québec)</h4><div class="place">Québec · Région de Québec</div>
     
     <p class="bref">Circuit thermal.</p>
-    <a class="weblink" href="https://awu.com/pages/preparer-ma-visite" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : AWŪ sanctuaire urbain Québec (ancien SKYSPA Québec)</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://awu.com/pages/preparer-ma-visite" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : AWŪ sanctuaire urbain Québec (ancien SKYSPA Québec)</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>À noter<span class="sr"> : AWŪ sanctuaire urbain Québec (ancien SKYSPA Québec)</span></summary><div class="note">Même entreprise qu’AWU DIX30 (enquête nº 1). La page de règles est celle d’AWU DIX30 : à confirmer pour Québec.</div></details>
   </article><article class="card mini tone-pending" id="lieu-25" style="--i:7">
     <h4 tabindex="-1">Spa Nordique Le Germain</h4><div class="place">Baie-Saint-Paul · Charlevoix</div>
     
     <p class="bref">Sauna finlandais, bain vapeur, bassins chauds et froids.</p>
-    <a class="weblink" href="https://www.germainhotels.com/en/le-germain-hotel-and-spa/charlevoix/things-to-do/spa-nordique-le-germain" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Spa Nordique Le Germain</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://www.germainhotels.com/en/le-germain-hotel-and-spa/charlevoix/things-to-do/spa-nordique-le-germain" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Spa Nordique Le Germain</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-26" style="--i:8">
     <h4 tabindex="-1">Moment Spa, Fairmont Le Manoir Richelieu</h4><div class="place">La Malbaie · Charlevoix</div>
     
     <p class="bref">Piscines chauffées, bains à remous intérieur et extérieur, hammam; vestiaires femmes et hommes.</p>
-    <a class="weblink" href="https://www.fairmont.com/fr/hotels/charlevoix/fairmont-le-manoir-richelieu/wellness/spa.html" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Moment Spa, Fairmont Le Manoir Richelieu</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://www.fairmont.com/fr/hotels/charlevoix/fairmont-le-manoir-richelieu/wellness/spa.html" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Moment Spa, Fairmont Le Manoir Richelieu</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-27" style="--i:9">
     <h4 tabindex="-1">Sartiga Spa sur le Lac (ancien NRJ Spa Nordique)</h4><div class="place">Saint-Alfred (Beauce) · Chaudière-Appalaches</div>
     
     <p class="bref">Bains chauds, saunas finlandais, hammam, bassin froid.</p>
-    <a class="weblink" href="https://chaudiereappalaches.com/en/plan-your-stay/what-to-do/sartiga-spa-sur-le-lac-saint-alfred-en-5348370/" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Sartiga Spa sur le Lac (ancien NRJ Spa Nordique)</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://chaudiereappalaches.com/en/plan-your-stay/what-to-do/sartiga-spa-sur-le-lac-saint-alfred-en-5348370/" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Sartiga Spa sur le Lac (ancien NRJ Spa Nordique)</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-28" style="--i:10">
     <h4 tabindex="-1">Sento Spa</h4><div class="place">Lévis · Chaudière-Appalaches</div>
     
     <p class="bref">Bains chauds et froids, sauna, hammam.</p>
-    <a class="weblink" href="https://chaudiereappalaches.com/en/plan-your-stay/what-to-do/sento-spa-levis-en-5377599/" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Sento Spa</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://chaudiereappalaches.com/en/plan-your-stay/what-to-do/sento-spa-levis-en-5377599/" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Sento Spa</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-29" style="--i:11">
     <h4 tabindex="-1">Noah Spa (Scott)</h4><div class="place">Scott · Chaudière-Appalaches</div>
     
     <p class="bref">Spa nordique, hammam, sauna, piscine extérieure.</p>
-    <a class="weblink" href="https://chaudiereappalaches.com/en/plan-your-stay/what-to-do/noah-spa-de-scott-scott-en-5348369/" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Noah Spa (Scott)</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://chaudiereappalaches.com/en/plan-your-stay/what-to-do/noah-spa-de-scott-scott-en-5348369/" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Noah Spa (Scott)</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-30" style="--i:12">
     <h4 tabindex="-1">Noah Spa (Thetford)</h4><div class="place">Thetford Mines · Chaudière-Appalaches</div>
     
     <p class="bref">Spas extérieurs.</p>
-    <a class="weblink" href="https://www.quebecvacances.com/fr/attractions/noah-spa-thetford" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Noah Spa (Thetford)</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://www.quebecvacances.com/fr/attractions/noah-spa-thetford" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Noah Spa (Thetford)</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-31" style="--i:13">
     <h4 tabindex="-1">Adstock Spa Nature</h4><div class="place">Adstock · Chaudière-Appalaches</div>
     
     <p class="bref">Spas publics, et des espaces privés avec spa, sauna et bassin froid.</p>
-    <a class="weblink" href="https://chaudiereappalaches.com/en/lived-for-real-our-recommendations/blog/i-discovered-adstock-spa-nature/" target="_blank" rel="noopener">Voir l’article<span class="sr"> : Adstock Spa Nature</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://chaudiereappalaches.com/en/lived-for-real-our-recommendations/blog/i-discovered-adstock-spa-nature/" target="_blank" rel="noopener">Voir l’article<span class="sr"> : Adstock Spa Nature</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-32" style="--i:14">
     <h4 tabindex="-1">Strøm spa nordique Sherbrooke</h4><div class="place">Sherbrooke · Cantons-de-l’Est</div>
     
     <p class="bref">Circuit thermal, plage sur la rivière Magog.</p>
-    <a class="weblink" href="https://www.stromspa.com/pages/preparer-votre-visite" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Strøm spa nordique Sherbrooke</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://www.stromspa.com/pages/preparer-votre-visite" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Strøm spa nordique Sherbrooke</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>À noter<span class="sr"> : Strøm spa nordique Sherbrooke</span></summary><div class="note">Même chaîne que Strøm, qui fait partie de l’enquête nº 1 et n’a pas répondu.</div></details>
   </article><article class="card mini tone-pending" id="lieu-33" style="--i:15">
     <h4 tabindex="-1">PAŪS Spa Expérience</h4><div class="place">Sherbrooke · Cantons-de-l’Est</div>
     
     <p class="bref">Spa urbain sur 4 étages : bain nordique, hammam, sauna sec, bassins chauds et froids, spas intérieur et extérieur.</p>
-    <a class="weblink" href="https://www.bonjourquebec.com/fr-ca/repertoire/quoi-faire/paus-spa-experience/0r2t" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : PAŪS Spa Expérience</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://www.bonjourquebec.com/fr-ca/repertoire/quoi-faire/paus-spa-experience/0r2t" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : PAŪS Spa Expérience</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-34" style="--i:16">
     <h4 tabindex="-1">Spa des Sables, Manoir des Sables (ancien Spa Villégia)</h4><div class="place">Orford · Cantons-de-l’Est</div>
     
     <p class="bref">Bain nordique, hammam, sauna sec, spa intérieur, piscines intérieure et extérieure.</p>
-    <a class="weblink" href="https://tourisme-memphremagog.com/en/fiches/spa-des-sables/" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Spa des Sables, Manoir des Sables (ancien Spa Villégia)</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://tourisme-memphremagog.com/en/fiches/spa-des-sables/" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Spa des Sables, Manoir des Sables (ancien Spa Villégia)</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-35" style="--i:17">
     <h4 tabindex="-1">Spa Nordique, Le Saint-Christophe Hôtel-Boutique &amp; Spa</h4><div class="place">Granby (lac Boivin) · Cantons-de-l’Est</div>
     
     <p class="bref">Spa nordique (installations à confirmer).</p>
-    <a class="weblink" href="https://www.quebecvacances.com/en/attractions/spa-saint-christophe" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Spa Nordique, Le Saint-Christophe Hôtel-Boutique &amp; Spa</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://www.quebecvacances.com/en/attractions/spa-saint-christophe" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Spa Nordique, Le Saint-Christophe Hôtel-Boutique &amp; Spa</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-36" style="--i:18">
     <h4 tabindex="-1">Centre de santé Euro-Spa</h4><div class="place">Saint-Ignace-de-Stanbridge · Cantons-de-l’Est</div>
     
     <p class="bref">Piscines intérieure et extérieure, spas intérieur et extérieur, sauna infrarouge.</p>
-    <a class="weblink" href="https://www.bonjourquebec.com/fr-ca/repertoire/quoi-faire/centre-de-sante-euro-spa/0p7k" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Centre de santé Euro-Spa</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://www.bonjourquebec.com/fr-ca/repertoire/quoi-faire/centre-de-sante-euro-spa/0p7k" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Centre de santé Euro-Spa</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-37" style="--i:19">
     <h4 tabindex="-1">Solstice sauna</h4><div class="place">North Hatley · Cantons-de-l’Est</div>
     
     <p class="bref">Sauna social au bord du lac Massawippi, baignade dans le lac.</p>
-    <a class="weblink" href="https://www.bonjourquebec.com/fr-fr/repertoire/quoi-faire/solstice-sauna/1jh4" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Solstice sauna</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://www.bonjourquebec.com/fr-fr/repertoire/quoi-faire/solstice-sauna/1jh4" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Solstice sauna</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>À noter<span class="sr"> : Solstice sauna</span></summary><div class="note">Séances publiques de 75 minutes, 20 personnes au plus; ouvert d’octobre à avril.</div></details>
   </article><article class="card mini tone-pending" id="lieu-38" style="--i:20">
     <h4 tabindex="-1">O’Spa Nordique, Hôtel de la Rive</h4><div class="place">Sorel-Tracy · Montérégie (Rive-Sud)</div>
     
     <p class="bref">Circuit thermal.</p>
-    <a class="weblink" href="https://www.quebecvacances.com/fr/attractions/ospa-nordique" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : O’Spa Nordique, Hôtel de la Rive</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://www.quebecvacances.com/fr/attractions/ospa-nordique" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : O’Spa Nordique, Hôtel de la Rive</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-39" style="--i:21">
     <h4 tabindex="-1">Noah Spa Venise-en-Québec</h4><div class="place">Venise-en-Québec · Montérégie (Rive-Sud)</div>
@@ -1034,229 +1118,229 @@ footer.site a[aria-current="page"] { font-weight: 700; text-decoration-thickness
     <h4 tabindex="-1">Spa Franklin</h4><div class="place">Franklin · Montérégie (Rive-Sud)</div>
     
     <p class="bref">Bains extérieurs, hammam à l’eucalyptus, sauna finlandais, bassin froid, accès à la rivière.</p>
-    <a class="weblink" href="https://www.bonjourquebec.com/en-us/listing/to-see-and-do/spa-franklin-experience-thermale-et-soins/0s64" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Spa Franklin</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://www.bonjourquebec.com/en-us/listing/to-see-and-do/spa-franklin-experience-thermale-et-soins/0s64" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Spa Franklin</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-41" style="--i:23">
     <h4 tabindex="-1">Spa Gallant, Auberge des Gallant</h4><div class="place">Sainte-Marthe · Montérégie (Rive-Sud)</div>
     
     <p class="bref">Installations à confirmer.</p>
-    <a class="weblink" href="https://www.quebecvacances.com/fr/attractions/spa-gallant" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Spa Gallant, Auberge des Gallant</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://www.quebecvacances.com/fr/attractions/spa-gallant" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Spa Gallant, Auberge des Gallant</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>À noter<span class="sr"> : Spa Gallant, Auberge des Gallant</span></summary><div class="note">Selon Québec Vacances, le spa est réservé aux clients de l’auberge.</div></details>
   </article><article class="card mini tone-pending" id="lieu-42" style="--i:24">
     <h4 tabindex="-1">Le Sainte-Hélène Auberge &amp; Spa Nordique</h4><div class="place">Sainte-Hélène-de-Chester · Centre-du-Québec</div>
     
     <p class="bref">Deux bains chauds, sauna sec, hammam, chute d’eau, verrière.</p>
-    <a class="weblink" href="https://www.bonjourquebec.com/fr-ca/repertoire/quoi-faire/le-sainte-helene-auberge-spa-nordique/0qxn" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Le Sainte-Hélène Auberge &amp; Spa Nordique</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://www.bonjourquebec.com/fr-ca/repertoire/quoi-faire/le-sainte-helene-auberge-spa-nordique/0qxn" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Le Sainte-Hélène Auberge &amp; Spa Nordique</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-43" style="--i:25">
     <h4 tabindex="-1">Bioterra Spa Santé urbain</h4><div class="place">Drummondville · Centre-du-Québec</div>
     
     <p class="bref">Bain scandinave, hammam, bain chaud et bassin froid intérieurs, chute froide, sauna sec.</p>
-    <a class="weblink" href="https://www.bonjourquebec.com/en/listing/to-see-and-do/bioterra-spa-sante-urbain/0od2" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Bioterra Spa Santé urbain</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://www.bonjourquebec.com/en/listing/to-see-and-do/bioterra-spa-sante-urbain/0od2" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Bioterra Spa Santé urbain</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-44" style="--i:26">
     <h4 tabindex="-1">Spa détente du Lac William, Manoir du Lac William</h4><div class="place">Saint-Ferdinand · Centre-du-Québec</div>
     
     <p class="bref">Spa nordique : trois bassins chauds, un bassin froid, sauna finlandais; piscines.</p>
-    <a class="weblink" href="https://www.bonjourquebec.com/fr-ca/repertoire/quoi-faire/manoir-du-lac-william-hotel-spa/0sy8" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Spa détente du Lac William, Manoir du Lac William</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://www.bonjourquebec.com/fr-ca/repertoire/quoi-faire/manoir-du-lac-william-hotel-spa/0sy8" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Spa détente du Lac William, Manoir du Lac William</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-45" style="--i:27">
     <h4 tabindex="-1">L’Oasis de l’Île Spa</h4><div class="place">Saint-Eustache · Laurentides</div>
     
     <p class="bref">Bains chauds et froids, bain vapeur, sauna sec, piscine l’été.</p>
-    <a class="weblink" href="https://www.bonjourquebec.com/fr-ca/repertoire/hebergement/oasis-de-l-ile/071u" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : L’Oasis de l’Île Spa</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://www.bonjourquebec.com/fr-ca/repertoire/hebergement/oasis-de-l-ile/071u" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : L’Oasis de l’Île Spa</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>À noter<span class="sr"> : L’Oasis de l’Île Spa</span></summary><div class="note">Spa réservé aux 16 ans et plus.</div></details>
   </article><article class="card mini tone-pending" id="lieu-46" style="--i:28">
     <h4 tabindex="-1">Auberge &amp; Spa Nordique Beaux Rêves</h4><div class="place">Sainte-Adèle · Laurentides</div>
     
     <p class="bref">Sauna finlandais, hammam à l’eucalyptus, bassin chaud, baignade dans la rivière.</p>
-    <a class="weblink" href="https://beauxreves.com/?p=20295" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Auberge &amp; Spa Nordique Beaux Rêves</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://beauxreves.com/?p=20295" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Auberge &amp; Spa Nordique Beaux Rêves</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>À noter<span class="sr"> : Auberge &amp; Spa Nordique Beaux Rêves</span></summary><div class="note">Le site parle d’un accès au spa avec l’hébergement : à confirmer pour les visites d’un jour.</div></details>
   </article><article class="card mini tone-pending" id="lieu-47" style="--i:29">
     <h4 tabindex="-1">Moment Spa, Fairmont Tremblant</h4><div class="place">Mont-Tremblant · Laurentides</div>
     
     <p class="bref">Piscine extérieure avec circuit thermal, cascade, bain à remous, bassin froid; hammams et sauna.</p>
-    <a class="weblink" href="https://www.fairmont.com/fr/hotels/tremblant/fairmont-tremblant/wellness.html" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Moment Spa, Fairmont Tremblant</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://www.fairmont.com/fr/hotels/tremblant/fairmont-tremblant/wellness.html" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Moment Spa, Fairmont Tremblant</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>À noter<span class="sr"> : Moment Spa, Fairmont Tremblant</span></summary><div class="note">Leur page bien-être ne dit rien sur la tenue.</div></details>
   </article><article class="card mini tone-pending" id="lieu-48" style="--i:30">
     <h4 tabindex="-1">Spa Natur’Eau</h4><div class="place">Mandeville · Lanaudière</div>
     
     <p class="bref">Sauna finlandais, bain turc, trois bains à remous extérieurs, chute nordique.</p>
-    <a class="weblink" href="https://natureau.com/?lang=en" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Spa Natur’Eau</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://natureau.com/?lang=en" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Spa Natur’Eau</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-49" style="--i:31">
     <h4 tabindex="-1">Centre de santé Le Rituel</h4><div class="place">Saint-Côme · Lanaudière</div>
     
     <p class="bref">Spa, sauna, rivière.</p>
-    <a class="weblink" href="https://lanaudiere.ca/en/activities-lanaudiere/centre-de-sante-le-rituel" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Centre de santé Le Rituel</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://lanaudiere.ca/en/activities-lanaudiere/centre-de-sante-le-rituel" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Centre de santé Le Rituel</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>À noter<span class="sr"> : Centre de santé Le Rituel</span></summary><div class="note">Semble surtout offert en accès privé, pour des groupes : à confirmer.</div></details>
   </article><article class="card mini tone-pending" id="lieu-50" style="--i:32">
     <h4 tabindex="-1">Spa de l’Auberge Aux Quatre Matins</h4><div class="place">Saint-Côme · Lanaudière</div>
     
     <p class="bref">Bains nordiques extérieurs.</p>
-    <a class="weblink" href="https://lanaudiere.ca/en/activities-lanaudiere/auberge-aux-quatre-matins-2/" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Spa de l’Auberge Aux Quatre Matins</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://lanaudiere.ca/en/activities-lanaudiere/auberge-aux-quatre-matins-2/" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Spa de l’Auberge Aux Quatre Matins</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-51" style="--i:33">
     <h4 tabindex="-1">Centre de santé de l’Auberge du Lac Taureau</h4><div class="place">Saint-Michel-des-Saints · Lanaudière</div>
     
     <p class="bref">Piscines intérieure et extérieure chauffées, saunas, bains à remous extérieurs.</p>
-    <a class="weblink" href="https://lanaudiere.ca/en/activities-lanaudiere/health-center-auberge-du-lac-taureau/" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Centre de santé de l’Auberge du Lac Taureau</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://lanaudiere.ca/en/activities-lanaudiere/health-center-auberge-du-lac-taureau/" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Centre de santé de l’Auberge du Lac Taureau</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-52" style="--i:34">
     <h4 tabindex="-1">Spa santé Le Nénuphar</h4><div class="place">Terrebonne · Lanaudière</div>
     
     <p class="bref">Spa urbain : bain à remous et bassin froid intérieurs, sauna sec, bain flottant.</p>
-    <a class="weblink" href="https://lanaudiere.ca/en/activities-lanaudiere/spa-sante-le-nenuphar" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Spa santé Le Nénuphar</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://lanaudiere.ca/en/activities-lanaudiere/spa-sante-le-nenuphar" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Spa santé Le Nénuphar</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-53" style="--i:35">
     <h4 tabindex="-1">Spa Santé Corps et Âme</h4><div class="place">L’Assomption · Lanaudière</div>
     
     <p class="bref">Bains dans une salle privée.</p>
-    <a class="weblink" href="https://lanaudiere.ca/en/activities-lanaudiere/spa-sante-corps-et-ame" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Spa Santé Corps et Âme</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://lanaudiere.ca/en/activities-lanaudiere/spa-sante-corps-et-ame" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Spa Santé Corps et Âme</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>À noter<span class="sr"> : Spa Santé Corps et Âme</span></summary><div class="note">Accès exclusif possible : installations peut-être pas communes, à confirmer.</div></details>
   </article><article class="card mini tone-pending" id="lieu-54" style="--i:36">
     <h4 tabindex="-1">Nordik Spa Village Chelsea</h4><div class="place">Chelsea · Outaouais</div>
     
     <p class="bref">10 bains extérieurs, 9 saunas; le plus grand spa d’Amérique du Nord.</p>
-    <a class="weblink" href="https://chelsea.lenordik.com/fr/code-du-village" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Nordik Spa Village Chelsea</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://chelsea.lenordik.com/fr/code-du-village" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Nordik Spa Village Chelsea</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>À noter<span class="sr"> : Nordik Spa Village Chelsea</span></summary><div class="note">Leur Code du Village : « Le port du maillot de bain est obligatoire partout dans le Spa Village. »</div></details>
   </article><article class="card mini tone-pending" id="lieu-55" style="--i:37">
     <h4 tabindex="-1">Koena Spa</h4><div class="place">Gatineau (Aylmer) · Outaouais</div>
     
     <p class="bref">Bains chauds et froids, saunas secs, hammam à l’eucalyptus, salle de sel de l’Himalaya, grotte.</p>
-    <a class="weblink" href="https://koenaspa.com/en/about-the-spa/" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Koena Spa</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://koenaspa.com/en/about-the-spa/" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Koena Spa</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-56" style="--i:38">
     <h4 tabindex="-1">Huma Spa</h4><div class="place">Gatineau · Outaouais</div>
     
     <p class="bref">Spa sur un toit : bains chauds intérieur et extérieur, bassin froid, hammam, sauna sec, bain flottant.</p>
-    <a class="weblink" href="https://www.tourismeoutaouais.com/en/attractions/huma-spa/" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Huma Spa</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://www.tourismeoutaouais.com/en/attractions/huma-spa/" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Huma Spa</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-57" style="--i:39">
     <h4 tabindex="-1">Holtz Spa en nature</h4><div class="place">La Pêche (Wakefield) · Outaouais</div>
     
     <p class="bref">Spa en forêt au Moulin Wakefield; installations communes à confirmer.</p>
-    <a class="weblink" href="https://www.wakefieldmill.com/wellness" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Holtz Spa en nature</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://www.wakefieldmill.com/wellness" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Holtz Spa en nature</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-58" style="--i:40">
     <h4 tabindex="-1">Amerispa Spa Nordique Cantley</h4><div class="place">Cantley · Outaouais</div>
     
     <p class="bref">Spas, sauna finlandais, bain vapeur à l’eucalyptus, chute nordique, bain tempéré.</p>
-    <a class="weblink" href="https://amerispa.ca/faq/" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Amerispa Spa Nordique Cantley</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://amerispa.ca/faq/" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Amerispa Spa Nordique Cantley</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>À noter<span class="sr"> : Amerispa Spa Nordique Cantley</span></summary><div class="note">18 ans et plus. Même chaîne qu’Amerispa Morin-Heights (enquête nº 1), dont la règle est à préciser.</div></details>
   </article><article class="card mini tone-pending" id="lieu-59" style="--i:41">
     <h4 tabindex="-1">Centre de vie</h4><div class="place">Ripon · Outaouais</div>
     
     <p class="bref">Sauna dans un ancien silo, lac d’argile.</p>
-    <a class="weblink" href="https://tourismeoutaouais.com/en/where-to-sleep/centre-de-vie" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Centre de vie</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://tourismeoutaouais.com/en/where-to-sleep/centre-de-vie" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Centre de vie</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>À noter<span class="sr"> : Centre de vie</span></summary><div class="note">Lieu de retraite (jeûne, yoga) : à confirmer s’il reçoit des visiteurs d’un jour.</div></details>
   </article><article class="card mini tone-pending" id="lieu-60" style="--i:42">
     <h4 tabindex="-1">KiNipi Spa nordique &amp; hébergement</h4><div class="place">Trois-Rivières · Mauricie</div>
     
     <p class="bref">Bassins extérieurs, saunas finlandais, hammam.</p>
-    <a class="weblink" href="https://www.bonjourquebec.com/en/listing/to-see-and-do/kinipi-spa-nordique-hebergement/0sy6" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : KiNipi Spa nordique &amp; hébergement</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://www.bonjourquebec.com/en/listing/to-see-and-do/kinipi-spa-nordique-hebergement/0sy6" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : KiNipi Spa nordique &amp; hébergement</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-61" style="--i:43">
     <h4 tabindex="-1">Spa santé Le Baluchon Éco-villégiature</h4><div class="place">Saint-Paulin · Mauricie</div>
     
     <p class="bref">Bains chauds, bassin froid, sauna, aires de repos au bord de la rivière du Loup.</p>
-    <a class="weblink" href="https://baluchon.com/en/spa/thermal-experience" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Spa santé Le Baluchon Éco-villégiature</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://baluchon.com/en/spa/thermal-experience" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Spa santé Le Baluchon Éco-villégiature</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-62" style="--i:44">
     <h4 tabindex="-1">Geos Spa Sacacomie</h4><div class="place">Saint-Alexis-des-Monts · Mauricie</div>
     
     <p class="bref">Bains géothermiques, saunas secs extérieurs, bain vapeur, bains à remous, piscine intérieure.</p>
-    <a class="weblink" href="https://tourismemauricie.com/en/directory/geos-spa-sacacomie-2" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Geos Spa Sacacomie</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://tourismemauricie.com/en/directory/geos-spa-sacacomie-2" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Geos Spa Sacacomie</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-63" style="--i:45">
     <h4 tabindex="-1">Édouard-les-Bains</h4><div class="place">L’Anse-Saint-Jean · Saguenay–Lac-Saint-Jean</div>
     
     <p class="bref">Bains à remous extérieurs, hammam, saunas, chute et bassins nordiques, piscine l’été.</p>
-    <a class="weblink" href="https://saguenaylacsaintjean.ca/en/attraction/quoi-faire/edouard-les-bains" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Édouard-les-Bains</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://saguenaylacsaintjean.ca/en/attraction/quoi-faire/edouard-les-bains" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Édouard-les-Bains</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-64" style="--i:46">
     <h4 tabindex="-1">L’Éternel Spa</h4><div class="place">Saint-David-de-Falardeau · Saguenay–Lac-Saint-Jean</div>
     
     <p class="bref">Quatre bassins chauds, bassin naturel froid avec chute, sauna, hammam, yourte.</p>
-    <a class="weblink" href="https://saguenaylacsaintjean.ca/en/attraction/quoi-faire/leternel-spa" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : L’Éternel Spa</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://saguenaylacsaintjean.ca/en/attraction/quoi-faire/leternel-spa" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : L’Éternel Spa</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-65" style="--i:47">
     <h4 tabindex="-1">Chalets &amp; Spa Lac-Saint-Jean</h4><div class="place">Chambord · Saguenay–Lac-Saint-Jean</div>
     
     <p class="bref">Bain nordique, bassins chaud et froid, sauna sec.</p>
-    <a class="weblink" href="https://www.bonjourquebec.com/fr-fr/repertoire/quoi-faire/chalets-spa-lac-saint-jean/0tb5" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Chalets &amp; Spa Lac-Saint-Jean</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://www.bonjourquebec.com/fr-fr/repertoire/quoi-faire/chalets-spa-lac-saint-jean/0tb5" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Chalets &amp; Spa Lac-Saint-Jean</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>À noter<span class="sr"> : Chalets &amp; Spa Lac-Saint-Jean</span></summary><div class="note">Bains interdits aux moins de 16 ans.</div></details>
   </article><article class="card mini tone-pending" id="lieu-66" style="--i:48">
     <h4 tabindex="-1">PAŪS Spa Expérience (Saguenay)</h4><div class="place">Saguenay · Saguenay–Lac-Saint-Jean</div>
     
     <p class="bref">Spa extérieur, bain scandinave, hammam.</p>
-    <a class="weblink" href="https://saguenaylacsaintjean.ca/en/member/what-to-do/paus-spa-experience-saguenay" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : PAŪS Spa Expérience (Saguenay)</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://saguenaylacsaintjean.ca/en/member/what-to-do/paus-spa-experience-saguenay" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : PAŪS Spa Expérience (Saguenay)</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-67" style="--i:49">
     <h4 tabindex="-1">Hammam Thalassa</h4><div class="place">Saguenay (Jonquière) · Saguenay–Lac-Saint-Jean</div>
     
     <p class="bref">Hammam (bain turc) aux huiles essentielles; vestiaire et douches.</p>
-    <a class="weblink" href="https://www.bonjourquebec.com/en/listing/to-see-and-do/hammam-thalassa/0pjw" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Hammam Thalassa</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://www.bonjourquebec.com/en/listing/to-see-and-do/hammam-thalassa/0pjw" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Hammam Thalassa</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-68" style="--i:50">
     <h4 tabindex="-1">UniverSpa Nordik, Hôtel Universel</h4><div class="place">Rivière-du-Loup · Bas-Saint-Laurent, Gaspésie, Côte-Nord</div>
     
     <p class="bref">Bains nordiques, deux bassins chauds, chute froide, saunas.</p>
-    <a class="weblink" href="https://bassaintlaurent.ca/en/what-to-do/f/health-center-universpa-nordik-hotel-universel" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : UniverSpa Nordik, Hôtel Universel</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://bassaintlaurent.ca/en/what-to-do/f/health-center-universpa-nordik-hotel-universel" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : UniverSpa Nordik, Hôtel Universel</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-69" style="--i:51">
     <h4 tabindex="-1">Noah Spa, Hôtel Le Navigateur</h4><div class="place">Rimouski · Bas-Saint-Laurent, Gaspésie, Côte-Nord</div>
     
     <p class="bref">Bassin à jets, bain scandinave, hammam, spa extérieur.</p>
-    <a class="weblink" href="https://www.bonjourquebec.com/en-gb/listing/to-see-and-do/noah-spa-rimouski/0qbt" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Noah Spa, Hôtel Le Navigateur</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://www.bonjourquebec.com/en-gb/listing/to-see-and-do/noah-spa-rimouski/0qbt" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Noah Spa, Hôtel Le Navigateur</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-70" style="--i:52">
     <h4 tabindex="-1">Centre de santé L’Estuaire, Hôtel Levesque</h4><div class="place">Rivière-du-Loup · Bas-Saint-Laurent, Gaspésie, Côte-Nord</div>
     
     <p class="bref">Spa nordique intérieur, sauna.</p>
-    <a class="weblink" href="https://www.bassaintlaurent.ca/en/centre-de-sante-l-estuaire-hotel-levesque/health-spas" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Centre de santé L’Estuaire, Hôtel Levesque</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://www.bassaintlaurent.ca/en/centre-de-sante-l-estuaire-hotel-levesque/health-spas" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Centre de santé L’Estuaire, Hôtel Levesque</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-71" style="--i:53">
     <h4 tabindex="-1">Thuya Spa, Le Nordet</h4><div class="place">Saint-Georges-de-Malbaie (Gaspésie) · Bas-Saint-Laurent, Gaspésie, Côte-Nord</div>
     
     <p class="bref">Bassins en cèdre, saunas, hammam.</p>
-    <a class="weblink" href="https://tourisme-gaspesie.com/en/visiter/thuya-spa/6452223S.html" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Thuya Spa, Le Nordet</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://tourisme-gaspesie.com/en/visiter/thuya-spa/6452223S.html" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Thuya Spa, Le Nordet</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-72" style="--i:54">
     <h4 tabindex="-1">Ferme 5 Étoiles</h4><div class="place">Sacré-Cœur (Côte-Nord) · Bas-Saint-Laurent, Gaspésie, Côte-Nord</div>
     
     <p class="bref">Coin détente d’un centre de vacances : bain à remous intérieur, sauna.</p>
-    <a class="weblink" href="https://www.tourismecote-nord.com/en/ferme-5-etoiles-family-vacation-resort/health-relaxation/" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Ferme 5 Étoiles</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://www.tourismecote-nord.com/en/ferme-5-etoiles-family-vacation-resort/health-relaxation/" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Ferme 5 Étoiles</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-73" style="--i:55">
     <h4 tabindex="-1">Jardin Spa, Le Noranda Hôtel &amp; Spa</h4><div class="place">Rouyn-Noranda · Abitibi-Témiscamingue</div>
     
     <p class="bref">Expérience thermale boréale : hammam, sauna boréal, bassin chaud.</p>
-    <a class="weblink" href="https://www.bonjourquebec.com/en-gb/listing/accommodation/le-noranda-hotel-spa/08nu" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Jardin Spa, Le Noranda Hôtel &amp; Spa</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://www.bonjourquebec.com/en-gb/listing/accommodation/le-noranda-hotel-spa/08nu" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Jardin Spa, Le Noranda Hôtel &amp; Spa</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-74" style="--i:56">
     <h4 tabindex="-1">Le Blanc Spa nordique</h4><div class="place">Val-d’Or · Abitibi-Témiscamingue</div>
     
     <p class="bref">Sauna baril, deux bains à remous, baril d’eau froide.</p>
-    <a class="weblink" href="https://abitibi-temiscamingue.org/en/attractions/le-blanc-spa-nordique/" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Le Blanc Spa nordique</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://abitibi-temiscamingue.org/en/attractions/le-blanc-spa-nordique/" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Le Blanc Spa nordique</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>À noter<span class="sr"> : Le Blanc Spa nordique</span></summary><div class="note">13 personnes au plus par séance de 4 heures.</div></details>
   </article><article class="card mini tone-pending" id="lieu-75" style="--i:57">
     <h4 tabindex="-1">Bain Colonial</h4><div class="place">Montréal (Plateau) · Montréal</div>
     <div class="tags"><span class="tag2 who">Lieu pour hommes</span></div>
     <p class="bref">Bain russe et sauna. Son site dit : « exclusivement réservé aux hommes ».</p>
-    <a class="weblink" href="https://baincolonial.com/intro" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Bain Colonial</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://baincolonial.com/intro" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Bain Colonial</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>À noter<span class="sr"> : Bain Colonial</span></summary><div class="note">Hommes trans et personnes non binaires : rien d’écrit.</div></details>
   </article><article class="card mini tone-pending" id="lieu-76" style="--i:58">
     <h4 tabindex="-1">Sauna G.I. Joe</h4><div class="place">Montréal (Village) · Montréal</div>
     <div class="tags"><span class="tag2 who">Lieu pour hommes</span></div>
     <p class="bref">Sauna gai; les hommes bisexuels sont aussi bienvenus, selon un guide.</p>
-    <a class="weblink" href="https://www.misterbandb.com/fr/guide-gay/canada/montreal/58-saunas-et-cruising/18860-sauna-g-i-joe" target="_blank" rel="noopener">Voir la fiche du guide<span class="sr"> : Sauna G.I. Joe</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://www.misterbandb.com/fr/guide-gay/canada/montreal/58-saunas-et-cruising/18860-sauna-g-i-joe" target="_blank" rel="noopener">Voir la fiche du guide<span class="sr"> : Sauna G.I. Joe</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>À noter<span class="sr"> : Sauna G.I. Joe</span></summary><div class="note">Hommes trans et personnes non binaires : rien d’écrit.</div></details>
   </article><article class="card mini tone-pending" id="lieu-77" style="--i:59">
     <h4 tabindex="-1">Sauna Centre-Ville</h4><div class="place">Montréal (Village) · Montréal</div>
     <div class="tags"><span class="tag2 who">Lieu pour hommes</span></div>
     <p class="bref">Sauna gai pour hommes, selon les guides.</p>
-    <a class="weblink" href="https://misterbandb.com/gay-guide/canada/montreal/58-saunas-cruising/18874-sauna-centre-ville" target="_blank" rel="noopener">Voir la fiche du guide<span class="sr"> : Sauna Centre-Ville</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://misterbandb.com/gay-guide/canada/montreal/58-saunas-cruising/18874-sauna-centre-ville" target="_blank" rel="noopener">Voir la fiche du guide<span class="sr"> : Sauna Centre-Ville</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>À noter<span class="sr"> : Sauna Centre-Ville</span></summary><div class="note">Hommes trans et personnes non binaires : rien d’écrit.</div></details>
   </article><article class="card mini tone-pending" id="lieu-78" style="--i:60">
     <h4 tabindex="-1">Sauna Oasis</h4><div class="place">Montréal (Village) · Montréal</div>
@@ -1274,277 +1358,277 @@ footer.site a[aria-current="page"] { font-weight: 700; text-decoration-thickness
     <h4 tabindex="-1">Sauna Backboys</h4><div class="place">Québec (Saint-Roch) · Région de Québec</div>
     <div class="tags"><span class="tag2 who">Lieu pour hommes</span></div>
     <p class="bref">Le seul sauna gai de la ville de Québec.</p>
-    <a class="weblink" href="https://www.misterbandb.com/gay-guide/canada/quebec-city/58-saunas-cruising/22344-sauna-backboys" target="_blank" rel="noopener">Voir la fiche du guide<span class="sr"> : Sauna Backboys</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://www.misterbandb.com/gay-guide/canada/quebec-city/58-saunas-cruising/22344-sauna-backboys" target="_blank" rel="noopener">Voir la fiche du guide<span class="sr"> : Sauna Backboys</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>À noter<span class="sr"> : Sauna Backboys</span></summary><div class="note">Hommes trans et personnes non binaires : rien d’écrit.</div></details>
   </article><article class="card mini tone-pending" id="lieu-81" style="--i:63">
     <h4 tabindex="-1">Steamworks Toronto</h4><div class="place">Toronto (Church-Wellesley) · Toronto et environs</div>
     <div class="tags"><span class="tag2 who">Lieu pour hommes</span></div>
     <p class="bref">Grand sauna gai ouvert jour et nuit : sauna sec, bain vapeur, bain à remous, gym.</p>
-    <a class="weblink" href="https://outxout.com/venue/steamworksbathstoronto" target="_blank" rel="noopener">Voir la fiche du guide<span class="sr"> : Steamworks Toronto</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://outxout.com/venue/steamworksbathstoronto" target="_blank" rel="noopener">Voir la fiche du guide<span class="sr"> : Steamworks Toronto</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>À noter<span class="sr"> : Steamworks Toronto</span></summary><div class="note">Club pour hommes. En entrevue avec Xtra, son gérant a dit que cela « inclut les hommes trans » et que le personnel serait formé pour que les personnes trans et non conformes dans le genre ne soient plus refusées. Personnes non binaires : rien d’écrit.</div></details>
   </article><article class="card mini tone-pending" id="lieu-82" style="--i:64">
     <h4 tabindex="-1">Spa Excess</h4><div class="place">Toronto (Carlton Street) · Toronto et environs</div>
     <div class="tags"><span class="tag2 who">Lieu pour hommes</span></div>
     <p class="bref">Sauna pour hommes ouvert jour et nuit, près de la rue Church.</p>
-    <a class="weblink" href="https://outxout.com/venue/spaexcesstoronto" target="_blank" rel="noopener">Voir la fiche du guide<span class="sr"> : Spa Excess</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://outxout.com/venue/spaexcesstoronto" target="_blank" rel="noopener">Voir la fiche du guide<span class="sr"> : Spa Excess</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>À noter<span class="sr"> : Spa Excess</span></summary><div class="note">Hommes trans et personnes non binaires : rien d’écrit.</div></details>
   </article><article class="card mini tone-pending" id="lieu-83" style="--i:65">
     <h4 tabindex="-1">Splash Steam and Sauna</h4><div class="place">Toronto (Little Portugal) · Toronto et environs</div>
     <div class="tags"><span class="tag2 who">Lieu pour hommes</span></div>
     <p class="bref">Petit sauna gai sur la rue Dundas Ouest : sauna sec et bain vapeur.</p>
-    <a class="weblink" href="https://outxout.com/venue/splashsteamandsaunatoronto" target="_blank" rel="noopener">Voir la fiche du guide<span class="sr"> : Splash Steam and Sauna</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://outxout.com/venue/splashsteamandsaunatoronto" target="_blank" rel="noopener">Voir la fiche du guide<span class="sr"> : Splash Steam and Sauna</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>À noter<span class="sr"> : Splash Steam and Sauna</span></summary><div class="note">Hommes trans et personnes non binaires : rien d’écrit.</div></details>
   </article><article class="card mini tone-pending" id="lieu-84" style="--i:66">
     <h4 tabindex="-1">Oasis Aqualounge</h4><div class="place">Toronto (Mutual Street) · Toronto et environs</div>
     
     <p class="bref">Club mixte pour adultes de 19 ans et plus, avec piscine et bains à remous; ouvert à tous les genres selon les guides.</p>
-    <a class="weblink" href="https://www.gayout.com/guides/most-popular-gay-saunas-in-toronto" target="_blank" rel="noopener">Voir la fiche du guide<span class="sr"> : Oasis Aqualounge</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://www.gayout.com/guides/most-popular-gay-saunas-in-toronto" target="_blank" rel="noopener">Voir la fiche du guide<span class="sr"> : Oasis Aqualounge</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>À noter<span class="sr"> : Oasis Aqualounge</span></summary><div class="note">Tarif réduit pour les personnes trans, selon les guides, et des soirées pour femmes, personnes trans et non binaires. Xtra a déjà rapporté des plaintes de personnes non binaires au sujet de sa politique d’admission.</div></details>
   </article><article class="card mini tone-pending" id="lieu-85" style="--i:67">
     <h4 tabindex="-1">Club Ottawa</h4><div class="place">Ottawa (Hintonburg) · Ottawa et vallée de l’Outaouais</div>
     <div class="tags"><span class="tag2 who">Lieu pour hommes</span></div>
     <p class="bref">Le seul sauna gai d’Ottawa, pour hommes.</p>
-    <a class="weblink" href="https://www.misterbandb.com/gay-guide/canada/ottawa/58-saunas-cruising/24770-club-ottawa" target="_blank" rel="noopener">Voir la fiche du guide<span class="sr"> : Club Ottawa</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://www.misterbandb.com/gay-guide/canada/ottawa/58-saunas-cruising/24770-club-ottawa" target="_blank" rel="noopener">Voir la fiche du guide<span class="sr"> : Club Ottawa</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>À noter<span class="sr"> : Club Ottawa</span></summary><div class="note">Hommes trans et personnes non binaires : rien d’écrit.</div></details>
   </article><article class="card mini tone-pending" id="lieu-86" style="--i:68">
     <h4 tabindex="-1">Club Hamilton (ancien Central Spa)</h4><div class="place">Hamilton (rue Main Ouest) · Hamilton et Niagara</div>
     <div class="tags"><span class="tag2 who">Lieu pour hommes</span></div>
     <p class="bref">Sauna gai pour hommes : sauna sec, bain vapeur.</p>
-    <a class="weblink" href="https://www.travelgay.com/venue/club-hamilton" target="_blank" rel="noopener">Voir la fiche du guide<span class="sr"> : Club Hamilton (ancien Central Spa)</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://www.travelgay.com/venue/club-hamilton" target="_blank" rel="noopener">Voir la fiche du guide<span class="sr"> : Club Hamilton (ancien Central Spa)</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>À noter<span class="sr"> : Club Hamilton (ancien Central Spa)</span></summary><div class="note">Hommes trans et personnes non binaires : rien d’écrit.</div></details>
   </article><article class="card mini tone-pending" id="lieu-87" style="--i:69">
     <h4 tabindex="-1">Body Blitz Spa (2 adresses)</h4><div class="place">Toronto (Corktown et Quartier des spectacles) · Toronto et environs</div>
     <div class="tags"><span class="tag2 who">Lieu pour femmes</span></div>
     <p class="bref">Circuit d’eaux : bassin au sel de la mer Morte, bain au sel d’Epsom, bassin froid, sauna infrarouge, hammam à l’eucalyptus.</p>
-    <a class="weblink" href="https://bodyblitzspa.com" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Body Blitz Spa (2 adresses)</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://bodyblitzspa.com" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Body Blitz Spa (2 adresses)</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>À noter<span class="sr"> : Body Blitz Spa (2 adresses)</span></summary><div class="note">Spa réservé aux femmes. En 2017, il a refusé une femme trans (voir « Dans l’actualité »). Sa règle d’aujourd’hui est à vérifier.</div></details>
   </article><article class="card mini tone-pending" id="lieu-88" style="--i:70">
     <h4 tabindex="-1">Othership (2 adresses)</h4><div class="place">Toronto (King Ouest et Yorkville) · Toronto et environs</div>
     
     <p class="bref">Sauna social et bassins froids, avec des séances guidées en groupe.</p>
-    <a class="weblink" href="https://www.othership.us" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Othership (2 adresses)</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://www.othership.us" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Othership (2 adresses)</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-89" style="--i:71">
     <h4 tabindex="-1">AIRE Ancient Baths Toronto</h4><div class="place">Toronto (Fashion District) · Toronto et environs</div>
     
     <p class="bref">Bains chauds, froids et tièdes, bassin de flottaison au sel, jets, hammam, sauna.</p>
-    <a class="weblink" href="https://relax.beaire.com/en/aire-ancient-baths-toronto" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : AIRE Ancient Baths Toronto</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://relax.beaire.com/en/aire-ancient-baths-toronto" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : AIRE Ancient Baths Toronto</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-90" style="--i:72">
     <h4 tabindex="-1">NRG Haus</h4><div class="place">Toronto · Toronto et environs</div>
     
     <p class="bref">Grand sauna en cèdre (55 personnes), quatre bassins froids; soirées avec DJ.</p>
-    <a class="weblink" href="https://nrghaus.com" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : NRG Haus</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://nrghaus.com" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : NRG Haus</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>À noter<span class="sr"> : NRG Haus</span></summary><div class="note">On s’y côtoie en maillot de bain, selon Toronto Life.</div></details>
   </article><article class="card mini tone-pending" id="lieu-91" style="--i:73">
     <h4 tabindex="-1">Sana</h4><div class="place">Toronto (avenue Geary) · Toronto et environs</div>
     
     <p class="bref">Sauna infrarouge, sauna au bois, grand hammam, deux bassins froids, restaurant.</p>
-    <a class="weblink" href="https://sanasana.ca" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Sana</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://sanasana.ca" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Sana</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-92" style="--i:74">
     <h4 tabindex="-1">Alter (2 adresses)</h4><div class="place">Toronto (College Ouest et Leslieville) · Toronto et environs</div>
     
     <p class="bref">Sauna sur plusieurs niveaux, deux bassins froids, seau d’eau froide, salon de thé.</p>
-    <a class="weblink" href="https://alterwellness.ca" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Alter (2 adresses)</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://alterwellness.ca" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Alter (2 adresses)</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-93" style="--i:75">
     <h4 tabindex="-1">Tonic Spa (Sweat and Tonic)</h4><div class="place">Toronto · Toronto et environs</div>
     
     <p class="bref">Sauna de 25 personnes, piscine, bain à remous; séances de sauna en groupe.</p>
-    <a class="weblink" href="https://sweatandtonic.com" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Tonic Spa (Sweat and Tonic)</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://sweatandtonic.com" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Tonic Spa (Sweat and Tonic)</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-94" style="--i:76">
     <h4 tabindex="-1">Rcvri</h4><div class="place">Toronto · Toronto et environs</div>
     
     <p class="bref">Saunas en cèdre, bassins froids, bain à remous (espace partagé d’environ 15 personnes).</p>
-    <a class="weblink" href="https://rcvri.co/en-ca" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Rcvri</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://rcvri.co/en-ca" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Rcvri</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>À noter<span class="sr"> : Rcvri</span></summary><div class="note">L’espace mouillé se fait en maillot de bain, selon Toronto Life.</div></details>
   </article><article class="card mini tone-pending" id="lieu-95" style="--i:77">
     <h4 tabindex="-1">Löyly Floating Sauna</h4><div class="place">Toronto (Queens Quay) · Toronto et environs</div>
     
     <p class="bref">Sauna sur une barge dans le port, douches froides; séances ouvertes ou privées.</p>
-    <a class="weblink" href="https://loylyfloatingsauna.ca" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Löyly Floating Sauna</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://loylyfloatingsauna.ca" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Löyly Floating Sauna</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-96" style="--i:78">
     <h4 tabindex="-1">Hammam Spa by Céla</h4><div class="place">Toronto (rue King) · Toronto et environs</div>
     
     <p class="bref">Hammam (bain turc) et soins.</p>
-    <a class="weblink" href="https://www.destinationontario.com/en-ca/articles/toronto-spa-and-wellness" target="_blank" rel="noopener">Voir l’article<span class="sr"> : Hammam Spa by Céla</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://www.destinationontario.com/en-ca/articles/toronto-spa-and-wellness" target="_blank" rel="noopener">Voir l’article<span class="sr"> : Hammam Spa by Céla</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>À noter<span class="sr"> : Hammam Spa by Céla</span></summary><div class="note">Installations communes à confirmer.</div></details>
   </article><article class="card mini tone-pending" id="lieu-97" style="--i:79">
     <h4 tabindex="-1">Sweetgrass Spa</h4><div class="place">Toronto (rue Queen Est) · Toronto et environs</div>
     <div class="tags"><span class="tag2 who">Lieu pour femmes</span></div>
     <p class="bref">Piscine à l’ozone, sauna infrarouge, bain à remous.</p>
-    <a class="weblink" href="https://www.destinationontario.com/en-ca/articles/toronto-spa-and-wellness" target="_blank" rel="noopener">Voir l’article<span class="sr"> : Sweetgrass Spa</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://www.destinationontario.com/en-ca/articles/toronto-spa-and-wellness" target="_blank" rel="noopener">Voir l’article<span class="sr"> : Sweetgrass Spa</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>À noter<span class="sr"> : Sweetgrass Spa</span></summary><div class="note">Spa réservé aux femmes, selon Destination Ontario. Femmes trans et personnes non binaires : rien d’écrit.</div></details>
   </article><article class="card mini tone-pending" id="lieu-98" style="--i:80">
     <h4 tabindex="-1">Go Place</h4><div class="place">Markham · Toronto et environs</div>
     
     <p class="bref">Spa ouvert 24 h : saunas à thèmes, bains, hammams, salle froide, restaurant.</p>
-    <a class="weblink" href="https://goplace.com" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Go Place</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://goplace.com" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Go Place</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>À noter<span class="sr"> : Go Place</span></summary><div class="note">Vestiaires séparés par genre; pyjamas fournis, selon Toronto Life.</div></details>
   </article><article class="card mini tone-pending" id="lieu-99" style="--i:81">
     <h4 tabindex="-1">South-Western Bathhouse and Tea Room</h4><div class="place">Mississauga · Toronto et environs</div>
     
     <p class="bref">Banya (sauna russe), baril d’eau froide, thé et repas.</p>
-    <a class="weblink" href="https://banya.ca" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : South-Western Bathhouse and Tea Room</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://banya.ca" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : South-Western Bathhouse and Tea Room</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-100" style="--i:82">
     <h4 tabindex="-1">Steamul Sauna</h4><div class="place">Mississauga · Toronto et environs</div>
     
     <p class="bref">Saunas finlandais, hammam, bain à remous, bassin froid, salle de sel.</p>
-    <a class="weblink" href="https://steamulsauna.ca/" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Steamul Sauna</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://steamulsauna.ca/" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Steamul Sauna</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-101" style="--i:83">
     <h4 tabindex="-1">Banya Richmond Hill</h4><div class="place">Richmond Hill · Toronto et environs</div>
     
     <p class="bref">Cycle d’hydrothérapie, sauna finlandais, salle de sel de l’Himalaya, salon de thé.</p>
-    <a class="weblink" href="https://banyarichmondhill.ca/" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Banya Richmond Hill</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://banyarichmondhill.ca/" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Banya Richmond Hill</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-102" style="--i:84">
     <h4 tabindex="-1">Thermëa Spa Village Whitby</h4><div class="place">Whitby · Toronto et environs</div>
     
     <p class="bref">Bains extérieurs, saunas, bassin de flottaison au sel, restaurants.</p>
-    <a class="weblink" href="https://thermea.com/whitby" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Thermëa Spa Village Whitby</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://thermea.com/whitby" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Thermëa Spa Village Whitby</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>À noter<span class="sr"> : Thermëa Spa Village Whitby</span></summary><div class="note">Même groupe que le Nordik de Chelsea.</div></details>
   </article><article class="card mini tone-pending" id="lieu-103" style="--i:85">
     <h4 tabindex="-1">Millcroft Inn &amp; Spa</h4><div class="place">Alton (Caledon) · Toronto et environs</div>
     
     <p class="bref">Piscine intérieure, bains extérieurs, sauna finlandais, bassin froid, hammam.</p>
-    <a class="weblink" href="https://drinkteatravel.com/best-hot-springs-ontario/" target="_blank" rel="noopener">Voir l’article<span class="sr"> : Millcroft Inn &amp; Spa</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://drinkteatravel.com/best-hot-springs-ontario/" target="_blank" rel="noopener">Voir l’article<span class="sr"> : Millcroft Inn &amp; Spa</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-104" style="--i:86">
     <h4 tabindex="-1">Scandinave Spa Blue Mountain</h4><div class="place">The Blue Mountains (Collingwood) · Simcoe, Grey et Bruce (Blue Mountain)</div>
     
     <p class="bref">Bains chauds extérieurs, bassins froids, chutes nordiques, saunas, hammams.</p>
-    <a class="weblink" href="https://www.scandinave.com/blue-mountain" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Scandinave Spa Blue Mountain</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://www.scandinave.com/blue-mountain" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Scandinave Spa Blue Mountain</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>À noter<span class="sr"> : Scandinave Spa Blue Mountain</span></summary><div class="note">Même chaîne que Scandinave Mont-Tremblant, qui fait partie de l’enquête nº 1 et n’a pas répondu. Silence demandé, pas de téléphone.</div></details>
   </article><article class="card mini tone-pending" id="lieu-105" style="--i:87">
     <h4 tabindex="-1">Vettä Nordic Spa</h4><div class="place">Oro-Medonte (Horseshoe Valley) · Simcoe, Grey et Bruce (Blue Mountain)</div>
     
     <p class="bref">Six bassins extérieurs, sauna finlandais, hammam, salle de pierres chaudes.</p>
-    <a class="weblink" href="https://vettaspa.com/" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Vettä Nordic Spa</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://vettaspa.com/" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Vettä Nordic Spa</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>À noter<span class="sr"> : Vettä Nordic Spa</span></summary><div class="note">Une zone silencieuse et une zone sociale.</div></details>
   </article><article class="card mini tone-pending" id="lieu-106" style="--i:88">
     <h4 tabindex="-1">Somewhere Inn Collingwood</h4><div class="place">Collingwood · Simcoe, Grey et Bruce (Blue Mountain)</div>
     
     <p class="bref">Sauna finlandais, bassin froid, feux extérieurs.</p>
-    <a class="weblink" href="https://somewhereinn.ca/collingwood/" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Somewhere Inn Collingwood</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://somewhereinn.ca/collingwood/" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Somewhere Inn Collingwood</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>À noter<span class="sr"> : Somewhere Inn Collingwood</span></summary><div class="note">Installations communes à confirmer.</div></details>
   </article><article class="card mini tone-pending" id="lieu-107" style="--i:89">
     <h4 tabindex="-1">Terra Nova Nordic Spa &amp; Café</h4><div class="place">Woodstock · Sud-Ouest de l’Ontario</div>
     
     <p class="bref">Sauna au bois, hammam à l’eucalyptus, bassin chaud, aire de repos près du feu.</p>
-    <a class="weblink" href="https://terranovanordic.ca/thermal-experience/" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Terra Nova Nordic Spa &amp; Café</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://terranovanordic.ca/thermal-experience/" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Terra Nova Nordic Spa &amp; Café</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-108" style="--i:90">
     <h4 tabindex="-1">Lungovita Beach Retreat</h4><div class="place">Harrow · Sud-Ouest de l’Ontario</div>
     
     <p class="bref">Saunas en cèdre, bains à remous avec vue sur le lac; passe d’un jour.</p>
-    <a class="weblink" href="https://www.lungovita.com/day-pass" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Lungovita Beach Retreat</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://www.lungovita.com/day-pass" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Lungovita Beach Retreat</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-109" style="--i:91">
     <h4 tabindex="-1">KW Sauna</h4><div class="place">Kitchener (rue Victoria Nord) · Sud-Ouest de l’Ontario</div>
     
     <p class="bref">Sauna, bain vapeur et bassin froid.</p>
-    <a class="weblink" href="https://www.gayout.com/en/usa-canada/canada/cambridge/saunas/kw-sauna" target="_blank" rel="noopener">Voir la fiche du guide<span class="sr"> : KW Sauna</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://www.gayout.com/en/usa-canada/canada/cambridge/saunas/kw-sauna" target="_blank" rel="noopener">Voir la fiche du guide<span class="sr"> : KW Sauna</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>À noter<span class="sr"> : KW Sauna</span></summary><div class="note">Un guide gai le décrit comme un sauna pour hommes; d’autres sources le décrivent comme un sauna ouvert à tout le monde. À confirmer.</div></details>
   </article><article class="card mini tone-pending" id="lieu-110" style="--i:92">
     <h4 tabindex="-1">Flowstate Nordic Spa</h4><div class="place">Tecumseh · Sud-Ouest de l’Ontario</div>
     
     <p class="bref">Sauna traditionnel, bassin froid, bain à remous.</p>
-    <a class="weblink" href="https://beflowstate.com/" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Flowstate Nordic Spa</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://beflowstate.com/" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Flowstate Nordic Spa</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-111" style="--i:93">
     <h4 tabindex="-1">Elora Mill Hotel &amp; Spa</h4><div class="place">Elora · Sud-Ouest de l’Ontario</div>
     
     <p class="bref">Saunas, hammams, bain à remous et piscine extérieurs.</p>
-    <a class="weblink" href="https://www.narcity.com/ottawa/8-ontario-spas-that-are-even-better-than-a-trip-to-icelands-blue-lagoon" target="_blank" rel="noopener">Voir l’article<span class="sr"> : Elora Mill Hotel &amp; Spa</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://www.narcity.com/ottawa/8-ontario-spas-that-are-even-better-than-a-trip-to-icelands-blue-lagoon" target="_blank" rel="noopener">Voir l’article<span class="sr"> : Elora Mill Hotel &amp; Spa</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-112" style="--i:94">
     <h4 tabindex="-1">Langdon Hall</h4><div class="place">Cambridge · Sud-Ouest de l’Ontario</div>
     
     <p class="bref">Sauna, hammam, bain à remous.</p>
-    <a class="weblink" href="https://www.narcity.com/ottawa/8-ontario-spas-that-are-even-better-than-a-trip-to-icelands-blue-lagoon" target="_blank" rel="noopener">Voir l’article<span class="sr"> : Langdon Hall</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://www.narcity.com/ottawa/8-ontario-spas-that-are-even-better-than-a-trip-to-icelands-blue-lagoon" target="_blank" rel="noopener">Voir l’article<span class="sr"> : Langdon Hall</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>À noter<span class="sr"> : Langdon Hall</span></summary><div class="note">Il faut réserver un soin; les gens de l’extérieur peuvent venir en semaine, selon Narcity.</div></details>
   </article><article class="card mini tone-pending" id="lieu-113" style="--i:95">
     <h4 tabindex="-1">Burning Springs Spa &amp; Thermal Pools</h4><div class="place">Niagara Falls · Hamilton et Niagara</div>
     
     <p class="bref">Trois bassins thermaux extérieurs, sauna au sel de l’Himalaya, cabane-sauna.</p>
-    <a class="weblink" href="https://burningspringsspa.com/" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Burning Springs Spa &amp; Thermal Pools</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://burningspringsspa.com/" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Burning Springs Spa &amp; Thermal Pools</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-114" style="--i:96">
     <h4 tabindex="-1">100 Fountain Spa, Pillar and Post</h4><div class="place">Niagara-on-the-Lake · Hamilton et Niagara</div>
     
     <p class="bref">Piscine intérieure à l’eau salée, bain à remous, piscine extérieure, bassin de style source chaude.</p>
-    <a class="weblink" href="https://drinkteatravel.com/best-hot-springs-ontario/" target="_blank" rel="noopener">Voir l’article<span class="sr"> : 100 Fountain Spa, Pillar and Post</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://drinkteatravel.com/best-hot-springs-ontario/" target="_blank" rel="noopener">Voir l’article<span class="sr"> : 100 Fountain Spa, Pillar and Post</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-115" style="--i:97">
     <h4 tabindex="-1">Wander The Spa</h4><div class="place">Bloomfield (comté de Prince Edward) · Est de l’Ontario</div>
     
     <p class="bref">Circuit thermal au bord du lac : saunas, hammam, bassins, bassins froids.</p>
-    <a class="weblink" href="https://www.wandertheresort.com/spa" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Wander The Spa</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://www.wandertheresort.com/spa" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Wander The Spa</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-116" style="--i:98">
     <h4 tabindex="-1">Ste. Anne’s Spa</h4><div class="place">Grafton · Est de l’Ontario</div>
     
     <p class="bref">Hammams et bassins d’hydrothérapie.</p>
-    <a class="weblink" href="https://www.narcity.com/ottawa/8-ontario-spas-that-are-even-better-than-a-trip-to-icelands-blue-lagoon" target="_blank" rel="noopener">Voir l’article<span class="sr"> : Ste. Anne’s Spa</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://www.narcity.com/ottawa/8-ontario-spas-that-are-even-better-than-a-trip-to-icelands-blue-lagoon" target="_blank" rel="noopener">Voir l’article<span class="sr"> : Ste. Anne’s Spa</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-117" style="--i:99">
     <h4 tabindex="-1">Uppliva Nordic Spa</h4><div class="place">Ottawa (Hintonburg) · Ottawa et vallée de l’Outaouais</div>
     
     <p class="bref">Sauna en cèdre, hammam à l’eucalyptus, bassin froid, douches de pluie.</p>
-    <a class="weblink" href="https://ottawatourism.ca/en/see-and-do/uppliva-nordic-spa" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Uppliva Nordic Spa</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://ottawatourism.ca/en/see-and-do/uppliva-nordic-spa" target="_blank" rel="noopener">Voir la fiche touristique<span class="sr"> : Uppliva Nordic Spa</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-118" style="--i:100">
     <h4 tabindex="-1">Saunoa Ottawa</h4><div class="place">Ottawa (rivière des Outaouais) · Ottawa et vallée de l’Outaouais</div>
     
     <p class="bref">Sauna flottant en cèdre et bassin froid sur la rivière.</p>
-    <a class="weblink" href="https://saunoa.ca/ottawa" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Saunoa Ottawa</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://saunoa.ca/ottawa" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Saunoa Ottawa</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>À noter<span class="sr"> : Saunoa Ottawa</span></summary><div class="note">Séances communes ou privées : à confirmer.</div></details>
   </article><article class="card mini tone-pending" id="lieu-119" style="--i:101">
     <h4 tabindex="-1">Maplestone Ranch and Retreat</h4><div class="place">Clayton (Lanark) · Ottawa et vallée de l’Outaouais</div>
     
     <p class="bref">Piscine d’eau salée tiède, bains à remous, saunas, bassins froids.</p>
-    <a class="weblink" href="https://maplestoneranchandretreat.ca/" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Maplestone Ranch and Retreat</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://maplestoneranchandretreat.ca/" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Maplestone Ranch and Retreat</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>À noter<span class="sr"> : Maplestone Ranch and Retreat</span></summary><div class="note">Réservé aux adultes.</div></details>
   </article><article class="card mini tone-pending" id="lieu-120" style="--i:102">
     <h4 tabindex="-1">Somewhere Inn Calabogie</h4><div class="place">Calabogie · Ottawa et vallée de l’Outaouais</div>
     
     <p class="bref">Sauna finlandais, bassin froid, feux extérieurs, aires de repos.</p>
-    <a class="weblink" href="https://somewhereinn.ca/calabogie/" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Somewhere Inn Calabogie</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://somewhereinn.ca/calabogie/" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Somewhere Inn Calabogie</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-121" style="--i:103">
     <h4 tabindex="-1">Floathaus</h4><div class="place">Gravenhurst · Muskoka et Hautes-Terres</div>
     
     <p class="bref">Sauna au bois, bassin froid, vue sur le lac.</p>
-    <a class="weblink" href="https://www.floathaus.ca/" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Floathaus</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://www.floathaus.ca/" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Floathaus</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>À noter<span class="sr"> : Floathaus</span></summary><div class="note">Séances communautaires et séances privées.</div></details>
   </article><article class="card mini tone-pending" id="lieu-122" style="--i:104">
     <h4 tabindex="-1">The Spa at Deerhurst Resort</h4><div class="place">Huntsville · Muskoka et Hautes-Terres</div>
     
     <p class="bref">Bains à remous, hammam, sauna, salon de repos.</p>
-    <a class="weblink" href="https://drinkteatravel.com/best-hot-springs-ontario/" target="_blank" rel="noopener">Voir l’article<span class="sr"> : The Spa at Deerhurst Resort</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://drinkteatravel.com/best-hot-springs-ontario/" target="_blank" rel="noopener">Voir l’article<span class="sr"> : The Spa at Deerhurst Resort</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-123" style="--i:105">
     <h4 tabindex="-1">Grail Springs Retreat for Wellbeing</h4><div class="place">Bancroft · Muskoka et Hautes-Terres</div>
     
     <p class="bref">Bains à remous, sauna finlandais en cèdre, bassin froid; passes d’un jour.</p>
-    <a class="weblink" href="https://drinkteatravel.com/best-hot-springs-ontario/" target="_blank" rel="noopener">Voir l’article<span class="sr"> : Grail Springs Retreat for Wellbeing</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://drinkteatravel.com/best-hot-springs-ontario/" target="_blank" rel="noopener">Voir l’article<span class="sr"> : Grail Springs Retreat for Wellbeing</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article><article class="card mini tone-pending" id="lieu-124" style="--i:106">
     <h4 tabindex="-1">Kangas Sauna</h4><div class="place">Thunder Bay · Nord de l’Ontario</div>
     
     <p class="bref">Maison de sauna finlandais traditionnel, avec restaurant; séances de 90 minutes à réserver.</p>
-    <a class="weblink" href="https://www.kangassauna.ca/" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Kangas Sauna</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://www.kangassauna.ca/" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Kangas Sauna</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     <details class="more"><summary>À noter<span class="sr"> : Kangas Sauna</span></summary><div class="note">Séances communes ou privées : à confirmer.</div></details>
   </article><article class="card mini tone-pending" id="lieu-125" style="--i:107">
     <h4 tabindex="-1">Spa Grande Nature (Cedar Meadows)</h4><div class="place">Timmins · Nord de l’Ontario</div>
     
     <p class="bref">Bains nordiques, jets, sauna infrarouge.</p>
-    <a class="weblink" href="https://cedarmeadows.com/spa/" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Spa Grande Nature (Cedar Meadows)</span> <span aria-hidden="true">↗</span><span class="sr"> (nouvel onglet)</span></a>
+    <a class="weblink" href="https://cedarmeadows.com/spa/" target="_blank" rel="noopener">Voir la page du spa<span class="sr"> : Spa Grande Nature (Cedar Meadows)</span> <span aria-hidden="true">↗︎</span><span class="sr"> (nouvel onglet)</span></a>
     
   </article></div>
       <p class="morewrap"><button type="button" class="morebtn" id="morebtn" hidden="" data-shown="108"></button></p>
@@ -1717,6 +1801,7 @@ const EN = {
   suiteh: "Keep reading",
   tiles: '<li><a data-pg="enquete" href="investigation.html"><span class="tn" aria-hidden="true">01</span><b>The investigation</b><span class="tt">The method, the full report as a PDF and its accessible versions.</span><i aria-hidden="true">→</i></a></li><li><a data-pg="histoire" href="history.html"><span class="tn" aria-hidden="true">02</span><b>A bit of history</b><span class="tt">Less than a hundred years ago, men had to cover their chests too.</span><i aria-hidden="true">→</i></a></li><li><a data-pg="actualite" href="news.html"><span class="tn" aria-hidden="true">03</span><b>In the news</b><span class="tt">When access rules turn into conflicts, and what the law says.</span><i aria-hidden="true">→</i></a></li><li class="hot"><a data-pg="temoigner" href="share.html"><span class="tn" aria-hidden="true">04</span><b>Share your story</b><span class="tt">Tell us how it went for you. Nothing is published without your consent.</span><i aria-hidden="true">→</i></a></li>',
   vcards: "Cards",
+  fopen: "Filters",
   qlbl: "Search a place, a city or a region",
   qph: "Search a place, a city…",
   vlist: "List",
@@ -1795,6 +1880,7 @@ const UI = {
     viewsaria: "Affichage", maplbl: "Carte des lieux du répertoire", maperr: "La carte n’a pas pu se charger. La liste contient les mêmes lieux.",
     nplaces: n => `${n} lieu${n > 1 ? "x" : ""}`, seecard: "Voir la fiche", zoomin: "Cliquer pour zoomer.",
     moreenq: n => n > 1 ? `Voir les ${n} autres réponses` : "Voir l’autre réponse", rowopen: "Détails",
+    fdone: n => n ? `Voir ${n > 1 ? `les ${n} lieux` : "le lieu"}` : "Aucun lieu : modifier les filtres", nact: n => `${n} filtre${n > 1 ? "s" : ""} actif${n > 1 ? "s" : ""}`,
     accs: { all: "Toutes les infos", partiel: "Accès partiel indiqué", non: "Peu ou pas accessible", inconnu: "Rien trouvé", pasverif: "Pas encore vérifié" },
     accnote: "Aucun spa ne dit que ses bains sont accessibles en fauteuil roulant. « Accès partiel » veut dire que certaines parties le sont (vestiaires, soins, ascenseur). Appelez le spa avant votre visite.",
     provs: { all: "Toutes les provinces", qc: "Québec", on: "Ontario" }, soon: "à venir",
@@ -1827,6 +1913,7 @@ const UI = {
     viewsaria: "View", maplbl: "Map of the places in the directory", maperr: "The map could not load. The list holds the same places.",
     nplaces: n => `${n} place${n > 1 ? "s" : ""}`, seecard: "See the card", zoomin: "Click to zoom in.",
     moreenq: n => n > 1 ? `Show the other ${n} answers` : "Show the other answer", rowopen: "Details",
+    fdone: n => n ? `Show ${n > 1 ? `the ${n} places` : "the place"}` : "No place: change the filters", nact: n => `${n} active filter${n > 1 ? "s" : ""}`,
     accs: { all: "All information", partiel: "Partial access stated", non: "Little or no access", inconnu: "Nothing found", pasverif: "Not checked yet" },
     accnote: "No spa says its baths are wheelchair accessible. “Partial access” means some areas are (changing rooms, treatments, elevator). Call the spa before your visit.",
     provs: { all: "All provinces", qc: "Quebec", on: "Ontario" }, soon: "coming soon",
@@ -1932,7 +2019,7 @@ function qa(label, v) {
 }
 function weblink(s) {
   const t = T();
-  return s.url ? `<a class="weblink" href="${esc(s.url)}" target="_blank" rel="noopener">${(t.links || {})[s.link] || t.seerule}<span class="sr"> : ${esc(s.name)}</span> <span aria-hidden="true">↗</span><span class="sr"> ${t.newtab}</span></a>` : "";
+  return s.url ? `<a class="weblink" href="${esc(s.url)}" target="_blank" rel="noopener">${(t.links || {})[s.link] || t.seerule}<span class="sr"> : ${esc(s.name)}</span> <span aria-hidden="true">↗\uFE0E</span><span class="sr"> ${t.newtab}</span></a>` : "";
 }
 // Le détail d'un lieu (règles, citations, site web, accessibilité), commun aux fiches et à la liste
 function extra(s) {
@@ -2028,6 +2115,9 @@ function renderActive() {
   const el = document.getElementById("active");
   el.innerHTML = chips.length ? `<span class="label">${t.activeh}</span>` + chips.map(([k, v, l]) => `<button type="button" class="afchip" data-k="${k}" data-v="${v}">${esc(l)} <span aria-hidden="true">×</span><span class="sr"> : ${t.remove}</span></button>`).join("") + `<button type="button" class="clearall">${t.clearall}</button>` : "";
   el.hidden = !chips.length;
+  const na = chips.filter(c => c[0] !== "q").length, nb = document.getElementById("n-all");
+  nb.textContent = na || ""; nb.hidden = !na;
+  document.getElementById("sr-all").textContent = na ? " : " + t.nact(na) : "";
 }
 
 // ---- Résultats ----
@@ -2067,6 +2157,7 @@ function render() {
   em.hidden = list.length > 0;
   em.innerHTML = list.length ? "" : `${esc(t.empty)} <button type="button" class="clearall">${t.clearall}</button>`;
   document.getElementById("count").textContent = t.count(list.length);
+  document.getElementById("fdone").textContent = t.fdone(list.length);
   if (map && state.view === "map") updateMap(true);
   syncURL();
 }
@@ -2131,6 +2222,16 @@ function clearAll(paint = true) {
   for (const k in KEYS) state[k].clear();
   state.q = state.qraw = ""; document.getElementById("q").value = "";
   return paint ? update() : Promise.resolve();
+}
+
+// ---- Téléphone : les filtres se rangent derrière un bouton « Filtres » ----
+function small() { try { return matchMedia("(max-width: 640px)").matches; } catch (e) { return false; } }
+function sheet(open) {
+  const b = document.getElementById("fopen"), fs = document.getElementById("fsheet");
+  if (!b || !fs) return;
+  b.setAttribute("aria-expanded", String(open));
+  fs.classList.toggle("open", open);
+  if (!open) closeMenus();
 }
 
 // ---- Vue fiches / liste / carte ----
@@ -2401,6 +2502,13 @@ document.addEventListener("click", e => {
     return;
   }
   if (e.target.closest(".clearall")) { clearAll().then(() => { const f = document.querySelector("#o-rule input"); if (f) f.focus(); }); return; }
+  if (e.target.closest("#fopen")) { sheet(document.getElementById("fopen").getAttribute("aria-expanded") !== "true"); return; }
+  if (e.target.closest("#fdone")) {
+    sheet(false);
+    const r = document.querySelector(".resbar"); if (r) r.scrollIntoView({ behavior: RM ? "auto" : "smooth", block: "start" });
+    return;
+  }
+  if (e.target.closest("#totop") && small()) { sheet(true); }
   if (e.target.closest("#morebtn")) { showMore("pend"); return; }
   if (e.target.closest("#moreenq")) { showMore("enq"); return; }
   const rb = e.target.closest(".rbtn"); if (rb) { toggleRow(rb); return; }
@@ -2414,15 +2522,19 @@ document.addEventListener("click", e => {
     document.getElementById(dd.getAttribute("aria-controls")).hidden = !open;
     return;
   }
+  if (small() && e.target.closest(".fsheet")) return; // téléphone : les sections du tiroir restent ouvertes
   if (!e.target.closest(".ddpanel") || e.target.closest(".ddpanel a")) closeMenus();
 });
 document.addEventListener("keydown", e => {
   if (e.key !== "Escape") return;
-  const b = document.querySelector('[data-dd][aria-expanded="true"]'); if (b) { closeMenus(); b.focus(); }
+  const b = document.querySelector('[data-dd][aria-expanded="true"]'); if (b) { closeMenus(); b.focus(); return; }
+  const fs = document.getElementById("fsheet");
+  if (fs && fs.classList.contains("open") && fs.contains(document.activeElement)) { sheet(false); document.getElementById("fopen").focus(); }
 });
 document.addEventListener("focusin", e => {
   document.querySelectorAll('[data-dd][aria-expanded="true"]').forEach(b => {
     const p = document.getElementById(b.getAttribute("aria-controls"));
+    if (small() && p.closest(".fsheet")) return;
     if (!p.contains(e.target) && e.target !== b) { b.setAttribute("aria-expanded", "false"); p.hidden = true; }
   });
 });
