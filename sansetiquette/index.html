@@ -104,7 +104,7 @@
 html, body { margin: 0; }
 body { background: var(--paper); color: var(--ink); font-family: var(--font-body); font-size: 16px; line-height: 1.5; }
 a { color: inherit; }
-a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, summary:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 .wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
 header.top { border-bottom: 3px solid var(--ink); padding: 20px 0 24px; }
 .mast { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 6px 16px; border-bottom: 1px solid var(--ink); padding-bottom: 10px; margin-bottom: 24px; }
@@ -332,7 +332,7 @@ html { scroll-padding-bottom: 190px; }
         <span class="issue" data-i18n="issue">Enquête nº 1</span>
         <div class="seg themes" id="theme" role="group" aria-label="Thème"><button type="button" data-theme-set="light" aria-pressed="true" title="Mode clair"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"></circle><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"></path></svg><span class="tl" id="tlight">Clair</span></button><button type="button" data-theme-set="dark" aria-pressed="false" title="Mode sombre"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"></path></svg><span class="tl" id="tdark">Sombre</span></button></div>
         <div class="seg lang" role="group" aria-label="Langue / Language">
-          <button type="button" data-lang="fr" lang="fr" aria-pressed="true">FR</button><button type="button" data-lang="en" lang="en" aria-pressed="false">EN</button>
+          <button type="button" data-lang="fr" lang="fr" aria-pressed="true"><span aria-hidden="true">FR</span><span class="sr">Français</span></button><button type="button" data-lang="en" lang="en" aria-pressed="false"><span aria-hidden="true">EN</span><span class="sr">English</span></button>
         </div>
       </div>
     </div>
