@@ -206,6 +206,7 @@ section.block h2.sec { font-family: var(--font-display); font-weight: 800; font-
 .timeline li { border-left: 3px solid var(--ink); padding-left: 12px; }
 .timeline b { display: block; font-family: var(--font-display); }
 .big { font-weight: 800; font-size: 20px; border-left: 4px solid var(--ink); padding-left: 12px; margin: 16px 0; max-width: 60ch; }
+.accpdf { max-width: 72ch; margin-top: 14px; }
 .news { max-width: 72ch; }
 .newsintro { margin: 0 0 8px; }
 .news h3 { font-family: var(--font-display); font-weight: 800; font-size: 20px; margin: 22px 0 10px; }
@@ -345,7 +346,7 @@ html { scroll-padding-bottom: 190px; }
     </figure>
     <p class="punch" data-i18n="punch">L’obligation de porter un maillot est une chose; l’obligation de couvrir sa poitrine en est une autre.</p>
     <div class="stats" id="stats"><div class="stat"><b>126</b><span>lieux dans le répertoire : 81 au Québec, 45 en Ontario</span></div><div class="stat"><b>18</b><span>spas contactés par courriel (enquête nº 1); 108 autres lieux en attente d’info</span></div><div class="stat"><b>1</b><span>seul spa, sur les 18 contactés, confirme que le haut est facultatif pour toute personne</span></div><div class="stat"><b>5</b><span>spas, sur les 18, obligent les femmes à couvrir leur poitrine (confirmé par écrit)</span></div></div>
-    <p class="dltop" data-i18n="dltop"><a class="btn primary" href="pdf/Torse_nu_au_spa_resume.pdf">Télécharger le résumé (PDF, 3 pages)</a> <span>Ou le <a href="pdf/Torse_nu_au_spa_enquete.pdf">dossier complet</a>, avec les réponses écrites des spas, la méthode et les sources.</span></p>
+    <p class="dltop" data-i18n="dltop"><a class="btn primary" href="pdf/Torse_nu_au_spa_resume.pdf">Télécharger le résumé (PDF, 3 pages)</a> <span>Ou le <a href="pdf/Torse_nu_au_spa_enquete.pdf">dossier complet</a>, avec les réponses écrites des spas, la méthode et les sources. <a href="#pdfacc">Versions accessibles</a>.</span></p>
     <nav class="jump" aria-label="Sections" data-i18n="nav"><a href="#repertoire">Le répertoire</a><a href="#enquete">Lire l’enquête complète</a><a href="#histoire">Un peu d’histoire</a><a href="#actualite">Dans l’actualité</a><a href="#apropos">À propos</a></nav>
   </div>
 </header>
@@ -1265,6 +1266,7 @@ html { scroll-padding-bottom: 190px; }
       <a class="btn" href="pdf/Torse_nu_au_spa_enquete.pdf">Le dossier complet (PDF, 22 pages)</a>
       <a class="btn" href="pdf/Topless_at_the_spa_investigation.pdf" lang="en">Download the report (PDF, English)</a>
     </div>
+    <p class="accpdf" id="pdfacc" data-i18n="accpdf"><b>Versions accessibles</b>, pour les lecteurs d’écran, le grossissement et la lecture à l’écran. Même contenu, avec de vrais titres, des tableaux avec en-têtes et des images décrites : <a href="pdf/Torse_nu_au_spa_resume_accessible.pdf">le résumé</a> · <a href="pdf/Torse_nu_au_spa_enquete_accessible.pdf">le dossier complet</a> (PDF balisés).</p>
   </section>
 
   <section class="block" id="histoire">
@@ -1353,7 +1355,7 @@ html { scroll-padding-bottom: 190px; }
       </nav>
       <div class="fcol">
         <h2 data-i18n="fdlh">Télécharger</h2>
-        <ul data-i18n="fdl"><li><a href="pdf/Torse_nu_au_spa_resume.pdf">Le résumé (PDF, 3 pages)</a></li><li><a href="pdf/Torse_nu_au_spa_enquete.pdf">Le dossier complet (PDF, 22 pages)</a></li></ul>
+        <ul data-i18n="fdl"><li><a href="pdf/Torse_nu_au_spa_resume.pdf">Le résumé (PDF, 3 pages)</a></li><li><a href="pdf/Torse_nu_au_spa_enquete.pdf">Le dossier complet (PDF, 22 pages)</a></li><li><a href="pdf/Torse_nu_au_spa_resume_accessible.pdf">Le résumé, version accessible (PDF balisé)</a></li><li><a href="pdf/Torse_nu_au_spa_enquete_accessible.pdf">Le dossier, version accessible (PDF balisé)</a></li></ul>
       </div>
       <div class="fcol">
         <h2 data-i18n="fcth">Écrire</h2>
@@ -1427,7 +1429,7 @@ const EN = {
   fnavh: "This investigation",
   fnav: '<li><a href="#repertoire">The directory</a></li><li><a href="#enquete">The full investigation</a></li><li><a href="#histoire">A bit of history</a></li><li><a href="#actualite">In the news</a></li><li><a href="#apropos">The method</a></li>',
   fdlh: "Download",
-  fdl: '<li><a href="pdf/Topless_at_the_spa_summary.pdf">The summary (PDF, 3 pages)</a></li><li><a href="pdf/Topless_at_the_spa_investigation.pdf">The full report (PDF, 22 pages)</a></li>',
+  fdl: '<li><a href="pdf/Topless_at_the_spa_summary.pdf">The summary (PDF, 3 pages)</a></li><li><a href="pdf/Topless_at_the_spa_investigation.pdf">The full report (PDF, 22 pages)</a></li><li><a href="pdf/Topless_at_the_spa_summary_accessible.pdf">The summary, accessible version (tagged PDF)</a></li><li><a href="pdf/Topless_at_the_spa_investigation_accessible.pdf">The report, accessible version (tagged PDF)</a></li>',
   fcth: "Get in touch",
   fct: 'A correction, a spa’s reply or an idea for an investigation: <a href="mailto:sansetiquette.enquete@gmail.com">sansetiquette.enquete@gmail.com</a>',
   fcopy: '© 2026 Kim Maurice · <a href="https://www.kimmaurice.com/">kimmaurice.com</a>',
@@ -1437,8 +1439,9 @@ const EN = {
   howto: '<span class="dot yes" style="display:inline-block"></span> Topless allowed for everyone &nbsp; <span class="dot maybe" style="display:inline-block"></span> Choice of swimsuit or rule to be clarified &nbsp; <span class="dot no" style="display:inline-block"></span> Top required for some people &nbsp; <span class="dot" style="display:inline-block"></span> No answer &nbsp; <span class="dot pending" style="display:inline-block"></span> Waiting for info: not contacted yet. The spas answered in French; summaries are translated. Rules can change: call the spa before you go.',
   enqh: "Read the full investigation",
   enqp: "The 22-page report contains the replies received that can be published, quoted word for word, the method, what each website says, a bit of history and the sources. For journalists: the original emails are kept and available on request.",
+  accpdf: '<b>Accessible versions</b>, for screen readers, magnification and on-screen reading. Same content, with real headings, tables with headers and described images: <a href="pdf/Topless_at_the_spa_summary_accessible.pdf">the summary</a> · <a href="pdf/Topless_at_the_spa_investigation_accessible.pdf">the full report</a> (tagged PDFs).',
   dl: '<a class="btn primary" href="pdf/Topless_at_the_spa_summary.pdf">The summary (PDF, 3 pages)</a> <a class="btn" href="pdf/Topless_at_the_spa_investigation.pdf">The full report (PDF, 22 pages)</a> <a class="btn" href="pdf/Torse_nu_au_spa_enquete.pdf" lang="fr">Télécharger le dossier (PDF, français)</a>',
-  dltop: '<a class="btn primary" href="pdf/Topless_at_the_spa_summary.pdf">Download the summary (PDF, 3 pages)</a> <span>Or the <a href="pdf/Topless_at_the_spa_investigation.pdf">full report</a>, with the spas’ written replies, the method and the sources.</span>',
+  dltop: '<a class="btn primary" href="pdf/Topless_at_the_spa_summary.pdf">Download the summary (PDF, 3 pages)</a> <span>Or the <a href="pdf/Topless_at_the_spa_investigation.pdf">full report</a>, with the spas’ written replies, the method and the sources. <a href="#pdfacc">Accessible versions</a>.</span>',
   hish: "A bit of history",
   hisbig: "Less than a hundred years ago, men had to cover their chests too. The rule changed for them. Not for women.",
   tepalt: "Painting of a nude woman lying on an animal skin in a marble Roman bath.",
