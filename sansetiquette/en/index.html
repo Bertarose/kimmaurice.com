@@ -514,6 +514,11 @@ fieldset.fg legend { padding: 0; margin-bottom: 8px; }
 @media (max-width: 1240px) { .tbnav { display: none; } .menubtn { display: inline-flex; } .tbr { margin-left: auto; } }
 .pinw.clu .pin b { font-size: 14px; }
 .marker-cluster-anim .leaflet-marker-icon, .marker-cluster-anim .leaflet-marker-shadow { transition: transform .3s ease-out, opacity .3s ease-in; }
+
+/* Fond de carte OpenStreetMap en noir et blanc, inversé en mode sombre (les pastilles gardent leurs couleurs) */
+.map .leaflet-tile-pane { filter: grayscale(1) contrast(.92) brightness(1.04); }
+:root[data-theme="dark"] .map .leaflet-tile-pane { filter: grayscale(1) invert(1) brightness(.82) contrast(.9); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .map .leaflet-tile-pane { filter: grayscale(1) invert(1) brightness(.82) contrast(.9); } }
 </style>
 </head>
 <body>
@@ -1976,7 +1981,8 @@ function setView(v) {
   syncURL();
 }
 let map = null, tiles = null, layer = null;
-function tileURL() { return `https://{s}.basemaps.cartocdn.com/${isDark() ? "dark_all" : "light_all"}/{z}/{x}/{y}{r}.png`; }
+// Fond OpenStreetMap (gratuit, sans clé), mis en noir et blanc par le CSS; inversé en mode sombre.
+function tileURL() { return "https://tile.openstreetmap.org/{z}/{x}/{y}.png"; }
 function loadLeaflet() {
   return new Promise((res, rej) => {
     if (window.L) return res();
@@ -1991,7 +1997,7 @@ async function showMap() {
   try { await loadLeaflet(); } catch (e) { document.getElementById("map").innerHTML = `<p class="maperr">${T().maperr}</p>`; return; }
   if (!map) {
     map = L.map("map", { scrollWheelZoom: false, zoomSnap: 0.5 }).setView([46.2, -74.5], 5);
-    tiles = L.tileLayer(tileURL(), { subdomains: "abcd", maxZoom: 18, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>' }).addTo(map);
+    tiles = L.tileLayer(tileURL(), { maxZoom: 19, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>' }).addTo(map);
     layer = L.markerClusterGroup({ maxClusterRadius: 64, showCoverageOnHover: false, spiderfyOnMaxZoom: true, animate: !RM,
       iconCreateFunction: cl => pieIcon(cl.getAllChildMarkers().flatMap(m => m.options.items), true) }).addTo(map);
     map.on("click focus", () => map.scrollWheelZoom.enable());
