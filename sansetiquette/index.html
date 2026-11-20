@@ -232,7 +232,8 @@ section.block h2.sec { font-family: var(--font-display); font-weight: 800; font-
 .weblink:hover, .weblink:focus-visible { background: var(--ink); color: var(--paper); }
 .webdom { display: block; font-size: 12px; color: var(--muted); margin-top: 4px; }
 .acc { font-size: 14px; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--line); }
-#region, #accsel { font: inherit; font-size: 15px; border: 1px solid var(--ink); background: var(--paper); color: var(--ink); border-radius: 6px; padding: 7px 10px; min-width: 240px; }
+#prov, #region, #accsel { font: inherit; font-size: 15px; border: 1px solid var(--ink); background: var(--paper); color: var(--ink); border-radius: 6px; padding: 7px 10px; min-width: 240px; }
+select#catsel, select#prov, select#region, select#accsel { -webkit-appearance: none; appearance: none; padding-right: 40px; background-color: var(--paper); background-image: linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, transparent 50%); background-position: calc(100% - 21px) 52%, calc(100% - 15px) 52%; background-size: 6px 6px, 6px 6px; background-repeat: no-repeat; }
 .weblink { display: table; margin-top: 10px; }
 .accnote { grid-column: 1 / -1; margin: 0; padding: 10px 14px; border-left: 3px solid var(--ink); background: var(--panel); font-size: 14px; }
 #catsel { font: inherit; font-size: 15px; border: 1px solid var(--ink); background: var(--paper); color: var(--ink); border-radius: 6px; padding: 7px 10px; }
@@ -247,7 +248,7 @@ section.block h2.sec { font-family: var(--font-display); font-weight: 800; font-
   .mobonly { display: flex !important; }
   .controls .row { flex-direction: column; align-items: stretch; gap: 4px; }
   .controls .row + .row { margin-top: 12px; }
-  #catsel, #region, #accsel { width: 100%; min-width: 0; font-size: 16px; padding: 10px; }
+  #catsel, #prov, #region, #accsel { width: 100%; min-width: 0; font-size: 16px; padding: 10px; }
   .count { margin-top: 4px; }
   h1 { font-size: 34px; line-height: 1.08; }
   .dl .btn, .dltop .btn { display: block; text-align: center; }
@@ -286,12 +287,16 @@ section.block h2.sec { font-family: var(--font-display); font-weight: 800; font-
 .mascot .eyes { transform-box: fill-box; transform-origin: center; animation: m-blink 4.6s infinite; }
 .mascot-x { position: absolute; top: -12px; left: -12px; z-index: 1; width: 30px; height: 30px; padding: 0; border-radius: 50%; border: 1.5px solid var(--ink); background: var(--paper); color: var(--ink); font: 700 18px/1 var(--font-body); cursor: pointer; display: flex; align-items: center; justify-content: center; }
 .mascot-x:hover { background: var(--ink); color: var(--paper); }
+.mascot-msg { position: absolute; right: calc(100% + 14px); top: 18px; width: 210px; margin: 0; padding: 10px 12px; font-size: 14px; line-height: 1.35; font-weight: 600; background: var(--paper); color: var(--ink); border: 1.5px solid var(--ink); border-radius: 14px; box-shadow: 0 3px 12px rgba(0,0,0,.18); animation: m-msg .5s ease-out 2.2s both; }
+.mascot-msg::after { content: ""; position: absolute; right: -8px; top: 22px; width: 13px; height: 13px; background: var(--paper); border-right: 1.5px solid var(--ink); border-top: 1.5px solid var(--ink); transform: rotate(45deg); }
+.mascot-msg[hidden] { display: none; }
+@keyframes m-msg { from { opacity: 0; transform: translateX(8px); } to { opacity: 1; transform: none; } }
 @keyframes m-in { from { transform: translateY(120%); opacity: 0; } to { transform: none; opacity: 1; } }
 @keyframes m-bob { to { transform: translateY(-2px); } }
 @keyframes m-wave { 0%, 45%, 100% { transform: rotate(0); } 9% { transform: rotate(-16deg); } 18% { transform: rotate(10deg); } 27% { transform: rotate(-16deg); } 36% { transform: rotate(8deg); } }
 @keyframes m-blink { 0%, 93%, 100% { transform: scaleY(1); } 96% { transform: scaleY(.1); } }
 @keyframes m-steam { 0% { transform: translateY(8px); opacity: 0; } 40% { opacity: .5; } 100% { transform: translateY(-12px); opacity: 0; } }
-@media (max-width: 640px) { .mascot { width: 92px; right: 12px; bottom: 14px; padding: 7px 7px 3px; border-radius: 14px; } .mascot-x { width: 32px; height: 32px; top: -14px; left: -14px; } .totop { right: auto; left: 14px; } }
+@media (max-width: 640px) { .mascot { width: 92px; right: 12px; bottom: 14px; padding: 7px 7px 3px; border-radius: 14px; } .mascot-msg { width: 150px; font-size: 13px; top: 8px; right: calc(100% + 12px); padding: 8px 10px; } .mascot-x { width: 32px; height: 32px; top: -14px; left: -14px; } .totop { right: auto; left: 14px; } }
 @media (prefers-reduced-motion: reduce) { .mascot, .mascot * { animation: none !important; } .mascot .s { opacity: .4; } }
 @media print { .mascot { display: none; } }
 /* Accessibilité */
@@ -304,7 +309,9 @@ html { scroll-padding-bottom: 190px; }
 @media (forced-colors: active) {
   .chip[aria-pressed="true"], .seg button[aria-pressed="true"] { outline: 3px solid Highlight; outline-offset: -3px; text-decoration: underline; }
   .dot { forced-color-adjust: none; }
-  .card, .mascot { border: 1px solid CanvasText; }
+  .card, .mascot, .mascot-msg { border: 1px solid CanvasText; }
+  select#catsel, select#prov, select#region, select#accsel { -webkit-appearance: auto; appearance: auto; padding-right: 10px; background-image: none; }
+  .mascot-msg::after { display: none; }
 }
 .about .a11y { margin-top: 28px; }
 </style>
@@ -344,8 +351,10 @@ html { scroll-padding-bottom: 190px; }
     <div class="row" role="group" id="cats" aria-label="Filtrer par règle"><span class="label">Filtrer par règle</span><button class="chip" type="button" data-cat="all" aria-pressed="true">Tous les spas<span class="n">18</span></button><button class="chip" type="button" data-cat="tous" aria-pressed="false">Torse nu pour toute personne<span class="n">1</span></button><button class="chip" type="button" data-cat="choix" aria-pressed="false">Choix du maillot, torse nu non confirmé<span class="n">3</span></button><button class="chip" type="button" data-cat="corps" aria-pressed="false">Selon le corps ou l’identité<span class="n">3</span></button><button class="chip" type="button" data-cat="fh" aria-pressed="false">Règle femmes / hommes<span class="n">3</span></button><button class="chip" type="button" data-cat="vague" aria-pressed="false">Règle à préciser<span class="n">2</span></button><button class="chip" type="button" data-cat="attente" aria-pressed="false">Pas de réponse : d’après leur site web<span class="n">6</span></button></div>
     <div class="row mobonly"><label class="label" for="catsel" data-i18n="rulelbl">Règle</label><select id="catsel"><option value="all">Tous les spas (18)</option><option value="tous">Torse nu pour toute personne (1)</option><option value="choix">Choix du maillot, torse nu non confirmé (3)</option><option value="corps">Selon le corps ou l’identité (3)</option><option value="fh">Règle femmes / hommes (3)</option><option value="vague">Règle à préciser (2)</option><option value="attente">Pas de réponse : d’après leur site web (6)</option></select></div>
     <div class="row">
+      <label class="label" for="prov" data-i18n="provlbl">Province</label>
+      <select id="prov"><option value="all" selected="">Toutes les provinces (18)</option><option value="qc">Québec (18)</option><option value="on" disabled="">Ontario (à venir)</option></select>
       <label class="label" for="region" data-i18n="search">Région</label>
-      <select id="region"><option value="all" selected="">Toutes les régions (18)</option><option value="mtl">Montréal (7)</option><option value="monteregie">Montérégie (Rive-Sud) (3)</option><option value="laurentides">Laurentides (5)</option><option value="estrie">Cantons-de-l’Est (4)</option><option value="lanaudiere">Lanaudière (1)</option></select>
+      <select id="region"><option value="all" selected="">Toutes les régions (18)</option><optgroup label="Québec"><option value="mtl">Montréal (7)</option><option value="monteregie">Montérégie (Rive-Sud) (3)</option><option value="laurentides">Laurentides (5)</option><option value="estrie">Cantons-de-l’Est (4)</option><option value="lanaudiere">Lanaudière (1)</option></optgroup></select>
       <label class="label" for="accsel" data-i18n="accsel">Mobilité réduite</label>
       <select id="accsel"><option value="all" selected="">Toutes les infos (18)</option><option value="partiel">Accès partiel indiqué (5)</option><option value="non">Peu ou pas accessible (5)</option><option value="inconnu">Rien trouvé (8)</option></select>
       <span class="count" id="count" aria-live="polite">18 spas affichés</span>
@@ -560,7 +569,7 @@ html { scroll-padding-bottom: 190px; }
   </div>
   <div data-i18n="f3">
     <h2>À propos de Sans étiquette</h2>
-    <p>Sans étiquette est une série d’enquêtes et de ressources pour les personnes queer, trans, non binaires, et pour toutes celles dont le corps ou l’identité ne rentre pas dans les cases. Torse nu au spa en est la première enquête.</p>
+    <p>Sans étiquette est une série d’enquêtes et de ressources pour les personnes queer, trans, non binaires, et pour toutes celles dont le corps ou l’identité ne rentre pas dans les cases. Torse nu au spa en est la première enquête. Le site est mis à jour au fur et à mesure : d’autres spas, au Québec puis en Ontario, s’ajouteront.</p>
     <p>L’enquête, les courriels et les choix éditoriaux sont de Kim Maurice. Des outils d’intelligence artificielle ont servi à classer les réponses, à mettre en page et à relire. Toutes les citations ont été vérifiées contre les courriels originaux.</p>
     <p>Une correction ou une réponse à ajouter? Écrivez à <a href="mailto:sansetiquette.enquete@gmail.com">sansetiquette.enquete@gmail.com</a>.</p>
   </div>
@@ -596,7 +605,8 @@ html { scroll-padding-bottom: 190px; }
   </div>
 </footer>
 
-<div class="mascot" id="mascot">
+<aside class="mascot" id="mascot" aria-label="Mot du personnage">
+  <p class="mascot-msg" id="mascotmsg" data-i18n="mascotmsg">Ce site est toujours en mise à jour : j’ajoute des infos et d’autres spas au fur et à mesure.</p>
   <button type="button" class="mascot-x" id="mascotx" aria-label="Fermer le personnage" title="Fermer le personnage"><span aria-hidden="true">×</span></button>
   <svg viewBox="0 0 140 215" role="img" aria-label="Petit personnage torse nu, une serviette autour de la taille, qui salue" id="mascotsvg">
 <g class="steam"><path class="s st1" d="M20 92c-6-7 6-11 0-18s6-11 0-18"></path><path class="s st2" d="M30 100c-6-7 6-11 0-18s6-11 0-18"></path><path class="s st3" d="M120 96c-6-7 6-11 0-18s6-11 0-18"></path></g>
@@ -626,7 +636,7 @@ html { scroll-padding-bottom: 190px; }
 <path class="l" d="M65.5 53 Q70 56.5 74.5 53"></path>
 </g>
   </svg>
-</div>
+</aside>
 
 <a href="#repertoire" class="totop" id="totop" hidden="" data-i18n="totop">↑ Filtres</a>
 <script>
@@ -644,8 +654,10 @@ const EN = {
   punch: "Having to wear a swimsuit is one thing. Having to cover your chest is another.",
   nav: '<a href="#repertoire">The directory</a><a href="#enquete">Read the full investigation</a><a href="#histoire">A bit of history</a><a href="#actualite">In the news</a><a href="#apropos">About</a>',
   search: "Region",
+  provlbl: "Province",
   rulelbl: "Rule",
   totop: "↑ Filters",
+  mascotmsg: "This site is still being updated: I’m adding information and more spas as I go.",
   ftag: "Investigations and resources for queer, trans and non-binary people, and for anyone whose body doesn’t fit the boxes.",
   fnavh: "This investigation",
   fnav: '<li><a href="#repertoire">The directory</a></li><li><a href="#enquete">The full investigation</a></li><li><a href="#histoire">A bit of history</a></li><li><a href="#actualite">In the news</a></li><li><a href="#apropos">The method</a></li>',
@@ -683,7 +695,7 @@ const EN = {
   f2: `<h2>What remains to be assessed</h2>
     <p>This directory settles no legal question. Since 2016, Quebec’s Charter of human rights and freedoms has prohibited discrimination based on sex and on gender identity or expression. Can a spa require a top for women and not for men? The question deserves to be put to lawyers and to the CDPDJ, Quebec’s human rights commission.</p>`,
   f3: `<h2>About Sans étiquette</h2>
-    <p>Sans étiquette (“no label”) is a series of investigations and resources for queer, trans and non-binary people, and for everyone whose body or identity doesn’t fit the boxes. Topless at the spa is its first investigation.</p>
+    <p>Sans étiquette (“no label”) is a series of investigations and resources for queer, trans and non-binary people, and for everyone whose body or identity doesn’t fit the boxes. Topless at the spa is its first investigation. The site is updated as I go: more spas, in Quebec and then Ontario, will be added.</p>
     <p>The investigation, the emails and the editorial choices are by Kim Maurice. Artificial intelligence tools were used to sort the replies, lay out the pages and proofread. Every quote was checked against the original emails.</p>
     <p>A correction or a reply to add? Write to <a href="mailto:sansetiquette.enquete@gmail.com">sansetiquette.enquete@gmail.com</a>.</p>`,
   f4: `<h2>Accessibility of this page</h2>
@@ -718,10 +730,11 @@ const UI = {
     title: "Torse nu au spa à Montréal : la règle, spa par spa · Sans étiquette",
     accs: { all: "Toutes les infos", partiel: "Accès partiel indiqué", non: "Peu ou pas accessible", inconnu: "Rien trouvé" },
     accnote: "Aucun spa ne dit que ses bains sont accessibles en fauteuil roulant. « Accès partiel » veut dire que certaines parties le sont (vestiaires, soins, ascenseur). Appelez le spa avant votre visite.",
+    provs: { all: "Toutes les provinces", qc: "Québec", on: "Ontario" }, soon: "à venir",
     regions: { all: "Toutes les régions", mtl: "Montréal", monteregie: "Montérégie (Rive-Sud)", laurentides: "Laurentides", estrie: "Cantons-de-l’Est", lanaudiere: "Lanaudière" },
     empty: "Aucun spa ne correspond. Essayez un autre filtre.",
     newtab: "(nouvel onglet)",
-    mascotAlt: "Petit personnage torse nu, une serviette autour de la taille, qui salue", mascotClose: "Fermer le personnage",
+    mascotAlt: "Petit personnage torse nu, une serviette autour de la taille, qui salue", mascotClose: "Fermer le personnage", mascotRegion: "Mot du personnage",
     toDark: "Sombre", toLight: "Clair", themeAria: "Thème", darkTitle: "Mode sombre", lightTitle: "Mode clair",
     filter: "Filtrer par règle",
     cats: { all: "Tous les spas", tous: "Torse nu pour toute personne", choix: "Choix du maillot, torse nu non confirmé", corps: "Selon le corps ou l’identité", fh: "Règle femmes / hommes", vague: "Règle à préciser", attente: "Pas de réponse : d’après leur site web" },
@@ -737,10 +750,11 @@ const UI = {
     title: "Topless at Montreal spas: the rule, spa by spa · Sans étiquette",
     accs: { all: "All information", partiel: "Partial access stated", non: "Little or no access", inconnu: "Nothing found" },
     accnote: "No spa says its baths are wheelchair accessible. “Partial access” means some areas are (changing rooms, treatments, elevator). Call the spa before your visit.",
+    provs: { all: "All provinces", qc: "Quebec", on: "Ontario" }, soon: "coming soon",
     regions: { all: "All regions", mtl: "Montreal", monteregie: "Montérégie (South Shore)", laurentides: "Laurentians", estrie: "Eastern Townships", lanaudiere: "Lanaudière" },
     empty: "No spa matches. Try another filter.",
     newtab: "(opens in a new tab)",
-    mascotAlt: "Small topless character with a towel around the waist, waving", mascotClose: "Close the character",
+    mascotAlt: "Small topless character with a towel around the waist, waving", mascotClose: "Close the character", mascotRegion: "A note from the character",
     toDark: "Dark", toLight: "Light", themeAria: "Theme", darkTitle: "Dark mode", lightTitle: "Light mode",
     filter: "Filter by rule",
     cats: { all: "All spas", tous: "Topless for everyone", choix: "Choice of swimsuit, topless not confirmed", corps: "Depends on the body or identity", fh: "Women / men rule", vague: "Rule to be clarified", attente: "No answer: from their website" },
@@ -768,7 +782,9 @@ if (!window.FR_STRINGS) {
 
 function esc(s) { return String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
 
-const state = { cat: "all", region: "all", acc: "all", lang: "fr" };
+const state = { cat: "all", prov: "all", region: "all", acc: "all", lang: "fr" };
+const PROVS = ["qc", "on"];
+const provOf = s => s.prov || "qc";
 const ACCLV = ["partiel", "non", "inconnu"];
 const REGIONS = ["mtl", "monteregie", "laurentides", "estrie", "lanaudiere"];
 const PAGE_LANG = document.documentElement.lang === "en" ? "en" : "fr";
@@ -799,7 +815,7 @@ function card(s) {
 
 function render() {
   const spas = DATA[state.lang];
-  const list = spas.filter(s => (state.cat === "all" || s.cat === state.cat) && (state.region === "all" || (s.regions || []).includes(state.region)) && (state.acc === "all" || s.acc === state.acc));
+  const list = spas.filter(s => (state.cat === "all" || s.cat === state.cat) && (state.prov === "all" || provOf(s) === state.prov) && (state.region === "all" || (s.regions || []).includes(state.region)) && (state.acc === "all" || s.acc === state.acc));
   document.getElementById("grid").innerHTML = (state.acc !== "all" ? `<p class="accnote">${T().accnote}</p>` : "") + list.map(card).join("");
   const em = document.getElementById("empty");
   em.hidden = list.length > 0;
@@ -824,10 +840,17 @@ function setLang(lang, save) {
     const n = k === "all" ? DATA.fr.length : DATA.fr.filter(s => s.cat === k).length;
     return `<button class="chip" type="button" data-cat="${k}" aria-pressed="false">${t.cats[k]}<span class="n">${n}</span></button>`;
   }).join("");
-  document.getElementById("region").innerHTML = ["all", ...REGIONS].map(r => {
+  document.getElementById("prov").innerHTML = ["all", ...PROVS].map(p => {
+    const n = p === "all" ? DATA.fr.length : DATA.fr.filter(s => provOf(s) === p).length;
+    return n || p === "all"
+      ? `<option value="${p}"${p === state.prov ? " selected" : ""}>${t.provs[p]} (${n})</option>`
+      : `<option value="${p}" disabled>${t.provs[p]} (${t.soon})</option>`;
+  }).join("");
+  const regOpt = r => {
     const n = r === "all" ? DATA.fr.length : DATA.fr.filter(s => (s.regions || []).includes(r)).length;
     return `<option value="${r}"${r === state.region ? " selected" : ""}>${t.regions[r]} (${n})</option>`;
-  }).join("");
+  };
+  document.getElementById("region").innerHTML = regOpt("all") + `<optgroup label="${t.provs.qc}">` + REGIONS.map(regOpt).join("") + `</optgroup>`;
   document.getElementById("catsel").innerHTML = CATKEYS.map(k => {
     const n = k === "all" ? DATA.fr.length : DATA.fr.filter(s => s.cat === k).length;
     return `<option value="${k}">${t.cats[k]} (${n})</option>`;
@@ -846,7 +869,7 @@ function setLang(lang, save) {
       history.replaceState(null, "", u);
     } catch (e) {}
   }
-  document.getElementById("mascotsvg").setAttribute("aria-label", t.mascotAlt);
+  document.getElementById("mascotsvg").setAttribute("aria-label", t.mascotAlt); document.getElementById("mascot").setAttribute("aria-label", t.mascotRegion);
   const mx = document.getElementById("mascotx"); mx.setAttribute("aria-label", t.mascotClose); mx.title = t.mascotClose;
   const ol = document.getElementById("otherlang"), other = state.lang === "en" ? "fr" : "en";
   ol.textContent = other === "en" ? "English version" : "Version française";
@@ -899,6 +922,8 @@ try {
 } catch (e) {}
 try { const h = location.hash.slice(1); if (CATKEYS.includes(h)) state.cat = h; } catch (e) {}
 
+// Bulle du personnage : sur petit écran, elle se retire après 15 secondes pour ne pas cacher le texte.
+try { if (matchMedia("(max-width: 640px)").matches) setTimeout(() => { document.getElementById("mascotmsg").hidden = true; }, 15000); } catch (e) {}
 // Personnage : se ferme avec le X, et reste fermé aux visites suivantes.
 document.getElementById("mascotx").addEventListener("click", () => {
   document.getElementById("mascot").hidden = true;
@@ -929,6 +954,7 @@ document.getElementById("catsel").addEventListener("change", e => {
 })();
 document.getElementById("accsel").addEventListener("change", e => { state.acc = e.target.value; render(); });
 document.getElementById("region").addEventListener("change", e => { state.region = e.target.value; render(); });
+document.getElementById("prov").addEventListener("change", e => { state.prov = e.target.value; render(); });
 window.addEventListener("hashchange", () => { const h = location.hash.slice(1); if (CATKEYS.includes(h)) { state.cat = h; render(); } else if (!h) { state.cat = "all"; render(); } });
 
 
