@@ -168,5 +168,23 @@
         <xhtml:link rel="alternate" hreflang="en" href="https://www.kimmaurice.com/sansetiquette/en/about.html"/>
         <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kimmaurice.com/sansetiquette/a-propos.html"/>
     </url>
+    <url>
+        <loc>https://www.kimmaurice.com/sansetiquette/sources.html</loc>
+        <lastmod>2026-11-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://www.kimmaurice.com/sansetiquette/sources.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.kimmaurice.com/sansetiquette/en/sources.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kimmaurice.com/sansetiquette/sources.html"/>
+    </url>
+    <url>
+        <loc>https://www.kimmaurice.com/sansetiquette/en/sources.html</loc>
+        <lastmod>2026-11-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.4</priority>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://www.kimmaurice.com/sansetiquette/sources.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.kimmaurice.com/sansetiquette/en/sources.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kimmaurice.com/sansetiquette/sources.html"/>
+    </url>
 
 </urlset>
