@@ -62,7 +62,7 @@
     </url>
     <url>
         <loc>https://www.kimmaurice.com/sansetiquette/</loc>
-        <lastmod>2026-11-19</lastmod>
+        <lastmod>2026-11-20</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
         <xhtml:link rel="alternate" hreflang="fr" href="https://www.kimmaurice.com/sansetiquette/"/>
@@ -71,12 +71,102 @@
     </url>
     <url>
         <loc>https://www.kimmaurice.com/sansetiquette/en/</loc>
-        <lastmod>2026-11-19</lastmod>
+        <lastmod>2026-11-20</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
         <xhtml:link rel="alternate" hreflang="fr" href="https://www.kimmaurice.com/sansetiquette/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.kimmaurice.com/sansetiquette/en/"/>
         <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kimmaurice.com/sansetiquette/"/>
     </url>
-    
+    <url>
+        <loc>https://www.kimmaurice.com/sansetiquette/enquete.html</loc>
+        <lastmod>2026-11-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://www.kimmaurice.com/sansetiquette/enquete.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.kimmaurice.com/sansetiquette/en/investigation.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kimmaurice.com/sansetiquette/enquete.html"/>
+    </url>
+    <url>
+        <loc>https://www.kimmaurice.com/sansetiquette/en/investigation.html</loc>
+        <lastmod>2026-11-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://www.kimmaurice.com/sansetiquette/enquete.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.kimmaurice.com/sansetiquette/en/investigation.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kimmaurice.com/sansetiquette/enquete.html"/>
+    </url>
+    <url>
+        <loc>https://www.kimmaurice.com/sansetiquette/histoire.html</loc>
+        <lastmod>2026-11-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://www.kimmaurice.com/sansetiquette/histoire.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.kimmaurice.com/sansetiquette/en/history.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kimmaurice.com/sansetiquette/histoire.html"/>
+    </url>
+    <url>
+        <loc>https://www.kimmaurice.com/sansetiquette/en/history.html</loc>
+        <lastmod>2026-11-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://www.kimmaurice.com/sansetiquette/histoire.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.kimmaurice.com/sansetiquette/en/history.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kimmaurice.com/sansetiquette/histoire.html"/>
+    </url>
+    <url>
+        <loc>https://www.kimmaurice.com/sansetiquette/actualite.html</loc>
+        <lastmod>2026-11-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://www.kimmaurice.com/sansetiquette/actualite.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.kimmaurice.com/sansetiquette/en/news.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kimmaurice.com/sansetiquette/actualite.html"/>
+    </url>
+    <url>
+        <loc>https://www.kimmaurice.com/sansetiquette/en/news.html</loc>
+        <lastmod>2026-11-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://www.kimmaurice.com/sansetiquette/actualite.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.kimmaurice.com/sansetiquette/en/news.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kimmaurice.com/sansetiquette/actualite.html"/>
+    </url>
+    <url>
+        <loc>https://www.kimmaurice.com/sansetiquette/temoigner.html</loc>
+        <lastmod>2026-11-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://www.kimmaurice.com/sansetiquette/temoigner.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.kimmaurice.com/sansetiquette/en/share.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kimmaurice.com/sansetiquette/temoigner.html"/>
+    </url>
+    <url>
+        <loc>https://www.kimmaurice.com/sansetiquette/en/share.html</loc>
+        <lastmod>2026-11-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://www.kimmaurice.com/sansetiquette/temoigner.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.kimmaurice.com/sansetiquette/en/share.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kimmaurice.com/sansetiquette/temoigner.html"/>
+    </url>
+    <url>
+        <loc>https://www.kimmaurice.com/sansetiquette/a-propos.html</loc>
+        <lastmod>2026-11-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://www.kimmaurice.com/sansetiquette/a-propos.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.kimmaurice.com/sansetiquette/en/about.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kimmaurice.com/sansetiquette/a-propos.html"/>
+    </url>
+    <url>
+        <loc>https://www.kimmaurice.com/sansetiquette/en/about.html</loc>
+        <lastmod>2026-11-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://www.kimmaurice.com/sansetiquette/a-propos.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.kimmaurice.com/sansetiquette/en/about.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kimmaurice.com/sansetiquette/a-propos.html"/>
+    </url>
+
 </urlset>
