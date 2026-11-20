@@ -76,6 +76,15 @@
 <script>try{var t=localStorage.getItem("se-theme");if(t==="dark"||t==="light")document.documentElement.dataset.theme=t;if(localStorage.getItem("se-mascot")==="off")document.documentElement.classList.add("nomascot")}catch(e){}</script>
 <style>
 /* Layout : en-tête éditorial noir et blanc, filtres collants, grille de fiches par spa. */
+.v2-search{display:flex;align-items:end;gap:10px;flex-wrap:wrap;margin:0 0 8px}
+.v2-search label{display:block;min-width:100%;margin-bottom:-5px}
+#directory-search{font:inherit;font-size:16px;min-width:min(100%,320px);flex:1;border:1px solid var(--ink);border-radius:6px;padding:10px 12px;background:var(--paper);color:var(--ink)}
+.v2-clear{font:inherit;font-size:14px;border:1px solid var(--ink);border-radius:6px;padding:10px 14px;background:var(--paper);color:var(--ink);cursor:pointer}
+.v2-clear:hover{background:var(--ink);color:var(--paper)}
+.v2-hint{font-size:13px;color:var(--muted);margin:0 0 10px}
+#cats .chip[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+@media(max-width:600px){.v2-search{display:grid;grid-template-columns:1fr}.v2-search label{min-width:0;margin:0}.v2-clear{width:100%}}
+
 :root {
   --paper: #ffffff;
   --ink: #111111;
@@ -378,6 +387,8 @@ html { scroll-padding-bottom: 190px; }
 <section class="controls" id="repertoire" aria-labelledby="reph">
   <div class="wrap">
     <h2 class="sr" id="reph" data-i18n="reph">Le répertoire des spas</h2>
+    <div class="v2-search"><label class="label" for="directory-search" data-i18n="searchlbl">Rechercher un lieu</label><input id="directory-search" type="search" placeholder="Nom, ville ou région…" autocomplete="off"><button type="button" id="clear-filters" class="v2-clear" data-i18n="clearfilters">Tout effacer</button></div>
+    <p class="v2-hint" data-i18n="filterhint">Sélections multiples : OU dans une même catégorie, ET entre les catégories.</p>
     <div class="row" role="group" id="cats" aria-label="Filtrer par règle"><span class="label">Filtrer par règle</span><button class="chip" type="button" data-cat="all" aria-pressed="true">Tous les lieux<span class="n">126</span></button><button class="chip" type="button" data-cat="tous" aria-pressed="false">Torse nu pour toute personne<span class="n">1</span></button><button class="chip" type="button" data-cat="choix" aria-pressed="false">Choix du maillot, torse nu non confirmé<span class="n">3</span></button><button class="chip" type="button" data-cat="corps" aria-pressed="false">Selon le corps ou l’identité<span class="n">3</span></button><button class="chip" type="button" data-cat="fh" aria-pressed="false">Règle femmes / hommes<span class="n">3</span></button><button class="chip" type="button" data-cat="vague" aria-pressed="false">Règle à préciser<span class="n">2</span></button><button class="chip" type="button" data-cat="attente" aria-pressed="false">Pas de réponse : d’après leur site web<span class="n">6</span></button><button class="chip" type="button" data-cat="pending" aria-pressed="false">En attente d’info : pas encore contactés<span class="n">108</span></button></div>
     <div class="row mobonly"><label class="label" for="catsel" data-i18n="rulelbl">Règle</label><select id="catsel"><option value="all">Tous les lieux (126)</option><option value="tous">Torse nu pour toute personne (1)</option><option value="choix">Choix du maillot, torse nu non confirmé (3)</option><option value="corps">Selon le corps ou l’identité (3)</option><option value="fh">Règle femmes / hommes (3)</option><option value="vague">Règle à préciser (2)</option><option value="attente">Pas de réponse : d’après leur site web (6)</option><option value="pending">En attente d’info : pas encore contactés (108)</option></select></div>
     <div class="row">
@@ -1486,6 +1497,7 @@ const EN = {
   punch: "Having to wear a swimsuit is one thing. Having to cover your chest is another.",
   nav: '<a href="#repertoire">The directory</a><a href="#enquete">Read the full investigation</a><a href="#histoire">A bit of history</a><a href="#actualite">In the news</a><a href="#temoignages">Share your story</a><a href="#apropos">About</a>',
   search: "Region",
+  searchlbl: "Search the directory", clearfilters: "Clear all", filterhint: "Multiple selections: OR within a category, AND between categories.",
   provlbl: "Province",
   wholbl: "Who can go",
   rulelbl: "Rule",
@@ -1668,7 +1680,7 @@ if (!window.FR_STRINGS) {
 
 function esc(s) { return String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
 
-const state = { cat: "all", who: "all", prov: "all", region: "all", acc: "all", lang: "fr" };
+const state = { cats: [], query: "", who: "all", prov: "all", region: "all", acc: "all", lang: "fr" };
 const PROVS = ["qc", "on"];
 const provOf = s => s.prov || "qc";
 const ACCLV = ["partiel", "non", "inconnu", "pasverif"];
@@ -1716,14 +1728,15 @@ function fillRegions() {
 
 function render() {
   const spas = DATA[state.lang];
-  const list = spas.filter(s => (state.cat === "all" || s.cat === state.cat) && (state.who === "all" || whoOf(s) === state.who) && (state.prov === "all" || provOf(s) === state.prov) && (state.region === "all" || (s.regions || []).includes(state.region)) && (state.acc === "all" || s.acc === state.acc));
+  const q = state.query.trim().toLocaleLowerCase(state.lang === "fr" ? "fr-CA" : "en-CA");
+  const list = spas.filter(s => (!state.cats.length || state.cats.includes(s.cat)) && (state.who === "all" || whoOf(s) === state.who) && (state.prov === "all" || provOf(s) === state.prov) && (state.region === "all" || (s.regions || []).includes(state.region)) && (state.acc === "all" || s.acc === state.acc) && (!q || [s.name, s.place, s.short, s.verdict, s.resume, s.access].join(" ").toLocaleLowerCase(state.lang === "fr" ? "fr-CA" : "en-CA").includes(q)));
   document.getElementById("grid").innerHTML = (state.acc !== "all" && state.acc !== "pasverif" ? `<p class="accnote">${T().accnote}</p>` : "") + list.map(card).join("");
   const em = document.getElementById("empty");
   em.hidden = list.length > 0;
   em.textContent = list.length ? "" : T().empty;
   document.getElementById("count").textContent = T().count(list.length);
-  document.getElementById("catsel").value = state.cat;
-  document.querySelectorAll("#cats .chip").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.cat === state.cat)));
+  document.getElementById("catsel").value = state.cats.length === 1 ? state.cats[0] : "all";
+  document.querySelectorAll("#cats .chip").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.cat === "all" ? state.cats.length === 0 : state.cats.includes(b.dataset.cat))));
 }
 
 function setLang(lang, save) {
@@ -1822,7 +1835,7 @@ try {
     else if ((navigator.language || "").toLowerCase().startsWith("en")) start = "en";
   }
 } catch (e) {}
-try { const h = location.hash.slice(1); if (CATKEYS.includes(h)) state.cat = h; } catch (e) {}
+try { const h = location.hash.slice(1); if (CATKEYS.includes(h) && h !== "all") state.cats = [h]; } catch (e) {}
 
 // Bulle du personnage : sur petit écran, elle se retire après 15 secondes pour ne pas cacher le texte.
 try { if (matchMedia("(max-width: 640px)").matches) setTimeout(() => { document.getElementById("mascotmsg").hidden = true; }, 15000); } catch (e) {}
@@ -1870,14 +1883,23 @@ document.getElementById("otherlang").addEventListener("click", e => {
 document.querySelector(".lang").addEventListener("click", e => { const b = e.target.closest("button"); if (b) setLang(b.dataset.lang, true); });
 document.getElementById("cats").addEventListener("click", e => {
   const b = e.target.closest(".chip"); if (!b) return;
-  state.cat = b.dataset.cat;
-  try { history.replaceState(null, "", state.cat === "all" ? location.pathname + location.search : "#" + state.cat); } catch (err) {}
+  const key = b.dataset.cat;
+  if (key === "all") state.cats = [];
+  else state.cats = state.cats.includes(key) ? state.cats.filter(x => x !== key) : [...state.cats, key];
+  try { history.replaceState(null, "", state.cats.length === 1 ? "#" + state.cats[0] : location.pathname + location.search); } catch (err) {}
   render();
 });
 document.getElementById("catsel").addEventListener("change", e => {
-  state.cat = e.target.value;
-  try { history.replaceState(null, "", state.cat === "all" ? location.pathname + location.search : "#" + state.cat); } catch (err) {}
+  state.cats = e.target.value === "all" ? [] : [e.target.value];
+  try { history.replaceState(null, "", state.cats.length ? "#" + state.cats[0] : location.pathname + location.search); } catch (err) {}
   render();
+});
+document.getElementById("directory-search").addEventListener("input", e => { state.query = e.target.value; render(); });
+document.getElementById("clear-filters").addEventListener("click", () => {
+  state.cats = []; state.query = ""; state.who = "all"; state.prov = "all"; state.region = "all"; state.acc = "all";
+  document.getElementById("directory-search").value = "";
+  ["who","prov","region","accsel"].forEach(id => { const el = document.getElementById(id); if (el) el.value = "all"; });
+  fillRegions(); render();
 });
 // Bouton « retour aux filtres » quand on a défilé sous la barre de filtres
 (function () {
@@ -1889,7 +1911,7 @@ document.getElementById("accsel").addEventListener("change", e => { state.acc = 
 document.getElementById("region").addEventListener("change", e => { state.region = e.target.value; render(); });
 document.getElementById("prov").addEventListener("change", e => { state.prov = e.target.value; fillRegions(); render(); });
 document.getElementById("who").addEventListener("change", e => { state.who = e.target.value; render(); });
-window.addEventListener("hashchange", () => { const h = location.hash.slice(1); if (CATKEYS.includes(h)) { state.cat = h; render(); } else if (!h) { state.cat = "all"; render(); } });
+window.addEventListener("hashchange", () => { const h = location.hash.slice(1); if (CATKEYS.includes(h)) { state.cats = h === "all" ? [] : [h]; render(); } else if (!h) { state.cats = []; render(); } });
 
 
 setLang(start, false);
