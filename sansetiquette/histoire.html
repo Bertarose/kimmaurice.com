@@ -480,7 +480,8 @@ fieldset.fg legend { padding: 0; margin-bottom: 8px; }
 .empty .clearall { font-size: 16px; }
 
 /* Carte */
-.map { height: min(74vh, 680px); border: 1.5px solid var(--ink); border-radius: 10px; overflow: hidden; background: var(--panel); }
+.map { position: relative; z-index: 0; isolation: isolate; height: min(74vh, 680px); border: 1.5px solid var(--ink); border-radius: 10px; overflow: hidden; background: var(--panel); }
+/* La carte garde ses calques chez elle : les menus du site, la barre du haut et le personnage passent par-dessus. */
 .mapnote { font-size: 14px; color: var(--muted); margin: 10px 0 0; max-width: 80ch; }
 .maperr { padding: 24px; }
 .pinw { background: none; border: 0; }
