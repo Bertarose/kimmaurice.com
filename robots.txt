@@ -2,8 +2,8 @@
 
 User-agent: *
 Allow: /
-# Sans étiquette : en préparation, pas encore public
-Disallow: /sansetiquette/pdf/
+# Torse nu au spa : en préparation, pas encore public
+Disallow: /spa/pdf/
 
 # Sitemap
 Sitemap: https://kimmaurice.com/sitemap.xml
@@ -17,16 +17,16 @@ Crawl-delay: 0
 # Common bots
 User-agent: Googlebot
 Allow: /
-Disallow: /sansetiquette/pdf/
+Disallow: /spa/pdf/
 
 User-agent: Googlebot-Image
 Allow: /
-Disallow: /sansetiquette/pdf/
+Disallow: /spa/pdf/
 
 User-agent: Bingbot
 Allow: /
-Disallow: /sansetiquette/pdf/
+Disallow: /spa/pdf/
 
 User-agent: Slurp
 Allow: /
-Disallow: /sansetiquette/pdf/
+Disallow: /spa/pdf/
