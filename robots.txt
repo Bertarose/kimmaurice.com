@@ -2,7 +2,7 @@
 
 User-agent: *
 Allow: /
-# Torse nu au spa : en préparation, pas encore public
+# Qui doit se couvrir? (kimmaurice.com/spa) : en préparation, pas encore public
 Disallow: /spa/pdf/
 
 # Sitemap
