@@ -2,11 +2,11 @@
    Garde une copie des fichiers de l’application pour qu’elle fonctionne
    sans connexion. Il ne voit jamais le contenu des rapports : ceux-ci
    ne quittent pas la page. Changer VERSION à chaque mise en ligne. */
-const VERSION = 'limpide-2.0.0';
+const VERSION = 'limpide-2.1.0';
 const FICHIERS = [
   './', './index.html', './a-propos.html', './manifest.webmanifest',
   './css/limpide.css',
-  './js/preferences.js', './js/exemples.js', './js/glossaire.js', './js/regles.js', './js/moteur.js', './js/app.js', './js/a-propos.js',
+  './js/preferences.js', './js/porte.js', './js/exemples.js', './js/glossaire.js', './js/regles.js', './js/moteur.js', './js/app.js', './js/a-propos.js',
   './img/icone.svg', './img/icone-32.png', './img/icone-192.png', './img/icone-512.png', './img/icone-masquable-512.png', './img/apple-touch-icon.png'
 ];
 

@@ -19,9 +19,36 @@
 <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 <link rel="stylesheet" href="css/limpide.css">
 <script src="js/preferences.js"></script>
+<script src="js/porte.js"></script>
 </head>
 <body>
 <a class="lien-evitement" href="#principal"><span data-l="fr">Aller au contenu</span><span data-l="en">Skip to content</span></a>
+<!-- ============ Porte d’entrée : démonstration privée ============ -->
+<div class="porte" id="porte">
+  <header class="porte-haut">
+    <span class="marque">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect x="2" y="4" width="28" height="24" rx="7" fill="#15313A"/><rect x="8" y="11" width="16" height="4" rx="2" fill="#F6E7A1"/><rect x="8" y="18" width="11" height="3" rx="1.5" fill="#79C2B3"/></svg>
+      <span>Limpide</span>
+    </span>
+    <button type="button" class="btn-icone" id="porte-langue"><span data-l="fr" lang="en">EN<span class="vc"> — English</span></span><span data-l="en" lang="fr">FR<span class="vc"> — Français</span></span></button>
+  </header>
+  <main class="porte-carte" aria-labelledby="titre-porte">
+    <span class="badge"><span data-l="fr">Démonstration privée</span><span data-l="en">Private demo</span></span>
+    <h1 id="titre-porte"><span data-l="fr">Votre rapport d’imagerie, en mots clairs.</span><span data-l="en">Your imaging report, in plain words.</span></h1>
+    <p class="porte-intro"><span data-l="fr">Limpide est présenté sur invitation. Entrez le mot de passe que vous avez reçu.</span><span data-l="en">Limpide is shown by invitation. Enter the password you received.</span></p>
+    <form id="form-porte" novalidate>
+      <label for="mot-de-passe"><span data-l="fr">Mot de passe</span><span data-l="en">Password</span></label>
+      <div class="rangee-mdp">
+        <input id="mot-de-passe" type="password" autocomplete="current-password" autocapitalize="off" spellcheck="false" enterkeyhint="go" aria-describedby="erreur-porte" required>
+        <button type="button" class="voir-mdp" id="voir-mdp" aria-pressed="false"><span data-l="fr">Afficher</span><span data-l="en">Show</span><span class="vc"><span data-l="fr"> le mot de passe</span><span data-l="en"> password</span></span></button>
+      </div>
+      <p class="erreur-porte" id="erreur-porte" role="alert" hidden><span data-l="fr">Ce mot de passe ne fonctionne pas. Vérifiez-le et réessayez.</span><span data-l="en">This password does not work. Check it and try again.</span></p>
+      <button type="submit" class="btn btn-principal pleine-largeur"><span data-l="fr">Entrer</span><span data-l="en">Enter</span></button>
+    </form>
+    <p class="porte-contact"><span data-l="fr">Pas de mot de passe? Écrivez à</span><span data-l="en">No password? Write to</span> <a href="mailto:info@kimmaurice.com?subject=Limpide">info@kimmaurice.com</a>.</p>
+  </main>
+  <footer class="porte-pied"><span data-l="fr">Conçu par</span><span data-l="en">Designed by</span> <a href="https://kimmaurice.com/">Kim Maurice</a></footer>
+</div>
 <svg width="0" height="0" class="vc" aria-hidden="true" focusable="false"><defs>
   <symbol id="i-fleche-g" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 </defs></svg>
@@ -152,6 +179,7 @@
           <tr><th scope="row">Connexions réseau</th><td>Interdites par la politique de sécurité de la page (Content-Security-Policy). Aucune analytique, aucune publicité, aucun traçage.</td></tr>
           <tr><th scope="row">Lecture à voix haute</th><td>Utilise seulement les voix installées sur l’appareil. Les voix en ligne sont ignorées.</td></tr>
           <tr><th scope="row">Préférences</th><td>Le thème, la taille du texte et la langue sont gardés sur l’appareil. Rien d’autre.</td></tr>
+          <tr><th scope="row">Mot de passe de la démo</th><td>Vérifié dans le navigateur. Une marque d’accès est gardée seulement le temps de l’onglet.</td></tr>
           <tr><th scope="row">Mode hors ligne</th><td>Une copie des fichiers de l’application est gardée pour fonctionner sans connexion. Elle ne contient aucun rapport.</td></tr>
         </tbody>
         <tbody data-l="en">
@@ -159,6 +187,7 @@
           <tr><th scope="row">Network connections</th><td>Blocked by the page’s security policy (Content-Security-Policy). No analytics, no ads, no tracking.</td></tr>
           <tr><th scope="row">Read-aloud</th><td>Uses only voices installed on the device. Online voices are ignored.</td></tr>
           <tr><th scope="row">Preferences</th><td>Theme, text size and language are kept on the device. Nothing else.</td></tr>
+          <tr><th scope="row">Demo password</th><td>Checked in the browser. An access mark is kept only while the tab is open.</td></tr>
           <tr><th scope="row">Offline mode</th><td>A copy of the app’s files is kept so it works without a connection. It contains no report.</td></tr>
         </tbody>
       </table>

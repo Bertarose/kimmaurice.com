@@ -457,3 +457,32 @@ dialog.feuille::backdrop { background: var(--voile); }
   .securite-complete { break-inside: avoid; }
 }
 .etude .sous-texte { color: var(--encre-2); margin-top: .9rem; font-size: .95rem; }
+
+/* ---------- 12. Porte d’entrée (démonstration privée) ---------- */
+html:not([data-acces="ok"]) body > :not(.porte):not(svg):not(script) { display: none !important; }
+html[data-acces="ok"] .porte { display: none; }
+.porte { min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; padding: max(1rem, env(safe-area-inset-top)) 1.25rem calc(1.25rem + env(safe-area-inset-bottom)); }
+.porte-haut { display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 30rem; margin: 0 auto; }
+.porte-haut .marque { cursor: default; }
+.porte-carte { width: 100%; max-width: 30rem; margin: auto; padding: 2rem 0; }
+.porte-carte h1 { font-size: 2rem; margin-top: .9rem; }
+.porte-intro { color: var(--encre-2); margin-top: .75rem; font-size: 1.05rem; }
+#form-porte { margin-top: 1.75rem; }
+#form-porte label { display: block; font-weight: 650; margin-bottom: .35rem; }
+.rangee-mdp { position: relative; }
+.rangee-mdp input {
+  width: 100%; min-height: 3.25rem; font-family: inherit; font-size: max(1rem, 16px); color: var(--encre);
+  background: var(--surface); border: 2px solid var(--ligne); border-radius: var(--r-petit); padding: .6rem 6.5rem .6rem .9rem;
+}
+.rangee-mdp input:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent); }
+.rangee-mdp input[aria-invalid="true"] { border-color: var(--sable-accent); }
+.voir-mdp {
+  position: absolute; right: .35rem; top: 50%; transform: translateY(-50%); min-height: 2.6rem; padding: 0 .8rem;
+  background: none; border: 0; border-radius: var(--r-petit); color: var(--lien); font-family: inherit; font-size: .9rem; font-weight: 650; cursor: pointer;
+}
+.voir-mdp[aria-pressed="true"] { background: var(--accent-pale); }
+.erreur-porte { margin-top: .75rem; padding: .7rem .9rem; border-radius: var(--r-petit); background: var(--sable); border-left: 4px solid var(--sable-accent); font-size: .95rem; }
+#form-porte .btn { margin-top: 1.1rem; }
+.porte-contact { margin-top: 1.5rem; font-size: .92rem; color: var(--encre-2); }
+.porte-pied { text-align: center; font-size: .85rem; color: var(--encre-2); max-width: 30rem; margin: 0 auto; }
+@media print { html:not([data-acces="ok"]) .porte { display: none; } }

@@ -8,6 +8,20 @@ Limpide est une application web qui explique en langage clair les rapports d’i
 
 > Projet de démonstration. Ce n’est pas un dispositif médical, et ses formulations n’ont pas encore été validées par des professionnels de la santé. Les six rapports d’exemple sont entièrement fictifs.
 
+## Accès à la démonstration
+
+L’application et l’étude de cas sont derrière un mot de passe, à donner aux entreprises pour la démo. Le mot de passe ne tient pas compte des majuscules ni des accents. Une fois entré, l’accès dure le temps de l’onglet.
+
+Le site est statique et le dépôt est public : cette porte garde la démo à l’écart des visiteurs, mais ce n’est pas une protection forte. Quelqu’un qui lit le code source sur GitHub peut la contourner. Le mot de passe lui-même n’est écrit nulle part dans le code : seule son empreinte SHA-256 l’est.
+
+**Changer le mot de passe :**
+
+```bash
+printf 'limpide:%s' 'nouveau-mot-de-passe' | shasum -a 256
+```
+
+Écrire le mot de passe en minuscules et sans accents. Remplacer ensuite `EMPREINTE` dans `js/porte.js` par le résultat, puis changer `VERSION` dans `sw.js`.
+
 ## Ce que fait l’application
 
 1. La personne colle le texte de son rapport, ou choisit l’un des six exemples fictifs.
@@ -58,6 +72,7 @@ limpide/
 ├── img/                    Icônes et image de partage
 └── js/
     ├── preferences.js      Thème, taille et langue, appliqués avant l’affichage
+    ├── porte.js            Mot de passe de la démonstration privée
     ├── exemples.js         Les six rapports fictifs
     ├── glossaire.js        147 termes, en français et en anglais
     ├── regles.js           29 règles qui traduisent les tournures fréquentes

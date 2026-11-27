@@ -36,9 +36,36 @@
 <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 <link rel="stylesheet" href="css/limpide.css">
 <script src="js/preferences.js"></script>
+<script src="js/porte.js"></script>
 </head>
 <body>
 <a class="lien-evitement" href="#principal"><span data-l="fr">Aller au contenu</span><span data-l="en">Skip to content</span></a>
+<!-- ============ Porte d’entrée : démonstration privée ============ -->
+<div class="porte" id="porte">
+  <header class="porte-haut">
+    <span class="marque">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect x="2" y="4" width="28" height="24" rx="7" fill="#15313A"/><rect x="8" y="11" width="16" height="4" rx="2" fill="#F6E7A1"/><rect x="8" y="18" width="11" height="3" rx="1.5" fill="#79C2B3"/></svg>
+      <span>Limpide</span>
+    </span>
+    <button type="button" class="btn-icone" id="porte-langue"><span data-l="fr" lang="en">EN<span class="vc"> — English</span></span><span data-l="en" lang="fr">FR<span class="vc"> — Français</span></span></button>
+  </header>
+  <main class="porte-carte" aria-labelledby="titre-porte">
+    <span class="badge"><span data-l="fr">Démonstration privée</span><span data-l="en">Private demo</span></span>
+    <h1 id="titre-porte"><span data-l="fr">Votre rapport d’imagerie, en mots clairs.</span><span data-l="en">Your imaging report, in plain words.</span></h1>
+    <p class="porte-intro"><span data-l="fr">Limpide est présenté sur invitation. Entrez le mot de passe que vous avez reçu.</span><span data-l="en">Limpide is shown by invitation. Enter the password you received.</span></p>
+    <form id="form-porte" novalidate>
+      <label for="mot-de-passe"><span data-l="fr">Mot de passe</span><span data-l="en">Password</span></label>
+      <div class="rangee-mdp">
+        <input id="mot-de-passe" type="password" autocomplete="current-password" autocapitalize="off" spellcheck="false" enterkeyhint="go" aria-describedby="erreur-porte" required>
+        <button type="button" class="voir-mdp" id="voir-mdp" aria-pressed="false"><span data-l="fr">Afficher</span><span data-l="en">Show</span><span class="vc"><span data-l="fr"> le mot de passe</span><span data-l="en"> password</span></span></button>
+      </div>
+      <p class="erreur-porte" id="erreur-porte" role="alert" hidden><span data-l="fr">Ce mot de passe ne fonctionne pas. Vérifiez-le et réessayez.</span><span data-l="en">This password does not work. Check it and try again.</span></p>
+      <button type="submit" class="btn btn-principal pleine-largeur"><span data-l="fr">Entrer</span><span data-l="en">Enter</span></button>
+    </form>
+    <p class="porte-contact"><span data-l="fr">Pas de mot de passe? Écrivez à</span><span data-l="en">No password? Write to</span> <a href="mailto:info@kimmaurice.com?subject=Limpide">info@kimmaurice.com</a>.</p>
+  </main>
+  <footer class="porte-pied"><span data-l="fr">Conçu par</span><span data-l="en">Designed by</span> <a href="https://kimmaurice.com/">Kim Maurice</a></footer>
+</div>
 
 <!-- ============ Icônes ============ -->
 <svg width="0" height="0" class="vc" aria-hidden="true" focusable="false">
