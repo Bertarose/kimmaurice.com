@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="fr-CA" data-theme="auto" data-taille="1">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; manifest-src 'self'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<meta name="robots" content="noindex">
+<title>Comment Limpide a été conçu — Étude de cas</title>
+<meta name="description" content="Étude de cas : conception d’une application qui explique les rapports d’imagerie médicale en langage clair, sans jamais poser de diagnostic.">
+<meta name="theme-color" content="#EDF1EE" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0F1B1F" media="(prefers-color-scheme: dark)">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Comment Limpide a été conçu — Étude de cas">
+<meta property="og:image" content="https://kimmaurice.com/limpide/img/partage.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="img/icone.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<link rel="stylesheet" href="css/limpide.css">
+<script src="js/preferences.js"></script>
+</head>
+<body>
+<a class="lien-evitement" href="#principal"><span data-l="fr">Aller au contenu</span><span data-l="en">Skip to content</span></a>
+<svg width="0" height="0" class="vc" aria-hidden="true" focusable="false"><defs>
+  <symbol id="i-fleche-g" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</defs></svg>
+
+<header class="entete">
+  <div class="enveloppe">
+    <a class="marque" href="./">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect x="2" y="4" width="28" height="24" rx="7" fill="#15313A"/><rect x="8" y="11" width="16" height="4" rx="2" fill="#F6E7A1"/><rect x="8" y="18" width="11" height="3" rx="1.5" fill="#79C2B3"/></svg>
+      <span>Limpide</span><span class="vc" data-l="fr">, ouvrir l’application</span><span class="vc" data-l="en">, open the app</span>
+    </a>
+    <div class="outils-entete">
+      <button type="button" class="btn-icone" id="btn-langue"><span id="btn-langue-court">EN</span><span class="vc" id="btn-langue-long"> — English</span></button>
+    </div>
+  </div>
+</header>
+
+<main id="principal" class="etude">
+  <div class="enveloppe">
+    <div class="retour"><a class="btn-texte" href="./"><svg aria-hidden="true"><use href="#i-fleche-g"/></svg><span data-l="fr">Ouvrir l’application</span><span data-l="en">Open the app</span></a></div>
+
+    <h1><span data-l="fr">Rendre un rapport d’imagerie lisible, sans jamais l’interpréter.</span><span data-l="en">Making an imaging report readable, without ever interpreting it.</span></h1>
+    <p class="chapeau" data-l="fr">Limpide est une étude de cas en conception de produit de santé numérique : une application web qui traduit en langage clair les rapports de radiologie que les patients du Québec reçoivent dans Carnet santé Québec.</p>
+    <p class="chapeau" data-l="en">Limpide is a digital health product design case study: a web app that translates into plain language the radiology reports that patients in Quebec receive in Carnet santé Québec.</p>
+
+    <section aria-labelledby="t-chiffres">
+      <h2 id="t-chiffres" class="vc"><span data-l="fr">En chiffres</span><span data-l="en">At a glance</span></h2>
+      <div class="chiffres">
+        <div><strong>147</strong><span data-l="fr">termes d’imagerie expliqués</span><span data-l="en">imaging terms explained</span></div>
+        <div><strong>29</strong><span data-l="fr">tournures de rapport traduites</span><span data-l="en">report phrasings translated</span></div>
+        <div><strong>2</strong><span data-l="fr">langues d’explication</span><span data-l="en">explanation languages</span></div>
+        <div><strong>0</strong><span data-l="fr">donnée envoyée ou conservée</span><span data-l="en">data sent or stored</span></div>
+      </div>
+    </section>
+
+    <section aria-labelledby="t-probleme">
+      <h2 id="t-probleme"><span data-l="fr">Le problème</span><span data-l="en">The problem</span></h2>
+      <div data-l="fr">
+        <p>Au Québec, les patients reçoivent leurs rapports d’imagerie directement dans Carnet santé Québec, souvent avant de revoir leur médecin. Ces rapports sont écrits par des radiologistes, pour des médecins. Pour la plupart des gens, ils sont illisibles.</p>
+        <p>Les outils existants ne comblent pas ce manque : la référence canadienne pour expliquer les résultats en langage simple exclut l’imagerie, et les équivalents américains n’existent qu’en anglais. Résultat : de l’anxiété en attendant le rendez-vous, des appels aux cliniques et une inégalité d’accès à sa propre information de santé, surtout pour les personnes âgées, les personnes qui lisent moins bien et les nouveaux arrivants.</p>
+      </div>
+      <div data-l="en">
+        <p>In Quebec, patients receive their imaging reports directly in Carnet santé Québec, often before they see their doctor again. These reports are written by radiologists, for physicians. For most people, they are unreadable.</p>
+        <p>Existing tools do not fill this gap: the Canadian reference for plain-language results excludes imaging, and US equivalents only exist in English. The result: anxiety while waiting for the appointment, calls to clinics, and unequal access to one’s own health information, especially for older adults, people with lower literacy and newcomers.</p>
+      </div>
+    </section>
+
+    <section aria-labelledby="t-qui">
+      <h2 id="t-qui"><span data-l="fr">Pour qui</span><span data-l="en">Who it is for</span></h2>
+      <ul class="liste" data-l="fr">
+        <li><strong>Monique, 68 ans,</strong> lit « kyste simple » et « BI-RADS 2 » dans son rapport de mammographie et veut comprendre avant son rendez-vous.</li>
+        <li><strong>Karim, 41 ans,</strong> a passé une IRM du genou après une blessure au soccer et veut savoir quoi demander à son médecin.</li>
+        <li><strong>Une proche aidante</strong> aide son parent à comprendre ses résultats et à préparer la prochaine visite.</li>
+        <li><strong>Une personne nouvellement arrivée</strong> reçoit un rapport en français et a besoin de l’explication en anglais.</li>
+      </ul>
+      <ul class="liste" data-l="en">
+        <li><strong>Monique, 68,</strong> reads “kyste simple” and “BI-RADS 2” in her mammogram report and wants to understand before her appointment.</li>
+        <li><strong>Karim, 41,</strong> had a knee MRI after a soccer injury and wants to know what to ask his doctor.</li>
+        <li><strong>A family caregiver</strong> helps a parent understand results and prepare for the next visit.</li>
+        <li><strong>A newcomer</strong> receives a report in French and needs the explanation in English.</li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="t-principes">
+      <h2 id="t-principes"><span data-l="fr">Principes de conception</span><span data-l="en">Design principles</span></h2>
+      <div class="principes">
+        <div class="carte"><h3><span data-l="fr">Expliquer, jamais interpréter</span><span data-l="en">Explain, never interpret</span></h3>
+          <p data-l="fr">Limpide traduit les mots. Il ne pose pas de diagnostic, ne dit pas si un résultat est grave et ne recommande rien.</p>
+          <p data-l="en">Limpide translates words. It never diagnoses, never judges whether a result is serious, and never recommends anything.</p></div>
+        <div class="carte"><h3><span data-l="fr">Tout attribuer au rapport</span><span data-l="en">Attribute everything to the report</span></h3>
+          <p data-l="fr">Chaque phrase commence par « Le rapport décrit… ». L’application ne parle jamais en son propre nom de la santé de la personne.</p>
+          <p data-l="en">Every sentence starts with “The report describes…”. The app never speaks in its own name about the person’s health.</p></div>
+        <div class="carte"><h3><span data-l="fr">Savoir dire « je ne sais pas »</span><span data-l="en">Say “I don’t know”</span></h3>
+          <p data-l="fr">Un mot inconnu est signalé clairement et devient une question pour le médecin, plutôt qu’une supposition.</p>
+          <p data-l="en">An unknown word is flagged clearly and becomes a question for the doctor, rather than a guess.</p></div>
+        <div class="carte"><h3><span data-l="fr">Un calme visuel</span><span data-l="en">Visual calm</span></h3>
+          <p data-l="fr">Aucun rouge, aucune alerte. Un seul élément vif, le surligneur, qui relie le jargon du rapport à sa traduction.</p>
+          <p data-l="en">No red, no alarms. A single bright element, the highlighter, links the report’s jargon to its translation.</p></div>
+        <div class="carte"><h3><span data-l="fr">Une confidentialité vérifiable</span><span data-l="en">Verifiable privacy</span></h3>
+          <p data-l="fr">La page bloque techniquement toute connexion réseau. Ce n’est pas une promesse : c’est une règle du navigateur.</p>
+          <p data-l="en">The page technically blocks every network connection. It is not a promise: it is a browser rule.</p></div>
+        <div class="carte"><h3><span data-l="fr">Accessible d’abord</span><span data-l="en">Accessible first</span></h3>
+          <p data-l="fr">Mobile d’abord, gros texte réglable, lecture à voix haute, mode sombre, clavier et lecteurs d’écran.</p>
+          <p data-l="en">Mobile first, adjustable large text, read-aloud, dark mode, keyboard and screen reader support.</p></div>
+      </div>
+    </section>
+
+    <section aria-labelledby="t-moteur">
+      <h2 id="t-moteur"><span data-l="fr">Comment fonctionne le moteur</span><span data-l="en">How the engine works</span></h2>
+      <p data-l="fr">Le moteur est local et déterministe : les mêmes mots donnent toujours la même explication, ce qui le rend vérifiable ligne par ligne.</p>
+      <p data-l="en">The engine is local and deterministic: the same words always give the same explanation, which makes it reviewable line by line.</p>
+      <ol class="flux">
+        <li><span data-l="fr">Découpe le rapport en sections (<code>EXAMEN</code>, <code>INDICATION</code>, <code>CONSTATATIONS</code>, <code>IMPRESSION</code>…) et écarte les lignes administratives.</span><span data-l="en">Splits the report into sections (<code>EXAMEN</code>, <code>INDICATION</code>, <code>CONSTATATIONS</code>, <code>IMPRESSION</code>…) and sets aside administrative lines.</span></li>
+        <li><span data-l="fr">Repère les termes du glossaire, sans tenir compte des accents ni des majuscules.</span><span data-l="en">Finds glossary terms, ignoring accents and capital letters.</span></li>
+        <li><span data-l="fr">Détecte les négations (« sans », « aucun », « absence de ») pour ne jamais présenter comme vu ce que le rapport dit absent.</span><span data-l="en">Detects negations (“sans”, “aucun”, “absence de”) so that something the report says is absent is never presented as found.</span></li>
+        <li><span data-l="fr">Applique des règles de phrases qui traduisent les tournures fréquentes, avec des repères concrets pour les tailles.</span><span data-l="en">Applies sentence rules that translate common phrasings, with concrete size references.</span></li>
+        <li><span data-l="fr">Signale ce qui n’est pas reconnu, au lieu de deviner.</span><span data-l="en">Flags what is not recognized, instead of guessing.</span></li>
+        <li><span data-l="fr">Produit un résumé, un glossaire et 3 à 5 questions priorisées pour le médecin.</span><span data-l="en">Produces a summary, a glossary and 3 to 5 prioritized questions for the doctor.</span></li>
+      </ol>
+      <p data-l="fr" class="sous-texte">Le format du résultat est stable : un futur moteur d’IA pourra être branché sans changer l’interface, à condition de respecter les mêmes règles de sécurité.</p>
+      <p data-l="en" class="sous-texte">The result format is stable: a future AI engine can be plugged in without changing the interface, as long as it follows the same safety rules.</p>
+    </section>
+
+    <section aria-labelledby="t-securite">
+      <h2 id="t-securite"><span data-l="fr">Règles de sécurité</span><span data-l="en">Safety rules</span></h2>
+      <ul class="liste" data-l="fr">
+        <li>Ne jamais dire ce qu’une personne « a ».</li>
+        <li>Ne jamais qualifier un résultat de grave, rassurant ou inquiétant.</li>
+        <li>Ne recommander aucun traitement, examen ou médicament.</li>
+        <li>Renvoyer au médecin dans chaque explication, et afficher l’avertissement sur chaque résultat.</li>
+        <li>Inviter à retirer le nom, la date de naissance et le numéro d’assurance maladie, et proposer de les retirer automatiquement.</li>
+        <li>Laisser de côté, volontairement, le vocabulaire du cancer avancé : ces mots sont signalés comme non reconnus et renvoyés au médecin.</li>
+      </ul>
+      <ul class="liste" data-l="en">
+        <li>Never say what a person “has”.</li>
+        <li>Never describe a result as serious, reassuring or worrying.</li>
+        <li>Recommend no treatment, test or medication.</li>
+        <li>Refer to the doctor in every explanation, and show the disclaimer on every result.</li>
+        <li>Ask people to remove their name, date of birth and health insurance number, and offer to remove them automatically.</li>
+        <li>Deliberately leave out advanced cancer vocabulary: these words are flagged as not recognized and referred to the doctor.</li>
+      </ul>
+    </section>
+
+    <section id="confidentialite" aria-labelledby="t-conf">
+      <h2 id="t-conf" tabindex="-1"><span data-l="fr">Confidentialité</span><span data-l="en">Privacy</span></h2>
+      <table class="tableau">
+        <tbody data-l="fr">
+          <tr><th scope="row">Rapport collé</th><td>Lu en mémoire dans le navigateur, jamais envoyé, jamais enregistré. Il disparaît à la fermeture de la page ou avec « Effacer et recommencer ».</td></tr>
+          <tr><th scope="row">Connexions réseau</th><td>Interdites par la politique de sécurité de la page (Content-Security-Policy). Aucune analytique, aucune publicité, aucun traçage.</td></tr>
+          <tr><th scope="row">Lecture à voix haute</th><td>Utilise seulement les voix installées sur l’appareil. Les voix en ligne sont ignorées.</td></tr>
+          <tr><th scope="row">Préférences</th><td>Le thème, la taille du texte et la langue sont gardés sur l’appareil. Rien d’autre.</td></tr>
+          <tr><th scope="row">Mode hors ligne</th><td>Une copie des fichiers de l’application est gardée pour fonctionner sans connexion. Elle ne contient aucun rapport.</td></tr>
+        </tbody>
+        <tbody data-l="en">
+          <tr><th scope="row">Pasted report</th><td>Read in memory in the browser, never sent, never saved. It disappears when the page closes or with “Clear and start over”.</td></tr>
+          <tr><th scope="row">Network connections</th><td>Blocked by the page’s security policy (Content-Security-Policy). No analytics, no ads, no tracking.</td></tr>
+          <tr><th scope="row">Read-aloud</th><td>Uses only voices installed on the device. Online voices are ignored.</td></tr>
+          <tr><th scope="row">Preferences</th><td>Theme, text size and language are kept on the device. Nothing else.</td></tr>
+          <tr><th scope="row">Offline mode</th><td>A copy of the app’s files is kept so it works without a connection. It contains no report.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="accessibilite" aria-labelledby="t-a11y">
+      <h2 id="t-a11y" tabindex="-1"><span data-l="fr">Accessibilité</span><span data-l="en">Accessibility</span></h2>
+      <p data-l="fr">Objectif : WCAG 2.1 niveau AA. Vérifié automatiquement avec axe-core sur les trois écrans, en mode clair et en mode sombre, et testé au clavier et sur des écrans de 320 à 1280 pixels de large.</p>
+      <p data-l="en">Goal: WCAG 2.1 level AA. Checked automatically with axe-core on all three screens, in light and dark mode, and tested with the keyboard and on screens from 320 to 1280 pixels wide.</p>
+      <ul class="liste" data-l="fr">
+        <li>Contrastes d’au moins 4,5:1 pour le texte, en clair et en sombre.</li>
+        <li>Trois tailles de texte, et une mise en page qui suit le zoom du navigateur.</li>
+        <li>Navigation complète au clavier, focus toujours visible, lien d’évitement.</li>
+        <li>Cibles tactiles d’au moins 44 pixels.</li>
+        <li>Lecture à voix haute de chaque explication, avec les voix de l’appareil.</li>
+        <li>Animations coupées si l’appareil le demande.</li>
+        <li>Niveau de lecture visé : compréhensible à 12 ans, sans être infantilisant.</li>
+      </ul>
+      <ul class="liste" data-l="en">
+        <li>Text contrast of at least 4.5:1, in light and dark mode.</li>
+        <li>Three text sizes, and a layout that follows browser zoom.</li>
+        <li>Full keyboard navigation, always-visible focus, skip link.</li>
+        <li>Touch targets of at least 44 pixels.</li>
+        <li>Read-aloud for every explanation, using the device’s voices.</li>
+        <li>Animations turned off when the device asks for it.</li>
+        <li>Target reading level: understandable at age 12, without talking down.</li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="t-suite">
+      <h2 id="t-suite"><span data-l="fr">Limites et prochaines étapes</span><span data-l="en">Limits and next steps</span></h2>
+      <ul class="liste" data-l="fr">
+        <li>Faire relire toutes les formulations par des radiologistes et des médecins de famille.</li>
+        <li>Tester avec de vraies personnes, dont des aînés, des proches aidants et des personnes nouvellement arrivées.</li>
+        <li>Élargir le glossaire et les règles à partir des rapports les plus fréquents.</li>
+        <li>Étudier un moteur d’IA encadré : mêmes règles de sécurité, réponses vérifiées avant affichage, consentement explicite si le texte doit quitter l’appareil.</li>
+        <li>Ajouter d’autres langues d’explication, comme l’espagnol et l’arabe.</li>
+      </ul>
+      <ul class="liste" data-l="en">
+        <li>Have every phrasing reviewed by radiologists and family physicians.</li>
+        <li>Test with real people, including older adults, caregivers and newcomers.</li>
+        <li>Expand the glossary and rules based on the most common reports.</li>
+        <li>Explore a guarded AI engine: same safety rules, answers checked before display, explicit consent if text must leave the device.</li>
+        <li>Add more explanation languages, such as Spanish and Arabic.</li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="t-credits">
+      <h2 id="t-credits"><span data-l="fr">Crédits</span><span data-l="en">Credits</span></h2>
+      <p data-l="fr">Conception, UX, rédaction et développement : <a href="https://kimmaurice.com/">Kim Maurice</a>, Montréal, avec l’aide de l’IA (Claude) pour la programmation.</p>
+      <p data-l="en">Design, UX, writing and development: <a href="https://kimmaurice.com/">Kim Maurice</a>, Montreal, with AI assistance (Claude) for programming.</p>
+      <div class="encadre encadre-sable" data-marge role="note">
+        <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 11v5.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="7.8" r="1.2" fill="currentColor"/></svg>
+        <p data-l="fr">Limpide est un projet de démonstration. Ce n’est pas un dispositif médical et ses formulations n’ont pas encore été validées par des professionnels de la santé. Les exemples sont des rapports fictifs.</p>
+        <p data-l="en">Limpide is a demonstration project. It is not a medical device and its wording has not yet been validated by health professionals. The examples are fictional reports.</p>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="pied">
+  <div class="enveloppe">
+    <p><span data-l="fr">Version de démonstration 2.0.</span><span data-l="en">Demo version 2.0.</span> <a href="./"><span data-l="fr">Ouvrir Limpide</span><span data-l="en">Open Limpide</span></a></p>
+  </div>
+</footer>
+<script src="js/a-propos.js"></script>
+</body>
+</html>

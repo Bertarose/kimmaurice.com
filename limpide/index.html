@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="fr-CA" data-theme="auto" data-taille="1">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!--
+  Confidentialité vérifiable : cette politique interdit toute connexion réseau
+  depuis la page (connect-src n’est pas permis). Le texte collé ne peut donc
+  techniquement pas quitter le navigateur. Seuls les fichiers de l’application
+  elle-même sont chargés.
+-->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; manifest-src 'self'; worker-src 'self'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<meta name="robots" content="noindex">
+<title>Limpide — Votre rapport d’imagerie, en mots clairs</title>
+<meta name="description" content="Limpide explique en langage clair les rapports d’imagerie médicale (radiographie, IRM, scan, échographie, mammographie) et prépare vos questions pour le médecin. Gratuit, sans compte, rien n’est conservé.">
+<meta name="theme-color" content="#EDF1EE" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0F1B1F" media="(prefers-color-scheme: dark)">
+<meta name="color-scheme" content="light dark">
+<meta name="application-name" content="Limpide">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Limpide">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Limpide — Votre rapport d’imagerie, en mots clairs">
+<meta property="og:description" content="Une application qui explique les rapports d’imagerie médicale en langage clair, sans jamais poser de diagnostic. Projet de Kim Maurice.">
+<meta property="og:image" content="https://kimmaurice.com/limpide/img/partage.png">
+<meta property="og:url" content="https://kimmaurice.com/limpide/">
+<meta property="og:locale" content="fr_CA">
+<meta property="og:locale:alternate" content="en_CA">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="img/icone.svg" type="image/svg+xml">
+<link rel="icon" href="img/icone-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<link rel="stylesheet" href="css/limpide.css">
+<script src="js/preferences.js"></script>
+</head>
+<body>
+<a class="lien-evitement" href="#principal"><span data-l="fr">Aller au contenu</span><span data-l="en">Skip to content</span></a>
+
+<!-- ============ Icônes ============ -->
+<svg width="0" height="0" class="vc" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-crochet" viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-moins" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 12h8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 11v5.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="7.8" r="1.2" fill="currentColor"/></symbol>
+    <symbol id="i-cadenas" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8.5 10.5V8a3.5 3.5 0 017 0v2.5" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+    <symbol id="i-fleche-g" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-fleche-d" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-imprimer" viewBox="0 0 24 24"><path d="M7 9V4h10v5M7 17H5a2 2 0 01-2-2v-4a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2h-2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><rect x="7" y="14" width="10" height="6" rx="1" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+    <symbol id="i-copier" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M16 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2h2" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+    <symbol id="i-effacer" viewBox="0 0 24 24"><path d="M4 12a8 8 0 108-8 8.3 8.3 0 00-5.7 2.3L4 8.5M4 4v4.5h4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-presse" viewBox="0 0 24 24"><rect x="5" y="4.5" width="14" height="16" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="9" y="3" width="6" height="3.2" rx="1" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8.5 11h7M8.5 14.5h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+    <symbol id="i-reglages" viewBox="0 0 24 24"><path d="M3.5 18.5L8 6h1.5l4.5 12.5M5.2 14h7.1" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M15.5 13.2c.6-1 1.6-1.5 2.8-1.5 1.8 0 2.7 1 2.7 2.7v4.1M21 16.2c-.9-.4-1.9-.5-2.9-.3-1.4.3-2.3 1-2.3 2 0 .9.7 1.6 1.9 1.6 1.4 0 2.6-.8 3.3-1.9" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-haut-parleur" viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M15.5 9a4 4 0 010 6M18 6.5a7.5 7.5 0 010 11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-stop" viewBox="0 0 24 24"><rect x="6.5" y="6.5" width="11" height="11" rx="2" fill="currentColor"/></symbol>
+    <symbol id="i-soleil" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-lune" viewBox="0 0 24 24"><path d="M19.5 14.5A8 8 0 019.5 4.5a8 8 0 1010 10z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="i-auto" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 3.5a8.5 8.5 0 010 17z" fill="currentColor"/></symbol>
+    <!-- Pictogrammes des exemples -->
+    <symbol id="i-thorax" viewBox="0 0 32 32"><path d="M16 5v11M16 9c-2 0-3.5 1-4.5 3-1.8 3.5-3.5 7.5-3.5 10.5 0 2 1.5 3 3.5 2.5 2.5-.6 4.5-3 4.5-7M16 9c2 0 3.5 1 4.5 3 1.8 3.5 3.5 7.5 3.5 10.5 0 2-1.5 3-3.5 2.5-2.5-.6-4.5-3-4.5-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-genou" viewBox="0 0 32 32"><path d="M12 3v9.5c0 1.5.7 2.6 2 3.3M20 3v8.5c0 3-1.3 4.8-3.5 5.6M13 18.5c-1 1.6-1.2 3.5-.8 5.5L13 29M19.5 18c.8 2 .9 4.2.3 6.4L19 29" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><ellipse cx="16" cy="16.6" rx="4.6" ry="2" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+    <symbol id="i-mammo" viewBox="0 0 32 32"><path d="M5 9c0 6 2.5 13 9 14.5M27 9c0 6-2.5 13-9 14.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="11" cy="15" r="1.6" fill="currentColor"/><circle cx="21" cy="15" r="1.6" fill="currentColor"/></symbol>
+    <symbol id="i-abdomen" viewBox="0 0 32 32"><path d="M7 11c3-2.5 7-3 10-2.5 4 .7 7 2.6 8 5.5 1.2 3.5-1 6.5-4.5 6.5-2.5 0-3.5-1.8-6-1.8-2.8 0-4 2.3-6.5 1.5C5.6 19.4 4.8 13 7 11z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M19 21.5c.3 2.5 1.8 4.3 4 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-scan" viewBox="0 0 32 32"><circle cx="16" cy="16" r="11" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="16" cy="16" r="5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M5 16h4M23 16h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-colonne" viewBox="0 0 32 32"><rect x="12" y="3.5" width="8" height="5" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="11.5" y="10.5" width="9" height="5" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="11" y="17.5" width="10" height="5" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12.5 24.5h7l-1.5 4h-4z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
+  </defs>
+</svg>
+
+<header class="entete">
+  <div class="enveloppe">
+    <button type="button" class="marque" data-aller="accueil">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect x="2" y="4" width="28" height="24" rx="7" fill="#15313A"/><rect x="8" y="11" width="16" height="4" rx="2" fill="#F6E7A1"/><rect x="8" y="18" width="11" height="3" rx="1.5" fill="#79C2B3"/></svg>
+      <span>Limpide</span><span class="vc" data-l="fr">, retour à l’accueil</span><span class="vc" data-l="en">, back to home</span>
+    </button>
+    <div class="outils-entete">
+      <button type="button" class="btn-icone" id="btn-langue" lang="en">
+        <span id="btn-langue-court">EN</span><span class="vc" id="btn-langue-long"> — English</span>
+      </button>
+      <button type="button" class="btn-icone" id="btn-affichage" aria-haspopup="dialog">
+        <svg aria-hidden="true"><use href="#i-reglages"/></svg>
+        <span class="etiq"><span data-l="fr">Affichage</span><span data-l="en">Display</span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="principal">
+
+<!-- ======================= ÉCRAN 1 : ACCUEIL ======================= -->
+<section id="vue-accueil" class="vue" aria-labelledby="titre-accueil">
+  <div class="enveloppe">
+    <div class="accroche">
+      <h1 id="titre-accueil" tabindex="-1"><span data-l="fr">Votre rapport d’imagerie, en mots clairs.</span><span data-l="en">Your imaging report, in plain words.</span></h1>
+      <p class="intro" data-l="fr">Collez le texte de votre rapport de radiographie, d’IRM, de scan, d’échographie ou de mammographie. Vous recevez une explication claire et des questions à poser à votre médecin.</p>
+      <p class="intro" data-l="en">Paste the text of your French X-ray, MRI, CT, ultrasound or mammogram report. You get a clear explanation in English and questions to ask your doctor.</p>
+
+      <figure class="demo">
+        <div class="jargon" lang="fr">
+          <span class="voix"><span data-l="fr">Le rapport</span><span data-l="en">The report (in French)</span></span>
+          <span class="surligne d1">Déchirure</span> <span class="surligne d2">horizontale</span> du <span class="surligne d3">ménisque médial</span> <span class="surligne d4">postérieur</span>.
+        </div>
+        <div class="clair">
+          <span class="voix"><span data-l="fr">En mots simples</span><span data-l="en">In plain words</span></span>
+          <p data-l="fr">Une fente, couchée à plat, dans le petit coussin de cartilage du côté intérieur du genou, vers l’arrière.</p>
+          <p data-l="en">A flat split in the small cushion of cartilage on the inner side of the knee, toward the back.</p>
+        </div>
+        <figcaption><span data-l="fr">Phrase tirée d’un rapport fictif d’IRM du genou.</span><span data-l="en">Sentence from a fictional knee MRI report.</span></figcaption>
+      </figure>
+
+      <div class="actions-accroche">
+        <a class="btn btn-principal" href="#/coller"><span data-l="fr">Coller mon rapport</span><span data-l="en">Paste my report</span></a>
+        <a class="btn-texte" href="#exemples"><span data-l="fr">Essayer avec un exemple</span><span data-l="en">Try an example</span></a>
+      </div>
+
+      <ul class="confiance">
+        <li><svg aria-hidden="true"><use href="#i-crochet"/></svg><span data-l="fr">Gratuit, sans compte et sans inscription</span><span data-l="en">Free, no account, no sign-up</span></li>
+        <li><svg aria-hidden="true"><use href="#i-crochet"/></svg><span data-l="fr">Votre texte reste sur votre appareil : rien n’est envoyé ni enregistré</span><span data-l="en">Your text stays on your device: nothing is sent or saved</span></li>
+        <li><svg aria-hidden="true"><use href="#i-crochet"/></svg><span data-l="fr">Vous aide à préparer votre rendez-vous, sans remplacer votre médecin</span><span data-l="en">Helps you prepare for your appointment, without replacing your doctor</span></li>
+      </ul>
+    </div>
+
+    <section class="bloc" id="exemples" aria-labelledby="titre-exemples">
+      <h2 id="titre-exemples" tabindex="-1"><span data-l="fr">Essayer avec un exemple fictif</span><span data-l="en">Try a fictional example</span></h2>
+      <p class="sous"><span data-l="fr">Ces six rapports sont inventés. Ils montrent comment fonctionne Limpide.</span><span data-l="en">These six reports are made up. They show how Limpide works.</span></p>
+      <ul class="exemples" id="liste-exemples"></ul>
+    </section>
+
+    <section class="bloc" aria-labelledby="titre-etapes">
+      <h2 id="titre-etapes"><span data-l="fr">Comment ça marche</span><span data-l="en">How it works</span></h2>
+      <p class="sous"><span data-l="fr">Trois étapes, environ cinq minutes.</span><span data-l="en">Three steps, about five minutes.</span></p>
+      <ol class="etapes">
+        <li><div>
+          <strong data-l="fr">Copiez le texte de votre rapport</strong><strong data-l="en">Copy the text of your report</strong>
+          <span data-l="fr">Par exemple, à partir de Carnet santé Québec. Retirez d’abord votre nom, votre date de naissance et votre numéro d’assurance maladie.</span>
+          <span data-l="en">For example, from Carnet santé Québec. First remove your name, date of birth and health insurance number.</span>
+        </div></li>
+        <li><div>
+          <strong data-l="fr">Collez-le dans Limpide</strong><strong data-l="en">Paste it into Limpide</strong>
+          <span data-l="fr">Le texte est lu sur votre appareil seulement.</span><span data-l="en">The text is read on your device only.</span>
+        </div></li>
+        <li><div>
+          <strong data-l="fr">Lisez l’explication et préparez vos questions</strong><strong data-l="en">Read the explanation and prepare your questions</strong>
+          <span data-l="fr">Écoutez-la à voix haute, imprimez-la ou copiez-la pour votre rendez-vous.</span><span data-l="en">Listen to it, print it or copy it for your appointment.</span>
+        </div></li>
+      </ol>
+    </section>
+
+    <section class="bloc" aria-labelledby="titre-limites">
+      <h2 id="titre-limites"><span data-l="fr">Ce que Limpide ne fait pas</span><span data-l="en">What Limpide does not do</span></h2>
+      <p class="sous"><span data-l="fr">Il explique les mots. Votre médecin explique ce qu’ils veulent dire pour vous.</span><span data-l="en">It explains the words. Your doctor explains what they mean for you.</span></p>
+      <ul class="limites">
+        <li><svg aria-hidden="true"><use href="#i-moins"/></svg><span data-l="fr">Il ne pose pas de diagnostic.</span><span data-l="en">It does not make a diagnosis.</span></li>
+        <li><svg aria-hidden="true"><use href="#i-moins"/></svg><span data-l="fr">Il ne dit pas si un résultat doit vous inquiéter ou non.</span><span data-l="en">It does not say whether a result should worry you or not.</span></li>
+        <li><svg aria-hidden="true"><use href="#i-moins"/></svg><span data-l="fr">Il ne recommande aucun traitement, examen ou médicament.</span><span data-l="en">It does not recommend any treatment, test or medication.</span></li>
+        <li><svg aria-hidden="true"><use href="#i-moins"/></svg><span data-l="fr">Il ne lit pas les images, seulement le texte du rapport.</span><span data-l="en">It does not read the images, only the text of the report.</span></li>
+      </ul>
+    </section>
+
+    <section class="bloc" aria-labelledby="titre-projet">
+      <h2 id="titre-projet" class="vc"><span data-l="fr">Le projet</span><span data-l="en">The project</span></h2>
+      <a class="carte lien-projet" href="a-propos.html">
+        <span><strong data-l="fr">Comment Limpide a été conçu</strong><strong data-l="en">How Limpide was designed</strong>
+        <span data-l="fr">Le problème, les principes de sécurité, l’accessibilité et l’architecture.</span><span data-l="en">The problem, safety principles, accessibility and architecture.</span></span>
+        <svg aria-hidden="true"><use href="#i-fleche-d"/></svg>
+      </a>
+    </section>
+  </div>
+</section>
+
+<!-- ======================= ÉCRAN 2 : SAISIE ======================= -->
+<section id="vue-saisie" class="vue saisie" aria-labelledby="titre-saisie" hidden>
+  <div class="enveloppe">
+    <div class="retour"><button type="button" class="btn-texte" data-aller="accueil"><svg aria-hidden="true"><use href="#i-fleche-g"/></svg><span data-l="fr">Accueil</span><span data-l="en">Home</span></button></div>
+    <h1 id="titre-saisie" tabindex="-1"><span data-l="fr">Collez votre rapport</span><span data-l="en">Paste your report</span></h1>
+
+    <div class="encadre encadre-sable" role="note">
+      <svg aria-hidden="true"><use href="#i-cadenas"/></svg>
+      <p class="titre"><span data-l="fr">Avant de coller, retirez de votre texte :</span><span data-l="en">Before pasting, remove from your text:</span></p>
+      <ul data-l="fr"><li>votre nom;</li><li>votre date de naissance;</li><li>votre numéro d’assurance maladie.</li></ul>
+      <ul data-l="en"><li>your name;</li><li>your date of birth;</li><li>your health insurance number.</li></ul>
+      <p><span data-l="fr">Le texte reste sur votre appareil. Rien n’est envoyé ni enregistré.</span><span data-l="en">The text stays on your device. Nothing is sent or saved.</span></p>
+    </div>
+
+    <form id="formulaire" novalidate>
+      <div class="champ">
+        <label for="rapport"><span data-l="fr">Texte de votre rapport</span><span data-l="en">Text of your report</span></label>
+        <p class="aide" id="aide-rapport">
+          <span data-l="fr">Ouvrez votre rapport, par exemple dans Carnet santé Québec. Sélectionnez tout le texte, copiez-le, puis collez-le ici.</span>
+          <span data-l="en">Open your report, for example in Carnet santé Québec. Select all the text, copy it, then paste it here. Limpide reads reports written in French and explains them in English.</span>
+        </p>
+        <textarea id="rapport" name="rapport" lang="fr" aria-describedby="aide-rapport compteur" spellcheck="false" autocomplete="off" autocapitalize="off"></textarea>
+        <div class="outils-saisie">
+          <div>
+            <button type="button" class="btn-texte" id="btn-coller" hidden><svg aria-hidden="true"><use href="#i-presse"/></svg><span data-l="fr">Coller</span><span data-l="en">Paste</span></button>
+            <button type="button" class="btn-texte" id="btn-vider"><span data-l="fr">Effacer le texte</span><span data-l="en">Clear text</span></button>
+          </div>
+          <span class="compteur" id="compteur" aria-live="polite"></span>
+        </div>
+      </div>
+
+      <div id="alerte-perso" class="encadre encadre-sable alerte-perso" role="alert" hidden>
+        <svg aria-hidden="true"><use href="#i-info"/></svg>
+        <p class="titre"><span data-l="fr">Votre texte semble contenir des renseignements personnels</span><span data-l="en">Your text seems to contain personal information</span></p>
+        <p id="alerte-perso-liste"></p>
+        <div class="boutons">
+          <button type="button" class="btn btn-principal" id="btn-masquer"><span data-l="fr">Retirer ces renseignements</span><span data-l="en">Remove this information</span></button>
+          <button type="button" class="btn btn-secondaire" id="btn-ignorer"><span data-l="fr">Continuer sans retirer</span><span data-l="en">Continue without removing</span></button>
+        </div>
+      </div>
+
+      <p id="erreur" class="message-erreur" role="alert" hidden></p>
+
+      <button type="submit" class="btn btn-principal pleine-largeur" id="btn-expliquer"><span data-l="fr">Expliquer mon rapport</span><span data-l="en">Explain my report</span></button>
+    </form>
+
+    <div class="essai">
+      <p><span data-l="fr">Pas de rapport sous la main? Essayez un exemple fictif :</span><span data-l="en">No report handy? Try a fictional example:</span></p>
+      <div class="puces" id="puces-exemples"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= ÉCRAN 3 : RÉSULTAT ======================= -->
+<section id="vue-resultat" class="vue" aria-labelledby="titre-resultat" hidden>
+  <div class="enveloppe">
+    <div class="entete-impression">
+      <strong><span data-l="fr">Limpide — préparé pour mon rendez-vous</span><span data-l="en">Limpide — prepared for my appointment</span></strong><br>
+      <span id="date-impression"></span>
+    </div>
+
+    <div class="retour"><button type="button" class="btn-texte" data-aller="saisie"><svg aria-hidden="true"><use href="#i-fleche-g"/></svg><span data-l="fr">Modifier le texte</span><span data-l="en">Edit the text</span></button></div>
+    <div class="resultat-tete">
+      <h1 id="titre-resultat" tabindex="-1"></h1>
+      <span class="badge" id="badge-exemple" hidden><span data-l="fr">Rapport fictif</span><span data-l="en">Fictional report</span></span>
+    </div>
+
+    <div class="encadre encadre-ciel note-securite" role="note">
+      <svg aria-hidden="true"><use href="#i-info"/></svg>
+      <p data-l="fr"><strong>Ceci n’est pas un diagnostic.</strong> Seul votre médecin peut interpréter ces résultats pour vous.</p>
+      <p data-l="en"><strong>This is not a diagnosis.</strong> Only your doctor can interpret these results for you.</p>
+    </div>
+
+    <nav class="sommaire" aria-label="Parties" id="sommaire">
+      <ul>
+        <li><a href="#r-resume" data-section="r-resume"><span data-l="fr">En bref</span><span data-l="en">Summary</span></a></li>
+        <li><a href="#r-explication" data-section="r-explication"><span data-l="fr">Explication</span><span data-l="en">Explanation</span></a></li>
+        <li><a href="#r-termes" data-section="r-termes"><span data-l="fr">Les mots</span><span data-l="en">Words</span></a></li>
+        <li><a href="#r-questions" data-section="r-questions"><span data-l="fr">Vos questions</span><span data-l="en">Your questions</span></a></li>
+      </ul>
+    </nav>
+
+    <section id="r-resume" class="partie" aria-labelledby="t-resume">
+      <h2 id="t-resume"><span data-l="fr">En bref</span><span data-l="en">Summary</span></h2>
+      <div class="carte">
+        <div class="resume" id="resume"></div>
+        <div class="zone-ecouter" id="zone-ecouter-resume"></div>
+      </div>
+    </section>
+
+    <section id="r-explication" class="partie" aria-labelledby="t-explication">
+      <h2 id="t-explication"><span data-l="fr">Section par section</span><span data-l="en">Section by section</span></h2>
+      <p class="sous"><span data-l="fr">Pour chaque phrase : ce que dit le rapport, puis la même chose en mots simples. Touchez un mot surligné pour voir sa définition.</span><span data-l="en">For each sentence: what the report says (in French), then the same thing in plain words. Tap a highlighted word to see what it means.</span></p>
+      <div id="explication"></div>
+      <details class="original">
+        <summary><span data-l="fr">Voir le rapport complet</span><span data-l="en">See the full report</span></summary>
+        <pre id="texte-original" lang="fr"></pre>
+      </details>
+    </section>
+
+    <section id="r-termes" class="partie" aria-labelledby="t-termes">
+      <h2 id="t-termes"><span data-l="fr">Les mots du rapport</span><span data-l="en">Words in the report</span></h2>
+      <p class="sous"><span data-l="fr">Les termes médicaux trouvés dans votre rapport, dans l’ordre où ils apparaissent.</span><span data-l="en">The medical terms found in your report, in the order they appear.</span></p>
+      <div class="carte"><dl class="glossaire" id="glossaire"></dl></div>
+    </section>
+
+    <section id="r-questions" class="partie" aria-labelledby="t-questions">
+      <h2 id="t-questions"><span data-l="fr">Questions à poser à votre médecin</span><span data-l="en">Questions to ask your doctor</span></h2>
+      <p class="sous"><span data-l="fr">La plus importante en premier. Ajoutez les vôtres : elles seront imprimées et copiées avec le reste.</span><span data-l="en">Most important first. Add your own: they will be printed and copied with the rest.</span></p>
+      <div class="carte">
+        <ol class="questions" id="questions"></ol>
+        <form class="ajout-question" id="form-question">
+          <label for="nouvelle-question"><span data-l="fr">Ajouter ma question</span><span data-l="en">Add my question</span></label>
+          <div class="rangee">
+            <input id="nouvelle-question" type="text" autocomplete="off" enterkeyhint="done">
+            <button type="submit" class="btn btn-secondaire"><span data-l="fr">Ajouter</span><span data-l="en">Add</span></button>
+          </div>
+        </form>
+      </div>
+      <div class="notes-impression" aria-hidden="true">
+        <strong><span data-l="fr">Notes pendant le rendez-vous</span><span data-l="en">Notes during the appointment</span></strong>
+        <div class="ligne-note"></div><div class="ligne-note"></div><div class="ligne-note"></div><div class="ligne-note"></div>
+      </div>
+    </section>
+
+    <div class="encadre encadre-ciel securite-complete" role="note">
+      <svg aria-hidden="true"><use href="#i-info"/></svg>
+      <p class="titre"><span data-l="fr">À retenir</span><span data-l="en">Please remember</span></p>
+      <p data-l="fr">Cette explication vous aide à comprendre les mots de votre rapport. Ce n’est pas un diagnostic et ça ne remplace pas votre médecin. Si vous avez des questions sur votre santé, parlez-en à votre médecin.</p>
+      <p data-l="en">This explanation helps you understand the words in your report. It is not a diagnosis and it does not replace your doctor. If you have questions about your health, talk to your doctor.</p>
+    </div>
+
+    <div class="actions-resultat">
+      <button type="button" class="btn btn-secondaire" id="btn-imprimer"><svg aria-hidden="true"><use href="#i-imprimer"/></svg><span data-l="fr">Imprimer</span><span data-l="en">Print</span></button>
+      <button type="button" class="btn btn-secondaire" id="btn-copier"><svg aria-hidden="true"><use href="#i-copier"/></svg><span data-l="fr">Copier l’explication</span><span data-l="en">Copy the explanation</span></button>
+      <button type="button" class="btn btn-principal" id="btn-recommencer"><svg aria-hidden="true"><use href="#i-effacer"/></svg><span data-l="fr">Effacer et recommencer</span><span data-l="en">Clear and start over</span></button>
+    </div>
+    <p class="fin"><svg aria-hidden="true"><use href="#i-cadenas"/></svg><span data-l="fr">Rien n’est conservé. Quand vous fermez cette page, tout disparaît.</span><span data-l="en">Nothing is kept. When you close this page, everything is gone.</span></p>
+  </div>
+</section>
+</main>
+
+<footer class="pied">
+  <div class="enveloppe">
+    <nav aria-label="Pied de page">
+      <a href="a-propos.html"><span data-l="fr">À propos du projet</span><span data-l="en">About the project</span></a>
+      <a href="a-propos.html#confidentialite"><span data-l="fr">Confidentialité</span><span data-l="en">Privacy</span></a>
+      <a href="a-propos.html#accessibilite"><span data-l="fr">Accessibilité</span><span data-l="en">Accessibility</span></a>
+    </nav>
+    <p data-l="fr">Limpide explique les mots d’un rapport d’imagerie. Il ne pose pas de diagnostic et ne remplace pas votre médecin.</p>
+    <p data-l="en">Limpide explains the words in an imaging report. It does not make a diagnosis and does not replace your doctor.</p>
+    <p data-l="fr">Votre texte est lu dans votre navigateur et n’est jamais envoyé ni enregistré. Aucune publicité, aucun traçage.</p>
+    <p data-l="en">Your text is read in your browser and is never sent or saved. No ads, no tracking.</p>
+    <p><span data-l="fr">Version de démonstration 2.0. Les exemples sont des rapports fictifs. Conçu par</span><span data-l="en">Demo version 2.0. The examples are fictional reports. Designed by</span> <a href="https://kimmaurice.com/">Kim Maurice</a>.</p>
+  </div>
+</footer>
+
+<dialog class="feuille definition" id="dlg-terme" aria-labelledby="dlg-titre">
+  <div class="poignee" aria-hidden="true"></div>
+  <div class="contenu">
+    <h2 id="dlg-titre"><span></span></h2>
+    <p class="court" id="dlg-court"></p>
+    <p class="long" id="dlg-long"></p>
+    <button type="button" class="btn btn-secondaire fermer" data-fermer><span data-l="fr">Fermer</span><span data-l="en">Close</span></button>
+  </div>
+</dialog>
+
+<dialog class="feuille reglages" id="dlg-affichage" aria-labelledby="dlg-affichage-titre">
+  <div class="poignee" aria-hidden="true"></div>
+  <div class="contenu">
+    <h2 id="dlg-affichage-titre"><span data-l="fr">Affichage</span><span data-l="en">Display</span></h2>
+    <fieldset>
+      <legend><span data-l="fr">Thème</span><span data-l="en">Theme</span></legend>
+      <div class="segment">
+        <label><input type="radio" name="theme" value="auto"><svg aria-hidden="true"><use href="#i-auto"/></svg><span data-l="fr">Auto</span><span data-l="en">Auto</span></label>
+        <label><input type="radio" name="theme" value="light"><svg aria-hidden="true"><use href="#i-soleil"/></svg><span data-l="fr">Clair</span><span data-l="en">Light</span></label>
+        <label><input type="radio" name="theme" value="dark"><svg aria-hidden="true"><use href="#i-lune"/></svg><span data-l="fr">Sombre</span><span data-l="en">Dark</span></label>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend><span data-l="fr">Taille du texte</span><span data-l="en">Text size</span></legend>
+      <div class="segment">
+        <label><input type="radio" name="taille" value="1"><span class="a1" aria-hidden="true">A</span><span class="vc"><span data-l="fr">Normale</span><span data-l="en">Normal</span></span></label>
+        <label><input type="radio" name="taille" value="2"><span class="a2" aria-hidden="true">A</span><span class="vc"><span data-l="fr">Grande</span><span data-l="en">Large</span></span></label>
+        <label><input type="radio" name="taille" value="3"><span class="a3" aria-hidden="true">A</span><span class="vc"><span data-l="fr">Très grande</span><span data-l="en">Extra large</span></span></label>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend><span data-l="fr">Langue des explications</span><span data-l="en">Explanation language</span></legend>
+      <div class="segment">
+        <label lang="fr"><input type="radio" name="langue" value="fr">Français</label>
+        <label lang="en"><input type="radio" name="langue" value="en">English</label>
+      </div>
+    </fieldset>
+    <p class="note"><span data-l="fr">Ces préférences restent sur cet appareil. Votre rapport, lui, n’est jamais enregistré.</span><span data-l="en">These preferences stay on this device. Your report is never saved.</span></p>
+    <button type="button" class="btn btn-secondaire fermer" data-fermer><span data-l="fr">Fermer</span><span data-l="en">Close</span></button>
+  </div>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<script src="js/exemples.js"></script>
+<script src="js/glossaire.js"></script>
+<script src="js/regles.js"></script>
+<script src="js/moteur.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
